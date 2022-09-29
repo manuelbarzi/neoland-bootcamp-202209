@@ -1,22 +1,26 @@
+/* Reset */
+* {
+    box-sizing: border-box;
+}
+
+html, body{
+    height: 100%;
+    margin: 0;
+}
+
 body{
     background-color: antiquewhite;
 }
 
-.centerCabeza{
-    display: flex;
-    flex-direction: column;
+/* Layout */
+.container{
+    display: flex; /* Como se comportan los hijos  */
     align-items: center;
+    justify-content: center;
+    gap: 0.5rem;    /* gap espacio entre items | Unidades rem relativas > Pixeles */
 }
 
-.centerCuerpo{
-    display: flex;
-    flex-direction: row;
-}
-
-.centerCola{
-    display: flex;
-    flex-direction: row;
-}
+/* Figura Geométrica */
 
 .nameAnimal{
     position: fixed;
@@ -36,7 +40,7 @@ body{
 }
 
 .cabezaZorro{
-    z-index: 3;
+    z-index: 1;
     position: fixed;
     background-color: rgb(233, 69, 69);
     height: 10rem;
@@ -46,7 +50,7 @@ body{
 }
 
 .sombraCabezaZorro{
-    z-index: 4;
+    z-index: 3;
     position: fixed;
     background-color: rgb(175, 41, 41);
     height: 10rem;
@@ -56,7 +60,7 @@ body{
 }
 
 .ojoDer{
-    z-index: 4;
+    z-index: 2;
     position: fixed;
     background-color: rgb(0, 0, 0);
     height: 1.6rem;
@@ -67,7 +71,7 @@ body{
 }
 
 .ojoDerIris{
-    z-index: 4;
+    z-index: 3;
     position: fixed;
     background-color: rgb(233, 69, 69);
     height: 0.5rem;
@@ -78,7 +82,7 @@ body{
 }
 
 .ojoIzq{
-    z-index: 5;
+    z-index: 2;
     position: fixed;
     background-color: rgb(0, 0, 0);
     height: 1.6rem;
@@ -89,7 +93,7 @@ body{
 }
 
 .ojoIzqIris{
-    z-index: 5;
+    z-index: 3;
     position: fixed;
     background-color: rgb(233, 69, 69);
     height: 0.5rem;
@@ -100,7 +104,7 @@ body{
 }
 
 .nariz{
-    z-index: 5;
+    z-index: 4;
     position: fixed;
     width: 0rem;
     height: 0rem;
@@ -124,7 +128,7 @@ body{
 }
 
 .sombraOrejaDer{
-    z-index: 4;
+    z-index: 3;
     position: fixed;
     background-color: rgb(0, 0, 0);
     height: 1.5rem;
@@ -146,7 +150,7 @@ body{
 }
 
 .sombraOrejaIzq{
-    z-index: 4;
+    z-index: 3;
     position: fixed;
     background-color: rgb(0, 0, 0);
     height: 1.5rem;
@@ -157,7 +161,7 @@ body{
 }
 
 .mofleteDer{
-    z-index: 7;
+    z-index: 4;
     position: fixed;
     background-color: rgb(255, 174, 67);
     height: 3rem;
@@ -168,7 +172,7 @@ body{
 }
 
 .mofleteIzq{
-    z-index: 7;
+    z-index: 4;
     position: fixed;
     background-color: rgb(255, 174, 67);
     height: 3rem;
@@ -221,7 +225,7 @@ body{
 }
 
 .traseroZorro{
-    z-index: 2;
+    z-index: 1;
     position: fixed;
     background-color: rgb(175, 41, 41);
     height: 10rem;
@@ -232,7 +236,7 @@ body{
 }
 
 .colaZorroUno{
-    z-index: 2;
+    z-index: 1;
     position: fixed;
     background-color: rgb(175, 41, 41);
     height: 10rem;
@@ -243,7 +247,7 @@ body{
 }
 
 .sombraColaZorroUno{
-    z-index: 3;
+    z-index: 2;
     position: fixed;
     background-color: rgb(255, 174, 67);
     height: 10rem;
@@ -254,7 +258,7 @@ body{
 }
 
 .sombraPequenyaColaZorroUno{
-    z-index: 5;
+    z-index: 3;
     position: fixed;
     background-color: rgb(255, 207, 145);
     height: 5rem;
@@ -265,7 +269,7 @@ body{
 }
 
 .colaZorroDos{
-    z-index: 2;
+    z-index: 1;
     position: fixed;
     background-color: rgb(233, 69, 69);
     height: 10rem;
@@ -286,7 +290,7 @@ body{
 }
 
 .sombraColaZorroTresUno{
-    z-index: 4;
+    z-index: 2;
     position: fixed;
     width: 0rem;
     height: 0rem;
@@ -299,7 +303,7 @@ body{
 }
 
 .sombraColaZorroTresDos{
-    z-index: 4;
+    z-index: 2;
     position: fixed;
     width: 0rem;
     height: 0rem;
@@ -312,7 +316,7 @@ body{
 }   
 
 .sombraColaZorroTresTres{
-    z-index: 4;
+    z-index: 2;
     position: fixed;
     width: 0rem;
     height: 0rem;
@@ -325,7 +329,7 @@ body{
 }  
 
 .colaZorroCuatro{
-    z-index: 2;
+    z-index: 1;
     position: fixed;
     background-color: rgb(255, 174, 67);
     height: 10rem;
@@ -336,7 +340,7 @@ body{
 }
 
 .sombraColaZorroCuatro{
-    z-index: 4;
+    z-index: 2;
     position: fixed;
     width: 0rem;
     height: 0rem;
@@ -349,7 +353,7 @@ body{
 }  
 
 .sombraColaZorroCuatroUno{
-    z-index: 4;
+    z-index: 2;
     position: fixed;
     width: 0rem;
     height: 0rem;
@@ -362,7 +366,7 @@ body{
 }  
 
 .sombraColaZorroCuatroDos{
-    z-index: 4;
+    z-index: 2;
     position: fixed;
     width: 0rem;
     height: 0rem;
@@ -375,7 +379,7 @@ body{
 }  
 
 .sombraColaZorroCuatroTres{
-    z-index: 4;
+    z-index: 2;
     position: fixed;
     width: 0rem;
     height: 0rem;
