@@ -1,0 +1,92 @@
+.rectangle {
+    background-color:aquamarine;
+    display: inline;
+}
+
+.semi-circle {
+    position: static;
+    background-color: red;
+    height: 50px;
+    width: 100px;
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+}
+
+div {
+    position: absolute;
+}
+
+.cabeza {
+    margin-top: 70px;
+    margin-left: 100px;
+    background-color: green;
+    height: 100px;
+    width: 100px;
+    border-radius: 100px;
+}
+
+.cuerpo {
+    top: 200px;
+    left: 142px;
+    background-color: green;
+    height: 150px;
+    width: 35px;
+    border-radius: 100px;
+}
+
+.ojo {
+    background-color: whitesmoke;
+    height: 20px;
+    width: 20px;
+    border-radius: 100px;
+    margin-top: 100px;
+}
+
+.ojo--derecho {
+    margin-left: 125px;
+}
+
+
+.ojo--izquierdo {
+    margin-left: 155px;
+}
+
+.brazoderecho {
+    margin-top: 165px;
+    margin-left: 132px;
+    background-color: green;
+    height: 20px;
+    width: 120px;
+    border-radius: 100px;
+    rotate: -20deg;
+}
+
+.brazoizquierdo {
+    margin-top: 165px;
+    margin-left: 50px;
+    background-color: green;
+    height: 20px;
+    width: 120px;
+    border-radius: 100px;
+    rotate: 20deg;
+}
+
+.piernaizquierda {
+    margin-top: 315px;
+    margin-left: 50px;
+    background-color: green;
+    height: 20px;
+    width: 120px;
+    border-radius: 100px;
+    rotate: -50deg;
+}
+
+.piernaderecha {
+    margin-top: 315px;
+    margin-left: 132px;
+    background-color: green;
+    height: 20px;
+    width: 120px;
+    border-radius: 100px;
+    rotate: 50deg;
+}
