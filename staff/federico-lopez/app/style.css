@@ -1,27 +1,104 @@
 /* resets */
 
-html, body {
-    height: 100%;
+html,
+body {
+  height: 100%;
 }
 
 body {
-    margin: 0;
+  margin: 0;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
 }
 
 /* layout - BEM */
 
-.container { /* block */
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: center;
-    gap: .5rem;
+.container {
+  /* block */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
-.container__item--left { /* block__element--modifier */
-    align-self: start;
+.container__item--left {
+  /* block__element--modifier */
+  align-self: start;
 }
 
-.container__item--right { /* block__element--modifier */
-    align-self: end;
+.container__item--right {
+  /* block__element--modifier */
+  align-self: end;
 }
+
+.header {
+  /* external */
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 30px;
+  box-shadow: 0 0 5px 0 rgba(50, 0, 180, 0.5);
+
+  /* internal */
+  background-color: blue;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* .header__menu-button {
+  order: 0;
+} */
+
+.header__menu {
+  /* external behavior */
+
+  /* position: fixed ó absolute implican que el component fija 
+  por sí mismo su ubicación en el layout */
+  position: fixed;
+  top: 30px;
+  height: 60px;
+  box-shadow: 0 1px 5px 0 rgba(50, 0, 180, 0.5);
+
+  /* internal behavior - children */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+  background-color: inherit;
+}
+
+.header__title {
+  /* margin-left: 15px; */
+  font-size: 1.5rem;
+  color: red;
+  text-decoration: underline;
+  font-weight: 200;
+  /* order: 1; */
+}
+
+/* 
+flex
+flex-direction
+align-items
+justify-content
+gap
+flex-reverse
+order
+flex-wrap
+
+game: flex-box froggy
+*/
