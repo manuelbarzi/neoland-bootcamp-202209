@@ -1,0 +1,61 @@
+.container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.rectangle {
+    background-color: yellow;
+    height: 300px;
+    width: 180px;
+    border: 5px solid black;
+}
+
+.circle {
+    border-radius: 50%;
+    border: 5px solid black;
+}
+
+.head {
+    background-color: blue;
+    height: 130px;
+    width: 130px;
+}
+
+.shoulder {
+    width: 20px;
+    height: 20px;
+    background-color: green;
+}
+
+.arm {
+    height: 150px;
+    width: 50px;
+    background-color: grey;
+     border: 5px solid black;
+}
+
+.leg {
+    background-color: grey;
+    height: 200px;
+    width: 50px;
+    border: 5px solid black;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.shoe {
+    background-color: red;
+    height: 50px;
+    width: 100px;
+    border: 5px solid black;
+
+}
+
+.shoe-left {
+    border-top-left-radius: 50% 100%;
+}
+
+.shoe-right {
+    border-top-right-radius: 50% 100%;
+}
