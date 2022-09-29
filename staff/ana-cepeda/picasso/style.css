@@ -1,0 +1,46 @@
+    /*
+    .circle  {
+        property: value;
+    } 
+    */
+    
+    body {
+            margin: 0;
+    } 
+
+    div {
+        box-shadow: 0rem 9px 8px rgba(0, 0, 256, 0.5);
+    } 
+    
+    .rectagle {
+        position: absolute;
+        top: 200px;
+        left: 50px;
+        background-color: blueviolet;
+        width: 100px;
+        height: 50px;
+        border: 10px solid; 
+        /* margin: 16px; */
+        /* padding: 4px; */
+        box-shadow: 0rem 8px 8px egba(0, 256, 0.5)
+        /*display: inline; */
+    } 
+
+.circle {
+    background-color:blue;
+    width:100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 1px solid ; 
+ } 
+
+ .semicircle {
+    position: absolute; 
+    background-color: aquamarine;
+    height: 50%;
+    width: 100%;
+    border-top-left-radius: 100px;
+    border-bottom-right-radius: 100px;
+
+ }
+ 
