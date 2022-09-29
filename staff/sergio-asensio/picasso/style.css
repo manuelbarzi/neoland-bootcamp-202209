@@ -1,0 +1,125 @@
+.muñeco{
+    position: absolute;
+    left: 100px;
+}
+
+.cabeza{
+    background-color: burlywood  ;
+    width: 125px;
+    height: 150px;
+    border: ;
+    border-radius: 50%;
+    position: absolute;
+    top: 100px;
+    left: 200px;
+    
+}
+
+
+.cuello{
+    background-color: burlywood;
+    width: 25px;
+    height: 25px;
+    margin: 16px;
+    padding: 4px;
+    position: absolute;
+    top: 230px;
+    left: 230px;
+}
+
+.cuerpo{
+    background-color: green;
+    height: 250px;
+    width: 200px;
+    border-radius: 150px 150px 0 0;
+    position: absolute;
+    top: 390px;
+    left: 263px;
+    transform: translate(-50%, -50%);
+}
+.cintura{
+    background-color: black;
+    height: 100px;
+    width: 200px;
+    position: absolute;
+    top: 514px;
+    left: 163px;
+}
+
+.piernaderecha{
+    background-color: black;
+    height: 250px;
+    width: 50px;
+    position: absolute;
+    top: 600px;
+    left: 163px;
+}
+
+.piernaizquierda{
+    background-color: black;
+    height: 250px;
+    width: 50px;
+    position: absolute;
+    top: 600px;
+    left: 313px;
+}
+
+.brazoizquierdo{
+    background-color: green;
+    height: 50px;
+    width: 200px;
+    position: absolute;
+    top:250px;
+    left: 320px;
+    transform: rotateZ(-40deg);
+}
+
+.brazoderecho{
+    background-color: green;
+    height: 50px;
+    width: 200px;
+    position: absolute;
+    top: 242px;
+    left: 11px;
+    transform: rotateZ(45deg);
+}
+
+.manoderecha{
+    background-color: burlywood;
+    height: 40px;
+    width: 40px;
+    border-radius: 60%;
+    position: absolute;
+    top: 179px;
+    left: 492px;
+}
+
+.manoizquierda{
+    background-color: burlywood;
+    height: 40px;
+    width: 40px;
+    border-radius: 60%;
+    position: absolute;
+    top: 164px;
+    left: 5px;
+}
+
+.gorra{
+    background-color: fuchsia;
+    height: 30px;
+    width: 80px;
+    border-top-left-radius: 150%;
+    border-top-right-radius: 150%;
+    position: absolute;
+    top: 82px;
+    left: 223px;
+}
+
+.visera{
+    background-color: fuchsia;
+    width: 50px;
+    height: 7px;
+    position: absolute;
+    top: 105px;
+    left: 300px;
+}
