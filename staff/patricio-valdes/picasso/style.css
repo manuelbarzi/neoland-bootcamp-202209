@@ -1,0 +1,41 @@
+/* 
+selector {
+    property: value;
+}
+*/
+
+body {
+    margin: 0;
+  }
+  
+  div {
+    box-shadow: 0rem 8px 8px rgba(0, 0, 256, 0.5);
+  }
+  
+  .rectagle {
+    position: absolute;
+    top: 300px;
+    right: 0px;
+    background-color: white;
+    width: 100px;
+    height: 50px;
+    border: 10px solid yellow;
+    /* margin: 16px; */
+    /* padding: 4px; */
+    box-shadow: 0rem 8px 8px rgba(0, 256, 0, 0.5);
+    /* display: inline; */
+  }
+  
+  .circle {
+    background-color: wheat;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 1px solid red;
+  }
+  
+  .semicircle {
+    height: 50px;
+    background-color: red;
+    border-radius:  150px 150px 0 0;
+  }
