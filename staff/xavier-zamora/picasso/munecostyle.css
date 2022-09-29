@@ -1,0 +1,64 @@
+body{
+    background-color: black;
+}
+.muneco{
+    position: absolute;
+    left: 15%;
+    top: 15%;
+}
+.cabeza{
+    border-radius: 50%;
+}
+.cuerpo{
+    width: 8rem;
+    height: 18rem;
+    background-color: white;
+    border-radius: 45%;
+}
+.Bderecho, .Bizquierdo{
+    background-color: white;
+    height: 10rem;
+    width: 1rem;
+}
+.Bderecho{
+    transform: rotate(-110deg);
+    position: absolute;
+    left: 120%;
+    top: 15%;
+}
+.Bizquierdo{
+    transform: rotate(110deg);
+    position: absolute;
+    right: 120%;
+    top: 15%;
+}
+.Pderecha, .Pizquierda{
+    background-color: white;
+    height: 40px;
+    width: 40px;
+    border-radius: 35%;
+}
+.Pderecha{
+    position: absolute;
+    left: 72%;
+    top: 90%;
+    transform: rotate(70deg);
+}
+.Pizquierda{
+    position: absolute;
+    left: 12%;
+    top: 96%;
+}
+.ashe{
+    position: absolute;
+    top: 30%;
+    left: 70%;
+}
+h1{
+    color: white;
+    z-index: auto;
+    position: absolute;
+    left: 50%;
+    top: 35%;
+}
+  
