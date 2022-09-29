@@ -1,0 +1,102 @@
+.cabeza {
+    background-color: orange;
+    border: 1px solid black;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    margin: 0 0 0 300px;
+    top: 20px
+}
+
+ojo {
+    background-color: red;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+}
+
+.ojo-der {
+    position: absolute;
+    margin: 0 0 0 100px;
+    top: 50px
+}
+
+.cuello {
+    background-color: orange;
+    border: 1px solid black;
+    width: 5px;
+    height: 10px;
+    position: absolute;
+    margin: 0 0 0 338px;
+    top: 102px
+}
+
+.cuerpo {
+    background-color: black;
+    width: 100px;
+    height: 149px;
+    position: absolute;
+    margin: 0 0 0 295px;
+    top: 112px
+}
+
+.brazo-der {
+    background-color: orange;
+    border: 1px solid black;
+    width: 100px;
+    height: 10px;
+    position: absolute;
+    margin: 0 0 0 380px;
+    top: 150px;
+    transform: rotate(30deg);
+}
+
+.brazo-izq {
+    background-color: orange;
+    border: 1px solid black;
+    width: 100px;
+    height: 10px;
+    position: absolute;
+    margin: 0 0 0 210px;
+    top: 150px;
+    transform: rotate(330deg);
+}
+
+.pierna-der {
+    background-color: orange;
+    border: 1px solid black;
+    width: 10px;
+    height: 120px;
+    position: absolute;
+    margin: 0 0 20px 310px;
+    top: 260px
+}
+
+.pierna-izq {
+    background-color: orange;
+    border: 1px solid black;
+    width: 10px;
+    height: 120px;
+    position: absolute;
+    margin: 0 0 5px 370px;
+    top: 260px
+}
+
+.pie-der {
+    background-color: black;
+    width: 25px;
+    height: 10px;
+    position: absolute;
+    margin: 0 0 20px 297px;
+    top: 372px
+}
+
+.pie-izq {
+    background-color: black;
+    width: 25px;
+    height: 10px;
+    position: absolute;
+    margin: 0 0 20px 370px;
+    top: 372px
+}
