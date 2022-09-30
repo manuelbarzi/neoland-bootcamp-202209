@@ -1,0 +1,47 @@
+/* 
+Find a solution to this with 2 divs, (maybe not posible) :( 
+
+body,
+html {
+    margin: 0;
+    height: 100%; 
+    display: flex;
+    justify-content: center;} 
+
+ .chess {
+    display: grid;
+    height: 100%;
+    /* text-align: center; 
+    grid-template-areas:
+        "a b a b a b a b"
+        "a b a b a b a b"
+        "a b a b a b a b"
+        "a b a b a b a b"
+        "a b a b a b a b"
+        "a b a b a b a b"
+        "a b a b a b a b"
+        "a b a b a b a b";
+}
+
+.chess:nth-child(1) {
+    grid-area: a;
+    background-color: white;
+} 
+
+ .chess:nth-child(2) {
+    grid-area: b;
+    background-color: black;
+} */
+
+body,
+html {
+    margin: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.chess {
+    display: grid;
+    height: 100%;
+}
