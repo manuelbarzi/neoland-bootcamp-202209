@@ -25,12 +25,13 @@ body{
     background-color: rgb(29, 29, 29);
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 .chess-board{
     display: grid;
-    width: 70vw;
-    height: 70vw;
+    width: 50vh;
+    height: 50vh;
     grid-template-columns: repeat(8, 1fr);
     background-color: #c7c7b4;
     border: 0.5px solid black;
