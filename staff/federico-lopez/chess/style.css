@@ -1,0 +1,45 @@
+:root {
+  --mybrown: rgb(238, 182, 127);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body,
+html {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.board {
+  width: 70vw;
+  height: 70vw;
+  border: 2px solid black;
+  grid-template-rows: repeat(8, 1fr);
+}
+
+.container {
+  display: grid;
+}
+
+.board__line {
+  grid-template-columns: repeat(8, 1fr);
+}
+
+.line-odd__item:nth-child(even) {
+  background-color: var(--mybrown);
+}
+
+.line-even__item:nth-child(odd) {
+  background-color: var(--mybrown);
+}
+
+.cell {
+  border: 0.5px solid black;
+}
