@@ -12,7 +12,6 @@ body{
 }
 
 .header{
-    padding: 5vh 10;
     text-align: center;
     color: rgb(255, 252, 252);
     font-size: xx-large;
@@ -31,27 +30,31 @@ body{
 
 .chess-board{
     display: grid;
-    width: min(50vh, 50vh);
-    height: min(50vh, 50vh);
+    width: 50vh;
+    height: 50vh;
     grid-template-columns: repeat(8, 1fr);
     background-color: #c7c7b4;
-    padding: 4vh;
+    border: 0.5px solid black;
 }
 
 .chess-board__square1:nth-child(odd){
-    background-color: #ebebd0
+    background-color: #ebebd0;
+    border: 0.5px solid black;
 }
 
 .chess-board__square1:nth-child(even){
     background-color: #779455;
+    border: 0.5px solid black;
 }
 
 .chess-board__square2:nth-child(even){
-    background-color: #ebebd0
+    background-color: #ebebd0;
+    border: 0.5px solid black;
 }
 
 .chess-board__square2:nth-child(odd){
     background-color: #779455;
+    border: 0.5px solid black;
 }
 
 
