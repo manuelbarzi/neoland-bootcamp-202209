@@ -1,0 +1,117 @@
+.container{    
+    text-align: center;
+    font-weight: 900;
+    text-transform: uppercase;
+       
+}
+
+div{
+    margin: 3px;
+    padding: 15px;   
+}
+
+.moldesresposteria{
+    background-color: blue;
+
+
+}
+.utensilios{
+    background-color:red;
+ 
+}
+.pequeñoElectrodomestico{
+    background-color:black;
+    color:aliceblue;
+  
+}
+.capsulas{
+    background-color: yellow;
+    
+}   
+.cajasBases{
+    background-color:pink;
+    
+}
+.cortadores{
+    background-color:green;
+
+}
+.ceramica{
+    background-color:chocolate;
+
+}
+.banatones{
+    background-color: rgb(191, 173, 167);
+
+}
+.toppers{
+    background-color: rgb(151, 151, 202);
+
+}
+
+
+@media (min-width: 768px) { 
+    .container{
+        display: grid;       
+        grid-template-columns:repeat(3 ,1fr);
+        grid-template-rows: repeat( 6, 1fr);  
+        
+         
+     
+    }
+    div{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+       
+    }
+    
+    .moldesresposteria{    
+        grid-column: 1 / 2;
+        grid-row: 1 / 3;
+    
+    }
+
+    .utensilios{
+        grid-column: 2 / 4;
+        grid-row: 1 / 2;    
+    }
+    .pequeñoElectrodomestico{
+        color:aliceblue;
+        grid-column: 2 / 4;
+        grid-row: 2 / 3;  
+    }
+    .capsulas{
+        grid-column: 1/3;
+        grid-row: 3 /4 ;        
+    }   
+
+    .cajasBases{
+        grid-column: 1/3;
+        grid-row: 4/5;
+        
+    }
+    .cortadores{
+        grid-column: 3/4;
+        grid-row: 3/5;
+    }
+    .ceramica{
+        grid-column: 1/2;
+        grid-row: 5 / 7;
+    }
+    .banatones{
+        grid-column: 2/4;
+        grid-row: 5/6;
+    }
+    .toppers{
+        grid-column: 2/4;
+        grid-row:  6 /7;
+    }
+    
+    
+    
+    
+}
+
+
+
