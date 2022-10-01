@@ -6,11 +6,16 @@ html,body {
     
 }
 
+.flex-container {
+    display: flex;
+    padding: 20px;
+}
+
 .casilleros {
     height: 500px;
     width: 500px;
     display: grid;
-    border: 7px solid black;
+    border: 10px solid black;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(6, 1fr);
     
