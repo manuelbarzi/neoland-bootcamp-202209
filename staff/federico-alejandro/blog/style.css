@@ -1,0 +1,13 @@
+html,
+body {
+    background-color: bisque;
+}
+
+.header__tittle {
+    display: flex;
+    font-family: 'Trebuchet MS';
+    font-size: 25px;
+    color: rgb(255, 111, 0);
+    font-weight: bold;
+    background-color: aquamarine;
+}
