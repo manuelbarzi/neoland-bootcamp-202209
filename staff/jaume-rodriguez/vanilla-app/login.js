@@ -3,35 +3,45 @@
 /* CREAMOS UN CONTENEDOR FLEX */
 var containerFlex = document.createElement("div")
 
+/* CREAMOS UN HEADER */
+
+var headerForm = document.createElement("h1");
+headerForm.innerText = "Sign in to continue to Home";
+
+containerFlex.append(headerForm);
+
 /* CREAMOS UN FORMULARIO */
 var form = document.createElement("form");
 form.action = "home.html";
 
+var imageAvatar = document.createElement("img");
+imageAvatar.src = "avatarlogo.png";
+
 var email = document.createElement("input");
 email.type = "email";
-email.placeholder = "Enter your e-mail";
+email.placeholder = "Email";
 
 var password = document.createElement("input");
 password.type = "password";
-password.placeholder = "Enter your password";
+password.placeholder = "Password";
 
 var button = document.createElement("button");
-button.innerText = "Login";
+button.innerText = "Sign in";
 
-var textEmail = document.createElement("p");
-textEmail.innerText = "E-mail";
-
-var textPassword = document.createElement("p");
-textPassword.innerText = "Password";
-
-var linkRegister = document.createElement("a");
-linkRegister.href = "Register.html";
-linkRegister.innerText = "Register";
-
-form.append(textEmail, email,textPassword, password, button, linkRegister);
+form.append(imageAvatar, email, password, button);
 
 containerFlex.append(form);
 document.body.append(containerFlex);
+
+/* CREAMOS ENLACE REGISTRO */
+
+var linkRegister = document.createElement("a");
+linkRegister.href = "Register.html";
+linkRegister.innerText = "Create an account";
+
+linkRegister.classList.add("anchor__login");
+
+containerFlex.append(linkRegister);
 
 /* AGREGAMOS ESTILOS */
 containerFlex.classList.add("container-flex");
@@ -39,5 +49,5 @@ form.classList.add("form");
 button.classList.add("button");
 textEmail.classList.add("textForm");
 textPassword.classList.add("textForm");
-
+linkRegister.classList.add("anchor__login");
 /* ----------------------- */
