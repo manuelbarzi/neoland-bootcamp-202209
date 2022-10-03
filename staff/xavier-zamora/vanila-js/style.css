@@ -1,0 +1,22 @@
+*{
+    box-sizing: border-box;
+}
+html, body{
+    height: 100%;
+    width: 100%;
+}
+body{
+    margin: 0%;
+}
+h2{
+    color: white;
+}
+button{
+    background-color: linear;
+    border-radius: 50%;
+    background: linear-gradient(to left, #ffc800, #aa00ff);
+    color: white;
+    border: 3px solid white;
+    width: 100px;
+    height: 30px;
+}
