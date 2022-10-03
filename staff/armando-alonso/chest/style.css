@@ -1,0 +1,49 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tablero {
+  border: 3px solid black;
+  height: 50vw;
+  width: 50vw;
+  display: grid;
+  grid-template-columns: 6% repeat(8, 11%) 6%;
+  grid-template-rows: 6% repeat(8, 11%) 6%;
+}
+
+.tablero__casilla-borde {
+  background-color: rgb(141, 99, 43);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* font-size: 10px; */
+  font-weight: 1000;
+}
+
+.tablero__casilla-negra {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  color: transparent;
+}
+
+.tablero__casilla-blanca {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  color: transparent;
+}
