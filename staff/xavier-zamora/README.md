@@ -1,6 +1,6 @@
-#Xavier
+# Xavier
 
-##Contact
+## Contact
 
 [linkedin](https://www.linkedin.com/in/xavi-zamora-lorente)
 
