@@ -39,9 +39,33 @@ html {
     height: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .chess {
     display: grid;
-    height: 100%;
+    width: 500px;
+    height: 500px;
+    border: 2px solid black;
+    grid-template-rows: repeat(8, 1fr);
+}
+
+.container {
+    display: grid;
+}
+
+.board__line {
+    grid-template-columns: repeat(8, 1fr);
+}
+
+.line-odd__item:nth-child(even) {
+    background-color: gray;
+}
+
+.line-even__item:nth-child(odd) {
+    background-color: gray;
+}
+
+.piece {
+    border: 1px solid black;
 }
