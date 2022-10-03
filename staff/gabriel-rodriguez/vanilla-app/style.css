@@ -1,0 +1,141 @@
+* {
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    background-color: rgba(165, 199, 124, 0.649);
+   
+    
+}
+/* button {
+    background-color: transparent;
+    border: none;
+} */
+
+
+
+h1,h2,h3,h4,h5,h6 {
+    margin: 0;
+}
+
+/* layout -BEM */
+.container { /*block */
+display: flex; /* especifica si un elemento es tratado como block or inline element y el diseño usado por sus hijos, como flow layout*/
+flex-direction: column; /*especifica cómo colocar los objetos flexibles en el contenedor flexible definiendo el eje principal y la dirección*/
+align-items: center; /*establece el valor align-self sobre todos los descendientes directos de un grupo*/
+justify-content: center; /*define cómo el navegador distribuye el espacio entre y alrededor de los items flex, a lo largo del eje principal de su contenedor*/
+gap: 5px; /*Es el ancho de la canaleta que separa las líneas de la cuadrícula,en relación con la dimensión del elemento*/
+}
+
+.containerForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    background-color: rgba(245, 245, 184, 0.798);
+    border-radius: 3px;
+    font-family: Franklin Gothic Medium;
+    font-style: italic;
+}
+
+.container__item--left { /*block__element--modificate*/
+    align-self: start; /*indica la alineación de un elemento dentro del bloque que lo contiene*/
+}
+
+.container__item--rigth {/*block__element--modificate*/
+    align-self: start;
+}
+
+.anchor1 {
+    font-family: Franklin Gothic Medium;
+    font-style: italic;
+}
+
+header {
+    background-color: blue;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    height: 30px;
+    box-shadow: 0 1px 5px 0 rgba(50, 0, 180, 0.5);
+    display: flex;
+    gap: 15px;
+    /* El padre va a dirigir como se situa los hijos es lo más recomendado */
+}
+
+.header__menu {
+    /* position: fixed and absolut implican que el component fija por si
+     mismo su ubicación en el layout (lugar en el que se posiciona en la
+     pantalla */
+    position: fixed;
+    top: 30px;
+    height: 60px;
+    display: flex;
+    flex-direction:column;
+    align-items: flex-start;
+    background-color: inherit;
+    justify-content: space-around;
+}
+
+.header__title {
+    /* margin-left: 15px; */
+    font-size: 25px;
+
+}
+
+.button-burguer {
+    width: fit-content;
+}
+
+
+/* Importante;
+	CSS FlexBox [display: flex;]
+	
+	Introduction:
+Cuando describimos a flexbox como unidimensional destacamos el hecho que flexbox maneja el layout en una sola dimensión a la vez — ya sea como fila o como columna.
+
+	The flex container properties are:
+
+    flex-direction	| Dirección horizontal o vertical en la que los items se acomulan
+    flex-wrap		| Si no hay sitio, salta linea o columna y sigue añadiendo items
+    flex-flow		| flex-direction + flex-wrap
+    justify-content	| Alinea Items horizontalmente
+    align-items 	| Alinea Items verticalmente
+    align-content 	| Alinea Lineas verticalmente
+
+	The flex item properties are:
+
+    order		| Coloca los items según el valor que le des 0-10..
+    flex-grow		| Más alto el valor del item, este "crecerá" más respecto a los otros
+    flex-shrink		| Más alto el valor del item, este "encogerá" más respecto a los otros
+    flex-basis		| Añade un valor manual al item para agrandarlo o decrecerlo horizontalmente respecto a los otros
+    flex		| flex-grow + flex-shrink + flex-basis
+    align-self		| Alinea verticalmente un item selecionado independientemente del resto
+
+
+	CSS Flexbox Responsive
+
+    flex-direction: row;	| Pc y grandes pantallas
+    flex-direction: column;	| Mobiles y Tablets
+
+    @media (max-width: 800px) {
+      .flex-container {
+        flex-direction: column;
+      }
+    }
+----------------------------------------------------------
+
+    flex-wrap: wrap;		| Para que al mutar salte de horizontal a vertical
+    flex: ".."%;		| Añadir un valor <100% al item para que mute a un 100% cuando se lo pidamos
+
+    @media (max-width: 800px) {
+      .flex-item--right, .flex-item--left {
+        flex: 100%;
+      }
+    }*/
