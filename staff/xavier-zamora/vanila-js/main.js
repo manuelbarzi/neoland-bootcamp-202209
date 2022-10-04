@@ -9,10 +9,10 @@ var password = document.createElement('input')
 password.placeholder = "insert password"
 var button = document.createElement('button')
 button.textContent = "SEND"
-var a = document.createElement('div')
+var a = document.createElement('main')
 
 //atributes
-email.type = "text"
+email.type = "email"
 password.type = "password"
 email.required = "true"
 password.required = "true"
@@ -31,7 +31,7 @@ form.appendChild(button)
 body.style.display = "flex"
 body.style.justifyContent = "center"
 body.style.alignItems = "center"
-body.style.height = "60rem"
+body.style.height = "100%"
 body.style.backgroundImage = "url('https://assets2.razerzone.com/images/pnx.assets/618c0b65424070a1017a7168ea1b6337/razer-wallpapers-page-hero-mobile.jpg')"
 body.style.backgroundRepeat = "no-repeat"
 body.style.backgroundPosition = "center center"
@@ -43,7 +43,7 @@ a.style.alignItems = "center"
 a.style.backgroundColor = "rgba(17, 132, 0, 1)"
 a.style.height = "20rem"
 a.style.width = "18rem"
-a.style.boxShadow = "10px 10px 1000px 20px green"
+a.style.boxShadow = "0.6rem 0.6rem  62.5rem 1.2rem green"
 
 form.style.display = "flex"
 form.style.flexDirection = "column"
@@ -52,6 +52,7 @@ button.style.margin = "2rem"
 
 a.style.border = "6px solid rgba(0,255,0,1)"
 a.style.borderRadius = "5%"
+
 
 
 

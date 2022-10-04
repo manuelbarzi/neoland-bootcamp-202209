@@ -1,15 +1,16 @@
 //selector var
 var body = document.querySelector('body')
 var form = document.createElement('form')
-var a = document.createElement('div')
+var a = document.createElement('main')
 var email = document.createElement('input')
 var password = document.createElement('input')
 var password2 = document.createElement('input')
 var button = document.createElement('button')
 
 //atributes
-email.type = "text"
+email.type = "email"
 email.required = "true"
+email.className = "Email"
 
 password.type = "password"
 password.required = "true"
@@ -34,7 +35,7 @@ password.placeholder = "Insert Password"
 password2.placeholder = "Repeat your password"
 
 //styles
-body.style.height = "60rem"
+body.style.height = "100%"
 body.style.display = "flex"
 body.style.justifyContent = "center"
 body.style.alignItems = "center"
@@ -59,4 +60,4 @@ a.style.borderRadius = "5%"
 a.style.backgroundColor = "rgba(17, 132, 0, 1)"
 a.style.height = "20rem"
 a.style.width = "18rem"
-a.style.boxShadow = "10px 10px 1000px 20px green"
+a.style.boxShadow = "0.6rem 0.6rem  62.5rem 1.2rem green"
