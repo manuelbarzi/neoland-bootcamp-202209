@@ -1,7 +1,9 @@
 var user = []
-var users = [{
-    name: "Aitor Tilla", email: 'aitor@tilla.com', password: 'aitortillabuena'
-}]
+var users = [
+    {name: "Aitor Tilla", email: 'aitor@tilla.com', password: 'aitortillabuena'},
+    {name: "Nosoy Tupadre", email: 'nosoy@yo.com', password: 'quenosoyyo'},
+    {name: "Debora Melo", email: 'debora@melo.com', password: 'deboramelo'},
+    {name: "Debora Dora", email: 'debora@dora.com', password: 'deboradora'}]
 
 //---------------THIS IS LOGIN----------------------
 //selector var
@@ -66,7 +68,6 @@ a.style.borderRadius = "5%"
 
 //---------------------THIS IS REGISTER-----------------------------
 //selector var
-var body = document.querySelector('body')
 var formA = document.createElement('form')
 var aA = document.createElement('main')
 var emailA = document.createElement('input')
@@ -138,6 +139,7 @@ aA.style.boxShadow = "0.6rem 0.6rem  62.5rem 1.2rem green"
 //-------------FINISH REGISTER-------------------
 
 //-------------THIS IS HOME----------------------
+
 //-------------FINISH HOME-----------------------
 
 //-------------- LOGIN SETUP ------------------------
@@ -160,6 +162,33 @@ linkA.onclick = function(event) {
     log('DEBUG', 'change to register LOGIN page')   
     aA.remove()
     document.body.append(a)
+}
+
+form.onsubmit = function(event){
+    debugger
+    var k = email.value
+    var l = password.value
+    event.preventDefault()
+    var i = users.length
+    var match = false
+    while (i > 0){
+        i--
+        var j = users[i]
+        if(j.email === k && j.password === l){
+            match = true;
+
+            break
+        }
+    }
+    if(match === true){
+        form.reset()
+        log('DEBUG', 'change page to home.html')
+        //Aquí redirige hacia home
+    }else{
+        alert("wrong password or email")
+        log('DEBUG', 'wrong credentials')
+        form.reset()
+    }
 }
 
 formA.onsubmit = function(event){

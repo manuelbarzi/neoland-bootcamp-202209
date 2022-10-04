@@ -10,13 +10,16 @@ var button = document.createElement('button')
 //atributes
 email.type = "email"
 email.required = "true"
-email.className = "Email"
+email.className = "form_email"
 
 password.type = "password"
 password.required = "true"
+password.className = "form_password"
 
 password2.type = "password"
 password2.required = "true"
+password2.className = "form_password2"
+
 
 button.textContent = "SEND"
 

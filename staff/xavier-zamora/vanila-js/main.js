@@ -53,6 +53,7 @@ button.style.margin = "2rem"
 a.style.border = "6px solid rgba(0,255,0,1)"
 a.style.borderRadius = "5%"
 
+//DONE make responsive version
 
 
 
