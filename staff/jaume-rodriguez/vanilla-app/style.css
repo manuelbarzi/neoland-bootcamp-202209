@@ -28,7 +28,8 @@ div h1{
 
 input{
     height: 2.5rem;
-    border-color: rgb(222, 222, 222);
+    border-color: rgb(215, 215, 215);
+    border-width: 0.12rem;
     border-radius: 0.2rem;
     border-style: solid;
     color: rgb(68, 68, 68);

@@ -33,7 +33,7 @@ form.append(imageAvatar, email, password, button);
 
 containerFlex.append(form);
 
-/* CREAMOS ENLACE REGISTRO */
+/* CREAMOS ENLACE CREATE AN ACCOUNT */
 
 var linkRegister = document.createElement("a");
 linkRegister.href = "Register.html";

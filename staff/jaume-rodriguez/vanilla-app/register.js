@@ -12,7 +12,6 @@ headerForm.innerText = "Create your Account to continue to Sign in ";
 containerFlex.append(headerForm);
 
 /* CREAMOS UN FORMULARIO */
-
 var form = document.createElement("form");
 form.action = "login.html";
 
@@ -39,7 +38,7 @@ form.append(imageAvatar, userName, email, password, button);
 
 containerFlex.append(form);
 
-/* CREAMOS ENLACE REGISTRO */
+/* CREAMOS ENLACE SIGN IN */
 
 var linkLogin = document.createElement("a");
 linkLogin.href = "Login.html";
