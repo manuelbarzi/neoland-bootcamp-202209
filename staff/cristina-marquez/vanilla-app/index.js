@@ -1,8 +1,8 @@
 // LOGIN FORM
 
-var users = [{
-    name: 'Cristina', email: 'cris@marquez.com', password: '123456'
-}
+var users = [
+    { name: 'Cristina', email: 'cris@marquez.com', password: '123456' },
+    { name: 'Pepe', email: 'pepe@goteras.com', password: '123456' },
 ]
 
 var loginForm = document.createElement("form")
@@ -34,7 +34,7 @@ var loginButton = document.createElement("button")
 loginButton.innerText = "Login"
 
 
-// button.addEventListener('click', (e) => {
+// button.addEventListener('click', (event) => {
 //     e.preventDefault();
 //     if (e.altKey) {
 //         alert('ALT was pressed')
@@ -46,6 +46,7 @@ loginButton.innerText = "Login"
 
 
 //agregar los elementos al form
+
 loginForm.append(loginEmailLabel, loginEmail, loginPasswordLabel, loginPassword, loginButton);
 
 
@@ -130,7 +131,60 @@ loginRegisterAnchor.onclick = function (event) {
     document.body.append(registerContainerFlex)
 }
 
-//TODO: create  DB + USER
-//TODO: get email and password from inputs
-//TODO: verify if email and password matches to some user in DB if matches navigate home, if not show alert message
 
+loginButton.onclick = function (event) {
+    event.preventDefault()
+
+    const inputEmail = loginEmail.value
+    const inputPassword = loginPassword.value
+
+    // Aux variable so we can toggle it while looping
+    let loginSuccessful = false
+
+    users.forEach(user => {
+        if (inputEmail === user.email && inputPassword === user.password) {
+            log('INFO', `User and password are correct for user ${user.name}`)
+            loginSuccessful = true
+        }
+    })
+
+
+    // And then we just read the aux variable
+    if (loginSuccessful) {
+        log('INFO', 'Authentication successful, navigate to google')
+    } else {
+        log('ERROR', 'Login was not successful')
+    }
+
+}
+
+
+registerAccountButton.onclick = (event) => {
+    event.preventDefault()
+
+    console.log('Registering...')
+
+    const inputName = registerName.value
+    const inputEmail = registerEmail.value
+    const inputPassword = registerPassword.value
+
+    const userExists = users.some(user => user.email === inputEmail)
+
+    if (userExists) {
+        log('ERROR', `Email ${inputEmail} was already registered`)
+        return
+    }
+
+
+    const newUser = {
+        name: inputName,
+        email: inputEmail,
+        password: inputPassword
+    }
+
+
+    users.push(newUser)
+
+    console.log(users)
+
+}

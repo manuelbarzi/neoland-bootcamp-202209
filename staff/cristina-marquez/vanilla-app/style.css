@@ -19,10 +19,9 @@ body {
     align-items: center;
 }
 
-
-
 .button {
     align-items: center;
+    margin: 16px;
 }
 
 .label {
