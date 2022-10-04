@@ -1,4 +1,4 @@
-* {
+/* * {
     box-sizing: border-box;
 }
 
@@ -18,10 +18,10 @@ body {
 } */
 
 
-
+/* 
 h1,h2,h3,h4,h5,h6 {
     margin: 0;
-}
+} */
 
 /* layout -BEM */
 .container { /*block */
@@ -44,19 +44,16 @@ gap: 5px; /*Es el ancho de la canaleta que separa las líneas de la cuadrícula,
     font-style: italic;
 }
 
-.container__item--left { /*block__element--modificate*/
+/* .container__item--left { /*block__element--modificate*/
     align-self: start; /*indica la alineación de un elemento dentro del bloque que lo contiene*/
 }
 
-.container__item--rigth {/*block__element--modificate*/
-    align-self: start;
-}
+/* .container__item--rigth {/*block__element--modificate*/
+    align-self: start; */
+} */
 
-.anchor1 {
-    font-family: Franklin Gothic Medium;
-    font-style: italic;
-}
 
+/* 
 header {
     background-color: blue;
     position: fixed;
@@ -65,33 +62,33 @@ header {
     height: 30px;
     box-shadow: 0 1px 5px 0 rgba(50, 0, 180, 0.5);
     display: flex;
-    gap: 15px;
+    gap: 15px; */
     /* El padre va a dirigir como se situa los hijos es lo más recomendado */
 }
 
-.header__menu {
+/* .header__menu {
     /* position: fixed and absolut implican que el component fija por si
      mismo su ubicación en el layout (lugar en el que se posiciona en la
      pantalla */
-    position: fixed;
+    /* position: fixed;
     top: 30px;
     height: 60px;
     display: flex;
     flex-direction:column;
     align-items: flex-start;
     background-color: inherit;
-    justify-content: space-around;
+    justify-content: space-around; */ */
 }
 
-.header__title {
+/* .header__title {
     /* margin-left: 15px; */
-    font-size: 25px;
+    font-size: 25px; */
 
 }
 
-.button-burguer {
+/* .button-burguer {
     width: fit-content;
-}
+} */ */
 
 
 /* Importante;
