@@ -2,6 +2,7 @@
 
 /* CREAMOS UN CONTENEDOR FLEX */
 var containerFlex = document.createElement("div")
+document.body.append(containerFlex);
 
 /* CREAMOS UN HEADER */
 
@@ -37,7 +38,6 @@ button.innerText = "Register";
 form.append(imageAvatar, userName, email, password, button);
 
 containerFlex.append(form);
-document.body.append(containerFlex);
 
 /* CREAMOS ENLACE REGISTRO */
 
