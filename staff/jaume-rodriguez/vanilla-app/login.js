@@ -18,18 +18,26 @@ form.action = "home.html";
 var imageAvatar = document.createElement("img");
 imageAvatar.src = "avatarlogo.png";
 
+var loginLabelEmail = document.createElement("label");
+loginLabelEmail.htmlFor = "loginEmail";
+
 var email = document.createElement("input");
 email.type = "email";
 email.placeholder = "Email";
+email.id = "loginEmail";
+
+var loginLabelPassword = document.createElement("label");
+loginLabelPassword.htmlFor = "loginPassword";
 
 var password = document.createElement("input");
 password.type = "password";
 password.placeholder = "Password";
+password.id = "loginPassword"
 
 var button = document.createElement("button");
 button.innerText = "Sign in";
 
-form.append(imageAvatar, email, password, button);
+form.append(imageAvatar, loginLabelEmail, email,loginLabelPassword, password, button);
 
 containerFlex.append(form);
 
@@ -47,7 +55,5 @@ containerFlex.append(linkRegister);
 containerFlex.classList.add("container-flex");
 form.classList.add("form");
 button.classList.add("button");
-textEmail.classList.add("textForm");
-textPassword.classList.add("textForm");
 linkRegister.classList.add("anchor__login");
 /* ----------------------- */
