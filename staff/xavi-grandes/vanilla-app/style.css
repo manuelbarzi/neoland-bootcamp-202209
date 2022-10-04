@@ -5,26 +5,37 @@ html {
 }
 
 body {
-    background-color: aliceblue;
+    background: radial-gradient(circle, rgba(199,204,230,1) 0%, rgba(72,70,252,1) 100%);
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     min-height: 100vh;
     margin: 0;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 19px;
+    font-size: 17px;
 }
 
 header{
     background-color: #216c9a;
 }
 
-.container {
+.loginContainer {
     background-color: white;
     padding: 1rem;
     border-radius: 5px;
     width: 250px;
-    height: 200px;
+    height: 220px;
+    border: 1px solid grey;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.714);
+}
+
+.RegisterContainer {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 5px;
+    width: 250px;
+    height: 280px;
     border: 1px solid grey;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.714);
 }
@@ -32,8 +43,9 @@ header{
 h1 {
     margin: 0 0.5rem;
     color: #216c9a;
-
-    font-size: 23px;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
 }
 
 hr {
@@ -75,7 +87,6 @@ button {
 button:hover {
     background-color: #4f97c4; 
     transition: background-color 0.25s;
-
 }
 
 .btn a{
@@ -88,4 +99,34 @@ a {
     font-size: 12px;
     text-decoration: none;
     color: grey;
+}
+
+.regiterLink {
+    display: flex;
+    justify-content: center;
+    margin-top: 0.5em;
+    padding-top: 0.3em;
+    color: #216c9a;
+    height: 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.loginLink {
+    display: flex;
+    justify-content: center;
+    margin-top: 0.5em;
+    padding-top: 0.3em;
+    background-color: #216c9a;
+    color: white;
+    height: 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.loginLink:hover {
+    background-color: #4f97c4; 
+    transition: background-color 0.25s;
 }
