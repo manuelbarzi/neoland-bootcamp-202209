@@ -1,12 +1,15 @@
 /* TODO VALIDAR 2 CONTRASEÑAS*/
-/* LOGIN PAGE */
-
+/* TODO MÁXIMO DE CARACTERES */
 log("INFO", "Start App")
 
 /* BASE DE DATOS */
+var users = [{
+    name:"",
+    email:"",
+    password:""
+}];
 
-var users = [];
-
+/* LOGIN PAGE */
 /* CREAMOS UN CONTENEDOR FLEX */
 var loginContainerFlex = document.createElement("div")
 document.body.append(loginContainerFlex);
@@ -27,27 +30,54 @@ loginImageAvatar.src = "avatarlogo.png";
 var loginLabelEmail = document.createElement("label");
 loginLabelEmail.htmlFor = "loginEmail";
 
-var loginEmail = document.createElement("input");
-loginEmail.type = "email";
-loginEmail.placeholder = "Email";
-loginEmail.id = "loginEmail";
-loginEmail.required = "required"
+var loginEmailInput = document.createElement("input");
+loginEmailInput.type = "email";
+loginEmailInput.placeholder = "Email";
+loginEmailInput.id = "loginEmail";
+loginEmailInput.required = "required"
 
 var loginLabelPassword = document.createElement("label");
 loginLabelPassword.htmlFor = "loginPassword";
 
-var loginPassword = document.createElement("input");
-loginPassword.type = "password";
-loginPassword.placeholder = "Password";
-loginPassword.id = "loginPassword"
-loginPassword.required = "required"
+var loginPasswordInput = document.createElement("input");
+loginPasswordInput.type = "password";
+loginPasswordInput.placeholder = "Password";
+loginPasswordInput.id = "loginPassword"
+loginPasswordInput.required = "required"
 
 var loginButton = document.createElement("button");
 loginButton.innerText = "Sign in";
 
-loginForm.append(loginImageAvatar, loginLabelEmail, loginEmail,loginLabelPassword, loginPassword, loginButton);
+loginForm.append(loginImageAvatar, loginLabelEmail, loginEmailInput,loginLabelPassword, loginPasswordInput, loginButton);
 
 loginContainerFlex.append(loginForm);
+
+/* CONFIRMAMOS USUARIO */
+loginForm.onsubmit = function(event){
+    event.preventDefault();
+    debugger
+    var email = loginEmailInput.value
+    var password = loginPasswordInput.value
+    var userMatches = false;
+
+    for (var i= 0; i < users.length; i++){
+    var user = users[i];
+    if (user.email === email && user.password === password){
+        userMatches = true;
+
+        break;
+        }
+    }
+
+if (userMatches){
+    loginForm.reset();
+
+    loginPage.remove();
+    document.body.append(homePage);
+} else {
+    alert("wrong credentials");
+}
+};
 
 /* CREAMOS ENLACE CREATE AN ACCOUNT */
 
@@ -104,34 +134,34 @@ registerImageAvatar.src = "avatarlogo.png";
 var registerLabelName = document.createElement("label");
 registerLabelName.htmlFor = "registerName"
 
-var registerName = document.createElement("input");
-registerName.type = "text";
-registerName.placeholder = "Enter a name";
-registerName.required = "required";
-registerName.id = "registerName"
+var registerNameInput = document.createElement("input");
+registerNameInput.type = "text";
+registerNameInput.placeholder = "Enter a name";
+registerNameInput.required = "required";
+registerNameInput.id = "registerName"
 
 var registerLabelEmail = document.createElement("label");
 registerLabelEmail.htmlFor = "registerEmail";
 
-var registerEmail = document.createElement("input");
-registerEmail.type = "email";
-registerEmail.placeholder = "Enter an e-mail";
-registerEmail.id = "registerEmail";
-registerEmail.required = "required"
+var registerEmailInput = document.createElement("input");
+registerEmailInput.type = "email";
+registerEmailInput.placeholder = "Enter an e-mail";
+registerEmailInput.id = "registerEmail";
+registerEmailInput.required = "required"
 
 var registerLabelPassword = document.createElement("label");
 registerLabelPassword.htmlFor = "registerPassword";
 
-var registerPassword = document.createElement("input");
-registerPassword.type = "password";
-registerPassword.placeholder = "Enter a password";
-registerPassword.id = "registerPassword"
-registerPassword.required = "required"
+var registerPasswordInput = document.createElement("input");
+registerPasswordInput.type = "password";
+registerPasswordInput.placeholder = "Enter a password";
+registerPasswordInput.id = "registerPassword"
+registerPasswordInput.required = "required"
 
 var registerButton = document.createElement("button");
 registerButton.innerText = "Register";
 
-registerForm.append(registerImageAvatar,registerLabelName, registerName,registerLabelEmail, registerEmail,registerLabelPassword, registerPassword, registerButton);
+registerForm.append(registerImageAvatar,registerLabelName, registerNameInput,registerLabelEmail, registerEmailInput,registerLabelPassword, registerPasswordInput, registerButton);
 
 registerContainerFlex.append(registerForm);
 
@@ -172,14 +202,53 @@ registerForm.onsubmit = function(event) {
     console.log("INFO", "Submit register");
 
     var user = {
-        name: registerName.value,
-        email: registerEmail.value,
-        password: registerPassword.value
+        name: registerNameInput.value,
+        email: registerEmailInput.value,
+        password: registerPasswordInput.value
     }
     users.push(user);
     registerForm.reset();
     console.log(users);
     registerLinkLogin.click();
+};
+
+/* HOME PAGE */
+
+/* CREAMOS MAIN */
+var homePage = document.createElement("main");
+
+/* CREAMOS HEADER */
+var homeHeader = document.createElement("header");
+var homeTitulo = document.createElement("h1");
+homeTitulo.innerText ="Web Site Jaume";
+
+homeHeader.append(homeTitulo);
+document.body.append(homeHeader);
+
+homePage.append(homeHeader);
+
+/* CREAMOS UNA BARRA DE NAVEGACIÓN FLEX*/
+var homeBarnav = document.createElement("div");
+var homeLinkHome = document.createElement("p");
+homeLinkHome.innerText = "Home";
+
+var homeLogOut = document.createElement("a");
+homeLogOut.href = "";
+homeLogOut.innerText = "Log out";
+
+homePage.append(homeBarnav);
+homeBarnav.append(homeLinkHome, homeLogOut);
+
+homeLogOut.onclick = function(event){
+    event.preventDefault();
+
+    log("DEBUG", "Navigate to login");
+
+    homePage.remove();
+    document.body.append(loginPage);
 }
 
-/* ----------------------- */
+/* AGREGAMOS ESTILOS */
+homeHeader.classList.add("header");
+homeBarnav.classList.add("barra-navegacion");
+homeLinkHome.classList.add("link--active");
