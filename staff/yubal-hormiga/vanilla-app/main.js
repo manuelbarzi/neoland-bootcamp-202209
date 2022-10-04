@@ -1,8 +1,13 @@
+var users = [ 
+    {name: 'yubal', email: 'yubal@yahoo.es', password:'12345'} 
+];
 
 /**CREAMOS */
 /*Div principal*/
-var containerBg = document.createElement('div')
-containerBg.classList.add('container__bg')
+log('DEBUG', 'mount login')
+
+var mainLogin = document.createElement('div')
+mainLogin.classList.add('container__bg')
 
 
 /*fieldset*/
@@ -11,7 +16,126 @@ fieldset.classList.add('container__field')
 
 /*legend*/
 var legend = document.createElement('legend')
-legend.textContent = 'Acceso'
+legend.textContent = 'Registro'
+legend.classList.add('container__legend')
+
+/*form*/
+
+
+var form = document.createElement('form')
+form.classList.add('container')
+form.method = 'post'
+
+
+form.onsubmit = function(event) {
+    event.preventDefault()
+    
+    log('DEBUG', 'submit register')
+    
+        
+    var user = { 
+        name: nombre.value, 
+        email: mailRegister.value, 
+        password: passwordRegister.value 
+    }
+
+    users.push(user)
+
+    form.reset()
+
+    alert('user registered')
+
+    registro.click()
+}
+
+
+/*Nombre*/
+
+var registerNameInput = document.createElement('input')
+registerNameInput.placeholder = 'Input your Name'
+registerNameInput.type = 'text'
+registerNameInput.id = 'nombre'
+
+/*Primer Label y Input*/
+var registerEmailLabel = document.createElement('label')
+registerEmailLabel.for = 'email'
+// registerEmailLabel.textContent = 'Email' 
+registerEmailLabel.classList.add('container__item--left')
+
+
+var registerEmailInput = document.createElement('input')
+registerEmailInput.type = "email"
+registerEmailInput.id = 'mailRegister'
+registerEmailInput.placeholder = 'Input your email'
+
+
+/*Segundo label e Input*/
+var loginMailLabel = document.createElement('label')
+loginMailLabel.for = 'emailRegister'
+// loginMailLabel.textContent = 'Email' 
+loginMailLabel.classList.add('container__item--left')
+
+var loginPasswordInput = document.createElement('input')
+loginPasswordInput.type = "password"
+loginPasswordInput.id = 'passwordRegister'
+loginPasswordInput.placeholder = 'Input your password'
+
+/*CREAMOS BOTON*/
+var button = document.createElement('button')
+button.textContent = 'Registro'
+button.classList.add('btn')
+
+/*CREAMOS REGISTRO*/
+var registro = document.createElement('a')
+registro.href = "register.html"
+registro.textContent = 'Loging'
+
+
+registro.onclick = function (event) {
+    event.preventDefault()
+
+    log('DEBUG', 'navigate to register')
+
+    mainLogin.remove()
+    document.body.append(containerRg)
+}
+
+/******AÑADIMOS DENTRO DEL FORM LABES E INPUTS*************/
+
+registerEmailLabel.appendChild(registerEmailInput)
+loginMailLabel.appendChild(loginPasswordInput)
+
+/**AÑADIMOS LOS LABELS AL FORM */
+form.appendChild(registerNameInput)
+form.appendChild(registerEmailLabel)
+form.appendChild(loginMailLabel)
+/*AÑADIMOS EL BOTON AL FORM*/
+form.appendChild(button)
+/*AÑDIMOS EL LEGEND AL FIELDSED*/
+fieldset.appendChild(legend)
+
+/*AÑADIMOS FORM AL FIELSED*/
+fieldset.appendChild(form)
+
+/*AÑADIMOS EL FIELSED AL DIV*/
+mainLogin.appendChild(fieldset)
+mainLogin.appendChild(registro)
+
+
+/**************************************/
+/**CREAMOS */
+/*Div principal*/
+var containerRg = document.createElement('div')
+containerRg.classList.add('container__bg')
+
+
+/*fieldset*/
+var fieldset = document.createElement('fieldset')
+fieldset.classList.add('container__field')
+
+/*legend*/
+var legend = document.createElement('legend')
+legend.textContent = 'Login'
 legend.classList.add('container__legend')
 
 /*form*/
@@ -20,48 +144,57 @@ form.classList.add('container')
 form.method = 'post'
 
 /*Primer Label y Input*/
-var labelOne = document.createElement('label')
-labelOne.for = 'email'
-labelOne.textContent = 'Email' 
-labelOne.classList.add('container__item--left')
+var registerEmailLabel = document.createElement('label')
+registerEmailLabel.for = 'email'
+// registerEmailLabel.textContent = 'Email' 
+registerEmailLabel.classList.add('container__item--left')
 
 
-var inputOne = document.createElement('input')
-inputOne.type = "email"
-inputOne.id = 'mail'
-inputOne.placeholder = 'Input your email'
+var registerEmailInput = document.createElement('input')
+registerEmailInput.type = "email"
+registerEmailInput.id = 'mail'
+registerEmailInput.placeholder = 'Input your email'
 
 
 /*Segundo label e Input*/
-var labelTwo = document.createElement('label')
-labelTwo.for = 'email'
-labelTwo.textContent = 'Email' 
-labelTwo.classList.add('container__item--left')
+var loginMailLabel = document.createElement('label')
+loginMailLabel.for = 'email'
+// loginMailLabel.textContent = 'Email' 
+loginMailLabel.classList.add('container__item--left')
 
-var inputTwo = document.createElement('input')
-inputTwo.type = "password"
-inputTwo.id = 'password'
-inputTwo.placeholder = 'Input your password'
+var loginPasswordInput = document.createElement('input')
+loginPasswordInput.type = "password"
+loginPasswordInput.id = 'password'
+loginPasswordInput.placeholder = 'Input your password'
 
 /*CREAMOS BOTON*/
-var botton = document.createElement('button')
-botton.textContent = 'login'
-botton.classList.add('btn')
+var button = document.createElement('button')
+button.textContent = 'login'
+button.classList.add('btn')
 
 /*CREAMOS REGISTRO*/
-var registro = document.createElement('a')
-registro.href = "register.html"
-registro.textContent = 'Registro'
+var loginRegisterLink = document.createElement('a')
+loginRegisterLink.href = "register.html"
+loginRegisterLink.textContent = 'Registro'
+
+loginRegisterLink.onclick = function (event) {
+    event.preventDefault()
+
+    log('DEBUG', 'navigate to register')
+
+    containerRg.remove()
+    document.body.append(mainLogin)
+}
 
 /******AÑADIMOS DENTRO DEL FORM LABES E INPUTS*************/
-labelOne.appendChild(inputOne)
-labelTwo.appendChild(inputTwo)
+registerEmailLabel.appendChild(registerEmailInput)
+loginMailLabel.appendChild(loginPasswordInput)
 
 /**AÑADIMOS LOS LABELS AL FORM */
-form.appendChild(labelOne)
-form.appendChild(labelTwo)
+form.appendChild(registerEmailLabel)
+form.appendChild(loginMailLabel)
 /*AÑADIMOS EL BOTON AL FORM*/
-form.appendChild(botton)
+form.appendChild(button)
 /*AÑDIMOS EL LEGEND AL FIELDSED*/
 fieldset.appendChild(legend)
 
@@ -69,14 +202,22 @@ fieldset.appendChild(legend)
 fieldset.appendChild(form)
 
 /*AÑADIMOS EL FIELSED AL DIV*/
-containerBg.appendChild(fieldset)
+containerRg.appendChild(fieldset)
+containerRg.appendChild(loginRegisterLink)
+
 
 
 /***LO INSERTAMOS EN EL HTML */
 
+
 const contenedor = document.querySelector('body')
-contenedor.appendChild(containerBg)
-contenedor.appendChild(registro)
+contenedor.appendChild(mainLogin)
+// contenedor.appendChild(registro)
+// contenedor.appendChild(containerRg)
+// contenedor.appendChild(registroRg)
+
+
+
 
 const body = document.querySelector('body')
 body.classList.add('container')
@@ -88,9 +229,8 @@ body.classList.add('container')
 //console.log(fieldset)
 //console.log(legend)
 //console.log(form)
-//console.log(labelOne)
-//console.log(inputOne)
-//console.log(labelTwo)
-//console.log(inputTwo)
-
+//console.log(registerEmailLabel)
+//console.log(registerEmailInput)
+//console.log(loginMailLabel)
+//console.log(loginPasswordInput)
 
