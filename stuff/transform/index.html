@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .scene {
+            position: absolute;
+            /* transform: rotate3d(0, 1, 0, 45deg); */
+        }
+
+        .background {
+            width: 1024px;
+            position: absolute;
+        }
+
+        .bird {
+            width: 100px;
+            position: absolute;
+            /* transform: translate3d(500px, 250px, 800px); */
+        }
+    </style>
+</head>
+
+<body class="scene">
+    <img class="background"
+        src="https://cdna.artstation.com/p/assets/images/images/001/397/492/large/kimberly-liima-wild-kratts-background.jpg?1445733149"
+        alt="">
+
+    <img class="bird" src="https://www.pngmart.com/files/13/African-Bird-PNG-Transparent-Image.png" alt="">
+
+    <script>
+        function pixels(value) {
+            return value + 'px'
+        }
+
+        HTMLElement.prototype.locate = function(x, y) {
+            this.x = x
+            this.y = y
+
+            this.style.left = pixels(x)
+            this.style.bottom = pixels(y)
+        }
+
+        var step = 10
+
+        var bird = document.querySelector('.bird')
+        bird.locate(100, 100)
+        
+        document.onkeydown = function (event) {
+            if (event.key === 'ArrowRight') {
+                // bird
+            }
+        }
+    </script>
+</body>
+
+</html>
