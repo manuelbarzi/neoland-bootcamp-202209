@@ -214,6 +214,7 @@ function pushUsers(){
     console.log(users)
     log('DEBUG', 'user register')
     linkA.click()
+    formA.reset()
 }
 
 
