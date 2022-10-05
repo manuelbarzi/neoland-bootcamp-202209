@@ -24,6 +24,7 @@ var buttonAnchor = document.createElement("a");
 var div = document.createElement("div");
 var anchor = document.createElement("a");
 
+
 // Incluimos las variables del formulario que acabamos de crear y que son las nuevas etiquetas dentro del body y el form
 
 body.append(form);
@@ -53,8 +54,35 @@ div.classList.add("option");
 
 // determino los parámetros de placeholder, en este caso no pongo los labels porque son 2 campos de formulario y se entiende rápido 
 
+user.type = "text";
 user.placeholder = "User";
+email.type = "email";
 email.placeholder = "E-mail";
+password.type = "password";
 password.placeholder = "Password";
 buttonAnchor.innerText = "Register";
-anchor.style = "color: white ", "text-decoration: none";
+anchor.style = "color: white; text-decoration: none";
+
+
+
+// apuntes de lo que estamos viendo en clase para poder recopilar los datos del formulario y enviarlos a la variable de almacenamiento
+
+// necesitaremos que exita para este ejercicio una variable que nos haga de base de datos y que sea un array en este caso 
+
+var users = [
+    
+] 
+
+registerForm.onsubmit = function(event) {
+    event.preventDefault()
+
+    log('DEBUG', 'submit register');
+
+    var user = {
+        name: registerNameInput.value,
+        email: registerEmailInput.value,
+        password: registerPasswordInput.value,
+    }
+
+    user.push 
+}
