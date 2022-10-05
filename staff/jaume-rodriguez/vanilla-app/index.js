@@ -3,11 +3,7 @@
 log("INFO", "Start App")
 
 /* BASE DE DATOS */
-var users = [{
-    name:"",
-    email:"",
-    password:""
-}];
+var users = [];
 
 /* LOGIN PAGE */
 /* CREAMOS UN CONTENEDOR FLEX */
@@ -61,9 +57,11 @@ loginContainerFlex.append(loginForm);
   //  var userMatches = users.some(function(user) {
   //  return user.email === email && user.password === password
   //   });
-  
+
 loginForm.onsubmit = function(event){
     event.preventDefault();
+    log("DEBUG", "Submit login")
+
     var email = loginEmailInput.value
     var password = loginPasswordInput.value
     var userMatches = false;
@@ -83,7 +81,8 @@ if (userMatches){
     loginPage.remove();
     document.body.append(homePage);
 } else {
-    alert("wrong credentials");
+    alert("Contraseña incorrecta. Vuelve a intentarlo o crea un nuevo usario seleccionando 'Create an account'");
+    loginEmailInput
 }
 };
 
@@ -206,8 +205,17 @@ registerButton.classList.add("button");
 
 registerForm.onsubmit = function(event) {
     event.preventDefault();
-
     console.log("INFO", "Submit register");
+
+    var email = registerEmailInput.value
+    for( var i = 0; i < users.length; i++) {
+        var user = users[i]
+        if ( user.email === email){
+            alert("ERROR User already exist");
+            return;
+        }
+    }
+
 
     var user = {
         name: registerNameInput.value,
