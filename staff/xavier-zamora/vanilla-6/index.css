@@ -1,0 +1,63 @@
+/* -----------------SETUP AND RESETS----------------------*/
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+body,
+h1,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0%;
+}
+
+/*----------------------DIRECT STYLES--------------------------*/
+h2 {
+    color: white;
+}
+
+h1 {
+    font-size: 22px;
+    align-self: center;
+}
+
+button {
+    background-color: linear;
+    border-radius: 50%;
+    background: linear-gradient(to left, #ffc800, #aa00ff);
+    color: white;
+    border: 3px solid white;
+    width: 100px;
+    height: 30px;
+}
+
+/*-----------------------STYLES PREFAB------------------------*/
+.nav-items {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.right-items {
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.apply-position-top {
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    right: 0%;
+    bottom: 95%;
+    background-color: white;
+}
+
+.flex {
+    display: flex;
+}

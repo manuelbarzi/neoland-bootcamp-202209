@@ -1,9 +1,9 @@
 var user = []
 var users = [
-    {name: "Aitor Tilla", email: 'aitor@tilla.com', password: 'aitortillabuena'},
-    {name: "Nosoy Tupadre", email: 'nosoy@yo.com', password: 'quenosoyyo'},
-    {name: "Debora Melo", email: 'debora@melo.com', password: 'deboramelo'},
-    {name: "Debora Dora", email: 'debora@dora.com', password: 'deboradora'}]
+    {email: 'aitor@tilla.com', password: 'aitortillabuena', password2: 'aitortillabuena'},
+    {email: 'nosoy@yo.com', password: 'quenosoyyo', password2: 'aitortillabuena'},
+    {email: 'debora@melo.com', password: 'deboramelo', password2: 'deboramelo'},
+    {email: 'debora@dora.com', password: 'deboradora', password2: 'deboradora'}]
 
 //---------------THIS IS LOGIN----------------------
 //selector var
@@ -139,7 +139,8 @@ aA.style.boxShadow = "0.6rem 0.6rem  62.5rem 1.2rem green"
 //-------------FINISH REGISTER-------------------
 
 //-------------THIS IS HOME----------------------
-
+//TODO Homepage
+var mainB = document.createElement('main')
 //-------------FINISH HOME-----------------------
 
 //-------------- LOGIN SETUP ------------------------
@@ -148,6 +149,7 @@ document.body.append(a)
 //-------------- FINISH LOGIN SETUP-----------------
 
 //-----------------FUNCTIONS-------------------------
+//anchors functions
 link.onclick = function (event) {
     event.preventDefault()
 
@@ -164,8 +166,8 @@ linkA.onclick = function(event) {
     document.body.append(a)
 }
 
+//submit functions
 form.onsubmit = function(event){
-    debugger
     var k = email.value
     var l = password.value
     event.preventDefault()
@@ -183,16 +185,28 @@ form.onsubmit = function(event){
     if(match === true){
         form.reset()
         log('DEBUG', 'change page to home.html')
-        //Aquí redirige hacia home
+        body.append(mainB)
+        a.remove()
     }else{
         alert("wrong password or email")
-        log('DEBUG', 'wrong credentials')
+        log('ERROR', 'wrong credentials')
         form.reset()
     }
 }
 
 formA.onsubmit = function(event){
     event.preventDefault()
+    var email = emailA.value
+    for (var i = 0; i < users.length; i++){
+        var userC = users[i].email
+        if(userC === email){
+            formA.reset()
+            alert("user already exist")
+            log('ERROR', 'user already exist')
+
+            return
+        }
+    }
     let user = {
         email: emailA.value, 
         password: passwordA.value,
