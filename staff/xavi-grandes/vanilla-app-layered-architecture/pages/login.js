@@ -7,27 +7,24 @@ var loginForm = document.createElement("form");
 loginForm.method = "post";
 
 loginForm.onsubmit = function (event) {
-  event.preventDefault();
-  // GET EMAIL AND PASSWORD FROM INPUTS
-  var email = loginInputEmail.value;
-  var password = loginInputPassword.value;
-  // VERIFY IF EMAIL AND PASSWORD MATCHES TO SOME USER IN DB
-  for (var i = 0; i < users.length; i++) {
-    var user = users[i];
-    // GET USER FROM DB IN INDEX "I" AND ASING IT TO VARIABLE USER
-    if (user.email === email) {
-      if (user.password === password) {
-        loginForm.reset();
+event.preventDefault();
 
-        loginDivContainer.remove();
-        document.body.append(homeHeader);
-      } // ELSE -> SHOW ALERT MESSAGE
-      else alert("Email or password uncorrect");
-      return;
-    }
-  }
-  alert("user not registered");
-};
+var email = loginInputEmail.value;
+var password = loginInputPassword.value;
+
+var result = authenticateUser(email, password)
+
+if (result instanceof Error) {
+    alert(result.message)
+
+    return
+}
+
+loginForm.reset();
+
+loginDivContainer.remove();
+document.body.append(homeHeader);
+}
 
 var loginH1 = document.createElement("h1");
 loginH1.innerText = "LOG IN";

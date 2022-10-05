@@ -7,17 +7,22 @@ registerDivContainer.classList = "RegisterContainer";
 
 var registerForm = document.createElement("form");
 // registerForm.method = 'post'
+
 registerForm.onsubmit = function (event) {
   event.preventDefault();
   //previene que el navegador por defecto refresque la página cuando se realiza el submit de los datos
 
-  var user = {
-    name: registerInputName.value,
-    email: registerInputEmail.value,
-    password: registerInputPasword.value,
-  };
+  var name = registerInputName.value
+  var email = registerInputEmail.value
+  var password = registerInputPasword.value
 
-  users.push(user);
+  const result = registerUser(name, email, password)
+
+  if (result instanceof Error){
+    alert(result.message)
+
+    return
+  }
 
   registerForm.reset();
 
