@@ -27,23 +27,3 @@ body {
 .label {
     margin-top: 16px;
 }
-
-
-.homepage-header {
-    position: fixed;
-    top: 0;
-
-    display: flex;
-    justify-content: end;
-    align-items: center;
-
-    height: 24px;
-    width: 100%;
-    background-color: rgb(27, 94, 65);
-}
-
-#username-header-span {
-    color: rgb(255, 255, 255);
-    font-size: 13px;
-    padding-right: 16px;
-}
