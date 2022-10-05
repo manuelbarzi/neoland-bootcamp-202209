@@ -10,46 +10,72 @@ body {
 
 body {
     display: flex;
-    
     margin: 0;
-    background-color: rgb(168, 245, 245);
+    background-color: aqua;
     
 
     
 }
 
 button {
-    background-color: white;
-    border: none;
+    background-color: #f9f9ff;
+    color: black;
+    
+    
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1 {
     margin: o;
+    font-family: 'Franklin Gothic Medium';
+    color: black;
 }
 
 
 
+
+/*email - password*/
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
+    color: black;
+   
 }
+
+.cajaLogin {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    border: 5px solid black;
+    
+    
+}
+
+
+
 
 
 .container__item--left {
     align-self: start;
+    font-style: oblique;
+    font-size: medium;
+
+    
+
 }
 
 .container__item--right {
     align-self: end;
+    
 }
+
+
+
+
+
+
 
 
 .header {
@@ -60,15 +86,13 @@ h6 {
     height: 30px;
     box-shadow: 0 0 5px 0 rgba(50, 0, 180, 0.5);
     /*internal*/
-    background-color: #a59eeb;
+    background-color: hsl(245, 30%, 93%);
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
-header_menu-button {
-    order: O;
-}
+
 
 .header__menu {
     position: fixed;
