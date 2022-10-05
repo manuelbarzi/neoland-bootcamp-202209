@@ -1,9 +1,7 @@
 log('INFO', 'start app')
 
 var users = [
-    { name: 'Pepito Grillo', email: 'pepito@grillo.com', password: '123123123' },
-    { name: 'Mickey Mouse', email: 'mickey@mouse.com', password: '123123123' },
-    { name: 'Wendy Darling', email: 'wendy@darling.com', password: '123123123' },
+    { name: 'Pepito Grillo', email: 'pepito@grillo.com', password: '123123123' }
 ]
 
 // DONE inject login with js
@@ -12,37 +10,6 @@ log('DEBUG', 'mount login')
 
 var loginForm = document.createElement('form')
 loginForm.className = 'container'
-
-// TODO implement login submit
-
-loginForm.onsubmit = function (event) {
-    event.preventDefault()
-
-    log('DEBUG', 'submit login')
-
-    var email = loginEmailInput.value
-    var password = loginPasswordInput.value
-
-    // TODO check user in db
-
-    for (var i = 0; i < users.length; i++) {
-        var user = users[i]
-
-        if (user.email === email) {
-            if (user.password === password) {
-                loginForm.reset()
-
-                loginPage.remove()
-                document.body.append(homePage)
-            } else
-                alert('wrong password')
-
-            return
-        }
-    }
-
-    alert('user not registered')
-}
 
 var loginEmailLabel = document.createElement('label')
 loginEmailLabel.htmlFor = 'login-email'
@@ -96,31 +63,17 @@ log('DEBUG', 'mount register')
 var registerForm = document.createElement('form')
 registerForm.className = 'container'
 
-// DONE implement register submit
+// TODO implement register submit
 
-registerForm.onsubmit = function (event) {
+registerForm.onsubmit = function(event) {
     event.preventDefault()
-
+    
     log('DEBUG', 'submit register')
-
-    var email = registerEmailInput.value
-
-    // DONE check user in db
-
-    for (var i = 0; i < users.length; i++) {
-        var user = users[i]
-
-        if (user.email === email) {
-            alert('ERROR user already exists')
-
-            return
-        }
-    }
-
-    var user = {
-        name: registerNameInput.value,
-        email: email,
-        password: registerPasswordInput.value
+    
+    var user = { 
+        name: registerNameInput.value, 
+        email: registerEmailInput.value, 
+        password: registerPasswordInput.value 
     }
 
     users.push(user)
