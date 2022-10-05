@@ -53,9 +53,17 @@ loginForm.append(loginImageAvatar, loginLabelEmail, loginEmailInput,loginLabelPa
 loginContainerFlex.append(loginForm);
 
 /* CONFIRMAMOS USUARIO */
+
+  //   var userMatches = users.some(
+  //     (user) => user.email === email && user.password === password
+  //   );
+
+  //  var userMatches = users.some(function(user) {
+  //  return user.email === email && user.password === password
+  //   });
+  
 loginForm.onsubmit = function(event){
     event.preventDefault();
-    debugger
     var email = loginEmailInput.value
     var password = loginPasswordInput.value
     var userMatches = false;
