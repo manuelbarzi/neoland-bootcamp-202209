@@ -1,0 +1,26 @@
+obj1 = {name: 'pepito', age: 25}
+{name: 'pepito', age: 25}
+obj2 = {name: 'pepito', age: 25}
+{name: 'pepito', age: 25}
+obj1 === obj2
+false
+obj1.name === obj2.name
+true
+obj1.age === obj2.age
+true
+number = 30
+30
+number
+30
+obj3 = obj1
+{name: 'pepito', age: 25}
+obj3
+{name: 'pepito', age: 25}
+obj3 === obj1
+true
+obj3.name = "carlos"
+'carlos'
+obj3
+{name: 'carlos', age: 25}
+obj1.name
+'carlos'
