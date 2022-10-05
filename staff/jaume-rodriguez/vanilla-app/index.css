@@ -107,33 +107,38 @@ form img{
     padding: 1rem;
 }
 
-/* HEADER HOME.HTML */
-.header{
-    padding: 4rem;
-    background-color: rgb(226, 226, 226);
-}
 
-/* BARRA DE NAVEGACIÓN */
-.barra-navegacion{
+/* HOME STYLES */
+
+.home__header{
     display: flex;
-    justify-content: center;
-    flex-wrap: nowrap;
-    background-color: rgb(255, 238, 160);
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background-color: #026aa7;
+    gap: 0.8rem;
+    box-shadow: 0 0 0.5rem 0 black;
 }
 
-.barra-navegacion a{
-    padding: 14px  60px;
+.home__header--username{
+    font-weight: bold;
+    font-size: 1rem;
+    color: #ffffff;
+    order: 3;
 }
 
-.barra-navegacion p{
-    padding: 14px  60px;
+.home__header--logout{
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #99d8ff;
+    margin-left: auto;
+    order: 2;
 }
 
-a:hover{
-    color: rgb(0, 0, 0);
-    background-color: rgb(233, 233, 233);
+.home__header--logout:hover{
+    color: #003f64;
 }
 
-.link--active{
-    background-color: rgb(255, 255, 255);
+.home__header--logo{
+    width: 4.9rem;
+    height: auto;
 }

@@ -80,6 +80,7 @@ registerLinkLogin.onclick = function(event){
     log("DEBUG", "Navigate to login");
 
     registerPage.remove();
+    registerForm.reset();
     document.body.append(loginPage);
 }
 

@@ -1,5 +1,6 @@
 /* TODO MEJORAR COLORES EN ALERT WRONG LOGIN Y USER */
 /* TODO OBLIGUE A @ Y .COM AL EMAIL */
+/* TODO SI SE PONE PASSWORD INCORRECTO, BORRARLO */
 
 /* CREAMOS UN LOGIN PAGE */
 var loginPage = document.createElement("main");
@@ -67,6 +68,7 @@ loginLinkRegister.onclick = function(event){
 
     log("DEBUG", "Navigate to register");
 
+    loginForm.reset();
     loginPage.remove();
     document.body.append(registerPage);
 }
@@ -91,9 +93,9 @@ loginForm.onsubmit = function (event) {
         return
     }
     console.log(result);
-
     loginForm.reset();
     loginPage.remove();
+    homeHeaderUserName.innerText = result.name;
     document.body.append(homePage);
 }
 /* ----------------------- */

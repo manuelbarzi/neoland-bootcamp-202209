@@ -7,33 +7,27 @@ var homePage = document.createElement("main");
 
 /* CREAMOS HEADER */
 var homeHeader = document.createElement("header");
-homeHeader.classList.add("header");
+homeHeader.classList.add("home__header");
 
 /* -- */
-var homeUserName = document.createElement("h1");
-homeUserName.innerText ="Web Site Jaume";
+var homeHeaderUserName = document.createElement("span");
+homeHeaderUserName.classList.add("home__header--username");
+
+var homeHeaderLogo = document.createElement("img");
+homeHeaderLogo.src = "img/trellologo.png"
+homeHeaderLogo.classList.add("home__header--logo");
 
 /* -- */
-homeHeader.append(homeUserName);
+homeHeader.append(homeHeaderUserName, homeHeaderLogo);
 homePage.append(homeHeader);
-
-/* CREAMOS UNA BARRA DE NAVEGACIÓN FLEX*/
-var homeBarnav = document.createElement("div");
-homeBarnav.classList.add("barra-navegacion");
-
-/* -- */
-var homeLinkHome = document.createElement("p");
-homeLinkHome.innerText = "Home";
-homeLinkHome.classList.add("link--active");
 
 /* -- */
 var homeLinkLogOut = document.createElement("a");
 homeLinkLogOut.href = "";
-homeLinkLogOut.innerText = "Log out";
+homeLinkLogOut.innerText = "Log out  ";
+homeLinkLogOut.classList.add("home__header--logout");
 
-/* -- */
-homeBarnav.append(homeLinkHome, homeLinkLogOut);
-homePage.append(homeBarnav);
+homeHeader.append(homeLinkLogOut);
 
 /* -- */
 homeLinkLogOut.onclick = function(event){
