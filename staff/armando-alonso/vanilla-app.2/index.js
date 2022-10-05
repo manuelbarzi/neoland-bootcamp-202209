@@ -1,62 +1,65 @@
 log("INFO", "start app");
 
 var users = [
-    {name: 'Pepito Grillo', email: 'pepito@grillo', password: '123456789'} ,
-    {name: 'arman', email: 'arman@grillo', password: '12345'},
-    {name: 'paco', email: 'paco@grillo', password: '123456'},
-    {name: 'pepe', email: 'pepe@grillo', password: '1234567'},
-    {name: 'juan', email: 'juan@grillo', password: '1234'},
-    {name: 'mario', email: 'mario@grillo', password: '12345678'},
-    {name: 'jose', email: 'jose@grillo', password: '123'}
-]
+  { name: "Pepito Grillo", email: "pepito@grillo", password: "123456789" },
+  { name: "arman", email: "arman@grillo", password: "12345" },
+  { name: "paco", email: "paco@grillo", password: "123456" },
+  { name: "pepe", email: "pepe@grillo", password: "1234567" },
+  { name: "juan", email: "juan@grillo", password: "1234" },
+  { name: "mario", email: "mario@grillo", password: "12345678" },
+  { name: "jose", email: "jose@grillo", password: "123" },
+];
 
 var head = document.querySelector("head");
 var body = document.querySelector("body");
 body.classList.add("container");
 
 var link = document.createElement("link");
-link.href = "style.css";
+link.href = "index.css";
 link.rel = "stylesheet";
 link.type = "text/css";
 
+var link2 = document.createElement("link");
+link2.href =
+  "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200";
+link2.rel = "stylesheet";
+
 head.append(link);
 
-// TODO inject login with js 
+// TODO inject login with js
 
 log("DEBUG", "start login");
 
-
 var loginForm = document.createElement("form");
-loginForm.classList.add("container", "form");
+loginForm.classList.add("form");
 
 loginForm.onsubmit = function (event) {
-    event.preventDefault()
+  event.preventDefault();
 
+  var email = loginEmail.value;
+  var password = loginPassword.value;
 
-    var email = loginEmail.value
-    var password = loginPassword.value
+  var userMatches = false;
 
-    var userMatches = false;
+  for (let i = 0; i < users.length; i++) {
+    var user = users[i];
 
-    for (let i = 0; i < users.length; i++) {
-        var user = users[i]
-        
-        if (user.email === email && user.password === password) {  
-            userMatches = true;
-            // 
-            break;
-        }  
+    if (user.email === email && user.password === password) {
+      userMatches = true;
+      //
+      break;
     }
+  }
 
-    if (userMatches) {
-        alert('user acepted')
-        loginForm.reset()
-        loginPage.remove()
-        document.body.append(homePage)
-    } else {
-        alert('user denied')
-    }
-}
+  if (userMatches) {
+    alert("user acepted");
+    loginForm.reset();
+    loginPage.remove();
+    document.body.append(homePage);
+  } else {
+    alert("user denied");
+  }
+};
 
 var loginH1 = document.createElement("h1");
 loginH1.innerText = "Login";
@@ -82,25 +85,22 @@ loginAnchor.href = "";
 
 loginForm.append(loginH1, loginEmail, loginPassword, loginButton);
 
-var loginPage = document.createElement('main');
+var loginPage = document.createElement("main");
 loginPage.classList.add("container");
 loginPage.append(loginForm, loginAnchor);
 
 document.body.append(loginPage);
 
-
 loginAnchor.onclick = function (event) {
-    event.preventDefault()
+  event.preventDefault();
 
-    log('Debug', 'navigate to register');
+  log("Debug", "navigate to register");
 
-    loginPage.remove()
-    document.body.append(registerPage)
+  loginPage.remove();
+  document.body.append(registerPage);
+};
 
-}
-
-// TODO inject register with js 
-
+// TODO inject register with js
 
 log("DEBUG", "start register");
 
@@ -108,48 +108,59 @@ log("DEBUG", "start register");
 // registerBody.classList.add("container");
 
 var registerForm = document.createElement("form");
-registerForm.classList.add("container", "form");
-registerForm.id = 'formulario';
+registerForm.classList.add("form");
+registerForm.id = "formulario";
 
 registerForm.onsubmit = function (event) {
-    event.preventDefault()
+  event.preventDefault();
 
-    log('DEBUG', 'submit register')
+  log("DEBUG", "submit register");
 
-    var user = {
-        name: registerUser.value,
-        email: registerEmail.value,
-        password: registerPassword.value
+  var email = registerEmail.value;
+
+  for (let i = 0; i < users.length; i++) {
+    var user = users[i];
+
+    if (user.email === email) {
+      alert('user already exists')
+      //
+      return;
     }
+  }
 
-    users.push(user)
+  var user = {
+    name: registerUser.value,
+    email: registerEmail.value,
+    password: registerPassword.value,
+  };
 
-    registerForm.reset()
+  users.push(user);
 
-    alert('user registered')
+  registerForm.reset();
 
-    registerAnchor.click()
-}
+  alert("user registered");
 
+  registerAnchor.click();
+};
 
 var registerH1 = document.createElement("h1");
 registerH1.innerText = "Register";
 
 var registerUser = document.createElement("input");
 registerUser.classList.add("input");
-registerUser.id = 'usuario';
+registerUser.id = "usuario";
 registerUser.type = "text";
 registerUser.placeholder = "User";
 
 var registerEmail = document.createElement("input");
 registerEmail.classList.add("input");
-registerEmail.id = 'email';
+registerEmail.id = "email";
 registerEmail.type = "email";
 registerEmail.placeholder = "E-mail";
 
 var registerPassword = document.createElement("input");
 registerPassword.classList.add("input");
-registerPassword.id = 'password';
+registerPassword.id = "password";
 registerPassword.type = "password";
 registerPassword.placeholder = "Password";
 
@@ -174,54 +185,60 @@ registerAnchor.href = "";
 // document.body.append(registerForm, registerDiv);
 // registerButton.append(registerButtonAnchor);
 // registerDiv.append(registerAnchor);
-registerForm.append(registerH1, registerUser, registerEmail, registerPassword, registerButton);
-
-
+registerForm.append(
+  registerH1,
+  registerUser,
+  registerEmail,
+  registerPassword,
+  registerButton
+);
 
 registerAnchor.onclick = function (event) {
-    event.preventDefault()
+  event.preventDefault();
 
-    log('Debug', 'navigate to login');
+  log("Debug", "navigate to login");
 
-    registerPage.remove()
-    document.body.append(loginPage)
+  registerPage.remove();
+  document.body.append(loginPage);
+};
 
-}
-
-var registerPage = document.createElement('main')
+var registerPage = document.createElement("main");
 registerPage.classList.add("container");
 registerPage.append(registerForm, registerAnchor);
 
-
 // document.body.append(registerPage);
 
+log("DEBUG", "mount home");
 
-log('DEBUG', 'mount home');
+var homeNav = document.createElement("nav");
+homeNav.classList.add("navbar");
 
-var homeDiv = document.createElement('div')
+var homeDiv = document.createElement("div");
 homeDiv.classList.add("news");
 
-var homeButton = document.createElement('button')
+var homeButton = document.createElement("button");
 homeButton.classList.add("desplegable");
+homeButton.innerText = "Home";
 
-var homeContent = document.createElement('div')
+var homeContent = document.createElement("div");
 homeContent.classList.add("news-content");
 
-var homeFirst = document.createElement('a')
+var homeFirst = document.createElement("a");
 homeFirst.innerText = "Sports";
+homeFirst.href = "#";
 
-var homeSecond = document.createElement('a')
+var homeSecond = document.createElement("a");
 homeSecond.innerText = "Regional";
+homeSecond.href = "#";
 
-var homeThird = document.createElement('a')
+var homeThird = document.createElement("a");
 homeThird.innerText = "Intermantional";
+homeThird.href = "#";
 
 homeContent.append(homeFirst, homeSecond, homeThird);
 homeDiv.append(homeButton, homeContent);
+homeNav.append(homeDiv);
 
-var homePage = document.createElement('nav')
-homePage.classList.add("navbar");
-
-homePage.append(homeDiv);
-
-
+var homePage = document.createElement("main");
+homePage.classList.add("container--home");
+homePage.append(homeNav);

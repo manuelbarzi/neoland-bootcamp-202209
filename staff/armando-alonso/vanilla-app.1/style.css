@@ -13,19 +13,17 @@ body , html {
   align-items: center;
   justify-content: center;
   gap: 0.9rem;
-  
+  background-color: white;
 
 }
 
 .form {
   border-radius: 10px;
-  padding: 10% !important;
+  padding: 2%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: start;
-  background-color: white;
-  box-shadow: 2px 2px 10px 0px rgb(4, 4, 4);
 }
 
 h1 {
@@ -58,7 +56,7 @@ h1 {
   text-decoration: none;
   display: flex;
   justify-content: center;
-  /* align-self: flex-end; */
+  align-self: flex-end;
   color: white;
 }
 
@@ -76,70 +74,7 @@ h1 {
     
 }
 
-
-/* Navbar pillada de internet para aprender como hacer un menu desplegable con css y 
-tener algo rápido https://es.w3hmong.com/howto/howto_css_dropdown_navbar.htm  */
-
-.navbar a {
-  display: block;
-  gap: 0.9rem;
-  float: left;
-  font-size: 16px;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
+.link {
+  
 }
 
-/* The dropdown container */
-.news {
-  float: left;
-  overflow: hidden;
-}
-
-/* Dropdown button */
-.news .desplegable {
-  font-size: 16px;
-  border: none;
-  outline: none;
-  color: white;
-  padding: 14px 16px;
-  background-color: inherit;
-  font-family: inherit; /* Important for vertical align on mobile phones */
-  margin: 0; /* Important for vertical align on mobile phones */
-}
-
-/* Add a red background color to navbar links on hover */
-.navbar a:hover, .news:hover .desplegable {
-  background-color: rgb(109, 107, 107);
-}
-
-/* Dropdown content (hidden by default) */
-.news-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-/* Links inside the dropdown */
-.news-content a {
-  float: none;
-  color: rgb(100, 100, 100);
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
-
-/* Add a grey background color to dropdown links on hover */
-.news-content a:hover {
-  background-color: rgb(208, 211, 208);
-}
-
-/* Show the dropdown menu on hover */
-.news:hover .news-content {
-  display: block;
-}
