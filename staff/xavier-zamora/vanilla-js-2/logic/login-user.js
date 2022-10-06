@@ -28,7 +28,6 @@ function authenticateUser(email, password) {
     } else {
         alert("wrong password or email")
         log('ERROR', 'wrong credentials')
-        formLoginRegister.reset()
+        loginPasswordRegister.value = ""
     }
-
 }

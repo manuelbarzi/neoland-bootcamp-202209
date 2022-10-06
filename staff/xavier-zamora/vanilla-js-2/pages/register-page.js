@@ -25,7 +25,6 @@ validatePasswordInputRegister.className = "form_password2"
 buttonA.textContent = "SEND"
 
 //insert 
-body.appendChild(mainRegister)
 mainRegister.appendChild(formRegister)
 formRegister.innerHTML = "<h2>REGISTER</h2>"
 formRegister.appendChild(emailInputRegister)

@@ -24,7 +24,7 @@ formLoginRegister.action = "index.html"
 formLoginRegister.method = "post"
 
 //insert
-body.appendChild(mainLogin)
+//body.appendChild(mainLogin)
 mainLogin.appendChild(formLoginRegister)
 formLoginRegister.innerHTML = "<h2>LOG IN</h2>"
 formLoginRegister.appendChild(loginEmailRegister)

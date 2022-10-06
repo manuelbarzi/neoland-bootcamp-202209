@@ -17,13 +17,21 @@ h5,
 h6 {
     margin: 0%;
 }
-
+.divBeforeHeader{
+    height: 10%;
+    width: 100%;
+    background-color: white;
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    border-bottom: 2px solid green;
+}
 /*----------------------DIRECT STYLES--------------------------*/
 h2 {
     color: white;
 }
 
-h1 {
+h3 {
     font-size: 22px;
     align-self: center;
 }
@@ -56,6 +64,16 @@ button {
     right: 0%;
     bottom: 95%;
     background-color: white;
+}
+
+.apply-position-open{
+    position: fixed;
+    top: 10%;
+    left: 0%;
+    right: 0%;
+    bottom: 80%;
+    background-color: white;
+    z-index: 0;
 }
 
 .flex {
