@@ -7,7 +7,7 @@
  */
 
 function registerUser(name, email, password) {
-    for (var i = 0; i < users.length; i++) {
+    for (var i = 0; i < users.length; i++) {  //base de datos users
         var user = users[i]
 
         if (user.email === email)
