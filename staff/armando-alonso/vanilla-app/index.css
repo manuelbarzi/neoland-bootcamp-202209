@@ -1,10 +1,11 @@
 * {
-    margin: 0;
+  margin: 0;
 }
 
-body , html {
+body,
+html {
   height: 100%;
-  background-image: linear-gradient(to bottom right, purple, green);
+  background-image: linear-gradient(to bottom right, #ba68c8, #4caf50);
 }
 
 .container {
@@ -44,16 +45,12 @@ h1 {
 
 .button {
   margin-top: 3rem;
-  background-color: green;
+  background-color: #af8eb5;
   border-style: none;
   height: 2.2rem;
   width: 15rem;
   border-radius: 7px;
   color: white;
-}
-
-#ch1 {
-  margin-top: 30px;
 }
 
 .enlace {
@@ -64,39 +61,39 @@ h1 {
   color: white;
 }
 
-.header {
-    display: flex;
-    background-color: white;
-    height: 50px;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.menu {
-    border: none;
-    background-color: transparent;
-    
-}
-
-
 /* Navbar pillada de internet para aprender como hacer un menu desplegable con css y 
 tener algo rápido https://es.w3hmong.com/howto/howto_css_dropdown_navbar.htm  */
 
 .navbar {
-    display: flex;
-    align-self: flex-start;
-    overflow: hidden;
-    background-color: rgb(134, 134, 134);
-    font-family: Arial;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+  overflow: hidden;
+  /* background-color: #97b498; */
+  font-family: monospace;
+  padding-right: 2%;
+  padding-left: 2%;
+  font-size: 16px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
 
+.profile {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: flex-end;
+  color: white;
+  font-size: 20px;
+}
+
+.logo {
+  height: 70px;
 }
 
 .navbar a {
-
   gap: 0.9rem;
   float: left;
-  font-size: 16px;
+  font-size: 18px;
   color: white;
   padding: 14px 16px;
   text-decoration: none;
@@ -104,41 +101,38 @@ tener algo rápido https://es.w3hmong.com/howto/howto_css_dropdown_navbar.htm  *
 
 /* The dropdown container */
 .news {
+  padding-left: 2%;
   float: left;
   overflow: hidden;
 }
 
 /* Dropdown button */
 .news .desplegable {
-  font-size: 16px;
+  font-size: 20px;
   border: none;
   outline: none;
-  color: white;
+  color: rgb(255, 255, 255);
   padding: 14px 16px;
   background-color: inherit;
   font-family: inherit; /* Important for vertical align on mobile phones */
   margin: 0; /* Important for vertical align on mobile phones */
 }
 
-/* Add a red background color to navbar links on hover */
-.navbar a:hover, .news:hover .desplegable {
-  background-color: rgb(109, 107, 107);
-}
-
 /* Dropdown content (hidden by default) */
 .news-content {
   display: none;
   position: absolute;
-  background-color: #f9f9f9;
+  /* background-color: #97b498; */
   min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
+  border-radius: 0px 0px 16px 0px;
 }
 
 /* Links inside the dropdown */
 .news-content a {
   float: none;
-  color: rgb(100, 100, 100);
+  color: rgb(255, 255, 255);
   padding: 12px 16px;
   text-decoration: none;
   display: block;
@@ -147,10 +141,42 @@ tener algo rápido https://es.w3hmong.com/howto/howto_css_dropdown_navbar.htm  *
 
 /* Add a grey background color to dropdown links on hover */
 .news-content a:hover {
-  background-color: rgb(208, 211, 208);
+  background-color: rgb(0, 0, 0);
+  opacity: 0.5;
+  border-radius: 0px 0px 16px 0px;
 }
 
 /* Show the dropdown menu on hover */
 .news:hover .news-content {
   display: block;
+}
+
+.cuerpo {
+  /* height: 100%; */
+  padding: 2%;
+  margin: 2%;
+}
+
+.cuerpo--contenedor {
+
+  /* border:1px solid black; */
+  /* background: gray; */
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  /* align-content: stretch; */
+  
+  
+}
+
+.columna {
+  border : 4px solid black;
+  border-radius: 10px;
+  background-color: white;
+  color: black;
+  width: 120px;
+  height: 120px;
+  
 }

@@ -4,7 +4,8 @@
 
 body , html {
   height: 100%;
-  background-image: linear-gradient(to bottom right, purple, green);
+  background-image: linear-gradient(to bottom right, #ba68c8, 
+  #4caf50);
 }
 
 .container {
@@ -44,7 +45,7 @@ h1 {
 
 .button {
   margin-top: 3rem;
-  background-color: green;
+  background-color: #af8eb5;
   border-style: none;
   height: 2.2rem;
   width: 15rem;
@@ -64,19 +65,6 @@ h1 {
   color: white;
 }
 
-.header {
-    display: flex;
-    background-color: white;
-    height: 50px;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.menu {
-    border: none;
-    background-color: transparent;
-    
-}
 
 
 /* Navbar pillada de internet para aprender como hacer un menu desplegable con css y 
@@ -86,7 +74,7 @@ tener algo rápido https://es.w3hmong.com/howto/howto_css_dropdown_navbar.htm  *
     display: flex;
     align-self: flex-start;
     overflow: hidden;
-    background-color: rgb(134, 134, 134);
+    background-color: #97b498;
     font-family: Arial;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 
@@ -113,7 +101,7 @@ tener algo rápido https://es.w3hmong.com/howto/howto_css_dropdown_navbar.htm  *
   font-size: 16px;
   border: none;
   outline: none;
-  color: white;
+  color: rgb(255, 255, 255);
   padding: 14px 16px;
   background-color: inherit;
   font-family: inherit; /* Important for vertical align on mobile phones */
@@ -129,7 +117,7 @@ tener algo rápido https://es.w3hmong.com/howto/howto_css_dropdown_navbar.htm  *
 .news-content {
   display: none;
   position: absolute;
-  background-color: #f9f9f9;
+  background-color: #97b498;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
@@ -138,7 +126,7 @@ tener algo rápido https://es.w3hmong.com/howto/howto_css_dropdown_navbar.htm  *
 /* Links inside the dropdown */
 .news-content a {
   float: none;
-  color: rgb(100, 100, 100);
+  color: rgb(255, 255, 255);
   padding: 12px 16px;
   text-decoration: none;
   display: block;
