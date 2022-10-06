@@ -6,5 +6,5 @@ var users = [
     { name: 'Wendy Darling', email: 'wendy@darling.com', password: '123123123' },
 ]
 
-// document.body.append(loginPage)
-document.body.append(homePage)
+document.body.append(loginPage)
+// document.body.append(homePage)
