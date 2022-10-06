@@ -1,6 +1,6 @@
 log("DEBUG", "mount register");
 
-// la variable divContainer es igual a - un elemento div en el documento
+ // la variable divContainer es igual a - un elemento div en el documento
 // la variable divContainer tiene una class llamada 'contaniner'
 var registerDivContainer = document.createElement("div");
 registerDivContainer.classList = "RegisterContainer";

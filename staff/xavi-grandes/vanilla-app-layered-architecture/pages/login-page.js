@@ -1,7 +1,5 @@
-var body = document.querySelector("body");
-
-var loginDivContainer = document.createElement("div");
-loginDivContainer.classList.add("loginContainer");
+var loginPage = document.createElement("div");
+loginPage.classList.add("loginContainer");
 
 var loginForm = document.createElement("form");
 loginForm.method = "post";
@@ -22,7 +20,7 @@ if (result instanceof Error) {
 
 loginForm.reset();
 
-loginDivContainer.remove();
+loginPage.remove();
 document.body.append(homeHeader);
 }
 
@@ -66,11 +64,14 @@ loginAnchor.className = "regiterLink";
 loginAnchor.innerText = "Register";
 
 // En este apartado agrupo los contenidos de cada contenedor con .append
-loginDivContainer.append(loginH1, loginLine, loginForm, loginAnchor);
+loginPage.append(loginH1, loginLine, loginForm, loginAnchor);
 loginForm.append(loginDivInputEmail, loginDivInputPasword, loginButton);
 loginDivInputEmail.append(loginLabelEmail, loginInputEmail);
 loginDivInputPasword.append(loginLabelPassword, loginInputPassword);
-body.append(loginDivContainer);
+// ---------------------------------------------------------------------------------------
+body.append(loginPage);
+// body.append(bodyHome)
+// ---------------------------------------------------------------------------------------
 
 
 // Explico la función que queremos ejecutar
@@ -79,6 +80,6 @@ loginAnchor.onclick = function (event) {
     
     log("DEBUG", "navigate to register");
     
-    loginDivContainer.remove();
+    loginPage.remove();
     document.body.append(registerDivContainer);
 };
