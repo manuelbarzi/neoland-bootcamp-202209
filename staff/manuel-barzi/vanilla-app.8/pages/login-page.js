@@ -19,12 +19,10 @@ loginForm.onsubmit = function (event) {
         return
     }
 
-    user = result
-
     loginForm.reset()
 
     loginPage.remove()
-    homeUserNameText.innerText = user.name
+    homeUserNameText.innerText = result.name
     document.body.append(homePage)
 }
 

@@ -4,16 +4,6 @@ var homeHeader = document.createElement('header')
 
 var homeHeaderLink = document.createElement('a')
 homeHeaderLink.href = ''
-homeHeaderLink.onclick = function(event) {
-    event.preventDefault()
-
-    homeMenuPanel.remove()
-    homeMenuPanelStatus = 'closed'
-
-    settingsPanel.remove()
-
-    homePage.append(tasksPanel)
-}
 
 var homeHeaderImage = document.createElement('img')
 homeHeaderImage.src = 'https://fakeimg.pl/50x25/?text=hola%20mundo&font=lobster'
@@ -45,43 +35,20 @@ homeMenuButton.onclick = function() {
 var homeMenuPanel = document.createElement('div')
 homeMenuPanel.className = 'container'
 
-var homeMenuSettingsLink = document.createElement('a')
-homeMenuSettingsLink.className = 'material-symbols-outlined'
-homeMenuSettingsLink.innerText = 'settings'
-homeMenuSettingsLink.href = ''
-
-homeMenuSettingsLink.onclick = function(event) {
-    event.preventDefault()
-
-    homeMenuPanel.remove()
-    homeMenuPanelStatus = 'closed'
-
-    tasksPanel.remove()
-
-    settingsEmailInput.value = user.email
-
-    homePage.append(settingsPanel)
-}
-
 var homeLogoutButton = document.createElement('button')
 homeLogoutButton.className = 'material-symbols-outlined'
 homeLogoutButton.innerText = 'logout'
 
 homeLogoutButton.onclick = function() {
-    user = null
-
     homeMenuPanel.remove()
     homeMenuPanelStatus = 'closed'
-
-    settingsPanel.remove()
-    homePage.append(tasksPanel)
 
     homePage.remove()
 
     document.body.append(loginPage)
 }
 
-homeMenuPanel.append(homeMenuSettingsLink, homeLogoutButton)
+homeMenuPanel.append(homeLogoutButton)
 
 var homeHeaderTopPanel = document.createElement('div')
 homeHeaderTopPanel.className = 'container container--row container--full-width container--content-space-between'
@@ -92,6 +59,6 @@ homeHeader.className = 'container container--full-width'
 homeHeader.append(homeHeaderTopPanel)
 
 var homePage = document.createElement('main')
-homePage.className = 'container container--full container--content-start' 
+homePage.className = 'container container--full container--content-start'
 
-homePage.append(homeHeader, tasksPanel)
+homePage.append(homeHeader)
