@@ -1,0 +1,154 @@
+
+
+
+
+html, 
+body {
+    height:100%;
+    
+}
+
+body {
+    display: flex;
+    margin: 0;
+    background-color: #EFEDF7;
+    
+
+    
+}
+
+button {
+    background-color: #f9f9ff;
+    color: black;
+    
+}
+
+h1 {
+    
+    font-weight: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+/*email - password*/
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    /*color: white;*/
+}
+
+.container--full {
+    width: 100%;
+    height: 100%;
+}
+.container--full-width {
+    width: 100%;
+}
+
+.container--content-start {
+    justify-content: start;
+}
+.container--row {
+    flex-direction: row;
+}    
+.container--content-space-between {
+    background-color:#BBE5ED;
+    justify-content: space-between;
+    height: 80px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.settings {
+    display: flex;
+    align-items: center;
+}
+
+
+
+.container--padding-h-s {
+    padding: 0.5rem;
+}
+
+.container--padding-h-m {
+    padding: 0.1rem;
+}
+
+.user-name {
+    color: black;
+    font-size: 25px;
+}
+
+.container--home {
+    width: 100%;
+    height: 100%; 
+}
+
+.container--home-start {
+    justify-content: start;
+}
+
+.container--userName{
+    height: 100%;
+    
+}
+.container-menu {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 30px;
+}
+.material-symbols-outlined {
+    width: 60px;
+    height: 60px;
+    border: transparent;
+    background-color: #BBE5ED;
+}
+
+
+
+
+
+
+/*LOGIN PAGE*/
+.container--login  {
+    border-color: black;
+    box-shadow: 10px 5px 5px gray;
+    background-color: #0687a7;
+    height: 280px;
+    width: 250px;
+}
+.container__item--left {
+    align-self: start;
+    font-style: oblique;
+    font-size: medium;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+.register--login {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/*REGISTER PAGE*/
+.login--link {
+    color: #f9f4f4;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.container--register {
+    border-color: black;
+    box-shadow: 10px 5px 5px gray;
+    background-color: #0687a7;
+    height: 280px;
+    width: 250px;
+}
+
+
+
+
+
+
+
+
+

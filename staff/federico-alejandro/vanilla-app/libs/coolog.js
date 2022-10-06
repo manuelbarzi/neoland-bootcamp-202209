@@ -1,4 +1,4 @@
-console.log('%cCOOL log %cV0', 'font-size: 24px;', 'font-size: 12px')
+console.log('%cCOOL lög %cV0', 'font-size: 24px;', 'font-size: 12px')
 
 function log(level, message) {
      var style
