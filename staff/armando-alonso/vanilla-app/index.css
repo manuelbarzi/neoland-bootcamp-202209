@@ -5,7 +5,7 @@
 body,
 html {
   height: 100%;
-  background-image: linear-gradient(to bottom right, #ba68c8, #4caf50);
+  background-color: #cfd8dc;
 }
 
 .container {
@@ -45,7 +45,7 @@ h1 {
 
 .button {
   margin-top: 3rem;
-  background-color: #af8eb5;
+  background-color: #9ea7aa;
   border-style: none;
   height: 2.2rem;
   width: 15rem;
@@ -58,7 +58,7 @@ h1 {
   text-decoration: none;
   display: flex;
   justify-content: center;
-  color: white;
+  color: #000000;
 }
 
 /* Navbar pillada de internet para aprender como hacer un menu desplegable con css y 
