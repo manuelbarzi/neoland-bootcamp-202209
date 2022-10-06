@@ -34,34 +34,16 @@ body {
     top: 0;
 
     display: flex;
-    justify-content: space-between;
+    justify-content: end;
     align-items: center;
 
-    height: 36px;
+    height: 24px;
     width: 100%;
-    background-color: rgb(44, 149, 137);
+    background-color: rgb(27, 94, 65);
 }
 
 #username-header-span {
     color: rgb(255, 255, 255);
     font-size: 13px;
     padding-right: 16px;
-}
-
-.header-icons {
-    font-size: 26px;
-    color: white;
-}
-
-.contextual-menu {
-    position: fixed;
-    top: 36px;
-    right: 30;
-    padding-bottom: 30px;
-    background-color: rgb(44, 149, 137);
-
-
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
 }

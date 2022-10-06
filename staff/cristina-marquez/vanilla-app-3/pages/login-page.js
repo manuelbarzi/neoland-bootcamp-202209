@@ -1,6 +1,6 @@
 // login page  
 var loginPage = document.createElement('main');
-
+document.body.append(loginPage);
 
 //container flex
 var loginContainerFlex = document.createElement("div")
@@ -67,8 +67,6 @@ loginForm.onsubmit = function (event) {
 
     if (authResponse instanceof Error) {
         log('ERROR', 'User authentication failure')
-
-        loginPassword.value = ''
         return
     } else {
         currentUser = authResponse
@@ -77,9 +75,8 @@ loginForm.onsubmit = function (event) {
 
     loginForm.reset()
     loginPage.remove()
-
-    userNameSpan.innerText = currentUser.name
     document.body.append(homePage)
+
 }
 
 

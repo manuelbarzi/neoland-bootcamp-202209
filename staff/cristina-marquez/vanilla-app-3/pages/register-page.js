@@ -68,8 +68,6 @@ registerAccountButton.onclick = function (event) {
         log('INFO', `Registration successful for user ${currentUser.name}`)
     }
 
-    userNameSpan.innerText = currentUser.name
-
     registerForm.reset()
     registerPage.remove()
     document.body.append(homePage)
