@@ -1,0 +1,42 @@
+.cuadro {
+    display: grid;
+    grid-template-areas: 
+    "a a b b b b"
+    "a a b b b b"
+    "a a b b b b"
+    "c c b b b b"
+    "c c b b b b"
+    "d d e e e f";
+    width: 500px;
+    height: 500px;
+    margin: 20px;
+    box-shadow: 7px 7px 3px rgba(0, 0, 0, 0.4)
+}
+.pintura {
+    border: solid black;
+    
+}
+.pintura:nth-child(1) {
+    grid-area: a;
+    background-color: yellow;
+}
+.pintura:nth-child(2) {
+    grid-area: b;
+    background-color: red;
+}
+.pintura:nth-child(3) {
+    grid-area: c;
+    background-color: white;
+}
+.pintura:nth-child(4) {
+    grid-area: d;
+    background-color: blue;
+}
+.pintura:nth-child(5) {
+    grid-area: e;
+    background-color: white;
+}
+.pintura:nth-child(6) {
+    grid-area: f;
+    background-color: white;
+}

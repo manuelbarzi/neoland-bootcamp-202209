@@ -1,0 +1,71 @@
+body {
+    margin: 0px;
+}
+
+.rectangle {
+    position: absolute;
+    top: 190px;
+    left: 275px;
+    background-color: aqua;
+    width: 200px;
+    height: 80px;
+    border: 1px solid black;
+    margin: 16px;
+    padding-inline-start: 30px;
+    padding-block-start: 30px;
+    transform: rotate(90deg);
+    
+    
+        /*display: inline; */
+}
+.circle {
+    position: absolute;
+    top: 0px;
+    left: 300px;
+    background-color: greenyellow;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: solid red;
+    margin: 16px;
+    padding-inline-start: 70px;
+    padding-block-start: 70px;
+}
+
+    .rectangle2 {
+        position: absolute;
+        top: 175px;
+        left: 320px;
+        width: 25px;
+        height: 125px;
+        background-color: blueviolet;
+        border: solid blueviolet;
+    }
+    .rectangle3 {
+        position: absolute;
+        top: 175px;
+        right: 872px;
+        width: 25px;
+        height: 125px;
+        background-color: yellow;
+        border: solid yellow;
+    }
+    .rectangle4 {
+        position: absolute;
+        top: 377px;
+        right: 977px;
+        width: 25px;
+        height: 125px;
+        background-color: red;
+        border: solid red;
+    }
+
+    .rectangle5 {
+        position: absolute;
+        top: 377px;
+        right: 915px;
+        width: 25px;
+        height: 125px;
+        background-color: rgb(0, 255, 106);
+        border: solid rgb(0, 255, 106);
+    }

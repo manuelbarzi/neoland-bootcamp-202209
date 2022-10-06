@@ -1,0 +1,54 @@
+html, body {
+    height: 100%;
+    margin-top: 15px;
+    background-image: url(https://thumbs.dreamstime.com/z/fondo-sangriento-33651389.jpg);
+}
+
+
+h1{
+    display: flex;
+    justify-content: center;
+    color: gold;
+}
+
+.tablero {
+    display: grid; 
+    height: 600px;
+    width: 600px;
+    padding: 90px;
+    margin: auto;
+    background-image: url(https://i0.wp.com/www.pcmgames.com/wp-content/uploads/2019/04/Juego-de-Tronos-Trono-de-hierro.jpg?resize=1400%2C788&ssl=1 );
+    background-attachment:fixed;
+    background-size:contain;
+    box-sizing: border-box;
+    border-radius: 10px;
+    grid-template-columns: repeat(9,1fr);
+    
+}
+.casilla__blanco, .casilla__negro{
+    border-radius: 6px;
+}
+.casilla__negro{
+    background-color: black;
+    border: 2px solid white;
+    box-shadow: 2px 4px 8px 0 #000;
+}
+ .casilla__blanco{
+    background-color: white;
+    border: 2px solid black;
+    box-shadow: 2px 4px 8px 0 #fff;
+}
+
+ .letras {
+    justify-self: center;
+    padding-top: 10px;    
+}
+
+ .numeros {
+    justify-self: flex-end;
+    align-self: center;
+    padding-right: 10px;    
+}
+ .numeros, .letras{
+    color: azure;
+}
