@@ -62,9 +62,11 @@ var registerPasswordInput = document.createElement('input')
 registerPasswordInput.type = 'password'
 registerPasswordInput.id = 'register-password'
 registerPasswordInput.placeholder = 'input your password'
-registerPasswordInput.minLength = 8
+//registerPasswordInput.minLength = 8
+// TODO improve following regex to support also symbols ($, %, ...)
+registerPasswordInput.pattern = '[A-Za-z0-9\S]{8,}'
 registerPasswordInput.required = true
-registerPasswordInput.title = 'Use min 8 characters for the password'
+registerPasswordInput.title = 'Use min 8 characters for the password and no spaces'
 
 var registerSubmitButton = document.createElement('button')
 registerSubmitButton.className = 'container__item--right'
