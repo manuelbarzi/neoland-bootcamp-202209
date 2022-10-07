@@ -24,7 +24,7 @@ loginForm.onsubmit = function (event) {
     loginForm.reset()
 
     loginPage.remove()
-    homeUserNameText.innerText = user.name
+    headerUserNameText.innerText = user.name
     document.body.append(homePage)
 }
 

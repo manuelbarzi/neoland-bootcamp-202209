@@ -18,6 +18,7 @@ body {
     align-items: center; 
     justify-content: center;
     gap: .5rem;
+    box-sizing: border-box;
 }
 
 .container--full {
@@ -27,7 +28,7 @@ body {
 
 .container--full-width {
     width: 100%;
-} 
+}
 
 .container--full-height {
     height: 100%;
@@ -35,6 +36,10 @@ body {
 
 .container--content-start {
     justify-content: start;
+}
+
+.container--items-start {
+    align-items: start;
 }
 
 .container--row {
@@ -45,12 +50,27 @@ body {
     justify-content: space-between;
 }
 
+.container--padding-s {
+    padding: .5rem;
+}
+
+.container--padding-m {
+    padding: 1rem;
+}
+
 .container--padding-h-s {
     padding: 0 .5rem;
 }
 
 .container--padding-h-m {
     padding: 0 1rem;
+}
+
+.container--border {
+    /* border-width: 1px;
+    border-style: solid;
+    border-color: black; */
+    border: 1px solid black; /* short-hand css rule */
 }
 
 

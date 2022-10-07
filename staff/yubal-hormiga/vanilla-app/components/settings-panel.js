@@ -19,7 +19,6 @@ settingsEmailInput.value = 'e@mail.com'
 var settingsEmailButton = document.createElement('button')
 settingsEmailButton.innerText = 'Save'
 
-
 settingsEmailForm.append(settingsEmailLabel, settingsEmailInput, settingsEmailButton)
 
 settingsEmailForm.onsubmit = function(event) {
@@ -39,5 +38,3 @@ settingsEmailForm.onsubmit = function(event) {
 }
 
 settingsPanel.append(settingsTitle, settingsEmailForm)
-
-
