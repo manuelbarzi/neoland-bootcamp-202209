@@ -14,12 +14,14 @@ homeHeaderImage.src =
 
 homeHeaderLinkImage.onclick = function (event) {
   event.preventDefault();
-  
+
   if (homeMenuPanelStatus === "opened") {
     homeMenuPanel.remove();
 
     homeMenuPanelStatus = "closed";
   }
+
+  settingsPanel.remove()
 };
 
 homeHeaderLinkImage.append(homeHeaderImage);

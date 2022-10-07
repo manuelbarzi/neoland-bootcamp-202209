@@ -1,8 +1,17 @@
 var settingsPanel = document.createElement('section')
-settingsPanel.className = 'rellenar'
+settingsPanel.className = 'setting-panel'
+
+var settingsPanelContainer = document.createElement('section')
+    settingsPanelContainer.className = 'panel-form-settings'
 
 var settingsTitle = document.createElement('h2')
     settingsTitle.innerText = 'Settings'
+
+var settingsline = document.createElement('hr')
+
+var settingsText = document.createElement('p')
+    settingsText.className = 'settings-intro'
+    settingsText.innerText = 'Change your data profile'
 
 var settingsEmailForm = document.createElement('form')
 
@@ -16,9 +25,21 @@ var settingsEmailInput = document.createElement('input')
     settingsEmailInput.placeholder = 'Input your e-mail'
     settingsEmailInput.value = ' '
 
-var settingEmailButton = document.createElement('button')
-    settingEmailButton.innerText = 'Save'
+var settingsPasswordLabel = document.createElement('label')
+    settingsPasswordLabel.htmlFor = 'password'
+    settingsPasswordLabel.innerText = 'password'
 
-settingsEmailForm.append(settingsEmailLabel, settingsEmailInput, settingEmailButton)
+var settingsPasswordInput = document.createElement('input')
+    settingsPasswordInput.id = 'password'
+    settingsPasswordInput.type = 'password'
+    settingsPasswordInput.placeholder = 'Input your new password'
+    settingsPasswordInput.value = ' '
 
-settingsPanel.append(settingsEmailForm)
+var settingFormButton = document.createElement('button')
+    settingFormButton.innerText = 'Save'
+
+settingsEmailForm.append(settingsTitle, settingsline, settingsText, settingsEmailLabel, settingsEmailInput, settingsPasswordLabel, settingsPasswordInput, settingFormButton)
+
+settingsPanelContainer.append(settingsEmailForm)
+
+settingsPanel.append(settingsPanelContainer)
