@@ -9,7 +9,7 @@
 
 function authenticateUser(email, password) {
     // DONE ok -> null, ko -> error
-
+    // users=JSON.parse(localStorage.getItem("db"))  --------------------------------
     for (var i = 0; i < users.length; i++) {
         var user = users[i]
 

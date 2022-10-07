@@ -21,6 +21,6 @@ function registerUser(name, email, password) {
     }
 
     users.push(user)
-
+    // localStorage.setItem("db",JSON.stringify(users)) --------------------------
     return null
 }
