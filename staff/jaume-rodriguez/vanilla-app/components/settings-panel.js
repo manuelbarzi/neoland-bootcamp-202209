@@ -42,7 +42,6 @@ updateLabelName.htmlFor = "updateName";
 var updateNameInput = document.createElement("input");
 updateNameInput.type = "text";
 updateNameInput.placeholder = "Enter new name";
-updateNameInput.required = "required";
 updateNameInput.id = "updateName"
 
 /* -- */
@@ -52,7 +51,6 @@ updateLabelEmail.htmlFor = "updateEmail";
 var updateEmailInput = document.createElement("input");
 updateEmailInput.type = "text";
 updateEmailInput.placeholder = "Enter new email";
-updateEmailInput.required = "required";
 updateEmailInput.id = "updateEmail"
 
 /* -- */
@@ -62,7 +60,6 @@ updateLabelPassword.htmlFor = "updatePassword";
 var updatePasswordInput = document.createElement("input");
 updatePasswordInput.type = "text";
 updatePasswordInput.placeholder = "Enter new password";
-updatePasswordInput.required = "required";
 updatePasswordInput.id = "updatePassword"
 
 /* -- */
@@ -76,7 +73,12 @@ settingsForm.append(updateTitleForm, updateLabelName, updateNameInput, updateLab
 settingsForm.onsubmit = function(event) {
     event.preventDefault()
 
+    var newName = updateNameInput.value
+    var newPassword = updatePasswordInput.value
     var newEmail = updateEmailInput.value
+
+    user.name = newName
+    user.password = newPassword
 
     var result = updateUserEmail(user.email, newEmail)
 

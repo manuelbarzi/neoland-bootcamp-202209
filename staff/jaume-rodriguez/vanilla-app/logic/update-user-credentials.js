@@ -6,7 +6,6 @@ function updateUserEmail(email, newEmail) {
             return new Error('user with e-mail ' + newEmail + ' already exists')
         }
     }
-    debugger
     for (var i = 0; i < users.length; i++) {
         var user = users[i]
 
