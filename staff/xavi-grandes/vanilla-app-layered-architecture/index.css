@@ -1,7 +1,8 @@
 html {
     padding: 0;
     margin: 0;
-    Box-sizing: border-box
+    Box-sizing: border-box;
+    height: 100vh;
 }
 
 body {
@@ -49,6 +50,10 @@ h1 {
     font-size: 20px;
     display: flex;
     justify-content: center;
+}
+
+h2 {
+    margin: 0 5px;
 }
 
 hr {
@@ -102,6 +107,7 @@ a {
     font-size: 12px;
     text-decoration: none;
     color: grey;
+    cursor: pointer;
 }
 
 .regiterLink {
@@ -134,13 +140,14 @@ a {
     transition: background-color 0.25s;
 }
 
-/* ------------------------------------------------------------------ */
+/* -------------------------HOME PAGE----------------------------------------- */
 
 .body-home {
     display: flex;
     justify-content: space-between;
     flex-direction: column;
     margin: 0px;
+    height: 100vh;
 }
 
 .home-header{
@@ -148,7 +155,6 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100vw;
 }
 
 .homeImgLogo {
@@ -176,4 +182,28 @@ a {
     color: white;
     margin-top: 8px;
     cursor: pointer;
+}
+
+
+
+/* ---------------------------SETTINGS PAGE--------------------------------------- */
+
+
+.setting-panel{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.panel-form-settings {
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px ;
+    border: 1px solid grey;
+}
+
+.settings-intro {
+    margin: 0;
+    font-weight: 700;
+    
 }
