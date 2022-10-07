@@ -48,6 +48,11 @@ registerInputName.type = "name";
 registerInputName.name = "name";
 registerInputName.id = "name";
 registerInputName.placeholder = "Input your name";
+registerInputName.pattern = '[a-zA-Z]{1,}';
+registerInputName.required = true;
+registerInputName.oninvalid = function() {
+  alert('Use characters from A to Z for names (min 1 character, and not numerics)')
+}
 
 var registerDivEmail = document.createElement("div");
 registerDivEmail.classList.add("input", "email");
@@ -61,6 +66,7 @@ registerInputEmail.type = "email";
 registerInputEmail.name = "email";
 registerInputEmail.id = "registerEmail";
 registerInputEmail.placeholder = "input your email";
+registerInputEmail.required = true;
 
 var registerDivPassword = document.createElement("div");
 registerDivPassword.classList.add("input", "password");
@@ -74,6 +80,9 @@ registerInputPasword.type = "password";
 registerInputPasword.name = "password";
 registerInputPasword.id = "registerPassword";
 registerInputPasword.placeholder = "Input your password";
+registerInputPasword.required = true
+registerInputPasword.minLength = 8
+registerInputPasword.title = 'Use min 8 characters for the password'
 
 var registerButton = document.createElement("button");
 registerButton.innerText = "Register";
