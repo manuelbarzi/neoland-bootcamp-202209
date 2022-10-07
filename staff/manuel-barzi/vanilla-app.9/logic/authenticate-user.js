@@ -7,7 +7,7 @@
  * @returns user | Error
  */
 function authenticateUser(email, password) {
-    // TODO validate input args
+    // TODO ok -> null, ko -> error
 
     for (var i = 0; i < users.length; i++) {
         var user = users[i]

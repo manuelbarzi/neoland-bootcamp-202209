@@ -36,11 +36,6 @@ var registerNameInput = document.createElement('input')
 registerNameInput.type = 'name'
 registerNameInput.id = 'register-name'
 registerNameInput.placeholder = 'input your name'
-registerNameInput.pattern = '[a-zA-Z]{1,}'
-registerNameInput.required = true
-registerNameInput.oninvalid = function() {
-    alert('Use characters from A to Z for names (min 1 character, and not numerics)')
-}
 
 var registerEmailLabel = document.createElement('label')
 registerEmailLabel.htmlFor = 'register-email'
@@ -51,7 +46,6 @@ var registerEmailInput = document.createElement('input')
 registerEmailInput.type = 'email'
 registerEmailInput.id = 'register-email'
 registerEmailInput.placeholder = 'input your e-mail'
-registerEmailInput.required = true
 
 var registerPasswordLabel = document.createElement('label')
 registerPasswordLabel.htmlFor = 'register-password'
@@ -62,9 +56,6 @@ var registerPasswordInput = document.createElement('input')
 registerPasswordInput.type = 'password'
 registerPasswordInput.id = 'register-password'
 registerPasswordInput.placeholder = 'input your password'
-registerPasswordInput.minLength = 8
-registerPasswordInput.required = true
-registerPasswordInput.title = 'Use min 8 characters for the password'
 
 var registerSubmitButton = document.createElement('button')
 registerSubmitButton.className = 'container__item--right'
