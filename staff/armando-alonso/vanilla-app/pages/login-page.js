@@ -17,10 +17,12 @@ loginForm.onsubmit = function (event) {
     return
   }
 
+  sessionUser = validUser
+
   loginForm.reset();
   loginPage.remove();
-  document.body.append(homePage);
   homeUser.innerText = validUser.name
+  document.body.append(homePage);
 };
 
 

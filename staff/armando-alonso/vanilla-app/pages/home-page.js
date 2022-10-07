@@ -1,11 +1,27 @@
 log("DEBUG", "mount home");
 
-var homeNav = document.createElement("nav");
-homeNav.classList.add("navbar");
+var homeNav = document.createElement("header")
+homeNav.classList.add("nav");
+
+var homeHeaderLink = document.createElement('a')
+homeHeaderLink.href = ''
+
+homeHeaderLink.onclick = function(event) {
+    event.preventDefault()
+    
+    homeMenuPanelStatus = 'closed'
+
+    settingsPanel.remove()
+
+    homePage.append(homeSection)
+
+}
 
 var homeLogo = document.createElement("img")
 homeLogo.classList.add('logo')
 homeLogo.src = 'https://cdn-icons-png.flaticon.com/512/1200/1200328.png'
+
+homeHeaderLink.append(homeLogo)
 
 var homeUser = document.createElement('span')
 homeUser.classList.add('profile');
@@ -14,50 +30,70 @@ homeUser.innerText = 'User'
 var homeDiv = document.createElement('div')
 homeDiv.classList.add("news");
 
-var homeButton = document.createElement("button");
-homeButton.classList.add("desplegable");
-homeButton.innerText = "Home";
+var homeButtonMenu = document.createElement("button");
+homeButtonMenu.classList.add('material-symbols-outlined','nav--menu');
+homeButtonMenu.innerText = "Menu";
 
-var homeContent = document.createElement("div");
-homeContent.classList.add("news-content");
+var homeMenuPanelStatus = 'closed'
 
-var homeFirst = document.createElement("a");
-homeFirst.innerText = "Sports";
-homeFirst.href = "#";
+homeButtonMenu.onclick = function () {
+    if (homeMenuPanelStatus === 'closed') {
+        homeNav.append(homeMenuPanel)
 
-var homeSecond = document.createElement("a");
-homeSecond.innerText = "Regional";
-homeSecond.href = "#";
+        homeMenuPanelStatus = 'opened'
+    }else{
+        homeMenuPanel.remove()
 
-var homeThird = document.createElement("a");
-homeThird.innerText = "Intermantional";
-homeThird.href = "#";
+        homeMenuPanelStatus = 'closed'
+    }
+}
 
-var homeSection = document.createElement('section')
-homeSection.classList.add('cuerpo', 'cuerpo--contenedor')
+var homeMenuPanel = document.createElement('div')
+homeMenuPanel.className = 'container'
 
-var homeFirstColumn = document.createElement('article')
-homeFirstColumn.classList.add('columna')
+var homeMenuSettingsLink = document.createElement('a')
+homeMenuSettingsLink.className = 'material-symbols-outlined'
+homeMenuSettingsLink.innerText = 'settings'
+homeMenuSettingsLink.href = ''
 
-var homeSecondColumn = document.createElement('article')
-homeSecondColumn.classList.add('columna')
+homeMenuSettingsLink.onclick = function(event) {
+    event.preventDefault()
 
-var homeThirdColumn = document.createElement('article')
-homeThirdColumn.classList.add('columna')
+    homeMenuPanel.remove()
+    homeMenuPanelStatus = 'closed'
 
-var homeFourthColumn = document.createElement('article')
-homeFourthColumn.classList.add('columna')
+    homeSection.remove()
 
-var homeFifthColumn = document.createElement('article')
-homeFifthColumn.classList.add('columna')
+    settingsEmailInput.value = sessionUser.email
 
-var homeSixthColumn = document.createElement('article')
-homeSixthColumn.classList.add('columna')
+    homePage.append(settingsPanel)
+}
 
-homeContent.append(homeFirst, homeSecond, homeThird);
-homeDiv.append(homeButton, homeContent);
-homeNav.append(homeLogo, homeDiv, homeUser);
-homeSection.append(homeFirstColumn, homeSecondColumn, homeThirdColumn, homeFourthColumn, homeFifthColumn, homeSixthColumn)
+var homeLogoutButton = document.createElement('button')
+homeLogoutButton.className = 'material-symbols-outlined'
+homeLogoutButton.innerText = 'logout'
+
+homeLogoutButton.onclick = function() {
+    sessionUser = null
+
+    homeMenuPanel.remove()
+    homeMenuPanelStatus = 'closed'
+
+    settingsPanel.remove()
+    homePage.append(homeSection)
+
+    homePage.remove()
+
+    document.body.append(loginPage)
+}
+
+homeMenuPanel.append(homeMenuSettingsLink, homeLogoutButton)
+
+
+
+homeDiv.append(homeButtonMenu);
+homeNav.append(homeHeaderLink, homeUser, homeDiv);
+
 
 var homePage = document.createElement("main");
 homePage.classList.add("container--home");
