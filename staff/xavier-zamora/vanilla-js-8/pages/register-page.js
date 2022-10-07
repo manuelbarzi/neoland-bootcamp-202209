@@ -6,6 +6,7 @@ var emailInputRegister = document.createElement('input')
 var passwordInputRegister = document.createElement('input')
 var validatePasswordInputRegister = document.createElement('input')
 var buttonA = document.createElement('button')
+buttonA.className = "button"
 var linkRegister = document.createElement('a')
 
 //atributes

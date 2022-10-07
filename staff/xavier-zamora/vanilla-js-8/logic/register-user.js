@@ -10,35 +10,45 @@
 //---------------SUBMIT FUNCTION------------------------
 //FUNCTOIN FOR REGISTER USER
 function registerUser(email, password, password2) {
-    var email = emailInputRegister.value
-    var validateNumber = /[0-9]/.test(password)
-    for (var i = 0; i < users.length; i++) {
-        var userC = users[i].email
-        if (userC === email) {
-            formRegister.reset()
-            alert("email already exist")
-            log('ERROR', 'email already exist')
-
-            return
+    var hasGmail = /gmail/.test(emailInputRegister.value)
+    var hasHotmail = /hotmail/.test(emailInputRegister.value)
+    var hasYahoo = /yahoo/.test(emailInputRegister.value)
+    var blockSend = (hasGmail || hasHotmail || hasYahoo)
+    console.log(emailInputRegister)
+    if (blockSend) {
+        var email = emailInputRegister.value
+        var validateNumber = /[0-9]/.test(password)
+        let user = {
+            email: emailInputRegister.value,
+            password: passwordInputRegister.value,
+            password2: validatePasswordInputRegister.value,
         }
-    }
-    let user = {
-        email: emailInputRegister.value,
-        password: passwordInputRegister.value,
-        password2: validatePasswordInputRegister.value,
-    }
-    if (password != password2) {
-        wrongPassword()//VALIDATE PASSWORD MATCH
-    }
-    else if (user.email.length <= 8 || user.password.length <= 8) {
-        wrongLenght()//VALIDATE LENGTH OF PASSWRODS
-    }
-    else if (validateNumber === false) {
-        passwordNotNumber()//VALIDATE NUMBER IN PASSWORD
-    }
-    else {
-        users.push(user)
-        pushUsers()
+        if (password != password2) {
+            wrongPassword()//VALIDATE PASSWORD MATCH
+        }
+        else if (user.email.length <= 8 || user.password.length <= 8) {
+            wrongLenght()//VALIDATE LENGTH OF PASSWRODS
+        }
+        else if (validateNumber === false) {
+            passwordNotNumber()//VALIDATE NUMBER IN PASSWORD
+        }
+        else {
+            for (var i = 0; i < users.length; i++) {
+                var userC = users[i].email
+                if (userC === email) {
+                    formRegister.reset()
+                    alert("email already exist")
+                    log('ERROR', 'email already exist')
+    
+                    return
+                }
+            }
+            users.push(user)
+            pushUsers()
+        }
+    } else {
+        alert('email ' + emailInputRegister.value + ' not have @email, @gmail or @yahoo')
+        log('DEBUG', 'change email error')
     }
 }
 

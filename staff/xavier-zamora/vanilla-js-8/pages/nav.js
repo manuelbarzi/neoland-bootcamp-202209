@@ -66,8 +66,8 @@ imgNavHeaderSpanLogout.textContent = "logout"
 imgNavHeaderSpanSettings.height = "100"
 
 //------------------SETTINGS FUNCTIONS-------------------------
-//THIS RETURN GO TO TASK PANEL
-imgDivHeader.onclick = function (event) {
+//THIS GO TO TASK PANEL
+divHeader.onclick = function (event) {
 
     //ONLY CAN ENTER TO TASK IF SINGIN
     if (userNameLogin.length > 1) {

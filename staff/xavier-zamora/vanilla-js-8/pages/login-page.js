@@ -11,6 +11,7 @@ var loginPasswordRegister = document.createElement('input')
 loginPasswordRegister.placeholder = "insert password"
 var buttonLoginLogin = document.createElement('button')
 buttonLoginLogin.textContent = "SEND"
+buttonLoginLogin.className = "button"
 var mainLogin = document.createElement('main')
 var linkMainLogin = document.createElement('a')
 

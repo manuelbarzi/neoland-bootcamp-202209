@@ -22,39 +22,36 @@ addInputEmailSettingPage.style.height = "1.3rem"
 addDivEmailSettings.style.height = "2rem"
 addDivEmailSettings.append(addInputEmailSettingPage)
 
-var addButonSendEmailSetting = document.createElement('span')
+var addButonSendEmailSetting = document.createElement('button')
 addButonSendEmailSetting.className = "material-symbols-outlined"
 addDivEmailSettings.append(addButonSendEmailSetting)
-addButonSendEmailSetting.textContent = 'keyboard_double_arrow_right'
+addButonSendEmailSetting.innerHTML = '<h5>keyboard_double_arrow_right</h5>'
 addButonSendEmailSetting.style.border = "1px solid black"
 addButonSendEmailSetting.style.height = "1.3rem"
 
 addFormSettingPage.className = "all-center"
 
-addButonSendEmailSetting.onclick = function (event) {
+addFormSettingPage.onsubmit = function (event) {
     event.preventDefault()
     //TODO AVISAR QUE NO LA PUEDO SEPARAR
     //function validateChangeMail()
     //this function is inside logic/setting-logic.js
-    var blockSend = /@/.test(addInputEmailSettingPage.value)
-    if (blockSend === false) {
-        alert('password need @')
-    } else {
-        console.log(blockSend)
-        var currentemail = userNameLogin
-        var newEmail = addInputEmailSettingPage.value
+    var currentemail = userNameLogin
+    var newEmail = addInputEmailSettingPage.value
 
-        var result = updateUserEmail(currentemail, newEmail)
+    var result = updateUserEmail(currentemail, newEmail)
 
-        if (result instanceof Error) {
-            alert(result.message)
-            log('ERROR', 'change email not succes')
 
-            return
-        }
-        alert('Email updated')
-        log('DEBUG', 'email update correct')
+    if (result instanceof Error) {
+        alert(result.message)
+        log('ERROR', 'change email not succes')
+
+        return
     }
+    alert('Email updated')
+    log('DEBUG', 'email update correct')
+    divHeader.click()
+    
 }
 
 
