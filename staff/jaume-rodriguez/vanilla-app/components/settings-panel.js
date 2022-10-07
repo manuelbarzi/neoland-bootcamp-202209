@@ -76,10 +76,7 @@ settingsForm.onsubmit = function(event) {
     var newName = updateNameInput.value
     var newPassword = updatePasswordInput.value
     var newEmail = updateEmailInput.value
-
-    user.name = newName
-    user.password = newPassword
-
+        
     var result = updateUserEmail(user.email, newEmail)
 
     if (result instanceof Error) {
@@ -88,7 +85,19 @@ settingsForm.onsubmit = function(event) {
         return
     }
 
-    alert('E-mail updated')
+    if ( newName === ""){
+        newName = user.Name;
+    } else{
+            user.name = newName;
+    };
+
+    if ( newPassword === ""){
+        newPassword = user.Password;
+    } else{
+            user.password = newPassword;
+    };
+
+    alert('Your changes have been applied')
     settingsForm.reset();
     homeMenuPanelUserName.innerText = user.name;
     homeSettingsTitle.innerText = user.name;
