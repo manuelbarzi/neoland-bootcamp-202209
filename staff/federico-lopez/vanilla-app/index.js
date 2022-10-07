@@ -1,6 +1,6 @@
-log("INFO", "start app");
+log('INFO', 'start app')
 
-var user = null;
+var user = null
 
-document.body.append(loginPage);
-// document.body.append(homePage);
+// document.body.append(loginPage)
+document.body.append(homePage)
