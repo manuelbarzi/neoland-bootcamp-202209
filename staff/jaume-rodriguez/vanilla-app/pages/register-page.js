@@ -1,7 +1,6 @@
 /* TODO VALIDAR 2 CONTRASEÑAS*/
 /* TODO MÁXIMO DE CARACTERES */
 /* TODO MEJORAR COLORES EN ALERT WRONG LOGIN Y USER */
-/* TODO OBLIGUE A @ Y .COM AL EMAIL */
 
 /* CREAMOS UN REGISTER PAGE */
 var registerPage = document.createElement("main");
@@ -77,7 +76,7 @@ registerLinkLogin.classList.add("anchor__login");
 registerLinkLogin.onclick = function(event){
     event.preventDefault();
 
-    log("DEBUG", "Navigate to login");
+    log("DEBUG", "Navigate to Login Page");
 
     registerPage.remove();
     registerForm.reset();
@@ -101,6 +100,7 @@ registerForm.onsubmit = function(event) {
     if (result instanceof Error) {
         alert(result.message)
 
+        registerPasswordInput.value = "";
         return
     }
     console.log(users);
