@@ -2,8 +2,8 @@ log("DEBUG", "mount register");
 
  // la variable divContainer es igual a - un elemento div en el documento
 // la variable divContainer tiene una class llamada 'contaniner'
-var registerDivContainer = document.createElement("div");
-registerDivContainer.classList = "RegisterContainer";
+var registerPage = document.createElement("div");
+registerPage.classList = "RegisterContainer";
 
 var registerForm = document.createElement("form");
 // registerForm.method = 'post'
@@ -82,7 +82,7 @@ var registerAnchor = document.createElement("a");
 registerAnchor.className = "loginLink";
 registerAnchor.innerText = "Log In";
 
-registerDivContainer.append(
+registerPage.append(
   registerH1,
   registerLine,
   registerForm,
@@ -104,6 +104,7 @@ registerAnchor.onclick = function (event) {
 
   log("DEBUG", "navigate to login");
 
-  registerDivContainer.remove();
-  document.body.append(loginDivContainer);
+  registerPage.remove();
+  document.body.append(loginPage);
+  document.body.className = "body-login"
 };

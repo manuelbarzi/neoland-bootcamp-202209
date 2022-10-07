@@ -18,10 +18,14 @@ if (result instanceof Error) {
     return
 }
 
+user = result
+
 loginForm.reset();
 
 loginPage.remove();
-document.body.append(homeHeader);
+document.body.append(homePage);
+document.body.className = "body-home"
+homeUserNameText.innerText = user.name
 }
 
 var loginH1 = document.createElement("h1");
@@ -69,8 +73,7 @@ loginForm.append(loginDivInputEmail, loginDivInputPasword, loginButton);
 loginDivInputEmail.append(loginLabelEmail, loginInputEmail);
 loginDivInputPasword.append(loginLabelPassword, loginInputPassword);
 // ---------------------------------------------------------------------------------------
-body.append(loginPage);
-// body.append(bodyHome)
+// document.body.append(loginPage);
 // ---------------------------------------------------------------------------------------
 
 
@@ -81,5 +84,6 @@ loginAnchor.onclick = function (event) {
     log("DEBUG", "navigate to register");
     
     loginPage.remove();
-    document.body.append(registerDivContainer);
+    document.body.append(registerPage);
+    document.body.className = "body-register"
 };
