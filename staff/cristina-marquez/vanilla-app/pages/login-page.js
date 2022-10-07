@@ -8,8 +8,6 @@ loginPage.append(loginContainerFlex)
 
 loginContainerFlex.classList.add("container-Flex");
 
-
-
 //loginform
 var loginForm = document.createElement("form")
 loginForm.className = 'container'
@@ -40,7 +38,6 @@ var loginButton = document.createElement("button")
 loginButton.classList.add("button")
 loginButton.innerText = "Login"
 
-
 loginForm.append(loginEmailLabel, loginEmail, loginPasswordLabel, loginPassword, loginButton);
 
 loginContainerFlex.append(loginForm)
@@ -54,11 +51,9 @@ loginRegisterAnchor.innerText = "Register"
 loginContainerFlex.append(loginRegisterAnchor)
 
 
-
 // Add event listeners
 loginForm.onsubmit = function (event) {
     event.preventDefault();
-
 
     var inputEmail = loginEmail.value
     var inputPassword = loginPassword.value
@@ -81,7 +76,6 @@ loginForm.onsubmit = function (event) {
     userNameSpan.innerText = currentUser.name
     document.body.append(homePage)
 }
-
 
 loginRegisterAnchor.onclick = function (event) {
     event.preventDefault()

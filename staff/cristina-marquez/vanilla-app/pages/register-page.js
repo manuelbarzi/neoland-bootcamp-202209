@@ -2,9 +2,12 @@ var registerForm = document.createElement('form')
 
 
 var registerName = document.createElement('input')
-registerName.type = 'name'
+registerName.type = 'text'
 registerName.name = 'name'
 registerName.placeholder = 'enter your name'
+registerName.pattern = '[A-Za-z]{3,}'
+registerName.required = true
+
 
 var registerNameLabel = document.createElement('label')
 registerNameLabel.htmlFor = 'userName'
@@ -25,6 +28,8 @@ registerEmailLabel.innerText = 'Your email'
 var registerPassword = document.createElement("input")
 registerPassword.type = "password"
 registerPassword.placeholder = "create a password"
+registerPassword.pattern = '[a-z]{3}'
+registerPassword.required = true
 
 var registerPasswordLabel = document.createElement('label')
 registerPasswordLabel.htmlFor = 'password'

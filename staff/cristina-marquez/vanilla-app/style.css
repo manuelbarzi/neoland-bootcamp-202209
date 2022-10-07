@@ -63,5 +63,10 @@ body {
 
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-end;
+}
+
+.contextual-menu-element {
+    font-size: 30px;
+    color: white;
 }
