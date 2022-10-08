@@ -1,5 +1,4 @@
 /* TODO VALIDAR 2 CONTRASEÑAS*/
-/* TODO MÁXIMO DE CARACTERES */
 /* TODO MEJORAR COLORES EN ALERT WRONG LOGIN Y USER */
 
 /* CREAMOS UN REGISTER PAGE */
@@ -34,8 +33,9 @@ registerLabelName.htmlFor = "registerName"
 var registerNameInput = document.createElement("input");
 registerNameInput.type = "text";
 registerNameInput.placeholder = "Enter a name";
-registerNameInput.required = "required";
 registerNameInput.id = "registerName"
+registerNameInput.required = true;
+registerNameInput.title = "Please enter at least 1 character";
 
 /* -- */
 var registerLabelEmail = document.createElement("label");
@@ -45,7 +45,8 @@ var registerEmailInput = document.createElement("input");
 registerEmailInput.type = "email";
 registerEmailInput.placeholder = "Enter an e-mail";
 registerEmailInput.id = "registerEmail";
-registerEmailInput.required = "required"
+registerNameInput.required = true;
+registerEmailInput.title = "Please use @ and . on your email"
 
 /* -- */
 var registerLabelPassword = document.createElement("label");
@@ -55,7 +56,31 @@ var registerPasswordInput = document.createElement("input");
 registerPasswordInput.type = "password";
 registerPasswordInput.placeholder = "Enter a password";
 registerPasswordInput.id = "registerPassword"
-registerPasswordInput.required = "required"
+registerNameInput.required = true;
+registerPasswordInput.title = "Please enter at least 8 characters without spaces"
+
+/* -- */
+var registerCheckboxContainer = document.createElement("span");
+registerCheckboxContainer.classList.add("form__checkbox__container");
+
+var registerLabelPasswordCheckbox = document.createElement("label");
+registerLabelPasswordCheckbox.type = "text";
+registerLabelPasswordCheckbox.innerText = "Show password"
+registerLabelPasswordCheckbox.classList.add("form__checkbox--text")
+
+var registerPasswordCheckbox = document.createElement("input");
+registerPasswordCheckbox.type = "checkbox";
+
+registerPasswordCheckbox.onchange = function showPassword() {
+    var showElement = registerPasswordInput;
+    if (showElement.type === "password") {
+      showElement.type = "text";
+    } else {
+      showElement.type = "password";
+    }
+  } 
+
+registerCheckboxContainer.append(registerPasswordCheckbox, registerLabelPasswordCheckbox)
 
 /* -- */
 var registerButton = document.createElement("button");
@@ -63,7 +88,7 @@ registerButton.innerText = "Register";
 registerButton.classList.add("button");
 
 /* -- */
-registerForm.append(registerImageAvatar,registerLabelName, registerNameInput,registerLabelEmail, registerEmailInput,registerLabelPassword, registerPasswordInput, registerButton);
+registerForm.append(registerImageAvatar,registerLabelName, registerNameInput,registerLabelEmail, registerEmailInput,registerLabelPassword, registerPasswordInput, registerCheckboxContainer, registerButton);
 registerContainerFlex.append(registerForm);
 
 /* CREAMOS ENLACE SIGN IN */
@@ -77,6 +102,8 @@ registerLinkLogin.onclick = function(event){
     event.preventDefault();
 
     log("DEBUG", "Navigate to Login Page");
+
+    registerPasswordInput.type = "password";
 
     registerPage.remove();
     registerForm.reset();
@@ -105,6 +132,7 @@ registerForm.onsubmit = function(event) {
     }
     console.log(users);
     
+    registerPasswordInput.type = "password";
     registerForm.reset();
     registerPage.remove();
     document.body.append(loginPage);

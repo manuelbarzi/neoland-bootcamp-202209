@@ -5,5 +5,5 @@ log("INFO", "Start App")
 var user = null;
 
 /* CARGAMOS LA PÁGINA INDEX */
-document.body.append(loginPage);
-/* document.body.append(homePage); */
+/* document.body.append(loginPage); */
+document.body.append(homePage);

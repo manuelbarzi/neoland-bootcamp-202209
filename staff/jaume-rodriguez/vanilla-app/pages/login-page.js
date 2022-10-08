@@ -1,5 +1,4 @@
 /* TODO MEJORAR COLORES EN ALERT WRONG LOGIN Y USER */
-/* TODO OBLIGUE A @ Y .COM AL EMAIL */
 
 /* CREAMOS UN LOGIN PAGE */
 var loginPage = document.createElement("main");
@@ -35,6 +34,7 @@ loginEmailInput.type = "email";
 loginEmailInput.placeholder = "Email";
 loginEmailInput.id = "loginEmail";
 loginEmailInput.required = "required"
+loginEmailInput.title = "Please use @ and . on your email"
 
 /* -- */
 var loginPasswordLabel = document.createElement("label");
@@ -45,6 +45,7 @@ loginPasswordInput.type = "password";
 loginPasswordInput.placeholder = "Password";
 loginPasswordInput.id = "loginPassword"
 loginPasswordInput.required = "required"
+loginPasswordInput.title = "Please enter at least 8 characters without spaces"
 
 /* -- */
 var loginButton = document.createElement("button");
@@ -52,7 +53,30 @@ loginButton.innerText = "Sign in";
 loginButton.classList.add("button");
 
 /* -- */
-loginForm.append(loginImageAvatar, loginEmailLabel, loginEmailInput,loginPasswordLabel, loginPasswordInput, loginButton);
+var loginCheckboxContainer = document.createElement("span");
+loginCheckboxContainer.classList.add("form__checkbox__container");
+
+var loginLabelPasswordCheckbox = document.createElement("label");
+loginLabelPasswordCheckbox.type = "text";
+loginLabelPasswordCheckbox.innerText = "Show password"
+loginLabelPasswordCheckbox.classList.add("form__checkbox--text")
+
+var loginPasswordCheckbox = document.createElement("input");
+loginPasswordCheckbox.type = "checkbox";
+
+loginPasswordCheckbox.onchange = function showPassword() {
+    var showElement = loginPasswordInput;
+    if (showElement.type === "password") {
+      showElement.type = "text";
+    } else {
+      showElement.type = "password";
+    }
+  } 
+
+  loginCheckboxContainer.append(loginPasswordCheckbox, loginLabelPasswordCheckbox)
+
+/* -- */
+loginForm.append(loginImageAvatar, loginEmailLabel, loginEmailInput,loginPasswordLabel, loginPasswordInput, loginCheckboxContainer, loginButton);
 loginContainerFlex.append(loginForm);
 
 /* CREAMOS ENLACE CREATE AN ACCOUNT */
@@ -66,6 +90,8 @@ loginLinkRegister.onclick = function(event){
     event.preventDefault();
 
     log("DEBUG", "Navigate to register page");
+
+    loginPasswordInput.type = "password";
 
     loginForm.reset();
     loginPage.remove();
@@ -99,7 +125,7 @@ loginForm.onsubmit = function (event) {
     console.log(result);
     loginForm.reset();
     loginPage.remove();
-    homeMenuPanelUserName.innerText = user.name;
+    homeMenuDropdownUserName.innerText = user.name;
     homeSettingsTitle.innerText = user.name;
     homeSettingsSecondTitle.innerText = user.email;
     document.body.append(homePage);
