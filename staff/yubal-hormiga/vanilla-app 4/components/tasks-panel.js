@@ -4,7 +4,6 @@ tasksPanel.className = 'container container--full-width'
 var tasksTitle = document.createElement('h2')
 tasksTitle.innerText = 'Tasks'
 
-
 var tasksContentPanel = document.createElement('div')
 tasksContentPanel.className = 'container container--row container--items-start'
 
@@ -14,7 +13,6 @@ tasksTodoColumn.className = 'container container--border container--padding-s co
 
 var taskCard = createTaskCard('buy milk')
 tasksTodoColumn.append(taskCard)
-
 
 var taskCard2 = createTaskCard('buy eggs')
 tasksTodoColumn.append(taskCard2)
@@ -32,7 +30,7 @@ tasksDoneColumn.className = 'container container--border container--padding-s'
 
 tasksContentPanel.append(tasksTodoColumn, tasksDoingColumn, tasksDoneColumn)
 
-tasksPanel.append(tasksTitle, taskButton, tasksContentPanel)
+tasksPanel.append(tasksTitle, tasksContentPanel)
 
 function createTaskCard(text) {
     var taskCard = document.createElement('article')
