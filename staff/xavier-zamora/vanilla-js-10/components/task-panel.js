@@ -80,7 +80,7 @@ taskPanelDivFINISH.append(taskPanelDivFINISHTASK)
 taskPanelDivFINISHTASK.style.height = "100%"
 
 //OPEN ADD TASK FUNCTION
-taskPanelTitel.onclick = function(event){ 
+taskPanelTitel.onclick = function (event) {
     event.preventDefault()
     log('DEBUG', 'working')
 

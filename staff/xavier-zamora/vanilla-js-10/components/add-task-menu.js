@@ -98,7 +98,7 @@ addTaskMenu.append(addTaskMenuTittleDivTittleFormButton)
 addTaskMenuTittleDivTittleFormButton.className = "material-symbols-outlined"
 addTaskMenuTittleDivTittleFormButton.innerHTML = "<span>send</span>"
 
-addTaskMenuCloseX.onclick = function(event){
+addTaskMenuCloseX.onclick = function (event) {
     event.preventDefault()
     log('DEBUG', 'close addTaskPanel')
     addTaskMenu.remove()
@@ -106,21 +106,21 @@ addTaskMenuCloseX.onclick = function(event){
     document.body.append(taskPanel)
 }
 
-addTaskMenuTittleDivTittleFormButton.onclick = function(event){
+addTaskMenuTittleDivTittleFormButton.onclick = function (event) {
     event.preventDefault()
     log('DEBUG', 'send new data task')
     var email = userNameLogin
     var tittle = addTaskMenuTittleDivTittleFormTittle.value
     var comment = addTaskMenuTittleDivTittleFormComment.value
-    
+
     var tittleUper = tittle.toUpperCase()
-   
-   var result = addNewTaskData(email, tittleUper, comment)
+
+    var result = addNewTaskData(email, tittleUper, comment)
 
     if (result instanceof Error) {
         alert(result.message)
         log('ERROR', 'task not added')
-    
+
         return
     }
     alert('task added')

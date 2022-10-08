@@ -41,7 +41,7 @@ addFormSettingPage.onsubmit = function (event) {
     var result = updateUserEmail(currentemail, newEmail)
 
 
-    if (result instanceof Error){
+    if (result instanceof Error) {
         alert(result.message)
         log('ERROR', 'change email not succes')
 
@@ -50,7 +50,7 @@ addFormSettingPage.onsubmit = function (event) {
     alert('Email updated')
     log('DEBUG', 'email update correct')
     divHeader.click()
-    
+
 }
 
 

@@ -16,9 +16,9 @@ function log(level, message) {
         style = 'color: white; background-color: red; font-size: 60px'
 
     console.log('%c' + level + ': ' + message, style)
-    }
-    log("DEBUG", "debug")
-    log("INFO", "hellow world")
-    log("WARN", "warning")
-    log("ERROR", "fail")
-    log("FATAL", "big fail")
+}
+log("DEBUG", "debug")
+log("INFO", "hellow world")
+log("WARN", "warning")
+log("ERROR", "fail")
+log("FATAL", "big fail")

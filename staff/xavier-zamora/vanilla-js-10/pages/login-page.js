@@ -30,7 +30,7 @@ formLoginRegister.appendChild(loginEmailRegister)
 formLoginRegister.appendChild(loginPasswordRegister)
 formLoginRegister.appendChild(buttonLoginLogin)
 formLoginRegister.appendChild(linkMainLogin)
-linkMainLogin.innerHTML = "REGISTER"    
+linkMainLogin.innerHTML = "REGISTER"
 linkMainLogin.href = "#"
 
 body.style.display = "flex"

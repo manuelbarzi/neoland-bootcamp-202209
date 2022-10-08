@@ -2,5 +2,5 @@
 log('INFO', 'START APP')
 var user = null
 
-    body.appendChild(mainLogin)
-    document.body.append(header)
+body.appendChild(mainLogin)
+document.body.append(header)
