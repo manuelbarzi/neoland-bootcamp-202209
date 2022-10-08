@@ -28,6 +28,9 @@ homeMenuDropdownSettings.onclick = function(event){
 
     homeMenuDropdownStatus = "closed";
     homeMenuDropdown.remove();
+    updateNameInput.disabled = true;
+    updateEmailInput.disabled = true;
+    updatePasswordInput.disabled = true;
     updateNameForm.reset();
     updatePasswordForm.reset();
     updateEmailForm.reset();
@@ -48,6 +51,9 @@ homeMenuDropdownLogOut.onclick = function(event){
     user = null;
     homeMenuDropdownStatus = "closed";
     homeMenuDropdown.remove();
+    updateNameInput.disabled = true;
+    updateEmailInput.disabled = true;
+    updatePasswordInput.disabled = true;
     updateNameForm.reset();
     updatePasswordForm.reset();
     updateEmailForm.reset();

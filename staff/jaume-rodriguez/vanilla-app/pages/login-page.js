@@ -128,6 +128,8 @@ loginForm.onsubmit = function (event) {
     homeMenuDropdownUserName.innerText = user.name;
     homeSettingsTitle.innerText = user.name;
     homeSettingsSecondTitle.innerText = user.email;
+    updateNameInput.placeholder = user.name;
+    updateEmailInput.placeholder = user.email;
     document.body.append(homePage);
 }
 /* ----------------------- */

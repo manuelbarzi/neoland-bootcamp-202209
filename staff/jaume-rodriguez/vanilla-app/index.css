@@ -109,14 +109,6 @@ form img{
     text-align: center;
     padding: 1rem;
 }
-.form__checkbox--text{
-    font-size: 0.78rem;
-    margin: 0.75rem 0.5rem;
-}
-
-.form__checkbox__container{
-    display: flex
-}
 
 /* HOME STYLES */
 
@@ -219,9 +211,10 @@ form img{
 
 .home__settings__header{
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-content: center;
+    flex-direction: column;
+    justify-content: start;
+    align-content: start;
+    align-items: center;
     z-index: 0;
     padding: 2rem;
     background-color: #f4f5f7;
@@ -232,19 +225,19 @@ form img{
 }
 
 .home__settings--title{
-    align-self: flex-end;
+    align-self: center;
     font-weight: 300;
     font-size: 2.1rem;
     color: black;
-    padding: 2rem 1rem;
+
 }
 
 .home__settings--second-title{
-    align-self: flex-end;
+    align-self: center;
     font-weight: 400;
     font-size: 1rem;
     color: black;
-    padding: 2.2rem 0rem;
+
 }
 
 .home__settings__form{
@@ -254,15 +247,16 @@ form img{
     width: 23rem;
     gap: 0.2rem;
     padding: 3.5rem 3rem;
-    box-shadow: 0rem 0.15rem 0.3rem 0 rgb(208, 208, 208);
 }
 
 .home__settings__form--title{
     margin-bottom: 1rem;
     margin-top: 0.5rem;
+    margin-left: -1.25rem;
+
 }
 
-.update__name__button{
+.edit__name__button{
     align-self: flex-start;
     transform: scale(1.2);
     padding: 0.51rem;
@@ -274,10 +268,28 @@ form img{
     border-style: none;
 }
 
+.edit__name__button:hover{
+    background-color: #026aa7;
+
+}
+
+.update__name__button{
+    align-self: flex-start;
+    transform: scale(1.2);
+    padding: 0.51rem;
+    background-color: rgb(38, 139, 247);
+    border-radius: 0.2rem;
+    color: white;
+    margin: 0.24rem 0.1rem;
+    cursor: pointer;
+    border-style: none;
+}
+
 .update__name__button:hover{
     background-color: #026aa7;
 
 }
+
 
 .update__settings__form{
     display: flex;
@@ -287,4 +299,20 @@ form img{
 
 .update__settings__form input{
     padding: 0.2rem 2.75rem 0.2rem 0.2rem;
+}
+
+.form__checkbox--text{
+    font-size: 0.78rem;
+    margin: 0.75rem 0.5rem;
+}
+
+.form__checkbox__container{
+    display: flex;
+}
+
+.form__update__checkbox__container{
+    display: flex;
+    margin-left: -1.2rem;
+    left:0;
+    
 }
