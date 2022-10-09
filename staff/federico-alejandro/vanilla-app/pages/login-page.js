@@ -28,6 +28,14 @@ form.onsubmit = function (event) {
   document.body.append(homePage)
 }
 
+var loginMain = document.createElement('main')
+loginMain.className = 'container'
+var logoTrello = document.createElement('img')
+logoTrello.src = 'https://1000logos.net/wp-content/uploads/2021/05/Trello-logo.png'
+logoTrello.className = 'logo-trello'
+
+
+
 var loginLabelEmail = document.createElement("label");
 loginLabelEmail.htmlFor = "email";
 loginLabelEmail.className = "container__item--left";
@@ -50,7 +58,8 @@ loginPassword.id = "password"
 loginPassword.placeholder = "input you password"
 
 var loginButton = document.createElement("button")
-loginButton.innerText = "login";
+loginButton.innerText = "Login";
+loginButton.className= 'login--button'
 
 var anchor = document.createElement("a");
 anchor.href = ""
@@ -60,17 +69,17 @@ anchor.className = "register--login"
 anchor.onclick = function (event) {
   event.preventDefault();
 
-  log("DEBUG", "navigate to regisrer")
+  log("DEBUG", "navigate to register")
 
   loginPage.remove();
   document.body.append(registerPage)
 }
 
-var loginPage = document.createElement("main")
+var loginPage = document.createElement("div")
 loginPage.className = "container container--login"
 
 var h1 = document.createElement("h1")
-h1.innerHTML = "login"
+h1.innerHTML = "Login"
 
 form.append(
   loginLabelEmail,
@@ -78,5 +87,6 @@ form.append(
   loginLabelPassword,
   loginPassword,
   loginButton)
-loginPage.append(h1, form, anchor)
 
+loginPage.append(h1, form, anchor)
+document.body.append(logoTrello)
