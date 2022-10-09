@@ -8,7 +8,6 @@ var taskItemArrayDone = []
 var taskItemID = 0
 
 function showItems() {
-    debugger
     var selectorDB = task_TODO
     var pushselectorDB = taskItemArrayTodo
 
@@ -68,6 +67,25 @@ function showItems() {
         taskPanelDivFINISHTASK.append(taskItemArrayDone[j])
     }
 }
+
+ //THIS PART DELETE TASK-ITEMS FOR RESET
+ function deleteItems(){
+        var deleteA = taskItemArrayTodo.length
+        var deleteB = taskItemArrayDoing.length
+        var deleteC = taskItemArrayDone.length
+        var deleteHigh = deleteA
+        if(deleteA >= deleteB && deleteA >= deleteC) deleteHigh = deleteA
+        if(deleteB >= deleteA && deleteB >= deleteC) deleteHigh = deleteB
+        if(deleteC >= deleteA && deleteC >= deleteB) deleteHigh = deleteC
+
+        while (deleteHigh > 0){
+            deleteHigh--
+            taskItemArrayTodo.pop()
+            taskItemArrayDoing.pop()
+            taskItemArrayTodo.pop()
+        }
+        }
+
 
 //CHANGE STATUS
 taskPanelDivTODOTASK.addEventListener("dragover", (event) => {

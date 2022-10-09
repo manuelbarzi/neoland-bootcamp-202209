@@ -3,6 +3,7 @@ function addNewTaskData(email, tittle, comment) { //THIS COME FROM componets/add
     if (!IS_ALPHABETICAL_REGEX.test(tittle)) return new Error('add task tittle')
     if (comment.length > 300) return new Error('commnent length have more than 300 characters')
 
+    //THIS PUSH NEW TASK
     var selectorOfDB = task_TODO
 
     if(addTaskMenuTittleDivTittleFormStatus.value === "TODO") selectorOfDB = task_TODO
@@ -55,6 +56,6 @@ function addNewTaskData(email, tittle, comment) { //THIS COME FROM componets/add
         bd_task_comment: comment,
         bd_task_status: addTaskMenuTittleDivTittleFormStatus.value,
     }
-
     selectorOfDB.push(taskPusher)
+    deleteItems()
 }

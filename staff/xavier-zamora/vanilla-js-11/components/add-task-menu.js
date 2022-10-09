@@ -127,6 +127,7 @@ addTaskMenuTittleDivTittleFormButton.onclick = function (event) { // logic/addTa
     divHeader.click()
     addTaskMenuTittleForm.reset()
     addTaskMenu.remove()
+    divHeader.click()
 }
 
 
