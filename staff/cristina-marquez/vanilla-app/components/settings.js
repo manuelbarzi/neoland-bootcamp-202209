@@ -1,5 +1,5 @@
-var settingsPanel = document.createElement('section')
-settingsPanel.className = 'container-Flex'
+var settingsComponent = document.createElement('section')
+settingsComponent.className = 'container-Flex'
 
 
 var settingsTitle = document.createElement('h2')
@@ -27,7 +27,7 @@ settingsEmailForm.onsubmit = function (event) {
 
     var newEmail = settingsEmailInput.value
 
-    var result = updateUserEmail(user.email, newEmail)
+    var result = updateUserEmail(currentUser.email, newEmail)
 
     if (result instanceof Error) {
         alert(result.message)
@@ -38,5 +38,5 @@ settingsEmailForm.onsubmit = function (event) {
     alert('E-mail updated')
 }
 
-settingsPanel.append(settingsTitle, settingsEmailForm)
+settingsComponent.append(settingsTitle, settingsEmailForm)
 

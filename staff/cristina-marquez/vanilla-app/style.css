@@ -19,6 +19,8 @@ body {
     align-items: center;
 }
 
+
+
 .button {
     align-items: center;
     margin: 16px;
@@ -27,7 +29,6 @@ body {
 .label {
     margin-top: 16px;
 }
-
 
 .homepage-header {
     position: fixed;
@@ -69,4 +70,10 @@ body {
 .contextual-menu-element {
     font-size: 30px;
     color: white;
+}
+
+.task-container {
+    display: flex;
+
+    margin: 2px solid black;
 }
