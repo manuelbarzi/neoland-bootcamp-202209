@@ -61,7 +61,7 @@ homepageContextualMenu.onclick = function (event) {
 }
 
 homepageHeader.append(homepageHeaderLeftGroup, homepageHeaderRightGroup)
-homePage.append(homepageHeader)
+homePage.append(homepageHeader, tasksPanel)
 
 
 // Create contextual menu
@@ -76,7 +76,7 @@ contextualMenuSettings.className = 'material-symbols-outlined contextual-menu-el
 
 var contextualMenuLogout = document.createElement('span')
 contextualMenuLogout.innerText = 'exit_to_app'
-contextualMenuLogout.className = ' material-symbols-outlined contextual-menu-element'
+contextualMenuLogout.className = 'material-symbols-outlined contextual-menu-element'
 
 contextualMenu.append(contextualMenuSettings, contextualMenuLogout)
 
@@ -88,3 +88,14 @@ contextualMenuLogout.onclick = function (event) {
     homePage.remove()
     document.body.append(loginPage)
 }
+
+contextualMenuSettings.onclick = function (event) {
+    event.preventDefault()
+
+    contextualMenu.remove()
+    isContextualMenuActive = false
+
+    log('DEBUG', 'settings')
+    homePage.append(settingsPanel)
+}
+
