@@ -1,3 +1,5 @@
+//TODO:columns + style
+//TODO:add logic
 var tasksComponent = document.createElement('section')
 tasksComponent.className = 'container-Flex'
 
@@ -23,11 +25,39 @@ tasksContentPanel.append(tasksTodoColumn, tasksInProgressColumn, tasksCompletedC
 
 tasksComponent.append(tasksTitle, tasksContentPanel)
 
+
+
+
 function createTaskCard(text) {
     var taskCard = document.createElement('article')
     taskCard.innerText = text
-    taskCard.className = 'task-container'
+    taskCard.className = ''
+    taskCard.contentEditable = true
 
     return taskCard
 }
 
+
+function renderTasks() {
+    var retrievedUserTasks = retrieveTasks(currentUser.email)
+
+    for (let i = 0; i < retrievedUserTasks.length; i++) {
+        const element = retrievedUserTasks[i];
+
+        var taskText = element.text
+        var taskStatus = element.status
+
+        var task = createTaskCard(taskText)
+
+        if (taskStatus === 'TODO') {
+            tasksTodoColumn.append(task)
+        }
+        if (taskStatus === 'IN PROGRESS') {
+            tasksInProgressColumn.append(task)
+        }
+        if (taskStatus === 'COMPLETED') {
+            tasksCompletedColumn.append(task)
+        }
+    }
+
+}

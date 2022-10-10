@@ -1,3 +1,5 @@
+//TODO: render task for user
+
 // login page  
 var loginPage = document.createElement('main');
 
@@ -72,6 +74,7 @@ loginForm.onsubmit = function (event) {
 
     loginForm.reset()
     loginPage.remove()
+    renderTasks()
 
     userNameSpan.innerText = currentUser.name
     document.body.append(homePage)

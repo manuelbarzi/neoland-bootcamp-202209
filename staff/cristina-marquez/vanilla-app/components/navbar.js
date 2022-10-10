@@ -1,3 +1,5 @@
+//TODO:change status
+
 // Shared variables
 var isContextualMenuActive = false
 
@@ -21,6 +23,25 @@ var navBarHomeIcon = document.createElement('span')
 navBarHomeIcon.innerText = 'home'
 navBarHomeIcon.className = 'material-symbols-outlined header-icons'
 
+var navBarNewTaskIcon = document.createElement('span')
+navBarNewTaskIcon.innerText = 'add'
+navBarNewTaskIcon.className = 'material-symbols-outlined header-icons'
+
+//TODO:onclick
+
+navBarNewTaskIcon.onclick = function () {
+    var result = createTask(currentUser.email)
+
+    if (result instanceof Error) {
+        alert(result.message)
+
+        return
+    }
+
+    clearTasksCards()
+
+    renderTasksCards()
+}
 
 // Append all elements to group
 navBarLeftGroup.append(navBarHomeIcon)
@@ -38,7 +59,7 @@ navBarMenuIcon.className = 'material-symbols-outlined header-icons'
 
 
 // Append all elements to group
-navBarRightGroup.append(userNameSpan, navBarMenuIcon)
+navBarRightGroup.append(userNameSpan, navBarNewTaskIcon, navBarMenuIcon)
 
 
 
