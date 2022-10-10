@@ -1,32 +1,15 @@
+log('INFO', 'start app')
+
+var users = [
+    { name: 'Pepito Grillo', email: 'pepito@grillo.com', password: '123123123' }
+]
+
+// DONE inject login with js
+
 log('DEBUG', 'mount login')
 
 var loginForm = document.createElement('form')
 loginForm.className = 'container'
-
-loginForm.onsubmit = function (event) {
-    event.preventDefault()
-
-    log('DEBUG', 'submit login')
-
-    var email = loginEmailInput.value
-    var password = loginPasswordInput.value
-
-    var result = authenticateUser(email, password)
-
-    if (result instanceof Error) {
-        alert(result.message)
-
-        return
-    }
-
-    user = result
-
-    loginForm.reset()
-
-    loginPage.remove()
-    homeUserNameText.innerText = user.name
-    document.body.append(homePage)
-}
 
 var loginEmailLabel = document.createElement('label')
 loginEmailLabel.htmlFor = 'login-email'
@@ -70,3 +53,18 @@ loginRegisterLink.onclick = function (event) {
 var loginPage = document.createElement('main')
 loginPage.className = 'container'
 loginPage.append(loginForm, loginRegisterLink)
+
+document.body.append(loginPage)
+
+// DONDE inject register with js
+
+log('DEBUG', 'mount register')
+
+var registerForm = document.createElement('form')
+registerForm.className = 'container'
+
+// TODO implement register submit
+
+registerForm.onsubmit = function (event) {
+    
+}

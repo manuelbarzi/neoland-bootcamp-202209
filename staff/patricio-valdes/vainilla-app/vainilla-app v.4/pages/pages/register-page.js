@@ -1,7 +1,11 @@
 log('DEBUG', 'mount register')
 
+// Creacion de formulario con clase
+
 var registerForm = document.createElement('form')
 registerForm.className = 'container'
+
+// funcion al dispararse el evento de apretar el boton
 
 registerForm.onsubmit = function (event) {
     event.preventDefault()
@@ -11,6 +15,8 @@ registerForm.onsubmit = function (event) {
     var name = registerNameInput.value
     var email = registerEmailInput.value
     var password = registerPasswordInput.value
+
+    // llama a la logica de registo - register-user 
 
     const result = registerUser(name, email, password)
 
@@ -26,6 +32,8 @@ registerForm.onsubmit = function (event) {
 
     registerLoginLink.click()
 }
+
+// creacion de etiquetas y diseño de nombre, email y password + boton
 
 var registerNameLabel = document.createElement('label')
 registerNameLabel.htmlFor = 'register-name'
@@ -61,12 +69,16 @@ var registerSubmitButton = document.createElement('button')
 registerSubmitButton.className = 'container__item--right'
 registerSubmitButton.innerText = 'Register'
 
+// agregar los elementos HTML hijos (children) al formulario (padre) en el orden en el que figuran
+
 registerForm.append(registerNameLabel, registerNameInput, registerEmailLabel, registerEmailInput, registerPasswordLabel, registerPasswordInput, registerSubmitButton)
 
+// crea el elemento HTML anchor
 var registerLoginLink = document.createElement('a')
 registerLoginLink.href = ""
 registerLoginLink.innerText = 'Login'
 
+//  cambio a pagina de login - cerrando pagina register y reseteandola
 registerLoginLink.onclick = function (event) {
     event.preventDefault()
 
