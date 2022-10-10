@@ -1,72 +1,83 @@
-log('DEBUG', 'mount login')
+log("DEBUG", "mount login");
 
-var loginForm = document.createElement('form')
-loginForm.className = 'container'
+var loginForm = document.createElement("form");
+loginForm.className = "container";
 
 loginForm.onsubmit = function (event) {
-    event.preventDefault()
+  event.preventDefault();
 
-    log('DEBUG', 'submit login')
+  log("DEBUG", "submit login");
 
-    var email = loginEmailInput.value
-    var password = loginPasswordInput.value
+  var email = loginEmailInput.value;
+  var password = loginPasswordInput.value;
 
-    var result = authenticateUser(email, password)
+  var result = authenticateUser(email, password);
 
-    if (result instanceof Error) {
-        alert(result.message)
+  if (result instanceof Error) {
+    alert(result.message);
 
-        return
-    }
+    return;
+  }
 
-    user = result
+  user = result;
 
-    loginForm.reset()
+  loginForm.reset();
 
-    loginPage.remove()
-    headerUserNameText.innerText = user.name
-    document.body.append(homePage)
-}
+  loginPage.remove();
+  headerUserNameText.innerText = user.name;
 
-var loginEmailLabel = document.createElement('label')
-loginEmailLabel.htmlFor = 'login-email'
-loginEmailLabel.className = 'container__item--left'
-loginEmailLabel.innerText = 'E-mail'
+  const tasks = retrieveTasks(user.email);
 
-var loginEmailInput = document.createElement('input')
-loginEmailInput.type = 'email'
-loginEmailInput.id = 'login-email'
-loginEmailInput.placeholder = 'input your e-mail'
+  renderTasks(tasks);
 
-var loginPasswordLabel = document.createElement('label')
-loginPasswordLabel.htmlFor = 'login-password'
-loginPasswordLabel.className = 'container__item--left'
-loginPasswordLabel.innerText = 'Password'
+  document.body.append(homePage);
+};
 
-var loginPasswordInput = document.createElement('input')
-loginPasswordInput.type = 'password'
-loginPasswordInput.id = 'login-password'
-loginPasswordInput.placeholder = 'input your password'
+var loginEmailLabel = document.createElement("label");
+loginEmailLabel.htmlFor = "login-email";
+loginEmailLabel.className = "container__item--left";
+loginEmailLabel.innerText = "E-mail";
 
-var loginSubmitButton = document.createElement('button')
-loginSubmitButton.className = 'container__item--right'
-loginSubmitButton.innerText = 'Login'
+var loginEmailInput = document.createElement("input");
+loginEmailInput.type = "email";
+loginEmailInput.id = "login-email";
+loginEmailInput.placeholder = "input your e-mail";
 
-loginForm.append(loginEmailLabel, loginEmailInput, loginPasswordLabel, loginPasswordInput, loginSubmitButton)
+var loginPasswordLabel = document.createElement("label");
+loginPasswordLabel.htmlFor = "login-password";
+loginPasswordLabel.className = "container__item--left";
+loginPasswordLabel.innerText = "Password";
 
-var loginRegisterLink = document.createElement('a')
-loginRegisterLink.href = ""
-loginRegisterLink.innerText = 'Register'
+var loginPasswordInput = document.createElement("input");
+loginPasswordInput.type = "password";
+loginPasswordInput.id = "login-password";
+loginPasswordInput.placeholder = "input your password";
+
+var loginSubmitButton = document.createElement("button");
+loginSubmitButton.className = "container__item--right";
+loginSubmitButton.innerText = "Login";
+
+loginForm.append(
+  loginEmailLabel,
+  loginEmailInput,
+  loginPasswordLabel,
+  loginPasswordInput,
+  loginSubmitButton
+);
+
+var loginRegisterLink = document.createElement("a");
+loginRegisterLink.href = "";
+loginRegisterLink.innerText = "Register";
 
 loginRegisterLink.onclick = function (event) {
-    event.preventDefault()
+  event.preventDefault();
 
-    log('DEBUG', 'navigate to register')
+  log("DEBUG", "navigate to register");
 
-    loginPage.remove()
-    document.body.append(registerPage)
-}
+  loginPage.remove();
+  document.body.append(registerPage);
+};
 
-var loginPage = document.createElement('main')
-loginPage.className = 'container'
-loginPage.append(loginForm, loginRegisterLink)
+var loginPage = document.createElement("main");
+loginPage.className = "container";
+loginPage.append(loginForm, loginRegisterLink);

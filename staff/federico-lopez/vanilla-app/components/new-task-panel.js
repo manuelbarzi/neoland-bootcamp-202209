@@ -18,7 +18,7 @@ newTaskForm.onsubmit = function (event) {
 
   var text = newTaskTextarea.value;
 
-  var result = createTask(user, text);
+  var result = createTask(user.email, text);
 
   // Create the task from textarea value
 };
