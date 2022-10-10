@@ -7,6 +7,7 @@ html {
 
 body {
     background: radial-gradient(circle, rgba(199,204,230,1) 0%, rgba(72,70,252,1) 100%);
+    font-family: 'Poppins', sans-serif;
 }
 
 .body-login, .body-register {
@@ -184,10 +185,7 @@ a {
     cursor: pointer;
 }
 
-
-
 /* ---------------------------SETTINGS PAGE--------------------------------------- */
-
 
 .setting-panel{
     display: flex;
@@ -206,4 +204,21 @@ a {
     margin: 0;
     font-weight: 700;
     
+}
+
+/* ---------------------------tASKS PAGE--------------------------------------- */
+
+
+.tasks-panel {
+    background-color: aliceblue;
+    display: flex;
+    justify-content: space-around;
+    margin: 15px 10%;
+}
+
+.tasks-title {
+    background-color: rgba(255, 255, 255, 0.20);
+    margin: 0;
+    padding: 10px 0;
+    text-transform: uppercase;
 }
