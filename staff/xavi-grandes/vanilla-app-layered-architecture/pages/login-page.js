@@ -5,30 +5,29 @@ var loginForm = document.createElement("form");
 loginForm.method = "post";
 
 loginForm.onsubmit = function (event) {
-event.preventDefault();
+  event.preventDefault();
 
-var email = loginInputEmail.value;
-var password = loginInputPassword.value;
+  var email = loginInputEmail.value;
+  var password = loginInputPassword.value;
 
-var result = authenticateUser(email, password)
+  var result = authenticateUser(email, password);
 
-if (result instanceof Error) {
-    alert(result.message)
+  if (result instanceof Error) {
+    alert(result.message);
 
-    return
-}
+    return;
+  }
 
-user = result
+  user = result;
 
-loginForm.reset();
+  loginForm.reset();
 
-loginPage.remove();
-homeUserNameText.innerText = user.name
+  loginPage.remove();
+  homeUserNameText.innerText = user.name;
 
-
-document.body.append(homePage);
-document.body.className = "body-home"
-}
+  document.body.append(homePage);
+  document.body.className = "body-home";
+};
 
 var loginH1 = document.createElement("h1");
 loginH1.innerText = "LOG IN";
@@ -78,14 +77,13 @@ loginDivInputPasword.append(loginLabelPassword, loginInputPassword);
 // document.body.append(loginPage);
 // ---------------------------------------------------------------------------------------
 
-
 // Explico la función que queremos ejecutar
 loginAnchor.onclick = function (event) {
-    event.preventDefault();
-    
-    log("DEBUG", "navigate to register");
-    
-    loginPage.remove();
-    document.body.append(registerPage);
-    document.body.className = "body-register"
+  event.preventDefault();
+
+  log("DEBUG", "navigate to register");
+
+  loginPage.remove();
+  document.body.append(registerPage);
+  document.body.className = "body-register";
 };
