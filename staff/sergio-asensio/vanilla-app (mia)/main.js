@@ -10,7 +10,7 @@ var labelEmail = document.createElement ('label');
     labelEmail.htmlFor = 'email';
     labelEmail.innerText= 'E-mail';
 
-var inputEmail = document.createElement ('input')
+var inputEmail = document.createElement ('input');
     inputEmail.type = 'email';
     inputEmail.name = 'email';
     inputEmail.id = 'email';
