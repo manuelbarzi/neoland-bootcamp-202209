@@ -24,11 +24,11 @@ homeLogo.src = 'https://cdn-icons-png.flaticon.com/512/1200/1200328.png'
 homeHeaderLink.append(homeLogo)
 
 var homeUser = document.createElement('span')
-homeUser.classList.add('profile')
+homeUser.classList.add('profile');
 homeUser.innerText = 'User'
 
 var homeDiv = document.createElement('div')
-homeDiv.classList.add("news")
+homeDiv.classList.add("news");
 
 var homeButtonMenu = document.createElement("button");
 homeButtonMenu.classList.add('material-symbols-outlined','nav--menu');
@@ -43,7 +43,6 @@ homeButtonMenu.onclick = function () {
         homeMenuPanelStatus = 'opened'
     }else{
         homeMenuPanel.remove()
-        // settingsPanel.remove()
 
         homeMenuPanelStatus = 'closed'
     }
@@ -99,4 +98,3 @@ homeNav.append(homeHeaderLink, homeUser, homeDiv);
 var homePage = document.createElement("main");
 homePage.classList.add("container--home");
 homePage.append(homeNav, homeSection);
-
