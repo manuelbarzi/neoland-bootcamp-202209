@@ -27,9 +27,28 @@ loginForm.onsubmit = function (event) {
     
     headerUserNameText.innerText = user.name
 
-    clearTasksCards()
+    var myTasksCards = tasksPanel.querySelectorAll('article')
 
-    renderTasksCards()
+    for (var i = 0; i < myTasksCards.length; i++) {
+        var myTaskCard = myTasksCards[i]
+
+        myTaskCard.remove()
+    }
+
+    var myTasks = retrieveTasks(user.email)
+
+    for (var i = 0; i < myTasks.length; i++) {
+        var myTask = myTasks[i]
+
+        var myTaskCard = createTaskCard(myTask.text)
+
+        if (myTask.status === 'todo')
+            tasksTodoColumn.append(myTaskCard)
+        else if (myTask.status === 'doing')
+            tasksDoingColumn.append(myTaskCard)
+        else if (myTask.status === 'done')
+            tasksDoneColumn.append(myTaskCard)
+    }
 
     document.body.append(homePage)
 }

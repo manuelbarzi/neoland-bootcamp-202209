@@ -48,34 +48,6 @@ function createTaskCard(text) {
     var taskCard = document.createElement('article')
     taskCard.innerText = text
     taskCard.className = 'container container--border container--padding-s container--full-width'
-    taskCard.contentEditable = true
 
     return taskCard
-}
-
-function clearTasksCards() {
-    var myTasksCards = tasksPanel.querySelectorAll('article')
-
-    for (var i = 0; i < myTasksCards.length; i++) {
-        var myTaskCard = myTasksCards[i]
-
-        myTaskCard.remove()
-    }
-}
-
-function renderTasksCards() {
-    var myTasks = retrieveTasks(user.email)
-
-    for (var i = 0; i < myTasks.length; i++) {
-        var myTask = myTasks[i]
-
-        var myTaskCard = createTaskCard(myTask.text)
-
-        if (myTask.status === 'todo')
-            tasksTodoColumn.append(myTaskCard)
-        else if (myTask.status === 'doing')
-            tasksDoingColumn.append(myTaskCard)
-        else if (myTask.status === 'done')
-            tasksDoneColumn.append(myTaskCard)
-    }
 }
