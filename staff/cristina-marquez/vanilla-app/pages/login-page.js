@@ -74,6 +74,8 @@ loginForm.onsubmit = function (event) {
 
     loginForm.reset()
     loginPage.remove()
+
+    clearTasksCards()
     renderTasks()
 
     userNameSpan.innerText = currentUser.name

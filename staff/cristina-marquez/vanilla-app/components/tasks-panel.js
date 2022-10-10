@@ -1,7 +1,7 @@
 //TODO:columns + style
 //TODO:add logic
 var tasksComponent = document.createElement('section')
-tasksComponent.className = 'container-Flex'
+
 
 var tasksTitle = document.createElement('h2')
 tasksTitle.innerText = 'Tasks'
@@ -10,16 +10,28 @@ var tasksContentPanel = document.createElement('div')
 tasksContentPanel.className = 'task-container'
 
 var tasksTodoColumn = document.createElement('section')
-tasksTodoColumn.innerText = 'TODO'
-tasksTodoColumn.className = 'task-container'
+tasksTodoColumn.className = 'task-column-group'
+
+var taskTodoHeader = document.createElement('div')
+taskTodoHeader.innerText = 'TODO'
+taskTodoHeader.className = 'task-column-header'
+tasksTodoColumn.append(taskTodoHeader)
 
 var tasksInProgressColumn = document.createElement('section')
-tasksInProgressColumn.innerText = 'IN PROGRESS'
-tasksInProgressColumn.className = 'task-container'
+tasksInProgressColumn.className = 'task-column-group'
+
+var taskInProgressHeader = document.createElement('div')
+taskInProgressHeader.innerText = 'IN PROGRESS'
+taskInProgressHeader.className = 'task-column-header'
+tasksInProgressColumn.append(taskInProgressHeader)
 
 var tasksCompletedColumn = document.createElement('section')
-tasksCompletedColumn.innerText = 'COMPLETED'
-tasksCompletedColumn.className = 'task-container'
+tasksCompletedColumn.className = 'task-column-group'
+
+var taskCompletedHeader = document.createElement('div')
+taskCompletedHeader.innerText = 'COMPLETED'
+taskCompletedHeader.className = 'task-column-header'
+tasksCompletedColumn.append(taskCompletedHeader)
 
 tasksContentPanel.append(tasksTodoColumn, tasksInProgressColumn, tasksCompletedColumn)
 
@@ -31,7 +43,7 @@ tasksComponent.append(tasksTitle, tasksContentPanel)
 function createTaskCard(text) {
     var taskCard = document.createElement('article')
     taskCard.innerText = text
-    taskCard.className = ''
+    taskCard.className = 'task-card'
     taskCard.contentEditable = true
 
     return taskCard
@@ -60,4 +72,14 @@ function renderTasks() {
         }
     }
 
+}
+
+function clearTasksCards() {
+    var myTasksCards = tasksComponent.querySelectorAll('article')
+
+    for (var i = 0; i < myTasksCards.length; i++) {
+        var myTaskCard = myTasksCards[i]
+
+        myTaskCard.remove()
+    }
 }

@@ -2,6 +2,12 @@ html,
 body {
     margin: 0%;
     height: 100%;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif
+}
+
+h2 {
+    margin-top: 50px;
+    margin-left: 50px;
 }
 
 .form {
@@ -18,7 +24,6 @@ body {
     justify-content: center;
     align-items: center;
 }
-
 
 
 .button {
@@ -74,6 +79,24 @@ body {
 
 .task-container {
     display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 
-    margin: 2px solid black;
+}
+
+.task-column-group {
+    border: 2px solid rgb(49, 53, 52);
+    padding: 10px;
+}
+
+.task-column-header {
+    font-weight: bold;
+    background-color: bisque;
+    padding: 10px;
+}
+
+.task-card {
+    border: 1px solid gray;
+    margin: 10px 0;
+    padding: 10px;
 }
