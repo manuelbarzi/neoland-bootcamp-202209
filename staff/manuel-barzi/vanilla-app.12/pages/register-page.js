@@ -12,7 +12,7 @@ registerForm.onsubmit = function (event) {
     var email = registerEmailInput.value
     var password = registerPasswordInput.value
 
-    var result = registerUser(name, email, password)
+    const result = registerUser(name, email, password)
 
     if (result instanceof Error) {
         alert(result.message)

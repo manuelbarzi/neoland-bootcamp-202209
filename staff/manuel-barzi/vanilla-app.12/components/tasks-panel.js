@@ -22,23 +22,11 @@ tasksTodoColumn.append(taskCard3)
 
 var tasksDoingColumn = document.createElement('section')
 tasksDoingColumn.innerText = 'DOING'
-tasksDoingColumn.className = 'container container--border container--padding-s container--items-start'
-
-var taskCard4 = createTaskCard('buy shoes')
-tasksDoingColumn.append(taskCard4)
-
-var taskCard5 = createTaskCard('buy socks')
-tasksDoingColumn.append(taskCard5)
+tasksDoingColumn.className = 'container container--border container--padding-s'
 
 var tasksDoneColumn = document.createElement('section')
 tasksDoneColumn.innerText = 'DONE'
-tasksDoneColumn.className = 'container container--border container--padding-s container--items-start'
-
-var taskCard6 = createTaskCard('buy gums')
-tasksDoneColumn.append(taskCard6)
-
-var taskCard7 = createTaskCard('buy t-shirt')
-tasksDoneColumn.append(taskCard7)
+tasksDoneColumn.className = 'container container--border container--padding-s'
 
 tasksContentPanel.append(tasksTodoColumn, tasksDoingColumn, tasksDoneColumn)
 
