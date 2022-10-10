@@ -10,43 +10,15 @@ tasksContentPanel.className = 'container container--row container--items-start'
 var tasksTodoColumn = document.createElement('section')
 tasksTodoColumn.innerText = 'TODO'
 tasksTodoColumn.className = 'container container--border container--padding-s container--items-start'
-//!nuevo */
-var taskForm = document.createElement('form')
-taskForm.className = 'container'
 
-var taskFormInput = document.createElement('input')
-taskFormInput.type = "text"
-taskFormInput.name = "taskText"
-taskFormInput.placeholder = "Nueva Tarea"
+var taskCard = createTaskCard('buy milk')
+tasksTodoColumn.append(taskCard)
 
-var taskFormButton = document.createElement('button')
-taskFormButton.textContent = '+'
-taskFormButton.type = 'submit'
+var taskCard2 = createTaskCard('buy eggs')
+tasksTodoColumn.append(taskCard2)
 
-taskForm.append(taskFormInput, taskFormButton)
-
-const textFormTask = function (event) {
-    event.preventDefault();
-    if(!value){
-        return
-    }
-    const task = document.createElement('div')
-    task.classList.add('task', 'rounBorder')
-    task.addEventListener('click', changeTaskState)
-    task.textContent = value
-    tasksTodoColumn.append(textFormTask)
-    event.target.reset
-}
-const changeTaskState = funtion(event){
-    event.target.classList.toggle()
-}
-const order = function(){
-    var toDo = []
-    tasksTodoColumn.childNodes.forEach(funtion(el){
-        el
-    })
-}
-
+var taskCard3 = createTaskCard('buy tomatoes and bananas')
+tasksTodoColumn.append(taskCard3)
 
 var tasksDoingColumn = document.createElement('section')
 tasksDoingColumn.innerText = 'DOING'
@@ -58,7 +30,7 @@ tasksDoneColumn.className = 'container container--border container--padding-s'
 
 tasksContentPanel.append(tasksTodoColumn, tasksDoingColumn, tasksDoneColumn)
 
-tasksPanel.append(tasksTitle,taskForm, tasksContentPanel)//!nuevo
+tasksPanel.append(tasksTitle, tasksContentPanel)
 
 function createTaskCard(text) {
     var taskCard = document.createElement('article')

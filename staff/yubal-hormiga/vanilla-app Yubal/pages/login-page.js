@@ -24,13 +24,7 @@ loginForm.onsubmit = function (event) {
     loginForm.reset()
 
     loginPage.remove()
-    
     headerUserNameText.innerText = user.name
-
-    clearTasksCards()
-
-    renderTasksCards()
-
     document.body.append(homePage)
 }
 

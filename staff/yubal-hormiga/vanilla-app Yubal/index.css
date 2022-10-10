@@ -19,6 +19,7 @@ body {
     justify-content: center;
     gap: .5rem;
     box-sizing: border-box;
+    
 }
 
 .container--full {
@@ -40,6 +41,7 @@ body {
 
 .container--items-start {
     align-items: start;
+   
 }
 
 .container--row {
@@ -84,16 +86,29 @@ body {
     align-self: end;
 }
 
-
-
-
-.task {
-    background-color: var(--primary);
-    padding: 15px;
-    margin-top: 15px;
-    color: var(--light);
-    cursor: pointer;
+.taskDiv{
+    display: flex;
+    gap: 5px;
 }
-.roundBorder {
-    border-radius: 5px;
+/*Estyles*/
+.deleteButton{
+    background-color: #ef476f;
+    color:white;
+    font-weight: 800;
+    margin: 4px;
+    padding: 5px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 4px;
 }
+.doingButton{
+    background-color: #118ab2;
+    color:white;
+    font-weight: 800;
+    margin: 4px;
+    padding: 5px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 4px;
+}
+

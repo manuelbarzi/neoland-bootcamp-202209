@@ -22,26 +22,6 @@ var headerUserNameText = document.createElement('span')
 headerUserNameText.innerText = 'User Name'
 headerUserNameText.className = 'container container--full-height container--padding-h-s'
 
-var addTaskButton = document.createElement('button')
-addTaskButton.className = 'material-symbols-outlined'
-addTaskButton.innerText = 'add'
-
-addTaskButton.onclick = function() {
-    var result = createTask(user.email)
-
-    if (result instanceof Error) {
-        alert(result.message)
-
-        return
-    }
-
-    // TODO refresh tasks panel
-
-    clearTasksCards()
-
-    renderTasksCards()
-}
-
 var headerMenuButton = document.createElement('button')
 headerMenuButton.className = 'material-symbols-outlined'
 headerMenuButton.innerText = 'menu'
@@ -63,7 +43,7 @@ headerMenuButton.onclick = function() {
 var headerTopPanel = document.createElement('div')
 headerTopPanel.className = 'container container--row container--full-width container--content-space-between'
 
-headerTopPanel.append(headerHomeLink, headerUserNameText, addTaskButton, headerMenuButton)
+headerTopPanel.append(headerHomeLink, headerUserNameText, headerMenuButton)
 
 headerPanel.className = 'container container--full-width'
 headerPanel.append(headerTopPanel)

@@ -26,20 +26,20 @@ var addTaskButton = document.createElement('button')
 addTaskButton.className = 'material-symbols-outlined'
 addTaskButton.innerText = 'add'
 
-addTaskButton.onclick = function() {
+addTaskButton.onclick = function () {
     var result = createTask(user.email)
 
-    if (result instanceof Error) {
+    if (result instanceof Error){
         alert(result.message)
 
         return
     }
 
-    // TODO refresh tasks panel
+    //TODO refresh tasks panel
+    
+    clearTaskCards()
 
-    clearTasksCards()
-
-    renderTasksCards()
+    renderTaskCards()
 }
 
 var headerMenuButton = document.createElement('button')
@@ -63,7 +63,7 @@ headerMenuButton.onclick = function() {
 var headerTopPanel = document.createElement('div')
 headerTopPanel.className = 'container container--row container--full-width container--content-space-between'
 
-headerTopPanel.append(headerHomeLink, headerUserNameText, addTaskButton, headerMenuButton)
+headerTopPanel.append(headerHomeLink, headerUserNameText, headerMenuButton)
 
 headerPanel.className = 'container container--full-width'
 headerPanel.append(headerTopPanel)
