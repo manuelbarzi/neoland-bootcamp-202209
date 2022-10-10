@@ -23,9 +23,11 @@ user = result
 loginForm.reset();
 
 loginPage.remove();
+homeUserNameText.innerText = user.name
+
+
 document.body.append(homePage);
 document.body.className = "body-home"
-homeUserNameText.innerText = user.name
 }
 
 var loginH1 = document.createElement("h1");
