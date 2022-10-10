@@ -22,6 +22,7 @@ homeHeaderLinkImage.onclick = function (event) {
   }
 
   settingsPanel.remove();
+  document.body.append(tasksPanel)
 };
 
 homeHeaderLinkImage.append(homeHeaderImage);
@@ -29,6 +30,25 @@ homeHeaderLinkImage.append(homeHeaderImage);
 var homeUserNameText = document.createElement("span");
 homeUserNameText.innerText = "User Name";
 homeUserNameText.className = "#";
+
+var headerButtonAddTask = document.createElement('button')
+headerButtonAddTask.className = 'home-header-button material-symbols-outlined'
+headerButtonAddTask.innerText ='add'
+
+headerButtonAddTask.onclick = function(){
+  var result = createTask(user.email)
+
+  if (result instanceof Error){
+    alert(result.message)
+
+    return
+  }
+
+  // clearTasksCards()
+
+  // rederTasksCards()
+}
+
 
 var homeMenuButton = document.createElement("button");
 homeMenuButton.className = "home-header-button material-symbols-outlined";
@@ -48,7 +68,5 @@ homeMenuButton.onclick = function () {
 }
 };
 
-homeHeader.append(homeHeaderLinkImage, homeUserNameText, homeMenuButton
-  // homeMenuPanel
-  );
+homeHeader.append(homeHeaderLinkImage, homeUserNameText, headerButtonAddTask, homeMenuButton);
 

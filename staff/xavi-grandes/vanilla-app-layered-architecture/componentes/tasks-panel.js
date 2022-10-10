@@ -9,15 +9,21 @@ var tasksContentPanel = document.createElement('div')
     tasksContentPanel.className='tasks-panel'
 
 var tasksTodoColumn = document.createElement('section')
-    tasksTodoColumn.className='nombrar'
+    tasksTodoColumn.className='todo-column'
     tasksTodoColumn.innerText='TO DO'
 
+var taskTodo = document.createElement('div')
+    taskTodo.className='task-item'
+    taskTodo.innerText = 'hacer la colada'
+
+    tasksTodoColumn.append(taskTodo)
+
 var tasksDoingColumn = document.createElement('section')
-    tasksDoingColumn.className='nombrar'
+    tasksDoingColumn.className='doing-column'
     tasksDoingColumn.innerText='DOING'
 
 var tasksDoneColumn = document.createElement('section')
-    tasksDoneColumn.className='nombrar'
+    tasksDoneColumn.className='done-column'
     tasksDoneColumn.innerText='DONE'
 
 tasksContentPanel.append(tasksTodoColumn, tasksDoingColumn, tasksDoneColumn)
