@@ -6,21 +6,10 @@ html, body {
 
 body {
     margin: 0;
-    
 }
 
 /* layout - BEM */
 
-.containerbody {
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: center;
-    gap: .5rem;
-    background: linear-gradient(to top, blue, white); /*Siempre que se use el linear-gradient usar el to*/
-    font-family: 'Franklin Gothic Medium';
-    
-}
 /* container */
 
 .container {
@@ -29,7 +18,6 @@ body {
     align-items: center; 
     justify-content: center;
     gap: .5rem;
-    
 }
 
 .container--full {
