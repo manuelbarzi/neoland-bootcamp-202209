@@ -1,4 +1,3 @@
-
 var tasks = [
     { id: 'task-1', user: 'pepe@goteras.com', text: 'buy cheese', status: 'TODO' },
     { id: 'task-2', user: 'cris@marquez.com', text: 'return shirt', status: 'IN PROGRESS' },

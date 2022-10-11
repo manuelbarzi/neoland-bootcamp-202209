@@ -46,6 +46,8 @@ function createTaskCard(text) {
     taskCard.className = 'task-card'
     taskCard.contentEditable = true
 
+    //TODO:onkeyup update task
+
     return taskCard
 }
 
