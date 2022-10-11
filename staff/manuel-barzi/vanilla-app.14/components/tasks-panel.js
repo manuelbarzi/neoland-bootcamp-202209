@@ -25,14 +25,12 @@ tasksPanel.append(tasksTitle, tasksContentPanel)
 
 function createTaskCard(taskId, text) {
     var taskCard = document.createElement('article')
+    taskCard.innerText = text
     taskCard.className = 'container container--border container--padding-s container--full-width'
-    
-    var taskText = document.createElement('p')
-    taskText.innerText = text
-    taskText.contentEditable = true
+    taskCard.contentEditable = true
 
-    taskText.onkeyup = function() {
-        var result = updateTaskText(user.email, taskId, taskText.innerText)
+    taskCard.onkeyup = function(event) {
+        var result = updateTaskText(user.email, taskId, taskCard.innerText)
 
         if (result instanceof Error) {
             alert(result.message)
@@ -40,24 +38,6 @@ function createTaskCard(taskId, text) {
             return
         }
     }
-
-    var taskDeleteButton = document.createElement('button')
-    taskDeleteButton.className = 'material-symbols-outlined'
-    taskDeleteButton.innerText = 'delete'
-
-    taskDeleteButton.onclick = function() {
-        var result = deleteTask(user.email, taskId)
-
-        if (result instanceof Error) {
-            alert(result.message)
-
-            return
-        }
-
-        taskCard.remove()
-    }
-
-    taskCard.append(taskText, taskDeleteButton)    
 
     return taskCard
 }
