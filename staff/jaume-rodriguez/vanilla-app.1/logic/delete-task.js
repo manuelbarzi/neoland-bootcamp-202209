@@ -1,6 +1,5 @@
 function deleteTask(userId, taskId){
     var found = false
-    debugger
         for (var i = 0; i < users.length && !found; i++) {
             var user = users[i]
             
@@ -21,6 +20,7 @@ function deleteTask(userId, taskId){
     
         if (!foundTask) return new Error("task with id " + taskId + " not found")
         if (foundTask.user !== userId) return new Error("task with id " + taskId + " not found")
-        
+
+        tasks.splice(i-1, 1);
         return null
 }

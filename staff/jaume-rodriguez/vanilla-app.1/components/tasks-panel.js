@@ -118,8 +118,11 @@ tasksPanelContent.append(tasksPanelColumnTodo, tasksPanelColumnDoing, tasksPanel
 
 /* -- */
 function createTaskCard(taskId, text) {
-    var taskCard = document.createElement("article")
+    var taskCard = document.createElement("article");
+    taskCard.classList.add("task__card");
+
     var taskText = document.createElement("p");
+    taskText.placeholder = "Enter a text"
     taskText.className = "tasks__panel__content__card"
     taskText.innerText = text
     taskText.contentEditable = true
@@ -136,8 +139,8 @@ function createTaskCard(taskId, text) {
 
     var taskDeleteButton = document.createElement("button");
     taskDeleteButton.classList.add("fa");
-    taskDeleteButton.classList.add("fa-edit");
-    taskDeleteButton.classList.add("tasks__panel__add-button")
+    taskDeleteButton.classList.add("fa-trash-o");
+    taskDeleteButton.classList.add("task__card__button-delete")
 
     taskDeleteButton.onclick = function(){
         var result = deleteTask(user.id, taskId)
@@ -149,6 +152,7 @@ function createTaskCard(taskId, text) {
         }
 
         taskCard.remove();
+
     }
 
     taskCard.append(taskText, taskDeleteButton);
