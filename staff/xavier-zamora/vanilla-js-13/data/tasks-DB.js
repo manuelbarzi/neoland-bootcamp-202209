@@ -1,16 +1,10 @@
 //DB FOR TASKS
-var task_TODO = [
-    { bd_task_email: 'aitor@tilla.com', bd_task_title: 'BUY CHOCOLATE', bd_task_id: 1, bd_task_comment: 'i need buy chocolate because is my drug', bd_task_status: 'TODO' },
-    { bd_task_email: 'aitor@tilla.com', bd_task_title: 'BUY COFFE', bd_task_id: 2, bd_task_comment: 'not like coffe but i need cafeine', bd_task_status: 'TODO' },
-]
-
-var task_DOING = [
-    { bd_task_email: 'debora@melo.com', bd_task_title: 'BUY BANANAS', bd_task_id: 3, bd_task_comment: 'i need buy banaans because my dog love it', bd_task_status: 'DOING' },
-    { bd_task_email: 'debora@melo.com', bd_task_title: 'BUY PEN', bd_task_id: 4, bd_task_comment: 'i need buy banaans because my other pendrive is full', bd_task_status: 'DOING' },
-    { bd_task_email: 'debora@melo.com', bd_task_title: 'BUY BANANAS', bd_task_id: 5, bd_task_comment: 'i need buy banaans because my dog love it', bd_task_status: 'DOING' },
-]
-
-var task_DONE = [
-    { bd_task_email: 'alaba@sura.com', bd_task_title: 'BUY ICE', bd_task_id: 6, bd_task_comment: 'i need buy ice because my drink in better whit it', bd_task_status: 'DONE' },
-    { bd_task_email: 'alaba@sura.com', bd_task_title: 'BUY CAR', bd_task_id: 7, bd_task_comment: 'i need buy a car because my other car have 343.234km', bd_task_status: 'DONE' },
+var taskDb = [
+    { email: 'aitor@tilla.com', title: 'BUY CHOCOLATE', id: 0, comment: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', status: 'TODO' },
+    { email: 'aitor@tilla.com', title: 'BUY COFFE', id: 1, comment: 'not like coffe but i need cafeine', status: 'TODO' },
+    { email: 'debora@melo.com', title: 'BUY BANANAS', id: 2, comment: 'i need buy banaans because my dog love it', status: 'DOING' },
+    { email: 'debora@melo.com', title: 'BUY PEN', id: 3, comment: 'i need buy banaans because my other pendrive is full', status: 'DOING' },
+    { email: 'debora@melo.com', title: 'BUY ORANGES', id: 4, comment: 'i need buy oranges because my dog love it', status: 'DOING' },
+    { email: 'alaba@sura.com', title: 'BUY ICE', id: 5, comment: 'i need buy ice because my drink in better whit it', status: 'DONE' },
+    { email: 'alaba@sura.com', title: 'BUY CAR', id: 6, comment: 'i need buy a car because my other car have 343.234km', status: 'DONE' },
 ]

@@ -1,4 +1,5 @@
 //---------------LOGIN----------------------
+var idLogin
 
 //selector var
 var body = document.querySelector('body')
@@ -79,6 +80,12 @@ formLoginRegister.onsubmit = function (event) {
 
     var email = loginEmailRegister.value
     var password = loginPasswordRegister.value
+
+    for (var i = users.length; i >= 0; i--){
+        if(email === users.email){
+            idLogin = users.id
+        }
+    }
 
     authenticateUser(email, password)
 

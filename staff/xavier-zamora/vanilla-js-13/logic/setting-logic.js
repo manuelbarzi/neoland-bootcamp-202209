@@ -14,6 +14,14 @@ function updateUserEmail(currentemail, newEmail) { //THIS FUNCION IS IN componen
         }
     }
 
+    //UPDATE TASKBD
+    debugger
+    for (var i = taskDb.length; i > 0; i--) {
+        if (taskDb[i-1].email === currentemail) {
+            taskDb[i-1].email = newEmail
+        }
+    }
+
     //CHANGE EMAIL
     var indexJ = users.length
     while (indexJ > 0) {

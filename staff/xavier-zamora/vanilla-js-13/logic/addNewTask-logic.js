@@ -11,6 +11,7 @@ function AddNewTaskFunction() { // logic/addTaskMenulogic.js
     var result = addNewTaskData(email, tittleUper, comment)
 
     if (result instanceof Error) {
+        alert(result.message)
         log('ERROR', 'task not added')
 
         return

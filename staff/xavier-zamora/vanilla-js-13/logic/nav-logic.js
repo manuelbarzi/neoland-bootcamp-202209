@@ -15,6 +15,8 @@ divHeader.onclick = function (event) {
         mainLogin.remove()
         mainRegister.remove()
         addTaskMenu.remove()
+        itemInfo.remove()
+        itemInfo.remove()
 
         //this part close menu
         openHeaderPanel = true
@@ -32,6 +34,7 @@ imgNavHeaderSpanLogout.onclick = function (event) {
     mainRegister.remove()
     taskPanel.remove()
     settingsPanel.remove()
+    itemInfo.remove()
     document.body.append(mainLogin)
 
     //This part close menu
@@ -51,10 +54,12 @@ imgNavHeaderSpanSettings.onclick = function (event) {
     event.preventDefault()
     log('DEBUG', 'open setings page')
     document.body.append(settingsPanel)
-    mainLogin.remove()
+    
 
     //This part close menu
     openHeaderPanel = true
     imgNavHeaderSpan.click()
+    mainLogin.remove()
     taskPanel.remove()
+    itemInfo.remove()
 }

@@ -3,134 +3,72 @@
 //taskPanelDivTODOTASK.append(taskItem)
 
 //ARRAYS CONTAINER
+var taskId = taskDb.length - 1
 var taskItemArrayTodo = []
 var taskItemArrayDoing = []
 var taskItemArrayDone = []
 
-var taskItemID = 0 //TODO LOOK IF IS USED IN ANOTHER POSITION
+var articleClick
 
 //THIS FUNCTION ADD THE TASKS TO THE PANEL
 function showItems() {
     //THIS ARE SELECTORS FOR CHANGE DE DB AND THE ARRAYCONTAINER
-    var selectorDB = task_TODO
-    var pushselectorDB = taskItemArrayTodo
+    var statusItem
 
-    //TASK_TODO BUCLE
-    var i = task_TODO.length
-    while (i > 0) {
-        i--
-        data()
-    }
-
-    //TASK_DOING BUCLE
-    i = task_DOING.length
-    pushselectorDB = taskItemArrayDoing
-    selectorDB = task_DOING
-    while (i > 0) {
-        i--
-        data()
-    }
-    //TASK_DONE BUCLE
-    i = task_DONE.length
-    pushselectorDB = taskItemArrayDone
-    selectorDB = task_DONE
-    while (i > 0) {
-        i--
-        data()
+    //TASKDB BUCLE
+    var i = taskDb.length - 1
+    for(i; i >= 0; i--) {
+        createTaskItem()
     }
 
     //PUSH TO CONTAINERS
-    var j = taskItemArrayTodo.length
-    while (j > 0) {
-        j--
-        taskPanelDivTODOTASK.append(taskItemArrayTodo[j])
+    for (i = taskItemArrayTodo.length; i > 0; i--) {
+        taskPanelDivTODOTASK.append(taskItemArrayTodo[i-1])
     }
 
-    j = taskItemArrayDoing.length
-    while (j > 0) {
-        j--
-        taskPanelDivDOINGTASK.append(taskItemArrayDoing[j])
+    for (i = taskItemArrayDoing.length; i > 0; i--) {
+        taskPanelDivDOINGTASK.append(taskItemArrayDoing[i-1])
     }
 
-    j = taskItemArrayDone.length
-    while (j > 0) {
-        j--
-        taskPanelDivFINISHTASK.append(taskItemArrayDone[j])
+    for (i = taskItemArrayDone.length; i > 0; i--) {
+        taskPanelDivFINISHTASK.append(taskItemArrayDone[i-1])
     }
 
-    function data() {//FUNCTION FOR CREATE ITEM
+    function createTaskItem() {//FUNCTION FOR CREATE ITEM
 
-        var taskItem = document.createElement('div')
-        taskItem.className = "item justify-content-center"
+        var taskItem = document.createElement('article')
+        taskItem.className = "item justify-content-center article"
         taskItem.style.paddingTop = "0.5rem"
-
+        
         var taskItemText = document.createElement('div')
         taskItemText.draggable = "true"
         taskItemText.style.background = "rgb(255, 255, 255)"
         taskItemText.style.border = "1px solid black"
         taskItemText.style.padding = "0.2rem"
+        taskItemText.id = taskId
 
         taskItem.append(taskItemText)
 
-        //PUSH DATA
-        taskItemText.innerHTML = '<h5>' + selectorDB[i].bd_task_title + '</h5>'
-        pushselectorDB.push(taskItem)
+        taskItemText.innerHTML = "<a onclick='clickOnTask("+ taskId +")'><h5>" + taskDb[i].title + '</h5></a>'
+        statusItem = taskDb[i].status
+
+        if(statusItem === "TODO"){
+            taskItemArrayTodo.push(taskItem)
+        }
+        if(statusItem === "DOING"){
+            taskItemArrayDoing.push(taskItem)
+        }
+        if(statusItem === "DONE"){
+            taskItemArrayDone.push(taskItem)
+        }
+        taskId--
     }
+    
 }//|||||||||||||||||||HOW WORKS||||||||||||||||||||
-//THE TWO VARS CHANGE DE DATA, NEXT THE BUCLES PUSH THIS DATA IN A DB, NEXT THE BUCLES PUSH ITEMS IN ARRAYS AND THIS ARRAYS PUSH THE ITEMS TO CONTAINER IN THE PANEL.
-
-//THIS FUNCTION ADD NEW ITEM
-function addTheNewItem() {
-    //SELECTORS
-    var pushselectorDB = taskItemArrayTodo
-    var selectorDB = task_TODO
-
-    //CONDITIONLALS FOR PUSH
-    if (task_TODO.length > taskItemArrayTodo.length) {
-        pushselectorDB = taskItemArrayTodo
-        selectorDB = task_TODO
-        var i = task_TODO.length - 1
-        data()
-        taskPanelDivTODOTASK.append(taskItemArrayTodo[i])
-    }
-    if (task_DOING.length > taskItemArrayDoing.length) {
-        pushselectorDB = taskItemArrayDoing
-        selectorDB = task_DOING
-        var i = task_DOING.length - 1
-        data()
-        taskPanelDivDOINGTASK.append(taskItemArrayDoing[i])
-    }
-    if (task_DONE.length > taskItemArrayDone.length) {
-        pushselectorDB = taskItemArrayDone
-        selectorDB = task_DONE
-        var i = task_DONE.length - 1
-        data()
-        taskPanelDivFINISHTASK.append(taskItemArrayDone[i])
-    }
-
-    //DATA
-    function data() {
-
-        var taskItem = document.createElement('div')
-        taskItem.className = "item justify-content-center"
-        taskItem.style.paddingTop = "0.5rem"
-
-        var taskItemText = document.createElement('div')
-        taskItemText.draggable = "true"
-        taskItemText.style.background = "rgb(255, 255, 255)"
-        taskItemText.style.border = "1px solid black"
-        taskItemText.style.padding = "0.2rem"
-
-        taskItem.append(taskItemText)
-
-        taskItemText.innerHTML = '<h5>' + selectorDB[i].bd_task_title + '</h5>'
-        pushselectorDB.push(taskItem)
-    }
-}//|||||||||||||||||||HOW WORKS||||||||||||||||||||
-//SELECTORS SELECT THE ARRAY AND DB, NEXT CONDITIONALS PUSH THE ITEM INTO A CONTAINER OF PANEL USING A DATA PSUH
+//THE TWO VARS CHANGE DE createNewUser, NEXT THE BUCLES PUSH THIS createNewUser IN A DB, NEXT THE BUCLES PUSH ITEMS IN ARRAYS AND THIS ARRAYS PUSH THE ITEMS TO CONTAINER IN THE PANEL.
 
 //TODO CHANGE STATUS
-taskPanelDivTODOTASK.addEventListener("dragover", (event) => {
+/*taskPanelDivTODOTASK.addEventListener("dragover", (event) => {
     event.preventDefault()
 });
 taskPanelDivTODOTASK.addEventListener("drop", (event) => {
@@ -154,5 +92,5 @@ taskPanelDivFINISHTASK.addEventListener("drop", (event) => {
     log('debug', 'drop')
     task[0].bd_task_status = "DONE"
     taskItem.remove()
-});
+});*/
 //TODO SEPARATE THE DOCUMENT IN TASK-ITEM AND TASK-ITEM LOGIC

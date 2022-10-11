@@ -40,6 +40,7 @@ function registerUser(email, password, password2) {
     //VALIDATE IF EMAIL EXIST
     let user = {
         email: emailInputRegister.value,
+        id: users.length,
         password: passwordInputRegister.value,
         password2: validatePasswordInputRegister.value,
     }

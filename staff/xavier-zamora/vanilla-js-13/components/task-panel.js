@@ -90,7 +90,7 @@ taskPanelDivFINISHTASK.style.background = "rgb(239, 239, 239)"
 //OPEN ADD TASK FUNCTION
 taskPanelTitel.onclick = function (event) {
     event.preventDefault()
-    log('DEBUG', 'working')
+    log('DEBUG', 'open add task menu')
 
     taskPanel.remove()
     body.append(addTaskMenu)

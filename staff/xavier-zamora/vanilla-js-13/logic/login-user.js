@@ -11,6 +11,24 @@
 var boolLog = true
 
 function authenticateUser(email, password) {
+
+    if (!IS_EMAIL_REGEX.test(email)) {
+        alert('email is not valid')
+        return new Error('email is not valid')
+    }
+    if (typeof password !== 'string') {
+        alert('password is not string')
+        return new Error('password is not string')
+    }
+    if (password.length < 8) {
+        alert('Password need 8 characters')
+        return new Error('Password need 8 characters')
+    }
+    if (!HAS_NUMBER_REGEX.test(password)) {
+        alert('The password need almost 1 number')
+        return new Error('The password need almost 1 number')
+    }
+ 
     i = users.length
     var match = false
     //MATCH IF CREDENTIALS ARE CORRECT
@@ -30,6 +48,7 @@ function authenticateUser(email, password) {
         mainLogin.remove()
         taskPanel.remove()
         body.append(taskPanel)
+
         //add bool for unable the showItems() function
         if (boolLog === true) {
             boolLog = false
