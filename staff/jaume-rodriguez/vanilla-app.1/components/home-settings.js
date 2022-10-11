@@ -1,5 +1,4 @@
 /* TODO SIMPLIFICAR 2 BOTONES A 1 */
-/* TODO RELLENAR LOS CAMPOS EN ESCRITO Y NO PLACEHOLDER */
 
 /* CREAMOS SETTINGS SECTION */
 var homeSettingsSection = document.createElement("section");
@@ -170,7 +169,7 @@ updateNameForm.onsubmit = function(event) {
 
     updateNameInput.disabled = true;
     updateNameForm.reset();
-    updateNameInput.placeholder = user.name;
+    updateNameInput.setAttribute("value", user.name);
     homeMenuDropdownUserName.innerText = user.name;
     tasksPanelSecondTitle.innerText = user.name;
 }
@@ -194,7 +193,7 @@ updateEmailForm.onsubmit = function(event) {
     alert('Your changes have been applied')
     updateEmailInput.disabled = true;
     updateEmailForm.reset();
-    updateEmailInput.placeholder = user.email;
+    updateEmailInput.setAttribute("value", user.email);
     homeSettingsSecondTitle.innerText = user.email;
 }
 

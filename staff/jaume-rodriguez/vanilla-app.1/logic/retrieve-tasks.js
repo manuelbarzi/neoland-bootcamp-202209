@@ -1,23 +1,22 @@
-function retrieveTasks(userEmail) {
+function retrieveTasks(userId) {
     
     var found = false
 
     for (var i = 0; i < users.length && !found; i++) {
         var user = users[i]
 
-        if (user.email === userEmail)
+        if (user.id === userId)
             found = true
     }
 
-    // if not found then ...
-    if (!found) return new Error('user with email ' + userEmail + ' not found')
+    if (!found) return new Error("user with id " + userId + " not found")
 
     var filteredTasks = []
 
     for (var i = 0; i < tasks.length; i++) {
         var task = tasks[i]
 
-        if (task.user === userEmail)
+        if (task.user === userId)
             filteredTasks.push(task)
     }
 

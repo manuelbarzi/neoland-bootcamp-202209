@@ -105,7 +105,7 @@ loginContainerFlex.append(loginLinkRegister);
 loginForm.onsubmit = function (event) {
     event.preventDefault()
 
-    log('DEBUG', 'Submit login')
+    log("DEBUG", "Submit login")
 
     var email = loginEmailInput.value
     var password = loginPasswordInput.value
@@ -128,10 +128,10 @@ loginForm.onsubmit = function (event) {
     homePage.append(tasksPanelSection);
     homeMenuDropdownUserName.innerText = user.name;
     homeSettingsSecondTitle.innerText = user.email;
-    updateNameInput.placeholder = user.name;
-    updateEmailInput.placeholder = user.email;
+    updateNameInput.setAttribute("value", user.name);
+    updateEmailInput.setAttribute("value", user.email);
     tasksPanelSecondTitle.innerText = user.name;
-  
+
     clearTasksCards()
     renderTasksCards()
 
