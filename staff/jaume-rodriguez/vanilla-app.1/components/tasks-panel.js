@@ -117,14 +117,41 @@ tasksPanelContent.append(tasksPanelColumnTodo, tasksPanelColumnDoing, tasksPanel
 
 
 /* -- */
-function createTaskCard(text) {
+function createTaskCard(taskId, text) {
     var taskCard = document.createElement("article")
+    var taskText = document.createElement("p");
+    taskText.className = "tasks__panel__content__card"
+    taskText.innerText = text
+    taskText.contentEditable = true
 
-    log("DEBUG", "A new TO DO card have been created")
+    taskText.onkeyup = function(){
+        var result = updateTaskText(user.id, taskId, taskText.innerText)
 
-    taskCard.innerText = text
-    taskCard.className = "tasks__panel__content__card"
-    taskCard.contentEditable = true
+        if (result instanceof Error) {
+            alert(result.message)
+
+            return
+        }
+    }
+
+    var taskDeleteButton = document.createElement("button");
+    taskDeleteButton.classList.add("fa");
+    taskDeleteButton.classList.add("fa-edit");
+    taskDeleteButton.classList.add("tasks__panel__add-button")
+
+    taskDeleteButton.onclick = function(){
+        var result = deleteTask(user.id, taskId)
+
+        if (result instanceof Error) {
+            alert(result.message)
+
+            return
+        }
+
+        taskCard.remove();
+    }
+
+    taskCard.append(taskText, taskDeleteButton);
 
     return taskCard
 }
@@ -147,7 +174,7 @@ function renderTasksCards() {
     for (var i = 0; i < myTasks.length; i++) {
         var myTask = myTasks[i]
 
-        var myTaskCard = createTaskCard(myTask.text)
+        var myTaskCard = createTaskCard(myTask.id, myTask.text)
 
         if (myTask.status === "todo")
         tasksPanelColumnTodo.append(myTaskCard)
