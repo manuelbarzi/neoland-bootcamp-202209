@@ -6,7 +6,7 @@ settingsPanel.className = "container display-screen"
 var addFormSettingPage = document.createElement('form')
 settingsPanel.append(addFormSettingPage)
 
-//ADD TITTLE
+//ADD TITLE
 var addTitleSettingPage = document.createElement('h3')
 addFormSettingPage.append(addTitleSettingPage)
 addTitleSettingPage.innerHTML = "SETTINGS"

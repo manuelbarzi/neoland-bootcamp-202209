@@ -3,15 +3,19 @@
 //taskPanelDivTODOTASK.append(taskItem)
 
 //ARRAYS CONTAINER
-var taskId = taskDb.length - 1
 var taskItemArrayTodo = []
 var taskItemArrayDoing = []
 var taskItemArrayDone = []
+var taskId = taskDb.length - 1
 
 var articleClick
 
 //THIS FUNCTION ADD THE TASKS TO THE PANEL
 function showItems() {
+    taskId = taskDb.length - 1//this is for reset task id outside of function
+    delete taskPanel
+    body.append(taskPanel)
+    debugger
     //THIS ARE SELECTORS FOR CHANGE DE DB AND THE ARRAYCONTAINER
     var statusItem
 
@@ -35,17 +39,20 @@ function showItems() {
     }
 
     function createTaskItem() {//FUNCTION FOR CREATE ITEM
+        
+        
 
         var taskItem = document.createElement('article')
         taskItem.className = "item justify-content-center article"
         taskItem.style.paddingTop = "0.5rem"
+        taskItem.id = taskId
         
         var taskItemText = document.createElement('div')
         taskItemText.draggable = "true"
         taskItemText.style.background = "rgb(255, 255, 255)"
         taskItemText.style.border = "1px solid black"
         taskItemText.style.padding = "0.2rem"
-        taskItemText.id = taskId
+        
 
         taskItem.append(taskItemText)
 

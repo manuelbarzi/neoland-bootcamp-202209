@@ -16,7 +16,6 @@ divHeader.onclick = function (event) {
         mainRegister.remove()
         addTaskMenu.remove()
         itemInfo.remove()
-        itemInfo.remove()
 
         //this part close menu
         openHeaderPanel = true

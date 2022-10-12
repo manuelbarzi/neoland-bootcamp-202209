@@ -88,5 +88,4 @@ formLoginRegister.onsubmit = function (event) {
     }
 
     authenticateUser(email, password)
-
 }

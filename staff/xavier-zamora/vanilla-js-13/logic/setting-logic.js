@@ -4,9 +4,7 @@ function updateUserEmail(currentemail, newEmail) { //THIS FUNCION IS IN componen
     if (!IS_EMAIL_REGEX.test(newEmail)) return new Error('email is not valid')
 
     //TEST IF USER EXIST
-    var i = users.length;
-    while (i > 0) {
-        i--
+    for (var i = users.length; i > 0; i--) {
         var user = users[i]
 
         if (currentemail === newEmail) {
@@ -15,7 +13,6 @@ function updateUserEmail(currentemail, newEmail) { //THIS FUNCION IS IN componen
     }
 
     //UPDATE TASKBD
-    debugger
     for (var i = taskDb.length; i > 0; i--) {
         if (taskDb[i-1].email === currentemail) {
             taskDb[i-1].email = newEmail
@@ -23,9 +20,7 @@ function updateUserEmail(currentemail, newEmail) { //THIS FUNCION IS IN componen
     }
 
     //CHANGE EMAIL
-    var indexJ = users.length
-    while (indexJ > 0) {
-        indexJ--
+    for (var indexJ = users.length; indexJ > 0; indexJ--) {
         var user = users[indexJ]
 
         if (user.email === currentemail) {

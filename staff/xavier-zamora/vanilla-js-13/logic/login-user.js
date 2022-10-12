@@ -29,12 +29,10 @@ function authenticateUser(email, password) {
         return new Error('The password need almost 1 number')
     }
  
-    i = users.length
     var match = false
     //MATCH IF CREDENTIALS ARE CORRECT
-    while (i > 0) {
-        i--
-        var container = users[i]
+    for (var i = users.length; i > 0; i--) {
+        var container = users[i - 1] 
         if (container.email === email && container.password === password) {
             match = true;
             userName.innerHTML = loginEmailRegister.value //userNameValue is in pages/nav.js line 3 

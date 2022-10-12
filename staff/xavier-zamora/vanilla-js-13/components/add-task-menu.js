@@ -23,91 +23,91 @@ addTaskMenuHeaderDiv.append(addTaskMenuCloseX)
 addTaskMenuCloseX.innerHTML = "X"
 
 //ADD TITLE
-var addTaskMenuTittle = document.createElement('h3')
-addTaskMenuTittle.innerHTML = "ADD TASK"
-addTaskMenu.append(addTaskMenuTittle)
+var addTaskMenuTitle = document.createElement('h3')
+addTaskMenuTitle.innerHTML = "ADD TASK"
+addTaskMenu.append(addTaskMenuTitle)
 
 //ADD FORM
-var addTaskMenuTittleForm = document.createElement('form')
-addTaskMenu.append(addTaskMenuTittleForm)
+var addTaskMenuTitleForm = document.createElement('form')
+addTaskMenu.append(addTaskMenuTitleForm)
 
-//ADD INPUT TITTLE TO FORM
-var addTaskMenuTittleDivTittleFormTittleh4 = document.createElement('h4')
-addTaskMenuTittleForm.append(addTaskMenuTittleDivTittleFormTittleh4)
-addTaskMenuTittleDivTittleFormTittleh4.innerHTML = "Tittle"
-var addTaskMenuTittleDivTittleFormTittle = document.createElement('input')
-addTaskMenuTittleDivTittleFormTittle.type = "Text"
-addTaskMenuTittleDivTittleFormTittle.required = true
-addTaskMenuTittleDivTittleFormTittle.placeholder = "Tittle"
-addTaskMenuTittleForm.append(addTaskMenuTittleDivTittleFormTittle)
+//ADD INPUT TITLE TO FORM
+var addTaskMenuTitleDivTitleFormTitleh4 = document.createElement('h4')
+addTaskMenuTitleForm.append(addTaskMenuTitleDivTitleFormTitleh4)
+addTaskMenuTitleDivTitleFormTitleh4.innerHTML = "Title"
+var addTaskMenuTitleDivTitleFormTitle = document.createElement('input')
+addTaskMenuTitleDivTitleFormTitle.type = "Text"
+addTaskMenuTitleDivTitleFormTitle.required = true
+addTaskMenuTitleDivTitleFormTitle.placeholder = "Title"
+addTaskMenuTitleForm.append(addTaskMenuTitleDivTitleFormTitle)
 
 //ADD INPUT STATUS TO FORM
-var addTaskMenuTittleDivTittleFormStatush4 = document.createElement('h4')
-addTaskMenuTittleForm.append(addTaskMenuTittleDivTittleFormStatush4)
-addTaskMenuTittleDivTittleFormStatush4.innerHTML = "Add Status"
+var addTaskMenuTitleDivTitleFormStatush4 = document.createElement('h4')
+addTaskMenuTitleForm.append(addTaskMenuTitleDivTitleFormStatush4)
+addTaskMenuTitleDivTitleFormStatush4.innerHTML = "Add Status"
 
-var addTaskMenuTittleDivTittleFormStatus = document.createElement('select')
-addTaskMenuTittleForm.append(addTaskMenuTittleDivTittleFormStatus)
+var addTaskMenuTitleDivTitleFormStatus = document.createElement('select')
+addTaskMenuTitleForm.append(addTaskMenuTitleDivTitleFormStatus)
 
-var addTaskMenuTittleDivTittleFormStatusOption1 = document.createElement('option')
-addTaskMenuTittleDivTittleFormStatus.append(addTaskMenuTittleDivTittleFormStatusOption1)
-addTaskMenuTittleDivTittleFormStatusOption1.value = "TODO"
-addTaskMenuTittleDivTittleFormStatusOption1.innerHTML = "TODO"
+var addTaskMenuTitleDivTitleFormStatusOption1 = document.createElement('option')
+addTaskMenuTitleDivTitleFormStatus.append(addTaskMenuTitleDivTitleFormStatusOption1)
+addTaskMenuTitleDivTitleFormStatusOption1.value = "TODO"
+addTaskMenuTitleDivTitleFormStatusOption1.innerHTML = "TODO"
 
-var addTaskMenuTittleDivTittleFormStatusOption2 = document.createElement('option')
-addTaskMenuTittleDivTittleFormStatus.append(addTaskMenuTittleDivTittleFormStatusOption2)
-addTaskMenuTittleDivTittleFormStatusOption2.value = "DOING"
-addTaskMenuTittleDivTittleFormStatusOption2.innerHTML = "DOING"
+var addTaskMenuTitleDivTitleFormStatusOption2 = document.createElement('option')
+addTaskMenuTitleDivTitleFormStatus.append(addTaskMenuTitleDivTitleFormStatusOption2)
+addTaskMenuTitleDivTitleFormStatusOption2.value = "DOING"
+addTaskMenuTitleDivTitleFormStatusOption2.innerHTML = "DOING"
 
-var addTaskMenuTittleDivTittleFormStatusOption3 = document.createElement('option')
-addTaskMenuTittleDivTittleFormStatus.append(addTaskMenuTittleDivTittleFormStatusOption3)
-addTaskMenuTittleDivTittleFormStatusOption3.value = "DONE"
-addTaskMenuTittleDivTittleFormStatusOption3.innerHTML = "DONE"
+var addTaskMenuTitleDivTitleFormStatusOption3 = document.createElement('option')
+addTaskMenuTitleDivTitleFormStatus.append(addTaskMenuTitleDivTitleFormStatusOption3)
+addTaskMenuTitleDivTitleFormStatusOption3.value = "DONE"
+addTaskMenuTitleDivTitleFormStatusOption3.innerHTML = "DONE"
 
-addTaskMenuTittleForm.append(addTaskMenuTittleDivTittleFormStatus)
-addTaskMenuTittleDivTittleFormStatus.type = "Text"
-addTaskMenuTittleDivTittleFormStatus.placeholder = "done, doing or done"
+addTaskMenuTitleForm.append(addTaskMenuTitleDivTitleFormStatus)
+addTaskMenuTitleDivTitleFormStatus.type = "Text"
+addTaskMenuTitleDivTitleFormStatus.placeholder = "done, doing or done"
 
 //ADD INPUT COMENT TO FORM
-var addTaskMenuTittleDivTittleFormCommenth4 = document.createElement('h4')
-addTaskMenuTittleForm.append(addTaskMenuTittleDivTittleFormCommenth4)
-addTaskMenuTittleDivTittleFormCommenth4.innerHTML = "Add Coment"
-var addTaskMenuTittleDivTittleFormComment = document.createElement('input')
-addTaskMenuTittleForm.append(addTaskMenuTittleDivTittleFormComment)
-addTaskMenuTittleDivTittleFormComment.type = "Text"
-addTaskMenuTittleDivTittleFormComment.required = true
-addTaskMenuTittleDivTittleFormComment.placeholder = "write hear yout coment"
-addTaskMenuTittleDivTittleFormComment.style.height = "10rem"
+var addTaskMenuTitleDivTitleFormCommenth4 = document.createElement('h4')
+addTaskMenuTitleForm.append(addTaskMenuTitleDivTitleFormCommenth4)
+addTaskMenuTitleDivTitleFormCommenth4.innerHTML = "Add Coment"
+var addTaskMenuTitleDivTitleFormComment = document.createElement('input')
+addTaskMenuTitleForm.append(addTaskMenuTitleDivTitleFormComment)
+addTaskMenuTitleDivTitleFormComment.type = "Text"
+addTaskMenuTitleDivTitleFormComment.required = true
+addTaskMenuTitleDivTitleFormComment.placeholder = "write hear yout coment"
+addTaskMenuTitleDivTitleFormComment.style.height = "10rem"
 
 //MARGIN INPUTS
-addTaskMenuTittleDivTittleFormTittleh4.style.marginTop = "7rem"
-addTaskMenuTittleDivTittleFormTittleh4.style.marginTop = "3rem"
+addTaskMenuTitleDivTitleFormTitleh4.style.marginTop = "7rem"
+addTaskMenuTitleDivTitleFormTitleh4.style.marginTop = "3rem"
 
-addTaskMenuTittleDivTittleFormTittle.style.marginBottom = "1rem"
-addTaskMenuTittleDivTittleFormStatus.style.marginBottom = "1rem"
-addTaskMenuTittleDivTittleFormComment.style.marginBottom = "1rem"
+addTaskMenuTitleDivTitleFormTitle.style.marginBottom = "1rem"
+addTaskMenuTitleDivTitleFormStatus.style.marginBottom = "1rem"
+addTaskMenuTitleDivTitleFormComment.style.marginBottom = "1rem"
 
-addTaskMenuTittleDivTittleFormCommenth4.style.marginBottom = "0.2rem"
-addTaskMenuTittleDivTittleFormStatush4.style.marginBottom = "0.2rem"
-addTaskMenuTittleDivTittleFormTittleh4.style.marginBottom = "0.2rem"
+addTaskMenuTitleDivTitleFormCommenth4.style.marginBottom = "0.2rem"
+addTaskMenuTitleDivTitleFormStatush4.style.marginBottom = "0.2rem"
+addTaskMenuTitleDivTitleFormTitleh4.style.marginBottom = "0.2rem"
 
 //ADD SEND BUTTON
-var addTaskMenuTittleDivTittleFormButton = document.createElement('button')
-addTaskMenu.append(addTaskMenuTittleDivTittleFormButton)
-addTaskMenuTittleDivTittleFormButton.className = "material-symbols-outlined"
-addTaskMenuTittleDivTittleFormButton.innerHTML = "<span>send</span>"
+var addTaskMenuTitleDivTitleFormButton = document.createElement('button')
+addTaskMenu.append(addTaskMenuTitleDivTitleFormButton)
+addTaskMenuTitleDivTitleFormButton.className = "material-symbols-outlined"
+addTaskMenuTitleDivTitleFormButton.innerHTML = "<span>send</span>"
 
 //THIS FUNCTION CLOSE THE PANEL
 addTaskMenuCloseX.onclick = function (event) {
     event.preventDefault()
     log('DEBUG', 'close addTaskPanel')
     addTaskMenu.remove()
-    addTaskMenuTittleForm.reset()
+    addTaskMenuTitleForm.reset()
     document.body.append(taskPanel)
 }
 
 //SEND THE FORM TO logic/addNewTask-logic.js
-addTaskMenuTittleDivTittleFormButton.onclick = function (event) {
+addTaskMenuTitleDivTitleFormButton.onclick = function (event) {
     event.preventDefault()
     AddNewTaskFunction()
 }

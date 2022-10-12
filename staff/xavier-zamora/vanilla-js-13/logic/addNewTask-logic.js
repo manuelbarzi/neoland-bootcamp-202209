@@ -3,12 +3,12 @@ function AddNewTaskFunction() { // logic/addTaskMenulogic.js
 
     log('DEBUG', 'send new data task')
     var email = userNameLogin
-    var tittle = addTaskMenuTittleDivTittleFormTittle.value
-    var comment = addTaskMenuTittleDivTittleFormComment.value
+    var title = addTaskMenuTitleDivTitleFormTitle.value
+    var comment = addTaskMenuTitleDivTitleFormComment.value
 
-    var tittleUper = tittle.toUpperCase()
+    var titleUper = title.toUpperCase()
 
-    var result = addNewTaskData(email, tittleUper, comment)
+    var result = addNewTaskData(email, titleUper, comment)
 
     if (result instanceof Error) {
         alert(result.message)
@@ -20,9 +20,7 @@ function AddNewTaskFunction() { // logic/addTaskMenulogic.js
     alert('task added')
     log('DEBUG', 'task added')
     divHeader.click()
-    addTaskMenuTittleForm.reset()
+    addTaskMenuTitleForm.reset()
     addTaskMenu.remove()
-    //deleteItems()
     addTheNewItem()
-    divHeader.click()
 }
