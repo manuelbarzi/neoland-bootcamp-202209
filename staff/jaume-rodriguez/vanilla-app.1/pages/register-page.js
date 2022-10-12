@@ -24,7 +24,7 @@ registerForm.classList.add("form");
 
 /* -- */
 var registerImageAvatar = document.createElement("img");
-registerImageAvatar.src = "img/avatarlogo.png";
+registerImageAvatar.src = "img/logologintrello.png";
 
 /* -- */
 var registerLabelName = document.createElement("label");

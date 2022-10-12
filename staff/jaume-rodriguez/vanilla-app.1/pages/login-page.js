@@ -23,7 +23,7 @@ loginForm.classList.add("form");
 
 /* -- */
 var loginImageAvatar = document.createElement("img");
-loginImageAvatar.src = "img/avatarlogo.png";
+loginImageAvatar.src = "img/logologintrello.png";
 
 /* -- */
 var loginEmailLabel = document.createElement("label");
