@@ -15,7 +15,8 @@ var task = {
     status: 'doing'
 }
 
-tasks.push(task)
+//tasks.push(task)
+tasks[3] = task
 
 var res = deleteTask(user.email, task.id)
 
@@ -31,3 +32,5 @@ for (var i = 0; i < tasks.length && !found; i++) {
 }
 
 console.assert(!found)
+
+// TODO add more test cases (unhappies)
