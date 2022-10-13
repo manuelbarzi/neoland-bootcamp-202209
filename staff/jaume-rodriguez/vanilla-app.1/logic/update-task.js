@@ -1,4 +1,11 @@
 function updateTaskText(userId, taskId, text){
+    if (typeof userId !== "string") return new Error("userId is not string");
+
+    if (typeof taskId !== "string") return new Error("taskId is not string");
+    if (typeof taskId.length < 6) return new Error("invalid taskId");
+
+    if (typeof text !== "string") return new Error("userId is not string");
+
     var found = false
 
     for (var i = 0; i < users.length && !found; i++) {
