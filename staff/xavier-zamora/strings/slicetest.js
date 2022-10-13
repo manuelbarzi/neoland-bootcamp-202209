@@ -1,5 +1,5 @@
 // CASE returns '' for string 'hola mundo' and start index 0 and end index 0 
-
+debugger
 var s = 'hola mundo'
 
 var res = slice(s, 0, 0)

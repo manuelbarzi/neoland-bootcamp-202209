@@ -1,4 +1,4 @@
-/*var a = "hola mundo"
+var a = "hola mundo"
 var b = "hellow world"
 var c = "hw"
 
@@ -10,12 +10,44 @@ var arA = ["A", "B", "C"]
 var arB = [1, 2, 3]
 var arC = [1, "B", "C"]
 
-var d*/
+var d
 
 var resultado
 
 function concat(a, b /*, *args*/) {
     debugger
+    var star_args = Array.prototype.slice.call (arguments, concat.length)
+    var j = arguments.length - 2
+    var array = []
+    if(a === undefined) a = "undefined"
+    if(b === undefined) b = "undefined"
+    array.push(a)
+    array.push(b)
+
+    if(typeof a === "number"){
+        return resultado = "error"
+    }
+
+    for(var i = 0; j > 0; i++){
+        j--
+        if(star_args[i] === undefined){
+            star_args[i] = "undefined"
+        }
+        if(typeof star_args[i] === "object"){
+        array.push(star_args[i])
+        }else{
+            var correct1 = star_args[i].toString()
+            array.push(correct1)
+        }
+    }
+    var str = array.toString()
+    var correct = str.replace(/,/g, "")
+    console.log(correct.toString())
+    return correct
+}
+
+//function concat(a, b /*, *args*/) {
+    /*debugger
     var star_args = Array.prototype.slice.call (arguments, concat.length)
     var j = arguments.length - 2
     var array = []
@@ -33,9 +65,11 @@ function concat(a, b /*, *args*/) {
         array.push(star_args[i])
         }else{
             var correct1 = star_args[i].toString()
-            array.push(star_args[i])
+            array.push(correct1)
         }
     }
-
-    return array.toString()
-}
+    var str = array.toString()
+    var correct = str.replace(/,/g, "")
+    console.log(correct.toString())
+    return correct
+}*/

@@ -1,4 +1,3 @@
-//var a = "hola mundo"
 
 function repeat(string, index) {
     var result = ''

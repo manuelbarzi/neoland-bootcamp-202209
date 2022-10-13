@@ -1,18 +1,18 @@
 // CASE returns '' for string 'hola mundo' index 0 
-
+debugger
 var s = 'hola mundo'
 
 var res = repeat(s, 0)
 
-console.assert("")
+console.assert(res === "")
 
 // CASE returns 'error' for string 'hola mundo' index -1
 
 var s = 'hola mundo'
 
-var res = repeat(s, -1)
+var res = repeat(res === s, -1)
 
-console.assert("error")
+console.assert(res === "error")
 
 // CASE returns 'hola mundohola mundo' for string 'hola mundo' index 2 
 
@@ -20,7 +20,7 @@ var s = 'hola mundo'
 
 var res = repeat(s, 2)
 
-console.assert('hola mundohola mundo')
+console.assert(res === 'hola mundohola mundo')
 
 // CASE returns ''hola mundohola mundohola mundo'' for string 'hola mundo' index 2
 
@@ -28,11 +28,11 @@ var s = 'hola mundo'
 
 var res = repeat(s, 3)
 
-console.assert('hola mundohola mundohola mundo')
+console.assert(res === 'hola mundohola mundohola mundo')
 
-// CASE returns ''hola mundohola mundohola mundohola mundohola mundo'' for string 'hola mundo' and index 10
+// CASE returns ''hola mundohola mundohola mundohola mundohola mundo'' for string 'hola mundo' and index 5
 var s = 'hola mundo'
 
-var res = repeat(s, 5)
+var res = repeat(res === s, 5)
 
-console.assert('hola mundohola mundohola mundohola mundohola mundo')
+console.assert(res === 'hola mundohola mundohola mundohola mundohola mundo')
