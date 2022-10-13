@@ -9,7 +9,7 @@ function indexOf(array, searchElement, fromIndex = 0) {
 
   //   var index = -1;
 
-  //   for (var i = 0; i < array.length && index === -1; i++) {
+  //   for (var i = fromIndex; i < array.length && index === -1; i++) {
   //     if (array[i] === searchElement) {
   //       index = i;
   //     }
