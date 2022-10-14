@@ -1,24 +1,16 @@
-function push() {
-
-    for (var i = 0; i < arguments.length; i++) {
-        animals[animals.length] = arguments[i]
-    }
-
-    var cantidad = 0
-
-    for (i = 0; i < arguments.length; i++) {
-
-        var searchStrings = animals[animals.length - arguments.length +i]
-
-        if(searchStrings === arguments[i])
-            cantidad = cantidad + 1   
-    }
+function push(array) {
+    debugger
+    var argumentsLength = arguments.length - 1
     
-    if ( cantidad !== arguments.length)
-        return new Error('arguments didnt founded in the array')
+    for (var i = 0; i < argumentsLength; i++) {
+        array[array.length] = arguments[i + 1]
+    }
 
+    // for (var i = 1; i < arguments.length; i ++) {
+    //     array[array.length] = arguments[i]
+    // }
 
-    return animals.length
+    return array.length
 
 }
 
