@@ -1,5 +1,4 @@
-function concat() {
-  debugger;
+function concat(array1, array2, array3, array4, array5, array6) {
   var result = [];
 
   for (var i = 0; i < array1.length; i++) {
