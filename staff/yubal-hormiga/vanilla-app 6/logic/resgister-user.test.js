@@ -41,4 +41,3 @@ console.assert(res instanceof Error)
 console.assert(res.message === 'name length is less than 1')
 
 // TODO add more unhappies...
-

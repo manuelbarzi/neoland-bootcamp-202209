@@ -1,7 +1,7 @@
 log('DEBUG', 'mount register')
 
 var registerForm = document.createElement('form')
-registerForm.className = 'container '
+registerForm.className = 'container'
 
 registerForm.onsubmit = function (event) {
     event.preventDefault()
@@ -88,5 +88,5 @@ registerLoginLink.onclick = function (event) {
 }
 
 var registerPage = document.createElement('main')
-registerPage.className = 'container register__container-colour'
+registerPage.className = 'container'
 registerPage.append(registerForm, registerLoginLink)
