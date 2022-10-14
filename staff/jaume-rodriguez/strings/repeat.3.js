@@ -1,7 +1,7 @@
 function repeat(string, count){
     var result = ""
 
-    if (count < 0 || count === Infinity) return new RangeError ("Invalid count  value: " + count);
+    if (count < 0) return new RangeError ("Invalid count  value: " + count);
     
     count = Math.floor(count)   //-> rounding down on a decimal count
 

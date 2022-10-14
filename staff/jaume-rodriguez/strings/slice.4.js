@@ -1,8 +1,5 @@
 function slice(string, indexStart, indexEnd){
     var result = ""
-    
-    if (indexStart === indexEnd)
-        return result
 
     if (indexEnd === undefined)
         indexEnd = string.length
