@@ -25,8 +25,6 @@ registerForm.onsubmit = function (event) {
     regiterLoginLink.click()
 }
 
-
-
 var registerFondo = document.createElement('div');
 registerFondo.className = 'rectangle';
 
@@ -74,8 +72,6 @@ var registerButton = document.createElement('button');
 registerButton.className = 'container__item--left';
 registerButton.innerText = 'Register';
 
-registerForm.append(register, registerLabelName, registerInputName, registerLabelEmail, registerInputEmail, registerLabelPassword, registerInputPassword, registerButton);
-
 var anchorRegister = document.createElement('a')
 anchorRegister.href = ''
 anchorRegister.className = 'anchor'
@@ -91,4 +87,4 @@ var registerPage = document.createElement('main')
 registerPage.className = 'container'
 registerPage.append(registerForm, anchorRegister)
 
-
+registerForm.append(register, registerLabelName, registerInputName, registerLabelEmail, registerInputEmail, registerLabelPassword, registerInputPassword, registerButton);

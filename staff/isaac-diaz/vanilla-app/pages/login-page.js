@@ -10,17 +10,20 @@ loginForm.onsubmit = function (event){
    var password = loginInputPassword.value;
 
    var result = authenticateUser(email, password);
-
+   
+   
    if (result instanceof Error){
       alert(result.message)
 
       return
    }
 
+   user = result
+
  loginForm.reset()
 
  loginPage.remove()
- homeUserNameText.innerText = result.name
+ headerUserNameText.innerText = result.name
  document.body.append(homePage)
 }
 
