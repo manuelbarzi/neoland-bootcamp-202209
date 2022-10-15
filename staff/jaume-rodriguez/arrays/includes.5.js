@@ -5,11 +5,14 @@ function includes(array1, value, index){
         index += array1.length
     }
 
-    if(index === undefined)
-    for (var i = 0; i < array1.length; i++){
-        if (value === array1[i]){
-            result = true
-            return result
+    if(index === undefined){
+        } else if (index < 0 && index < array1.length){
+
+        for (var i = 0; i < array1.length; i++){
+            if (value === array1[i]){
+                result = true
+                return result
+            }
         }
     }
     
