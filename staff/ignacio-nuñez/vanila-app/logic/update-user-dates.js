@@ -14,3 +14,4 @@ var updateEmail = function (newEmail, email) {
     return new Error('you are not registred')
 
 }
+

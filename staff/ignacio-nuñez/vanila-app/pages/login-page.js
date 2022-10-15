@@ -21,18 +21,20 @@ loginForm.onsubmit = function (event) {
         }
         user = result
 
-        loginForm.reset()
+        createTaskCard()
 
+        loginForm.reset()
+        tasksTodoForm.reset()
         loginDivContenedor.remove()
         userNameText.innerText =user.name
         homeNav.append(homeLinkHome, menuButton)
         document.body.append(homeContenedor)
+
+        var tasksRender = retrieveTasks(user.email)
     } else{
         alert('put your dates')
     }
-
 }
-
 
 var loginH2 = document.createElement('h2');
 loginH2.innerText = 'Log in'
@@ -44,10 +46,6 @@ loginEmailLabel.innerText = 'E-mail';
 loginEmailLabel.htmlFor = 'login-email';
 loginEmailLabel.className = 'container__item-left';
 
-var loginPasswordLabel = document.createElement('label');
-loginPasswordLabel.innerText = 'Password';
-loginPasswordLabel.htmlFor = 'login-password';
-loginPasswordLabel.className = 'container__item-left';
 
 var loginEmailInput = document.createElement('input');
 loginEmailInput.className = 'input-form'
@@ -55,6 +53,11 @@ loginEmailInput.type = 'email';
 loginEmailInput.placeholder = 'Input your E-mail';
 loginEmailInput.name = 'login-email';
 loginEmailInput.id = 'login-email';
+
+var loginPasswordLabel = document.createElement('label');
+loginPasswordLabel.innerText = 'Password';
+loginPasswordLabel.htmlFor = 'login-password';
+loginPasswordLabel.className = 'container__item-left';
 
 var loginPasswordInput = document.createElement('input');
 loginPasswordInput.className = 'input-form'

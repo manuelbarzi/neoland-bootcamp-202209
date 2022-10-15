@@ -171,6 +171,7 @@ p{
     grid-row-start: 3;
     box-shadow: 2px 2px 2px rgb(0, 0, 0, 0.4);
     border-radius: 5px;
+    z-index: 1;
 }
 .home-title{
     grid-column: 10/11;
@@ -191,7 +192,7 @@ p{
 }
 
 .menu--links:hover{
-    background-color: rgba(218, 165, 32, 0.5);
+    background-color: rgba(209, 164, 50, 0.5);
 
 }
 
@@ -201,4 +202,66 @@ p{
     height: 100%;
     background-color: bisque;
     align-items: center;
+}
+
+.container-flex{
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center;
+    gap: .5rem;
+    box-sizing: border-box;
+}
+
+.container-color{
+    background-color: beige;
+}
+
+.flex-columns{
+    flex-direction: column;
+}
+
+.full-width{
+    width: 100%;
+}
+
+.align-self-center{
+    justify-content: center;
+}
+
+.align-items-center{
+    align-items: center;
+}
+
+.flex-rows{
+    flex-direction: row;
+}
+
+.justify-content-start{
+    justify-content: flex-start;
+}
+
+.align-items-start{
+    align-items: flex-start;
+}
+
+.padding-s{
+    padding: 5px
+}
+
+.width-25{
+    width: 25%;
+}
+
+.border-and-radius{
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.margin-top{
+    margin-top: 5px;
+}
+
+.align-self-end{
+    align-self: flex-end;
 }

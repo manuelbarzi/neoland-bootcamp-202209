@@ -39,5 +39,33 @@ settingsEmailButton.onclick = function (event) {
 settingsEmailForm.append(settingsEmailLabel, settingsEmailInput, settingsEmailButton)
 
 
+var settingsPasswordForm = document.createElement('form')
 
-settingsPanel.append(settingsTitle, settingsEmailForm)
+var settingsPasswordLabel = document.createElement('label')
+settingsPasswordLabel.innerText = 'password'
+settingsPasswordLabel.htmlFor = 'settings-password'
+
+var settingsPasswordInput = document.createElement('input')
+settingsPasswordInput.type = ''
+settingsPasswordInput.id = 'settings-password'
+
+
+var settingsPasswordButton = document.createElement('button')
+settingsPasswordButton.innerText = 'Save'
+
+settingsPasswordButton.onclick = function (event) {
+    event.preventDefault()
+
+    var newPassword = settingsPasswordInput.value
+
+
+
+    user.password = newPassword
+    alert('Password correctly changed')
+}
+
+settingsPasswordForm.append(settingsPasswordLabel, settingsPasswordInput, settingsPasswordButton)
+
+settingsPanel.append(settingsTitle, settingsEmailForm, settingsPasswordForm)
+
+

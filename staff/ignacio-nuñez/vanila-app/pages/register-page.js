@@ -12,23 +12,23 @@ registerForm.onsubmit = function (event) {
     var email = registerEmailInput.value
     var password = registerPasswordInput.value
 
-    if(name && email && password){
-    const result = registerUser(name, email, password)
+    if (name && email && password) {
+        const result = registerUser(name, email, password)
 
-    if(result instanceof Error){
-        alert(result.message)
+        if (result instanceof Error) {
+            alert(result.message)
 
-        return
+            return
+        }
+
+        alert('User registered');
+        registerForm.reset();
+        registerLinkLogin.click()
+
+    } else {
+        alert('Put your dates')
     }
-
-    alert('User registered');
-    registerForm.reset();
-    registerLinkLogin.click()
-
-} else {
-    alert('Put your dates')
 }
-} 
 
 
 
@@ -41,11 +41,16 @@ registerNameLabel.innerText = 'Name';
 registerNameLabel.className = 'container__item-left';
 
 var registerNameInput = document.createElement('input');
-registerNameInput.type = 'register-name';
+registerNameInput.type = 'text';
 registerNameInput.name = 'register-name';
 registerNameInput.id = 'register-name';
 registerNameInput.placeholder = 'Input your Name'
 registerNameInput.className = 'input-form'
+registerNameInput.required = true
+registerNameInput.pattern = '[A-Za-z]{1,}'
+registerNameInput.oninvalid = function () {
+    alert('Use characters from A to Z for names')
+}
 
 
 
@@ -55,12 +60,12 @@ registerEmailLabel.innerText = 'E-mail';
 registerEmailLabel.className = 'container__item-left';
 
 var registerEmailInput = document.createElement('input');
-registerEmailInput.type = 'register-email';
+registerEmailInput.type = 'email';
 registerEmailInput.name = 'register-email';
 registerEmailInput.id = 'register-email';
 registerEmailInput.placeholder = 'Input your E-mail';
 registerEmailInput.className = 'input-form';
-
+registerEmailInput.required = true
 
 
 
@@ -75,6 +80,11 @@ registerPasswordInput.type = 'password';
 registerPasswordInput.id = 'register-password';
 registerPasswordInput.placeholder = 'Input your password';
 registerPasswordInput.className = 'input-form';
+// TODO improve following regex to support also symbols ($, %, ...)
+registerPasswordInput.pattern = '[A-Za-z0-9\S]{7,}'
+registerPasswordInput.required = true
+registerPasswordInput.title = 'Use min 8 characters for the password and no spaces'
+
 
 
 
@@ -102,8 +112,6 @@ registerLinkLogin.onclick = function (event) {
     registerDivContenedor.remove()
     document.body.append(loginDivContenedor)
 }
-
-
 
 
 divLogin.append(registerParraf, registerLinkLogin)
