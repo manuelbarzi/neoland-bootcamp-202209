@@ -5,9 +5,11 @@ function includes(array1, value, index){
         index += array1.length
     }
 
-    if(index === undefined){
-        } else if (index < 0 && index < array1.length){
+    if (index >= array1.length){
+        return result
+    }
 
+    if(index === undefined || index <= 0){
         for (var i = 0; i < array1.length; i++){
             if (value === array1[i]){
                 result = true
@@ -15,10 +17,7 @@ function includes(array1, value, index){
             }
         }
     }
-    
-    if (index >= array1.length){
-        return result
-    }
+
     if (value === array1[index]){
         result = true
         return result
