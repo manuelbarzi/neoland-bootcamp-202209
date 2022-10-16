@@ -30,17 +30,9 @@ navBarNewTaskIcon.className = 'material-symbols-outlined header-icons'
 //TODO:onclick
 
 navBarNewTaskIcon.onclick = function () {
-    var result = createTask(currentUser.email)
-
-    if (result instanceof Error) {
-        alert(result.message)
-
-        return
-    }
-
+    createTaskCard(currentUser.email)
     clearTasksCards()
-
-    renderTasksCards()
+    renderTasks()
 }
 
 // Append all elements to group

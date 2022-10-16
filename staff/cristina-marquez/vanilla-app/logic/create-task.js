@@ -1,8 +1,18 @@
 
-// function createTaskCard(text) {
-//     var taskCard = document.createElement('article')
-//     taskCard.innerText = text
-//     taskCard.className = 'task-container'
+function createTaskCard(email) {
 
-//     return taskCard
-// }
+    var newTask = {
+        id: null,
+        user: email,
+        text: '',
+        status: 'TODO'
+    }
+
+    var lastTask = tasks[tasks.length - 1]
+    var lastTaskId = lastTask.id
+
+    newTask.id = lastTaskId + 1
+
+    tasks.push(newTask)
+
+}

@@ -1,4 +1,3 @@
-//TODO: retrieve tasks to user when login
 
 function retrieveTasks(userEmail) {
 

@@ -40,13 +40,19 @@ tasksComponent.append(tasksTitle, tasksContentPanel)
 
 
 
-function createTaskCard(text) {
+function createTaskCardElement(text, userEmail, id) {
     var taskCard = document.createElement('article')
     taskCard.innerText = text
     taskCard.className = 'task-card'
     taskCard.contentEditable = true
 
-    //TODO:onkeyup update task
+    taskCard.onkeyup = function () {
+        var error = updateTaskText(userEmail, id, taskCard.innerText)
+
+        if (error) {
+            log('ERROR', error)
+        }
+    }
 
     return taskCard
 }
@@ -56,12 +62,13 @@ function renderTasks() {
     var retrievedUserTasks = retrieveTasks(currentUser.email)
 
     for (let i = 0; i < retrievedUserTasks.length; i++) {
-        const element = retrievedUserTasks[i];
+        const dbTask = retrievedUserTasks[i];
 
-        var taskText = element.text
-        var taskStatus = element.status
+        var taskText = dbTask.text
+        var taskStatus = dbTask.status
+        var taskId = dbTask.id
 
-        var task = createTaskCard(taskText)
+        var task = createTaskCardElement(taskText, currentUser.email, taskId)
 
         if (taskStatus === 'TODO') {
             tasksTodoColumn.append(task)
