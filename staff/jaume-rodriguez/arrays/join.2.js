@@ -5,12 +5,9 @@ function join(array, separator){
         separator = ","
 
     for (var i = 0; i < array.length; i++){
-        if (array[i] === undefined){
-            array[i] = ''
-        } else if(i < array.length - 1){
+        if(i < array.length - 1){
             result += array[i] + separator
-        } 
-        else{
+        } else{
             result += array[i]
         }
     }
