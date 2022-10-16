@@ -1,20 +1,20 @@
-function indexOf(array, value, indexStart){
+function indexOf(array, searchElement, fromIndex){
     var result = ""
 
-    if (indexStart === undefined){
-        indexStart = 0
+    if (fromIndex === undefined){
+        fromIndex = 0
     }
 
-    if (indexStart < 0){
-        indexStart = indexStart + array.length
+    if (fromIndex < 0){
+        fromIndex = fromIndex + array.length
     }
 
-    if (indexStart < 0){
-        indexStart = 0
+    if (fromIndex < 0){
+        fromIndex = 0
     }
 
-    for (var i = indexStart; i < array.length; i++){
-        if (value === array[i]){
+    for (var i = fromIndex; i < array.length; i++){
+        if (searchElement === array[i]){
             result = i
             break;
         }

@@ -1,12 +1,12 @@
-function indexOf(array, value, indexStart){
+function indexOf(array, searchElement, fromIndex){
     var result = ""
     
-    if (indexStart === undefined){
-        indexStart = 0
+    if (fromIndex === undefined){
+        fromIndex = 0
     }
 
-    for (var i = indexStart; i < array.length; i++){
-        if (value === array[i])
+    for (var i = fromIndex; i < array.length; i++){
+        if (searchElement === array[i])
             result = i
         }
     return result

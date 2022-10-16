@@ -1,8 +1,8 @@
-function includes(array1, value){
+function includes(array, searchElement){
     var result = false
     
-    for (var i = 0; i < array1.length; i++){
-        if (value === array1[i]){
+    for (var i = 0; i < array.length; i++){
+        if (searchElement === array[i]){
             result = true
             return result
         }
