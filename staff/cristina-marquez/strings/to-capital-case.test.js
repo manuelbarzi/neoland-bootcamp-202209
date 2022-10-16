@@ -1,5 +1,7 @@
-// //CASE returns 'Hola mundo' for string 'hola mundo'
+// //CASE returns 'Hello world' for string 'hello world'
 
-// var s = 'hola mundo'
+var s = 'hello world'
 
-// var res = 
+var res = capitalCaseCharAt(s)
+
+console.assert(res === 'Hello world')

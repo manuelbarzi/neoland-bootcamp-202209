@@ -1,67 +1,26 @@
 
 function capitalCaseCharAt(string) {
-    var result = "";
-    indexStart = 0;
-    indexEnd = 1;
-
-    for (var i = indexStart; i < indexEnd; i++) {
-        var char = string[i];
-
-        result = result + char;
-    }
-
+    var result = [];
     var lowerCase = 'abcdefghijklmnopqrstuvwxyz'
     var upperCase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
-    for (var i = 0; i < lowerCase.length; i += 2) {
-        var letter = lowerCase[i];
+    var firstLetter = string[0]
 
-        if (letter === result) {
-            result = upperCase[i]
+    for (var i = 0; i < lowerCase.length; i++) {
+        var lowerCaseLetter = lowerCase[i];
 
-            return result;
+        if (lowerCaseLetter === firstLetter) {
+            result[0] = upperCase[i]
         }
-
     }
 
+    for (let i = 1; i < string.length; i++) {
+        const stringLetter = string[i];
+        result.push(stringLetter)
+    }
+
+    return result.join('')
 }
-
-
-
-// function capitalCaseCharAt(string) {
-
-
-//     var result = "";
-
-//     inicio = 0;
-//     fin = 1;
-
-//     for (var i = inicio; i < fin; i++) {
-//         var char = string[i];
-
-//         result = result + char;
-//     }
-
-//     var minusculas = 'abcdefghijklmnñopqrstuvwxyz'
-//     var mayusculas = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ'
-
-
-
-//     for (var i = 0; i < minusculas.length; i += 2) {
-//         var letra = minusculas[i];
-//         if (letra === result) {
-//             result = mayusculas[i]
-
-//             return result
-//         }
-
-//     }
-
-// }
-
-
-
-
 
 
 
