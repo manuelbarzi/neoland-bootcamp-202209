@@ -27,7 +27,6 @@ var navBarNewTaskIcon = document.createElement('span')
 navBarNewTaskIcon.innerText = 'add'
 navBarNewTaskIcon.className = 'material-symbols-outlined header-icons'
 
-//TODO:onclick
 
 navBarNewTaskIcon.onclick = function () {
     createTaskCard(currentUser.email)
@@ -49,10 +48,8 @@ navBarMenuIcon.innerText = 'menu'
 navBarMenuIcon.className = 'material-symbols-outlined header-icons'
 
 
-
 // Append all elements to group
 navBarRightGroup.append(userNameSpan, navBarNewTaskIcon, navBarMenuIcon)
-
 
 
 // Event handlers

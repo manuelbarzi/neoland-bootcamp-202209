@@ -25,7 +25,6 @@ h2 {
     align-items: center;
 }
 
-
 .button {
     align-items: center;
     margin: 16px;
@@ -84,6 +83,23 @@ h2 {
 
 }
 
+.task-component {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 1px solid gray;
+    margin: 10px 0;
+    padding: 10px;
+}
+
+.task-card {
+    margin-right: 5px;
+}
+
+.delete-icon {
+    justify-content: left;
+}
+
 .task-column-group {
     border: 2px solid rgb(49, 53, 52);
     padding: 10px;
@@ -92,11 +108,5 @@ h2 {
 .task-column-header {
     font-weight: bold;
     background-color: bisque;
-    padding: 10px;
-}
-
-.task-card {
-    border: 1px solid gray;
-    margin: 10px 0;
     padding: 10px;
 }

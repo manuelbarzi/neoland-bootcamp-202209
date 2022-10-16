@@ -1,5 +1,3 @@
-//TODO:columns + style
-//TODO:add logic
 var tasksComponent = document.createElement('section')
 
 
@@ -41,21 +39,37 @@ tasksComponent.append(tasksTitle, tasksContentPanel)
 
 
 function createTaskCardElement(text, userEmail, id) {
-    var taskCard = document.createElement('article')
-    taskCard.innerText = text
-    taskCard.className = 'task-card'
-    taskCard.contentEditable = true
+    var taskCardContainer = document.createElement('div')
+    taskCardContainer.className = 'task-component'
 
-    taskCard.onkeyup = function () {
-        var error = updateTaskText(userEmail, id, taskCard.innerText)
+    var taskCardArticle = document.createElement('article')
+    taskCardArticle.innerText = text
+    taskCardArticle.className = 'task-card'
+    taskCardArticle.contentEditable = true
+
+    var taskCardDeleteIcon = document.createElement('span')
+    taskCardDeleteIcon.innerText = 'delete'
+    taskCardDeleteIcon.className = 'material-symbols-outlined task-component delete-icon'
+
+    taskCardContainer.append(taskCardArticle, taskCardDeleteIcon)
+
+    taskCardArticle.onkeyup = function () {
+        var error = updateTaskText(userEmail, id, taskCardArticle.innerText)
 
         if (error) {
             log('ERROR', error)
         }
     }
 
-    return taskCard
+    taskCardDeleteIcon.onclick = function () {
+        deleteTaskCard(id)
+        clearTasksCards()
+        renderTasks()
+
+    }
+    return taskCardContainer
 }
+
 
 
 function renderTasks() {
@@ -84,7 +98,7 @@ function renderTasks() {
 }
 
 function clearTasksCards() {
-    var myTasksCards = tasksComponent.querySelectorAll('article')
+    var myTasksCards = tasksComponent.querySelectorAll('.task-component')
 
     for (var i = 0; i < myTasksCards.length; i++) {
         var myTaskCard = myTasksCards[i]
