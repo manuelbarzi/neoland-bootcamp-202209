@@ -1,26 +1,20 @@
-function includes(array, searchElement, index){
-    var result = false
+function includes(array, searchElement, fromIndex){
 
-    if (index < 0){
-        index += array.length
+    if (fromIndex < 0){
+        fromIndex += array.length
     }
 
-    if (index >= array.length){
-        return result
+    if (fromIndex >= array.length){
+        return false
     }
 
-    if(index === undefined || index <= 0){
-        for (var i = 0; i < array.length; i++){
+    if(fromIndex === undefined || fromIndex <= 0){
+        fromIndex = 0
+    }
+        for (var i = fromIndex; i < array.length; i++){
             if (searchElement === array[i]){
-                result = true
-                return result
+                return true
             }
         }
-    }
-
-    if (searchElement === array[index]){
-        result = true
-        return result
-    }
-    return result
+    return false
 }

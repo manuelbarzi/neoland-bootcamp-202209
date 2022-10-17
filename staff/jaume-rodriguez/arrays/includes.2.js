@@ -1,18 +1,13 @@
-function includes(array, searchElement, index){
-    var result = false
+function includes(array, searchElement, fromIndex){
 
-    if(index === undefined){
-    for (var i = 0; i < array.length; i++){
+    if(fromIndex === undefined){
+        fromIndex = 0
+    }
+
+    for (var i = fromIndex; i < array.length; i++){
         if (searchElement === array[i]){
-            result = true
-            return result
+            return true
         }
     }
-    }
-    
-    if (searchElement === array[index]){
-        result = true
-        return result
-    }
-    return result
+    return false
 }

@@ -19,30 +19,29 @@ var iArray3 = ['cat', 'dog', 'bird']
 var result = includes(iArray3, 'at')
 
 // CASE 2 returns true for the array ['a', 'b', 'c']
-//with a string value 'a' and an index 2
+//with a string value 'a' and a fromIndex 1
 
 var iArray4 = ['a', 'b', 'c']
 
-var result = includes(iArray4, 'c', 2)
+var result = includes(iArray4, 'c', 1)
 
 // CASE 3 returns false for the array ['a', 'b', 'c']
-// with a string value 'c' and an index greater or equal to array.length
+// with a string value 'c' and a fromIndex greater or equal to array.length
 
 var iArray5 = ['a', 'b', 'c']
 
 var result = includes(iArray5, 'c', 3)
 
 // CASE 4 returns true for the array ['a', 'b', 'c', 'd'] 
-// with a string value 'd' and a negative computed index + array.length
-// to be used as a position from right to left
+// with a string value 'd' and a negative fromIndex converted to 1
 
 var iArray6 = ['a', 'b', 'c', 'd']
 
-var result = includes(iArray6, 'd', -1)
+var result = includes(iArray6, 'd', -3)
 
 // CASE 5 returns true for the array ['a', 'b', 'c'] 
 // with a string value 'c' and a negative computed index + array.length
-// less than or equal to 0
+// less than or equal to 0 converted to 0
 
 var iArray7 = ['a', 'b', 'c']
 
