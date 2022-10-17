@@ -3,7 +3,7 @@
 var ns = [10, 20, 30, 40, 50]
 var r = 0
 
-var addToResult = function (n) {
+var addToResult = function(n) {
     r += n
 }
 
@@ -17,7 +17,7 @@ var ns = [10, 20, 30, 40, 50]
 var r = []
 
 //function mulBy10AndPushIntoResult(n, i) {
-var mulBy10AndPushIntoResult = function (n, i) {
+var mulBy10AndPushIntoResult = function(n, i) {
     r[i] = n * 10
 }
 
@@ -34,41 +34,8 @@ console.assert(r[4] === 500)
 var chars = ['i', 'l', 'o', 'v', 'e', 'c', 'o', 'd', 'e', '&', 't', 'd', 'd']
 var s = ''
 
-forEach(chars, function (char) {
+forEach(chars, function(char) {
     s += char
 })
 
 console.assert(s === 'ilovecode&tdd')
-
-// CASE fails on no array input
-
-var nums = [10, 20, 30]
-var print = function(num) { console.log(num) }
-
-var _error
-
-try {
-    forEach()
-} catch (error) {
-    _error = error
-}
-
-console.assert(_error instanceof TypeError)
-console.assert(_error.message === 'undefined is not an array')
-
-// CASE fails on no callback input
-
-var nums = [10, 20, 30]
-var print = function(num) { console.log(num) }
-
-var _error
-
-try {
-    forEach(nums)
-} catch (error) {
-    _error = error
-}
-
-console.assert(_error instanceof TypeError)
-console.assert(_error.message === 'undefined is not a function')
-

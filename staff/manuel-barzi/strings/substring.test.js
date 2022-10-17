@@ -45,3 +45,36 @@ var s = 'hola mundo'
 var res = substring(s, 0, 0)
 
 console.assert(res === '')
+
+// CASE fails on array parameter as "string"
+
+var s = ['h', 'o', 'l', 'a']
+
+var _error = null
+
+try {
+    substring(s, 0, 0)
+} catch(error) {
+    _error = error
+}
+
+console.assert(_error instanceof TypeError)
+console.assert(_error.message === 'h,o,l,a is not a string')
+
+// CASE fails on boolean parameter as "string"
+
+var s = true
+
+var _error = null
+
+try {
+    substring(s, 0, 0)
+} catch(error) {
+    _error = error
+}
+
+console.assert(_error instanceof TypeError)
+console.assert(_error.message === 'true is not a string')
+
+
+
