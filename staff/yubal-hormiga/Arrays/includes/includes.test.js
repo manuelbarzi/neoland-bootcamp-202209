@@ -1,37 +1,27 @@
-//!arriy.includes().The includes() method determines whether an array includes a certain value among its entries, returning true or false as appropriate.
-//*CASE.1 includes 2 in array [1, 2, 3]
 
-var array1 = [1, 2, 3];
+var includesTest = [1, 2, 3]
 
-var res=  includes(array1, 3)
+//CASE returns true for input value (2)
 
-console.assert(res === true )
+var result = includesArray(includesTest, 2)
 
-//*CASE.2 includes cat in array [1, 2, 3, cat]
+console.assert(result === true)
 
-var array1 = [1, 2, 3, 'cat'];
 
-var res=  includes(array1, 'tac')
+//CASE returns false for input value (6)
 
-console.assert(res == false )
+var result2 = includesArray(includesTest, 6)
+console.assert(result2 === false)
 
-//*CASE.3  The position in this array at which to begin  searchElement.includes(Array,searchElement, fromIndex)
-var array1 = [1, 2, 3];
+//CASE returns true with fromIndex argument
 
-var res=  includes(array1, 3,3)
+var result3 = includesArray(includesTest, 3, 2)
+console.assert(result3 === true)
 
-console.assert(res === false )
+//CASE returns false with fromIndex argument
 
-// //* CASE.4 IS computed index is less than or equal to 0, the entire array will be searched.
-var array1 = [1, 2, 3];
+var result4 = includesArray(includesTest, 1, 2)
+console.assert(result4 === false)
 
-var res=  includes(array1, 3,-4)
 
-console.assert(res === true)
-
-// //? CASE.5 If fromIndex is negative, the computed index is calculated ARRAY.LENGTH - FROMINDEX 
-// var array1 = [1, 2, 3];
-
-// var res=  includes(array1, 2 ,-3)
-
-// console.assert(res === false)
+// if its negative, its equal to 0

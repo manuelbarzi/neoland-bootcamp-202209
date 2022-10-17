@@ -1,7 +1,10 @@
-function concat(s1,s2){
-   
-   
-var result= ''
-result = s1 + s2
-return result
+function myConcat() {
+    var result = []
+    for (var i = 0; i < arguments.length; i++) {
+        var string = arguments[i]
+
+        
+        result += string 
+    }    
+    return result
 }

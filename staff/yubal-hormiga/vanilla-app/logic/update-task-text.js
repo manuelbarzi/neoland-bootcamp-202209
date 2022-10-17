@@ -1,4 +1,12 @@
 function updateTaskText(userEmail, taskId, text) {
+    if (typeof userEmail !== 'string') return new TypeError('userEmail is not a string')
+    if (!IS_EMAIL_REGEX.test(userEmail)) return new Error('userEmail is not valid')
+
+    if (typeof taskId !== 'string') return new TypeError('taskId is not a string')
+    if (taskId.length < 6 || !taskId.startsWith('task-')) return new Error('invalid taskId')
+
+    if (typeof text !== 'string') return new TypeError('text is not a string')
+
     var found = false
 
     for (var i = 0; i < users.length && !found; i++) {
