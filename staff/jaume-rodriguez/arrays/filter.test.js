@@ -4,7 +4,7 @@
 
 var filArray1 = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
 
-var filCondition1 = (word) => { return word.length > 6};
+var filCondition1 = (element) => { return element.length > 6};
 
 var result = filter(filArray1, filCondition1);
 
@@ -14,6 +14,6 @@ var result = filter(filArray1, filCondition1);
 
 var filArray2 = ['spray', 123, 3, null, 'destruction', undefined, 67];
 
-var filCondition2 = (word) => { return typeof word === 'number'};
+var filCondition2 = (element) => { return typeof element === 'number'};
 
 var result = filter(filArray2, filCondition2);
