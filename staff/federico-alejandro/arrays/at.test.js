@@ -24,7 +24,7 @@ var numbers = [10, 20, 30, 40, 50];
 var res = at(numbers, -10)
 
 console.assert(res === undefined)
-// caso sin enviar un valor
+//  Sin enviar un valor
 var numbers = [10, 20, 30, 40, 50];
 
 var res = at(numbers)

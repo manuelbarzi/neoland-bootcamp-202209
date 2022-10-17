@@ -32,3 +32,19 @@ var esBanana = find(inventario, function (element) {
 
 console.assert(inventario[1].nombre === 'bananas')
 console.assert(inventario[1].cantidad === 0)
+
+// No se ingresa un array
+
+var meses = ['enero', 'febrero', 'mayo', 'abril']
+var result = function(mes){ console.log(mes)}
+
+var error
+
+try {
+  find(result)
+} catch (_error) {
+  error = _error
+}
+
+console.assert(error instanceof TypeError)
+console.assert(error.message === 'function(mes){ console.log(mes)} is not an array')

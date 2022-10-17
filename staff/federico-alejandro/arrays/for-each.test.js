@@ -39,3 +39,35 @@ forEach(chars, function(char) {
 })
 
 console.assert(s === 'ilovecode&tdd')
+
+//CASE fails an no array input
+var nums = [10, 20, 30]
+var print = function(num) {console.log(num) }
+
+var _error
+
+try {
+    forEach()
+} catch (error) {
+    _error = error
+}
+
+console.assert(_error instanceof TypeError)
+console.assert(_error.message === 'undefined is not an array')
+
+//CASE fails an no callback input
+
+var nums = [10, 20, 30]
+var print = function(num) { console.log(num) }
+
+var _error
+
+try { 
+    forEach(nums)
+} catch (error) {
+    _error = error
+}
+
+console.assert(_error instanceof TypeError)
+console.assert(_error.message === 'undefined is not a function')
+
