@@ -1,49 +1,11 @@
 log('INFO', 'start app')
 
-var users = [
-    { name: 'Pepito Grillo', email: 'pepito@grillo.com', password: '123123123' },
-    { name: 'Mickey Mouse', email: 'mickey@mouse.com', password: '123123123' },
-    { name: 'Wendy Darling', email: 'wendy@darling.com', password: '123123123' },
-]
-
 // DONE inject login with js
 
 log('DEBUG', 'mount login')
 
 var loginForm = document.createElement('form')
 loginForm.className = 'container'
-
-// TODO implement login submit
-
-loginForm.onsubmit = function (event) {
-    event.preventDefault()
-
-    log('DEBUG', 'submit login')
-
-    var email = loginEmailInput.value
-    var password = loginPasswordInput.value
-
-    // TODO check user in db
-
-    for (var i = 0; i < users.length; i++) {
-        var user = users[i]
-
-        if (user.email === email) {
-            if (user.password === password) {
-                loginForm.reset()
-
-                loginPage.remove()
-                homeUserNameText.innerText = user.name
-                document.body.append(homePage)
-            } else
-                alert('wrong password')
-
-            return
-        }
-    }
-
-    alert('user not registered')
-}
 
 var loginEmailLabel = document.createElement('label')
 loginEmailLabel.htmlFor = 'login-email'
@@ -75,7 +37,7 @@ var loginRegisterLink = document.createElement('a')
 loginRegisterLink.href = ""
 loginRegisterLink.innerText = 'Register'
 
-loginRegisterLink.onclick = function (event) {
+loginRegisterLink.onclick = function(event) {
     event.preventDefault()
 
     log('DEBUG', 'navigate to register')
@@ -88,48 +50,14 @@ var loginPage = document.createElement('main')
 loginPage.className = 'container'
 loginPage.append(loginForm, loginRegisterLink)
 
+document.body.append(loginPage)
+
 // DONE inject register with js
 
 log('DEBUG', 'mount register')
 
 var registerForm = document.createElement('form')
 registerForm.className = 'container'
-
-// DONE implement register submit
-
-registerForm.onsubmit = function (event) {
-    event.preventDefault()
-
-    log('DEBUG', 'submit register')
-
-    var email = registerEmailInput.value
-
-    // DONE check user in db
-
-    for (var i = 0; i < users.length; i++) {
-        var user = users[i]
-
-        if (user.email === email) {
-            alert('ERROR user already exists')
-
-            return
-        }
-    }
-
-    var user = {
-        name: registerNameInput.value,
-        email: email,
-        password: registerPasswordInput.value
-    }
-
-    users.push(user)
-
-    registerForm.reset()
-
-    alert('user registered')
-
-    registerLoginLink.click()
-}
 
 var registerNameLabel = document.createElement('label')
 registerNameLabel.htmlFor = 'register-name'
@@ -171,7 +99,7 @@ var registerLoginLink = document.createElement('a')
 registerLoginLink.href = ""
 registerLoginLink.innerText = 'Login'
 
-registerLoginLink.onclick = function (event) {
+registerLoginLink.onclick = function(event) {
     event.preventDefault()
 
     log('DEBUG', 'navigate to login')
@@ -194,19 +122,14 @@ var homeHeader = document.createElement('header')
 var homeHeaderLink = document.createElement('a')
 homeHeaderLink.href = ''
 var homeHeaderImage = document.createElement('img')
-homeHeaderImage.src = 'https://fakeimg.pl/50x25/?text=hola%20mundo&font=lobster'
-var homeUserNameText = document.createElement('span')
-homeUserNameText.innerText = 'User Name'
-homeUserNameText.className = 'container container--full-height container--padding-h-s'
+homeHeaderImage.src = 'https://fakeimg.pl/30/0000ff'
 
 homeHeaderLink.append(homeHeaderImage)
-homeHeader.append(homeHeaderLink, homeUserNameText)
-homeHeader.className = 'container container--row container--full-width container--content-space-between'
+homeHeader.append(homeHeaderLink)
 
 var homePage = document.createElement('main')
-homePage.className = 'container container--full container--content-start'
+homePage.className = 'container'
 
 homePage.append(homeHeader)
 
-document.body.append(loginPage)
-// document.body.append(homePage) esto es para poner la carpeta que inicializa
+// document.body.append(homePage)
