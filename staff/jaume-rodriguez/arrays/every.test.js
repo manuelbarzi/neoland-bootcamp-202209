@@ -14,7 +14,7 @@ var evArray1 = ['1', '4', '2', '7', '5']
 
 var result = every(evArray1, isBelowThreshold1)
 
-// CASE 1 returns true for the array ['1', '4', '2', '7', '5']
+// CASE 1.2 returns true for the array ['1', '4', '2', '7', '5']
 // tested by the provided function currentValue < 5
 
 var isBelowThreshold2 = (currentValue) => currentValue < 10;
