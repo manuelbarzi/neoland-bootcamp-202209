@@ -4,28 +4,33 @@ var loginForm = document.createElement("form");
 loginForm.classList.add("container");
 
 loginForm.onsubmit = function (event) {
-    event.preventDefault()
+  event.preventDefault();
 
-    var email = loginEmailInput.value
-    var password = loginPasswordInput.value
+  var email = loginEmailInput.value;
+  var password = loginPasswordInput.value;
 
-    var result = authenticateUser(email, password)
-    
-    if (result instanceof Error) {
+  var result = authenticateUser(email, password);
 
-      alert(result.message)
-      
-      return
-    }
+  if (result instanceof Error) {
+    alert(result.message);
 
-    user = result
+    return;
+  }
 
-    loginForm.reset()
-    loginPage.remove()
-    homeUserName.innerText = user.name
-    document.body.append(homePage)
+  user = result;
 
-}
+  loginForm.reset();
+
+  loginPage.remove();
+
+  homeUserName.innerText = user.name;
+
+  clearTasksCards()
+
+  renderTasksCards()
+
+  document.body.append(homePage);
+};
 
 var loginTitle = document.createElement("h2");
 loginTitle.innerText = "Login";
@@ -77,7 +82,6 @@ loginRegisterLink.onclick = function (event) {
 };
 
 var loginPage = document.createElement("main");
-loginPage.className = 'container container--full'
+loginPage.className = "container container--full";
 
 loginPage.append(loginForm, loginRegisterLink);
-

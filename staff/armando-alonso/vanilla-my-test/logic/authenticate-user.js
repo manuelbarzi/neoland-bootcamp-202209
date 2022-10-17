@@ -1,5 +1,5 @@
 /**
- *Authenticates a user.
+ *Authenticate a user.
  *
  * @param {string} email The user Email
  * @param {string} password The user password

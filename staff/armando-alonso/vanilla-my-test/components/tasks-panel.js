@@ -1,69 +1,92 @@
-var tasksPanel = document.createElement('section')
-tasksPanel.className = 'container container--full-with'
+var tasksPanel = document.createElement("section");
+tasksPanel.className = "container container--full-with";
 
-var tasksTitle = document.createElement('h2')
-tasksTitle.innerText = 'Tasks'
+var tasksTitle = document.createElement("h2");
+tasksTitle.innerText = "Tasks";
 
-var tasksContentPanel = document.createElement('div')
-tasksContentPanel.className = 'container container--row container--items-start'
+var tasksContentPanel = document.createElement("div");
+tasksContentPanel.className = "container container--row container--items-start";
 
-var tasksColumnTodo = document.createElement('section')
-tasksColumnTodo.className = 'container container--border container--padding-s container--items-start'
-tasksColumnTodo.innerText = 'ToDo Column'
+var tasksColumnTodo = document.createElement("section");
+tasksColumnTodo.className = "container container--border container--padding-s container--items-start";
+tasksColumnTodo.innerText = "ToDo Column";
 
-var tasktodoone = document.createElement('article')
-tasktodoone.className = 'container container--border container--padding-s container--full-width'
-tasktodoone.innerText = 'Prueba primera tarea'
+var tasksColumnDoing = document.createElement("section");
+tasksColumnDoing.className =
+  "container container--border container--padding-s container--items-start";
+tasksColumnDoing.innerText = "Doing Column";
 
-var taskTodoOne = document.createElement('article')
-taskTodoOne.className = 'container container--border container--padding-s container--full-width'
-taskTodoOne.innerText = 'Prueba primera tarea'
+var tasksColumnDone = document.createElement("section");
+tasksColumnDone.className =
+  "container container--border container--padding-s container--items-start";
+tasksColumnDone.innerText = "Done Column";
 
-var taskTodoTwo = document.createElement('article')
-taskTodoTwo.className = 'container container--border container--padding-s container--full-width'
-taskTodoTwo.innerText = 'Prueba segunda tarea'
+tasksContentPanel.append(tasksColumnTodo, tasksColumnDoing, tasksColumnDone);
 
-var taskTodoThree = document.createElement('article')
-taskTodoThree.className = 'container container--border container--padding-s container--full-width'
-taskTodoThree.innerText = 'Prueba tercera tarea'
+tasksPanel.append(tasksTitle, tasksContentPanel);
 
-tasksColumnTodo.append(taskTodoOne, taskTodoTwo, taskTodoThree)
 
-var tasksColumnDoing = document.createElement('section')
-tasksColumnDoing.className = 'container container--border container--padding-s container--items-start'
-tasksColumnDoing.innerText = 'Doing Column'
 
-var taskDoingOne = document.createElement('article')
-taskDoingOne.className = 'container container--border container--padding-s container--full-width'
-taskDoingOne.innerText = 'Prueba primera tarea'
 
-var taskDoingTwo = document.createElement('article')
-taskDoingTwo.className = 'container container--border container--padding-s container--full-width'
-taskDoingTwo.innerText = 'Prueba segunda tarea'
+function createTaskCard(taskId, text) {
+  var taskCard = document.createElement("article");
+  taskCard.className = "container container--border container--padding-s container--full-with";
 
-var taskDoingThree = document.createElement('article')
-taskDoingThree.className = 'container container--border container--padding-s container--full-width'
-taskDoingThree.innerText = 'Prueba tercera tarea'
+  var taskText = document.createElement('p')
+  taskText.innerText = text;
+  taskText.contentEditable = true;
 
-tasksColumnDoing.append(taskDoingOne, taskDoingTwo, taskDoingThree)
+  taskText.onkeyup = function () {
+    var result = updateTaskText(user.email, taskId, taskText.innerText);
 
-var tasksColumnDone = document.createElement('section')
-tasksColumnDone.className = 'container container--border container--padding-s container--items-start'
-tasksColumnDone.innerText = 'Done Column'
+    if (result instanceof Error) {
+      alert(result.message);
 
-var taskDoneOne = document.createElement('article')
-taskDoneOne.className = 'container container--border container--padding-s container--full-width'
-taskDoneOne.innerText = 'Prueba primera tarea'
+      return
+    }
+  }
 
-var taskDoneTwo = document.createElement('article')
-taskDoneTwo.className = 'container container--border container--padding-s container--full-width'
-taskDoneTwo.innerText = 'Prueba segunda tarea'
+  var taskDeleteButton = document.createElement('button')
+  taskDeleteButton.className = 'material-symbols-outlined'
+  taskDeleteButton.innerText = 'delete'
 
-var taskDoneThree = document.createElement('article')
-taskDoneThree.className = 'container container--border container--padding-s container--full-width'
-taskDoneThree.innerText = 'Prueba tercera tarea'
+  taskDeleteButton.onclick = function(){
+    var result = deleteTask(user.email, taskId)
 
-tasksColumnDone.append(taskDoneOne, taskDoneTwo, taskDoneThree)
+    if (result instanceof Error) {
+        alert(result.message)
 
-tasksContentPanel.append(tasksColumnTodo, tasksColumnDoing, tasksColumnDone)
-tasksPanel.append(tasksTitle, tasksContentPanel)
+        return
+    }
+
+    taskCard.remove()
+  }
+
+  taskCard.append(taskText, taskDeleteButton)
+  
+  return taskCard;
+}
+
+function clearTasksCards() {
+  var cleanTask = tasksContentPanel.querySelectorAll("article");
+
+  for (var i = 0; i < cleanTask.length; i++) {
+    var myTaskCard = cleanTask[i];
+
+    myTaskCard.remove();
+  }
+}
+
+function renderTasksCards() {
+  var myTasks = retrieveTasks(user.email);
+
+  for (var i = 0; i < myTasks.length; i++) {
+    var myTask = myTasks[i];
+
+    var myTaskCard = createTaskCard(myTask.id, myTask.text);
+
+    if (myTask.status === "todo") tasksColumnTodo.append(myTaskCard);
+    else if (myTask.status === "doing") tasksColumnDoing.append(myTaskCard);
+    else if (myTask.status === "done") tasksColumnDone.append(myTaskCard);
+  }
+}
