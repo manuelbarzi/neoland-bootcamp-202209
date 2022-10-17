@@ -7,9 +7,6 @@ registerName.name = 'name'
 registerName.placeholder = 'enter your name'
 registerName.pattern = '[A-Za-z]{3,}'
 registerName.required = true
-registerName.oninvalid = function () {
-    alert('(Use minimum 3characters from a-z non-numerical)')
-}
 
 
 var registerNameLabel = document.createElement('label')
