@@ -8,40 +8,41 @@ tasksTitle.className = 'tasks-title align-self-center'
 
 
 var tasksContentPanel = document.createElement('div')
-tasksContentPanel.className = 'container-flex flex-rows align-items-start border-and-radius container-color'
+tasksContentPanel.className = 'container-flex flex-rows align-items-start color-bisque'
 
 var tasksTodoColumn = document.createElement('section')
 tasksTodoColumn.innerText = 'TODO'
 tasksTodoColumn.className = 'padding-s'
 
 var todoContenedor = document.createElement('div')
-todoContenedor.className = 'container-flex align-items-start border-and-radius padding-s'
+todoContenedor.className = 'container-flex-tasks  border-and-radius padding-s container-color min-heigth-width'
 
 var tasksTodoForm = document.createElement('form')
-tasksTodoForm.className = 'container-flex align-items-start container-color'
+tasksTodoForm.className = 'container-flex-tasks-button container-color'
 tasksTodoForm.onsubmit = function (event) {
     event.preventDefault()
 
-    var text = insertNewTaskText.value
+    var text = ''
 
     var result = createTask(user.email, text)
 
 }
 
 
-
-var insertNewTaskText = document.createElement('textarea')
-insertNewTaskText.className = 'border-and-radius margin-top'
-insertNewTaskText.placeholder = 'Put your new task'
-
 var insertNewTaskButton = document.createElement('button')
-insertNewTaskButton.className = 'material-symbols-outlined align-self-end'
+insertNewTaskButton.className = 'material-symbols-outlined'
 insertNewTaskButton.innerText = 'add'
 
+var doingContenedor = document.createElement('div')
+doingContenedor.className = 'container-flex-tasks border-and-radius padding-s container-color min-heigth-width'
 
 var tasksDoingColumn = document.createElement('section')
 tasksDoingColumn.innerText = 'DOING'
 tasksDoingColumn.className = 'padding-s'
+
+
+var doneContenedor = document.createElement('div')
+doneContenedor.className = 'container-flex-tasks border-and-radius padding-s container-color min-heigth-width'
 
 var tasksDoneColumn = document.createElement('section')
 tasksDoneColumn.innerText = 'DONE'
@@ -75,7 +76,8 @@ function createTaskCard() {
 
         var taskCard = document.createElement('article')
         taskCard.innerText = renderTask.text
-        taskCard.className = ''
+        taskCard.className = 'new-task-card'
+        taskCard.contentEditable = true
 
         if (renderTask.status === 'todo')
             tasksTodoColumn.append(taskCard)
@@ -92,12 +94,10 @@ function createTaskCard() {
 }
 
 
-tasksTodoForm.append(insertNewTaskText, insertNewTaskButton)
+tasksTodoForm.append(insertNewTaskButton)
 todoContenedor.append(tasksTodoColumn, tasksTodoForm)
-tasksContentPanel.append(todoContenedor, tasksDoingColumn, tasksDoneColumn)
+doingContenedor.append(tasksDoingColumn)
+doneContenedor.append(tasksDoneColumn)
+tasksContentPanel.append(todoContenedor, doingContenedor, doneContenedor)
 
 tasksPanel.append(tasksTitle, tasksContentPanel)
-
-
-
-

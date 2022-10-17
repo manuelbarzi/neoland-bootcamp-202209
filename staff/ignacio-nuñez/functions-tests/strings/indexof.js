@@ -4,7 +4,7 @@ function myIndexOf(string, worth, startPosition) {
 
     startPosition < 0 ? startPosition= 0 : startPosition
 
-    !startPosition ? startPosition = 0 : startPosition
+    startPosition === undefined ? startPosition = 0 : startPosition
 
     if (!worth) {
         if (!startPosition)

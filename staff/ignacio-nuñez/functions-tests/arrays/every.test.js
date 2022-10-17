@@ -4,4 +4,4 @@ var personas = [
     {name: 'pame', age: 27}
 ]
 
-var result = every()
+// var result = every()

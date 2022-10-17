@@ -209,6 +209,22 @@ p{
     flex-direction: column; 
     align-items: center; 
     justify-content: center;
+    gap: 1rem;
+    box-sizing: border-box;
+}
+
+.container-flex-tasks-button{
+    display: flex;  
+    gap: 1rem;
+    box-sizing: border-box;
+    justify-content: flex-end;
+    align-self: flex-end;
+}
+
+.container-flex-tasks{
+    display: flex;
+    flex-direction: column;     
+    align-items: center; 
     gap: .5rem;
     box-sizing: border-box;
 }
@@ -264,4 +280,25 @@ p{
 
 .align-self-end{
     align-self: flex-end;
+}
+
+.color-bisque{
+    background-color: bisque;
+}
+
+.min-heigth-width{
+    min-width: 200px;
+    min-height: 120px;
+}
+
+.align-self-start{
+    justify-self: flex-start;
+}
+
+.new-task-card{
+    border: 1px black solid;
+    margin-top: 5px;
+    border-radius: 5px;
+    width: 170px;
+    min-height: 30px;
 }
