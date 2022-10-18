@@ -1,4 +1,4 @@
-// para funciones variables, usamos 'arguments' de manera que si 
+// para funciones variables, usamos 'arguments' 
 
 function concat() {
   var result = "";
