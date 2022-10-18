@@ -3,12 +3,10 @@
 
 var flArray1 = [0, 3, 8, [1, 9]];
 
-var result = flat(flArray1)
+var result1 = flat(flArray1, 2)
 
-//CASE succes with 2 levels of arrays
+//CASE 1.2 succes with 4 depth levels of arrays
 
-var numbers1 = [1, [2, 3], [4, [5, 6]], 7]
+flArray2 = [1, [2, 2], [2, [3, 3]], 1, [2, 2, [3, 3, [4, 4]], 2], 1]
 
-var result1 = flat(numbers1)
-
-console.log(flat(numbers1[2]))
+var result2 = flat(flArray2, 3)

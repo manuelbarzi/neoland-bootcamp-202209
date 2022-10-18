@@ -1,11 +1,16 @@
-function flat(array) {
+function flat(array, depth = 1) {
+    var count = 0
+    count = count + 1
     var result = [];
+
     for (let i = 0; i < array.length; i++) {
         const element = array[i];
-        if (!(element instanceof Array)) {
+        if (!(element instanceof Array) && count <= depth) {
             result[result.length] = element;
-        } else {
-            const flatenedSubArray = flat(element);
+            continue;
+        }
+        if (count < depth) {
+            const flatenedSubArray = flat(element, depth - 1);
 
             for (let j = 0; j < flatenedSubArray.length; j++) {
                 result[result.length] = flatenedSubArray[j]
