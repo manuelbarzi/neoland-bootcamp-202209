@@ -1,7 +1,7 @@
 function toCapitalCase(text) {
     
     var lowers = "abcdefghijklmnñopqrstuvwxyz";
-    var uppers = "ABCDEFGHIJKLMÑOPQRSTUVWXYZ";
+    var uppers = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
     
     var result = "";
   
