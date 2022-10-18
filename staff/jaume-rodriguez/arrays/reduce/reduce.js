@@ -1,4 +1,4 @@
-function reduce(array, callback, initialValue = "") {
+function reduce(array, callback, initialValue = []) {
     let acomulado = initialValue
     for (let i = 0; i < array.length; i++) {
         const element = array[i];

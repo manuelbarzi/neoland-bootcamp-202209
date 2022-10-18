@@ -7,6 +7,6 @@ var result1 = flat(flArray1, 2)
 
 //CASE 1.2 succes with 4 depth levels of arrays
 
-flArray2 = [1, [2, 2], [2, [3, 3]], 1, [2, 2, [3, 3, [4, 4]], 2], 1]
+var flArray2 = [1, [2, 2], [2, [3, 3]], 1, [2, 2, [3, 3, [4, 4]], 2], 1]
 
 var result2 = flat(flArray2, 3)

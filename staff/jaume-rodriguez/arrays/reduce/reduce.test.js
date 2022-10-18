@@ -20,4 +20,15 @@ var reCondition2 = (acomulado, element) => {
     }
 }
 
-var result = reduce(reArray2, reCondition2, "")
+var result = reduce(reArray2, reCondition2, '')
+
+// CASE 1.3 returns [0, 1, 2, 3, 4, 5] for the array [[0, 1], [2, 3], [4, 5]]
+// as the result of the conditionated callback function
+
+var reArray3 = [[0, 1], [2, 3], [4, 5]];
+
+var reCondition3 = (acomulado, element) => {
+    return acomulado.concat(element)
+}
+
+var result = reduce(reArray3, reCondition3)

@@ -1,21 +1,23 @@
-function flat(array, depth = 1) {
-    var count = 0
-    count = count + 1
-    var result = [];
+function flat(array, deep = 1) {
+    var counterDeep = 0
 
-    for (let i = 0; i < array.length; i++) {
-        const element = array[i];
-        if (!(element instanceof Array) && count <= depth) {
-            result[result.length] = element;
-            continue;
-        }
-        if (count < depth) {
-            const flatenedSubArray = flat(element, depth - 1);
+    return (function call(arr) {
+        var result = []
 
-            for (let j = 0; j < flatenedSubArray.length; j++) {
-                result[result.length] = flatenedSubArray[j]
-            }
+        for (var i = 0; i < arr.length; i++)
+            if (arr[i] instanceof Array)
+                for (j = 0; j < arr[i].length; j++)
+                    result[result.length] = arr[i][j]
+            else
+                result[result.length] = arr[i]
+
+        if (++counterDeep < deep) {
+            for (i = 0; i < result.length; i++)
+                if (result[i] instanceof Array)
+                    return call(result)
         }
-    }
-    return result;
+
+        return result
+
+    })([...array])
 }
