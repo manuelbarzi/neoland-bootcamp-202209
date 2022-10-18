@@ -1,9 +1,7 @@
-function forEach(array, callback){
-    for( var i = 0; i < array.length; i++){
-        var element = array[i]
-        if (!!callback(element)){
-            console.log(callback(element))
-        }
+function forEach(array, callback) {
+    for (var i = 0; i < array.length; i++) {
+        var element = array[i];
+
+        callback(element);
     }
-    return null
 }
