@@ -1,6 +1,4 @@
 function slice(sentence , value , value2 = 1/0) {
-
-    if (typeof value === 'string') value = 0
     
     var newValue = sentence.length
 

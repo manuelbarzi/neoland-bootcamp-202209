@@ -12,6 +12,20 @@ for (var i = 0; i < result.length; i++) {
 }
 
 
+// // Case "Neoland" exists into the string all times that you want
+
+// var sentence = 'The web developer course of Neoland school is really difficult Neoland claro que si guapi Neoland'
+
+// var word = 'Neoland'
+
+// var result = indexof(sentence,word)
+
+// console.assert(result[0] === result[0])
+// console.assert(result[1] === result[1])
+// console.assert(result[2] === result[2])
+
+
+
 // Case var "sentence" is not a string
 
 var sentence = true
@@ -22,10 +36,10 @@ try {
     var result = indexof(sentence,word)
 } catch (error) {
     result = error
-
-    console.assert(result instanceof Error)
-    console.assert(result.message === 'Please, put a String to check it')
 }
+
+console.assert(result instanceof Error)
+console.assert(result.message === 'Please, put a String to check it')
     
 
 // Case var "word" is not a string

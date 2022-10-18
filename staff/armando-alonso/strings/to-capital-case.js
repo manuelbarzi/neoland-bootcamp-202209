@@ -78,18 +78,6 @@ function capitalCase(string) {
   return endresult;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 // //   str.length
 
 // charAt(2)
