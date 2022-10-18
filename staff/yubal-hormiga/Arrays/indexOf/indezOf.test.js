@@ -1,5 +1,5 @@
 
-const beasts = ["ant", "bison", "camel", "duck", "bison"];
+var beasts = ["ant", "bison", "camel", "duck", "bison"];
 
 // on element found
 var result1 = indexOf(beasts, "bison");

@@ -1,7 +1,7 @@
 log('DEBUG', 'mount register')
 
 var registerForm = document.createElement('form')
-registerForm.className = 'container'
+registerForm.className = 'container '
 
 registerForm.onsubmit = function (event) {
     event.preventDefault()
@@ -12,19 +12,19 @@ registerForm.onsubmit = function (event) {
     var email = registerEmailInput.value
     var password = registerPasswordInput.value
 
-    try {
-        registerUser(name, email, password)
+    var result = registerUser(name, email, password)
 
-        registerForm.reset()
+    if (result instanceof Error) {
+        alert(result.message)
 
-        alert('user registered')
-
-        registerLoginLink.click()
-    } catch (error) {
-        alert(error.message)
-
-        registerPasswordInput.value = ''
+        return
     }
+        
+    registerForm.reset()
+
+    alert('user registered')
+
+    registerLoginLink.click()
 }
 
 var registerNameLabel = document.createElement('label')
@@ -36,10 +36,9 @@ var registerNameInput = document.createElement('input')
 registerNameInput.type = 'name'
 registerNameInput.id = 'register-name'
 registerNameInput.placeholder = 'input your name'
-// TODO refine this regex as it doesn't accept a composed name
-// registerNameInput.pattern = '[a-zA-Z]{1,}'
+registerNameInput.pattern = '[a-zA-Z]{1,}'
 registerNameInput.required = true
-registerNameInput.oninvalid = function () {
+registerNameInput.oninvalid = function() {
     alert('Use characters from A to Z for names (min 1 character, and not numerics)')
 }
 
@@ -89,5 +88,5 @@ registerLoginLink.onclick = function (event) {
 }
 
 var registerPage = document.createElement('main')
-registerPage.className = 'container'
+registerPage.className = 'container register__container-colour'
 registerPage.append(registerForm, registerLoginLink)

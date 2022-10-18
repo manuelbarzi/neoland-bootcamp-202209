@@ -6,7 +6,7 @@ var password = '123123123'
 
 var res = registerUser(name, email, password)
 
-console.assert(res === undefined)
+console.assert(res === null)
 
 var found = false
 
@@ -28,28 +28,17 @@ var user = {
 
 users.push(user)
 
-var _error = null
+var res = registerUser(user.name, user.email, user.password)
 
-try {
-    registerUser(user.name, user.email, user.password)
-} catch(error) {
-    _error = error
-}
-
-console.assert(_error instanceof Error)
-console.assert(_error.message === 'user already exists')
+console.assert(res instanceof Error)
+console.assert(res.message === 'user already exists')
 
 // CASE fails on empy name (unhappy)
 
-var _error = null
+var res = registerUser('', 'ti@gre.com', '123123123')
 
-try {
-    registerUser('', 'ti@gre.com', '123123123')
-} catch(error) {
-    _error = error
-}
-
-console.assert(_error instanceof Error)
-console.assert(_error.message === 'name length is less than 1')
+console.assert(res instanceof Error)
+console.assert(res.message === 'name length is less than 1')
 
 // TODO add more unhappies...
+

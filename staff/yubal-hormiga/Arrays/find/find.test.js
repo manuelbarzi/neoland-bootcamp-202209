@@ -13,5 +13,3 @@ var addToResult = function(n) {
 find(ns,index, addToResult)
 
 console.assert(result[0] === 20)
-
-
