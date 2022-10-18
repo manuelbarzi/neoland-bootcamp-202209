@@ -1,9 +1,4 @@
-function indexOf(array, searchElement, fromIndex){
-    var result = ""
-
-    if (fromIndex === undefined){
-        fromIndex = 0
-    }
+function indexOf(array, searchElement, fromIndex = 0){
 
     if (fromIndex < 0){
         fromIndex = fromIndex + array.length
@@ -15,13 +10,8 @@ function indexOf(array, searchElement, fromIndex){
 
     for (var i = fromIndex; i < array.length; i++){
         if (searchElement === array[i]){
-            result = i
-            break;
+            return i
         }
     }
-
-    if (result === ""){
-        result = -1
-    }
-return result
+    return -1
 }
