@@ -60,12 +60,7 @@ for (var i = 0; i < length2; i++) {
     word2 += char
 }
 
-var space1 = ' '.repeat(Math.round(Math.random() * 10))
-var space2 = ' '.repeat(Math.round(Math.random() * 10))
-var space3 = ' '.repeat(Math.round(Math.random() * 10))
-
-
-var result = toCapitalCase(space1 + word + space2 + word2 + space3)
-var expected = space1 + word[0].toUpperCase() + word.substring(1) + space2 + word2[0].toUpperCase() + word2.substring(1) + space3
+var result = toCapitalCase(word + ' ' + word2)
+var expected = word[0].toUpperCase() + word.substring(1) + ' ' + word2[0].toUpperCase() + word2.substring(1)
 
 console.assert(result === expected)
