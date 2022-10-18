@@ -29,3 +29,8 @@ var result = slice(string, -9, -5)
 console.assert(result === "lazy")
 
 // CASE 5 returns "" for the string "the fox jumps over the lazy dog." when indexStart = indexEnd
+var string = 'the fox jumps over the lazy dog.'
+
+var result = slice(string, 2, 2)
+
+console.assert(result === "")
