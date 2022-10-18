@@ -1,4 +1,5 @@
 function includes(array, element, fromIndex = 0){
+    if (!(array instanceof Array)) throw new TypeError(array + ' is not an array')
     
     if(fromIndex < 0)
     fromIndex = 0

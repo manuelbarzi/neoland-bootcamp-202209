@@ -5,7 +5,7 @@ function every(array, callback) {
          
         var returnCallbackValue = callback(element);
 
-        if(!returnCallbackValue)
+        if(!returnCallbackValue)//,element, i, array)
         return false 
 
         

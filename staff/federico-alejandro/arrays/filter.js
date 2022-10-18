@@ -1,20 +1,23 @@
 function filter(array, callback) {
+    debugger
     if (!(array instanceof Array)) throw new TypeError(array + ' is not an array')
     if (typeof callback !== 'function') throw new TypeError(callback + ' is not a function')
 
-    var result = [];
-    var position = 0
+    const result = [];
+
+    //let position = 0
     
     for (var i = 0; i < array.length; i++) {
-        var element = array[i];
+        const element = array[i];
 
-        var returnCallbackValue = callback(element)
+        const meetsTheCondition = callback(element)
         //result[i] = returnCallbackValue
-        if (returnCallbackValue) {
+        if (meetsTheCondition) {
             
-            result[position] = element
-            position++
+            result[result.length] = element
+            //position++
         }      
     }
+
     return result
 }

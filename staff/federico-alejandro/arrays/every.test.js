@@ -1,7 +1,7 @@
 // Devuelve false poruqe un elemento no cumple la condicion 
 var  age = [20, 30 , 12, 20]
 
-var  isBiggerThan =  function(currentValue) {
+var  isBiggerThan =  function(currentValue) {//dentro del parentesis va index y array
   return currentValue > 13;
 }
 var res = every(age, isBiggerThan);

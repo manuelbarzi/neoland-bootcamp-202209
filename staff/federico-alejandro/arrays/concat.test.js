@@ -31,4 +31,5 @@ console.assert(array8[5] === array6[0]);
 console.assert(array8[6] === array7[0]);
 console.assert(array8[7] === array7[1]);
 
-// No se ingresa array 
+
+
