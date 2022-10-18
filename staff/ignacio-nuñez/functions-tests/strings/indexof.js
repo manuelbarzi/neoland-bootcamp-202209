@@ -1,8 +1,7 @@
 
 
 function myIndexOf(string, worth, startPosition) {
-
-    startPosition < 0 ? startPosition= 0 : startPosition
+     startPosition < 0 ? startPosition= 0 : startPosition
 
     startPosition === undefined ? startPosition = 0 : startPosition
 
@@ -15,18 +14,21 @@ function myIndexOf(string, worth, startPosition) {
 
         else return startPosition
     }
+    for (var i = startPosition; i < string.length; i++) {
 
+        var search = (function(string, indexFrom, indexEnd){
+            var comparationSearch = ''
 
-
-    for (i = startPosition; i < string.length; i++) {
-
-        var search = string.substring(i, (i + worth.length))
+            for(var j = indexFrom; j<indexEnd; j++){
+                comparationSearch= comparationSearch + string[j]
+            }
+            return comparationSearch
+        }(string, i,(i+ worth.length)))
 
         if (search === worth)
             return i
 
     }
-
     return -1
 }
 
