@@ -42,8 +42,6 @@ var index = 't'
 
 result4 = at(string, index)
 
-console.assert = (result4 === 'W')
-
-
+console.assert(result4 === 'W')
 
 
