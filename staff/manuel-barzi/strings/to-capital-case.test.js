@@ -38,7 +38,7 @@ console.assert(result === expected)
 
 var lowers = 'abcdefghijklmnñopqrstuvwxyz'
 
-var length = Math.round(Math.random() * 10)
+var length = 1 + Math.round(Math.random() * 9)
 var word = ''
 
 for (var i = 0; i < length; i++) {
@@ -49,7 +49,7 @@ for (var i = 0; i < length; i++) {
     word += char
 }
 
-var length2 = Math.round(Math.random() * 10)
+var length2 = 1 + Math.round(Math.random() * 9)
 var word2 = ''
 
 for (var i = 0; i < length2; i++) {
@@ -60,12 +60,13 @@ for (var i = 0; i < length2; i++) {
     word2 += char
 }
 
-var space1 = ' '.repeat(Math.round(Math.random() * 10))
-var space2 = ' '.repeat(Math.round(Math.random() * 10))
-var space3 = ' '.repeat(Math.round(Math.random() * 10))
-
+var space1 = ' '.repeat(1 + Math.round(Math.random() * 9))
+var space2 = ' '.repeat(1 + Math.round(Math.random() * 9))
+var space3 = ' '.repeat(1 + Math.round(Math.random() * 9))
 
 var result = toCapitalCase(space1 + word + space2 + word2 + space3)
 var expected = space1 + word[0].toUpperCase() + word.substring(1) + space2 + word2[0].toUpperCase() + word2.substring(1) + space3
 
 console.assert(result === expected)
+
+// CASE ...
