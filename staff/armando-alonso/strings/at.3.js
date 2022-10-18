@@ -1,7 +1,7 @@
 function at(sentence, index) {
 
 if (typeof sentence !== 'string') throw new Error('Please, the sentence should be an string')
-if (typeof index !== 'number') throw new Error('Please, the index should be a number')
+
 
   var element;
 

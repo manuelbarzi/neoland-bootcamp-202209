@@ -7,6 +7,8 @@ function indexof(sentence, word) {
 
   if (sentence.length < 1) throw new Error("Please, write a something");
 
+
+
   var vword = word;
 
   var position = [];

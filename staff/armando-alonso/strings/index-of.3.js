@@ -1,11 +1,8 @@
 function indexof(sentence, word) {
   if (typeof sentence !== "string")
     throw new Error("Please, put a String to check it");
-
   if (typeof word !== "string")
     throw new Error("Please, put a String to check it");
-
-  if (sentence.length < 1) throw new Error("Please, write a something");
 
   var vword = word;
 

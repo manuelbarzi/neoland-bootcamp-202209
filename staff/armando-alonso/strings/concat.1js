@@ -1,10 +1,6 @@
 function concat(first, second) {
 
-    pass = '';
-
-    pass = pass + first
-
-    pass = pass + second
+    pass = first + second;
 
     return pass
 }
