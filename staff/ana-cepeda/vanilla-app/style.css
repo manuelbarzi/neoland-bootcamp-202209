@@ -1,58 +1,93 @@
-/*NORMALIZE*/
-*{
-    box-sizing:  border-box;;
-    margin: 0%;
+/* resets */
+html,
+body {
+  height: 100%;
+  height: 100%;
 }
 
-html { 
-    height: 100%
+body {
+  margin: 0;
+  background: linear-gradient(45deg,  rgba(66, 183, 245,0.8) 0%,rgba(66, 245, 189,0.4) 100%);
+  color: blueviolet;
+  font: base-font-family;
+  font-size: base-font-size;
+  line-height: base-line-height;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-body{ 
-    margin: 0 auto;
-    height: 100%;
+/* layout - BEM */
+
+/* container */
+
+.container {
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center;
+  gap: .5rem;
+  box-sizing: border-box;
 }
 
-h1{
-    text-align: center;
+.container--full {
+  width: 100%;
+  height: 100%;
 }
 
-.container-flex{ 
-    display: flex;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
+.container--full-width {
+  width: 100%;
 }
 
-/*FORMULARIO*/
+.container--full-height {
+  height: 100%;
+} 
 
-.form{
-    display: flex;
-    justify-self: start;
-    flex-direction: column;
-    gap: 0.5rem;
-
+.container--content-start {
+  justify-content: start;
 }
 
-.button{ 
-    width: 50%;
-    align-self: flex-start;
-    margin: 10%px;
+.container--items-start {
+  align-items: start;
 }
 
-.texForm{
-    text-align: start;
+.container--row {
+  flex-direction: row;
+}
+
+.container--content-space-between {
+  justify-content: space-between;
+}
+
+.container--padding-s {
+  padding: .5rem;
+}
+
+.container--padding-m {
+  padding: 1rem;
+}
+
+.container--padding-h-s {
+  padding: 0 .5rem;
+}
+
+.container--padding-h-m {
+  padding: 0 1rem;
+}
+
+.container--border {
+  /* border-width: 1px;
+  border-style: solid;
+  border-color: black; */
+  border: 1px solid black; /* short-hand css rule */
 }
 
 
-/* HEADER HOME.HTML */
+/* container__item */
 
-.header{
-    padding: 4rem;
-    background-color: aquamarine;
+.container__item--left { /* block__element--modifier */
+  align-self: start;
 }
 
-
-/* BARRA DE NAVEGACION */
-
-
+.container__item--right { /* block__element--modifier */
+  align-self: end;
+}
