@@ -1,32 +1,32 @@
-var tasksComponent = document.createElement('section')
+const tasksComponent = document.createElement('section')
 
 
-var tasksTitle = document.createElement('h2')
+const tasksTitle = document.createElement('h2')
 tasksTitle.innerText = 'Tasks'
 
-var tasksContentPanel = document.createElement('div')
+const tasksContentPanel = document.createElement('div')
 tasksContentPanel.className = 'task-container'
 
-var tasksTodoColumn = document.createElement('section')
+const tasksTodoColumn = document.createElement('section')
 tasksTodoColumn.className = 'task-column-group'
 
-var taskTodoHeader = document.createElement('div')
+const taskTodoHeader = document.createElement('div')
 taskTodoHeader.innerText = 'TODO'
 taskTodoHeader.className = 'task-column-header'
 tasksTodoColumn.append(taskTodoHeader)
 
-var tasksInProgressColumn = document.createElement('section')
+const tasksInProgressColumn = document.createElement('section')
 tasksInProgressColumn.className = 'task-column-group'
 
-var taskInProgressHeader = document.createElement('div')
+const taskInProgressHeader = document.createElement('div')
 taskInProgressHeader.innerText = 'IN PROGRESS'
 taskInProgressHeader.className = 'task-column-header'
 tasksInProgressColumn.append(taskInProgressHeader)
 
-var tasksCompletedColumn = document.createElement('section')
+const tasksCompletedColumn = document.createElement('section')
 tasksCompletedColumn.className = 'task-column-group'
 
-var taskCompletedHeader = document.createElement('div')
+const taskCompletedHeader = document.createElement('div')
 taskCompletedHeader.innerText = 'COMPLETED'
 taskCompletedHeader.className = 'task-column-header'
 tasksCompletedColumn.append(taskCompletedHeader)
@@ -100,8 +100,8 @@ function renderTasks() {
 function clearTasksCards() {
     var myTasksCards = tasksComponent.querySelectorAll('.task-component')
 
-    for (var i = 0; i < myTasksCards.length; i++) {
-        var myTaskCard = myTasksCards[i]
+    for (let i = 0; i < myTasksCards.length; i++) {
+        const myTaskCard = myTasksCards[i]
 
         myTaskCard.remove()
     }

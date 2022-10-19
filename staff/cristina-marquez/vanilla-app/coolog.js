@@ -1,5 +1,5 @@
 function log(level, message) {
-    var style
+    let style
 
     if (level === 'DEBUG')
         style = 'color: green'

@@ -1,7 +1,8 @@
-var registerForm = document.createElement('form')
+const registerForm = document.createElement('form')
+registerForm.className = 'flex flex-col items-center justify-center gap-2 m-2'
 
 
-var registerName = document.createElement('input')
+const registerName = document.createElement('input')
 registerName.type = 'text'
 registerName.name = 'name'
 registerName.placeholder = 'enter your name'
@@ -10,42 +11,46 @@ registerName.required = true
 registerName.oninvalid = function () {
     alert('(Use minimum 3characters from a-z non-numerical)')
 }
+registerName.className = 'border rounded-md'
 
-
-var registerNameLabel = document.createElement('label')
+const registerNameLabel = document.createElement('label')
 registerNameLabel.htmlFor = 'userName'
 registerNameLabel.classList = ['label']
 registerNameLabel.innerText = 'Your name'
 
-var registerEmail = document.createElement("input")
+const registerEmail = document.createElement("input")
 registerEmail.type = "email"
 registerEmail.name = "email"
 registerEmail.placeholder = "enter your email"
+registerEmail.className = 'border rounded-md'
 
-var registerEmailLabel = document.createElement('label')
+const registerEmailLabel = document.createElement('label')
 registerEmailLabel.htmlFor = 'email'
 registerEmailLabel.classList = ['label']
 registerEmailLabel.innerText = 'Your email'
 
 
-var registerPassword = document.createElement("input")
+const registerPassword = document.createElement("input")
 registerPassword.type = "password"
 registerPassword.placeholder = "create a password"
 registerPassword.pattern = '[a-z]{3}'
 registerPassword.required = true
+registerPassword.className = 'border rounded-md'
 
-var registerPasswordLabel = document.createElement('label')
+const registerPasswordLabel = document.createElement('label')
 registerPasswordLabel.htmlFor = 'password'
 registerPasswordLabel.classList = ['label']
 registerPasswordLabel.innerText = 'Your password'
 
-var registerAccountButton = document.createElement("button")
+const registerAccountButton = document.createElement("button")
 registerAccountButton.innerText = "Create account";
+registerAccountButton.className = 'bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-500 hover:to-indigo-300 ... p-2 rounded-lg text-white text-sm'
 
 registerForm.append(registerNameLabel, registerName, registerEmailLabel, registerEmail, registerPasswordLabel, registerPassword, registerAccountButton)
 
 
-var registerContainerFlex = document.createElement('div')
+const registerContainerFlex = document.createElement('div')
+registerContainerFlex.className = 'bg-white flex flex-col border rounded-lg p-3'
 
 registerContainerFlex.classList.add("container-Flex")
 registerForm.classList.add("form")
@@ -53,7 +58,8 @@ registerAccountButton.classList.add("button")
 
 registerContainerFlex.append(registerForm)
 
-var registerPage = document.createElement('main')
+const registerPage = document.createElement('main')
+
 
 registerPage.append(registerContainerFlex)
 

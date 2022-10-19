@@ -1,29 +1,27 @@
-//TODO:change status
-
 // Shared variables
-var isContextualMenuActive = false
+const isContextualMenuActive = false
 
 // DOM definitions
 
-var navBar = document.createElement('header')
+const navBar = document.createElement('header')
 navBar.classList = ['homepage-header']
 
 
 // Create left group container
-var navBarLeftGroup = document.createElement('div')
+const navBarLeftGroup = document.createElement('div')
 navBarLeftGroup.className = 'homepage-header-left-group'
 
 // Create right group container
-var navBarRightGroup = document.createElement('div')
+const navBarRightGroup = document.createElement('div')
 navBarRightGroup.className = 'homepage-header-right-group'
 
 
 // Left container elements
-var navBarHomeIcon = document.createElement('span')
+const navBarHomeIcon = document.createElement('span')
 navBarHomeIcon.innerText = 'home'
 navBarHomeIcon.className = 'material-symbols-outlined header-icons'
 
-var navBarNewTaskIcon = document.createElement('span')
+const navBarNewTaskIcon = document.createElement('span')
 navBarNewTaskIcon.innerText = 'add'
 navBarNewTaskIcon.className = 'material-symbols-outlined header-icons'
 
@@ -39,11 +37,11 @@ navBarLeftGroup.append(navBarHomeIcon)
 
 
 // Right container elements
-var userNameSpan = document.createElement('span')
+const userNameSpan = document.createElement('span')
 userNameSpan.innerText = ''
 userNameSpan.id = 'username-header-span'
 
-var navBarMenuIcon = document.createElement('span')
+const navBarMenuIcon = document.createElement('span')
 navBarMenuIcon.innerText = 'menu'
 navBarMenuIcon.className = 'material-symbols-outlined header-icons'
 

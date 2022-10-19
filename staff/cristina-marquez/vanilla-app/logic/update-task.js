@@ -1,8 +1,8 @@
 function updateTaskText(userEmail, taskId, text) {
     var found = false
 
-    for (var i = 0; i < users.length && !found; i++) {
-        var user = users[i]
+    for (let i = 0; i < users.length && !found; i++) {
+        const user = users[i]
 
         if (user.email === userEmail)
             found = true
@@ -12,8 +12,8 @@ function updateTaskText(userEmail, taskId, text) {
 
     var foundTask
 
-    for (var i = 0; i < tasks.length && !foundTask; i++) {
-        var task = tasks[i]
+    for (let i = 0; i < tasks.length && !foundTask; i++) {
+        const task = tasks[i]
 
         if (task.id === taskId) {
             foundTask = task

@@ -1,3 +1,3 @@
-var homePage = document.createElement('main')
+const homePage = document.createElement('main')
 
 homePage.append(navBar, tasksComponent)

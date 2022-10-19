@@ -1,44 +1,48 @@
-
-
 // login page  
-var loginPage = document.createElement('main');
+const loginPage = document.createElement('main');
+loginPage.className = 'flex flex-col gap-10'
 
 
 //container flex
-var loginContainerFlex = document.createElement("div")
+const loginContainerFlex = document.createElement("div")
 loginPage.append(loginContainerFlex)
 
 loginContainerFlex.classList.add("container-Flex");
+loginContainerFlex.className = 'bg-white flex flex-col border rounded-lg p-3'
 
 //loginform
-var loginForm = document.createElement("form")
-loginForm.className = 'container'
+const loginForm = document.createElement("form")
+loginForm.className = 'flex flex-col items-center justify-center gap-2 m-2'
 loginForm.classList.add("form")
 
-var loginEmailLabel = document.createElement('label')
+const loginEmailLabel = document.createElement('label')
 loginEmailLabel.htmlFor = 'email'
 loginEmailLabel.classList = ['label']
 loginEmailLabel.innerText = 'Your email'
 
 
-var loginEmail = document.createElement("input")
+
+const loginEmail = document.createElement("input")
 loginEmail.type = "email"
 loginEmail.name = "email"
 loginEmail.placeholder = "enter your email"
+loginEmail.className = 'border rounded-md'
 
-var loginPasswordLabel = document.createElement('label')
+const loginPasswordLabel = document.createElement('label')
 loginPasswordLabel.htmlFor = 'password'
 loginPasswordLabel.classList = ['label']
 loginPasswordLabel.innerText = 'Your password'
 
-var loginPassword = document.createElement("input")
+const loginPassword = document.createElement("input")
 loginPassword.type = "password"
 loginPassword.placeholder = "enter your password"
+loginPassword.className = 'border rounded-md'
 
 
-var loginButton = document.createElement("button")
+const loginButton = document.createElement("button")
 loginButton.classList.add("button")
 loginButton.innerText = "Login"
+loginButton.className = 'bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-500 hover:to-indigo-300 ... p-2 rounded-lg text-white text-sm'
 
 loginForm.append(loginEmailLabel, loginEmail, loginPasswordLabel, loginPassword, loginButton);
 
@@ -46,9 +50,10 @@ loginContainerFlex.append(loginForm)
 
 
 // Link to register form
-var loginRegisterAnchor = document.createElement("a")
+const loginRegisterAnchor = document.createElement("a")
 loginRegisterAnchor.href = ""
 loginRegisterAnchor.innerText = "Register"
+
 
 loginContainerFlex.append(loginRegisterAnchor)
 

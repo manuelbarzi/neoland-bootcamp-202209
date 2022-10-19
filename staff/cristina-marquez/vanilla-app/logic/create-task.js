@@ -1,15 +1,15 @@
 
 function createTaskCard(email) {
 
-    var newTask = {
+    const newTask = {
         id: null,
         user: email,
         text: '',
         status: 'TODO'
     }
 
-    var lastTask = tasks[tasks.length - 1]
-    var lastTaskId = lastTask.id
+    const lastTask = tasks[tasks.length - 1]
+    const lastTaskId = lastTask.id
 
     newTask.id = lastTaskId + 1
 
