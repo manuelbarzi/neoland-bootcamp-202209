@@ -1,8 +1,17 @@
-function reduce(array, callback, initialValue = []) {
-    let acomulado = initialValue
-    for (let i = 0; i < array.length; i++) {
-        const element = array[i];
-        acomulado = callback(acomulado, element)
+function reduce(array, callback, initialValue) {
+    let acumulado, index
+
+    if (!initialValue) {
+        acumulado = array[0]
+        index = 1
+    } else {
+        acumulado = initialValue
+        index = 0
     }
-    return acomulado
+
+    for (let i = index; i < array.length; i++) {
+        const element = array[i];
+        acumulado = callback(acumulado, element)
+    }
+    return acumulado
 }

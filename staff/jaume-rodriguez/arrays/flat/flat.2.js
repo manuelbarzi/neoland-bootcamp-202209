@@ -1,20 +1,20 @@
 function flat(array, depth = 1) {
-    var count = 0
-    count = count + 1
+    if (depth === 0) {
+        return array
+    }
     var result = [];
 
     for (let i = 0; i < array.length; i++) {
         const element = array[i];
-        if (!(element instanceof Array) && count <= depth) {
+        if (!(element instanceof Array)) {
             result[result.length] = element;
             continue;
         }
-        if (count < depth) {
-            const flatenedSubArray = flat(element, depth - 1);
+        const flatenedSubArray = flat(element, depth - 1);
+        /* ---entrando a contexto--- */
 
-            for (let j = 0; j < flatenedSubArray.length; j++) {
-                result[result.length] = flatenedSubArray[j]
-            }
+        for (let j = 0; j < flatenedSubArray.length; j++) {
+            result[result.length] = flatenedSubArray[j]
         }
     }
     return result;
