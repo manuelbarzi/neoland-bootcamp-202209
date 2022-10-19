@@ -1,8 +1,8 @@
 console.log("%cCOOL lög %cv0", "font-size: 24px;", "font-size: 12px;")
 
 function log(level, message) {
-    var style
-    
+    let style
+
     if (level === "DEBUG")
         style = "color: green"
     else if (level === "INFO")
@@ -13,6 +13,6 @@ function log(level, message) {
         style = "color: tomato"
     else if (level === "FATAL")
         style = "color: white; background-color: tomato"
-    
+
     console.log("%c" + level + ": " + message, style)
 }

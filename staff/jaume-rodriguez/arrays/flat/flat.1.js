@@ -1,23 +1,27 @@
-function flat(array, deep = 1) {
-    var counterDeep = 0
+function flat(array, depth = 1) {
+    if (depth === 0) {
+        return array
+    }
+    var result = [];
 
-    return (function call(arr) {
-        var result = []
-
-        for (var i = 0; i < arr.length; i++)
-            if (arr[i] instanceof Array)
-                for (j = 0; j < arr[i].length; j++)
-                    result[result.length] = arr[i][j]
-            else
-                result[result.length] = arr[i]
-
-        if (++counterDeep < deep) {
-            for (i = 0; i < result.length; i++)
-                if (result[i] instanceof Array)
-                    return call(result)
+    for (let i = 0; i < array.length; i++) {
+        const element = array[i];
+        if (!(element instanceof Array)) {
+            result[result.length] = element;
+            continue;
         }
+        const flatenedSubArray = flat(element, depth - 1);
+        /* ---entrando a contexto--- */
 
-        return result
-
-    })([...array])
+        for (let j = 0; j < flatenedSubArray.length; j++) {
+            result[result.length] = flatenedSubArray[j]
+        }
+    }
+    return result;
 }
+
+/* Como programar casos recursivos
+1. Identificar casos Bases y resolverlos
+2. Dividir en problemas más sencillos
+3. Una vez dividido en problemas sencillos y has obtenidos
+resultados independientes ( pequeños ), los unimos */

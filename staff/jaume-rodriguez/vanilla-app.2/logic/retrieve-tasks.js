@@ -1,9 +1,9 @@
 function retrieveTasks(userId) {
 
-    var found = false
+    let found = false
 
-    for (var i = 0; i < users.length && !found; i++) {
-        var user = users[i]
+    for (let i = 0; i < users.length && !found; i++) {
+        const user = users[i]
 
         if (user.id === userId) {
             found = true
@@ -12,10 +12,10 @@ function retrieveTasks(userId) {
 
     if (!found) throw new Error("user with id " + userId + " not found")
 
-    var filteredTasks = []
+    let filteredTasks = []
 
-    for (var i = 0; i < tasks.length; i++) {
-        var task = tasks[i]
+    for (let i = 0; i < tasks.length; i++) {
+        const task = tasks[i]
 
         if (task.user === userId) {
             filteredTasks.push(task)

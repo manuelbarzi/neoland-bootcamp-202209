@@ -7,8 +7,8 @@
  * @returns  user | Error
  */
 function authenticateUser(email, password) {
-    for (var i = 0; i < users.length; i++) {
-        var user = users[i]
+    for (let i = 0; i < users.length; i++) {
+        const user = users[i]
 
         if (user.email === email) {
             if (user.password === password)

@@ -1,27 +1,23 @@
 /* CREAMOS UN MENU PANEL */
-var homeMenuDropdownContainer = document.createElement("div");
+const homeMenuDropdownContainer = document.createElement("div");
 homeMenuDropdownContainer.classList.add("home__menu__panel--container");
 
-var homeMenuDropdown = document.createElement("div");
+const homeMenuDropdown = document.createElement("div");
 homeMenuDropdown.classList.add("home__menu__panel");
 
-/* -- */
-var homeMenuDropdownUserName = document.createElement("p");
+const homeMenuDropdownUserName = document.createElement("p");
 homeMenuDropdownUserName.innerText = "User Name";
 homeMenuDropdownUserName.classList.add("home__menu__panel--user-name");
 
-/* -- */
-var homeMenuDropdownSeparation = document.createElement("hr");
+const homeMenuDropdownSeparation = document.createElement("hr");
 homeMenuDropdownSeparation.classList.add("home__menu__panel--separation");
 
-/* -- */
-var homeMenuDropdownSettings = document.createElement("a");
+const homeMenuDropdownSettings = document.createElement("a");
 homeMenuDropdownSettings.href = "";
 homeMenuDropdownSettings.innerText = "Settings";
 homeMenuDropdownSettings.classList.add("home__menu__panel--text");
 
-/* -- */
-homeMenuDropdownSettings.onclick = function(event){
+homeMenuDropdownSettings.onclick = function (event) {
     event.preventDefault();
 
     log("DEBUG", "Navigate to settings")
@@ -38,13 +34,12 @@ homeMenuDropdownSettings.onclick = function(event){
     homePage.append(homeSettingsSection);
 }
 
-/* -- */
-var homeMenuDropdownLogOut = document.createElement("a");
+const homeMenuDropdownLogOut = document.createElement("a");
 homeMenuDropdownLogOut.href = "";
 homeMenuDropdownLogOut.innerText = "Log out";
 homeMenuDropdownLogOut.classList.add("home__menu__panel--text");
 
-homeMenuDropdownLogOut.onclick = function(event){
+homeMenuDropdownLogOut.onclick = function (event) {
     event.preventDefault();
 
     log("DEBUG", "Navigate to login");
@@ -63,5 +58,4 @@ homeMenuDropdownLogOut.onclick = function(event){
     document.body.append(loginPage);
 }
 
-/* -- */
-homeMenuDropdown.append(homeMenuDropdownUserName,homeMenuDropdownSeparation, homeMenuDropdownSettings, homeMenuDropdownLogOut);
+homeMenuDropdown.append(homeMenuDropdownUserName, homeMenuDropdownSeparation, homeMenuDropdownSettings, homeMenuDropdownLogOut);

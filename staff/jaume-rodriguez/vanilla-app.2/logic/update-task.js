@@ -6,10 +6,10 @@ function updateTaskText(userId, taskId, text) {
 
     if (typeof text !== "string") throw new Error("userId is not string");
 
-    var found = false
+    let found = false
 
-    for (var i = 0; i < users.length && !found; i++) {
-        var user = users[i]
+    for (let i = 0; i < users.length && !found; i++) {
+        const user = users[i]
 
         if (user.id === userId) {
             found = true
@@ -18,10 +18,10 @@ function updateTaskText(userId, taskId, text) {
 
     if (!found) throw new Error("user with id " + userId + " not found")
 
-    var foundTask = false
+    let foundTask = false
 
-    for (var i = 0; i < tasks.length && !foundTask; i++) {
-        var task = tasks[i]
+    for (let i = 0; i < tasks.length && !foundTask; i++) {
+        const task = tasks[i]
 
         if (task.id === taskId) {
             foundTask = task

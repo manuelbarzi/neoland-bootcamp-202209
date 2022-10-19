@@ -1,2 +1,2 @@
 /* BASE DE DATOS -BD */
-var tasks = [{ id: 'task-1', user: '', text: '', status: '' },];
+let tasks = [{ id: 'task-1', user: '', text: '', status: '' },];

@@ -19,24 +19,24 @@ function registerUser(name, email, password) {
     if (password.length < 8) throw new Error("password length is less than 8");
     if (HAS_SPACES_REGEX.test(password)) throw new Error("password has spaces");
 
-    for (var i = 0; i < users.length; i++) {
-        var user = users[i]
+    for (let i = 0; i < users.length; i++) {
+        const user = users[i]
 
         if (user.email === email)
             throw new Error("User already exists")
     }
 
-    var lastIndex = users.length - 1
-    var lastUser = users[lastIndex]
-    var lastUserId = lastUser.id
+    const lastIndex = users.length - 1
+    const lastUser = users[lastIndex]
+    const lastUserId = lastUser.id
 
-    var countString = lastUserId.substring(5)
-    var count = parseInt(countString)
+    const countString = lastUserId.substring(5)
+    const count = parseInt(countString)
 
-    var nextCount = count + 1
-    var nextUserId = 'user-' + nextCount
+    const nextCount = count + 1
+    const nextUserId = 'user-' + nextCount
 
-    var user = {
+    const user = {
         "id": nextUserId,
         "name": name,
         "email": email,

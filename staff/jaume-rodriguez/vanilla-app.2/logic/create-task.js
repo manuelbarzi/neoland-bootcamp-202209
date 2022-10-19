@@ -1,9 +1,9 @@
 function createTaskTodo(userId) {
 
-    var found = false
+    let found = false
 
-    for (var i = 0; i < users.length && !found; i++) {
-        var user = users[i]
+    for (let i = 0; i < users.length && !found; i++) {
+        const user = users[i]
 
         if (user.id === userId) {
             found = true
@@ -12,17 +12,17 @@ function createTaskTodo(userId) {
 
     if (!found) throw new Error("user with id " + userId + " not found")
 
-    var lastIndex = tasks.length - 1
-    var lastTask = tasks[lastIndex]
-    var lastTaskId = lastTask.id
+    const lastIndex = tasks.length - 1
+    const lastTask = tasks[lastIndex]
+    const lastTaskId = lastTask.id
 
-    var countString = lastTaskId.substring(5)
-    var count = parseInt(countString)
+    const countString = lastTaskId.substring(5)
+    const count = parseInt(countString)
 
-    var nextCount = count + 1
-    var nextTaskId = "task-" + nextCount
+    const nextCount = count + 1
+    const nextTaskId = "task-" + nextCount
 
-    var task = {
+    const task = {
         id: nextTaskId,
         user: userId,
         text: "",
@@ -32,13 +32,12 @@ function createTaskTodo(userId) {
     tasks.push(task)
 }
 
-/* -- */
 function createTaskDoing(userId) {
 
-    var found = false
+    let found = false
 
-    for (var i = 0; i < users.length && !found; i++) {
-        var user = users[i]
+    for (let i = 0; i < users.length && !found; i++) {
+        const user = users[i]
 
         if (user.id === userId) {
             found = true
@@ -47,17 +46,17 @@ function createTaskDoing(userId) {
 
     if (!found) throw new Error("user with id " + Id + " not found")
 
-    var lastIndex = tasks.length - 1
-    var lastTask = tasks[lastIndex]
-    var lastTaskId = lastTask.id
+    const lastIndex = tasks.length - 1
+    const lastTask = tasks[lastIndex]
+    const lastTaskId = lastTask.id
 
-    var countString = lastTaskId.substring(5)
-    var count = parseInt(countString)
+    const countString = lastTaskId.substring(5)
+    const count = parseInt(countString)
 
-    var nextCount = count + 1
-    var nextTaskId = "task-" + nextCount
+    const nextCount = count + 1
+    const nextTaskId = "task-" + nextCount
 
-    var task = {
+    const task = {
         id: nextTaskId,
         user: userId,
         text: "",
@@ -67,13 +66,12 @@ function createTaskDoing(userId) {
     tasks.push(task)
 }
 
-/* -- */
 function createTaskDone(userId) {
 
-    var found = false
+    let found = false
 
-    for (var i = 0; i < users.length && !found; i++) {
-        var user = users[i]
+    for (let i = 0; i < users.length && !found; i++) {
+        const user = users[i]
 
         if (user.id === userId) {
             found = true
@@ -82,17 +80,17 @@ function createTaskDone(userId) {
 
     if (!found) throw new Error("user with id " + userId + " not found")
 
-    var lastIndex = tasks.length - 1
-    var lastTask = tasks[lastIndex]
-    var lastTaskId = lastTask.id
+    const lastIndex = tasks.length - 1
+    const lastTask = tasks[lastIndex]
+    const lastTaskId = lastTask.id
 
-    var countString = lastTaskId.substring(5)
-    var count = parseInt(countString)
+    const countString = lastTaskId.substring(5)
+    const count = parseInt(countString)
 
-    var nextCount = count + 1
-    var nextTaskId = "task-" + nextCount
+    const nextCount = count + 1
+    const nextTaskId = "task-" + nextCount
 
-    var task = {
+    const task = {
         id: nextTaskId,
         user: userId,
         text: "",

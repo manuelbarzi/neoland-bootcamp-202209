@@ -3,38 +3,38 @@
 /* TODO BUG REMOVE LIMPIA EL TEXTO INTERIOR */
 
 /* CREAMOS EL TASKS PANEL */
-var tasksPanelSection = document.createElement("section");
+const tasksPanelSection = document.createElement("section");
 tasksPanelSection.classList.add("home__main");
 
 /* -- */
-var tasksPanelHeader = document.createElement("div");
+const tasksPanelHeader = document.createElement("div");
 tasksPanelHeader.classList.add("home__settings__header")
 
 tasksPanelSection.append(tasksPanelHeader);
 
 /* -- */
-var tasksPanelTitle = document.createElement("span");
+const tasksPanelTitle = document.createElement("span");
 tasksPanelTitle.innerText = "My Tasks";
 tasksPanelTitle.classList.add("home__settings--title");
 
-var tasksPanelSecondTitle = document.createElement("span");
+const tasksPanelSecondTitle = document.createElement("span");
 tasksPanelSecondTitle.innerText = "User name";
 tasksPanelSecondTitle.classList.add("home__settings--second-title");
 
 tasksPanelHeader.append(tasksPanelTitle, tasksPanelSecondTitle);
 
 /* -- */
-var tasksPanelContent = document.createElement("div");
+const tasksPanelContent = document.createElement("div");
 tasksPanelContent.classList.add("tasks__panel__content");
 
 tasksPanelSection.append(tasksPanelContent);
 
 /* -- */
-var tasksPanelColumnTodo = document.createElement("section");
+const tasksPanelColumnTodo = document.createElement("section");
 tasksPanelColumnTodo.classList.add("tasks__panel__content__column");
 tasksPanelColumnTodo.innerText = "TO DO";
 
-var tasksPanelAddTodoButton = document.createElement("button");
+const tasksPanelAddTodoButton = document.createElement("button");
 tasksPanelAddTodoButton.classList.add("fa");
 tasksPanelAddTodoButton.classList.add("fa-plus");
 tasksPanelAddTodoButton.classList.add("tasks__panel__add-button")
@@ -56,11 +56,11 @@ tasksPanelAddTodoButton.onclick = function () {
 tasksPanelColumnTodo.append(tasksPanelAddTodoButton);
 
 /* -- */
-var tasksPanelColumnDoing = document.createElement("section");
+const tasksPanelColumnDoing = document.createElement("section");
 tasksPanelColumnDoing.classList.add("tasks__panel__content__column");
 tasksPanelColumnDoing.innerText = "DOING";
 
-var tasksPanelAddDoingButton = document.createElement("button");
+const tasksPanelAddDoingButton = document.createElement("button");
 tasksPanelAddDoingButton.classList.add("fa");
 tasksPanelAddDoingButton.classList.add("fa-plus");
 tasksPanelAddDoingButton.classList.add("tasks__panel__add-button")
@@ -83,11 +83,11 @@ tasksPanelAddDoingButton.onclick = function () {
 tasksPanelColumnDoing.append(tasksPanelAddDoingButton);
 
 /* -- */
-var tasksPanelColumnDone = document.createElement("section");
+const tasksPanelColumnDone = document.createElement("section");
 tasksPanelColumnDone.classList.add("tasks__panel__content__column");
 tasksPanelColumnDone.innerText = "DONE";
 
-var tasksPanelAddDoneButton = document.createElement("button");
+const tasksPanelAddDoneButton = document.createElement("button");
 tasksPanelAddDoneButton.classList.add("fa");
 tasksPanelAddDoneButton.classList.add("fa-plus");
 tasksPanelAddDoneButton.classList.add("tasks__panel__add-button")
@@ -116,10 +116,10 @@ tasksPanelContent.append(tasksPanelColumnTodo, tasksPanelColumnDoing, tasksPanel
 
 /* -- */
 function createTaskCard(taskId, text) {
-    var taskCard = document.createElement("article");
+    const taskCard = document.createElement("article");
     taskCard.classList.add("task__card");
 
-    var taskText = document.createElement("p");
+    const taskText = document.createElement("p");
     taskText.placeholder = "Enter a text"
     taskText.className = "tasks__panel__content__card"
     taskText.innerText = text
@@ -136,7 +136,7 @@ function createTaskCard(taskId, text) {
         }
     }
 
-    var taskDeleteButton = document.createElement("button");
+    const taskDeleteButton = document.createElement("button");
     taskDeleteButton.classList.add("fa");
     taskDeleteButton.classList.add("fa-trash-o");
     taskDeleteButton.classList.add("task__card__button-delete")
@@ -159,24 +159,24 @@ function createTaskCard(taskId, text) {
 }
 
 function clearTasksCards() {
-    var myTasksCards = tasksPanelContent.querySelectorAll("article")
+    const myTasksCards = tasksPanelContent.querySelectorAll("article")
 
     log("DEBUG", "All card have been removed")
 
-    for (var i = 0; i < myTasksCards.length; i++) {
-        var myTaskCard = myTasksCards[i]
+    for (let i = 0; i < myTasksCards.length; i++) {
+        const myTaskCard = myTasksCards[i]
 
         myTaskCard.remove()
     }
 }
 
 function renderTasksCards() {
-    var myTasks = retrieveTasks(user.id)
+    const myTasks = retrieveTasks(user.id)
 
-    for (var i = 0; i < myTasks.length; i++) {
-        var myTask = myTasks[i]
+    for (let i = 0; i < myTasks.length; i++) {
+        const myTask = myTasks[i]
 
-        var myTaskCard = createTaskCard(myTask.id, myTask.text)
+        const myTaskCard = createTaskCard(myTask.id, myTask.text)
 
         if (myTask.status === "todo")
             tasksPanelColumnTodo.append(myTaskCard)
