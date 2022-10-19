@@ -1,7 +1,7 @@
 log('DEBUG', 'mount login')
 
 const loginForm = document.createElement('form')
-loginForm.className = 'flex flex-col gap-2'
+loginForm.className = 'container'
 
 loginForm.onsubmit = function (event) {
     event.preventDefault()
@@ -41,7 +41,6 @@ const loginEmailInput = document.createElement('input')
 loginEmailInput.type = 'email'
 loginEmailInput.id = 'login-email'
 loginEmailInput.placeholder = 'input your e-mail'
-loginEmailInput.className = 'border-b border-black'
 
 const loginPasswordLabel = document.createElement('label')
 loginPasswordLabel.htmlFor = 'login-password'
@@ -52,10 +51,9 @@ const loginPasswordInput = document.createElement('input')
 loginPasswordInput.type = 'password'
 loginPasswordInput.id = 'login-password'
 loginPasswordInput.placeholder = 'input your password'
-loginPasswordInput.className = 'border-b border-black'
 
 const loginSubmitButton = document.createElement('button')
-loginSubmitButton.className = 'p-2 border rounded-xl hover:animate-spin'
+loginSubmitButton.className = 'container__item--right'
 loginSubmitButton.innerText = 'Login'
 
 loginForm.append(loginEmailLabel, loginEmailInput, loginPasswordLabel, loginPasswordInput, loginSubmitButton)
@@ -63,7 +61,6 @@ loginForm.append(loginEmailLabel, loginEmailInput, loginPasswordLabel, loginPass
 const loginRegisterLink = document.createElement('a')
 loginRegisterLink.href = ""
 loginRegisterLink.innerText = 'Register'
-loginRegisterLink.className = 'underline'
 
 loginRegisterLink.onclick = function (event) {
     event.preventDefault()
@@ -75,5 +72,5 @@ loginRegisterLink.onclick = function (event) {
 }
 
 const loginPage = document.createElement('main')
-loginPage.className = 'flex flex-col items-center gap-2'
+loginPage.className = 'container'
 loginPage.append(loginForm, loginRegisterLink)
