@@ -2,9 +2,8 @@ log('INFO','star app')
 
 var user = null
 
-//document.body.append(loginPage)
-document.body.append(homePage)
-
+document.body.append(loginPage)
+//document.body.append(homePage)
 
 
 

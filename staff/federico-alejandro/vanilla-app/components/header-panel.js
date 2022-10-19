@@ -1,4 +1,23 @@
 var homeHeader = document.createElement('header')
+homeHeader.className = 'container container--full-width container--content-space-between'
+
+var homeMenuButton = document.createElement ('button')
+homeMenuButton.className = 'container container--row material-symbols-outlined'
+homeMenuButton.innerText = 'menu'
+
+var homeMenuPanelStatus = 'closed'
+
+homeMenuButton.onclick = function() {
+    if (homeMenuPanelStatus === 'closed') {
+        homeHeader.append(homeMenuPanel)
+
+        homeMenuPanelStatus = 'opened'
+    } else {
+        homeMenuPanel.remove()
+        
+        homeMenuPanelStatus = 'closed'
+    }
+}
 
 var homeHeaderLink = document.createElement('a')
 homeHeaderLink.href = ''
@@ -12,17 +31,15 @@ homeHeaderLink.onclick = function(event) {
 
     homePage.append(tasksPanel)
 }
+var logoTrello = document.createElement('img')
+logoTrello.src = 'https://1000logos.net/wp-content/uploads/2021/05/Trello-logo.png'
+logoTrello.className = ' logo-trello'
+ homeHeaderLink.append(logoTrello)
 
-var homeHeaderImage = document.createElement('button')
-homeHeaderImage.className = 'material-symbols-outlined'
-homeHeaderImage.innerText = 'Home' // como poner logo trello??
-homeHeaderLink.append(homeHeaderImage)
-
-//homeUserNameText es igual que userName//
 var userName = document.createElement('span')
 userName.innerText = 'User Name'
 userName.className = ' user-name'
-//probar si funcionan container--full-height container--padding-h-s//
+
 
 var searchButton = document.createElement('button')
 searchButton.className ='material-symbols-outlined'
@@ -35,9 +52,9 @@ var homeHeaderTopPanelRight = document.createElement('div')
 homeHeaderTopPanelRight.append(searchButton, homeMenuButton)
 
 var homeHeaderTopPanelLeft = document.createElement('div')
-homeHeaderTopPanelLeft.append(homeHeaderLink, userName)
+homeHeaderTopPanelLeft.append(userName)
 homeHeaderTopPanel.append(homeHeaderTopPanelLeft, homeHeaderTopPanelRight)
 
 
-homeHeader.className = 'container container--full-width'
-homeHeader.append(homeHeaderTopPanel)
+
+homeHeader.append(homeHeaderLink, homeHeaderTopPanel)

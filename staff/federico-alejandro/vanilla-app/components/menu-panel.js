@@ -1,27 +1,9 @@
-var homeMenuButton = document.createElement ('button')
-homeMenuButton.className = 'material-symbols-outlined'
-homeMenuButton.innerText = 'menu'
-
-var homeMenuPanelStatus = 'closed'
-
-homeMenuButton.onclick = function() {
-    if (homeMenuPanelStatus === 'closed') {
-        homeHeader.append(homeMenuPanel)
-
-        homeMenuPanelStatus = 'opened'
-    } else {
-        homeMenuPanel.remove()
-        
-        homeMenuPanelStatus = 'closed'
-    }
-}
-
 var homeMenuPanel = document.createElement('div')
-// homeMenuPanel.className = 'container'
+homeMenuPanel.className = 'container container-menu-panel'
 
 
 var homeMenuSettingsLink = document.createElement('a')
-homeMenuSettingsLink.className = 'icons-menu-settings material-symbols-outlined'
+homeMenuSettingsLink.className = 'material-symbols-outlined'
 homeMenuSettingsLink.innerText = 'settings'
 homeMenuSettingsLink.href =''
 
@@ -38,13 +20,8 @@ homeMenuSettingsLink.onclick = function(event) {
     homePage.append(settingsPanel)
 }
 
-var languageButton = document.createElement('button')
-languageButton.className = 'icons-menu-settings material-symbols-outlined'
-languageButton.innerText = 'language'
-
-
 var homeLogoutButton = document.createElement('button')
-homeLogoutButton.className = 'icons-menu-settings material-symbols-outlined'
+homeLogoutButton.className = 'material-symbols-outlined'
 homeLogoutButton.innerText = 'logout'
 
 homeLogoutButton.onclick = function() {
@@ -61,4 +38,4 @@ homeLogoutButton.onclick = function() {
     document.body.append(loginPage)
 }
 
-homeMenuPanel.append(homeMenuSettingsLink, languageButton, homeLogoutButton)//languageButton agregar aca?//
+homeMenuPanel.append(homeMenuSettingsLink, homeLogoutButton)

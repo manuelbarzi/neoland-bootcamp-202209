@@ -11,28 +11,39 @@ form.onsubmit = function (event) {
   var email = loginEmail.value
   var password = loginPassword.value
 
-  var result = authenticateUser(email, password)
+  
+  try {
+    user = authenticateUser(email, password)
 
-  if (result instanceof Error) {
-    alert(result.message)
 
-    return
+    form.reset();
+
+    loginPage.remove();
+
+    userName.innerText = user.name
+
+    clearTasksCards()
+    renderTasksCards()
+
+    document.body.append(homePage)
+  } catch (error) {
+
+    alert(error.message)
+
+    loginPassword.value = ''
   }
-
-  user = result
-
-  form.reset();
-
-  loginPage.remove();
-  userName.innerText = user.name
-  document.body.append(homePage)
+  //user = result
 }
 
 var loginMain = document.createElement('main')
 loginMain.className = 'container'
-var logoTrello = document.createElement('img')
+
+/*var loginImage = document.getElementById('img')
+loginImage.innerHTML = <img src='data/img/vecteezy_3d-online-airline-ticket-buying-confirm-concept-icon-with-3d_10916024_536.png'/>
+loginMain.append(loginImage)*/
+/*var logoTrello = document.createElement('img')
 logoTrello.src = 'https://1000logos.net/wp-content/uploads/2021/05/Trello-logo.png'
-logoTrello.className = 'logo-trello'
+logoTrello.className = 'logo-trello'*/
 
 
 
@@ -59,7 +70,7 @@ loginPassword.placeholder = "input you password"
 
 var loginButton = document.createElement("button")
 loginButton.innerText = "Login";
-loginButton.className= 'login--button'
+loginButton.className = 'login--button'
 
 var anchor = document.createElement("a");
 anchor.href = ""
@@ -89,4 +100,4 @@ form.append(
   loginButton)
 
 loginPage.append(h1, form, anchor)
-document.body.append(logoTrello)
+//document.body.append(logoTrello)

@@ -1,11 +1,14 @@
 
 
 var settingsPanel = document.createElement('section')
-settingsPanel.className ='container container--full-width'
+settingsPanel.className = 'container container--full-width'
 
 var settingsTitle = document.createElement('h2')
-settingsTitle.innerText ='settings'
-settingsTitle.className =''
+settingsTitle.innerText = 'settings'
+settingsTitle.className = ''
+
+var updateForm = document.createElement('div')
+updateForm.className = 'update-form'
 
 var settingsEmailForm = document.createElement('form')
 
@@ -25,22 +28,20 @@ settingsEmailButton.className = 'buttons--save'
 
 settingsEmailForm.append(settingsEmailLabel, settingsEmailInput, settingsEmailButton)
 
-settingsEmailForm.onsubmit = function(event) {
+settingsEmailForm.onsubmit = function (event) {
     event.preventDefault()
 
     var newEmail = settingsEmailInput.value
+    
+    try {
+        updateUserEmail(user.email, newEmail)
 
-    var result = updateUserEmail(user.email, newEmail)
-
-    if (result instanceof Error) {
-        alert(result.message)
-
-        return
+        alert('E-mail updated')
+    } catch (error) {
+    
+        alert(error.message)
     }
-
-    alert('E-mail updated')
-
-} 
+}
 
 var settingsNameForm = document.createElement('form')
 
@@ -60,59 +61,63 @@ settingsNameButton.className = 'buttons--save'
 
 
 settingsNameForm.append(settingsNameLabel, settingsNameInput, settingsNameButton)
-settingsNameForm.onsubmit = function(event) {
+settingsNameForm.onsubmit = function (event) {
     event.preventDefault()
 
     var newName = settingsNameInput.value
+    try {
+        updateUserName(user.name, newName)
 
-    var result = updateUserName(user.name, newName)
+        alert('Name updated')
+    } catch (error) {
 
-    if (result instanceof Error) {
-        alert(result.message)
-
-        return
+        alert(error.message)
     }
+}
+var settingsPasswordForm = document.createElement('form')
 
-    alert('Name updated')
+var settingsLabelPassword = document.createElement('label')
+settingsLabelPassword.htmlFor = 'settings-password'
+settingsLabelPassword.innerText = 'Password '
 
-} 
+var settingsPassword = document.createElement('input')
+settingsPassword.type = 'password'
+//settingsPassword.name = ''
+settingsPassword.id = 'settings-password'
+settingsPassword.placeholder = 'input new password'
 
-var settingsPhoneNumberForm = document.createElement('form')
 
-var settingsPhoneNumberLabel = document.createElement('label')
-settingsPhoneNumberLabel.innerText = 'Phone '
-settingsPhoneNumberLabel.htmlFor = 'settings-number'
+var settingsPasswordButton = document.createElement('button')
+settingsPasswordButton.innerText = 'Save'
+settingsPasswordButton.className = 'buttons--save'
 
-var settingsPhoneNumberInput = document.createElement('input')
-settingsPhoneNumberInput.type = 'Phone Number'
-settingsPhoneNumberInput.id = 'settings-number'
-settingsPhoneNumberInput.placeholder = 'Ej. +34668899999'
-settingsPhoneNumberInput.value = ''
-
-var settingsPhoneNumberButton = document.createElement('button')
-settingsPhoneNumberButton.innerText = 'Save'
-settingsPhoneNumberButton.className = 'buttons--save'
-
-settingsPhoneNumberForm.append( settingsPhoneNumberLabel, settingsPhoneNumberInput, settingsPhoneNumberButton)
-
-settingsPhoneNumberForm.onsubmit = function(event) {
+settingsPasswordForm.onsubmit = function (event) {
     event.preventDefault()
 
-    var newPhoneNumber = settingsPhoneNumberInput.value
+    log('DEBUG', 'Submit new password')
 
-    var result = updateUserName(user.phoneNumber, newPhoneNumber)
+    var newPassword = settingsPassword.value
+    
+    try {
+        updateUserPassword(user.password, newPassword)
 
-    if (result instanceof Error) {
-        alert(result.message)
+        alert('Password updated')
 
-        return
+        updatePasswordForm.reset()
+
+    } catch (error) {
+    
+        alert(error.message)
     }
-
-    alert('Phone Number updated')
-
-} 
-
-
+}
+settingsPasswordForm.append(settingsLabelPassword, settingsPassword, settingsPasswordButton)
+updateForm.append(settingsEmailForm, settingsNameForm, settingsPasswordForm)
+settingsPanel.append(settingsTitle, updateForm)
 
 
-settingsPanel.append(settingsTitle, settingsEmailForm, settingsNameForm, settingsPhoneNumberForm)
+
+
+
+
+
+

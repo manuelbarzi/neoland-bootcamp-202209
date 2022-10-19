@@ -5,24 +5,12 @@ var tasksTitle = document.createElement('h2')
 tasksTitle.innerText = 'Tasks'
 tasksTitle.className = 'container'
 
-
 var tasksContentPanel = document.createElement('div')
 tasksContentPanel.className = 'container container--row container--items-start'
 
 var tasksTodoColumn = document.createElement('section')
 tasksTodoColumn.innerText = 'TODO'
 tasksTodoColumn.className = 'container--border container--padding-s container--items-start'
-
-var taskCard = createTaskCard('buy milk')
-tasksTodoColumn.append(taskCard)
-
-
-var taskCard2 = createTaskCard('buy eggs')
-tasksTodoColumn.append(taskCard2)
-
-
-var taskCard3 = createTaskCard('buy tomatoes')
-tasksTodoColumn.append(taskCard3)
 
 var tasksDoingColumn = document.createElement('section')
 tasksDoingColumn.innerText = 'DOING'
@@ -34,52 +22,108 @@ tasksDoneColumn.className = ' container--border container--padding-s'
 
 tasksContentPanel.append(tasksTodoColumn, tasksDoingColumn, tasksDoneColumn)
 
+function createTaskCard(taskId, text) {
+  var taskCard = document.createElement('article')
+  //taskCard.innerText = text
+  taskCard.className = 'container container--border-i container--padding-s container--full-width'
 
+  var taskText = document.createElement('p')
+  taskText.innerText = text
+  taskCard.contentEditable = true
 
-function createTaskCard(text) {
-    var taskCard = document.createElement('article')
-    taskCard.innerText = text
-    
-    
-    taskCard.className = 'container container--border-i container--padding-s container--full-width'
-
-    return taskCard
-}
- var buttonTasks = document.createElement ('button')
- buttonTasks.className ='button-tasks  container--padding-s container--full-width'
- buttonTasks.innerText = '+ Add task'
-// ESTA BIEN?
- buttonTasks.onsubmit = function (createTaskCard) {
-    createTaskCard.preventDefault();
-    
-    var result = buttonTasksInput.value
-   
-    
-    if (result instanceof Error) {
-        alert(result.message)
-    
-        return
-      }
-      taskCard = result
-      buttonTasksInput.reset();
-      document.body.append(tasksTodoColumn)
+  taskText.onkeyup = function () {
+    try {
+      updateTaskText(user.email, taskId, taskText.innerText)
+    } catch (error) {
+      alert(error.message)
+    }
   }
- 
-var buttonTasksInput = document.createElement ('input')
-buttonTasksInput.placeholder = 'Write a task'
+  var taskDeleteButton = document.createElement('button')
+  taskDeleteButton.className = 'material-symbols-outlined'
+  taskDeleteButton.innerText = 'delete'
 
+  taskDeleteButton.onclick = function () {
+    try {
+      deleteTask(user.email, taskId)
+
+      taskCard.remove()
+    } catch (error) {
+      alert(error.message)
+    }
+  }
+
+  taskCard.append(taskText, taskDeleteButton)
+
+  return taskCard
+}
+
+function clearTasksCards() {
+  var myTasksCards = tasksPanel.querySelectorAll('article')
+
+  for (var i = 0; i < myTasksCards.length; i++) {
+      var myTaskCard = myTasksCards[i]
+
+    myTaskCard.remove()
+  }
+}
+
+function renderTasksCards() {
+ //var myTasks
+   try {
+   myTasks = retrieveTasks(user.email)
+
+   for (var i = 0; i < myTasks.length; i++) {
+    var myTask = myTasks[i]
+
+    var myTaskCard = createTaskCard(myTask.id, myTask.text)
+
+     if (myTask.status === 'todo')
+       tasksTodoColumn.append(myTaskCard)
+     else if (myTask.status === 'doing')
+       tasksDoingColumn.append(myTaskCard)
+     else if (myTask.status === 'done')
+       tasksDoneColumn.append(myTaskCard)
+   }
+
+  } catch (error) {
+      alert(error.message)
+  }
+}
+
+
+var buttonTasks = document.createElement('button')
+buttonTasks.className = 'button-tasks  container--padding-s container--full-width'
+buttonTasks.innerText = '+ Add task'
+
+buttonTasks.onclick = function () {
+  
+  try {
+    createTask(user.email)
+    
+    clearTasksCards()
+    
+    renderTasksCards()
+  } catch (error) {
+    
+    alert(error.message)
+    
+  }
+}
 var addTask = document.createElement('div')
 addTask.className = 'container'
+addTask.click = function () {
+  
+  try {
+    createTask(user.email)
 
-addTask.append(buttonTasksInput, buttonTasks)
-tasksPanel.append(tasksTitle,tasksContentPanel, addTask)
-/* buttonTasks.addEventListener('click') {
-    var task = input.value
-    if(task) {
-        addTask(task)
-    }
-    input.value = ''
- }*/
- 
+    clearTasksCards()
 
-//tasksTodoColumn.append(buttonTasks)
+    renderTasksCards()
+  } catch (error) {
+   
+    alert(error.message)
+  }
+}
+
+addTask.append(buttonTasks)
+tasksPanel.append(tasksTitle, tasksContentPanel, addTask)

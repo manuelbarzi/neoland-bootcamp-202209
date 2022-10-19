@@ -7,7 +7,12 @@
  *  @returns user | Error
  */
 function authenticateUser(email, password) {
-    // TODO validate input args 
+    if (typeof email !== 'string') throw new Error ('email is not a string')
+    if (!IS_EMAIL_REGEX.test(email)) throw new Error ('email is not valid')
+
+    if (typeof password !== 'string') throw new Error ('password is not a string')
+    if (password.length < 8) throw new Error ('password length is less than 8')
+    if (HAS_SPACES_REGEX.test(password)) throw new Error ('password has spaces')
 
     for (var i = 0; i < users.length; i++) {
         var user = users[i]
@@ -16,9 +21,9 @@ function authenticateUser(email, password) {
             if (user.password === password)
             return user
         else
-            return new Error('wrong credentials')
+            throw new Error('wrong credentials')
         }
     }
 
-    return new Error('user not registered')
+    throw new Error('user not registered')
 }
