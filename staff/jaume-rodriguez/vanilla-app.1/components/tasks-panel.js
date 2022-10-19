@@ -40,17 +40,17 @@ tasksPanelAddTodoButton.classList.add("fa-plus");
 tasksPanelAddTodoButton.classList.add("tasks__panel__add-button")
 tasksPanelAddTodoButton.innerText = " Add new Task"
 
-tasksPanelAddTodoButton.onclick = function() {
-    var result = createTaskTodo(user.id)
+tasksPanelAddTodoButton.onclick = function () {
+    try {
+        createTaskTodo(user.id)
+        clearTasksCards()
+        renderTasksCards()
 
-    if (result instanceof Error) {
-        alert(result.message)
+    } catch (error) {
+        alert(error.message)
 
         return
     }
-
-    clearTasksCards()
-    renderTasksCards()
 }
 
 tasksPanelColumnTodo.append(tasksPanelAddTodoButton);
@@ -66,19 +66,18 @@ tasksPanelAddDoingButton.classList.add("fa-plus");
 tasksPanelAddDoingButton.classList.add("tasks__panel__add-button")
 tasksPanelAddDoingButton.innerText = " Add new Task"
 
-tasksPanelAddDoingButton.onclick = function() {
-    var result = createTaskDoing(user.id)
+tasksPanelAddDoingButton.onclick = function () {
+    try {
+        createTaskDoing(user.id)
+        log("DEBUG", "A new DOING card have been created")
 
-    log("DEBUG", "A new DOING card have been created")
+        clearTasksCards()
+        renderTasksCards()
 
-    if (result instanceof Error) {
-        alert(result.message)
-
+    } catch (error) {
+        alert(error.message)
         return
     }
-
-    clearTasksCards()
-    renderTasksCards()
 }
 
 tasksPanelColumnDoing.append(tasksPanelAddDoingButton);
@@ -94,19 +93,18 @@ tasksPanelAddDoneButton.classList.add("fa-plus");
 tasksPanelAddDoneButton.classList.add("tasks__panel__add-button")
 tasksPanelAddDoneButton.innerText = " Add new Task"
 
-tasksPanelAddDoneButton.onclick = function() {
-    var result = createTaskDone(user.id)
+tasksPanelAddDoneButton.onclick = function () {
+    try {
+        createTaskDone(user.id)
+        log("DEBUG", "A new DONE card have been created")
 
-    log("DEBUG", "A new DONE card have been created")
+        clearTasksCards()
+        renderTasksCards()
 
-    if (result instanceof Error) {
-        alert(result.message)
-
+    } catch (error) {
+        alert(error.message)
         return
     }
-
-    clearTasksCards()
-    renderTasksCards()
 }
 
 tasksPanelColumnDone.append(tasksPanelAddDoneButton);
@@ -127,11 +125,12 @@ function createTaskCard(taskId, text) {
     taskText.innerText = text
     taskText.contentEditable = true
 
-    taskText.onkeyup = function(){
-        var result = updateTaskText(user.id, taskId, taskText.innerText)
+    taskText.onkeyup = function () {
+        try {
+            updateTaskText(user.id, taskId, taskText.innerText)
 
-        if (result instanceof Error) {
-            alert(result.message)
+        } catch (error) {
+            alert(error.message)
 
             return
         }
@@ -142,17 +141,16 @@ function createTaskCard(taskId, text) {
     taskDeleteButton.classList.add("fa-trash-o");
     taskDeleteButton.classList.add("task__card__button-delete")
 
-    taskDeleteButton.onclick = function(){
-        var result = deleteTask(user.id, taskId)
+    taskDeleteButton.onclick = function () {
+        try {
+            deleteTask(user.id, taskId)
+            taskCard.remove();
 
-        if (result instanceof Error) {
-            alert(result.message)
+        } catch (error) {
+            alert(error.message)
 
             return
         }
-
-        taskCard.remove();
-
     }
 
     taskCard.append(taskText, taskDeleteButton);
@@ -181,10 +179,10 @@ function renderTasksCards() {
         var myTaskCard = createTaskCard(myTask.id, myTask.text)
 
         if (myTask.status === "todo")
-        tasksPanelColumnTodo.append(myTaskCard)
+            tasksPanelColumnTodo.append(myTaskCard)
         else if (myTask.status === "doing")
-        tasksPanelColumnDoing.append(myTaskCard)
+            tasksPanelColumnDoing.append(myTaskCard)
         else if (myTask.status === "done")
-        tasksPanelColumnDone.append(myTaskCard)
+            tasksPanelColumnDone.append(myTaskCard)
     }
 }

@@ -72,13 +72,13 @@ var registerPasswordCheckbox = document.createElement("input");
 registerPasswordCheckbox.type = "checkbox";
 
 registerPasswordCheckbox.onchange = function showPassword() {
-    var showElement = registerPasswordInput;
-    if (showElement.type === "password") {
-      showElement.type = "text";
-    } else {
-      showElement.type = "password";
-    }
-  } 
+  var showElement = registerPasswordInput;
+  if (showElement.type === "password") {
+    showElement.type = "text";
+  } else {
+    showElement.type = "password";
+  }
+}
 
 registerCheckboxContainer.append(registerPasswordCheckbox, registerLabelPasswordCheckbox)
 
@@ -88,7 +88,7 @@ registerButton.innerText = "Register";
 registerButton.classList.add("button");
 
 /* -- */
-registerForm.append(registerImageAvatar,registerLabelName, registerNameInput,registerLabelEmail, registerEmailInput,registerLabelPassword, registerPasswordInput, registerCheckboxContainer, registerButton);
+registerForm.append(registerImageAvatar, registerLabelName, registerNameInput, registerLabelEmail, registerEmailInput, registerLabelPassword, registerPasswordInput, registerCheckboxContainer, registerButton);
 registerContainerFlex.append(registerForm);
 
 /* CREAMOS ENLACE SIGN IN */
@@ -98,43 +98,44 @@ registerLinkLogin.innerText = "Sign in";
 registerLinkLogin.classList.add("anchor__login");
 
 /* -- */
-registerLinkLogin.onclick = function(event){
-    event.preventDefault();
+registerLinkLogin.onclick = function (event) {
+  event.preventDefault();
 
-    log("DEBUG", "Navigate to Login Page");
+  log("DEBUG", "Navigate to Login Page");
 
-    registerPasswordInput.type = "password";
+  registerPasswordInput.type = "password";
 
-    registerPage.remove();
-    registerForm.reset();
-    document.body.append(loginPage);
+  registerPage.remove();
+  registerForm.reset();
+  document.body.append(loginPage);
 }
 
 /* -- */
 registerContainerFlex.append(registerLinkLogin);
 
 /* CREAMOS UNA BASE DE DATOS - BD */
-registerForm.onsubmit = function(event) {
-    event.preventDefault();
-    console.log("DEBUG", "Submit register");
+registerForm.onsubmit = function (event) {
+  event.preventDefault();
+  console.log("DEBUG", "Submit register");
 
-    var name = registerNameInput.value;
-    var email = registerEmailInput.value;
-    var password = registerPasswordInput.value;
+  var name = registerNameInput.value;
+  var email = registerEmailInput.value;
+  var password = registerPasswordInput.value;
 
-    const result = registerUser(name, email, password);
+  try {
+    registerUser(name, email, password);
 
-    if (result instanceof Error) {
-        alert(result.message)
-
-        registerPasswordInput.value = "";
-        return
-    }
     console.log(users);
-    
+
     registerPasswordInput.type = "password";
     registerForm.reset();
     registerPage.remove();
     document.body.append(loginPage);
+
+  } catch (error) {
+    alert(error.message)
+
+    registerPasswordInput.value = "";
+  }
 }
 /* ----------------------- */

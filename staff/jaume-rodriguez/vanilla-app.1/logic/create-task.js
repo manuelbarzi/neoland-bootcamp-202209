@@ -4,12 +4,13 @@ function createTaskTodo(userId) {
 
     for (var i = 0; i < users.length && !found; i++) {
         var user = users[i]
-        
-        if (user.id === userId)
+
+        if (user.id === userId) {
             found = true
+        }
     }
 
-    if (!found) return new Error("user with id " + userId + " not found")
+    if (!found) throw new Error("user with id " + userId + " not found")
 
     var lastIndex = tasks.length - 1
     var lastTask = tasks[lastIndex]
@@ -29,8 +30,6 @@ function createTaskTodo(userId) {
     }
 
     tasks.push(task)
-
-    return null
 }
 
 /* -- */
@@ -40,12 +39,13 @@ function createTaskDoing(userId) {
 
     for (var i = 0; i < users.length && !found; i++) {
         var user = users[i]
-        
-        if (user.id === userId)
+
+        if (user.id === userId) {
             found = true
+        }
     }
 
-    if (!found) return new Error("user with id " + Id + " not found")
+    if (!found) throw new Error("user with id " + Id + " not found")
 
     var lastIndex = tasks.length - 1
     var lastTask = tasks[lastIndex]
@@ -65,8 +65,6 @@ function createTaskDoing(userId) {
     }
 
     tasks.push(task)
-
-    return null
 }
 
 /* -- */
@@ -76,12 +74,13 @@ function createTaskDone(userId) {
 
     for (var i = 0; i < users.length && !found; i++) {
         var user = users[i]
-        
-        if (user.id === userId)
+
+        if (user.id === userId) {
             found = true
+        }
     }
 
-    if (!found) return new Error("user with id " + userId + " not found")
+    if (!found) throw new Error("user with id " + userId + " not found")
 
     var lastIndex = tasks.length - 1
     var lastTask = tasks[lastIndex]
@@ -101,6 +100,4 @@ function createTaskDone(userId) {
     }
 
     tasks.push(task)
-
-    return null
 }

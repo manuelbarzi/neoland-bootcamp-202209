@@ -65,18 +65,18 @@ var loginPasswordCheckbox = document.createElement("input");
 loginPasswordCheckbox.type = "checkbox";
 
 loginPasswordCheckbox.onchange = function showPassword() {
-    var showElement = loginPasswordInput;
-    if (showElement.type === "password") {
-      showElement.type = "text";
-    } else {
-      showElement.type = "password";
-    }
-  } 
+  var showElement = loginPasswordInput;
+  if (showElement.type === "password") {
+    showElement.type = "text";
+  } else {
+    showElement.type = "password";
+  }
+}
 
-  loginCheckboxContainer.append(loginPasswordCheckbox, loginLabelPasswordCheckbox)
+loginCheckboxContainer.append(loginPasswordCheckbox, loginLabelPasswordCheckbox)
 
 /* -- */
-loginForm.append(loginImageAvatar, loginEmailLabel, loginEmailInput,loginPasswordLabel, loginPasswordInput, loginCheckboxContainer, loginButton);
+loginForm.append(loginImageAvatar, loginEmailLabel, loginEmailInput, loginPasswordLabel, loginPasswordInput, loginCheckboxContainer, loginButton);
 loginContainerFlex.append(loginForm);
 
 /* CREAMOS ENLACE CREATE AN ACCOUNT */
@@ -86,16 +86,16 @@ loginLinkRegister.innerText = "Create an account";
 loginLinkRegister.classList.add("anchor__login");
 
 /* -- */
-loginLinkRegister.onclick = function(event){
-    event.preventDefault();
+loginLinkRegister.onclick = function (event) {
+  event.preventDefault();
 
-    log("DEBUG", "Navigate to register page");
+  log("DEBUG", "Navigate to register page");
 
-    loginPasswordInput.type = "password";
+  loginPasswordInput.type = "password";
 
-    loginForm.reset();
-    loginPage.remove();
-    document.body.append(registerPage);
+  loginForm.reset();
+  loginPage.remove();
+  document.body.append(registerPage);
 }
 
 /* -- */
@@ -103,26 +103,16 @@ loginContainerFlex.append(loginLinkRegister);
 
 /* CONFIRMAMOS USUARIO */
 loginForm.onsubmit = function (event) {
-    event.preventDefault()
+  event.preventDefault()
 
-    log("DEBUG", "Submit login")
+  log("DEBUG", "Submit login")
 
-    var email = loginEmailInput.value
-    var password = loginPasswordInput.value
-    
-    var result = authenticateUser(email, password)
+  var email = loginEmailInput.value
+  var password = loginPasswordInput.value
 
-    if (result instanceof Error) {
-        alert(result.message)
+  try {
+    user = authenticateUser(email, password)
 
-        loginPasswordInput.value = "";
-        return
-        
-    }
-
-    user = result;
-
-    console.log(result);
     loginForm.reset();
     loginPage.remove();
     homePage.append(tasksPanelSection);
@@ -136,5 +126,11 @@ loginForm.onsubmit = function (event) {
     renderTasksCards()
 
     document.body.append(homePage);
+
+  } catch (error) {
+    alert(error.message)
+
+    loginPasswordInput.value = "";
+  }
 }
 /* ----------------------- */

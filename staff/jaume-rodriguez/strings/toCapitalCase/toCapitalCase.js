@@ -2,20 +2,20 @@ function toCapitalCase(text) {
     var lowers = 'abcdefghijklmnñopqrstuvwxyz'
     var uppers = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ'
 
-    var result
+    var result = ''
 
     for (var i = 0; i < text.length; i++) {
+        var prevChar = text[i - 1]
         var char = text[i]
-        
-        if (i === 0) {
-            for (var j = 0; j < lowers.length; j++) {
-                var char2 = lowers[j]
 
-                if (char === char2) {
-                    result = uppers[j]
+        if ((prevChar === undefined || prevChar === ' ') && char !== ' ') {
+            var char2 = undefined
 
-                    break
-                }
+            for (var j = 0; j < lowers.length && char2 !== char; j++) {
+                char2 = lowers[j]
+
+                if (char === char2)
+                    result += uppers[j]
             }
         } else {
             result += char

@@ -51,7 +51,7 @@ editNameButton.classList.add("edit__name__button");
 editNameButton.classList.add("fa");
 editNameButton.classList.add("fa-pencil");
 
-editNameButton.onclick = function(event){
+editNameButton.onclick = function (event) {
     event.preventDefault();
     updateNameInput.disabled = false;
 }
@@ -82,7 +82,7 @@ editEmailButton.classList.add("edit__name__button");
 editEmailButton.classList.add("fa");
 editEmailButton.classList.add("fa-pencil");
 
-editEmailButton.onclick = function(event){
+editEmailButton.onclick = function (event) {
     event.preventDefault();
     updateEmailInput.disabled = false;
 }
@@ -113,7 +113,7 @@ editPasswordButton.classList.add("edit__name__button");
 editPasswordButton.classList.add("fa");
 editPasswordButton.classList.add("fa-pencil");
 
-editPasswordButton.onclick = function(event){
+editPasswordButton.onclick = function (event) {
     event.preventDefault();
     updatePasswordInput.disabled = false;
 }
@@ -137,86 +137,84 @@ updatePasswordCheckbox.type = "checkbox";
 updatePasswordCheckbox.onchange = function showPassword() {
     var showElement = updatePasswordInput;
     if (showElement.type === "password") {
-      showElement.type = "text";
+        showElement.type = "text";
     } else {
-      showElement.type = "password";
+        showElement.type = "password";
     }
-  } 
+}
 
-  updateCheckboxContainer.append(updatePasswordCheckbox, updateLabelPasswordCheckbox)
+updateCheckboxContainer.append(updatePasswordCheckbox, updateLabelPasswordCheckbox)
 
 updatePasswordForm.append(updateLabelPassword, updatePasswordInput, editPasswordButton, updatePasswordButton);
 
 settingsFormContainer.append(updateTitleForm, updateNameForm, updateEmailForm, updatePasswordForm, updateCheckboxContainer);
 
 /* -- */
-updateNameForm.onsubmit = function(event) {
+updateNameForm.onsubmit = function (event) {
     event.preventDefault()
 
     log('DEBUG', 'Submit new name')
 
     var newName = updateNameInput.value
 
-    var result = updateUserName(user.name, newName)
+    try {
+        updateUserName(user.name, newName)
 
-    if (result instanceof Error) {
-        alert(result.message)
+        alert('Your changes have been applied')
 
-        return
+        updateNameInput.disabled = true;
+        updateNameForm.reset();
+        updateNameInput.setAttribute("value", user.name);
+        homeMenuDropdownUserName.innerText = user.name;
+        tasksPanelSecondTitle.innerText = user.name;
+
+    } catch (error) {
+        alert(error.message)
     }
-
-    alert('Your changes have been applied')
-
-    updateNameInput.disabled = true;
-    updateNameForm.reset();
-    updateNameInput.setAttribute("value", user.name);
-    homeMenuDropdownUserName.innerText = user.name;
-    tasksPanelSecondTitle.innerText = user.name;
 }
 
 /* -- */
-updateEmailForm.onsubmit = function(event) {
+updateEmailForm.onsubmit = function (event) {
     event.preventDefault()
 
     log('DEBUG', 'Submit new email')
 
     var newEmail = updateEmailInput.value
-        
-    var result = updateUserEmail(user.email, newEmail)
 
-    if (result instanceof Error) {
-        alert(result.message)
+    try {
+        updateUserEmail(user.email, newEmail)
 
-        return
+        alert('Your changes have been applied')
+        updateEmailInput.disabled = true;
+        updateEmailForm.reset();
+        updateEmailInput.setAttribute("value", user.email);
+        homeSettingsSecondTitle.innerText = user.email;
+
+    } catch (error) {
+        alert(error.message)
     }
-
-    alert('Your changes have been applied')
-    updateEmailInput.disabled = true;
-    updateEmailForm.reset();
-    updateEmailInput.setAttribute("value", user.email);
-    homeSettingsSecondTitle.innerText = user.email;
 }
 
 /* -- */
-updatePasswordForm.onsubmit = function(event) {
+updatePasswordForm.onsubmit = function (event) {
     event.preventDefault()
 
     log('DEBUG', 'Submit new password')
 
     var newPassword = updatePasswordInput.value
 
-    var result = updateUserPassword(user.password, newPassword)
+    try {
+        updateUserPassword(user.password, newPassword)
 
-    if (result instanceof Error) {
-        alert(result.message)
+        alert('Your changes have been applied')
+        updatePasswordInput.disabled = true;
+        updatePasswordForm.reset();
+
+    } catch (error) {
+        alert(error.message)
 
         updatePasswordForm.reset();
-        return
     }
-
-    alert('Your changes have been applied')
-    updatePasswordInput.disabled = true;
-    updatePasswordForm.reset();
 }
 
 /* ----------------------- */
