@@ -21,20 +21,18 @@ settingsEmailButton.innerText = 'Save'
 
 settingsEmailForm.append(settingsEmailLabel, settingsEmailInput, settingsEmailButton)
 
-settingsEmailForm.onsubmit = function(event) {
+settingsEmailForm.onsubmit = function (event) {
     event.preventDefault()
 
     var newEmail = settingsEmailInput.value
 
-    var result = updateUserEmail(user.email, newEmail)
+    try {
+        updateUserEmail(user.email, newEmail)
 
-    if (result instanceof Error) {
-        alert(result.message)
-
-        return
+        alert('E-mail updated')
+    } catch (error) {
+        alert(error.message)
     }
-
-    alert('E-mail updated')
 }
 
 settingsPanel.append(settingsTitle, settingsEmailForm)

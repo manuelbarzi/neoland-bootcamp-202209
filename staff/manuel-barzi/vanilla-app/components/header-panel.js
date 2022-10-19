@@ -27,19 +27,15 @@ addTaskButton.className = 'material-symbols-outlined'
 addTaskButton.innerText = 'add'
 
 addTaskButton.onclick = function() {
-    var result = createTask(user.email)
+    try {
+        createTask(user.email)
 
-    if (result instanceof Error) {
-        alert(result.message)
-
-        return
+        clearTasksCards()
+    
+        renderTasksCards()
+    } catch(error) {
+        alert(error.message)
     }
-
-    // TODO refresh tasks panel
-
-    clearTasksCards()
-
-    renderTasksCards()
 }
 
 var headerMenuButton = document.createElement('button')

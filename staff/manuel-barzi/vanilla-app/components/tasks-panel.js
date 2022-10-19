@@ -26,18 +26,16 @@ tasksPanel.append(tasksTitle, tasksContentPanel)
 function createTaskCard(taskId, text) {
     var taskCard = document.createElement('article')
     taskCard.className = 'container container--border container--padding-s container--full-width'
-    
+
     var taskText = document.createElement('p')
     taskText.innerText = text
     taskText.contentEditable = true
 
-    taskText.onkeyup = function() {
-        var result = updateTaskText(user.email, taskId, taskText.innerText)
-
-        if (result instanceof Error) {
-            alert(result.message)
-
-            return
+    taskText.onkeyup = function () {
+        try {
+            updateTaskText(user.email, taskId, taskText.innerText)
+        } catch (error) {
+            alert(error.message)
         }
     }
 
@@ -45,19 +43,17 @@ function createTaskCard(taskId, text) {
     taskDeleteButton.className = 'material-symbols-outlined'
     taskDeleteButton.innerText = 'delete'
 
-    taskDeleteButton.onclick = function() {
-        var result = deleteTask(user.email, taskId)
+    taskDeleteButton.onclick = function () {
+        try {
+            deleteTask(user.email, taskId)
 
-        if (result instanceof Error) {
-            alert(result.message)
-
-            return
+            taskCard.remove()
+        } catch (error) {
+            alert(error.message)
         }
-
-        taskCard.remove()
     }
 
-    taskCard.append(taskText, taskDeleteButton)    
+    taskCard.append(taskText, taskDeleteButton)
 
     return taskCard
 }
@@ -73,18 +69,22 @@ function clearTasksCards() {
 }
 
 function renderTasksCards() {
-    var myTasks = retrieveTasks(user.email)
+    try {
+        var myTasks = retrieveTasks(user.email)
 
-    for (var i = 0; i < myTasks.length; i++) {
-        var myTask = myTasks[i]
+        for (var i = 0; i < myTasks.length; i++) {
+            var myTask = myTasks[i]
 
-        var myTaskCard = createTaskCard(myTask.id, myTask.text)
+            var myTaskCard = createTaskCard(myTask.id, myTask.text)
 
-        if (myTask.status === 'todo')
-            tasksTodoColumn.append(myTaskCard)
-        else if (myTask.status === 'doing')
-            tasksDoingColumn.append(myTaskCard)
-        else if (myTask.status === 'done')
-            tasksDoneColumn.append(myTaskCard)
+            if (myTask.status === 'todo')
+                tasksTodoColumn.append(myTaskCard)
+            else if (myTask.status === 'doing')
+                tasksDoingColumn.append(myTaskCard)
+            else if (myTask.status === 'done')
+                tasksDoneColumn.append(myTaskCard)
+        }
+    } catch (error) {
+        alert(error.message)
     }
 }

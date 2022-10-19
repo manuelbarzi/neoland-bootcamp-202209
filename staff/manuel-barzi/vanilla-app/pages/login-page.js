@@ -11,27 +11,25 @@ loginForm.onsubmit = function (event) {
     var email = loginEmailInput.value
     var password = loginPasswordInput.value
 
-    var result = authenticateUser(email, password)
+    try {
+        user = authenticateUser(email, password)
 
-    if (result instanceof Error) {
-        alert(result.message)
+        loginForm.reset()
 
-        return
-    }
-
-    user = result
-
-    loginForm.reset()
-
-    loginPage.remove()
+        loginPage.remove()
+        
+        headerUserNameText.innerText = user.name
     
-    headerUserNameText.innerText = user.name
+        clearTasksCards()
+    
+        renderTasksCards()
+    
+        document.body.append(homePage)    
+    } catch(error) {
+        alert(error.message)
 
-    clearTasksCards()
-
-    renderTasksCards()
-
-    document.body.append(homePage)
+        loginPasswordInput.value = ''
+    }
 }
 
 var loginEmailLabel = document.createElement('label')
