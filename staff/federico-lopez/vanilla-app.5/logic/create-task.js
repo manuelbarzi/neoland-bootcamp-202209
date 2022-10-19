@@ -1,6 +1,9 @@
 function createTask(userEmail) {
+    // DONE validate input args
     if (typeof userEmail !== 'string') return new Error('email is not a string')
     if (!IS_EMAIL_REGEX.test(userEmail)) return new Error('email is not valid')
+
+    // DONE check userEmail belongs to an existing user
 
     var found = false
 
@@ -10,7 +13,8 @@ function createTask(userEmail) {
         if (user.email === userEmail)
             found = true
     }
-    
+
+    // if not found then ...
     if (!found) return new Error('user with email ' + userEmail + ' not found')
 
     var lastIndex = tasks.length - 1
