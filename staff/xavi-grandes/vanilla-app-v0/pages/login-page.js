@@ -1,16 +1,16 @@
-var loginPage = document.createElement("div");
-loginPage.classList.add("loginContainer");
+const loginPage = document.createElement("div");
+loginPage.className = 'loginContainer';
 
-var loginForm = document.createElement("form");
+const loginForm = document.createElement("form");
 loginForm.method = "post";
 
 loginForm.onsubmit = function (event) {
   event.preventDefault();
 
-  var email = loginInputEmail.value;
-  var password = loginInputPassword.value;
+  const email = loginInputEmail.value;
+  const password = loginInputPassword.value;
 
-  var result = authenticateUser(email, password);
+  const result = authenticateUser(email, password);
 
   if (result instanceof Error) {
     alert(result.message);

@@ -13,6 +13,7 @@ homeMenuSettingsLink.onclick = function (event) {
   tasksPanel.remove()
   homeMenuPanelStatus = "closed";
 
+  tasksPanel.remove()
   homePage.append(settingsPanel);
 };
 
@@ -25,6 +26,7 @@ homeMenuButtonLogout.onclick = function () {
   homeMenuPanelStatus = "closed";
   // homeMenuPanel.remove();
 
+  settingsPanel.remove();
   homePage.remove();
   document.body.append(loginPage);
   document.body.className = "body-login";
