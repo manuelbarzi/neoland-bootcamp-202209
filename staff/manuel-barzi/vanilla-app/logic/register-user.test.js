@@ -10,8 +10,8 @@
 
     let found = false
 
-    for (var i = 0; i < users.length && !found; i++) {
-        var user = users[i]
+    for (let i = 0; i < users.length && !found; i++) {
+        const user = users[i]
 
         if (user.email === email) found = true
     }

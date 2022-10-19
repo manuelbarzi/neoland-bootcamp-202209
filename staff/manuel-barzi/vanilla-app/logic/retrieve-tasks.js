@@ -16,7 +16,7 @@ function retrieveTasks(userEmail) {
 
     const filteredTasks = []
 
-    for (var i = 0; i < tasks.length; i++) {
+    for (let i = 0; i < tasks.length; i++) {
         const task = tasks[i]
 
         if (task.user === userEmail)

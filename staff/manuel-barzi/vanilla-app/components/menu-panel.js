@@ -1,7 +1,7 @@
-var menuPanel = document.createElement('div')
+const menuPanel = document.createElement('div')
 menuPanel.className = 'container'
 
-var menuSettingsLink = document.createElement('a')
+const menuSettingsLink = document.createElement('a')
 menuSettingsLink.className = 'material-symbols-outlined'
 menuSettingsLink.innerText = 'settings'
 menuSettingsLink.href = ''
@@ -19,7 +19,7 @@ menuSettingsLink.onclick = function(event) {
     homePage.append(settingsPanel)
 }
 
-var menuLogoutButton = document.createElement('button')
+const menuLogoutButton = document.createElement('button')
 menuLogoutButton.className = 'material-symbols-outlined'
 menuLogoutButton.innerText = 'logout'
 

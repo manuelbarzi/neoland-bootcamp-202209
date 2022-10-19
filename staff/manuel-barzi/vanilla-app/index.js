@@ -1,6 +1,6 @@
 log('INFO', 'start app')
 
-var user = null
+let user = null
 
 document.body.append(loginPage)
 
