@@ -1,19 +1,19 @@
-var homeHeader = document.createElement('header')
+const homeHeader = document.createElement('header')
 homeHeader.className= 'home-header'
 
-var homeNav = document.createElement('nav')
+const homeNav = document.createElement('nav')
 homeNav.className= 'home-nav'
 
 
 
-var userNameText = document.createElement('span')
+const userNameText = document.createElement('span')
 userNameText.className='username'
 
-var menuButton = document.createElement('button')
+const menuButton = document.createElement('button')
 menuButton.className= 'material-symbols-outlined menu-button'
 menuButton.innerText= 'Menu'
 
-var menuStatus = 'closed'
+let menuStatus = 'closed'
 
 menuButton.onclick= function(event){
     event.preventDefault()
@@ -29,7 +29,7 @@ menuButton.onclick= function(event){
 
 
 
-var homeLinkHome = document.createElement('a');
+const homeLinkHome = document.createElement('a');
 homeLinkHome.href=''
 homeLinkHome.innerText='Home'
 homeLinkHome.className='home-link-home'
@@ -45,6 +45,6 @@ homeLinkHome.onclick = function (event) {
 
 
 
-var homeTitle = document.createElement('h1')
+const homeTitle = document.createElement('h1')
 homeTitle.className= 'home-title'
 homeTitle.innerText='GameOver'

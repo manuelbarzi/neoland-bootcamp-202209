@@ -1,30 +1,22 @@
 function retrieveTasks(email) {
+    let found = false
 
-    var found = false
-
-    for (i = 0; i < users.length && !found; i++) {
-
-        var user = users[i]
+    for (let i = 0; i < users.length && !found; i++) {
+        const user = users[i]
 
         if (email === user.email)
             found = true
-
-
     }
+    if (!found) throw new Error('user email dont found')
 
-    if (!found) return new Error ('user email dont found')
+    const userTasks = []
 
-    var userTasks = []
-    
-    for(i=0; i < tasks.length; i++){
+    for (let i = 0; i < tasks.length; i++) {
+        const task = tasks[i]
 
-        var task = tasks[i]
-
-        if(email === task.user)
+        if (email === task.user)
             userTasks.push(task)
-        
     }
-
     return userTasks
 }
 

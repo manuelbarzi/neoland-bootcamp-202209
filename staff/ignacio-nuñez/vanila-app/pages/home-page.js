@@ -1,7 +1,7 @@
 
 
 
-var homeContenedor= document.createElement('div')
+const homeContenedor= document.createElement('div')
 homeContenedor.className='home-contenedor'
 
 

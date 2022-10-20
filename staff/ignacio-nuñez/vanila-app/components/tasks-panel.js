@@ -1,98 +1,110 @@
 
-var tasksPanel = document.createElement('section')
+const tasksPanel = document.createElement('section')
 tasksPanel.className = 'container-flex full-width justify-content-start'
 
-var tasksTitle = document.createElement('h2')
+const tasksTitle = document.createElement('h2')
 tasksTitle.innerText = 'Tasks'
 tasksTitle.className = 'tasks-title align-self-center'
 
 
-var tasksContentPanel = document.createElement('div')
+const tasksContentPanel = document.createElement('div')
 tasksContentPanel.className = 'container-flex flex-rows align-items-start color-bisque'
 
-var tasksTodoColumn = document.createElement('section')
+const tasksTodoColumn = document.createElement('section')
 tasksTodoColumn.innerText = 'TODO'
 tasksTodoColumn.className = 'padding-s'
 
-var todoContenedor = document.createElement('div')
+const todoContenedor = document.createElement('div')
 todoContenedor.className = 'container-flex-tasks  border-and-radius padding-s container-color min-heigth-width'
 
-var tasksTodoForm = document.createElement('form')
+const tasksTodoForm = document.createElement('form')
 tasksTodoForm.className = 'container-flex-tasks-button container-color'
 tasksTodoForm.onsubmit = function (event) {
     event.preventDefault()
 
-    var text = ''
+    const text = ''
 
-    var result = createTask(user.email, text)
+    try {
+        createTask(user.email, text)
 
+        clearTaskCard()
+        renderTasksCards()
+    }
+    catch (error) {
+        alert(error.message)
+    }
+}
+
+function createTaskCard(taskId, taskText){
+
+    const taskCard = document.createElement('article')
+    taskCard.innerText = taskText
+    taskCard.className = 'new-task-card'
+    taskCard.contentEditable = true
+
+    taskCard.onkeyup = function(){
+
+        const updateMyTask = updateTask()
+    }
+    return taskCard
 }
 
 
-var insertNewTaskButton = document.createElement('button')
+const insertNewTaskButton = document.createElement('button')
 insertNewTaskButton.className = 'material-symbols-outlined'
 insertNewTaskButton.innerText = 'add'
 
-var doingContenedor = document.createElement('div')
+const doingContenedor = document.createElement('div')
 doingContenedor.className = 'container-flex-tasks border-and-radius padding-s container-color min-heigth-width'
 
-var tasksDoingColumn = document.createElement('section')
+const tasksDoingColumn = document.createElement('section')
 tasksDoingColumn.innerText = 'DOING'
 tasksDoingColumn.className = 'padding-s'
 
 
-var doneContenedor = document.createElement('div')
+const doneContenedor = document.createElement('div')
 doneContenedor.className = 'container-flex-tasks border-and-radius padding-s container-color min-heigth-width'
 
-var tasksDoneColumn = document.createElement('section')
+const tasksDoneColumn = document.createElement('section')
 tasksDoneColumn.innerText = 'DONE'
 tasksDoneColumn.className = 'padding-s'
 
 
 function clearTaskCard() {
 
-    var taskCardSelections = tasksContentPanel.querySelectorAll('article')
+    const taskCardSelections = tasksContentPanel.querySelectorAll('article')
 
     for (i = 0; i < taskCardSelections.length; i++) {
 
-        var taskCardSelection = taskCardSelections[i]
+        const taskCardSelection = taskCardSelections[i]
 
         taskCardSelection.remove()
     }
 }
 
-function createTaskCard() {
+function renderTasksCards() {
+    try {
+        const renderTasks = retrieveTasks(user.email)
 
-    clearTaskCard()
+        for (i = 0; i < renderTasks.length; i++) {
+            const renderTask = renderTasks[i]
 
-    var email = user.email
+            const myTaskCard = createTaskCard(renderTask.id, renderTask.text)
 
-    var renderTasks = retrieveTasks(email)
+            if (renderTask.status === 'todo')
+                tasksTodoColumn.append(myTaskCard)
 
+            else if (renderTask.status === 'doing')
+                tasksDoingColumn.append(myTaskCard)
 
-    for (i = 0; i < renderTasks.length; i++) {
-
-        var renderTask = renderTasks[i]
-
-        var taskCard = document.createElement('article')
-        taskCard.innerText = renderTask.text
-        taskCard.className = 'new-task-card'
-        taskCard.contentEditable = true
-
-        if (renderTask.status === 'todo')
-            tasksTodoColumn.append(taskCard)
-
-        else if (renderTask.status === 'doing')
-            tasksDoingColumn.append(taskCard)
-
-        else if (renderTask.status === 'done')
-            tasksDoneColumn.append(taskCard)
-
+            else if (renderTask.status === 'done')
+                tasksDoneColumn.append(myTaskCard)
+        }
     }
-
-
+    catch (error) {
+        alert(error.message)
+    }
 }
-
 
 tasksTodoForm.append(insertNewTaskButton)
 todoContenedor.append(tasksTodoColumn, tasksTodoForm)

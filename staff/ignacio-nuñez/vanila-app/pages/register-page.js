@@ -7,26 +7,22 @@ registerForm.className = 'container borde-register';
 registerForm.onsubmit = function (event) {
     event.preventDefault()
 
+    const name = registerNameInput.value
+    const email = registerEmailInput.value
+    const password = registerPasswordInput.value
 
-    var name = registerNameInput.value
-    var email = registerEmailInput.value
-    var password = registerPasswordInput.value
 
-    if (name && email && password) {
-        const result = registerUser(name, email, password)
+    try {
+        registerUser(name, email, password)
 
-        if (result instanceof Error) {
-            alert(result.message)
-
-            return
-        }
-
-        alert('User registered');
         registerForm.reset();
         registerLinkLogin.click()
+        alert('User registered');
+    }
+    catch (error) {
+        alert(error.message)
 
-    } else {
-        alert('Put your dates')
+        registerPasswordInput.value = ''
     }
 }
 

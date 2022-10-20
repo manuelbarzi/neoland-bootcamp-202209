@@ -1,62 +1,62 @@
-var settingsPanel = document.createElement('section')
+const settingsPanel = document.createElement('section')
 settingsPanel.className = 'settings-container'
 
-var settingsTitle = document.createElement('h2')
+const settingsTitle = document.createElement('h2')
 settingsTitle.innerText = 'Settings'
 
-var settingsEmailForm = document.createElement('form')
+const settingsEmailForm = document.createElement('form')
 
-var settingsEmailLabel = document.createElement('label')
+const settingsEmailLabel = document.createElement('label')
 settingsEmailLabel.innerText = 'E-mail'
 settingsEmailLabel.htmlFor = 'settings-email'
 
-var settingsEmailInput = document.createElement('input')
+const settingsEmailInput = document.createElement('input')
 settingsEmailInput.type = 'email'
 settingsEmailInput.id = 'settings-email'
 
 
-var settingsEmailButton = document.createElement('button')
+const settingsEmailButton = document.createElement('button')
 settingsEmailButton.innerText = 'Save'
 
 settingsEmailButton.onclick = function (event) {
     event.preventDefault()
 
-    var newEmail = settingsEmailInput.value
-    var email = user.email
+    const newEmail = settingsEmailInput.value
+    const email = user.email
 
-    var result = updateEmail(newEmail, email)
 
-    if (result instanceof Error) {
-        alert(result.message)
-
-        return
+    try {
+       result = updateEmail(newEmail, email)
+       user.email = result
+       alert('Email correctly changed')
+    } catch(error) {
+        alert(error.message)
     }
-
-    user.email = result
-    alert('Email correctly changed')
 }
+
+
 
 settingsEmailForm.append(settingsEmailLabel, settingsEmailInput, settingsEmailButton)
 
 
-var settingsPasswordForm = document.createElement('form')
+const settingsPasswordForm = document.createElement('form')
 
-var settingsPasswordLabel = document.createElement('label')
+const settingsPasswordLabel = document.createElement('label')
 settingsPasswordLabel.innerText = 'password'
 settingsPasswordLabel.htmlFor = 'settings-password'
 
-var settingsPasswordInput = document.createElement('input')
+const settingsPasswordInput = document.createElement('input')
 settingsPasswordInput.type = ''
 settingsPasswordInput.id = 'settings-password'
 
 
-var settingsPasswordButton = document.createElement('button')
+const settingsPasswordButton = document.createElement('button')
 settingsPasswordButton.innerText = 'Save'
 
 settingsPasswordButton.onclick = function (event) {
     event.preventDefault()
 
-    var newPassword = settingsPasswordInput.value
+    const newPassword = settingsPasswordInput.value
 
 
 

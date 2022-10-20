@@ -1,17 +1,20 @@
-var updateEmail = function (newEmail, email) {
-    for (i = 0; i < users.length; i++) {
-        var user = users[i]
+const updateEmail = function (newEmail, email) {
+    if(newEmail === email)
+        throw new Error ('you must put a new email')
+
+    for (let i = 0; i < users.length; i++) {
+        const user = users[i]
 
         if (newEmail === user.email)
-            return new Error('email already exists')
+            throw new Error('email already exists')
     }
-    for (i=0; i<users.length; i++){
-        var user = users[i]
+    for (let i=0; i<users.length; i++){
+        const user = users[i]
 
         if(email === user.email)
         return newEmail
     } 
-    return new Error('you are not registred')
+    throw new Error('you are not registred')
 
 }
 

@@ -17,7 +17,7 @@ function sliceParrafo(parrafo, startNumber, endNumber) {
     if (endNumber < 0)
         endNumber += parrafo.length
 
-    !endNumber || endNumber > parrafo.length === true ? endNumber = parrafo.length : endNumber
+    !endNumber || endNumber > parrafo.length ? endNumber = parrafo.length : endNumber
 
 
 
