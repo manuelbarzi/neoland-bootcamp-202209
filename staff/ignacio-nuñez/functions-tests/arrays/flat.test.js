@@ -3,14 +3,6 @@ var numbers1 = [1, [2, 3], [4, [5, 6]], 7]
 
 var result1 = flat(numbers1, 2)
 
-// console.assert(numbers1[0] === 1) 
-// console.assert(numbers1[1] === 2) 
-// console.assert(numbers1[2] === 3) 
-// console.assert(numbers1[3] === 4) 
-// console.assert(numbers1[4] === 5) 
-// console.assert(numbers1[5] === 6) 
-// console.assert(numbers1[6] === 7) 
-
 console.assert(result1[0] === 1) 
 console.assert(result1[1] === 2) 
 console.assert(result1[2] === 3) 
@@ -60,17 +52,17 @@ console.assert(result4[5] === 7)
 
 
 //CASE succes with 3 level of arrays and down it infinity level
-// var numbers5 = [1, [2, 3], [4, [5, [6]]], 7]
+var numbers5 = [1, [2, 3], [4, [5, [6]]], 7]
 
-// var result5 = flat(numbers5, Infinity)
+var result5 = flat(numbers5, Infinity)
 
-// console.assert(result5[0] === 1) 
-// console.assert(result5[1] === 2)     
-// console.assert(result5[2] === 3) 
-// console.assert(result5[3] === 4) 
-// console.assert(result5[4] === 5) 
-// console.assert(result5[5] === 6) 
-// console.assert(result5[6] === 7) 
+console.assert(result5[0] === 1) 
+console.assert(result5[1] === 2)     
+console.assert(result5[2] === 3) 
+console.assert(result5[3] === 4) 
+console.assert(result5[4] === 5) 
+console.assert(result5[5] === 6) 
+console.assert(result5[6] === 7) 
 
 //CASE succes with 5 level of arrays and down it 3 level
 var numbers6 = [[1, 3,[4, 5, [6, 7, [8, 9, [10, 11]]]], 12]]
