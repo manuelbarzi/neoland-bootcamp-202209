@@ -1,5 +1,5 @@
 const menuPanel = document.createElement('div')
-menuPanel.className = 'container'
+menuPanel.className = 'flex flex-col items-center'
 
 const menuSettingsLink = document.createElement('a')
 menuSettingsLink.className = 'material-symbols-outlined'
