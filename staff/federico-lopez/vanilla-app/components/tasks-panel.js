@@ -1,21 +1,21 @@
-var tasksPanel = document.createElement('section')
+const tasksPanel = document.createElement('section')
 tasksPanel.className = 'container container--full-width'
 
-var tasksTitle = document.createElement('h2')
+const tasksTitle = document.createElement('h2')
 tasksTitle.innerText = 'Tasks'
 
-var tasksContentPanel = document.createElement('div')
+const tasksContentPanel = document.createElement('div')
 tasksContentPanel.className = 'container container--row container--items-start'
 
-var tasksTodoColumn = document.createElement('section')
+const tasksTodoColumn = document.createElement('section')
 tasksTodoColumn.innerText = 'TODO'
 tasksTodoColumn.className = 'container container--border container--padding-s container--items-start'
 
-var tasksDoingColumn = document.createElement('section')
+const tasksDoingColumn = document.createElement('section')
 tasksDoingColumn.innerText = 'DOING'
 tasksDoingColumn.className = 'container container--border container--padding-s container--items-start'
 
-var tasksDoneColumn = document.createElement('section')
+const tasksDoneColumn = document.createElement('section')
 tasksDoneColumn.innerText = 'DONE'
 tasksDoneColumn.className = 'container container--border container--padding-s container--items-start'
 
@@ -24,67 +24,67 @@ tasksContentPanel.append(tasksTodoColumn, tasksDoingColumn, tasksDoneColumn)
 tasksPanel.append(tasksTitle, tasksContentPanel)
 
 function createTaskCard(taskId, text) {
-    var taskCard = document.createElement('article')
+    const taskCard = document.createElement('article')
     taskCard.className = 'container container--border container--padding-s container--full-width'
-    
-    var taskText = document.createElement('p')
+
+    const taskText = document.createElement('p')
     taskText.innerText = text
     taskText.contentEditable = true
 
-    taskText.onkeyup = function() {
-        var result = updateTaskText(user.email, taskId, taskText.innerText)
-
-        if (result instanceof Error) {
-            alert(result.message)
-
-            return
+    taskText.onkeyup = function () {
+        try {
+            updateTaskText(user.email, taskId, taskText.innerText)
+        } catch (error) {
+            alert(error.message)
         }
     }
 
-    var taskDeleteButton = document.createElement('button')
+    const taskDeleteButton = document.createElement('button')
     taskDeleteButton.className = 'material-symbols-outlined'
     taskDeleteButton.innerText = 'delete'
 
-    taskDeleteButton.onclick = function() {
-        var result = deleteTask(user.email, taskId)
+    taskDeleteButton.onclick = function () {
+        try {
+            deleteTask(user.email, taskId)
 
-        if (result instanceof Error) {
-            alert(result.message)
-
-            return
+            taskCard.remove()
+        } catch (error) {
+            alert(error.message)
         }
-
-        taskCard.remove()
     }
 
-    taskCard.append(taskText, taskDeleteButton)    
+    taskCard.append(taskText, taskDeleteButton)
 
     return taskCard
 }
 
 function clearTasksCards() {
-    var myTasksCards = tasksPanel.querySelectorAll('article')
+    const myTasksCards = tasksPanel.querySelectorAll('article')
 
-    for (var i = 0; i < myTasksCards.length; i++) {
-        var myTaskCard = myTasksCards[i]
+    for (let i = 0; i < myTasksCards.length; i++) {
+        const myTaskCard = myTasksCards[i]
 
         myTaskCard.remove()
     }
 }
 
 function renderTasksCards() {
-    var myTasks = retrieveTasks(user.email)
+    try {
+        const myTasks = retrieveTasks(user.email)
 
-    for (var i = 0; i < myTasks.length; i++) {
-        var myTask = myTasks[i]
+        for (let i = 0; i < myTasks.length; i++) {
+            const myTask = myTasks[i]
 
-        var myTaskCard = createTaskCard(myTask.id, myTask.text)
+            const myTaskCard = createTaskCard(myTask.id, myTask.text)
 
-        if (myTask.status === 'todo')
-            tasksTodoColumn.append(myTaskCard)
-        else if (myTask.status === 'doing')
-            tasksDoingColumn.append(myTaskCard)
-        else if (myTask.status === 'done')
-            tasksDoneColumn.append(myTaskCard)
+            if (myTask.status === 'todo')
+                tasksTodoColumn.append(myTaskCard)
+            else if (myTask.status === 'doing')
+                tasksDoingColumn.append(myTaskCard)
+            else if (myTask.status === 'done')
+                tasksDoneColumn.append(myTaskCard)
+        }
+    } catch (error) {
+        alert(error.message)
     }
 }

@@ -1,7 +1,7 @@
 console.log('%cCOOL lög %cv0', 'font-size: 24px;', 'font-size: 12px;')
 
 function log(level, message) {
-    let style
+    var style
     
     if (level === 'DEBUG')
         style = 'color: green'

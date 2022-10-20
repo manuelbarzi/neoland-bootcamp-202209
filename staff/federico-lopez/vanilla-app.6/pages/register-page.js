@@ -1,6 +1,6 @@
 log('DEBUG', 'mount register')
 
-const registerForm = document.createElement('form')
+var registerForm = document.createElement('form')
 registerForm.className = 'container'
 
 registerForm.onsubmit = function (event) {
@@ -8,9 +8,9 @@ registerForm.onsubmit = function (event) {
 
     log('DEBUG', 'submit register')
 
-    const name = registerNameInput.value
-    const email = registerEmailInput.value
-    const password = registerPasswordInput.value
+    var name = registerNameInput.value
+    var email = registerEmailInput.value
+    var password = registerPasswordInput.value
 
     try {
         registerUser(name, email, password)
@@ -27,12 +27,12 @@ registerForm.onsubmit = function (event) {
     }
 }
 
-const registerNameLabel = document.createElement('label')
+var registerNameLabel = document.createElement('label')
 registerNameLabel.htmlFor = 'register-name'
 registerNameLabel.className = 'container__item--left'
 registerNameLabel.innerText = 'Name'
 
-const registerNameInput = document.createElement('input')
+var registerNameInput = document.createElement('input')
 registerNameInput.type = 'name'
 registerNameInput.id = 'register-name'
 registerNameInput.placeholder = 'input your name'
@@ -43,23 +43,23 @@ registerNameInput.oninvalid = function () {
     alert('Use characters from A to Z for names (min 1 character, and not numerics)')
 }
 
-const registerEmailLabel = document.createElement('label')
+var registerEmailLabel = document.createElement('label')
 registerEmailLabel.htmlFor = 'register-email'
 registerEmailLabel.className = 'container__item--left'
 registerEmailLabel.innerText = 'E-mail'
 
-const registerEmailInput = document.createElement('input')
+var registerEmailInput = document.createElement('input')
 registerEmailInput.type = 'email'
 registerEmailInput.id = 'register-email'
 registerEmailInput.placeholder = 'input your e-mail'
 registerEmailInput.required = true
 
-const registerPasswordLabel = document.createElement('label')
+var registerPasswordLabel = document.createElement('label')
 registerPasswordLabel.htmlFor = 'register-password'
 registerPasswordLabel.className = 'container__item--left'
 registerPasswordLabel.innerText = 'Password'
 
-const registerPasswordInput = document.createElement('input')
+var registerPasswordInput = document.createElement('input')
 registerPasswordInput.type = 'password'
 registerPasswordInput.id = 'register-password'
 registerPasswordInput.placeholder = 'input your password'
@@ -69,13 +69,13 @@ registerPasswordInput.pattern = '[A-Za-z0-9\S]{8,}'
 registerPasswordInput.required = true
 registerPasswordInput.title = 'Use min 8 characters for the password and no spaces'
 
-const registerSubmitButton = document.createElement('button')
+var registerSubmitButton = document.createElement('button')
 registerSubmitButton.className = 'container__item--right'
 registerSubmitButton.innerText = 'Register'
 
 registerForm.append(registerNameLabel, registerNameInput, registerEmailLabel, registerEmailInput, registerPasswordLabel, registerPasswordInput, registerSubmitButton)
 
-const registerLoginLink = document.createElement('a')
+var registerLoginLink = document.createElement('a')
 registerLoginLink.href = ""
 registerLoginLink.innerText = 'Login'
 
@@ -88,6 +88,6 @@ registerLoginLink.onclick = function (event) {
     document.body.append(loginPage)
 }
 
-const registerPage = document.createElement('main')
+var registerPage = document.createElement('main')
 registerPage.className = 'container'
 registerPage.append(registerForm, registerLoginLink)
