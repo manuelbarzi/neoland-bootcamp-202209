@@ -1,21 +1,34 @@
 /* CREAMOS UN MENU PANEL */
 const homeMenuDropdownContainer = document.createElement("div");
-homeMenuDropdownContainer.classList.add("home__menu__panel--container");
+homeMenuDropdownContainer.classList.add("flex", "justify-end", "right-0", "absolute");
 
 const homeMenuDropdown = document.createElement("div");
-homeMenuDropdown.classList.add("home__menu__panel");
+homeMenuDropdown.classList.add(
+    "flex",
+    "flex-col",
+    "items-end",
+    "content-end",
+    "z-10",
+    "w-64",
+    "p-4",
+    "rounded-sm",
+    "gap-2",
+    "bg-white",
+    "shadow-sm",
+    "shadow-slate-800/50"
+);
 
 const homeMenuDropdownUserName = document.createElement("p");
 homeMenuDropdownUserName.innerText = "User Name";
-homeMenuDropdownUserName.classList.add("home__menu__panel--user-name");
+homeMenuDropdownUserName.classList.add("text-black", "pr-1");
 
 const homeMenuDropdownSeparation = document.createElement("hr");
-homeMenuDropdownSeparation.classList.add("home__menu__panel--separation");
+homeMenuDropdownSeparation.classList.add("w-full");
 
 const homeMenuDropdownSettings = document.createElement("a");
 homeMenuDropdownSettings.href = "";
 homeMenuDropdownSettings.innerText = "Settings";
-homeMenuDropdownSettings.classList.add("home__menu__panel--text");
+homeMenuDropdownSettings.classList.add("text-black", "pr-1", "hover:font-semibold");
 
 homeMenuDropdownSettings.onclick = function (event) {
     event.preventDefault();
@@ -37,7 +50,7 @@ homeMenuDropdownSettings.onclick = function (event) {
 const homeMenuDropdownLogOut = document.createElement("a");
 homeMenuDropdownLogOut.href = "";
 homeMenuDropdownLogOut.innerText = "Log out";
-homeMenuDropdownLogOut.classList.add("home__menu__panel--text");
+homeMenuDropdownLogOut.classList.add("text-black", "pr-1", "hover:font-semibold");
 
 homeMenuDropdownLogOut.onclick = function (event) {
     event.preventDefault();

@@ -2,7 +2,7 @@
 log("INFO", "Start App")
 
 /* GUARDAMOS EL USUARIO */
-var user = null;
+let user = null;
 
 /* CARGAMOS LA PÁGINA INDEX */
 document.body.append(loginPage);

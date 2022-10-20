@@ -290,10 +290,6 @@ form img{
     justify-content: center;
 }
 
-.update__settings__form input{
-    padding: 0.2rem 2.75rem 0.2rem 0.2rem;
-}
-
 .form__checkbox--text{
     font-size: 0.78rem;
     margin: 0.75rem 0.5rem;
