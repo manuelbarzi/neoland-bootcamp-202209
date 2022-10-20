@@ -13,6 +13,12 @@ function createTask(userEmail) {
   
   if (!found) throw new Error('user with email ' + userEmail + ' not found')
 
+  // let newTaskId
+
+  // if (tasks.lenght === 0) {
+  //   newTaskId ='task-l'
+  // } else {
+
   const lastIndex = tasks.length - 1
   const lastTask = tasks[lastIndex]
   const lastTaskId = lastTask.id
