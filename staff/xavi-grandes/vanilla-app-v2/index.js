@@ -1,4 +1,4 @@
-document.body.className = "body-login";
+document.body.className = "h-full flex items-center justify-center";
 document.body.append(loginPage)
 
 // // var user = null
