@@ -38,3 +38,4 @@ settingsEmailForm.onsubmit = function(event) {
 }
 
 settingsPanel.append(settingsTitle, settingsEmailForm)
+

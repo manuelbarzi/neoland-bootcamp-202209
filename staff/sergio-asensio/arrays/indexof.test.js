@@ -1,53 +1,89 @@
-// // CASE with con the element at the array, and index 0
+// CASE with the element at the array and without indexFrom
 
-// var array = ['casa', 'camion','arbol', 'pera']
-// var element = 'camion'
-// var index = 0
+var array = ['casa', 'camion','arbol', 'pera']
+var element = 'pera'
 
-// var aux = 0
+var result = indexOf(array, element)
 
-// var result = indexof(array, element, index)
-
-// console.assert(result === 1)
-
-
-// // CASE with start bigger than array.length
-
-// var array = ['casa', 'camion','arbol', 'pera']
-// var element = 'arbol'
-// var n = 6
-
-// var aux = 0
-
-// var result = indexof(array, element, n)
-
-// console.assert(result === 2)
+console.assert(result === 3)
 
 
 
-// // CASE when whe want the second 'casa'
+// CASE without the element and without indexFrom
 
-// var array = ['casa', 'camion','arbol', 'pera', 'casa']
-// var element = 'casa'
-// var n = 
+var array = ['casa', 'camion','arbol', 'pera']
+var element = 'pelota'
 
-// var aux = 0
+var result = indexOf(array, element)
 
-// var result = indexof(array, element, n)
-
-// console.assert(result === 2)
+console.assert(result === -1)
 
 
 
-//----------------------------------------------------------------//
+// CASE with the element at the array and indexFrom 
 
-// CASE with one element on the array
+var array = ['casa', 'camion','arbol', 'pera']
+var element = 'arbol'
+var indexFrom = 1
+
+var result = indexOf(array, element, indexFrom)
+
+console.assert(result === 2)
+
+
+
+// CASE with the element at the array and indexFrom wrong
 
 var array = ['casa', 'camion','arbol', 'pera']
 var element = 'camion'
-var index = 0
+var indexFrom = 2
+
+var result = indexOf(array, element, indexFrom)
+
+console.assert(result === -1)
 
 
-var result = indexof(array, element, index)
+
+// CASE with the element at the array and indexFrom bigger than the array.length
+
+var array = ['casa', 'camion','arbol', 'pera']
+var element = 'camion'
+var indexFrom = 5
+
+var result = indexOf(array, element, indexFrom)
+
+console.assert(result === -1)
+
+
+
+// CASE with the element at the array and a negative indexFrom
+
+var array = ['casa', 'camion','arbol', 'pera']
+var element = 'camion'
+var indexFrom = -5
+
+var result = indexOf(array, element, indexFrom)
 
 console.assert(result === 1)
+
+
+// CASE with the element at the array and a negative indexFrom 
+
+var array = ['casa', 'camion','arbol', 'pera']
+var element = 'camion'
+var indexFrom = -2
+
+var result = indexOf(array, element, indexFrom)
+
+console.assert(result === -1)
+
+
+// CASE with the same element two times at the array and a negative indexFrom
+
+var array = ['casa', 'camion','arbol', 'pera', 'camion']
+var element = 'camion'
+var indexFrom = -2
+
+var result = indexOf(array, element, indexFrom)
+
+console.assert(result === 4)

@@ -1,6 +1,6 @@
-var headerPanel = document.createElement('header')
+const headerPanel = document.createElement('header')
 
-var headerHomeLink = document.createElement('a')
+const headerHomeLink = document.createElement('a')
 headerHomeLink.href = ''
 headerHomeLink.onclick = function(event) {
     event.preventDefault()
@@ -13,40 +13,36 @@ headerHomeLink.onclick = function(event) {
     homePage.append(tasksPanel)
 }
 
-var headerImage = document.createElement('img')
+const headerImage = document.createElement('img')
 headerImage.src = 'https://fakeimg.pl/50x25/?text=hola%20mundo&font=lobster'
 
 headerHomeLink.append(headerImage)
 
-var headerUserNameText = document.createElement('span')
+const headerUserNameText = document.createElement('span')
 headerUserNameText.innerText = 'User Name'
 headerUserNameText.className = 'container container--full-height container--padding-h-s'
 
-var addTaskButton = document.createElement('button')
+const addTaskButton = document.createElement('button')
 addTaskButton.className = 'material-symbols-outlined'
 addTaskButton.innerText = 'add'
 
 addTaskButton.onclick = function() {
-    var result = createTask(user.email)
+    try {
+        createTask(user.email)
 
-    if (result instanceof Error) {
-        alert(result.message)
-
-        return
+        clearTasksCards()
+    
+        renderTasksCards()
+    } catch(error) {
+        alert(error.message)
     }
-
-    // TODO refresh tasks panel
-
-    clearTasksCards()
-
-    renderTasksCards()
 }
 
-var headerMenuButton = document.createElement('button')
+const headerMenuButton = document.createElement('button')
 headerMenuButton.className = 'material-symbols-outlined'
 headerMenuButton.innerText = 'menu'
 
-var headerMenuPanelStatus = 'closed'
+let headerMenuPanelStatus = 'closed'
 
 headerMenuButton.onclick = function() {
     if (headerMenuPanelStatus === 'closed') {
@@ -60,7 +56,7 @@ headerMenuButton.onclick = function() {
     }
 }
 
-var headerTopPanel = document.createElement('div')
+const headerTopPanel = document.createElement('div')
 headerTopPanel.className = 'container container--row container--full-width container--content-space-between'
 
 headerTopPanel.append(headerHomeLink, headerUserNameText, addTaskButton, headerMenuButton)
