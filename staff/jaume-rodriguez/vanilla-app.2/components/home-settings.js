@@ -18,8 +18,8 @@ homeSettingsHeader.classList.add(
     "content-center",
     "z-0",
     "p-8",
-    "bg-slate-100",
-    "border-slate-300",
+    "bg-sky-100",
+    "border-sky-700",
     "border-b-2",
     "border-solid",
     "w-full",
@@ -100,7 +100,10 @@ editNameButton.classList.add(
     "text-white",
     "mx-2",
     "mt-1",
-    "cursor-pointer"
+    "cursor-pointer",
+    "bg-gradient-to-br",
+    "from-cyan-500",
+    "to-blue-500"
 );
 editNameButton.classList.add("fa");
 editNameButton.classList.add("fa-pencil");
@@ -120,7 +123,10 @@ updateNameButton.classList.add(
     "text-white",
     "mx-1",
     "mt-1",
-    "cursor-pointer"
+    "cursor-pointer",
+    "bg-gradient-to-br",
+    "from-cyan-500",
+    "to-blue-500"
 );
 updateNameButton.classList.add("fa");
 updateNameButton.classList.add("fa-save");
@@ -166,7 +172,10 @@ editEmailButton.classList.add(
     "text-white",
     "mx-2",
     "mt-1",
-    "cursor-pointer"
+    "cursor-pointer",
+    "bg-gradient-to-br",
+    "from-cyan-500",
+    "to-blue-500"
 );
 editEmailButton.classList.add("fa");
 editEmailButton.classList.add("fa-pencil");
@@ -186,7 +195,10 @@ updateEmailButton.classList.add(
     "text-white",
     "mx-1",
     "mt-1",
-    "cursor-pointer"
+    "cursor-pointer",
+    "bg-gradient-to-br",
+    "from-cyan-500",
+    "to-blue-500"
 );
 updateEmailButton.classList.add("fa");
 updateEmailButton.classList.add("fa-save");
@@ -232,7 +244,10 @@ editPasswordButton.classList.add(
     "text-white",
     "mx-2",
     "mt-1",
-    "cursor-pointer"
+    "cursor-pointer",
+    "bg-gradient-to-br",
+    "from-cyan-500",
+    "to-blue-500"
 );
 editPasswordButton.classList.add("fa");
 editPasswordButton.classList.add("fa-pencil");
@@ -252,7 +267,10 @@ updatePasswordButton.classList.add(
     "text-white",
     "mx-1",
     "mt-1",
-    "cursor-pointer"
+    "cursor-pointer",
+    "bg-gradient-to-br",
+    "from-cyan-500",
+    "to-blue-500"
 );
 updatePasswordButton.classList.add("fa");
 updatePasswordButton.classList.add("fa-save");

@@ -20,8 +20,8 @@ tasksPanelHeader.classList.add(
     "content-center",
     "z-0",
     "p-8",
-    "bg-slate-100",
-    "border-slate-300",
+    "bg-sky-100",
+    "border-sky-700",
     "border-b-2",
     "border-solid",
     "w-full",
@@ -74,7 +74,7 @@ tasksPanelColumnTodo.classList.add(
     "w-80"
 );
 tasksPanelColumnTodo.innerText = "TO DO";
-tasksPanelColumnTodo.classList.add("font-semibold")
+tasksPanelColumnTodo.classList.add("font-semibold");
 
 const tasksPanelAddTodoButton = document.createElement("button");
 tasksPanelAddTodoButton.classList.add(
@@ -118,7 +118,7 @@ tasksPanelColumnDoing.classList.add(
     "w-80"
 );
 tasksPanelColumnDoing.innerText = "DOING";
-tasksPanelColumnDoing.classList.add("font-semibold")
+tasksPanelColumnDoing.classList.add("font-semibold");
 
 const tasksPanelAddDoingButton = document.createElement("button");
 tasksPanelAddDoingButton.classList.add(
@@ -163,7 +163,7 @@ tasksPanelColumnDone.classList.add(
     "w-80"
 );
 tasksPanelColumnDone.innerText = "DONE";
-tasksPanelColumnDone.classList.add("font-semibold")
+tasksPanelColumnDone.classList.add("font-semibold");
 
 const tasksPanelAddDoneButton = document.createElement("button");
 tasksPanelAddDoneButton.classList.add(
@@ -205,11 +205,34 @@ tasksPanelContent.append(
 
 function createTaskCard(taskId, text) {
     const taskCard = document.createElement("article");
-    taskCard.classList.add("task__card");
+    taskCard.classList.add(
+        "w-full",
+        "p-4",
+        "flex",
+        "justify-center",
+        "flex-col",
+        "mb-4",
+        "rounded",
+        "border-solid",
+        "border-sky-600",
+        "border-t",
+        "border-b-4",
+        "border-x",
+        "bg-sky-100"
+    );
 
     const taskText = document.createElement("p");
     taskText.placeholder = "Enter a text";
-    taskText.className = "tasks__panel__content__card";
+    taskText.classList.add(
+        "flex",
+        "flex-col",
+        "items-center",
+        "bg-cyan-50",
+        "p-4",
+        "text-sm",
+        "border-sky-600",
+        "border"
+    );
     taskText.innerText = text;
     taskText.contentEditable = true;
 
@@ -226,7 +249,15 @@ function createTaskCard(taskId, text) {
     const taskDeleteButton = document.createElement("button");
     taskDeleteButton.classList.add("fa");
     taskDeleteButton.classList.add("fa-trash-o");
-    taskDeleteButton.classList.add("task__card__button-delete");
+    taskDeleteButton.classList.add(
+        "self-center",
+        "p-1",
+        "rounded",
+        "cursor-pointer",
+        "border-none",
+        "mt-4",
+        "ml-56"
+    );
 
     taskDeleteButton.onclick = function () {
         try {

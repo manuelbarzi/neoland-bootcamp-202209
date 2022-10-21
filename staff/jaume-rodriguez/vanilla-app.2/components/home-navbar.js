@@ -2,7 +2,7 @@
 const homeNavbar = document.createElement("header");
 homeNavbar.classList.add(
     "flex",
-    "z-3",
+    "z-0",
     "items-center",
     "px-2",
     "py-3",

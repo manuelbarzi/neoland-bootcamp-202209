@@ -9,13 +9,15 @@ homeMenuDropdown.classList.add(
     "items-end",
     "content-end",
     "z-10",
-    "w-64",
+    "w-56",
     "p-4",
     "rounded-sm",
     "gap-2",
-    "bg-white",
-    "shadow-sm",
-    "shadow-slate-800/50"
+    "bg-cyan-100",
+    "border-sky-700",
+    "border-b-2",
+    "border-l",
+    "-mt-1"
 );
 
 const homeMenuDropdownUserName = document.createElement("p");
@@ -23,7 +25,7 @@ homeMenuDropdownUserName.innerText = "User Name";
 homeMenuDropdownUserName.classList.add("text-black", "pr-1");
 
 const homeMenuDropdownSeparation = document.createElement("hr");
-homeMenuDropdownSeparation.classList.add("w-full");
+homeMenuDropdownSeparation.classList.add("w-full", "border-b", "border-sky-700", "mx-auto", "my-2");
 
 const homeMenuDropdownSettings = document.createElement("a");
 homeMenuDropdownSettings.href = "";

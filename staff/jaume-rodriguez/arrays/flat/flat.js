@@ -10,9 +10,9 @@ function flat(array, depth = 1) {
             result[result.length] = element;
             continue;
         }
-        const flatenedSubArray = flat(element, depth - 1);
         /* ---entrando a contexto--- */
-
+        const flatenedSubArray = flat(element, depth - 1);
+        //
         for (let j = 0; j < flatenedSubArray.length; j++) {
             result[result.length] = flatenedSubArray[j]
         }

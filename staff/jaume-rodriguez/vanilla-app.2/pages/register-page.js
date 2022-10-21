@@ -134,12 +134,13 @@ registerButton.classList.add(
   'w-full',
   'h-8',
   'self-start',
-  'bg-sky-600',
+  "bg-gradient-to-br",
+  "from-cyan-500",
+  "to-blue-500",
   'rounded',
   'border-none',
   'text-white',
   'font-bold',
-  'hover:bg-sky-700'
 );
 
 registerForm.append(registerImageAvatar, registerLabelName, registerNameInput, registerLabelEmail, registerEmailInput, registerLabelPassword, registerPasswordInput, registerCheckboxContainer, registerButton);

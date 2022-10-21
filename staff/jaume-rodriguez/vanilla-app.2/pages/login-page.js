@@ -91,12 +91,13 @@ loginButton.classList.add(
   'w-full',
   'h-8',
   'self-start',
-  'bg-sky-600',
   'rounded',
   'border-none',
   'text-white',
   'font-bold',
-  'hover:bg-sky-700'
+  "bg-gradient-to-br",
+  "from-cyan-500",
+  "to-blue-500",
 );
 
 const loginCheckboxContainer = document.createElement("span");
