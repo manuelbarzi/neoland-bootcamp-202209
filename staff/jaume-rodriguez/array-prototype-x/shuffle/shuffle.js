@@ -9,7 +9,7 @@ Array.prototype.shuffle = function () {
     for (let i = 0; i < this.length; i++) {
         const randomIndexes = Math.floor(Math.random() * indexes.length)
 
-        const index = indexes[randomIndexes]
+        const index = indexes[randomIndexes]    // Con este paso nos aseguramos que el index es en base a un array que ya ha eliminado un i utilizado.
 
         result[i] = this[index]
 
