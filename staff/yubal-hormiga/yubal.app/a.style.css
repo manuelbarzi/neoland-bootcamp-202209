@@ -40,6 +40,7 @@ h3 {
 }
 
 
+
 .header__nav{
   display: flex;
   flex-direction: row;
@@ -47,6 +48,7 @@ h3 {
   gap: 2rem;
   border-radius: 50px;
   margin: 3rem 0;
+  
 
 }
 
