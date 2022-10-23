@@ -1,10 +1,11 @@
 // Shared variables
-const isContextualMenuActive = false
+let isContextualMenuActive = false
 
 // DOM definitions
 
 const navBar = document.createElement('header')
 navBar.classList = ['homepage-header']
+navBar.className = `flex justify-between bg-${cssPrimaryColor}`
 
 
 // Create left group container
@@ -19,11 +20,11 @@ navBarRightGroup.className = 'homepage-header-right-group'
 // Left container elements
 const navBarHomeIcon = document.createElement('span')
 navBarHomeIcon.innerText = 'home'
-navBarHomeIcon.className = 'material-symbols-outlined header-icons'
+navBarHomeIcon.className = 'material-symbols-outlined header-icons text-white'
 
 const navBarNewTaskIcon = document.createElement('span')
 navBarNewTaskIcon.innerText = 'add'
-navBarNewTaskIcon.className = 'material-symbols-outlined header-icons'
+navBarNewTaskIcon.className = 'material-symbols-outlined header-icons text-white'
 
 
 navBarNewTaskIcon.onclick = function () {
@@ -40,10 +41,11 @@ navBarLeftGroup.append(navBarHomeIcon)
 const userNameSpan = document.createElement('span')
 userNameSpan.innerText = ''
 userNameSpan.id = 'username-header-span'
+userNameSpan.className = 'text-white'
 
 const navBarMenuIcon = document.createElement('span')
 navBarMenuIcon.innerText = 'menu'
-navBarMenuIcon.className = 'material-symbols-outlined header-icons'
+navBarMenuIcon.className = 'material-symbols-outlined header-icons text-white'
 
 
 // Append all elements to group

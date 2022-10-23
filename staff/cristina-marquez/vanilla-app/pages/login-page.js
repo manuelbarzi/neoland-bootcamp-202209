@@ -62,10 +62,10 @@ loginContainerFlex.append(loginRegisterAnchor)
 loginForm.onsubmit = function (event) {
     event.preventDefault();
 
-    var inputEmail = loginEmail.value
-    var inputPassword = loginPassword.value
+    const inputEmail = loginEmail.value
+    const inputPassword = loginPassword.value
 
-    var authResponse = authenticateUser(inputEmail, inputPassword)
+    const authResponse = authenticateUser(inputEmail, inputPassword)
 
     if (authResponse instanceof Error) {
         log('ERROR', 'User authentication failure')

@@ -1,34 +1,36 @@
 const tasksComponent = document.createElement('section')
+tasksComponent.className = 'flex flex-col items-center'
 
 
 const tasksTitle = document.createElement('h2')
 tasksTitle.innerText = 'Tasks'
+tasksTitle.className = 'text-4xl m-5'
 
 const tasksContentPanel = document.createElement('div')
-tasksContentPanel.className = 'task-container'
+tasksContentPanel.className = 'flex-column sm:flex w-11/12 sm:w-3/4 justify-around'
 
 const tasksTodoColumn = document.createElement('section')
-tasksTodoColumn.className = 'task-column-group'
+tasksTodoColumn.className = 'flex flex-col border-2 mr-5 basis-1/3 rounded-md shadow-md'
 
 const taskTodoHeader = document.createElement('div')
 taskTodoHeader.innerText = 'TODO'
-taskTodoHeader.className = 'task-column-header'
+taskTodoHeader.className = `task-column-header pt-5 pl-5 pb-5 bg-${cssPrimaryColor} rounded-t-md text-${cssPrimaryColorText}`
 tasksTodoColumn.append(taskTodoHeader)
 
 const tasksInProgressColumn = document.createElement('section')
-tasksInProgressColumn.className = 'task-column-group'
+tasksInProgressColumn.className = 'flex flex-col border-2 mr-5 basis-1/3 rounded-md shadow-md'
 
 const taskInProgressHeader = document.createElement('div')
 taskInProgressHeader.innerText = 'IN PROGRESS'
-taskInProgressHeader.className = 'task-column-header'
+taskInProgressHeader.className = `task-column-header pt-5 pl-5 pb-5 bg-${cssPrimaryColor} rounded-t-md text-${cssPrimaryColorText}`
 tasksInProgressColumn.append(taskInProgressHeader)
 
 const tasksCompletedColumn = document.createElement('section')
-tasksCompletedColumn.className = 'task-column-group'
+tasksCompletedColumn.className = 'flex flex-col border-2 mr-5 basis-1/3 rounded-md shadow-md'
 
 const taskCompletedHeader = document.createElement('div')
 taskCompletedHeader.innerText = 'COMPLETED'
-taskCompletedHeader.className = 'task-column-header'
+taskCompletedHeader.className = `task-column-header pt-5 pl-5 pb-5 bg-${cssPrimaryColor} rounded-t-md text-${cssPrimaryColorText}`
 tasksCompletedColumn.append(taskCompletedHeader)
 
 tasksContentPanel.append(tasksTodoColumn, tasksInProgressColumn, tasksCompletedColumn)
@@ -39,15 +41,15 @@ tasksComponent.append(tasksTitle, tasksContentPanel)
 
 
 function createTaskCardElement(text, userEmail, id) {
-    var taskCardContainer = document.createElement('div')
-    taskCardContainer.className = 'task-component'
+    const taskCardContainer = document.createElement('div')
+    taskCardContainer.className = 'task-component mx-3 my-2 flex justify-between'
 
-    var taskCardArticle = document.createElement('article')
+    const taskCardArticle = document.createElement('article')
     taskCardArticle.innerText = text
     taskCardArticle.className = 'task-card'
     taskCardArticle.contentEditable = true
 
-    var taskCardDeleteIcon = document.createElement('span')
+    const taskCardDeleteIcon = document.createElement('span')
     taskCardDeleteIcon.innerText = 'delete'
     taskCardDeleteIcon.className = 'material-symbols-outlined task-component delete-icon'
 
@@ -73,16 +75,16 @@ function createTaskCardElement(text, userEmail, id) {
 
 
 function renderTasks() {
-    var retrievedUserTasks = retrieveTasks(currentUser.email)
+    const retrievedUserTasks = retrieveTasks(currentUser.email)
 
     for (let i = 0; i < retrievedUserTasks.length; i++) {
         const dbTask = retrievedUserTasks[i];
 
-        var taskText = dbTask.text
-        var taskStatus = dbTask.status
-        var taskId = dbTask.id
+        const taskText = dbTask.text
+        const taskStatus = dbTask.status
+        const taskId = dbTask.id
 
-        var task = createTaskCardElement(taskText, currentUser.email, taskId)
+        const task = createTaskCardElement(taskText, currentUser.email, taskId)
 
         if (taskStatus === 'TODO') {
             tasksTodoColumn.append(task)
@@ -98,7 +100,7 @@ function renderTasks() {
 }
 
 function clearTasksCards() {
-    var myTasksCards = tasksComponent.querySelectorAll('.task-component')
+    const myTasksCards = tasksComponent.querySelectorAll('.task-component')
 
     for (let i = 0; i < myTasksCards.length; i++) {
         const myTaskCard = myTasksCards[i]

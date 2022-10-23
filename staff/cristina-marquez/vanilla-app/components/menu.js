@@ -1,16 +1,16 @@
 // Create contextual menu
 const contextualMenuComponent = document.createElement('div')
-contextualMenuComponent.className = 'contextual-menu'
+contextualMenuComponent.className = 'flex flex-col items-end'
 
 // Contextual menu elements
 const contextualMenuSettings = document.createElement('span')
 contextualMenuSettings.innerText = 'settings'
-contextualMenuSettings.className = 'material-symbols-outlined contextual-menu-element'
+contextualMenuSettings.className = 'material-symbols-outlined text-white'
 
 
 const contextualMenuLogout = document.createElement('span')
 contextualMenuLogout.innerText = 'exit_to_app'
-contextualMenuLogout.className = 'material-symbols-outlined contextual-menu-element'
+contextualMenuLogout.className = 'material-symbols-outlined contextual-menu-element text-white'
 
 contextualMenuComponent.append(contextualMenuSettings, contextualMenuLogout)
 

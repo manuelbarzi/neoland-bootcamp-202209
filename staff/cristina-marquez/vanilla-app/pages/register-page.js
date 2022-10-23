@@ -68,11 +68,11 @@ registerPage.append(registerContainerFlex)
 registerAccountButton.onclick = function (event) {
     event.preventDefault();
 
-    var inputEmail = registerEmail.value
-    var inputPassword = registerPassword.value
-    var inputName = registerName.value
+    const inputEmail = registerEmail.value
+    const inputPassword = registerPassword.value
+    const inputName = registerName.value
 
-    var registerResponse = registerUser(inputName, inputEmail, inputPassword)
+    const registerResponse = registerUser(inputName, inputEmail, inputPassword)
 
     if (registerResponse instanceof Error) {
         log('ERROR', 'User registration failure')
