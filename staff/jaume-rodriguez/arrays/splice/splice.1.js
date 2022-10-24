@@ -1,7 +1,19 @@
+//TODO Negative and arguments version
+
 function splice(array, index = 0, deleteElement = 0, insertedElement) {
     let output = []
     let deleted = false
     let fromIndex = 0
+
+    if (index < 0) {
+        index = index + array.length
+    }
+    if (index < 0) {
+        index = 0
+    }
+    if (index > array.length) {
+        index = array.length
+    }
 
     if (deleteElement !== 0 && index === 0) {
         fromIndex = deleteElement
@@ -9,7 +21,6 @@ function splice(array, index = 0, deleteElement = 0, insertedElement) {
     } else if (index === 0) {
         output[output.length] = insertedElement
     }
-
 
     for (let i = fromIndex; i < array.length; i++) {
         output[output.length] = array[i]
