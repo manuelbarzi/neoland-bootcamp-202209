@@ -1,14 +1,15 @@
-function group(array, callback) {
-    let result = []
-    let type = ''
+function group(array) {
+    var property = 'type'
+    var output = []
+    var aux = array[property]
 
     for (let i = 0; i < array.length; i++) {
-        const element = array[i]
-        callback(element)
-        if (element.type === callback(element)) {
-            type = callback(element)
+        output[output.length] = array[i]
+        if ((!output[aux])) {
+            output[aux] = []
         }
-        result[length] = type
+        output[aux].push()
     }
-    return result
+
+    return output
 }
