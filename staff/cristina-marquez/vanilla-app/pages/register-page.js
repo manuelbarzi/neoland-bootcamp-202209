@@ -44,7 +44,7 @@ registerPasswordLabel.innerText = 'Your password'
 
 const registerAccountButton = document.createElement("button")
 registerAccountButton.innerText = "Create account";
-registerAccountButton.className = 'bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-500 hover:to-indigo-300 ... p-2 rounded-lg text-white text-sm'
+registerAccountButton.className = `bg-pink-500 hover:bg-pink-600 text-${cssPrimaryColorText} p-2 rounded-lg text-sm`
 
 registerForm.append(registerNameLabel, registerName, registerEmailLabel, registerEmail, registerPasswordLabel, registerPassword, registerAccountButton)
 
@@ -59,6 +59,7 @@ registerAccountButton.classList.add("button")
 registerContainerFlex.append(registerForm)
 
 const registerPage = document.createElement('main')
+registerPage.className = `h-full w-full flex flex-col items-center justify-center bg-${cssPrimaryColor}`
 
 
 registerPage.append(registerContainerFlex)

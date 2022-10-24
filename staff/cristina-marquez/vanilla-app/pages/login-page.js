@@ -1,6 +1,6 @@
 // login page  
 const loginPage = document.createElement('main');
-loginPage.className = 'flex flex-col gap-10'
+loginPage.className = `h-full w-full flex flex-col items-center justify-center bg-${cssPrimaryColor}`
 
 
 //container flex
@@ -42,7 +42,7 @@ loginPassword.className = 'border rounded-md'
 const loginButton = document.createElement("button")
 loginButton.classList.add("button")
 loginButton.innerText = "Login"
-loginButton.className = 'bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-500 hover:to-indigo-300 ... p-2 rounded-lg text-white text-sm'
+loginButton.className = `bg-pink-500 hover:bg-pink-600 text-${cssPrimaryColorText} p-2 rounded-lg text-sm`
 
 loginForm.append(loginEmailLabel, loginEmail, loginPasswordLabel, loginPassword, loginButton);
 
