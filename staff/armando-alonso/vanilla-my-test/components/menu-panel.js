@@ -1,9 +1,9 @@
 log("INFO", "Menu Panel");
 
-var homeMenuPanel = document.createElement("div");
+const homeMenuPanel = document.createElement("div");
 homeMenuPanel.className = "container container__item--right";
 
-var homeMenuSettingsLink = document.createElement("button");
+const homeMenuSettingsLink = document.createElement("button");
 homeMenuSettingsLink.className = "material-symbols-outlined";
 homeMenuSettingsLink.innerText = "settings";
 // homeMenuSettingsLink.href = ''
@@ -22,7 +22,7 @@ homeMenuSettingsLink.onclick = function (event) {
   homePage.append(settingsPanel);
 };
 
-var homeLogoutButton = document.createElement("button");
+const homeLogoutButton = document.createElement("button");
 homeLogoutButton.className = "material-symbols-outlined";
 homeLogoutButton.innerText = "logout";
 

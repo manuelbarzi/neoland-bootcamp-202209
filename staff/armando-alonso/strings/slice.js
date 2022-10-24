@@ -21,7 +21,7 @@ function slice(sentence , value , value2 = 1/0) {
     }
 
     for (let i = value; i < sentence.length && i < value2; i++) {
-        newSentence = newSentence + sentence[i];
+        newSentence += sentence[i];
 
     }
     return newSentence

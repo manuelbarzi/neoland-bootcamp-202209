@@ -1,32 +1,32 @@
 function createTask(emailUser) {
 
-    if (typeof emailUser !== 'string') return new Error('email is not a string')
-    if (!IS_EMAIL_REGEX.test(emailUser)) return new Error('email is not valid')
+    if (typeof emailUser !== 'string') throw new Error('email is not a string')
+    if (!IS_EMAIL_REGEX.test(emailUser)) throw new Error('email is not valid')
 
-    var found = false
+    let found = false
 
-    for (var i = 0; i < users.length && !found; i++) {
-        var user = users[i];
+    for (let i = 0; i < users.length && !found; i++) {
+        const user = users[i];
 
         if (user.email === emailUser) 
             found = true
     }
 
-    if (!found) return new Error('user with email ' + emailUser + ' mot found')
+    if (!found) throw new Error('user with email ' + emailUser + ' mot found')
 
-    var lastIndex = tasks.length -1
-    var lastTask = tasks[lastIndex]
-    var lastTaskId = lastTask.id
+    const lastIndex = tasks.length -1
+    const lastTask = tasks[lastIndex]
+    const lastTaskId = lastTask.id
 
-    var countString = lastTaskId.substring(5)
-    var count = parseInt(countString)
+    const countString = lastTaskId.substring(5)
+    const count = parseInt(countString)
 
-    var nextCount = count +1
-    var nextTaskId = 'task-' + nextCount
+    const nextCount = count +1
+    const nextTaskId = 'task-' + nextCount
 
 
 
-    var task = {
+    const task = {
         id: nextTaskId,
         user: emailUser,
         text: '',
@@ -34,6 +34,4 @@ function createTask(emailUser) {
     }
 
     tasks.push(task)
-
-    return null
 }

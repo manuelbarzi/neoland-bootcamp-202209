@@ -1,41 +1,44 @@
 log("INFO", "Register Page");
 
-var registerForm = document.createElement("form");
+const registerForm = document.createElement("form");
 registerForm.className = 'container'
 
 registerForm.onsubmit = function (event) {
   event.preventDefault();
 
  
-    var name = registerUserInput.value
-    var email = registerEmailInput.value
-    var password = registerPasswordInput.value
+    const name = registerUserInput.value
+    const email = registerEmailInput.value
+    const password = registerPasswordInput.value
 
-
-  var result = registerUser(name, email, password)
-
-  if (result instanceof Error) {
-    alert(result.message)
-
-    return
-  }
+try {
+  
+  registerUser(name, email, password)
 
   registerForm.reset();
 
   alert("User Registered");
 
   registerLoginLink.click();
+
+} catch (error) {
+
+  alert(error.message)
+
+  registerPasswordInput.value = ''
+}
+  
 };
 
-var registerTitle = document.createElement("h2");
+const registerTitle = document.createElement("h2");
 registerTitle.innerText = "Register";
 
-var registerUserLabel = document.createElement("label");
+const registerUserLabel = document.createElement("label");
 registerUserLabel.htmlFor = "user-register";
 registerUserLabel.classList.add("container__item--left");
 registerUserLabel.innerText = "User";
 
-var registerUserInput = document.createElement("input");
+const registerUserInput = document.createElement("input");
 registerUserInput.type = "text";
 registerUserInput.id = "user-register";
 registerUserInput.placeholder = "User";
@@ -46,23 +49,23 @@ registerUserInput.oninvalid = function () {
 }
 registerUserInput.title = 'Use characters from A to Z for names (min 1 character, and not numerics)'
 
-var registerEmailLabel = document.createElement("label");
+const registerEmailLabel = document.createElement("label");
 registerEmailLabel.htmlFor = "email-register";
 registerEmailLabel.classList.add("container__item--left");
 registerEmailLabel.innerText = "Email";
 
-var registerEmailInput = document.createElement("input");
+const registerEmailInput = document.createElement("input");
 registerEmailInput.type = "email";
 registerEmailInput.id = "email-register";
 registerEmailInput.placeholder = "Email";
 registerEmailInput.required = true
 
-var registerPasswordLabel = document.createElement("label");
+const registerPasswordLabel = document.createElement("label");
 registerPasswordLabel.htmlFor = "password-register";
 registerPasswordLabel.classList.add("container__item--left");
 registerPasswordLabel.innerText = "Password";
 
-var registerPasswordInput = document.createElement("input");
+const registerPasswordInput = document.createElement("input");
 registerPasswordInput.type = "password";
 registerPasswordInput.id = "password-register";
 registerPasswordInput.placeholder = "Password";
@@ -72,7 +75,7 @@ registerPasswordInput.pattern = '[A-Za-z0-9\S]{8,}'
 registerPasswordInput.required = true
 registerPasswordInput.title = 'Use min 8 characters for the password and no spaces'
 
-var registerButton = document.createElement("button");
+const registerButton = document.createElement("button");
 registerButton.classList = "";
 registerButton.innerText = "Register";
 
@@ -87,7 +90,7 @@ registerForm.append(
   registerButton
 );
 
-var registerLoginLink = document.createElement("a");
+const registerLoginLink = document.createElement("a");
 registerLoginLink.href = "";
 registerLoginLink.classlist = "";
 registerLoginLink.innerText = "Login";
@@ -100,7 +103,7 @@ registerLoginLink.onclick = function (event) {
   document.body.append(loginPage);
 };
 
-var registerPage = document.createElement("main");
+const registerPage = document.createElement("main");
 registerPage.className = 'container  container--full'
 
 registerPage.append(registerForm, registerLoginLink);

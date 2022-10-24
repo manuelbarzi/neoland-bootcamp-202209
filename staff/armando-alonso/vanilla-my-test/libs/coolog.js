@@ -2,7 +2,7 @@ console.log('%cMy Console Log', 'color:blue; font-size: 20px');
 
 function log(level, message) {
 
-    var color
+    let color
     if (level === 'DEBUG') {
         color = 'color: orange'
     } else if(level === 'ALERT'){

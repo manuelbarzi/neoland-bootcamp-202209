@@ -1,22 +1,22 @@
-var tasksPanel = document.createElement("section");
+const tasksPanel = document.createElement("section");
 tasksPanel.className = "container container--full-with";
 
-var tasksTitle = document.createElement("h2");
+const tasksTitle = document.createElement("h2");
 tasksTitle.innerText = "Tasks";
 
-var tasksContentPanel = document.createElement("div");
+const tasksContentPanel = document.createElement("div");
 tasksContentPanel.className = "container container--row container--items-start";
 
-var tasksColumnTodo = document.createElement("section");
+const tasksColumnTodo = document.createElement("section");
 tasksColumnTodo.className = "container container--border container--padding-s container--items-start";
 tasksColumnTodo.innerText = "ToDo Column";
 
-var tasksColumnDoing = document.createElement("section");
+const tasksColumnDoing = document.createElement("section");
 tasksColumnDoing.className =
   "container container--border container--padding-s container--items-start";
 tasksColumnDoing.innerText = "Doing Column";
 
-var tasksColumnDone = document.createElement("section");
+const tasksColumnDone = document.createElement("section");
 tasksColumnDone.className =
   "container container--border container--padding-s container--items-start";
 tasksColumnDone.innerText = "Done Column";
@@ -29,37 +29,37 @@ tasksPanel.append(tasksTitle, tasksContentPanel);
 
 
 function createTaskCard(taskId, text) {
-  var taskCard = document.createElement("article");
+  const taskCard = document.createElement("article");
   taskCard.className = "container container--border container--padding-s container--full-with";
 
-  var taskText = document.createElement('p')
+  const taskText = document.createElement('p')
   taskText.innerText = text;
   taskText.contentEditable = true;
 
   taskText.onkeyup = function () {
-    var result = updateTaskText(user.email, taskId, taskText.innerText);
-
-    if (result instanceof Error) {
-      alert(result.message);
-
-      return
+  
+    try {
+      updateTaskText(user.email, taskId, taskText.innerText);
+    } catch (error) {
+      alert(error.message)
     }
+
   }
 
-  var taskDeleteButton = document.createElement('button')
+  const taskDeleteButton = document.createElement('button')
   taskDeleteButton.className = 'material-symbols-outlined'
   taskDeleteButton.innerText = 'delete'
 
   taskDeleteButton.onclick = function(){
-    var result = deleteTask(user.email, taskId)
 
-    if (result instanceof Error) {
-        alert(result.message)
+    try {
+      deleteTask(user.email, taskId)
 
-        return
+      taskCard.remove()
+
+    } catch (error) {
+        alert(error.message)
     }
-
-    taskCard.remove()
   }
 
   taskCard.append(taskText, taskDeleteButton)
@@ -68,22 +68,22 @@ function createTaskCard(taskId, text) {
 }
 
 function clearTasksCards() {
-  var cleanTask = tasksContentPanel.querySelectorAll("article");
+  const cleanTask = tasksContentPanel.querySelectorAll("article");
 
-  for (var i = 0; i < cleanTask.length; i++) {
-    var myTaskCard = cleanTask[i];
+  for (let i = 0; i < cleanTask.length; i++) {
+    const myTaskCard = cleanTask[i];
 
     myTaskCard.remove();
   }
 }
 
 function renderTasksCards() {
-  var myTasks = retrieveTasks(user.email);
+  const myTasks = retrieveTasks(user.email);
 
-  for (var i = 0; i < myTasks.length; i++) {
-    var myTask = myTasks[i];
+  for (let i = 0; i < myTasks.length; i++) {
+    const myTask = myTasks[i];
 
-    var myTaskCard = createTaskCard(myTask.id, myTask.text);
+    const myTaskCard = createTaskCard(myTask.id, myTask.text);
 
     if (myTask.status === "todo") tasksColumnTodo.append(myTaskCard);
     else if (myTask.status === "doing") tasksColumnDoing.append(myTaskCard);

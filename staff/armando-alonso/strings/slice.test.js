@@ -34,6 +34,24 @@ var result = slice(sentence , 2000)
 console.assert(result === '')
 
 
+//Case value = both higest number
+
+var sentence = 'I want to hack your computer and your cat'
+
+var result = slice(sentence , 2000 , 2000)
+
+console.assert(result === '')
+
+
+//Case value = second higest number
+
+var sentence = 'I want to hack your computer and your cat'
+
+var result = slice(sentence , 0 , 2000)
+
+console.assert(result === 'I want to hack your computer and your cat')
+
+
 //Case value = negative number
 
 var sentence = 'I want to hack your computer and your cat'

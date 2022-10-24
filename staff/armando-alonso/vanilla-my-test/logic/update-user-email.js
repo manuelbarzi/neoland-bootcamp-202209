@@ -8,25 +8,25 @@
  */
 
 function updateUserEmail(oldEmail, newEmail) {
-    if (typeof newEmail !== 'string') return new Error('email is not a string')
-    if (!IS_EMAIL_REGEX.test(newEmail)) return new Error('email is not valid')
+    if (typeof newEmail !== 'string') throw new Error('email is not a string')
+    if (!IS_EMAIL_REGEX.test(newEmail)) throw new Error('email is not valid')
 
-    for (var i = 0; i < users.length; i++) {
-        var user = users[i];
+    for (let i = 0; i < users.length; i++) {
+        const user = users[i];
         if (user.email === newEmail) {
-            return new Error('The email ' + newEmail + ' already exists')
+            throw new Error('The email ' + newEmail + ' already exists')
         }
     }
-    for (var i = 0; i < users.length; i++) {
-        var user = users[i];
+    for (let i = 0; i < users.length; i++) {
+        const user = users[i];
         if (user.email === oldEmail) {
             user.email = newEmail
 
-            return null
+            throw null
         }
         
     }
 
-    return new Error('User with email ' + oldEmail + ' not found')
+    throw new Error('User with email ' + oldEmail + ' not found')
     
 }

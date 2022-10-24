@@ -1,21 +1,21 @@
 function retrieveTasks(emailUser) {
-  if (typeof emailUser !== "string") return new Error("email is not a string");
-  if (!IS_EMAIL_REGEX.test(emailUser)) return new Error("email is not valid");
+  if (typeof emailUser !== "string") throw new Error("email is not a string");
+  if (!IS_EMAIL_REGEX.test(emailUser)) throw new Error("email is not valid");
 
-  var found = false;
+  let found = false;
 
-  for (var i = 0; i < users.length && !found; i++) {
-    var user = users[i];
+  for (let i = 0; i < users.length && !found; i++) {
+    const user = users[i];
 
     if (user.email === emailUser) found = true;
   }
 
-  if (!found) return new Error("user with email " + emailUser + " mot found");
+  if (!found) throw new Error("user with email " + emailUser + " mot found");
 
-  var userTasks = [];
+  let userTasks = [];
 
-  for (var i = 0; i < tasks.length; i++) {
-    var task = tasks[i];
+  for (let i = 0; i < tasks.length; i++) {
+    const task = tasks[i];
     if (task.user === emailUser) {
       userTasks.push(task);
     }

@@ -1,5 +1,8 @@
 function concat(array1, array2) {
+
+
   var test = array1.length + array2.length;
+
 
   var newarray = [""];
 
@@ -37,3 +40,14 @@ function concat(array1, array2) {
 //     result[result.length] = element;
 //   }
 // }
+
+
+// Manera hiper reducida
+
+// var result = []
+
+// for (let i = 0; i < arguments.length; i++)
+// for (let j = 0; j < arguments.length; j++)
+//     result[result.length] = arguments[i][j]
+
+//     return result

@@ -1,4 +1,4 @@
-var tasks = [
+const tasks = [
     { id: 'task-1', user: 'pepe@neoland.com', text: 'Clean Car', status: 'todo' },
     { id: 'task-2', user: 'paco@neoland.com', text: 'Go out and run', status: 'todo' },
     { id: 'task-3', user: 'arman@neoland.com', text: 'Read a book', status: 'todo' },

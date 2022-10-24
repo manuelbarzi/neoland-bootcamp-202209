@@ -1,9 +1,9 @@
 log("INFO", "Header Panel");
 
-var homeHeader = document.createElement("header");
+const homeHeader = document.createElement("header");
 homeHeader.className = "container container--full-with";
 
-var homeLink = document.createElement("a");
+const homeLink = document.createElement("a");
 homeLink.href = "";
 
 homeLink.onclick = function (event) {
@@ -18,39 +18,39 @@ homeLink.onclick = function (event) {
   homePage.append(tasksPanel)
 };
 
-var homeLogo = document.createElement("img");
+const homeLogo = document.createElement("img");
 homeLogo.src =
   "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Trello-logo-blue.svg/100px-Trello-logo-blue.svg.png";
 
 homeLink.append(homeLogo);
 
-var homeUserName = document.createElement("span");
+const homeUserName = document.createElement("span");
 homeUserName.className =
   "container container--full-height container--padding-h-s";
 
-var homeAddTask = document.createElement('button')
+const homeAddTask = document.createElement('button')
 homeAddTask.className = 'material-symbols-outlined'
 homeAddTask.innerText = 'add'
 
 homeAddTask.onclick = function () {
-  var result = createTask(user.email)
+  try {
+    createTask(user.email)
 
-  if (result instanceof Error) {
-    alert(result.messagge)
+    clearTasksCards()
 
-    return
+    renderTasksCards()
+    
+  } catch (error) {
+    alert(error.message)
+  }
+
 }
-  clearTasksCards()
 
-  renderTasksCards()
-
-}
-
-var homeMenuButton = document.createElement("button");
+const homeMenuButton = document.createElement("button");
 homeMenuButton.className = "material-symbols-outlined";
 homeMenuButton.innerText = "menu";
 
-var homeMenuPanelStatus = "closed";
+let homeMenuPanelStatus = "closed";
 
 homeMenuButton.onclick = function () {
   if (homeMenuPanelStatus === "closed") {
@@ -64,7 +64,7 @@ homeMenuButton.onclick = function () {
   }
 };
 
-var homeHeaderTopPanel = document.createElement("div");
+const homeHeaderTopPanel = document.createElement("div");
 homeHeaderTopPanel.className =
   "container container--row container--full-with container--content-space-between";
 
