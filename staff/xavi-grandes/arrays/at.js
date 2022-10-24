@@ -1,13 +1,14 @@
-function at(array, index) {
+function at(arrayAt, indexAt) {
     
-    if (index < 0)
-      index = [array.length + index]
+    if (indexAt < 0)
+    indexAt = [arrayAt.length + indexAt]
     
 
-    if (index === undefined)
-    index = 0
+    if (indexAt === undefined)
+    indexAt = 0
 
-    var result = array[index]
+    var result = arrayAt[indexAt]
     
     return result
 }
+

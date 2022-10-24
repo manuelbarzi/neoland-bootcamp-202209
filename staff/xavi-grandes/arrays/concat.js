@@ -13,3 +13,17 @@ function concat() {
 
   return newArray;
 }
+
+//   function concat(array1, array2) {
+
+//   newArrayConcat = []
+
+//   for (var i = 0; 0 < arguments.length; i++){
+//     let elemets = arguments[i]
+    
+//     newArrayConcat.push(arguments[i])
+//   }
+
+//   return newArrayConcat
+
+// }
