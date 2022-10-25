@@ -70,7 +70,7 @@ clown.render()
 document.onkeydown = function (event) {
     const key = event.key
 
-    if (key === 'arrowUp')
+    if (key === 'ArrowUp')
         crazy.move(crazy.position.x, crazy.position.y + 10)
     else if (key === 'ArrowDown')
         crazy.move(crazy.position.x, crazy.position.y - 10)
