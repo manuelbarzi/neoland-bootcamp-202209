@@ -35,17 +35,40 @@ tasksTodoForm.onsubmit = function (event) {
     }
 }
 
-function createTaskCard(taskId, taskText){
+function createTaskCard(taskId, text){
 
     const taskCard = document.createElement('article')
-    taskCard.innerText = taskText
     taskCard.className = 'new-task-card'
-    taskCard.contentEditable = true
 
-    taskCard.onkeyup = function(){
+    const taskText = document.createElement('p')
+    taskText.innerText = text
+    taskText.contentEditable = true
 
-        const updateMyTask = updateTask()
+    taskText.onkeyup = function(){
+
+        try {
+            updateTaskText(user.email, taskId, taskText.innerText)
+        } catch (error) {
+            alert(error.message)
+        }
+    
     }
+
+    const taskDeleteButton = document.createElement('button')
+    taskDeleteButton.className = 'material-symbols-outlined'
+    taskDeleteButton.innerText = 'delete'
+
+    taskDeleteButton.onclick = function () {
+        try {
+            deleteTask(user.email, taskId)
+
+            taskCard.remove()
+        } catch (error) {
+            alert(error.message)
+        }
+    }
+    taskCard.append(taskText, taskDeleteButton)
+
     return taskCard
 }
 
