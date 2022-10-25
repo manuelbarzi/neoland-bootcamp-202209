@@ -2,7 +2,7 @@
 
 /* CREAMOS UN LOGIN PAGE */
 const loginPage = document.createElement("main");
-loginPage.classList.add("h-full");
+loginPage.classList.add("h-screen");
 
 /* CREAMOS UN CONTENEDOR FLEX */
 const loginContainerFlex = document.createElement("div");
@@ -23,7 +23,7 @@ loginPage.append(loginContainerFlex);
 /* CREAMOS UN HEADER */
 const loginHeaderForm = document.createElement("h1");
 loginHeaderForm.innerText = "Sign in to continue to Home";
-loginHeaderForm.classList.add("text-center");
+loginHeaderForm.classList.add("text-center", "text-white", "text-lg", "pb-4");
 
 loginContainerFlex.append(loginHeaderForm);
 

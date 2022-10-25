@@ -3,7 +3,7 @@
 
 /* CREAMOS UN REGISTER PAGE */
 const registerPage = document.createElement("main");
-registerPage.classList.add("h-full");
+registerPage.classList.add("h-screen");
 
 /* CREAMOS UN CONTENEDOR FLEX */
 const registerContainerFlex = document.createElement("div")
@@ -24,7 +24,7 @@ registerPage.append(registerContainerFlex);
 /* CREAMOS UN HEADER */
 const registerHeaderForm = document.createElement("h1");
 registerHeaderForm.innerText = "Create your Account to continue to Sign in";
-registerHeaderForm.classList.add("text-center");
+registerHeaderForm.classList.add("text-center", "text-white", "text-lg", "pb-4");
 
 registerContainerFlex.append(registerHeaderForm);
 
