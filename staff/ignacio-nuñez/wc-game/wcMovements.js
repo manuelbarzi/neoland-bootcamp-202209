@@ -11,7 +11,7 @@ document.onkeydown = function (event) {
                     if (vater.position.x >= 600 && vater.position.x < 620)
                         clearInterval(vaterIntervalId)
 
-                    vater.move(3)
+                    vater.move(4)
                     vaterKey.d = true
                     vater.render()
                 }, 2)
@@ -26,7 +26,7 @@ document.onkeydown = function (event) {
                     if (vater.position.x > -10 && vater.position.x < 1)
                         clearInterval(vaterIntervalId2)
 
-                    vater.move(-3)
+                    vater.move(-4)
 
                     vaterKey.a = true
                     vater.render()

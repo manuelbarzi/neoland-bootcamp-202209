@@ -56,13 +56,13 @@ class Character extends Shape {
     }
     render() {
         this.container.innerText = this.icon
-
+        // this.container.className = "pooRain"
         super.render()
     }
 }
 
 const vater = new Character('🚽', 40, 40)
 
-vater.newPosition(200, 0)
+vater.newPosition(313, 0)
 vater.render()
 vater.makeBig(50)
