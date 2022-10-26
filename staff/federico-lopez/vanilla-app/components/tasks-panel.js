@@ -1,23 +1,23 @@
 const tasksPanel = document.createElement('section')
-tasksPanel.className = 'container container--full-width'
+tasksPanel.className = 'flex flex-col items-center'
 
 const tasksTitle = document.createElement('h2')
 tasksTitle.innerText = 'Tasks'
 
 const tasksContentPanel = document.createElement('div')
-tasksContentPanel.className = 'container container--row container--items-start'
+tasksContentPanel.className = 'flex flex-col sm:flex-row gap-4'
 
 const tasksTodoColumn = document.createElement('section')
 tasksTodoColumn.innerText = 'TODO'
-tasksTodoColumn.className = 'container container--border container--padding-s container--items-start'
+tasksTodoColumn.className = 'flex flex-col gap-2 border-2 p-2'
 
 const tasksDoingColumn = document.createElement('section')
 tasksDoingColumn.innerText = 'DOING'
-tasksDoingColumn.className = 'container container--border container--padding-s container--items-start'
+tasksDoingColumn.className = 'border-2 p-2'
 
 const tasksDoneColumn = document.createElement('section')
 tasksDoneColumn.innerText = 'DONE'
-tasksDoneColumn.className = 'container container--border container--padding-s container--items-start'
+tasksDoneColumn.className = 'border-2 p-2'
 
 tasksContentPanel.append(tasksTodoColumn, tasksDoingColumn, tasksDoneColumn)
 
@@ -25,7 +25,7 @@ tasksPanel.append(tasksTitle, tasksContentPanel)
 
 function createTaskCard(taskId, text) {
     const taskCard = document.createElement('article')
-    taskCard.className = 'container container--border container--padding-s container--full-width'
+    taskCard.className = 'border-2 p-1'
 
     const taskText = document.createElement('p')
     taskText.innerText = text

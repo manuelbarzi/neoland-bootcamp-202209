@@ -1,24 +1,27 @@
 class App extends React.Component {
-    constructor() {
-        log('INFO', 'App -> constructor')
+  constructor() {
+    log("INFO", "App -> constructor");
 
-        super()
-    }
+    super();
+  }
 
-    componentDidMount() {
-        log('INFO', 'App -> componentDidMount')
-    }
+  componentDidMount() {
+    log("INFO", "App -> componentDidMount");
+  }
 
-    componentWillUnmount() {
-        log('INFO', 'App -> componentWillUnmount')
-    }
+  componentWillUnmount() {
+    log("INFO", "App -> componentWillUnmount");
+  }
 
-    render() {
-        log('INFO', 'App -> render')
+  render() {
+    log("INFO", "App -> render");
 
-        return <>
-            {/* <LoginPage /> */}
-            <RegisterPage />
-        </>
-    }
+    return (
+      <>
+        {/* <LoginPage /> */}
+        {/* <RegisterPage /> */}
+        <HomePage />
+      </>
+    );
+  }
 }

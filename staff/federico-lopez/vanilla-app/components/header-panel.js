@@ -20,7 +20,7 @@ headerHomeLink.append(headerImage)
 
 const headerUserNameText = document.createElement('span')
 headerUserNameText.innerText = 'User Name'
-headerUserNameText.className = 'container container--full-height container--padding-h-s'
+//headerUserNameText.className = ''
 
 const addTaskButton = document.createElement('button')
 addTaskButton.className = 'material-symbols-outlined'
@@ -57,9 +57,9 @@ headerMenuButton.onclick = function() {
 }
 
 const headerTopPanel = document.createElement('div')
-headerTopPanel.className = 'container container--row container--full-width container--content-space-between'
+headerTopPanel.className = 'flex justify-between'
 
 headerTopPanel.append(headerHomeLink, headerUserNameText, addTaskButton, headerMenuButton)
 
-headerPanel.className = 'container container--full-width'
+headerPanel.className = 'flex flex-col'
 headerPanel.append(headerTopPanel)
