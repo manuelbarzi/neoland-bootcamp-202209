@@ -1,6 +1,6 @@
 class Point {
-    // var x = 0;
-    // var y = 0;
+    // var x = x;
+    // var y = x;
 
     constructor(x, y) {
         this.x = x

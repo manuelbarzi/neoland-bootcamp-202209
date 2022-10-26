@@ -19,5 +19,3 @@ class StartButton extends HTMLElement {
 }
 
 customElements.define('wc-button', StartButton)
-
-// --------------------

@@ -1,5 +1,5 @@
 class Shape {
-    // let position: Point
+    // let position = Point
     // let container
     constructor() {
         this.position = new Point(0, 0)
