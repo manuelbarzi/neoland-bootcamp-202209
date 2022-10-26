@@ -4,7 +4,7 @@ let user = null
 
 document.body.append(loginPage)
 
-/**/
+/*
 //loginEmailInput.value = 'mickey@mouse.com'
 loginEmailInput.value = 'pepito@grillo.com'
 loginPasswordInput.value = '123123123'
