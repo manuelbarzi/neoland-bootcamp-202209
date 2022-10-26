@@ -1,14 +1,12 @@
-function includes(array, searchElement, fromIndex) {
+function includes(array, searchElement, fromIndex = 0) {
 
-
-    if (array.length <= fromIndex)
+    //Aqui quiero que si el valor es negativo pero no es superior al length del array cuente de atras en adelante
+    if (-fromIndex < array.length) {
         return false
+    }
 
-
-        // if (searchElement === undefined)
-        //     return false;
-
-        for (var i = 0; i < array.length; i++) {
+    
+    for (var i = fromIndex; i < array.length; i++) {
         var element = array[i]
 
         if (searchElement === element)
@@ -17,3 +15,4 @@ function includes(array, searchElement, fromIndex) {
     return false
 }
 
+[2, 10, 5, 9, 4]

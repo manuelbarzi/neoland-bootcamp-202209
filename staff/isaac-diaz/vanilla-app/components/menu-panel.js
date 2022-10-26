@@ -1,6 +1,6 @@
 //Aqui se abre el desplegable del menú
 var menuPanel = document.createElement('div')
-menuPanel.className = 'color container z-index'
+menuPanel.className = 'flex flex-col'
 
 var menuSettingsLink = document.createElement('a')
 menuSettingsLink.innerText = 'settings'

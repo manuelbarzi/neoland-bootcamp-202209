@@ -1,10 +1,10 @@
 //Aqui empieza el header
-var headerPanel = document.createElement('header')
-headerPanel.className = 'container container--full-width header--height'
+const headerPanel = document.createElement('header')
+headerPanel.className = 'flex flex-col w-full'
 
 //Anchor de la imagen para que derive al inicio de nuevo
-var headerHomeLink = document.createElement('a')
-headerHomeLink.className = ''
+const headerHomeLink = document.createElement('a')
+headerHomeLink.className = 'h-10'
 headerHomeLink.href = ''
 headerHomeLink.onclick = function (event) {
     event.preventDefault()
@@ -17,42 +17,45 @@ headerHomeLink.onclick = function (event) {
     homePage.append(tasksPanel)
 } 
 
-var headerImage = document.createElement('img')
+const headerImage = document.createElement('img')
 headerImage.src = 'https://www.tienda.lacasa.es/1057-large_default/lacasitos-tubos-4-uds-20-g.jpg'
-headerImage.className = 'image--width'
+headerImage.className = 'h-10'
 
 //Declaracion de la imagen en el anchor
 headerHomeLink.append(headerImage)
 
 //Aqui se pone el nombre del usuario que ha iniciado la sesion
-var headerUserNameText = document.createElement('span')
+const headerUserNameText = document.createElement('span')
 headerUserNameText.innerText = 'User Name'
-headerUserNameText.className = 'container container--full-height container--padding-h-s'
+headerUserNameText.className = 'flex flex-col h-full p-2px'
 
 //Agregamos un boton para añadir tarea
 
-var addTaskButton = document.createElement('button')
+const addTaskButton = document.createElement('button')
 addTaskButton.innerText = 'add'
-addTaskButton.className = 'material-symbols-outlined'
+addTaskButton.className = 'material-symbols-outlined bg-gray-400'
 
 addTaskButton.onclick = function(){    
-    var result = createTask(user.email)
+    try{
+    createTask(user.email)
 
-    if(result instanceof Error) {
-    alert(result.message)
-
-    return
-    }
     clearTasksCards()
 
     renderTasksCards()
-}
+
+    }catch (error) {
+        alert(error.message)
+    }
+
+    
+    }
+
 //Aqui empieza el panel del boton menú
-var headerMenuButton = document.createElement('button')
+const headerMenuButton = document.createElement('button')
 headerMenuButton.innerText = 'menu'
 headerMenuButton.className = 'material-symbols-outlined'
 
-var headerMenuPanelStatus = 'closed'
+let headerMenuPanelStatus = 'closed'
 
 headerMenuButton.onclick = function() {
     if (headerMenuPanelStatus === 'closed') {
@@ -66,8 +69,8 @@ headerMenuButton.onclick = function() {
     }
 }
 
-var headerTopPanel = document.createElement('div')
-headerTopPanel.className = 'color container container--row container--full-width container--content-space-between container--full-height'
+const headerTopPanel = document.createElement('div')
+headerTopPanel.className = 'flex justify-between'
 
 //Declaracion del Anchor de la imagen, el nombre de usuario logeado y el boton de menú
 headerTopPanel.append(headerHomeLink, headerUserNameText, addTaskButton, headerMenuButton)

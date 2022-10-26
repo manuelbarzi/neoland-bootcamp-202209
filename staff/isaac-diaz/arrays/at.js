@@ -1,8 +1,10 @@
 function ats(array, index) {
-    for(var i = 0; i < array.length; i++) {
-        var position = index
-    }
 
-return position
+    if (result = array[index])
+
+    if (index = array.length)
+        (array[array.length - 1])
+
+    return result
 }
 

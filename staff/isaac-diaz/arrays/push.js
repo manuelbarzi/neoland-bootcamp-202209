@@ -1,5 +1,5 @@
 function push(array) {
-    debugger
+    
     var argumentsLength = arguments.length - 1
     
     for (var i = 0; i < argumentsLength; i++) {

@@ -1,16 +1,19 @@
 function substring(string, indexStart, indexEnd) {
     var result = ''
 
-    
-    //En este caso da igual el orden en como nos de el valor
-    if (newIndexEnd = indexStart) {
-        indexStart = indexEnd
-        indexEnd = newIndexEnd
-    }
-    //Aqui miramos el caso en que nos de un valor menor o mayor al string 
+
+
+    //Aqui miramos el caso en que el indexStart es negativo 
     if (indexStart < 0)
         indexStart = 0
-  
+
+    //Caso en el que el indexStart es mayor al indexEnd
+    if (indexStart > indexEnd) {
+        var newindexStart = indexEnd
+        indexEnd = indexStart
+        indexStart = newindexStart
+    }
+
     if (!indexEnd || string.length < indexEnd) {
         indexEnd = string.length
     }

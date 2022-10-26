@@ -18,14 +18,22 @@ console.assert(result === ' mundo')
 
 var string = 'hola mundo'
 
-var result = substring(8, 2)
+var result = substring(string, 8, 2)
 
-console.assert(result === 'la mund')
+console.assert(result === 'la mun')
 
 //4º caso, si el valor que nos da es menor al startIndex coger el primer valor de este, o si es mayor que el propio string se quede en el endIndex.
 
 var string = 'hola mundo'
 
-var result = substring(-4, 15)
+var result = substring(string, -4, 15)
 
 console.assert(result === 'hola mundo')
+
+//5º caso, index start === indexEnd
+
+var string = 'hola mundo'
+
+var result = substring(string, 3, 3)
+
+console.assert(result === '')

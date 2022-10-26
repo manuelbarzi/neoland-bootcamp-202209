@@ -5,10 +5,17 @@ var result = includes(pets, 'cat')
 
 console.assert(result === true)
 
-//En
-
+//CASE return false with fromIndex argument
 var pets = ['dog', 'cat', 'coco', 'mouseperez', 'cigüeña']
 
 var result = includes('cat', 40)
+
+console.assert(result === false)
+
+
+//CASE return false for input value ('horse')
+var pets = ['dog', 'cat', 'coco', 'mouseperez', 'cigüeña']
+
+var result = includes('horse')
 
 console.assert(result === false)

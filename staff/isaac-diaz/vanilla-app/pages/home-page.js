@@ -1,5 +1,5 @@
 //Home
-var homePage = document.createElement('main')
-homePage.className = 'container container--full container--content-start'
+const homePage = document.createElement('main')
+homePage.className = 'flex flex-col'
 
 homePage.append(headerPanel, tasksPanel)
