@@ -15,4 +15,4 @@ class Estudiante extends Persona {
 }
 
 var estudiante1 = new Estudiante('Jaume')
-estudiante1.presentate()
+estudiante1.presentate() // Me llamo Jaume
