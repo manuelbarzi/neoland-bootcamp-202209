@@ -29,7 +29,7 @@ class App extends React.Component {
             
             {this.state.view === 'register' && <RegisterPage onLoginClick={this.navigateToLogin} />}
 
-            {this.state.view === 'home' && <HomePage />}
+            {this.state.view === 'home' && <HomePage onLoggedOut={this.navigateToLogin} />}
         </>
     }
 }

@@ -6,7 +6,7 @@ headerHomeLink.onclick = function(event) {
     event.preventDefault()
 
     menuPanel.remove()
-    headerMenuPanelStatus = 'closed'
+    headerMenuButton.innerText = 'menu'
 
     settingsPanel.remove()
 
@@ -42,17 +42,15 @@ const headerMenuButton = document.createElement('button')
 headerMenuButton.className = 'material-symbols-outlined'
 headerMenuButton.innerText = 'menu'
 
-let headerMenuPanelStatus = 'closed'
-
 headerMenuButton.onclick = function() {
-    if (headerMenuPanelStatus === 'closed') {
+    if (headerMenuButton.innerText === 'menu') {
         headerPanel.append(menuPanel)
 
-        headerMenuPanelStatus = 'opened'
+        headerMenuButton.innerText = 'close'
     } else {
         menuPanel.remove()
 
-        headerMenuPanelStatus = 'closed'
+        headerMenuButton.innerText = 'menu'
     }
 }
 
