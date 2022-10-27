@@ -1,24 +1,23 @@
 const tasksPanel = document.createElement("section");
-tasksPanel.className = "container container--full-with";
+tasksPanel.className = "flex flex-col items-center";
 
 const tasksTitle = document.createElement("h2");
 tasksTitle.innerText = "Tasks";
+tasksTitle.className = 'p-4'
 
 const tasksContentPanel = document.createElement("div");
-tasksContentPanel.className = "container container--row container--items-start";
+tasksContentPanel.className = "flex flex-col sm:flex-row gap-40";
 
 const tasksColumnTodo = document.createElement("section");
-tasksColumnTodo.className = "container container--border container--padding-s container--items-start";
+tasksColumnTodo.className = "flex";
 tasksColumnTodo.innerText = "ToDo Column";
 
 const tasksColumnDoing = document.createElement("section");
-tasksColumnDoing.className =
-  "container container--border container--padding-s container--items-start";
+tasksColumnDoing.className = "";
 tasksColumnDoing.innerText = "Doing Column";
 
 const tasksColumnDone = document.createElement("section");
-tasksColumnDone.className =
-  "container container--border container--padding-s container--items-start";
+tasksColumnDone.className = "";
 tasksColumnDone.innerText = "Done Column";
 
 tasksContentPanel.append(tasksColumnTodo, tasksColumnDoing, tasksColumnDone);

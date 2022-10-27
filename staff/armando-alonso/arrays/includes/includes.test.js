@@ -94,3 +94,17 @@
 
 }
 
+
+// Case value is a string and check value is a different word
+
+{
+
+    const array = 'Neoland'
+
+    let result = includes(array, 'oland')
+
+    console.assert(result === false)
+
+
+}
+

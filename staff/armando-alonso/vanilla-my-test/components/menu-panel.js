@@ -1,7 +1,7 @@
 log("INFO", "Menu Panel");
 
 const homeMenuPanel = document.createElement("div");
-homeMenuPanel.className = "container container__item--right";
+homeMenuPanel.className = "flex flex-col items-end";
 
 const homeMenuSettingsLink = document.createElement("button");
 homeMenuSettingsLink.className = "material-symbols-outlined";

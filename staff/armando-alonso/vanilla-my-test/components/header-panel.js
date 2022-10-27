@@ -1,7 +1,7 @@
 log("INFO", "Header Panel");
 
 const homeHeader = document.createElement("header");
-homeHeader.className = "container container--full-with";
+homeHeader.className = "flex flex-col";
 
 const homeLink = document.createElement("a");
 homeLink.href = "";
@@ -21,12 +21,12 @@ homeLink.onclick = function (event) {
 const homeLogo = document.createElement("img");
 homeLogo.src =
   "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Trello-logo-blue.svg/100px-Trello-logo-blue.svg.png";
+homeLogo.className = ""
 
 homeLink.append(homeLogo);
 
 const homeUserName = document.createElement("span");
-homeUserName.className =
-  "container container--full-height container--padding-h-s";
+homeUserName.className = "";
 
 const homeAddTask = document.createElement('button')
 homeAddTask.className = 'material-symbols-outlined'
@@ -64,10 +64,14 @@ homeMenuButton.onclick = function () {
   }
 };
 
-const homeHeaderTopPanel = document.createElement("div");
-homeHeaderTopPanel.className =
-  "container container--row container--full-with container--content-space-between";
+const homeAddMenu = document.createElement('div')
+homeAddMenu.className = 'flex'
 
-homeHeaderTopPanel.append(homeLink, homeUserName, homeAddTask, homeMenuButton);
+const homeHeaderTopPanel = document.createElement("div");
+homeHeaderTopPanel.className = "flex justify-between p-4";
+
+homeAddMenu.append(homeAddTask, homeMenuButton)
+
+homeHeaderTopPanel.append(homeLink, homeUserName, homeAddMenu);
 
 homeHeader.append(homeHeaderTopPanel);

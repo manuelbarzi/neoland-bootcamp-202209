@@ -1,7 +1,7 @@
 log("INFO", "Register Page");
 
 const registerForm = document.createElement("form");
-registerForm.className = 'container'
+registerForm.className = ('flex flex-col gap-y-2 rounded-xl shadow-2xl bg-[#cccab5] p-8')
 
 registerForm.onsubmit = function (event) {
   event.preventDefault();
@@ -32,6 +32,7 @@ try {
 
 const registerTitle = document.createElement("h2");
 registerTitle.innerText = "Register";
+registerTitle.className = ('flex justify-center text-[#ffffff] text-xl mb-3')
 
 const registerUserLabel = document.createElement("label");
 registerUserLabel.htmlFor = "user-register";
@@ -104,6 +105,6 @@ registerLoginLink.onclick = function (event) {
 };
 
 const registerPage = document.createElement("main");
-registerPage.className = 'container  container--full'
+registerPage.className = ('h-screen flex flex-col items-center justify-center')
 
 registerPage.append(registerForm, registerLoginLink);

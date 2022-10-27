@@ -1,5 +1,5 @@
 const settingsPanel = document.createElement('section')
-settingsPanel.className = 'container container--full-with'
+settingsPanel.className = ''
 
 const settingsTitle = document.createElement('h2')
 settingsTitle.innerText = 'settings'
