@@ -1,17 +1,52 @@
-function LoginPage() {
+function LoginPage(props) {
+    const hadleClick = (event) => {
+        log('INFO', 'RegisterPage -> render')
+        event.preventDefault()
+
+        const onRegisterLinkClick = props.onRegisterLinkClick
+
+        onRegisterLinkClick()
+    }
+
+
+    const handleSubmit = (event) => {
+        log('INFO', 'Submit Login')
+        event.preventDefault()
+
+        const form = event.target
+
+        const emailInput = form.email
+        const passwordInput = form.password
+
+        const email = emailInput.value
+        const password = passwordInput.value
+
+        try {
+            user = authenticateUser(email, password)
+
+            const onLoggedIn = props.onLoggedIn
+
+            onLoggedIn()
+        } catch (error) {
+            alert(error.message)
+            passwordInput.value = ''
+        }
+    }
+
     return (
         <main className="h-screen">
             <div className="h-full flex flex-col flex-wrap justify-center items-center bg-gradient-to-br from-cyan-500 to-blue-500">
                 <h1 className="text-center text-white text-lg pb-4">
                     Sign in to continue to Home
                 </h1>
-                <form className="flex flex-col justify-start w-96 gap-1 px-12 py-14 rounded bg-white">
+                <form className="flex flex-col justify-start w-96 gap-1 px-12 py-14 rounded bg-white" onSubmit={handleSubmit}>
                     <img
                         src="img/logologintrello.png"
                         className="self-center w-2/5 mb-8"
                     />
                     <label htmlFor="loginEmail"></label>
                     <input
+                        name='email'
                         type="email"
                         placeholder="Email"
                         id="loginEmail"
@@ -21,6 +56,7 @@ function LoginPage() {
                     />
                     <label htmlFor="loginPassword"></label>
                     <input
+                        name='password'
                         type="password"
                         placeholder="Password"
                         id="loginPassword"
@@ -36,7 +72,7 @@ function LoginPage() {
                         Sign in
                     </button>
                 </form>
-                <a href="" className="mt-2 text-white text-base hover:text-black">
+                <a href="" className="mt-2 text-white text-base hover:text-black" onClick={hadleClick}>
                     Create an account
                 </a>
             </div>
