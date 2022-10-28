@@ -1,12 +1,12 @@
 function RegisterPage(props) {
     log('INFO', 'RegisterPage -> render')
 
-    const handleNavigateToLogin = event => {
+    const handleClick = event => {
         event.preventDefault()
 
-        const onNavigateToLogin = props.onNavigateToLogin
+        const onLoginClick = props.onLoginClick
 
-        onNavigateToLogin()
+        onLoginClick()
     }
 
     return <main className="flex flex-col items-center gap-2">
@@ -19,6 +19,6 @@ function RegisterPage(props) {
             <input type="password" id="register-password" placeholder="input your password" className="border-b border-black" />
             <button className="p-2 border rounded-xl hover:animate-spin">Register</button>
         </form>
-        <a href="" className="underline" onClick={handleNavigateToLogin}>Login</a>
+        <a href="" className="underline" onClick={handleClick}>Login</a>
     </main>
 }
