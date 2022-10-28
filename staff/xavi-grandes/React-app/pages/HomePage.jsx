@@ -120,7 +120,8 @@ class HomePage extends React.Component {
           <h1 className="uppercase font-bold text-center mt-4">
             Manage your tasks</h1>
 
-          <div className="flex gap-10 justify-center mt-4">
+          {/* sm:flex-row - cuando el texto está más grande que en mobile la distribución pasa a ser flex-row */}
+          <div className="flex gap-10 justify-center flex-col mt-4 sm:flex-row items-center ">
             <section className="w-64 p-2 bg-white border border-black">
               <h2 className="font-bold">TODO</h2>
               {this.state.tasks.filter((task) => task.status === "todo").map((task) => (
