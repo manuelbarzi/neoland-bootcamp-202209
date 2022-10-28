@@ -25,26 +25,7 @@ class HomePage extends React.Component {
         try {
             const tasks = retrieveTasks(user.email)
 
-            this.setState({ tasks })
-        } catch (error) {
-            alert(error.message)
-        }
-    }
-
-    handleKeyUp = (taskId, newText) => {
-        try {
-            updateTaskText(user.email, taskId, newText)
-        } catch (error) {
-            alert(error.message)
-        }
-    }
-
-    handleClick = taskId => {
-        try {
-            deleteTask(user.email, taskId)
-
-            const tasks = retrieveTasks(user.email)
-            
+            //this.setState({ tasks: tasks })
             this.setState({ tasks })
         } catch (error) {
             alert(error.message)
@@ -68,23 +49,23 @@ class HomePage extends React.Component {
                 <div className="flex flex-col sm:flex-row gap-4">
                     <section className="flex flex-col gap-2 border-2 p-2">
                         <h2>TODO</h2>
-                        {this.state.tasks.filter(task => task.status === 'todo').map(task => <article key={task.id} className="border-2 p-1">
-                            <p suppressContentEditableWarning={true} contentEditable="true" onKeyUp={event => this.handleKeyUp(task.id, event.target.innerText)}>{task.text}</p>
-                            <button className="material-symbols-outlined" onClick={() => this.handleClick(task.id)}>delete</button>
+                        {this.state.tasks.filter(task => task.status === 'todo').map(task => <article className="border-2 p-1">
+                            <p contenteditable="true">{task.text}</p>
+                            <button className="material-symbols-outlined">delete</button>
                         </article>)}
                     </section>
                     <section className="border-2 p-2">
                         <h2>DOING</h2>
-                        {this.state.tasks.filter(task => task.status === 'doing').map(task => <article key={task.id} className="border-2 p-1">
-                            <p suppressContentEditableWarning={true} contentEditable="true" onKeyUp={event => this.handleKeyUp(task.id, event.target.innerText)}>{task.text}</p>
-                            <button className="material-symbols-outlined" onClick={() => this.handleClick(task.id)}>delete</button>
+                        {this.state.tasks.filter(task => task.status === 'doing').map(task => <article className="border-2 p-1">
+                            <p contenteditable="true">{task.text}</p>
+                            <button className="material-symbols-outlined">delete</button>
                         </article>)}
                     </section>
                     <section className="border-2 p-2">
                         <h2>DONE</h2>
-                        {this.state.tasks.filter(task => task.status === 'done').map(task => <article key={task.id} className="border-2 p-1">
-                            <p suppressContentEditableWarning={true} contentEditable="true" onKeyUp={event => this.handleKeyUp(task.id, event.target.innerText)}>{task.text}</p>
-                            <button className="material-symbols-outlined" onClick={() => this.handleClick(task.id)}>delete</button>
+                        {this.state.tasks.filter(task => task.status === 'done').map(task => <article className="border-2 p-1">
+                            <p contenteditable="true">{task.text}</p>
+                            <button className="material-symbols-outlined">delete</button>
                         </article>)}
                     </section>
                 </div>
