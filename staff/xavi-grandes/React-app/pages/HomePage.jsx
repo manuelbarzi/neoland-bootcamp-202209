@@ -53,6 +53,19 @@ class HomePage extends React.Component {
     }
   };
   
+  handleAddTask = () => {
+    try {
+      createTask (user.email)
+
+    const tasks = retrieveTasks (user.email)
+    
+    this.setState({tasks})
+
+    } catch (error) {
+      alert(error.message)
+    }
+  }
+  
   handleNavigateToSettings = event => {
     event.preventDefault()
 
@@ -83,7 +96,7 @@ class HomePage extends React.Component {
             <img className="w-16" src="https://cdn.iconscout.com/icon/free/png-256/trello-14-1175081.png"/>
           </a>
           <span className="#">Pepito Grillo</span>
-          <button className="home-header-button material-symbols-outlined">add</button>
+          <button className="home-header-button material-symbols-outlined" onClick={this.handleAddTask}>add</button>
           <button
             className="home-header-button material-symbols-outlined"
             onClick={this.handleToggleMenu}>
