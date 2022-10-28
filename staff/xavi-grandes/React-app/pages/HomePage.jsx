@@ -59,6 +59,21 @@ class HomePage extends React.Component {
     this.setState({view: 'settings', toggleButtonText: 'menu'})
   }
 
+  handleUpdateUserEmail = event => {
+    event.preventDefault()
+
+    try {
+      const newEmail = event.target.email.value 
+
+      updateUserEmail(user.email, newEmail)
+
+      alert('E-mail updated')
+
+    } catch (error) {
+      alert(error.message)
+    }
+  }
+
   render() {
     log("INFO", "Home -> render");
 
