@@ -51,7 +51,7 @@ try{
 }
 
 console.assert(_error instanceof TypeError)
-console.assert(_error.message === 'function(num){ console.log(num)} is not an array')
+console.assert(_error.message === 'function(num) {console.log(num)} is not an array')
  
 // No se ingresa una funcion 
 var nums = [10, 20, 30, 40]

@@ -1,0 +1,63 @@
+describe('Burray.prototype.forEach', () => {
+    it('add all numbers into a result', () => {
+        const ns = new Burray(10, 20, 30, 40, 50)
+        let r = 0
+
+        const addToResult = n => {
+            r += n //  0 callback 
+        }
+        
+        ns.forEach(addToResult) // llama al array y a la function ( reemplazo por callback)
+
+        expect(r).toBe(150)
+    })
+    
+    it('multiply all numbers by 10 and accumulate into an array', () => {
+        const ns = new Burray(10, 20, 30, 40, 50)
+        const r = new Burray
+        //function mulBy10AndPushInToResult(n, i) 
+        const mulBy10AndPushInToResult = (n, i) => {
+            r[i] = n * 10
+            r.length++
+        }
+        
+       ns.forEach(mulBy10AndPushInToResult)
+
+        expect(r[0]).toBe(100)
+        expect(r[1]).toBe(200)
+        expect(r[2]).toBe(300)
+        expect(r[3]).toBe(400)
+        expect(r[4]).toBe(500)
+    })
+
+    it('concatenate all characters into a string', () => {
+        const chars = new Burray('i', 'l', 'o', 'v', 'e', 'c', 'o', 'd', 'e', '&', 't', 'd', 'd')
+        let s = ''
+
+        chars.forEach = char => {
+            s += char
+        }
+
+        expect(s).toBe('')
+    })
+
+    it('fails an no array input', () => {
+        const nums = [10, 20, 30]
+        const print = num => console.log(num) 
+
+        let _error
+
+        try {
+            nums.forEach()
+        } catch (error) {
+            _error = error
+        }
+
+        expect(_error).toBeInstanceOf(TypeError)
+        expect(_error.message).toBe('undefined is not a function')
+    })
+})
+
+
+
+

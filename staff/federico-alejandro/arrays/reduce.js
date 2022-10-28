@@ -1,23 +1,21 @@
 function reduce(array, callback, initialValue = 0) {
     if (!(array instanceof Array)) throw new TypeError(array + ' is not an array')
-    if (typeof callback !== 'function') throw new TypeError(callback + ' is no a function')
-    
-    var result = 0;
+    if (typeof callback !== 'function') throw new TypeError(callback + ' is not a function')
 
-    for (var i = 0; i < numbers.length; i++){
-     var element = array[i]
-     
-     if (initialValue === 0){
-          i + 1
-          initialValue + 1
+    var previousValue = initialValue
 
-          result = array[i]
+    for (var i = 0; i < array.length; i++) {
+        var element = array[i]
 
-     }
-        
-    var returnCallbackValue = callback(result, element)
-    result = returnCallbackValue
+        if (initialValue === 0) {
+            previousValue = array[i]
+            i++
+            initialValue++
+        }
+
+        var returnCallbackValue = callback(previousValue, array[i], i, ...array)
+        previousValue = returnCallbackValue
     }
-    return result
-   
+    return previousValue
+
 }

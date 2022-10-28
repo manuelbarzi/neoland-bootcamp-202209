@@ -1,11 +1,11 @@
-var homeHeader = document.createElement('header')
+const homeHeader = document.createElement('header')
 homeHeader.className = 'container container--full-width container--content-space-between'
 
-var homeMenuButton = document.createElement ('button')
+const homeMenuButton = document.createElement ('button')
 homeMenuButton.className = 'container container--row material-symbols-outlined'
 homeMenuButton.innerText = 'menu'
 
-var homeMenuPanelStatus = 'closed'
+let homeMenuPanelStatus = 'closed'
 
 homeMenuButton.onclick = function() {
     if (homeMenuPanelStatus === 'closed') {
@@ -19,7 +19,7 @@ homeMenuButton.onclick = function() {
     }
 }
 
-var homeHeaderLink = document.createElement('a')
+const homeHeaderLink = document.createElement('a')
 homeHeaderLink.href = ''
 homeHeaderLink.onclick = function(event) {
     event.preventDefault()
@@ -31,27 +31,27 @@ homeHeaderLink.onclick = function(event) {
 
     homePage.append(tasksPanel)
 }
-var logoTrello = document.createElement('img')
+const logoTrello = document.createElement('img')
 logoTrello.src = 'https://1000logos.net/wp-content/uploads/2021/05/Trello-logo.png'
 logoTrello.className = ' logo-trello'
  homeHeaderLink.append(logoTrello)
 
-var userName = document.createElement('span')
+const userName = document.createElement('span')
 userName.innerText = 'User Name'
 userName.className = ' user-name'
 
 
-var searchButton = document.createElement('button')
+const searchButton = document.createElement('button')
 searchButton.className ='material-symbols-outlined'
 searchButton.innerText = 'Search'
 
-var homeHeaderTopPanel = document.createElement('div')
+const homeHeaderTopPanel = document.createElement('div')
 homeHeaderTopPanel.className = 'container container--row container--full-width container--content-space-between'
 
-var homeHeaderTopPanelRight = document.createElement('div')
+const homeHeaderTopPanelRight = document.createElement('div')
 homeHeaderTopPanelRight.append(searchButton, homeMenuButton)
 
-var homeHeaderTopPanelLeft = document.createElement('div')
+const homeHeaderTopPanelLeft = document.createElement('div')
 homeHeaderTopPanelLeft.append(userName)
 homeHeaderTopPanel.append(homeHeaderTopPanelLeft, homeHeaderTopPanelRight)
 

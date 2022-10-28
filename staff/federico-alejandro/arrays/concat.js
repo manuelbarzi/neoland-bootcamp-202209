@@ -1,17 +1,57 @@
 function concat() {
-    
-    
-    var result = [];
+    var result = []
 
     for (var i = 0; i < arguments.length; i++) {
-        var array = arguments[i];
+        var array = arguments[i]
 
         for (var j = 0; j < array.length; j++) {
-            var element = array[j];
+            var element = array[j]
 
-            result[result.length] = element;
+            result[result.length] = element
         }
     }
+    return result
 
-    return result;
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

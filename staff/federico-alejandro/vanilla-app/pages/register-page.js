@@ -1,6 +1,6 @@
 log('DEBUG', 'mount register')
 
-var registerPage = document.createElement('main')
+const registerPage = document.createElement('main')
 registerPage.className = 'container container--register'
 
 registerPage.onsubmit = function(event) {
@@ -8,9 +8,9 @@ registerPage.onsubmit = function(event) {
     
     log('DEBUG', 'submit register')
 
-    var name = registerName.value
-    var email =  registerEmail.value
-    var password = registerPassword.value
+    const name = registerName.value
+    const email =  registerEmail.value
+    const password = registerPassword.value
 
     try {
         registerUser(name, email, password)
@@ -31,11 +31,11 @@ registerPage.onsubmit = function(event) {
         //alert(result.message)
 }
 
-var registerLabelName = document.createElement('label')
+const registerLabelName = document.createElement('label')
 registerLabelName.htmlFor = 'name'
 registerLabelName.className = 'container__item--left'
 registerLabelName.innerText = 'Name'
-var registerName = document.createElement('input')
+const registerName = document.createElement('input')
 registerName.type = 'name'
 registerName.name = 'name'
 registerName.id = 'name'
@@ -47,8 +47,8 @@ registerName.oninvalid = function() {
 }
 
 
-var registerLabelEmail = document.createElement('label')
-var registerEmail = document.createElement('input')
+const registerLabelEmail = document.createElement('label')
+const registerEmail = document.createElement('input')
 registerLabelEmail.htmlFor = 'email'
 registerLabelEmail.className = 'container__item--left'
 registerLabelEmail.innerText = 'E-mail'
@@ -58,8 +58,8 @@ registerEmail.id = 'email'
 registerEmail.placeholder = 'input your email'
 registerEmail.required = true
 
-var registerLabelPassword = document.createElement('label')
-var registerPassword = document.createElement('input')
+const registerLabelPassword = document.createElement('label')
+const registerPassword = document.createElement('input')
 registerLabelPassword.className = 'container__item--left'
 registerLabelPassword.htmlFor = 'Password'
 registerLabelPassword.innerText = 'Password'
@@ -74,10 +74,10 @@ registerPassword.required = true
 registerPassword.title = 'Use min 8 characters for the password and no spaces'
 
 
-var registerButton = document.createElement('button')
+const registerButton = document.createElement('button')
 registerButton.innerText = 'Register'
 
-var registerLoginLink = document.createElement ('a')
+const registerLoginLink = document.createElement ('a')
 registerLoginLink.href =""
 registerLoginLink.innerText = 'login'
 registerLoginLink.className = 'login--link'
@@ -91,7 +91,7 @@ registerLoginLink.onclick = function(event) {
     document.body.append(loginPage)
  }
 
-var registerForm = document.createElement('form')
+const registerForm = document.createElement('form')
 registerForm.className = 'container'
 registerForm.append(registerLabelName, registerName, registerLabelEmail, registerEmail, registerLabelPassword, registerPassword, registerButton, registerLoginLink)
 registerPage.append(registerForm)

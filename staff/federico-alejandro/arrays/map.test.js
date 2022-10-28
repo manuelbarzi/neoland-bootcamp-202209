@@ -1,7 +1,7 @@
 const array1 = [1, 4, 9, 16];
 
 const arrayMappeado = map(array1, function (number) {
-  return number * 2;
+  return number * 2 ;
 });
 
 console.assert(arrayMappeado.length === 4);

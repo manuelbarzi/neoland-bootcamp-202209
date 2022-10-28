@@ -1,5 +1,5 @@
 function filter(array, callback) {
-    debugger
+   
     if (!(array instanceof Array)) throw new TypeError(array + ' is not an array')
     if (typeof callback !== 'function') throw new TypeError(callback + ' is not a function')
 

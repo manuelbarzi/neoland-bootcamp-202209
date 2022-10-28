@@ -11,7 +11,7 @@ var string = 'hola'
 var count = -2
 
 var res= repeat(string, -2)
-//El resultado sera un mensaje de error ya que ingresa un numero negativo es invalido
+//El resultado sera un mensaje de error ya que ingresar un numero negativo es invalido
 console.assert(res instanceof RangeError)
 console.assert(res.message === 'invalid count value: -2' )
 

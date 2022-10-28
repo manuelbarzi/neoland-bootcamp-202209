@@ -9,7 +9,7 @@ var result = slice(string, 0, 1);
 
 console.assert(result === "h");
 
-// devuelve 'hola m' del string 'hola mundo, desde numA 0 y numB -4
+// devuelve 'hola m' del string 'hola mundo', desde numA 0 y numB -4
 var string = "hola mundo";
 var result2 = slice(string, 0, -4);
 

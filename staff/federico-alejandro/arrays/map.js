@@ -7,10 +7,24 @@ function map(array, callback) {
     for (var i = 0; i < array.length; i++) {
       var element = array[i];
   
-      var returnCallbackValue = callback(element);
+      var returnCallbackValue = callback(element, i, array);
   
       result[result.length] = returnCallbackValue;
     }
   
     return result;
   }
+
+  /*function map(array, callback){
+    res = []
+  
+    for(i = 0; i < array.length; i++){
+      let returnedElement = callback(array[i], i, array)
+  
+      res[i] = returnedElement
+  
+    }
+  
+    return res
+  }*/
+

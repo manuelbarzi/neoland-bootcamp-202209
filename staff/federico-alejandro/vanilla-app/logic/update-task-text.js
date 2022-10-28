@@ -1,5 +1,5 @@
  function updateTask(userEmail, taskId, text){
-    if (typeof userEmail === 'string') throw new TypeError('userEmail is not a string')
+    if (typeof userEmail !== 'string') throw new TypeError('userEmail is not a string')
     if (!IS_EMAIL_REGEX.test(userEmail)) throw new Error ('userEmail is not valid')
 
     if (typeof taskId !== 'string') throw new TypeError('taskId is not a string')
@@ -7,10 +7,10 @@
 
     if (typeof text !== 'string') throw new TypeError('text is not a string')
     
-    var found = false
+    let found = false
 
-    for ( var i = 0; i < users.length && !found; i++) {
-        var user = users[i]
+    for ( let i = 0; i < users.length && !found; i++) {
+        const user = users[i]
 
         if(user.email === userEmail)
            found = true 
@@ -18,10 +18,10 @@
 
     if (!found) throw new Error ('user with email ' + userEmail + ' not found')
 
-    var foundTask //= false
+   let foundTask //= false
 
-    for ( var i = 0; i < tasks.length && !foundTask; i++) {
-        var task = tasks[i]
+    for (let i = 0; i < tasks.length && !foundTask; i++) {
+        const task = tasks[i]
 
         if (task.id === taskId) {
             foundTask = task

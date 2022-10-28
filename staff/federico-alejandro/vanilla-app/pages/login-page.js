@@ -1,6 +1,6 @@
 log("DEBOG", "mount login");
 //LoginForm = form//
-var form = document.createElement("form");
+const form = document.createElement("form");
 form.className = "container";
 
 form.onsubmit = function (event) {
@@ -8,8 +8,8 @@ form.onsubmit = function (event) {
 
   log("DEBUG", "submit login")
 
-  var email = loginEmail.value
-  var password = loginPassword.value
+  const email = loginEmail.value
+  const password = loginPassword.value
 
   
   try {
@@ -35,44 +35,44 @@ form.onsubmit = function (event) {
   //user = result
 }
 
-var loginMain = document.createElement('main')
+const loginMain = document.createElement('main')
 loginMain.className = 'container'
 
-/*var loginImage = document.getElementById('img')
+/*const loginImage = document.getElementById('img')
 loginImage.innerHTML = <img src='data/img/vecteezy_3d-online-airline-ticket-buying-confirm-concept-icon-with-3d_10916024_536.png'/>
 loginMain.append(loginImage)*/
-/*var logoTrello = document.createElement('img')
+/*const logoTrello = document.createElement('img')
 logoTrello.src = 'https://1000logos.net/wp-content/uploads/2021/05/Trello-logo.png'
 logoTrello.className = 'logo-trello'*/
 
 
 
-var loginLabelEmail = document.createElement("label");
+const loginLabelEmail = document.createElement("label");
 loginLabelEmail.htmlFor = "email";
 loginLabelEmail.className = "container__item--left";
 loginLabelEmail.innerText = "E-mail";
 
-var loginEmail = document.createElement("input");
+const loginEmail = document.createElement("input");
 loginEmail.type = "email";
 loginEmail.name = "email";
 loginEmail.id = "email";
 loginEmail.placeholder = "input your email";
 
-var loginLabelPassword = document.createElement("label");
+const loginLabelPassword = document.createElement("label");
 loginLabelPassword.htmlFor = "password";
 loginLabelPassword.innerText = "Password";
 loginLabelPassword.className = "container__item--left";
 
-var loginPassword = document.createElement("input")
+const loginPassword = document.createElement("input")
 loginPassword.type = "password"
 loginPassword.id = "password"
 loginPassword.placeholder = "input you password"
 
-var loginButton = document.createElement("button")
+const loginButton = document.createElement("button")
 loginButton.innerText = "Login";
 loginButton.className = 'login--button'
 
-var anchor = document.createElement("a");
+const anchor = document.createElement("a");
 anchor.href = ""
 anchor.innerText = "Register"
 anchor.className = "register--login"
@@ -86,10 +86,10 @@ anchor.onclick = function (event) {
   document.body.append(registerPage)
 }
 
-var loginPage = document.createElement("div")
+const loginPage = document.createElement("div")
 loginPage.className = "container container--login"
 
-var h1 = document.createElement("h1")
+const h1 = document.createElement("h1")
 h1.innerHTML = "Login"
 
 form.append(
