@@ -62,7 +62,7 @@ class HomePage extends React.Component {
   render() {
     log("INFO", "Home -> render");
 
-    return <main className="w-full self-start">
+    return <main className="w-full h-full self-start">
         <header className="bg-white w-full flex place-content-between items-center">
           <a href=" ">
             <img className="w-16" src="https://cdn.iconscout.com/icon/free/png-256/trello-14-1175081.png"/>
@@ -88,7 +88,7 @@ class HomePage extends React.Component {
             </div>
           </div>}
 
-        <main className="tasks-menu">
+          {this.state.view === 'tasks' && <section className="tasks-menu">
           <h1 className="uppercase font-bold text-center mt-4">
             Manage your tasks</h1>
 
@@ -133,7 +133,19 @@ class HomePage extends React.Component {
                 ))}
             </section>
           </div>
-        </main>
+        </section>}
+
+        {this.state.view === 'settings' && <section className="flex flex-col items-center">
+          <div className="m-4 rounded-xl bg-white border border-black ">
+                <h2 className="m-2 text-xl font-bold">Settings</h2>
+                <form className="mr-2 ml-2 flex flex-col" onSubmit={this.handleUpdateUserEmail}>
+                    <label htmlFor="email">E-mail</label>
+                    <input className="pl-1 bg-gray-200 border-b-2 border-gray-100" name="email" type="email" id="email" placeholder="input an email" defaultValue={user.email} />
+                    <button className="bg-red-400 border border-black rounded-md w-32 m-2 self-center">Save</button>
+                </form>
+          </div>
+            </section>}
+
       </main>
   }
 }
