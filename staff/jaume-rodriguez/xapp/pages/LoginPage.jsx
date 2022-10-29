@@ -68,7 +68,7 @@ function LoginPage(props) {
                         <input type="checkbox" />
                         <label className="text-xs mx-2 my-3">Show password</label>
                     </span>
-                    <button className="w-full h-8 self-start rounded border-none text-white font-bold bg-gradient-to-br from-cyan-500 to-blue-500">
+                    <button className="w-full h-8 self-start rounded border-none text-white font-bold bg-sky-700">
                         Sign in
                     </button>
                 </form>

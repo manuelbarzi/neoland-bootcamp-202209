@@ -75,7 +75,7 @@ function RegisterPage(props) {
                         <input type="checkbox" />
                         <label className="text-xs mx-2 my-3">Show password</label>
                     </span>
-                    <button className="w-full h-8 self-start bg-gradient-to-br from-cyan-500 to-blue-500 rounded border-none text-white font-bold">
+                    <button className="w-full h-8 self-start bg-sky-700 rounded border-none text-white font-bold">
                         Register
                     </button>
                 </form>

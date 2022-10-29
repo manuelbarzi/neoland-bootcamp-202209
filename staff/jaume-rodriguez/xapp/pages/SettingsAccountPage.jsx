@@ -6,13 +6,13 @@ class SettingsAccountPage extends React.Component {
         this.state = { toggleMenuComponent: "open" };
     }
 
-    toggleMenu = () =>
+    handleToggleMenu = () =>
         this.setState({
             toggleMenuComponent:
                 this.state.toggleMenuComponent === "open" ? "close" : "open",
         });
 
-    logout = () => {
+    handleLogoutLink = () => {
         log("INFO", "Home->logout");
         user = null;
         const onLoggedOut = this.props.onLoggedOut;
@@ -20,7 +20,7 @@ class SettingsAccountPage extends React.Component {
         onLoggedOut();
     };
 
-    homePageLink = () => {
+    handleHomePageLink = () => {
         log("INFO", "Settings Account -> render");
 
         const onHomePageLink = this.props.onHomePageLink;
@@ -28,7 +28,7 @@ class SettingsAccountPage extends React.Component {
         onHomePageLink();
     };
 
-    userNameSubmit = (event) => {
+    handleUserNameSubmit = (event) => {
         log("INFO", "Submit Name");
         event.preventDefault();
 
@@ -48,7 +48,7 @@ class SettingsAccountPage extends React.Component {
         }
     };
 
-    userEmailSubmit = (event) => {
+    handleUserEmailSubmit = (event) => {
         log("INFO", "Submit Email");
         event.preventDefault();
 
@@ -68,7 +68,7 @@ class SettingsAccountPage extends React.Component {
         }
     };
 
-    userPasswordSubmit = (event) => {
+    handleUserPasswordSubmit = (event) => {
         log("INFO", "Submit Password");
         event.preventDefault();
 
@@ -92,16 +92,16 @@ class SettingsAccountPage extends React.Component {
     render() {
         return (
             <main className="h-screen">
-                <header className="flex z-0 items-center px-2 py-3 bg-gradient-to-br from-cyan-500 to-blue-500">
+                <header className="flex z-0 items-center px-2 py-3 bg-sky-700">
                     <img
                         src="img/trellologo.png"
                         className="w-40 cursor-pointer"
-                        onClick={this.homePageLink}
+                        onClick={this.handleHomePageLink}
                     />
                     <img
                         src="img/headermenupanelbotton.png"
                         className="w-14 cursor-pointer ml-auto invert"
-                        onClick={this.toggleMenu}
+                        onClick={this.handleToggleMenu}
                     />
                 </header>
                 {this.state.toggleMenuComponent === "close" && (
@@ -114,7 +114,7 @@ class SettingsAccountPage extends React.Component {
                             </a>
                             <button
                                 className="text-black pr-1 hover:font-semibold"
-                                onClick={this.logout}
+                                onClick={this.handleLogoutLink}
                             >
                                 Logout
                             </button>
@@ -132,7 +132,7 @@ class SettingsAccountPage extends React.Component {
                     </div>
                     <div className="flex content-start flex-col w-92 gap-1 p-12">
                         <span className="mb-4 mt-2">Manage your Trello account</span>
-                        <form className="flex w-full justify-center" onSubmit={this.userNameSubmit}>
+                        <form className="flex w-full justify-center" onSubmit={this.handleUserNameSubmit}>
                             <label htmlFor="updateName"></label>
                             <input
                                 name='name'
@@ -144,10 +144,10 @@ class SettingsAccountPage extends React.Component {
                                 className="h-10 border-gray-400 border-2 rounded border-solid text-slate-800 text-base pl-2 w-64"
                                 defaultValue={user.name}
                             />
-                            <button className="self-start scale-125 p-2 bg-sky-700 rounded text-white mx-2 mt-1 cursor-pointer bg-gradient-to-br from-cyan-500 to-blue-500 fa fa-pencil"></button>
-                            <button className="self-start scale-125 p-2 bg-sky-700 rounded text-white mx-1 mt-1 cursor-pointer bg-gradient-to-br from-cyan-500 to-blue-500 fa fa-save"></button>
+                            <button className="self-start scale-125 p-2 bg-sky-700 rounded text-white mx-2 mt-1 cursor-pointer bg-sky-700 fa fa-pencil"></button>
+                            <button className="self-start scale-125 p-2 bg-sky-700 rounded text-white mx-1 mt-1 cursor-pointer bg-sky-700 fa fa-save"></button>
                         </form>
-                        <form className="flex w-full justify-center" onSubmit={this.userEmailSubmit}>
+                        <form className="flex w-full justify-center" onSubmit={this.handleUserEmailSubmit}>
                             <label htmlFor="updateEmail"></label>
                             <input
                                 name='email'
@@ -159,10 +159,10 @@ class SettingsAccountPage extends React.Component {
                                 className="h-10 border-gray-400 border-2 rounded border-solid text-slate-800 text-base pl-2 w-64"
                                 defaultValue={user.email}
                             />
-                            <button className="self-start scale-125 p-2 bg-sky-700 rounded text-white mx-2 mt-1 cursor-pointer bg-gradient-to-br from-cyan-500 to-blue-500 fa fa-pencil"></button>
-                            <button className="self-start scale-125 p-2 bg-sky-700 rounded text-white mx-1 mt-1 cursor-pointer bg-gradient-to-br from-cyan-500 to-blue-500 fa fa-save"></button>
+                            <button className="self-start scale-125 p-2 bg-sky-700 rounded text-white mx-2 mt-1 cursor-pointer bg-sky-700 fa fa-pencil"></button>
+                            <button className="self-start scale-125 p-2 bg-sky-700 rounded text-white mx-1 mt-1 cursor-pointer bg-sky-700 fa fa-save"></button>
                         </form>
-                        <form className="flex w-full justify-center" onSubmit={this.userPasswordSubmit}>
+                        <form className="flex w-full justify-center" onSubmit={this.handleUserPasswordSubmit}>
                             <label htmlFor="updatePassword"></label>
                             <input
                                 name='password'
@@ -173,8 +173,8 @@ class SettingsAccountPage extends React.Component {
                                 disabled=""
                                 className="h-10 border-gray-400 border-2 rounded border-solid text-slate-800 text-base pl-2 w-64"
                             />
-                            <button className="self-start scale-125 p-2 bg-sky-700 rounded text-white mx-2 mt-1 cursor-pointer bg-gradient-to-br from-cyan-500 to-blue-500 fa fa-pencil"></button>
-                            <button className="self-start scale-125 p-2 bg-sky-700 rounded text-white mx-1 mt-1 cursor-pointer bg-gradient-to-br from-cyan-500 to-blue-500 fa fa-save"></button>
+                            <button className="self-start scale-125 p-2 bg-sky-700 rounded text-white mx-2 mt-1 cursor-pointer bg-sky-700 fa fa-pencil"></button>
+                            <button className="self-start scale-125 p-2 bg-sky-700 rounded text-white mx-1 mt-1 cursor-pointer bg-sky-700 fa fa-save"></button>
                         </form>
                         <span className="flex">
                             <input type="checkbox" />
