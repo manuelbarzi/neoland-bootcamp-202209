@@ -1,6 +1,6 @@
 class App extends React.Component {
     constructor() {
-        log('INFO', 'constructor()', 'components/LogSystem.jsx')
+        log('INFO', 'constructor()', 'components/App.jsx')
 
         super()
 
@@ -20,8 +20,6 @@ class App extends React.Component {
 
     navigateToHome = () => this.setState({ view: 'home' })
 
-    navigateToBatlle = () => this.setState({view: 'battle'})
-
     render() {
         log('INFO', 'render', 'components/LogSystem.jsx')
 
@@ -30,7 +28,8 @@ class App extends React.Component {
             
             {this.state.view === 'register' && <RegisterPage onLoginClick={this.navigateToLogin} />}
 
-            {this.state.view === 'home' && <HomePage onLoggedOut={this.navigateToLogin}/>}
+            {this.state.view === 'home' && <HomePage onBattleClick={this.navigateToBattleMenu}/>}
+
         </>
     }
 }

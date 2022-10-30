@@ -1,7 +1,11 @@
+let nickName
+
 function LoginPage(props) {
     log('INFO', 'LoginPage', 'pages/LoginPage.jsx')
 
     const handleClick = event => {
+        debugger
+        log('DEBUG', 'go to register page', 'pages/LoginPage.jsx')
         event.preventDefault()
 
         const onRegisterClick = props.onRegisterClick
@@ -10,6 +14,7 @@ function LoginPage(props) {
     }
 
     const handleSubmit = event => {
+        log('DEBUG', 'send login', 'LoginPage.jsx')
         event.preventDefault()
 
         const form = event.target
@@ -25,10 +30,11 @@ function LoginPage(props) {
 
             const onLoggedIn = props.onLoggedIn
 
+            nickName = user.name
+
             onLoggedIn()
         } catch(error) {
-            alert(error.message)
-
+            
             passwordInput.value = ''
         }
     }

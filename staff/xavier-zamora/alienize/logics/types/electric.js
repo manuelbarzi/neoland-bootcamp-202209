@@ -11,20 +11,23 @@ class BRAETHORP {
         this.healing = 27
         this.repeat = 10
         this.type = 'Electric'
-        this.atack1 = 'Alto Voltage'
-        this.atack2 = 'paralizador'
+        this.atack1 = 'High Voltatge'
+        this.atack2 = 'Paralizer'
         this.atack3 = 'Puño Agua'
         this.atack4 = 'Rugido Del Dragón'
+
+        this.passiveEfect = false
+        this.paralyzed = false
     }
 
     atackA(alienAtack, alienDefense) {
-        log('DEBUG-LOGIC', 'atackA working', 'electric.js')
-        altoVoltage(alienAtack, alienDefense)
+        log('DEBUG-LOGIC', 'atackA(BattlePage.jsx)', 'electric.js')
+        highVoltatge(alienAtack, alienDefense)
     }
 
-    atackB() {
+    atackB(alienAtack, alienDefense) {
         log('DEBUG-LOGIC', 'atackB working', 'electric.js')
-        paralizador(this.name)
+        paralyzerAtack(alienAtack, alienDefense)
     }
 
     atackC() {
@@ -58,19 +61,22 @@ class DELETEMAN {
         this.repeat = 10
         this.type = 'Electric'
         this.atack1 = 'Alto Voltage'
-        this.atack2 = 'paralizador'
-        this.atack3 = 'Puño Agua'
-        this.atack4 = 'Rugido Del Dragón'
+        this.atack2 = 'pito'
+        this.atack3 = 'Pato'
+        this.atack4 = 'poto'
+
+        this.passiveEfect = false
+        this.paralyzed = false
     }
 
-    atackA(subject,  healthPoints, name, especialAtack, fisicAtack, psiquicalAtack, especialDefense, fisicDefense, speed, healing, repeat, atack1, atack2, atack3, atack4, target,  targetHealthPoints, targetName, targetEspecialAtack, targetFisicAtack, targetPsiquicalAtack, targetEspecialDefense, targetFisicDefense, targetSpeed, targetHealing, targetRepeat, targetAtack1, targetAtack2, targetAtack3, targetAtack4 ) {
+    atackA(alienAtack, alienDefense) {
         log('DEBUG-LOGIC', 'atackA working', 'electric.js')
-        altoVoltage(subject,  healthPoints, name, especialAtack, fisicAtack, psiquicalAtack, especialDefense, fisicDefense, speed, healing, repeat, atack1, atack2, atack3, atack4, target,  targetHealthPoints, targetName, targetEspecialAtack, targetFisicAtack, targetPsiquicalAtack, targetEspecialDefense, targetFisicDefense, targetSpeed, targetHealing, targetRepeat, targetAtack1, targetAtack2, targetAtack3, targetAtack4 )
+        highVoltatge(alienAtack, alienDefense)
     }
 
     atackB() {
         log('DEBUG-LOGIC', 'atackB working', 'electric.js')
-        paralizador(this.name)
+        paralyzerAtack(this.name)
     }
 
     atackC() {

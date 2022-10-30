@@ -1,19 +1,36 @@
-function altoVoltage(atackAlien, defenseAlien) {
+function highVoltatge(atackAlien, defenseAlien) {
     if(typeof atackAlien != 'object' || typeof defenseAlien != 'object')
-    throw new TypeError(log('ERROR', '1-altoVoltage() values are not object', 'data/atacks/atacks.js -> altoVoltage()'))
+    throw new TypeError(log('ERROR', 'altoVoltage(pages/BattlePage.jsx) values are not object', 'data/atacks/atacks.js -> altoVoltage()'))
 
     log('DEBUG-LOGIC', 'altoVoltage()', 'data/atacks/atacks.js')
-    console.log(atackAlien.name + " " + "ha usado alto voltage")
+    console.log(atackAlien.name + " " + "use High Voltatge")
     const damageDeal = atackAlien.especialAtack - defenseAlien.especialDefense
     const res = defenseAlien.healthPoints - damageDeal
-    console.log(atackAlien.name + " " + "ha inflingido" + " " + damageDeal + " " + "de daño")
+    console.log(atackAlien.name + " " + "do" + " " + damageDeal + " " + "of damage")
     defenseAlien.updateHealth(res)
     return res
 }
 
-function paralizador(name) {
+function paralyzerAtack(atackAlien, defenseAlien) {
     log('DEBUG-LOGIC', 'paralizador()', 'data/atacks/atacks.js')
-    console.log(name + " " + "ha usado paralizador")
+    if(defenseAlien.paralyzed === false){
+    console.log(atackAlien.name + ' ' + "use paralyzer")
+    defenseAlien.passiveEfect = true
+    defenseAlien.paralyzed = true
+    return}
+    const randomValue = Math.floor(Math.random() * 4)
+    if(randomValue < 2){
+        defenseAlien.passiveEfect = true
+        defenseAlien.paralyzed = true
+        if(hasTurn === false) hasTurn = true
+        else hasTurn = false 
+        console.log(defenseAlien.name + ' ' + 'has been paralyzed')
+    }else{
+        defenseAlien.passiveEfect = false
+        defenseAlien.paralyzed = false
+        console.log(defenseAlien.name + ' ' + 'is not paralyzed')
+    }
+    
 }
 
 function puñoAgua(name) {
