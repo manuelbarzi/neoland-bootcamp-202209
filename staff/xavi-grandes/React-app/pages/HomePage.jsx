@@ -93,6 +93,18 @@ class HomePage extends React.Component {
     this.setState({view: 'tasks'})
   }
 
+  handleUpdateTaskStatus = (taskId, newStatus) => {
+    try {
+      updateTaskStatus(user.email, taskId, newStatus)
+
+      const tasks = retrieveTasks (user.email)
+
+      this.setState ({tasks})
+    } catch (error) {
+      alert (error.message)
+    }
+  }
+
   render() {
     log("INFO", "Home -> render");
 
@@ -163,7 +175,7 @@ class HomePage extends React.Component {
                 </div>
                 <select className='bg-blue-100 m-1 border border-black' onChange={event => this.handleUpdateTaskStatus (task.id, event.target.value)}>
   <option disabled selected hidden className="text-sm " value=''><select name="" id=""></select></option>
-<option className="text-sm " value='doing'>TODO</option>
+<option className="text-sm " value='todo'>TODO</option>
 <option className="text-sm " value='done'>DONE</option>
 </select>
               </article>
@@ -183,8 +195,8 @@ class HomePage extends React.Component {
 </div>
                     <select className='bg-blue-100 m-1 border border-black' onChange={event => this.handleUpdateTaskStatus (task.id, event.target.value)}>
   <option disabled selected hidden className="text-sm " value=''><select name="" id=""></select></option>
-<option className="text-sm " value='doing'>TODO</option>
-<option className="text-sm " value='done'>DOING</option>
+<option className="text-sm " value='todo'>TODO</option>
+<option className="text-sm " value='doing'>DOING</option>
 </select>
                   </article>
                 ))}
