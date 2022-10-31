@@ -11,39 +11,38 @@ class App extends React.Component {
         log('INFO', 'App -> componentDidMount')
     }
 
-    navigateToLogin = () => this.setState({ view: 'LoginPage' })
     navigateToRegister = () => this.setState({ view: 'RegisterPage' })
+    navigateToLogin = () => this.setState({ view: 'LoginPage' })
     navigateToHome = () => this.setState({ view: 'HomePage' })
     navigateToSettingsAccount = () => this.setState({ view: 'SettingsAccountPage' })
 
     render() {
-        log('INFO', 'App -> Render')
+        log('INFO', 'App -> render')
 
         return <>
             {this.state.view === 'LoginPage' &&
                 <LoginPage
-                    onLoggedIn={this.navigateToHome}
                     onRegisterLinkClick={this.navigateToRegister}
+                    onLoggedIn={this.navigateToHome}
                 />}
 
             {this.state.view === 'RegisterPage' &&
                 <RegisterPage
-                    onRegisterSuccess={this.navigateToLogin}
                     onLoginLinkClick={this.navigateToLogin}
+                    onRegisterSuccess={this.navigateToLogin}
                 />}
 
             {this.state.view === 'HomePage' &&
                 <HomePage
-                    onHomeLink={this.navigateToHome}
+                    onLoggedOut={this.navigateToLogin}
                     onSettingsAccountLink={this.navigateToSettingsAccount}
-                    onLoggedoutLink={this.navigateToLogin}
+                    onHomeLink={this.navigateToHome}
                 />}
 
             {this.state.view === 'SettingsAccountPage' &&
                 <SettingsAccountPage
-                    onHomeLink={this.navigateToHome}
-                    onSettingsAccountLink={this.navigateToSettingsAccount}
-                    onLoggedoutLink={this.navigateToLogin}
+                    onLoggedOut={this.navigateToLogin}
+                    onHomePageLink={this.navigateToHome}
                 />}
         </>
     }

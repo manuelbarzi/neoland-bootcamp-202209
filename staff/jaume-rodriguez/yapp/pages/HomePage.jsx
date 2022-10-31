@@ -4,30 +4,44 @@ class HomePage extends React.Component {
         super();
 
         this.state = {
+            toggleMenuComponent: "open",
             tasks: [],
             view: 'tasks'
         };
     }
+    // MENU OPEN & CLOSE
+    handleToggleMenu = () =>
+        this.setState({
+            toggleMenuComponent:
+                this.state.toggleMenuComponent === "open" ? "close" : "open",
+        });
 
-    // HEADER LINKS BRIDGE
-    handleHomeLink = () => {
-        log("INFO", "Header Brige: handleHomeLink");
-        this.props.onHomeLink();
-    };
-
-    // TOGGLE MENU LINKS BRIDGE
-    handleSettingsLink = () => {
-        log("INFO", "Header Brige: handleSettingsLink");
-        this.props.onSettingsAccountLink();
-    };
-
+    // MENU LINKS
     handleLogoutLink = () => {
-        log("INFO", "Header Brige: handleLogoutLink");
+        log("INFO", "Home->logout");
         user = null;
-        this.props.onLoggedoutLink();
+        const onLoggedOut = this.props.onLoggedOut;
+
+        onLoggedOut();
     };
 
-    // TASKS MANAGER
+    handleSettingsLink = () => {
+        log("INFO", "Settings Account -> render");
+
+        const onSettingsAccountLink = this.props.onSettingsAccountLink;
+
+        onSettingsAccountLink();
+    };
+
+    // HEADER LINKS
+    handleHomeLink = () => {
+        log("INFO", "Home -> render");
+
+        const onHomeLink = this.props.onHomeLink;
+
+        onHomeLink();
+    };
+
     componentDidMount() {
         log('INFO', 'Home -> componentDidMount');
 
@@ -40,6 +54,8 @@ class HomePage extends React.Component {
         }
     }
 
+
+    // TASKS MANAGER
     handleCreateTaskTodo = () => {
         try {
             createTaskTodo(user.id)
@@ -115,11 +131,35 @@ class HomePage extends React.Component {
         return (
             <main className="min-h-screen bg-sky-500">
                 {/* HEADER */}
-                <Header
-                    onHomeLink={this.handleHomeLink}
-                    onSettingsAccountLink={this.handleSettingsLink}
-                    onLoggedoutLink={this.handleLogoutLink}
-                />
+                <header className="flex flex-row z-0 items-center px-3 py-2 bg-sky-800">
+                    <img src="img/trellologo.png" className="w-40 cursor-pointer" onClick={this.handleHomeLink} />
+                    <img
+                        src="img/headermenupanelbotton.png"
+                        className="w-14 cursor-pointer ml-auto invert"
+                        onClick={this.handleToggleMenu}
+                    />
+                </header>
+                {/* TOGGLE MENU */}
+                {this.state.toggleMenuComponent === "close" && (
+                    <div className="flex justify-end right-0 absolute">
+                        <div className="flex flex-col items-end content-end z-10 w-56 p-4 rounded-sm gap-2 bg-sky-100 border-sky-700 border-b-2 border-l -mt-1">
+                            <p className="text-black pr-1">{user.email}</p>
+                            <hr className="w-full border-sky-700 mx-auto my-2" />
+                            <button
+                                className="text-black pr-1 hover:font-semibold"
+                                onClick={this.handleSettingsLink}
+                            >
+                                Settings
+                            </button>
+                            <button
+                                className="text-black pr-1 hover:font-semibold"
+                                onClick={this.handleLogoutLink}
+                            >
+                                Logout
+                            </button>
+                        </div>
+                    </div>
+                )}
                 {/* TASKS PANEL*/}
                 <section className="flex z-1 w-full justify-center flex-wrap">
                     <div className="flex flex-row justify-center content-center z-0 p-8 bg-sky-500 border-black border-b border-solid w-full h-16">
