@@ -1,0 +1,140 @@
+class BattleActionsPage extends React.Component{
+    constructor(){
+        super()
+    }
+
+    componentDidMount() {
+        setInterval(() => this.updateClock(), 1000)
+    }
+
+
+    updateClock() {
+        if (totalTime == 0) {
+            this.finishTurn()
+            totalTime = 30
+        } else {
+            totalTime -= 1
+            this.setState({})
+            this.updateTurn()
+        }
+    }
+
+    updateTurn() { //THIS SUCCES WHEN THE TURN OVER, THEY UPDATE THE TURN
+        log('DEBUG', 'updateTurn()', 'pages/BattlePage.jsx')
+        this.setState({
+            
+        })
+    }
+
+
+    validatePassives = () => {
+
+        this.props.onValidatePassives()
+    }
+
+    finishTurn = () => {
+
+        this.props.onFinishTurn()
+    }
+
+    selectFighter(key, index) {
+        log('DEBUG', 'selectFighter(pages/BattlePages)', 'pages/BattlePage.jsx')
+        try {
+            if (index === 0 && hasTurn === false) {
+                if (key === 0) selectAlienOne = 0
+                if (key === 1) selectAlienOne = 1
+                if (key === 2) selectAlienOne = 2
+                if (key === 3) selectAlienOne = 3
+                if (key === 4) selectAlienOne = 4
+                this.finishTurn()
+                this.updateTurn()
+                this.setFirstTurn()
+                hasTurn = true
+            }
+            if (index === 1 && hasTurn === true) {
+                if (key === 5) selectAlienTwo = 0
+                if (key === 6) selectAlienTwo = 1
+                if (key === 7) selectAlienTwo = 2
+                if (key === 8) selectAlienTwo = 3
+                if (key === 9) selectAlienTwo = 4
+                this.finishTurn()
+                this.updateTurn()
+                this.setFirstTurn()
+                hasTurn = false
+            }
+        } catch (error) {
+            log('ERROR', error, 'pages/BattlePage.jsx')
+        }
+    }
+
+    render(){
+        return <>
+        <h2>turn: {turn}</h2>
+        <h2>time: {totalTime}</h2>
+
+        <h4>Player One</h4>
+        <h6>{playerOneAlienFighter[selectAlienOne].name}</h6>
+        <h5>{playerOneAlienFighter[selectAlienOne].healthPoints}</h5>
+
+        <button onClick={() => {
+            this.validatePassives()
+            if (!hasTurn) {
+                alienAtack = playerOneAlienFighter[selectAlienOne]
+                alienDefense = playerTwoAlienFighter[selectAlienTwo]
+                playerOneAlienFighter[selectAlienOne].atackA(alienAtack, alienDefense)
+
+                this.finishTurn()
+                this.updateTurn()
+            }
+        }}>{playerOneAlienFighter[selectAlienOne].atack1}</button>
+
+        <button onClick={() => {
+            this.validatePassives()
+            if (!hasTurn) {
+                alienAtack = playerOneAlienFighter[selectAlienOne]
+                alienDefense = playerTwoAlienFighter[selectAlienTwo]
+                playerOneAlienFighter[selectAlienOne].atackB(alienAtack, alienDefense)
+
+                this.finishTurn()
+                this.updateTurn()
+            }
+        }}>{playerOneAlienFighter[selectAlienOne].atack2}</button>
+        <h6>{playerOneAlienFighter[selectAlienOne].atack3}</h6>
+        <h6>{playerOneAlienFighter[selectAlienOne].atack4}</h6>
+
+        {playerOneAlienFighter.map((fighter, index) => { return (<button key={index} onClick={() => this.selectFighter(index, 0)} >{fighter.name}</button>) })}
+
+        <h4>Player Two</h4>
+        <h6>{playerTwoAlienFighter[selectAlienTwo].name}</h6>
+        <h5>{playerTwoAlienFighter[selectAlienTwo].healthPoints}</h5>
+
+        <button onClick={() => {
+            this.validatePassives()
+            if (hasTurn) {
+                alienAtack = playerTwoAlienFighter[selectAlienTwo]
+                alienDefense = playerOneAlienFighter[selectAlienOne]
+                playerTwoAlienFighter[selectAlienTwo].atackA(alienAtack, alienDefense)
+
+                this.finishTurn()
+                this.updateTurn()
+            }
+        }}>{playerTwoAlienFighter[selectAlienTwo].atack1}</button>
+
+        <button onClick={() => {
+            this.validatePassives()
+            if (hasTurn) {
+                alienAtack = playerTwoAlienFighter[selectAlienTwo]
+                alienDefense = playerOneAlienFighter[selectAlienOne]
+                playerTwoAlienFighter[selectAlienTwo].atackB(alienAtack, alienDefense)
+
+                this.finishTurn()
+                this.updateTurn()
+            }
+        }}>{playerOneAlienFighter[selectAlienOne].atack2}</button>
+        <h6>{playerTwoAlienFighter[selectAlienTwo].atack3}</h6>
+        <h6>{playerTwoAlienFighter[selectAlienTwo].atack4}</h6>
+
+        {playerTwoAlienFighter.map((fighter, index) => { return (<button key={index = index + 5} onClick={() => this.selectFighter(index, 1)} >{fighter.name}</button>) })}
+    </>
+}
+}
