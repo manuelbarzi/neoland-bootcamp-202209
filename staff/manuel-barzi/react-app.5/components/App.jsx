@@ -29,11 +29,11 @@ class App extends React.Component {
         log('INFO', 'App -> render')
 
         return <>
-            {this.state.view === 'login' && <Login onNavigateToRegister={this.handleNavigateToRegister} onLoggedIn={this.handleNavigateToHome} />}
+            {this.state.view === 'login' && <LoginPage onNavigateToRegister={this.handleNavigateToRegister} onLoggedIn={this.handleNavigateToHome} />}
             
-            {this.state.view === 'register' && <Register onNavigateToLogin={this.handleNavigateToLogin} />}
+            {this.state.view === 'register' && <RegisterPage onNavigateToLogin={this.handleNavigateToLogin} />}
 
-            {this.state.view === 'home' && <Home onLogout={this.handleNavigateToLogin} />}
+            {this.state.view === 'home' && <HomePage onLoggedOut={this.handleNavigateToLogin} />}
         </>
     }
 }

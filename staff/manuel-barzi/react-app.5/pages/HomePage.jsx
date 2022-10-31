@@ -99,13 +99,19 @@ class HomePage extends React.Component {
         }
     }
 
+    handleNavigateToTasks = event => {
+        event.preventDefault()
+
+        this.setState({ view: 'tasks' })
+    }
+
     render() {
         log('INFO', 'Home -> render')
 
         return <main className="h-full w-full">
             <header className="flex flex-col">
                 <div className="flex justify-between">
-                    <a href=""><img src="https://fakeimg.pl/50x25/?text=hola%20mundo&amp;font=lobster" /></a>
+                    <a href="" onClick={this.handleNavigateToTasks}><img src="https://fakeimg.pl/50x25/?text=hola%20mundo&amp;font=lobster" /></a>
                     <span>{user && user.name}</span>
                     <button className="material-symbols-outlined" onClick={this.handleAddTask}>add</button>
                     <button className="material-symbols-outlined" onClick={this.handleToggleMenu}>{this.state.toggleButtonText}</button>
