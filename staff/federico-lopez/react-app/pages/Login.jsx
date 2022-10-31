@@ -1,15 +1,17 @@
-function LoginPage(props) {
-    log('INFO', 'LoginPage -> render')
+function Login(props) {
+    log('INFO', 'Login -> render')
 
     const handleNavigateToRegister = event => {
+        log('INFO', 'Login -> handleNavigateToRegister')
+
         event.preventDefault()
 
-        const onNavigateToRegister = props.onNavigateToRegister
-
-        onNavigateToRegister()
+        props.onNavigateToRegister()
     }
 
     const handleLogin = event => {
+        log('INFO', 'Login -> handleLogin')
+
         event.preventDefault()
 
         const form = event.target
@@ -23,9 +25,7 @@ function LoginPage(props) {
         try {
             user = authenticateUser(email, password)
     
-            const onLoggedIn = props.onLoggedIn
-
-            onLoggedIn()
+            props.onLogin()
         } catch(error) {
             alert(error.message)
     

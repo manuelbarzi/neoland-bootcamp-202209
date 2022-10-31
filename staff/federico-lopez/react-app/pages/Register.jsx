@@ -1,12 +1,12 @@
-function RegisterPage(props) {
-    log('INFO', 'RegisterPage -> render')
+function Register(props) {
+    log('INFO', 'Register -> render')
 
     const handleNavigateToLogin = event => {
+        log('INFO', 'Register -> handleNavigateToLogin')
+
         event.preventDefault()
 
-        const onNavigateToLogin = props.onNavigateToLogin
-
-        onNavigateToLogin()
+        props.onNavigateToLogin()
     }
 
     return <main className="flex flex-col items-center gap-2">

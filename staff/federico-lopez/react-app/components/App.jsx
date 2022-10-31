@@ -4,7 +4,7 @@ class App extends React.Component {
 
         super()
 
-        //this.state = { view: 'login' }
+        // this.state = { view: 'login' }
 
         // NOTE force user logged in already, to go faster to home page
         user = users[2]
@@ -19,21 +19,33 @@ class App extends React.Component {
         log('INFO', 'App -> componentWillUnmount')
     }
 
-    handleNavigateToRegister = () => this.setState({ view: 'register' })
+    handleNavigateToRegister = () => {
+        log('INFO', 'App -> handleNavigateToRegister')
 
-    handleNavigateToLogin = () => this.setState({ view: 'login' })
+        this.setState({ view: 'register' })
+    }
 
-    handleNavigateToHome = () => this.setState({ view: 'home' })
+    handleNavigateToLogin = () => {
+        log('INFO', 'App -> handleNavigateToLogin')
+
+        this.setState({ view: 'login' })
+    }
+
+    handleNavigateToHome = () => {
+        log('INFO', 'App -> handleNavigateToHome')
+
+        this.setState({ view: 'home' })
+    }
 
     render() {
         log('INFO', 'App -> render')
 
         return <>
-            {this.state.view === 'login' && <LoginPage onNavigateToRegister={this.handleNavigateToRegister} onLoggedIn={this.handleNavigateToHome} />}
+            {this.state.view === 'login' && <Login onNavigateToRegister={this.handleNavigateToRegister} onLogin={this.handleNavigateToHome} />}
             
-            {this.state.view === 'register' && <RegisterPage onNavigateToLogin={this.handleNavigateToLogin} />}
+            {this.state.view === 'register' && <Register onNavigateToLogin={this.handleNavigateToLogin} />}
 
-            {this.state.view === 'home' && <HomePage onLoggedOut={this.handleNavigateToLogin} />}
+            {this.state.view === 'home' && <Home onLogout={this.handleNavigateToLogin} />}
         </>
     }
 }
