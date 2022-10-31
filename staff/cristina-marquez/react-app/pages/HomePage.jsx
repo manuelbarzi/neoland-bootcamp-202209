@@ -1,6 +1,4 @@
 
-//TODO: fix taxt status
-
 class HomePage extends React.Component {
     constructor() {
 
@@ -175,6 +173,15 @@ class HomePage extends React.Component {
                     </section>
                 </div>
             </section>
+
+            {this.state.view === 'settings' && <section className="flex flex-col items-center">
+                <h2>Settings</h2>
+                <form className="flex flex-col" onSubmit={this.handleUpdateUserEmail}>
+                    <label htmlFor="email">E-mail</label>
+                    <input name="email" type="email" id="email" placeholder="input an email" defaultValue={user.email} />
+                    <button>Save</button>
+                </form>
+            </section>}
 
         </main>
 
