@@ -4,11 +4,11 @@ class App extends React.Component {
 
         super()
 
-        this.state = { view: 'login' }
+        //this.state = { view: 'login' }
 
         // NOTE force user logged in already, to go faster to home page
-        // user = users[2]
-        // this.state = { view: 'home' }
+        user = users[2]
+        this.state = { view: 'home' }
     }
 
     componentDidMount() {
