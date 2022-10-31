@@ -1,11 +1,11 @@
-function updateTaskText(userEmail, taskId, text) {
+function updateTaskText(userEmail, taskId, newText) {
     if (typeof userEmail !== 'string') throw new TypeError('userEmail is not a string')
     if (!IS_EMAIL_REGEX.test(userEmail)) throw new Error('userEmail is not valid')
 
     if (typeof taskId !== 'string') throw new TypeError('taskId is not a string')
     if (taskId.length < 6 || !taskId.startsWith('task-')) throw new Error('invalid taskId')
 
-    if (typeof text !== 'string') throw new TypeError('text is not a string')
+    if (typeof newText !== 'string') throw new TypeError('newText is not a string')
 
     let found = false
 
@@ -32,5 +32,5 @@ function updateTaskText(userEmail, taskId, text) {
 
     if (foundTask.user !== userEmail) throw new Error('task with id ' + taskId + ' does not belong to user with email ' + userEmail)
 
-    foundTask.text = text
+    foundTask.text = newText
 }

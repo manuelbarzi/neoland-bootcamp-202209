@@ -18,6 +18,14 @@ function updateUserEmail(userEmail, newEmail) {
         if (user.email === userEmail) {
             user.email = newEmail
 
+            for (let j = 0; j < tasks.length; j++) {
+                const task = tasks[j]
+
+                if (task.user === userEmail) {
+                    task.user = newEmail
+                }
+            }
+
             return
         }
     }

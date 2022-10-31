@@ -4,7 +4,11 @@ class App extends React.Component {
 
     super();
 
-    this.state = { view: "login" };
+    //this.state = { view: 'login' }
+
+    // NOTE force user logged in already, to go faster to home page
+    user = users[2];
+    this.state = { view: "home" };
   }
 
   componentDidMount() {
@@ -15,11 +19,11 @@ class App extends React.Component {
     log("INFO", "App -> componentWillUnmount");
   }
 
-  navigateToRegister = () => this.setState({ view: "register" });
+  handleNavigateToRegister = () => this.setState({ view: "register" });
 
-  navigateToLogin = () => this.setState({ view: "login" });
+  handleNavigateToLogin = () => this.setState({ view: "login" });
 
-  navigateToHome = () => this.setState({ view: "home" });
+  handleNavigateToHome = () => this.setState({ view: "home" });
 
   render() {
     log("INFO", "App -> render");
@@ -28,17 +32,17 @@ class App extends React.Component {
       <>
         {this.state.view === "login" && (
           <LoginPage
-            onRegisterClick={this.navigateToRegister}
-            onLoggedIn={this.navigateToHome}
+            onNavigateToRegister={this.handleNavigateToRegister}
+            onLoggedIn={this.handleNavigateToHome}
           />
         )}
 
         {this.state.view === "register" && (
-          <RegisterPage onLoginClick={this.navigateToLogin} />
+          <RegisterPage onNavigateToLogin={this.handleNavigateToLogin} />
         )}
 
         {this.state.view === "home" && (
-          <HomePage onLoggedOut={this.navigateToLogin} />
+          <HomePage onLoggedOut={this.handleNavigateToLogin} />
         )}
       </>
     );
