@@ -8,12 +8,12 @@
  */
 
 function authenticateUser(email, password) {
-    if (typeof email !== 'string') return new Error ('the email is not a string')
-    if (!IS_EMAIL_REGEX.test(email)) return new Error('email is not valid')
+    if (typeof email !== 'string') throw new Error ('the email is not a string')
+    if (!IS_EMAIL_REGEX.test(email)) throw new Error('email is not valid')
 
-    if (typeof password !== 'string') return new Error ('the password is not a string')
-    if (password.length < 8) return new Error ('password length is less than 8')
-    if (HAS_SPACES_REGEX.test(password)) return new Error ('password has spaces')
+    if (typeof password !== 'string') throw new Error ('the password is not a string')
+    if (password.length < 8) throw new Error ('password length is less than 8')
+    if (HAS_SPACES_REGEX.test(password)) throw new Error ('password has spaces')
     // DONE ok -> null, ko -> error
     // users=JSON.parse(localStorage.getItem("db"))  --------------------------------
     for (var i = 0; i < users.length; i++) {
@@ -23,9 +23,9 @@ function authenticateUser(email, password) {
             if (user.password === password)
                 return user
             else
-                return new Error('wrong password')
+                throw new Error('wrong password')
         }
     }
 
-    return new Error('user not registered')
+    throw new Error('user not registered')
 }

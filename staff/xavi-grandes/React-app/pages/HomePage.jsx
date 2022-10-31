@@ -87,12 +87,18 @@ class HomePage extends React.Component {
     }
   }
 
+  handleReturnHome = event => {
+    event.preventDefault()
+
+    this.setState({view: 'tasks'})
+  }
+
   render() {
     log("INFO", "Home -> render");
 
-    return <main className="w-full h-full self-start">
+    return <main className=" min-h-screen w-full h-full self-start">
         <header className="bg-white w-full flex place-content-between items-center">
-          <a href=" ">
+          <a onClick={this.handleReturnHome} href=" ">
             <img className="w-16" src="https://cdn.iconscout.com/icon/free/png-256/trello-14-1175081.png"/>
           </a>
           <span className="#">Pepito Grillo</span>
@@ -125,13 +131,21 @@ class HomePage extends React.Component {
             <section className="w-64 p-2 bg-white border border-black">
               <h2 className="font-bold">TODO</h2>
               {this.state.tasks.filter((task) => task.status === "todo").map((task) => (
-                  <article key={task.id} className="m-2 p-2 border border-black task-item flex place-content-between ">
+                  <article key={task.id} className="m-2 p-2 border border-black task-item flex flex-col place-content-between ">
+                    <div className="flex justify-between ml-2">
                     <p suppressContentEditableWarning={true}
                       contentEditable="true" onKeyUp={event => this.handleUpdateTaskText (task.id, event.target.innerText)}>{task.text}</p>
                     <button className="material-symbols-outlined"
                     onClick={() => this.handleDeleteTask(task.id)}>
                       delete
                     </button>
+                    </div>
+<select className='bg-blue-100 m-1 border border-black' onChange={event => this.handleUpdateTaskStatus (task.id, event.target.value)}>
+  <option disabled selected hidden className="text-sm " value=''><select name="" id=""></select></option>
+<option className="text-sm " value='doing'>DOING</option>
+<option className="text-sm " value='done'>DONE</option>
+</select>
+
                   </article>
                 ))}
             </section>
@@ -139,25 +153,39 @@ class HomePage extends React.Component {
             <section className="w-64 p-2 bg-white border border-black">
               <h2 className="font-bold">DOING</h2>
               {this.state.tasks.filter((task) => task.status === "doing").map((task) => (
-              <article key={task.id} className="m-2 p-2 border border-black task-item flex place-content-between">
+              <article key={task.id} className="m-2 p-2 border border-black task-item flex flex-col place-content-between">
+                <div className="flex justify-between ml-2">
                 <p suppressContentEditableWarning={true} contentEditable="true" onKeyUp={event => this.handleUpdateTaskText (task.id, event.target.innerText)}>{task.text}</p>
                 <button
                       className="material-symbols-outlined"
                       onClick={() => this.handleDeleteTask(task.id)}>delete
                 </button>
+                </div>
+                <select className='bg-blue-100 m-1 border border-black' onChange={event => this.handleUpdateTaskStatus (task.id, event.target.value)}>
+  <option disabled selected hidden className="text-sm " value=''><select name="" id=""></select></option>
+<option className="text-sm " value='doing'>TODO</option>
+<option className="text-sm " value='done'>DONE</option>
+</select>
               </article>
               ))}
             </section>
 
             <section className="w-64 p-2 bg-white border border-black">
               <h2 className="font-bold">DONE</h2>
-              {this.state.tasks.filter((task) => task.status === "done").map((task) => (<article key={task.id} className="m-2 p-2 border border-black task-item flex place-content-between ">
+              {this.state.tasks.filter((task) => task.status === "done").map((task) => (<article key={task.id} className="m-2 p-2 border border-black task-item flex flex-col place-content-between ">
+              <div className="flex justify-between ml-2"> 
               <p suppressContentEditableWarning={true} contentEditable="true" onKeyUp={event => {this.handleUpdateTaskText}}>
               {task.text}</p>
                     <button
                       className="material-symbols-outlined"
                       onClick={() => this.handleDeleteTask(task.id)}>delete
                     </button>
+</div>
+                    <select className='bg-blue-100 m-1 border border-black' onChange={event => this.handleUpdateTaskStatus (task.id, event.target.value)}>
+  <option disabled selected hidden className="text-sm " value=''><select name="" id=""></select></option>
+<option className="text-sm " value='doing'>TODO</option>
+<option className="text-sm " value='done'>DOING</option>
+</select>
                   </article>
                 ))}
             </section>
