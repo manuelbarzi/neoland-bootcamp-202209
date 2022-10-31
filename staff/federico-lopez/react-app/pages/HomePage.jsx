@@ -1,314 +1,178 @@
 class HomePage extends React.Component {
-  constructor() {
-    log("INFO", "Home -> constructor");
+    constructor() {
+        log('INFO', 'Home -> constructor')
 
-    super();
+        super()
 
-    this.state = {
-      toggleButtonText: "menu",
-      tasks: [],
-      view: "tasks",
-    };
-  }
-
-  handleToggleMenu = () =>
-    this.setState({
-      toggleButtonText:
-        this.state.toggleButtonText === "menu" ? "close" : "menu",
-    });
-
-  handleLogout = () => {
-    log("INFO", "Home -> logout");
-
-    user = null;
-
-    const onLoggedOut = this.props.onLoggedOut;
-
-    onLoggedOut();
-  };
-
-  componentDidMount() {
-    log("INFO", "Home -> componentDidMount");
-
-    try {
-      const tasks = retrieveTasks(user.email);
-
-      this.setState({ tasks });
-    } catch (error) {
-      alert(error.message);
+        this.state = {
+            toggleButtonText: 'menu',
+            tasks: [],
+            view: 'tasks'
+        }
     }
-  }
 
-  handleUpdateTaskText = (taskId, newText) => {
-    try {
-      updateTaskText(user.email, taskId, newText);
-    } catch (error) {
-      alert(error.message);
+    handleToggleMenu = () => this.setState({ toggleButtonText: this.state.toggleButtonText === 'menu' ? 'close' : 'menu' })
+
+    handleLogout = () => {
+        log('INFO', 'Home -> logout')
+
+        user = null
+
+        const onLoggedOut = this.props.onLoggedOut
+
+        onLoggedOut()
     }
-  };
 
-  handleDeleteTask = (taskId) => {
-    try {
-      deleteTask(user.email, taskId);
+    componentDidMount() {
+        log('INFO', 'Home -> componentDidMount')
 
-      const tasks = retrieveTasks(user.email);
+        try {
+            const tasks = retrieveTasks(user.email)
 
-      this.setState({ tasks });
-    } catch (error) {
-      alert(error.message);
+            this.setState({ tasks })
+        } catch (error) {
+            alert(error.message)
+        }
     }
-  };
 
-  handleAddTask = () => {
-    try {
-      createTask(user.email);
-
-      const tasks = retrieveTasks(user.email);
-
-      this.setState({ tasks });
-    } catch (error) {
-      alert(error.message);
+    handleUpdateTaskText = (taskId, newText) => {
+        try {
+            updateTaskText(user.email, taskId, newText)
+        } catch (error) {
+            alert(error.message)
+        }
     }
-  };
 
-  handleNavigateToSettings = (event) => {
-    event.preventDefault();
+    handleDeleteTask = taskId => {
+        try {
+            deleteTask(user.email, taskId)
 
-    this.setState({ view: "settings", toggleButtonText: "menu" });
-  };
+            const tasks = retrieveTasks(user.email)
 
-  handleUpdateUserEmail = (event) => {
-    event.preventDefault();
-
-    try {
-      const newEmail = event.target.email.value;
-
-      updateUserEmail(user.email, newEmail);
-
-      user.email = newEmail
-
-      alert("E-mail updated");
-    } catch (error) {
-      alert(error.message);
+            this.setState({ tasks })
+        } catch (error) {
+            alert(error.message)
+        }
     }
-  };
 
-  handleUpdateTaskStatus = (taskId, newStatus) => {
-    try {
-      updateTaskText(user.email, taskId, newStatus);
+    handleAddTask = () => {
+        try {
+            createTask(user.email)
 
-      const tasks = retrieveTasks(user.email);
+            const tasks = retrieveTasks(user.email)
 
-      this.setState({ tasks });
-    } catch (error) {
-      alert(error.message);
+            this.setState({ tasks })
+        } catch (error) {
+            alert(error.message)
+        }
     }
-  };
 
-  render() {
-    log("INFO", "Home -> render");
+    handleNavigateToSettings = event => {
+        event.preventDefault()
 
-    return (
-      <main className="h-full w-full">
-        <header className="flex flex-col">
-          <div className="flex justify-between">
-            <a href="">
-              <img src="https://fakeimg.pl/50x25/?text=hola%20mundo&amp;font=lobster" />
-            </a>
-            <span>{user && user.name}</span>
-            <button
-              className="material-symbols-outlined"
-              onClick={this.handleAddTask}
-            >
-              add
-            </button>
-            <button
-              className="material-symbols-outlined"
-              onClick={this.handleToggleMenu}
-            >
-              {this.state.toggleButtonText}
-            </button>
-          </div>
+        this.setState({ view: 'settings', toggleButtonText: 'menu' })
+    }
 
-          {this.state.toggleButtonText === "close" && (
-            <div className="flex flex-col items-center">
-              <a
-                className="material-symbols-outlined"
-                href=""
-                onClick={this.handleNavigateToSettings}
-              >
-                settings
-              </a>
-              <button
-                className="material-symbols-outlined"
-                onClick={this.handleLogout}
-              >
-                logout
-              </button>
-            </div>
-          )}
-        </header>
+    handleUpdateUserEmail = event => {
+        event.preventDefault()
 
-        {this.state.view === "tasks" && (
-          <section className="flex flex-col items-center">
-            <h2>Tasks</h2>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <section className="flex flex-col gap-2 border-2 p-2">
-                <h2>TODO</h2>
-                {this.state.tasks
-                  .filter((task) => task.status === "todo")
-                  .map((task) => (
-                    <article key={task.id} className="border-2 p-1">
-                      <p
-                        suppressContentEditableWarning={true}
-                        contentEditable="true"
-                        onKeyUp={(event) =>
-                          this.handleUpdateTaskText(
-                            task.id,
-                            event.target.innerText
-                          )
-                        }
-                      >
-                        {task.text}
-                      </p>
+        try {
+            const newEmail = event.target.email.value
+            
+            updateUserEmail(user.email, newEmail)
+    
+            alert('E-mail updated')
+        } catch (error) {
+            alert(error.message)
+        }
+    }
 
-                      <button
-                        className="material-symbols-outlined"
-                        onClick={() => this.handleDeleteTask(task.id)}
-                      >
-                        delete
-                      </button>
+    handleUpdateTaskStatus = (taskId, newStatus) => {
+        try {
+            updateTaskText(user.email, taskId, newStatus)
 
-                      <select
-                        className="material-symbols-outlined"
-                        onChange={(event) =>
-                          this.handleUpdateTaskStatus(
-                            task.id,
-                            event.target.value
-                          )
-                        }
-                      >
-                        <option disabled selected hidden className="text-sm">
-                          width_normal
-                        </option>
-                        <option value="doing">DOING</option>
-                        <option value="done">DONE</option>
-                      </select>
-                    </article>
-                  ))}
-              </section>
-              <section className="border-2 p-2">
-                <h2>DOING</h2>
-                {this.state.tasks
-                  .filter((task) => task.status === "doing")
-                  .map((task) => (
-                    <article key={task.id} className="border-2 p-1">
-                      <p
-                        suppressContentEditableWarning={true}
-                        contentEditable="true"
-                        onKeyUp={(event) =>
-                          this.handleUpdateTaskText(
-                            task.id,
-                            event.target.innerText
-                          )
-                        }
-                      >
-                        {task.text}
-                      </p>
+            const tasks = retrieveTasks(user.email)
 
-                      <button
-                        className="material-symbols-outlined"
-                        onClick={() => this.handleDeleteTask(task.id)}
-                      >
-                        delete
-                      </button>
+            this.setState({ tasks })
+        } catch (error) {
+            alert(error.message)
+        }
+    }
 
-                      <select
-                        className="material-symbols-outlined"
-                        onChange={(event) =>
-                          this.handleUpdateTaskStatus(
-                            task.id,
-                            event.target.value
-                          )
-                        }
-                      >
-                        <option disabled selected hidden className="text-sm">
-                          width_normal
-                        </option>
-                        <option value="todo">TODO</option>
-                        <option value="done">DONE</option>
-                      </select>
-                    </article>
-                  ))}
-              </section>
-              <section className="border-2 p-2">
-                <h2>DONE</h2>
-                {this.state.tasks
-                  .filter((task) => task.status === "done")
-                  .map((task) => (
-                    <article key={task.id} className="border-2 p-1">
-                      <p
-                        suppressContentEditableWarning={true}
-                        contentEditable="true"
-                        onKeyUp={(event) =>
-                          this.handleUpdateTaskText(
-                            task.id,
-                            event.target.innerText
-                          )
-                        }
-                      >
-                        {task.text}
-                      </p>
+    render() {
+        log('INFO', 'Home -> render')
 
-                      <button
-                        className="material-symbols-outlined"
-                        onClick={() => this.handleDeleteTask(task.id)}
-                      >
-                        delete
-                      </button>
+        return <main className="h-full w-full">
+            <header className="flex flex-col">
+                <div className="flex justify-between">
+                    <a href=""><img src="https://fakeimg.pl/50x25/?text=hola%20mundo&amp;font=lobster" /></a>
+                    <span>{user && user.name}</span>
+                    <button className="material-symbols-outlined" onClick={this.handleAddTask}>add</button>
+                    <button className="material-symbols-outlined" onClick={this.handleToggleMenu}>{this.state.toggleButtonText}</button>
+                </div>
 
-                      <select
-                        className="material-symbols-outlined"
-                        onChange={(event) =>
-                          this.handleUpdateTaskStatus(
-                            task.id,
-                            event.target.value
-                          )
-                        }
-                      >
-                        <option disabled selected hidden className="text-sm">
-                          width_normal
-                        </option>
-                        <option value="todo">TODO</option>
-                        <option value="doing">DOING</option>
-                      </select>
-                    </article>
-                  ))}
-              </section>
-            </div>
-          </section>
-        )}
+                {this.state.toggleButtonText === 'close' && <div className="flex flex-col items-center">
+                    <a className="material-symbols-outlined" href="" onClick={this.handleNavigateToSettings}>settings</a>
+                    <button className="material-symbols-outlined" onClick={this.handleLogout}>logout</button>
+                </div>}
+            </header>
 
-        {this.state.view === "settings" && (
-          <section className="flex flex-col items-center">
-            <h2>Settings</h2>
-            <form
-              className="flex flex-col"
-              onSubmit={this.handleUpdateUserEmail}
-            >
-              <label htmlFor="email">E-mail</label>
-              <input
-                name="email"
-                type="email"
-                id="email"
-                placeholder="input an email"
-                defaultValue={user.email}
-              />
-              <button>Save</button>
-            </form>
-          </section>
-        )}
-      </main>
-    );
-  }
+            {this.state.view === 'tasks' && <section className="flex flex-col items-center">
+                <h2>Tasks</h2>
+                <div className="flex flex-col sm:flex-row gap-4">
+                    <section className="flex flex-col gap-2 border-2 p-2">
+                        <h2>TODO</h2>
+                        {this.state.tasks.filter(task => task.status === 'todo').map(task => <article key={task.id} className="border-2 p-1">
+                            <p suppressContentEditableWarning={true} contentEditable="true" onKeyUp={event => this.handleUpdateTaskText(task.id, event.target.innerText)}>{task.text}</p>
+                            
+                            <button className="material-symbols-outlined" onClick={() => this.handleDeleteTask(task.id)}>delete</button>
+                            
+                            <select className="material-symbols-outlined" onChange={event => this.handleUpdateTaskStatus(task.id, event.target.value)}>
+                                <option disabled selected hidden className="text-sm">width_normal</option>
+                                <option value="doing">DOING</option>
+                                <option value="done">DONE</option>
+                            </select>
+                        </article>)}
+                    </section>
+                    <section className="border-2 p-2">
+                        <h2>DOING</h2>
+                        {this.state.tasks.filter(task => task.status === 'doing').map(task => <article key={task.id} className="border-2 p-1">
+                            <p suppressContentEditableWarning={true} contentEditable="true" onKeyUp={event => this.handleUpdateTaskText(task.id, event.target.innerText)}>{task.text}</p>
+
+                            <button className="material-symbols-outlined" onClick={() => this.handleDeleteTask(task.id)}>delete</button>
+
+                            <select className="material-symbols-outlined" onChange={event => this.handleUpdateTaskStatus(task.id, event.target.value)}>
+                                <option disabled selected hidden className="text-sm">width_normal</option>
+                                <option value="todo">TODO</option>
+                                <option value="done">DONE</option>
+                            </select>
+                        </article>)}
+                    </section>
+                    <section className="border-2 p-2">
+                        <h2>DONE</h2>
+                        {this.state.tasks.filter(task => task.status === 'done').map(task => <article key={task.id} className="border-2 p-1">
+                            <p suppressContentEditableWarning={true} contentEditable="true" onKeyUp={event => this.handleUpdateTaskText(task.id, event.target.innerText)}>{task.text}</p>
+
+                            <button className="material-symbols-outlined" onClick={() => this.handleDeleteTask(task.id)}>delete</button>
+
+                            <select className="material-symbols-outlined" onChange={event => this.handleUpdateTaskStatus(task.id, event.target.value)}>
+                                <option disabled selected hidden className="text-sm">width_normal</option>
+                                <option value="todo">TODO</option>
+                                <option value="doing">DOING</option>
+                            </select>
+                        </article>)}
+                    </section>
+                </div>
+            </section>}
+
+            {this.state.view === 'settings' && <section className="flex flex-col items-center">
+                <h2>Settings</h2>
+                <form className="flex flex-col" onSubmit={this.handleUpdateUserEmail}>
+                    <label htmlFor="email">E-mail</label>
+                    <input name="email" type="email" id="email" placeholder="input an email" defaultValue={user.email} />
+                    <button>Save</button>
+                </form>
+            </section>}
+        </main>
+    }
 }
