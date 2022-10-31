@@ -109,7 +109,7 @@ class HomePage extends React.Component {
     log("INFO", "Home -> render");
 
     return <main className=" min-h-screen w-full h-full self-start">
-        <header className="bg-white w-full flex place-content-between items-center">
+        <header className="pr-4 pl-2 bg-white w-full flex place-content-between items-center">
           <a onClick={this.handleReturnHome} href=" ">
             <img className="w-16" src="https://cdn.iconscout.com/icon/free/png-256/trello-14-1175081.png"/>
           </a>
@@ -123,13 +123,13 @@ class HomePage extends React.Component {
         </header>
         {this.state.toggleButtonText === "close" && 
           <div className="absolute right-0 flex justify-end">
-            <div className="bg-green-500 w-40 flex flex-col items-center p-2 gap-2">
-              <a className=" material-symbols-outlined" href="" onClick={this.handleNavigateToSettings}>
+            <div className="bg-blue-500 w-40 flex flex-col items-center p-2 gap-2">
+              <a className="text-white material-symbols-outlined" href="" onClick={this.handleNavigateToSettings}>
                 settings
               </a>
 
               <button
-                className="material-symbols-outlined"
+                className="text-white material-symbols-outlined"
                 onClick={this.handleLogout}>logout</button>
             </div>
           </div>}
@@ -139,7 +139,7 @@ class HomePage extends React.Component {
             Manage your tasks</h1>
 
           {/* sm:flex-row - cuando el texto está más grande que en mobile la distribución pasa a ser flex-row */}
-          <div className="flex gap-10 justify-center flex-col mt-4 sm:flex-row items-center ">
+          <div className="flex gap-10 justify-center flex-col mt-4 sm:flex-row">
             <section className="w-64 p-2 bg-white border border-black">
               <h2 className="font-bold">TODO</h2>
               {this.state.tasks.filter((task) => task.status === "todo").map((task) => (
