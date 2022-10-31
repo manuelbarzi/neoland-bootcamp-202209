@@ -10,7 +10,7 @@ class SettingsAccountPage extends React.Component {
             toggleButtonFormPassword: "open",
             inputNameState: true,
             inputEmailState: true,
-            inputPasswordState: true
+            inputPasswordState: true,
         };
     };
 
@@ -202,8 +202,9 @@ class SettingsAccountPage extends React.Component {
                         </span>
                     </div>
                     {/*SETTINGS ACCOUNT*/}
-                    <div className="flex content-start flex-col w-92 gap-1 p-12">
-                        <span className="mb-4 mt-2">Manage your Trello account</span>
+                    <div className="flex content-start flex-col w-92 gap-1 p-12 border-solid border-b-4 border-x border-sky-800 bg-inherit">
+                        <span className="mb-2">Manage your Trello account</span>
+                        <hr className="w-full mx-auto my-2 border-black" />
                         <form className="flex w-full justify-center" onSubmit={this.handleUserNameSubmit}>
                             <label htmlFor="updateName"></label>
                             <input
@@ -219,11 +220,12 @@ class SettingsAccountPage extends React.Component {
                             {this.state.toggleButtonFormName === "open" && (
                                 <span
                                     className="self-start scale-125 p-1 bg-sky-100 rounded text-black mx-2 mt-1 cursor-pointer material-symbols-outlined cursor-pointer"
-                                    onClick={() => { this.handleInputNameState.bind(this); this.handleToggleButtonFormName(); }}>edit</span>
+                                    onClick={() => { this.handleInputNameState(); this.handleToggleButtonFormName(); }}>edit</span>
                             )}
                             {this.state.toggleButtonFormName === "close" && (
                                 <button
-                                    className="self-start scale-125 p-1 bg-sky-100 rounded text-black mx-2 mt-1 cursor-pointer material-symbols-outlined">save</button>
+                                    className="self-start scale-125 p-1 bg-sky-100 rounded text-black mx-2 mt-1 cursor-pointer material-symbols-outlined"
+                                    onClick={this.handleInputNameState}>save</button>
                             )}
                         </form>
                         <form className="flex w-full justify-center" onSubmit={this.handleUserEmailSubmit}>
@@ -241,18 +243,19 @@ class SettingsAccountPage extends React.Component {
                             {this.state.toggleButtonFormEmail === "open" && (
                                 <span
                                     className="self-start scale-125 p-1 bg-sky-100 rounded text-black mx-2 mt-1 cursor-pointer material-symbols-outlined cursor-pointer"
-                                    onClick={() => { this.handleInputEmailState.bind(this); this.handleToggleButtonFormEmail(); }}>edit</span>
+                                    onClick={() => { this.handleInputEmailState(); this.handleToggleButtonFormEmail(); }}>edit</span>
                             )}
                             {this.state.toggleButtonFormEmail === "close" && (
                                 <button
-                                    className="self-start scale-125 p-1 bg-sky-100 rounded text-black mx-2 mt-1 cursor-pointer material-symbols-outlined">save</button>
+                                    className="self-start scale-125 p-1 bg-sky-100 rounded text-black mx-2 mt-1 cursor-pointer material-symbols-outlined"
+                                    onClick={this.handleInputEmailState}>save</button>
                             )}
                         </form>
                         <form className="flex w-full justify-center" onSubmit={this.handleUserPasswordSubmit}>
                             <label htmlFor="updatePassword"></label>
                             <input
                                 name='password'
-                                type="password"
+                                type='password'
                                 placeholder="Enter new password"
                                 id="updatePassword"
                                 title="Please enter at least 8 characters without spaces"
@@ -262,15 +265,17 @@ class SettingsAccountPage extends React.Component {
                             {this.state.toggleButtonFormPassword === "open" && (
                                 <span
                                     className="self-start scale-125 p-1 bg-sky-100 rounded text-black mx-2 mt-1 cursor-pointer material-symbols-outlined cursor-pointer"
-                                    onClick={() => { this.handleInputPasswordState.bind(this); this.handleToggleButtonFormPassword(); }}>edit</span>
+                                    onClick={() => { this.handleInputPasswordState(); this.handleToggleButtonFormPassword(); }}>edit</span>
                             )}
                             {this.state.toggleButtonFormPassword === "close" && (
                                 <button
-                                    className="self-start scale-125 p-1 bg-sky-100 rounded text-black mx-2 mt-1 cursor-pointer material-symbols-outlined">save</button>
+                                    className="self-start scale-125 p-1 bg-sky-100 rounded text-black mx-2 mt-1 cursor-pointer material-symbols-outlined"
+                                    onClick={this.handleInputPasswordState}>save</button>
                             )}
                         </form>
                         <span className="flex">
-                            <input type="checkbox" />
+                            <input
+                                type="checkbox" />
                             <label className="text-xs mx-2 my-3">Show password</label>
                         </span>
                     </div>
