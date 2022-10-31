@@ -54,6 +54,13 @@ class Header extends React.Component {
         this.props.onLogout()
     }
 
+    handleReturnHome = event => {
+        event.preventDefault()
+    
+        // this.setState({view: 'tasks'})
+        this.props.onNavigateToHome
+      }
+
     render () {
         log('INFO', 'Header -> render')
 

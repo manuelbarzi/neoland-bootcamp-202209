@@ -69,7 +69,7 @@ class HomePage extends React.Component {
   handleNavigateToSettings = event => {
     event.preventDefault()
 
-    this.setState({view: 'settings', toggleButtonText: 'menu'})
+    this.setState({view: 'settings'})
   }
 
   handleUpdateUserEmail = event => {
@@ -110,6 +110,7 @@ class HomePage extends React.Component {
 
     return <main className=" min-h-screen w-full h-full self-start">
         <Header 
+          onNavigateToHome={this.handleReturnHome}
           onNavigateToTasks={this.handleNavigateToTasks}
           onAddTask={this.handleAddTask}
           onNavigateToSettings={this.handleNavigateToSettings}
