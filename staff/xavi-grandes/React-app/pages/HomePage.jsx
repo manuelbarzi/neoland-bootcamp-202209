@@ -109,30 +109,13 @@ class HomePage extends React.Component {
     log("INFO", "Home -> render");
 
     return <main className=" min-h-screen w-full h-full self-start">
-        <header className="pr-4 pl-2 bg-white w-full flex place-content-between items-center">
-          <a onClick={this.handleReturnHome} href=" ">
-            <img className="w-16" src="https://cdn.iconscout.com/icon/free/png-256/trello-14-1175081.png"/>
-          </a>
-          <span className="#">Pepito Grillo</span>
-          <button className="home-header-button material-symbols-outlined" onClick={this.handleAddTask}>add</button>
-          <button
-            className="home-header-button material-symbols-outlined"
-            onClick={this.handleToggleMenu}>
-            {this.state.toggleButtonText}
-          </button>
-        </header>
-        {this.state.toggleButtonText === "close" && 
-          <div className="absolute right-0 flex justify-end">
-            <div className="bg-blue-500 w-40 flex flex-col items-center p-2 gap-2">
-              <a className="text-white material-symbols-outlined" href="" onClick={this.handleNavigateToSettings}>
-                settings
-              </a>
-
-              <button
-                className="text-white material-symbols-outlined"
-                onClick={this.handleLogout}>logout</button>
-            </div>
-          </div>}
+        <Header 
+          onNavigateToTasks={this.handleNavigateToTasks}
+          onAddTask={this.handleAddTask}
+          onNavigateToSettings={this.handleNavigateToSettings}
+          onLogout={this.handleLogout}
+          view={this.state.view}
+        />
 
           {this.state.view === 'tasks' && <section className="tasks-menu">
           <h1 className="uppercase font-bold text-center mt-4">
