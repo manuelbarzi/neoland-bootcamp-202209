@@ -9,13 +9,14 @@ class HomePage extends React.Component {
             view: 'tasks'
         };
     }
-
+    // MENU OPEN & CLOSE
     handleToggleMenu = () =>
         this.setState({
             toggleMenuComponent:
                 this.state.toggleMenuComponent === "open" ? "close" : "open",
         });
 
+    // MENU LINKS
     handleLogoutLink = () => {
         log("INFO", "Home->logout");
         user = null;
@@ -32,6 +33,15 @@ class HomePage extends React.Component {
         onSettingsAccountLink();
     };
 
+    // HEADER LINKS
+    handleHomeLink = () => {
+        log("INFO", "Home -> render");
+
+        const onHomeLink = this.props.onHomeLink;
+
+        onHomeLink();
+    };
+
     componentDidMount() {
         log('INFO', 'Home -> componentDidMount');
 
@@ -44,6 +54,8 @@ class HomePage extends React.Component {
         }
     }
 
+
+    // TASKS MANAGER
     handleCreateTaskTodo = () => {
         try {
             createTaskTodo(user.id)
@@ -120,7 +132,7 @@ class HomePage extends React.Component {
             <main className="min-h-screen bg-sky-500">
                 {/* HEADER */}
                 <header className="flex flex-row z-0 items-center px-3 py-2 bg-sky-800">
-                    <img src="img/trellologo.png" className="w-40 cursor-pointer" />
+                    <img src="img/trellologo.png" className="w-40 cursor-pointer" onClick={this.handleHomeLink} />
                     <img
                         src="img/headermenupanelbotton.png"
                         className="w-14 cursor-pointer ml-auto invert"

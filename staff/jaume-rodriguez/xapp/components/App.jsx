@@ -36,6 +36,7 @@ class App extends React.Component {
                 <HomePage
                     onLoggedOut={this.navigateToLogin}
                     onSettingsAccountLink={this.navigateToSettingsAccount}
+                    onHomeLink={this.navigateToHome}
                 />}
 
             {this.state.view === 'SettingsAccountPage' &&
