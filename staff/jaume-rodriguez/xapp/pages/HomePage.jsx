@@ -130,7 +130,7 @@ class HomePage extends React.Component {
                 {/* TOGGLE MENU */}
                 {this.state.toggleMenuComponent === "close" && (
                     <div className="flex justify-end right-0 absolute">
-                        <div className="flex flex-col items-end content-end z-10 w-56 p-4 rounded-sm gap-2 bg-cyan-100 border-sky-700 border-b-2 border-l -mt-1">
+                        <div className="flex flex-col items-end content-end z-10 w-56 p-4 rounded-sm gap-2 bg-sky-100 border-sky-700 border-b-2 border-l -mt-1">
                             <p className="text-black pr-1">{user.email}</p>
                             <hr className="w-full border-sky-700 mx-auto my-2" />
                             <button
@@ -153,9 +153,6 @@ class HomePage extends React.Component {
                     <div className="flex flex-row justify-center content-center z-0 p-8 bg-sky-500 border-black border-b border-solid w-full h-16">
                         <span className="self-center font-semibold text-4xl text-sky-100">
                             My Tasks
-                        </span>
-                        <span className="self-center font-normal text-lg text-black mt-3 px-4">
-                            | {user.name}
                         </span>
                     </div>
                     {/*TASKS*/}
@@ -181,7 +178,7 @@ class HomePage extends React.Component {
                                     </textarea>
                                     <div className="flex flex-row mt-3">
                                         <select
-                                            className="text-black bg-inherit self-end font-normal"
+                                            className="text-black bg-inherit self-end font-normal text-base"
                                             onChange={(event) => this.handleUpdateTaskStatus(task.id, event.target.value)}>
                                             <option disabled selected hidden value='todo'>
                                                 Pendiente
@@ -231,7 +228,7 @@ class HomePage extends React.Component {
                                     </textarea>
                                     <div className="flex flex-row mt-3">
                                         <select
-                                            className="text-black bg-inherit self-end font-normal"
+                                            className="text-black bg-inherit self-end font-normal text-base"
                                             onChange={(event) => this.handleUpdateTaskStatus(task.id, event.target.value)}>
                                             <option disabled selected hidden value='doing'>
                                                 En proceso
@@ -281,7 +278,7 @@ class HomePage extends React.Component {
                                     </textarea>
                                     <div className="flex flex-row mt-3">
                                         <select
-                                            className="text-black bg-inherit self-end font-normal"
+                                            className="text-black bg-inherit self-end font-normal text-base"
                                             onChange={(event) => this.handleUpdateTaskStatus(task.id, event.target.value)}>
                                             <option disabled selected hidden value='done'>
                                                 Hecho
