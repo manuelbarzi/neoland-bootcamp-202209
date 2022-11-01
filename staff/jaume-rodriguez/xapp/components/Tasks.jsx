@@ -10,7 +10,7 @@ class Tasks extends React.Component {
 
     // TASKS MANAGER
     componentDidMount() {
-        log('INFO', 'Home -> componentDidMount');
+        log('INFO', 'Tasks: componentDidMount');
 
         try {
             const tasks = retrieveTasks(user.id)
@@ -22,6 +22,7 @@ class Tasks extends React.Component {
     }
 
     handleCreateTaskTodo = () => {
+        log('INFO', 'Tasks: handleCreateTaskTodo');
         try {
             createTaskTodo(user.id)
             const tasks = retrieveTasks(user.id)
@@ -33,6 +34,7 @@ class Tasks extends React.Component {
     }
 
     handleCreateTaskDoing = () => {
+        log('INFO', 'Tasks: handleCreateTaskDoing');
         try {
             createTaskDoing(user.id)
             const tasks = retrieveTasks(user.id)
@@ -44,6 +46,7 @@ class Tasks extends React.Component {
     }
 
     handleCreateTaskDone = () => {
+        log('INFO', 'Tasks: handleCreateTaskDone');
         try {
             createTaskDone(user.id)
             const tasks = retrieveTasks(user.id)
@@ -55,6 +58,7 @@ class Tasks extends React.Component {
     }
 
     handleUpdateTaskText = (taskId, newText) => {
+        log('INFO', 'Tasks: handleUpdateTaskText');
         try {
             updateTaskText(user.id, taskId, newText);
         } catch (error) {
@@ -65,6 +69,7 @@ class Tasks extends React.Component {
     }
 
     handleUpdateTaskStatus = (taskId, newStatus) => {
+        log('INFO', 'Tasks: handleUpdateTaskStatus');
         try {
             updateTaskStatus(user.id, taskId, newStatus);
             const tasks = retrieveTasks(user.id)
@@ -79,6 +84,7 @@ class Tasks extends React.Component {
     }
 
     handleDeleteTask = (taskId) => {
+        log('INFO', 'Tasks: handleDeleteTask');
         try {
             deleteTask(user.id, taskId);
 

@@ -11,6 +11,7 @@ class SettingsAccountPage extends React.Component {
             inputNameState: true,
             inputEmailState: true,
             inputPasswordState: true,
+            showPasswordText: true
         };
     };
 
@@ -70,6 +71,12 @@ class SettingsAccountPage extends React.Component {
     handleInputPasswordState = () => {
         this.setState({
             inputPasswordState: !this.state.inputPasswordState
+        });
+    }
+
+    handleShowPasswordText = () => {
+        this.setState({
+            showPasswordText: !this.state.showPasswordText
         });
     }
 
@@ -223,7 +230,7 @@ class SettingsAccountPage extends React.Component {
                             <label htmlFor="updatePassword"></label>
                             <input
                                 name='password'
-                                type='password'
+                                type={this.state.showPasswordText ? 'password' : 'text'}
                                 placeholder="Enter new password"
                                 id="updatePassword"
                                 title="Please enter at least 8 characters without spaces"
@@ -243,7 +250,8 @@ class SettingsAccountPage extends React.Component {
                         </form>
                         <span className="flex">
                             <input
-                                type="checkbox" />
+                                type="checkbox"
+                                onChange={this.handleShowPasswordText} />
                             <label className="text-xs mx-2 my-3">Show password</label>
                         </span>
                     </div>
