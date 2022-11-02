@@ -17,10 +17,6 @@ class Header extends React.Component {
         log('INFO', 'Header -> componentWillUnmount')
     }
 
-    componentWillReceiveProps() {
-        log('INFO', 'Header -> componentWillReceiveProps')
-    }
-
     handleNavigateToTasks = event => {
         log('INFO', 'Header -> handleNavigateToTasks')
 
@@ -31,15 +27,8 @@ class Header extends React.Component {
 
     handleAddTask = () => {
         log('INFO', 'Header -> handleAddTask')
-
-        try {
-            createTask(user.email)
-            
-            this.props.onAddTask()
-        } catch (error) {
-            alert(error.message)
-        }
         
+        this.props.onAddTask()
     }
 
     handleToggleMenu = () => {

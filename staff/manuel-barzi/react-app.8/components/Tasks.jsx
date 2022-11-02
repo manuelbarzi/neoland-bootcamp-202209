@@ -3,74 +3,24 @@ class Tasks extends React.Component {
         log('INFO', 'Tasks -> constructor')
 
         super()
-
-        this.state = { tasks: [] }
-    }
-
-    componentDidMount() {
-        log('INFO', 'Tasks -> componentDidMount')
-
-        try {
-            const tasks = retrieveTasks(user.email)
-
-            this.setState({ tasks })
-        } catch (error) {
-            alert(error.message)
-        }
-    }
-
-    componentWillUnmount() {
-        log('INFO', 'Tasks -> componentWillUnmount')
-    }
-
-    componentWillReceiveProps() {
-        log('INFO', 'Tasks -> componentWillReceiveProps')
-
-        try {
-            const tasks = retrieveTasks(user.email)
-
-            this.setState({ tasks })
-        } catch (error) {
-            alert(error.message)
-        }
     }
 
     handleUpdateTaskText = (taskId, newText) => {
         log('INFO', 'Tasks -> handleUpdateTaskText')
 
-        try {
-            updateTaskText(user.email, taskId, newText)
-        } catch (error) {
-            alert(error.message)
-        }
+        this.props.onUpdateTaskText(taskId, newText)
     }
 
     handleDeleteTask = taskId => {
-        log('INFO', 'Home -> handleDeleteTask')
+        log('INFO', 'Tasks -> handleDeleteTask')
 
-        try {
-            deleteTask(user.email, taskId)
-
-            const tasks = retrieveTasks(user.email)
-
-            this.setState({ tasks })
-        } catch (error) {
-            alert(error.message)
-        }
+        this.props.onDeleteTask(taskId)
     }
 
     handleUpdateTaskStatus = (taskId, newStatus) => {
-        log('INFO', 'Home -> handleUpdateTaskStatus')
+        log('INFO', 'Tasks -> handleUpdateTaskStatus')
 
-        try {
-            updateTaskStatus(user.email, taskId, newStatus)
-
-            const tasks = retrieveTasks(user.email)
-
-            this.setState({ tasks })
-        } catch (error) {
-            alert(error.message)
-        }
+        this.props.onUpdateTaskStatus(taskId, newStatus)
     }
 
     render() {
@@ -81,7 +31,7 @@ class Tasks extends React.Component {
             <div className="flex flex-col sm:flex-row gap-4">
                 <section className="flex flex-col gap-2 border-2 p-2">
                     <h2>TODO</h2>
-                    {this.state.tasks.filter(task => task.status === 'todo').map(task => <article key={task.id} className="border-2 p-1">
+                    {this.props.tasks.filter(task => task.status === 'todo').map(task => <article key={task.id} className="border-2 p-1">
                         <p suppressContentEditableWarning={true} contentEditable="true" onKeyUp={event => this.handleUpdateTaskText(task.id, event.target.innerText)}>{task.text}</p>
 
                         <button className="material-symbols-outlined" onClick={() => this.handleDeleteTask(task.id)}>delete</button>
@@ -95,7 +45,7 @@ class Tasks extends React.Component {
                 </section>
                 <section className="border-2 p-2">
                     <h2>DOING</h2>
-                    {this.state.tasks.filter(task => task.status === 'doing').map(task => <article key={task.id} className="border-2 p-1">
+                    {this.props.tasks.filter(task => task.status === 'doing').map(task => <article key={task.id} className="border-2 p-1">
                         <p suppressContentEditableWarning={true} contentEditable="true" onKeyUp={event => this.handleUpdateTaskText(task.id, event.target.innerText)}>{task.text}</p>
 
                         <button className="material-symbols-outlined" onClick={() => this.handleDeleteTask(task.id)}>delete</button>
@@ -109,7 +59,7 @@ class Tasks extends React.Component {
                 </section>
                 <section className="border-2 p-2">
                     <h2>DONE</h2>
-                    {this.state.tasks.filter(task => task.status === 'done').map(task => <article key={task.id} className="border-2 p-1">
+                    {this.props.tasks.filter(task => task.status === 'done').map(task => <article key={task.id} className="border-2 p-1">
                         <p suppressContentEditableWarning={true} contentEditable="true" onKeyUp={event => this.handleUpdateTaskText(task.id, event.target.innerText)}>{task.text}</p>
 
                         <button className="material-symbols-outlined" onClick={() => this.handleDeleteTask(task.id)}>delete</button>
