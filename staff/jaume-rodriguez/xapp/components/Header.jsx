@@ -8,11 +8,13 @@ class Header extends React.Component {
     }
 
     // MENU OPEN & CLOSE
-    handleToggleMenu = () =>
+    handleToggleMenu = () => {
+        log("INFO", "Header: handleToggleMenu");
         this.setState({
             toggleMenuComponent:
                 this.state.toggleMenuComponent === "open" ? "close" : "open",
         });
+    }
 
     // HEADER LINKS
     handleHomeLink = () => {
