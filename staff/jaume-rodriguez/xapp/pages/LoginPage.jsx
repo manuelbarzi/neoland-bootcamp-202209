@@ -15,12 +15,22 @@ class LoginPage extends React.Component {
         this.props.onRegisterLinkClick()
     }
 
-    // FORM INPUTS VISUAL
+    // FORM INPUTS VALUE
     handleInputPasswordText = () => {
         log('INFO', 'LoginPage: handleInputPasswordText')
         this.setState({
             inputPasswordText: !this.state.inputPasswordText
         });
+    }
+
+    handleInputEmailValue = (event) => {
+        const newValue = event.target.value
+        this.props.onInputEmailValue(newValue)
+    }
+
+    handleInputPasswordValue = (event) => {
+        const newValue = event.target.value
+        this.props.onInputPasswordValue(newValue)
     }
 
     // FORM SUBMITS
@@ -43,6 +53,7 @@ class LoginPage extends React.Component {
             alert(error.message)
         }
     }
+
     render() {
         return (
             <main className="h-screen" >
@@ -63,6 +74,7 @@ class LoginPage extends React.Component {
                             id="loginEmail"
                             required=""
                             title="Please use @ and . on your email"
+                            onChange={this.handleInputEmailValue}
                             className="h-10 border-gray-400 border-2 rounded border-solid text-slate-800 text-base pl-2"
                         />
                         <label htmlFor="loginPassword"></label>
@@ -73,6 +85,7 @@ class LoginPage extends React.Component {
                             id="loginPassword"
                             required=""
                             title="Please enter at least 8 characters without spaces"
+                            onChange={this.handleInputPasswordValue}
                             className="h-10 border-gray-400 border-2 rounded border-solid text-slate-800 text-base pl-2"
                         />
                         <span className="flex">

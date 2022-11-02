@@ -17,13 +17,21 @@ function Task(props) {
                             props.task.status === 'doing' ? 'En proceso' :
                                 props.task.status === 'done' ? 'Hecho' : 'Estado'}
                     </option>
-                    <option value={props.task.status === 'todo' ? 'doing' : 'todo'}>
-                        {props.task.status === 'todo' ? 'En Proceso' : 'Pendiente'}
-                    </option>
-                    <option value={props.task.status === 'done' ? 'doing' : 'done'}>
-                        {props.task.status === 'done' ? 'En Proceso' : 'Hecho'}
-                    </option>
-
+                    {props.task.status === 'todo' ? <>
+                        <option value="doing">En Proceso</option>
+                        <option value="done">Hecho</option>
+                    </>
+                        :
+                        props.task.status === 'doing' ? <>
+                            <option value="todo">Pendiente</option>
+                            <option value="done">Hecho</option>
+                        </>
+                            :
+                            <>
+                                <option value="todo">Pendiente</option>
+                                <option value="doing">En Proceso</option>
+                            </>
+                    }
                 </select>
                 <button
                     className="material-symbols-outlined self-center rounded cursor-pointer border-none mt-3 ml-auto text-sky-900"

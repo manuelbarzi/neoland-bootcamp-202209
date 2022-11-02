@@ -4,13 +4,27 @@ class App extends React.Component {
 
         super()
 
-        this.state = { view: 'LoginPage' }
+        this.state = {
+            view: 'LoginPage',
+            inputEmailValue: "",
+            inputPasswordValue: ""
+        }
     }
 
     componentDidMount() {
         log('INFO', 'App -> componentDidMount')
     }
 
+    // FORMS INFO VALUE
+    handleInputEmailValue = (newValue) => {
+        this.setState({ inputEmailValue: newValue })
+    }
+
+    handleInputPasswordValue = (newValue) => {
+        this.setState({ inputPasswordValue: newValue })
+    }
+
+    // APP PAGES RENDER
     navigateToLogin = () => this.setState({ view: 'LoginPage' })
     navigateToRegister = () => this.setState({ view: 'RegisterPage' })
     navigateToHome = () => this.setState({ view: 'HomePage' })
@@ -24,10 +38,14 @@ class App extends React.Component {
                 <LoginPage
                     onLoggedIn={this.navigateToHome}
                     onRegisterLinkClick={this.navigateToRegister}
+                    onInputEmailValue={this.handleInputEmailValue}
+                    onInputPasswordValue={this.handleInputPasswordValue}
                 />}
 
             {this.state.view === 'RegisterPage' &&
                 <RegisterPage
+                    loginInputEmailValue={this.state.inputEmailValue}
+                    loginInputPasswordValue={this.state.inputPasswordValue}
                     onLoggedIn={this.navigateToHome}
                     onLoginLinkClick={this.navigateToLogin}
                 />}
