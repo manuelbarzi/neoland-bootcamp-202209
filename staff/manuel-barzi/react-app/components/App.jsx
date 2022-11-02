@@ -4,11 +4,11 @@ class App extends React.Component {
 
         super()
 
-        // this.state = { view: 'login' }
+        this.state = { view: 'login' }
 
         // NOTE force user logged in already, to go faster to home page
-        user = users[2]
-        this.state = { view: 'home' }
+        // user = users[2]
+        // this.state = { view: 'home' }
     }
 
     componentDidMount() {
@@ -43,7 +43,7 @@ class App extends React.Component {
         return <>
             {this.state.view === 'login' && <Login onNavigateToRegister={this.handleNavigateToRegister} onLogin={this.handleNavigateToHome} />}
             
-            {this.state.view === 'register' && <Register onNavigateToLogin={this.handleNavigateToLogin} />}
+            {this.state.view === 'register' && <Register onNavigateToLogin={this.handleNavigateToLogin} onRegister={this.handleNavigateToLogin} />}
 
             {this.state.view === 'home' && <Home onLogout={this.handleNavigateToLogin} />}
         </>
