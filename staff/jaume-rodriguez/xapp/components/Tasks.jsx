@@ -132,7 +132,7 @@ class Tasks extends React.Component {
                                         <select
                                             className="text-black bg-inherit self-end font-normal text-base"
                                             onChange={(event) => this.handleUpdateTaskStatus(task.id, event.target.value)}>
-                                            <option disabled defaultValue hidden value='todo'>
+                                            <option disabled selected hidden value='todo'>
                                                 Pendiente
                                             </option>
                                             <option value='doing'>
@@ -182,7 +182,7 @@ class Tasks extends React.Component {
                                         <select
                                             className="text-black bg-inherit self-end font-normal text-base"
                                             onChange={(event) => this.handleUpdateTaskStatus(task.id, event.target.value)}>
-                                            <option disabled defaultValue hidden value='doing'>
+                                            <option disabled selected hidden value='doing'>
                                                 En proceso
                                             </option>
                                             <option value='todo'>
@@ -232,7 +232,7 @@ class Tasks extends React.Component {
                                         <select
                                             className="text-black bg-inherit self-end font-normal text-base"
                                             onChange={(event) => this.handleUpdateTaskStatus(task.id, event.target.value)}>
-                                            <option disabled defaultValue hidden value='done'>
+                                            <option disabled selected hidden value='done'>
                                                 Hecho
                                             </option>
                                             <option value='todo'>

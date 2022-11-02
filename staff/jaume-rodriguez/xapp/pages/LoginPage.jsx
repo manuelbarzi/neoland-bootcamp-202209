@@ -4,7 +4,7 @@ class LoginPage extends React.Component {
         super()
 
         this.state = {
-            showPasswordText: true
+            showPasswordText: true,
         };
     }
 
@@ -15,7 +15,7 @@ class LoginPage extends React.Component {
         this.props.onRegisterLinkClick()
     }
 
-    //FORM INPUTS VISUAL
+    // FORM INPUTS VISUAL
     handleShowPasswordText = () => {
         log('INFO', 'LoginPage: handleShowPasswordText')
         this.setState({
@@ -41,7 +41,6 @@ class LoginPage extends React.Component {
             this.props.onLoggedIn()
         } catch (error) {
             alert(error.message)
-            passwordInput.value = ''
         }
     }
     render() {

@@ -4,7 +4,7 @@ class RegisterPage extends React.Component {
         super()
 
         this.state = {
-            showPasswordText: true
+            showPasswordText: true,
         };
     }
 
@@ -40,10 +40,10 @@ class RegisterPage extends React.Component {
 
         try {
             registerUser(name, email, password)
-            this.props.onRegisterSuccess()
+            user = authenticateUser(email, password)
+            this.props.onLoggedIn()
         } catch (error) {
             alert(error.message)
-            passwordInput.value = ''
         }
     }
 

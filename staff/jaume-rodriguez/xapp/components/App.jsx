@@ -28,7 +28,7 @@ class App extends React.Component {
 
             {this.state.view === 'RegisterPage' &&
                 <RegisterPage
-                    onRegisterSuccess={this.navigateToLogin}
+                    onLoggedIn={this.navigateToHome}
                     onLoginLinkClick={this.navigateToLogin}
                 />}
 
