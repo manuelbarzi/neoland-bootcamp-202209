@@ -119,36 +119,12 @@ class Tasks extends React.Component {
                             </div>
                             <hr className="w-full mx-auto my-2 border-black" />
                             {this.state.tasks.filter(task => task.status === 'todo').map(task =>
-                                <article
+                                <Task
                                     key={task.id}
-                                    className="w-full p-4 flex justify-center flex-col mb-4 rounded border-solid border-sky-600 border-t border-b-4 border-x bg-sky-100">
-                                    <textarea
-                                        defaultValue={task.text}
-                                        className="flex flex-col text-justify bg-cyan-50 p-4 text-sm border-sky-600 border bg-sky-200 text-black text-[14px] font-normal"
-                                        onKeyUp={(event) => this.handleUpdateTaskText(task.id, event.target.value)}
-                                    >
-                                    </textarea>
-                                    <div className="flex flex-row mt-3">
-                                        <select
-                                            className="text-black bg-inherit self-end font-normal text-base"
-                                            onChange={(event) => this.handleUpdateTaskStatus(task.id, event.target.value)}>
-                                            <option disabled selected hidden value='todo'>
-                                                Pendiente
-                                            </option>
-                                            <option value='doing'>
-                                                En proceso
-                                            </option>
-                                            <option value='done'>
-                                                Hecho
-                                            </option>
-
-                                        </select>
-                                        <button
-                                            className="material-symbols-outlined self-center rounded cursor-pointer border-none mt-3 ml-auto text-sky-900"
-                                            onClick={() => this.handleDeleteTask(task.id)}>delete
-                                        </button>
-                                    </div>
-                                </article>)}
+                                    task={task}
+                                    handleUpdateTaskText={this.handleUpdateTaskText}
+                                    handleUpdateTaskStatus={this.handleUpdateTaskStatus}
+                                    handleDeleteTask={this.handleDeleteTask} />)}
                             <div
                                 className="w-full p-2 px-4 flex flex-row items-end rounded border-solid border-sky-600 border-t border-b-4 border-x bg-sky-100 hover:bg-sky-200 cursor-pointer text-sm"
                                 onClick={this.handleCreateTaskTodo}>
@@ -169,36 +145,12 @@ class Tasks extends React.Component {
                             </div>
                             <hr className="w-full mx-auto my-2 border-black" />
                             {this.state.tasks.filter(task => task.status === 'doing').map(task =>
-                                <article
+                                <Task
                                     key={task.id}
-                                    className="w-full p-4 flex justify-center flex-col mb-4 rounded border-solid border-sky-600 border-t border-b-4 border-x bg-sky-100">
-                                    <textarea
-                                        defaultValue={task.text}
-                                        className="flex flex-col text-justify bg-cyan-50 p-4 text-sm border-sky-600 border bg-sky-200 text-black text-[14px] font-normal"
-                                        onKeyUp={(event) => this.handleUpdateTaskText(task.id, event.target.value)}
-                                    >
-                                    </textarea>
-                                    <div className="flex flex-row mt-3">
-                                        <select
-                                            className="text-black bg-inherit self-end font-normal text-base"
-                                            onChange={(event) => this.handleUpdateTaskStatus(task.id, event.target.value)}>
-                                            <option disabled selected hidden value='doing'>
-                                                En proceso
-                                            </option>
-                                            <option value='todo'>
-                                                Pendiente
-                                            </option>
-                                            <option value='done'>
-                                                Hecho
-                                            </option>
-
-                                        </select>
-                                        <button
-                                            className="material-symbols-outlined self-center rounded cursor-pointer border-none mt-3 ml-auto text-sky-900"
-                                            onClick={() => this.handleDeleteTask(task.id)}>delete
-                                        </button>
-                                    </div>
-                                </article>)}
+                                    task={task}
+                                    handleUpdateTaskText={this.handleUpdateTaskText}
+                                    handleUpdateTaskStatus={this.handleUpdateTaskStatus}
+                                    handleDeleteTask={this.handleDeleteTask} />)}
                             <div
                                 className="w-full p-2 px-4 flex flex-row items-end rounded border-solid border-sky-600 border-t border-b-4 border-x bg-sky-100 hover:bg-sky-200 cursor-pointer text-sm"
                                 onClick={this.handleCreateTaskDoing}>
@@ -219,36 +171,12 @@ class Tasks extends React.Component {
                             </div>
                             <hr className="w-full mx-auto my-2 border-black" />
                             {this.state.tasks.filter(task => task.status === 'done').map(task =>
-                                <article
+                                <Task
                                     key={task.id}
-                                    className="w-full p-4 flex justify-center flex-col mb-4 rounded border-solid border-sky-600 border-t border-b-4 border-x bg-sky-100">
-                                    <textarea
-                                        defaultValue={task.text}
-                                        className="flex flex-col text-justify bg-cyan-50 p-4 text-sm border-sky-600 border bg-sky-200 text-black text-[14px] font-normal"
-                                        onKeyUp={(event) => this.handleUpdateTaskText(task.id, event.target.value)}
-                                    >
-                                    </textarea>
-                                    <div className="flex flex-row mt-3">
-                                        <select
-                                            className="text-black bg-inherit self-end font-normal text-base"
-                                            onChange={(event) => this.handleUpdateTaskStatus(task.id, event.target.value)}>
-                                            <option disabled selected hidden value='done'>
-                                                Hecho
-                                            </option>
-                                            <option value='todo'>
-                                                Pendiente
-                                            </option>
-                                            <option value='doing'>
-                                                En proceso
-                                            </option>
-
-                                        </select>
-                                        <button
-                                            className="material-symbols-outlined self-center rounded cursor-pointer border-none mt-3 ml-auto text-sky-900"
-                                            onClick={() => this.handleDeleteTask(task.id)}>delete
-                                        </button>
-                                    </div>
-                                </article>)}
+                                    task={task}
+                                    handleUpdateTaskText={this.handleUpdateTaskText}
+                                    handleUpdateTaskStatus={this.handleUpdateTaskStatus}
+                                    handleDeleteTask={this.handleDeleteTask} />)}
                             <div
                                 className="w-full p-2 px-4 flex flex-row items-end rounded border-solid border-sky-600 border-t border-b-4 border-x bg-sky-100 hover:bg-sky-200 cursor-pointer text-sm"
                                 onClick={this.handleCreateTaskDone}>
