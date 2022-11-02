@@ -91,16 +91,15 @@ class SettingsAccountPage extends React.Component {
 
         const newName = nameInput.value
 
-        // SETBACK THE BUTTON VISUAL
-        this.setState({
-            buttonFormName:
-                this.state.buttonFormName === "open" ? "close" : "open",
-        });
-
         try {
             updateUserName(user.name, newName)
             user.name = newName
             alert('The user name has been changed successfully')
+            // SETBACK THE BUTTON VISUAL
+            this.setState({
+                buttonFormName:
+                    this.state.buttonFormName === "open" ? "close" : "open",
+            });
 
         } catch (error) {
             alert(error.message)
@@ -117,16 +116,15 @@ class SettingsAccountPage extends React.Component {
 
         const newEmail = emailInput.value
 
-        // SETBACK THE BUTTON VISUAL
-        this.setState({
-            buttonFormEmail:
-                this.state.buttonFormEmail === "open" ? "close" : "open",
-        });
-
         try {
             updateUserEmail(user.email, newEmail)
             user.email = newEmail
             alert('The user email has been changed successfully')
+            // SETBACK THE BUTTON VISUAL
+            this.setState({
+                buttonFormEmail:
+                    this.state.buttonFormEmail === "open" ? "close" : "open",
+            });
 
         } catch (error) {
             alert(error.message)
@@ -143,17 +141,16 @@ class SettingsAccountPage extends React.Component {
 
         const newPassword = passwordInput.value
 
-        // SETBACK THE BUTTON VISUAL
-        this.setState({
-            buttonFormPassword:
-                this.state.buttonFormPassword === "open" ? "close" : "open",
-        });
-
         try {
             updateUserPassword(user.password, newPassword)
             user.password = newPassword
             alert('The user password has been changed successfully')
             passwordInput.value = ''
+            // SETBACK THE BUTTON VISUAL
+            this.setState({
+                buttonFormPassword:
+                    this.state.buttonFormPassword === "open" ? "close" : "open",
+            });
 
         } catch (error) {
             alert(error.message)

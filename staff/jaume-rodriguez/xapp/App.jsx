@@ -6,6 +6,7 @@ class App extends React.Component {
 
         this.state = {
             view: 'LoginPage',
+            inputNameValue: "",
             inputEmailValue: "",
             inputPasswordValue: ""
         }
@@ -16,8 +17,11 @@ class App extends React.Component {
     }
 
     // FORMS INFO VALUE
-    handleInputEmailValue = (newValue) => {
-        this.setState({ inputEmailValue: newValue })
+    handleInputEmailAndNameValue = (newValue) => {
+        this.setState({
+            inputEmailValue: newValue,
+            inputNameValue: newValue.split('@')[0]
+        })
     }
 
     handleInputPasswordValue = (newValue) => {
@@ -38,16 +42,17 @@ class App extends React.Component {
                 <LoginPage
                     onLoggedIn={this.navigateToHome}
                     onRegisterLinkClick={this.navigateToRegister}
-                    onInputEmailValue={this.handleInputEmailValue}
+                    onInputEmailValue={this.handleInputEmailAndNameValue}
                     onInputPasswordValue={this.handleInputPasswordValue}
                 />}
 
             {this.state.view === 'RegisterPage' &&
                 <RegisterPage
-                    loginInputEmailValue={this.state.inputEmailValue}
-                    loginInputPasswordValue={this.state.inputPasswordValue}
                     onLoggedIn={this.navigateToHome}
                     onLoginLinkClick={this.navigateToLogin}
+                    loginInputNameValue={this.state.inputNameValue}
+                    loginInputEmailValue={this.state.inputEmailValue}
+                    loginInputPasswordValue={this.state.inputPasswordValue}
                 />}
 
             {this.state.view === 'HomePage' &&

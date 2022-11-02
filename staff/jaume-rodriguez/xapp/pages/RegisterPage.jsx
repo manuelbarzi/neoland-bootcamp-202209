@@ -65,6 +65,7 @@ class RegisterPage extends React.Component {
                             required=""
                             title="Please enter at least 1 character"
                             className="h-10 border-gray-400 border-2 rounded border-solid text-slate-800 text-base pl-2"
+                            defaultValue={this.props.loginInputNameValue}
                         />
                         <label htmlFor="registerEmail"></label>
                         <input
