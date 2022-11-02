@@ -2,9 +2,6 @@ class HomePage extends React.Component {
     constructor() {
         log("INFO", "HomePage -> render");
         super();
-
-        this.state = {
-        };
     }
 
     // HEADER LINKS BRIDGE

@@ -119,6 +119,7 @@ class Tasks extends React.Component {
                             </div>
                             <hr className="w-full mx-auto my-2 border-black" />
                             {this.state.tasks.filter(task => task.status === 'todo').map(task =>
+                                // COMPONENTE TASK
                                 <Task
                                     key={task.id}
                                     task={task}
@@ -145,6 +146,7 @@ class Tasks extends React.Component {
                             </div>
                             <hr className="w-full mx-auto my-2 border-black" />
                             {this.state.tasks.filter(task => task.status === 'doing').map(task =>
+                                // COMPONENTE TASK
                                 <Task
                                     key={task.id}
                                     task={task}
@@ -171,6 +173,7 @@ class Tasks extends React.Component {
                             </div>
                             <hr className="w-full mx-auto my-2 border-black" />
                             {this.state.tasks.filter(task => task.status === 'done').map(task =>
+                                // COMPONENTE TASK
                                 <Task
                                     key={task.id}
                                     task={task}

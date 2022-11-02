@@ -1,10 +1,10 @@
 class LoginPage extends React.Component {
     constructor() {
-        log('INFO', 'RegisterPage -> render')
+        log('INFO', 'LoginPage -> render')
         super()
 
         this.state = {
-            showPasswordText: true,
+            inputPasswordText: true,
         };
     }
 
@@ -16,10 +16,10 @@ class LoginPage extends React.Component {
     }
 
     // FORM INPUTS VISUAL
-    handleShowPasswordText = () => {
-        log('INFO', 'LoginPage: handleShowPasswordText')
+    handleInputPasswordText = () => {
+        log('INFO', 'LoginPage: handleInputPasswordText')
         this.setState({
-            showPasswordText: !this.state.showPasswordText
+            inputPasswordText: !this.state.inputPasswordText
         });
     }
 
@@ -68,7 +68,7 @@ class LoginPage extends React.Component {
                         <label htmlFor="loginPassword"></label>
                         <input
                             name='password'
-                            type={this.state.showPasswordText ? 'password' : 'text'}
+                            type={this.state.inputPasswordText ? 'password' : 'text'}
                             placeholder="Password"
                             id="loginPassword"
                             required=""
@@ -78,7 +78,7 @@ class LoginPage extends React.Component {
                         <span className="flex">
                             <input
                                 type="checkbox"
-                                onChange={this.handleShowPasswordText} />
+                                onChange={this.handleInputPasswordText} />
                             <label className="text-xs mx-2 my-3">Show password</label>
                         </span>
                         <button className="w-full h-8 self-start rounded border-none text-white font-bold bg-sky-700">

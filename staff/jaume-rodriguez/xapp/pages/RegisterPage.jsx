@@ -1,10 +1,10 @@
 class RegisterPage extends React.Component {
     constructor() {
-        log('INFO', 'LoginPage -> render')
+        log('INFO', 'RegisterPage -> render')
         super()
 
         this.state = {
-            showPasswordText: true,
+            inputPasswordText: true,
         };
     }
 
@@ -16,10 +16,10 @@ class RegisterPage extends React.Component {
     }
 
     //FORM INPUTS VISUAL
-    handleShowPasswordText = () => {
-        log('INFO', 'Registerage: handleShowPasswordText')
+    handleInputPasswordText = () => {
+        log('INFO', 'Registerage: handleInputPasswordText')
         this.setState({
-            showPasswordText: !this.state.showPasswordText
+            inputPasswordText: !this.state.inputPasswordText
         });
     }
 
@@ -78,7 +78,7 @@ class RegisterPage extends React.Component {
                         <label htmlFor="registerPassword"></label>
                         <input
                             name='password'
-                            type={this.state.showPasswordText ? 'password' : 'text'}
+                            type={this.state.inputPasswordText ? 'password' : 'text'}
                             placeholder="Enter a password"
                             id="registerPassword"
                             title="Please enter at least 8 characters without spaces"
@@ -87,7 +87,7 @@ class RegisterPage extends React.Component {
                         <span className="flex">
                             <input
                                 type="checkbox"
-                                onChange={this.handleShowPasswordText} />
+                                onChange={this.handleInputPasswordText} />
                             <label className="text-xs mx-2 my-3">Show password</label>
                         </span>
                         <button className="w-full h-8 self-start bg-sky-700 rounded border-none text-white font-bold">

@@ -4,14 +4,13 @@ class SettingsAccountPage extends React.Component {
         super();
 
         this.state = {
-            toggleMenuComponent: "open",
-            toggleButtonFormName: "open",
-            toggleButtonFormEmail: "open",
-            toggleButtonFormPassword: "open",
-            inputNameState: true,
-            inputEmailState: true,
-            inputPasswordState: true,
-            showPasswordText: true
+            buttonFormName: "open",
+            buttonFormEmail: "open",
+            buttonFormPassword: "open",
+            inputNameDisabled: true,
+            inputEmailDisabled: true,
+            inputPasswordDisabled: true,
+            inputPasswordText: true
         };
     };
 
@@ -34,49 +33,50 @@ class SettingsAccountPage extends React.Component {
     };
 
     // FORM BUTTONS VISUAL
-    handleToggleButtonFormName = () => {
+    handleButtonFormName = () => {
         this.setState({
-            toggleButtonFormName:
-                this.state.toggleButtonFormName === "open" ? "close" : "open",
+            buttonFormName:
+                this.state.buttonFormName === "open" ? "close" : "open",
         });
     }
 
-    handleToggleButtonFormEmail = () => {
+    handleButtonFormEmail = () => {
         this.setState({
-            toggleButtonFormEmail:
-                this.state.toggleButtonFormEmail === "open" ? "close" : "open",
+            buttonFormEmail:
+                this.state.buttonFormEmail === "open" ? "close" : "open",
         });
     }
 
-    handleToggleButtonFormPassword = () => {
+    handleButtonFormPassword = () => {
         this.setState({
-            toggleButtonFormPassword:
-                this.state.toggleButtonFormPassword === "open" ? "close" : "open",
+            buttonFormPassword:
+                this.state.buttonFormPassword === "open" ? "close" : "open",
         });
     }
 
     // FORM INPUTS VISUAL
-    handleInputNameState = () => {
+    handleInputNameDisabled = () => {
         this.setState({
-            inputNameState: !this.state.inputNameState
+            inputNameDisabled: !this.state.inputNameDisabled
         });
     }
 
-    handleInputEmailState = () => {
+    handleInputEmailDisabled = () => {
         this.setState({
-            inputEmailState: !this.state.inputEmailState
+            inputEmailDisabled: !this.state.inputEmailDisabled
         });
     }
 
-    handleInputPasswordState = () => {
+    handleInputPasswordDisabled = () => {
         this.setState({
-            inputPasswordState: !this.state.inputPasswordState
+            inputPasswordDisabled: !this.state.inputPasswordDisabled
         });
     }
 
-    handleShowPasswordText = () => {
+    handleInputPasswordText = () => {
+        log('INFO', 'LoginPage: handleInputPasswordText')
         this.setState({
-            showPasswordText: !this.state.showPasswordText
+            inputPasswordText: !this.state.inputPasswordText
         });
     }
 
@@ -93,8 +93,8 @@ class SettingsAccountPage extends React.Component {
 
         // SETBACK THE BUTTON VISUAL
         this.setState({
-            toggleButtonFormName:
-                this.state.toggleButtonFormName === "open" ? "close" : "open",
+            buttonFormName:
+                this.state.buttonFormName === "open" ? "close" : "open",
         });
 
         try {
@@ -119,8 +119,8 @@ class SettingsAccountPage extends React.Component {
 
         // SETBACK THE BUTTON VISUAL
         this.setState({
-            toggleButtonFormEmail:
-                this.state.toggleButtonFormEmail === "open" ? "close" : "open",
+            buttonFormEmail:
+                this.state.buttonFormEmail === "open" ? "close" : "open",
         });
 
         try {
@@ -145,8 +145,8 @@ class SettingsAccountPage extends React.Component {
 
         // SETBACK THE BUTTON VISUAL
         this.setState({
-            toggleButtonFormPassword:
-                this.state.toggleButtonFormPassword === "open" ? "close" : "open",
+            buttonFormPassword:
+                this.state.buttonFormPassword === "open" ? "close" : "open",
         });
 
         try {
@@ -188,19 +188,19 @@ class SettingsAccountPage extends React.Component {
                                 placeholder="Enter new name"
                                 id="updateName"
                                 title="Please enter at least 1 character"
-                                disabled={(this.state.inputNameState) ? "disabled" : ""}
+                                disabled={(this.state.inputNameDisabled) ? "disabled" : ""}
                                 className="h-10 rounded text-slate-800 text-base pl-2 w-64"
                                 defaultValue={user.name}
                             />
-                            {this.state.toggleButtonFormName === "open" && (
+                            {this.state.buttonFormName === "open" && (
                                 <span
                                     className="self-start scale-125 p-1 bg-sky-100 rounded text-black mx-2 mt-1 cursor-pointer material-symbols-outlined cursor-pointer"
-                                    onClick={() => { this.handleInputNameState(); this.handleToggleButtonFormName(); }}>edit</span>
+                                    onClick={() => { this.handleInputNameDisabled(); this.handleButtonFormName(); }}>edit</span>
                             )}
-                            {this.state.toggleButtonFormName === "close" && (
+                            {this.state.buttonFormName === "close" && (
                                 <button
                                     className="self-start scale-125 p-1 bg-sky-100 rounded text-black mx-2 mt-1 cursor-pointer material-symbols-outlined"
-                                    onClick={this.handleInputNameState}>save</button>
+                                    onClick={this.handleInputNameDisabled}>save</button>
                             )}
                         </form>
                         <form className="flex w-full justify-center" onSubmit={this.handleUserEmailSubmit}>
@@ -211,47 +211,47 @@ class SettingsAccountPage extends React.Component {
                                 placeholder="Enter new email"
                                 id="updateEmail"
                                 title="Please use @ and . on your email"
-                                disabled={(this.state.inputEmailState) ? "disabled" : ""}
+                                disabled={(this.state.inputEmailDisabled) ? "disabled" : ""}
                                 className="h-10 rounded text-slate-800 text-base pl-2 w-64"
                                 defaultValue={user.email}
                             />
-                            {this.state.toggleButtonFormEmail === "open" && (
+                            {this.state.buttonFormEmail === "open" && (
                                 <span
                                     className="self-start scale-125 p-1 bg-sky-100 rounded text-black mx-2 mt-1 cursor-pointer material-symbols-outlined cursor-pointer"
-                                    onClick={() => { this.handleInputEmailState(); this.handleToggleButtonFormEmail(); }}>edit</span>
+                                    onClick={() => { this.handleInputEmailDisabled(); this.handleButtonFormEmail(); }}>edit</span>
                             )}
-                            {this.state.toggleButtonFormEmail === "close" && (
+                            {this.state.buttonFormEmail === "close" && (
                                 <button
                                     className="self-start scale-125 p-1 bg-sky-100 rounded text-black mx-2 mt-1 cursor-pointer material-symbols-outlined"
-                                    onClick={this.handleInputEmailState}>save</button>
+                                    onClick={this.handleInputEmailDisabled}>save</button>
                             )}
                         </form>
                         <form className="flex w-full justify-center" onSubmit={this.handleUserPasswordSubmit}>
                             <label htmlFor="updatePassword"></label>
                             <input
                                 name='password'
-                                type={this.state.showPasswordText ? 'password' : 'text'}
+                                type={this.state.inputPasswordText ? 'password' : 'text'}
                                 placeholder="Enter new password"
                                 id="updatePassword"
                                 title="Please enter at least 8 characters without spaces"
-                                disabled={(this.state.inputPasswordState) ? "disabled" : ""}
+                                disabled={(this.state.inputPasswordDisabled) ? "disabled" : ""}
                                 className="h-10 rounded text-slate-800 text-base pl-2 w-64"
                             />
-                            {this.state.toggleButtonFormPassword === "open" && (
+                            {this.state.buttonFormPassword === "open" && (
                                 <span
                                     className="self-start scale-125 p-1 bg-sky-100 rounded text-black mx-2 mt-1 cursor-pointer material-symbols-outlined cursor-pointer"
-                                    onClick={() => { this.handleInputPasswordState(); this.handleToggleButtonFormPassword(); }}>edit</span>
+                                    onClick={() => { this.handleInputPasswordDisabled(); this.handleButtonFormPassword(); }}>edit</span>
                             )}
-                            {this.state.toggleButtonFormPassword === "close" && (
+                            {this.state.buttonFormPassword === "close" && (
                                 <button
                                     className="self-start scale-125 p-1 bg-sky-100 rounded text-black mx-2 mt-1 cursor-pointer material-symbols-outlined"
-                                    onClick={this.handleInputPasswordState}>save</button>
+                                    onClick={this.handleInputPasswordDisabled}>save</button>
                             )}
                         </form>
                         <span className="flex">
                             <input
                                 type="checkbox"
-                                onChange={this.handleShowPasswordText} />
+                                onChange={this.handleInputPasswordText} />
                             <label className="text-xs mx-2 my-3">Show password</label>
                         </span>
                     </div>
