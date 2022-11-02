@@ -49,6 +49,7 @@ class Tasks extends React.Component {
                             task={task}
                             onDeleteTask={this.handleRefreshTasks}
                             onUpdateTaskStatus={this.handleRefreshTasks}
+                            alternateStatuses={['DOING', 'DONE']}
                         />
                     )}
                 </section>
@@ -59,6 +60,7 @@ class Tasks extends React.Component {
                         task={task}
                         onDeleteTask={this.handleRefreshTasks}
                         onUpdateTaskStatus={this.handleRefreshTasks}
+                        alternateStatuses={['TODO', 'DONE']}
                     />)}
                 </section>
                 <section className="border-2 p-2">
@@ -68,6 +70,7 @@ class Tasks extends React.Component {
                         task={task}
                         onDeleteTask={this.handleRefreshTasks}
                         onUpdateTaskStatus={this.handleRefreshTasks}
+                        alternateStatuses={['TODO', 'DOING']}
                     />)}
                 </section>
             </div>

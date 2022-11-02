@@ -7,25 +7,13 @@ function Header(props) {
     //     log('INFO', 'Header -> componentDidMount')
     // }
 
-    // React.useEffect(() => log('INFO', 'Header -> effect "componentDidMount"'), [])
-
     // componentWillUnmount() {
     //     log('INFO', 'Header -> componentWillUnmount')
     // }
 
-    // React.useEffect(() => () => log('INFO', 'Header -> effect "componentWillUnmount"'), [])
-
-    React.useEffect(() => {
-        log('INFO', 'Header -> effect "componentDidMount"')
-
-        return () => log('INFO', 'Header -> effect "componentWillUnmount"')
-    }, [])
-
     // componentWillReceiveProps() {
     //     log('INFO', 'Header -> componentWillReceiveProps')
     // }
-
-    React.useEffect(() => log('INFO', 'Header -> effect "componentWillReceiveProps"'), [props])
 
     const handleNavigateToTasks = event => {
         log('INFO', 'Header -> handleNavigateToTasks')
