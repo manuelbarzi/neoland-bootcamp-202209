@@ -13,7 +13,9 @@ function Task(props) {
                     className="text-black bg-inherit self-end font-normal text-base"
                     onChange={(event) => props.handleUpdateTaskStatus(props.task.id, event.target.value)}>
                     <option disabled selected hidden value=''>
-                        Estado
+                        {props.task.status === 'todo' ? 'Pendiente' :
+                            props.task.status === 'doing' ? 'En proceso' :
+                                props.task.status === 'done' ? 'Hecho' : 'Estado'}
                     </option>
                     <option value={props.task.status === 'todo' ? 'doing' : 'todo'}>
                         {props.task.status === 'todo' ? 'En Proceso' : 'Pendiente'}
