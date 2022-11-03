@@ -4,20 +4,20 @@
 const { useState, useEffect } = React
 
 function Header(props) {
-    log('INFO', 'Header -> render')
+    log.info('Header -> render')
 
     const [toggleButtonText, setToggleButtonText] = useState('menu')
 
     useEffect(() => {
-        log('INFO', 'Header -> effect "componentDidMount"')
+        log.info('Header -> effect "componentDidMount"')
 
-        return () => log('INFO', 'Header -> effect "componentWillUnmount"')
+        return () => log.info('Header -> effect "componentWillUnmount"')
     }, [])
 
-    useEffect(() => log('INFO', 'Header -> effect "componentWillReceiveProps"'), [props])
+    useEffect(() => log.info('Header -> effect "componentWillReceiveProps"'), [props])
 
     const handleNavigateToTasks = event => {
-        log('INFO', 'Header -> handleNavigateToTasks')
+        log.info('Header -> handleNavigateToTasks')
 
         event.preventDefault()
 
@@ -27,7 +27,7 @@ function Header(props) {
     }
 
     const handleAddTask = () => {
-        log('INFO', 'Header -> handleAddTask')
+        log.info('Header -> handleAddTask')
 
         try {
             createTask(user.email)
@@ -40,13 +40,13 @@ function Header(props) {
     }
 
     const handleToggleMenu = () => {
-        log('INFO', 'Header -> handleToggleMenu')
+        log.info('Header -> handleToggleMenu')
 
         setToggleButtonText(toggleButtonText === 'menu' ? 'close' : 'menu')
     }
 
     const handleNavigateToSettings = event => {
-        log('INFO', 'Header -> handleNavigateToSettings')
+        log.info('Header -> handleNavigateToSettings')
 
         event.preventDefault()
 
@@ -56,7 +56,7 @@ function Header(props) {
     }
 
     const handleLogout = () => {
-        log('INFO', 'Header -> handleLogout')
+        log.info('Header -> handleLogout')
 
         props.onLogout()
     }

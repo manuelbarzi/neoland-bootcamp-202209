@@ -18,24 +18,23 @@ function log(level, message) {
 }
 
 log.on = true
-log.level = 'DEBUG'
 
 log.debug = function (message) {
-    this.on && this.level === 'DEBUG' && this('DEBUG', message)
+    this.on && this('DEBUG', message)
 }
 
 log.info = function (message) {
-    this.on && (this.level === 'DEBUG' || this.level === 'INFO') && this('INFO', message)
+    this.on && this('INFO', message)
 }
 
 log.warn = function (message) {
-    this.on && (this.level === 'DEBUG' || this.level === 'INFO' || this.level === 'WARN') && this('WARN', message)
+    this.on && this('WARN', message)
 }
 
 log.error = function (message) {
-    this.on && (this.level === 'DEBUG' || this.level === 'INFO' || this.level === 'WARN' || this.level === 'ERROR') && this('ERROR', message)
+    this.on && this('ERROR', message)
 }
 
 log.fatal = function (message) {
-    this.on && (this.level === 'DEBUG' || this.level === 'INFO' || this.level === 'WARN' || this.level === 'ERROR' || this.level === 'FATAL') && this('FATAL', message)
+    this.on && this('FATAL', message)
 }

@@ -1,8 +1,8 @@
 function Settings() {
-    log('INFO', 'Settings -> render')
+    log.info('Settings -> render')
 
     const handleUpdateUserEmail = event => {
-        log('INFO', 'Settings -> handleUpdateUserEmail')
+        log.info('Settings -> handleUpdateUserEmail')
 
         event.preventDefault()
 

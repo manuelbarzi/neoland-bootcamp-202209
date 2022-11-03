@@ -1,21 +1,21 @@
 const { useState, useEffect } = React
 
 function Home(props) {
-    log('INFO', 'Home -> render')
+    log.info('Home -> render')
 
     const [view, setView] = useState('tasks')
     const [timestamp, setTimestamp] = useState(Date.now())
 
     useEffect(() => {
-        log('INFO', 'Home -> effect "componentDidMount"')
+        log.info('Home -> effect "componentDidMount"')
 
-        return () => log('INFO', 'Home -> effect "componentWillUnmount"')
+        return () => log.info('Home -> effect "componentWillUnmount"')
     }, [])
 
-    useEffect(() => log('INFO', 'Home -> effect "componentWillReceiveProps"'), [props])
+    useEffect(() => log.info('Home -> effect "componentWillReceiveProps"'), [props])
 
     const handleLogout = () => {
-        log('INFO', 'Home -> handleLogout')
+        log.info('Home -> handleLogout')
 
         user = null
 
@@ -23,19 +23,19 @@ function Home(props) {
     }
 
     const handleAddTask = () => {
-        log('INFO', 'Home -> handleAddTask')
+        log.info('Home -> handleAddTask')
 
         setTimestamp(Date.now())
     }
 
     const handleNavigateToSettings = () => {
-        log('INFO', 'Home -> handleNavigateToSettings')
+        log.info('Home -> handleNavigateToSettings')
 
         setView('settings')
     }
 
     const handleNavigateToTasks = () => {
-        log('INFO', 'Home -> handleNavigateToTasks')
+        log.info('Home -> handleNavigateToTasks')
 
         setView('tasks')
     }
