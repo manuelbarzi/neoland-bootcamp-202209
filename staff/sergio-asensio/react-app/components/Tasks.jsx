@@ -1,68 +1,67 @@
+const { useState, useEffect } = React
+
 function Tasks(props) {
-    log('INFO', 'Tasks -> render')
+    log.info('Tasks -> render')
 
-    const handleUpdateTaskText = (taskId, newText) => {
-        log('INFO', 'Tasks -> handleUpdateTaskText')
+    const [tasks, setTasks] = useState([])
 
-        props.onUpdateTaskText(taskId, newText)
-    }
+    useEffect(() => {
+        log.info('Tasks -> effect "componentDidMount"')
 
-    const handleDeleteTask = taskId => {
-        log('INFO', 'Tasks -> handleDeleteTask')
+        //handleRefreshTasks()
 
-        props.onDeleteTask(taskId)
-    }
+        return () => log.info('Tasks -> effect "componentWillUnmount"')
+    }, [])
 
-    const handleUpdateTaskStatus = (taskId, newStatus) => {
-        log('INFO', 'Tasks -> handleUpdateTaskStatus')
+    useEffect(() => {
+        log.info('Tasks -> effect "componentWillReceiveProps"')
 
-        props.onUpdateTaskStatus(taskId, newStatus)
+        handleRefreshTasks()
+    }, [props])
+
+    const handleRefreshTasks = () => {
+        log.info('Tasks -> handleRefreshTasks')
+
+        try {
+            const tasks = retrieveTasks(user.email)
+
+            setTasks(tasks)
+        } catch (error) {
+            alert(error.message)
+        }
     }
 
     return <section className="flex flex-col items-center">
         <h2>Tasks</h2>
         <div className="flex flex-col sm:flex-row gap-4">
-            <section className="flex flex-col gap-2 border-2 p-2">
+            <section className="flex flex-col gap-2 border-2 p-2 rounded-xl">
                 <h2>TODO</h2>
-                {props.tasks.filter(task => task.status === 'todo').map(task => <article key={task.id} className="border-2 p-1">
-                    <p suppressContentEditableWarning={true} contentEditable="true" onKeyUp={event => handleUpdateTaskText(task.id, event.target.innerText)}>{task.text}</p>
-
-                    <button className="material-symbols-outlined" onClick={() => handleDeleteTask(task.id)}>delete</button>
-
-                    <select className="material-symbols-outlined" onChange={event => handleUpdateTaskStatus(task.id, event.target.value)} defaultValue="">
-                        <option disabled hidden className="text-sm" value="">width_normal</option>
-                        <option value="doing">DOING</option>
-                        <option value="done">DONE</option>
-                    </select>
-                </article>)}
+                {tasks.filter(task => task.status === 'todo').map(task =>
+                    <Task
+                        key={task.id}
+                        task={task}
+                        onDeleteTask={handleRefreshTasks}
+                        onUpdateTaskStatus={handleRefreshTasks}
+                    />
+                )}
             </section>
-            <section className="border-2 p-2">
+            <section className="flex flex-col gap-2 border-2 p-2 rounded-xl">
                 <h2>DOING</h2>
-                {props.tasks.filter(task => task.status === 'doing').map(task => <article key={task.id} className="border-2 p-1">
-                    <p suppressContentEditableWarning={true} contentEditable="true" onKeyUp={event => handleUpdateTaskText(task.id, event.target.innerText)}>{task.text}</p>
-
-                    <button className="material-symbols-outlined" onClick={() => handleDeleteTask(task.id)}>delete</button>
-
-                    <select className="material-symbols-outlined" onChange={event => handleUpdateTaskStatus(task.id, event.target.value)} defaultValue="">
-                        <option disabled hidden className="text-sm" value="">width_normal</option>
-                        <option value="todo">TODO</option>
-                        <option value="done">DONE</option>
-                    </select>
-                </article>)}
+                {tasks.filter(task => task.status === 'doing').map(task => <Task
+                    key={task.id}
+                    task={task}
+                    onDeleteTask={handleRefreshTasks}
+                    onUpdateTaskStatus={handleRefreshTasks}
+                />)}
             </section>
-            <section className="border-2 p-2">
+            <section className="flex flex-col gap-2 border-2 p-2 rounded-xl">
                 <h2>DONE</h2>
-                {props.tasks.filter(task => task.status === 'done').map(task => <article key={task.id} className="border-2 p-1">
-                    <p suppressContentEditableWarning={true} contentEditable="true" onKeyUp={event => handleUpdateTaskText(task.id, event.target.innerText)}>{task.text}</p>
-
-                    <button className="material-symbols-outlined" onClick={() => handleDeleteTask(task.id)}>delete</button>
-
-                    <select className="material-symbols-outlined" onChange={event => handleUpdateTaskStatus(task.id, event.target.value)} defaultValue="">
-                        <option disabled hidden className="text-sm" value="">width_normal</option>
-                        <option value="todo">TODO</option>
-                        <option value="doing">DOING</option>
-                    </select>
-                </article>)}
+                {tasks.filter(task => task.status === 'done').map(task => <Task
+                    key={task.id}
+                    task={task}
+                    onDeleteTask={handleRefreshTasks}
+                    onUpdateTaskStatus={handleRefreshTasks}
+                />)}
             </section>
         </div>
     </section>

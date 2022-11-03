@@ -1,144 +1,56 @@
-class Home extends React.Component {
-    constructor() {
-        log('INFO', 'Home -> constructor')
+const { useState, useEffect } = React
 
-        super()
+function Home(props) {
+    log.info('Home -> render')
 
-        this.state = {
-            tasks: [],
-            view: 'tasks'
-        }
-    }
+    const [view, setView] = useState('tasks')
+    const [timestamp, setTimestamp] = useState(Date.now())
 
-    componentWillUnmount() {
-        log('INFO', 'Home -> componentWillUnmount')
-    }
+    useEffect(() => {
+        log.info('Home -> effect "componentDidMount"')
 
-    handleLogout = () => {
-        log('INFO', 'Home -> handleLogout')
+        return () => log.info('Home -> effect "componentWillUnmount"')
+    }, [])
+
+    useEffect(() => log.info('Home -> effect "componentWillReceiveProps"'), [props])
+
+    const handleLogout = () => {
+        log.info('Home -> handleLogout')
 
         user = null
 
-        this.props.onLogout()
+        props.onLogout()
     }
 
-    componentDidMount() {
-        log('INFO', 'Home -> componentDidMount')
+    const handleAddTask = () => {
+        log.info('Home -> handleAddTask')
 
-        try {
-            const tasks = retrieveTasks(user.email)
-
-            this.setState({ tasks })
-        } catch (error) {
-            alert(error.message)
-        }
+        setTimestamp(Date.now())
     }
 
-    handleUpdateTaskText = (taskId, newText) => {
-        log('INFO', 'Home -> handleUpdateTaskText')
+    const handleNavigateToSettings = () => {
+        log.info('Home -> handleNavigateToSettings')
 
-        try {
-            updateTaskText(user.email, taskId, newText)
-        } catch (error) {
-            alert(error.message)
-        }
+        setView('settings')
     }
 
-    handleDeleteTask = taskId => {
-        log('INFO', 'Home -> handleDeleteTask')
+    const handleNavigateToTasks = () => {
+        log.info('Home -> handleNavigateToTasks')
 
-        try {
-            deleteTask(user.email, taskId)
-
-            const tasks = retrieveTasks(user.email)
-
-            this.setState({ tasks })
-        } catch (error) {
-            alert(error.message)
-        }
+        setView('tasks')
     }
 
-    handleAddTask = () => {
-        log('INFO', 'Home -> handleAddTask')
+    return <main className="h-full w-full">
+        <Header
+            onNavigateToTasks={handleNavigateToTasks}
+            onAddTask={handleAddTask}
+            onNavigateToSettings={handleNavigateToSettings}
+            onLogout={handleLogout}
+            view={view}
+        />
 
-        try {
-            createTask(user.email)
-            
-            const tasks = retrieveTasks(user.email)
+        {view === 'tasks' && <Tasks />}
 
-            this.setState({ tasks })
-        } catch (error) {
-            alert(error.message)
-        }
-    }
-
-    handleNavigateToSettings = () => {
-        log('INFO', 'Home -> handleNavigateToSettings')
-
-        this.setState({ view: 'settings' })
-    }
-
-    handleUpdateUserEmail = event => {
-        log('INFO', 'Home -> handleUpdateUserEmail')
-
-        event.preventDefault()
-
-        try {
-            const newEmail = event.target.email.value
-
-            updateUserEmail(user.email, newEmail)
-
-            alert('E-mail updated')
-        } catch (error) {
-            alert(error.message)
-        }
-    }
-
-    handleUpdateTaskStatus = (taskId, newStatus) => {
-        log('INFO', 'Home -> handleUpdateTaskStatus')
-
-        try {
-            updateTaskStatus(user.email, taskId, newStatus)
-
-            const tasks = retrieveTasks(user.email)
-
-            this.setState({ tasks })
-        } catch (error) {
-            alert(error.message)
-        }
-    }
-
-    handleNavigateToTasks = () => {
-        log('INFO', 'Home -> handleNavigateToTasks')
-
-        this.setState({ view: 'tasks' })
-    }
-
-    render() {
-        log('INFO', 'Home -> render')
-
-        return <main className="h-full w-full">
-            <Header
-                onNavigateToTasks={this.handleNavigateToTasks}
-                onAddTask={this.handleAddTask}
-                onNavigateToSettings={this.handleNavigateToSettings}
-                onLogout={this.handleLogout}
-                view={this.state.view}
-            />
-
-            {this.state.view === 'tasks' && <Tasks
-                tasks={this.state.tasks}
-                onUpdateTaskText={this.handleUpdateTaskText}
-                onDeleteTask={this.handleDeleteTask}
-                onUpdateTaskStatus={this.handleUpdateTaskStatus}
-            />}
-
-            {this.state.view === 'settings' && <Settings
-                settings={this.state.settings}
-            
-            
-            
-            />}
-        </main>
-    }
+        {view === 'settings' && <Settings />}
+    </main>
 }

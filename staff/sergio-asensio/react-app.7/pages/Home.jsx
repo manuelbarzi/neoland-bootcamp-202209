@@ -78,14 +78,10 @@ class Home extends React.Component {
         this.setState({ view: 'settings' })
     }
 
-    handleUpdateUserEmail = event => {
+    handleUpdateUserEmail = newEmail => {
         log('INFO', 'Home -> handleUpdateUserEmail')
 
-        event.preventDefault()
-
         try {
-            const newEmail = event.target.email.value
-
             updateUserEmail(user.email, newEmail)
 
             alert('E-mail updated')
@@ -133,14 +129,7 @@ class Home extends React.Component {
                 onUpdateTaskStatus={this.handleUpdateTaskStatus}
             />}
 
-            {this.state.view === 'settings' && <section className="flex flex-col items-center">
-                <h2>Settings</h2>
-                <form className="flex flex-col" onSubmit={this.handleUpdateUserEmail}>
-                    <label htmlFor="email">E-mail</label>
-                    <input name="email" type="email" id="email" placeholder="input an email" defaultValue={user.email} />
-                    <button>Save</button>
-                </form>
-            </section>}
+            {this.state.view === 'settings' && <Settings onUpdateUserEmail={this.handleUpdateUserEmail} />}
         </main>
     }
 }

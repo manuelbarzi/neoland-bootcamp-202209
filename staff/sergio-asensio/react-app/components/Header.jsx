@@ -1,80 +1,83 @@
-class Header extends React.Component {
-    constructor() {
-        log('INFO', 'Header -> constructor')
+// const useState = React.useState
+// const useEffect = React.useEffect
 
-        super()
+const { useState, useEffect } = React
 
-        this.state = {
-            toggleButtonText: 'menu'
+function Header(props) {
+    log.info('Header -> render')
+
+    const [toggleButtonText, setToggleButtonText] = useState('menu')
+
+    useEffect(() => {
+        log.info('Header -> effect "componentDidMount"')
+
+        return () => log.info('Header -> effect "componentWillUnmount"')
+    }, [])
+
+    useEffect(() => log.info('Header -> effect "componentWillReceiveProps"'), [props])
+
+    const handleNavigateToTasks = event => {
+        log.info('Header -> handleNavigateToTasks')
+
+        event.preventDefault()
+
+        setToggleButtonText('menu')
+
+        props.onNavigateToTasks()
+    }
+
+    const handleAddTask = () => {
+        log.info('Header -> handleAddTask')
+
+        try {
+            createTask(user.email)
+
+            props.onAddTask()
+        } catch (error) {
+            alert(error.message)
         }
+
     }
 
-    componentDidMount() {
-        log('INFO', 'Header -> componentDidMount')
+    const handleToggleMenu = () => {
+        log.info('Header -> handleToggleMenu')
+
+        setToggleButtonText(toggleButtonText === 'menu' ? 'close' : 'menu')
     }
 
-    componentWillUnmount() {
-        log('INFO', 'Header -> componentWillUnmount')
-    }
-
-    handleNavigateToTasks = event => {
-        log('INFO', 'Header -> handleNavigateToTasks')
+    const handleNavigateToSettings = event => {
+        log.info('Header -> handleNavigateToSettings')
 
         event.preventDefault()
 
-        this.props.onNavigateToTasks()
+        setToggleButtonText('menu')
+
+        props.onNavigateToSettings()
     }
 
-    handleAddTask = () => {
-        log('INFO', 'Header -> handleAddTask')
-        
-        this.props.onAddTask()
+    const handleLogout = () => {
+        log.info('Header -> handleLogout')
+
+        props.onLogout()
     }
 
-    handleToggleMenu = () => {
-        log('INFO', 'Header -> handleToggleMenu')
+    return <header className="flex flex-col">
+        <div className="flex justify-between">
+            <a href="" onClick={handleNavigateToTasks}><img src="https://fakeimg.pl/50x25/?text=hola%20mundo&amp;font=lobster" /></a>
 
-        this.setState({ toggleButtonText: this.state.toggleButtonText === 'menu' ? 'close' : 'menu' })
-    }
+            <span>{user && user.name}</span>
 
+            {props.view === 'tasks' && <button className="material-symbols-outlined" onClick={handleAddTask}>add</button>}
 
-    handleNavigateToSettings = event => {
-        log('INFO', 'Header -> handleNavigateToSettings')
+            <button className="material-symbols-outlined" onClick={handleToggleMenu}>{toggleButtonText}</button>
+        </div>
 
-        event.preventDefault()
+        {
+            toggleButtonText === 'close' && <div className="flex flex-col items-center">
+                <a className="material-symbols-outlined" href="" onClick={handleNavigateToSettings}>settings</a>
 
-        this.setState({ toggleButtonText: 'menu' })
-
-        this.props.onNavigateToSettings()
-    }
-
-    handleLogout = () => {
-        log('INFO', 'Header -> handleLogout')
-
-        this.props.onLogout()
-    }
-
-    render() {
-        log('INFO', 'Header -> render')
-
-        return <header className="flex flex-col">
-            <div className="flex justify-between">
-                <a href="" onClick={this.handleNavigateToTasks}><img src="https://fakeimg.pl/50x25/?text=hola%20mundo&amp;font=lobster" /></a>
-
-                <span>{user && user.name}</span>
-
-                {this.props.view === 'tasks' && <button className="material-symbols-outlined" onClick={this.handleAddTask}>add</button>}
-
-                <button className="material-symbols-outlined" onClick={this.handleToggleMenu}>{this.state.toggleButtonText}</button>
+                <button className="material-symbols-outlined" onClick={handleLogout}>logout</button>
             </div>
-
-            {
-                this.state.toggleButtonText === 'close' && <div className="flex flex-col items-center">
-                    <a className="material-symbols-outlined" href="" onClick={this.handleNavigateToSettings}>settings</a>
-                    
-                    <button className="material-symbols-outlined" onClick={this.handleLogout}>logout</button>
-                </div>
-            }
-        </header>
-    }
+        }
+    </header>
 }
