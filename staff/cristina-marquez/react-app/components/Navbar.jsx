@@ -1,73 +1,78 @@
-class Navbar extends React.Component {
-    constructor() {
-        super()
+const { useState, useEffect } = React
 
-        this.state = {
-            toggleButtonText: 'menu'
-        }
+function Navbar(props) {
 
+
+    const [toggleButtonText, setToggleButtonText] = useState('menu')
+
+
+
+    useEffect(() => {
+        log('INFO', 'componentDidMount')
+
+        return () => log('INFO', 'componentWillUnmount')
+    }, [])
+
+    useEffect(() => log('INFO', 'componentWillReceiveProps'), [props])
+
+
+    const handleToggleMenu = () => {
+
+        setToggleButtonText(toggleButtonText === 'menu' ? 'close' : 'menu')
     }
 
-
-    componentDidMount() {
-        log('INFO', 'Header -> componentDidMount')
-    }
-
-    componentWillUnmount() {
-        log('INFO', 'Header -> componentWillUnmount')
-    }
-
-    handleToggleMenu = () => this.setState({ toggleButtonText: this.state.toggleButtonText === 'menu' ? 'close' : 'menu' })
-
-    handleNavigateToTasks = event => {
-        log('INFO', 'Header -> handleNavigateToTasks')
+    const handleNavigateToTasks = event => {
+        log('INFO', 'handleNavigateToTasks')
 
         event.preventDefault()
 
-        this.props.onNavigateToTasks()
+        setToggleButtonText('menu')
+
+        props.onNavigateToTasks()
     }
 
 
 
-    handleNavigateToSettings = event => {
+    const handleNavigateToSettings = event => {
         console.log('Navigating to settings')
         event.preventDefault()
 
-        this.setState({ toggleButtonText: 'menu' })
-        this.props.onNavigateToSettings()
-    }
-
-    handleCreateTask = () => {
-
-        this.props.onAddTask()
-
-    }
-
-    handleLogout = () => {
-        this.props.onLoggedOut()
+        setToggleButtonText('menu')
+        props.onNavigateToSettings()
     }
 
 
+    const handleCreateTask = () => {
+        createTask(user.email)
 
-    render() {
-        return <header className="fixed flex justify-between bg-pink-600 w-full">
-            <div className="homepage-header-left-group">
-                <span className="material-symbols-outlined header-icons text-white">home</span>
+        props.onAddTask()
+    }
+
+    const handleLogout = () => {
+        props.onLoggedOut()
+    }
+
+
+
+
+    return <header className="fixed flex justify-between bg-pink-600 w-full">
+        <div className="homepage-header-left-group">
+            <span className="material-symbols-outlined header-icons text-white">home</span>
+        </div>
+        <div className="homepage-header-right-group">
+            <span id="username-header-span" className="text-white">{user && user.name}</span>
+            <span className="material-symbols-outlined header-icons text-white" onClick={handleCreateTask}>add</span>
+            <span className="material-symbols-outlined header-icons text-white" onClick={handleToggleMenu}>{toggleButtonText}</span>
+        </div>
+
+        {
+            toggleButtonText === 'close' && <div className="flex flex-col items-center text-white">
+                <a className="material-symbols-outlined text-white" href="" onClick={handleNavigateToSettings}>settings</a>
+                <button className="material-symbols-outlined text-white" onClick={handleLogout}>logout</button>
             </div>
-            <div className="homepage-header-right-group">
-                <span id="username-header-span" className="text-white">{user && user.name}</span>
-                <span className="material-symbols-outlined header-icons text-white" onClick={this.handleCreateTask}>add</span>
-                <span className="material-symbols-outlined header-icons text-white" onClick={this.handleToggleMenu}>{this.state.toggleButtonText}</span>
-            </div>
+        }
+    </header >
 
-            {
-                this.state.toggleButtonText === 'close' && <div className="flex flex-col items-center text-white">
-                    <a className="material-symbols-outlined text-white" href="" onClick={this.handleNavigateToSettings}>settings</a>
-                    <button className="material-symbols-outlined text-white" onClick={this.handleLogout}>logout</button>
-                </div>
-            }
-        </header >
 
-    }
 
 }

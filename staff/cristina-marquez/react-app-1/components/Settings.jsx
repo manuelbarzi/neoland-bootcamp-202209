@@ -3,7 +3,6 @@ function Settings() {
 
 
 
-
     return <section className="flex flex-col items-center">
         <h2>Settings</h2>
         <form className="flex flex-col" onSubmit={() => { }}>

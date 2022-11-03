@@ -1,32 +1,4 @@
-function RegisterPage(props) {
-
-    const handleRegister = event => {
-
-
-        event.preventDefault()
-
-        const form = event.target
-
-        const nameInput = form.name
-        const emailInput = form.email
-        const passwordInput = form.password
-
-        const name = nameInput.value
-        const email = emailInput.value
-        const password = passwordInput.value
-
-        try {
-            registerUser(name, email, password)
-
-            props.onRegister()
-        } catch (error) {
-            alert(error.message)
-
-            passwordInput.value = ''
-        }
-    }
-
-
+function RegisterPage() {
     return <main className="h-full w-full flex flex-col items-center justify-center bg-pink-600">
         <div className="bg-white flex flex-col border rounded-lg p-3 container-Flex">
             <form className="flex flex-col items-center justify-center gap-2 m-2 form">
@@ -36,7 +8,7 @@ function RegisterPage(props) {
                 <input type="email" name="email" placeholder="enter your email" className="border rounded-md" />
                 <label htmlFor="password" className="label">Your password</label>
                 <input type="password" placeholder="create a password" pattern="[a-z]{3}" required="" className="border rounded-md" />
-                <button className="bg-pink-500 hover:bg-pink-600 text-white p-2 rounded-lg text-sm button" onClick={handleRegister}>Create account</button>
+                <button className="bg-pink-500 hover:bg-pink-600 text-white p-2 rounded-lg text-sm button">Create account</button>
             </form>
         </div>
     </main>

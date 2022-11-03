@@ -1,101 +1,55 @@
-class HomePage extends React.Component {
-    constructor() {
+const { useState, useEffect } = React
 
-        super()
-        this.state = { view: "tasks" }
+function HomePage(props) {
+    const [view, setView] = useState("tasks")
+    //const [timestamp, setTimestamp] = useState(Date.now())
+    const [sensor, toggle] = useState(false)
 
-    }
-
-
-    componentDidMount() {
+    useEffect(() => {
         log('INFO', 'Home component mounted')
-        try {
-            const tasks = retrieveTasks(user.email)
+    }, [])
 
-            this.setState({ tasks })
-        } catch (error) {
-            alert(error.message)
-        }
+    const handleCreateTask = () => {
+        //setTimestamp(Date.now())
+
+        toggle(!sensor)
     }
 
+    const handleNavigateToTasks = () => {
 
-    handleCreateTask = () => {
-
-        try {
-            createTask(user.email)
-
-            const tasks = retrieveTasks(user.email)
-
-            this.setState({ tasks })
-        } catch (error) {
-            alert(error.message)
-        }
+        setView('tasks')
     }
 
-
-    handleUpdateTaskText = (taskId, newText) => {
-        try {
-            updateTaskText(user.email, taskId, newText)
-        } catch (error) {
-            alert(error.message)
-        }
-    }
-
-    handleUpdateTaskStatus = (taskId, newStatus) => {
-        try {
-
-            updateTaskStatus(taskId, newStatus)
-
-            const tasks = retrieveTasks(user.email)
-
-            this.setState({ tasks })
-        } catch (error) {
-            alert(error.message)
-        }
-    }
-
-    handleDeleteTask = (taskId) => {
-        try {
-            deleteTask(taskId)
-
-            const tasks = retrieveTasks(user.email)
-
-            this.setState({ tasks })
-        } catch (error) {
-            alert(error.message)
-        }
-    }
-
-    handleNavigateToSettings = () => {
+    const handleNavigateToSettings = () => {
         log('INFO', 'navigating to settings')
 
-        this.setState({ view: 'settings' })
+        setView('settings')
     }
 
-    handleLogout = () => {
+    const handleLogout = () => {
 
         user = null
 
-        this.props.onLoggedOut()
+        props.onLoggedOut()
     }
 
-    render() {
-        return <main className="min-h-screen">
+
+    return <main className="min-h-screen">
 
 
-            <Navbar
+        <Navbar
 
-                onAddTask={this.handleCreateTask}
-                onNavigateToSettings={this.handleNavigateToSettings}
-                onLoggedOut={this.handleLogout}
-                view={this.state.view}
-            />
-            {this.state.view === 'settings' && <Settings />}
-            {this.state.view === 'tasks' && <Tasks />}
+            onAddTask={handleCreateTask}
+            onNavigateToSettings={handleNavigateToSettings}
+            onNavigateToTasks={handleNavigateToTasks}
+            onLoggedOut={handleLogout}
+            view={view}
+        />
+        {view === 'settings' && <Settings />}
+        {view === 'tasks' && <Tasks />}
 
 
 
-        </main>
+    </main>
 
-    }
 }
