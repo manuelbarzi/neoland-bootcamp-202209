@@ -4,7 +4,6 @@ class Tasks extends React.Component {
 
         this.state = {
             tasks: [],
-            view: 'tasks'
         };
     }
 

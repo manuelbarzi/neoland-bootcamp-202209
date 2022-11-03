@@ -19,8 +19,8 @@ class App extends React.Component {
     // FORMS INFO VALUE
     handleInputEmailAndNameValue = (newValue) => {
         this.setState({
-            inputEmailValue: newValue,
-            inputNameValue: newValue.split('@')[0]
+            inputNameValue: newValue.split('@')[0],
+            inputEmailValue: newValue
         })
     }
 
