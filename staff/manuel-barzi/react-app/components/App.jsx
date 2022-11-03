@@ -1,51 +1,49 @@
-class App extends React.Component {
-    constructor() {
-        log('INFO', 'App -> constructor')
+const { useState, useEffect } = React
 
-        super()
+function App(props) {
+    log('INFO', 'App -> render')
 
-        this.state = { view: 'login' }
+    // const viewState = useState('login')
+    // const view = viewState[0]
+    // const setView = viewState[1]
 
-        // NOTE force user logged in already, to go faster to home page
-        // user = users[2]
-        // this.state = { view: 'home' }
-    }
+    const [view, setView] = useState('login')
 
-    componentDidMount() {
-        log('INFO', 'App -> componentDidMount')
-    }
+    // NOTE force user logged in already, to go faster to home page
+    // user = users[2]
+    // const [view, setView] = useState('home')
 
-    componentWillUnmount() {
-        log('INFO', 'App -> componentWillUnmount')
-    }
+    useEffect(() => {
+        log('INFO', 'App -> effect "componentDidMount"')
 
-    handleNavigateToRegister = () => {
+        return () => log('INFO', 'App -> effect "componentWillUnmount"')
+    }, [])
+
+    useEffect(() => log('INFO', 'App -> effect "componentWillReceiveProps"'), [props])
+
+    const handleNavigateToRegister = () => {
         log('INFO', 'App -> handleNavigateToRegister')
 
-        this.setState({ view: 'register' })
+        setView('register')
     }
 
-    handleNavigateToLogin = () => {
+    const handleNavigateToLogin = () => {
         log('INFO', 'App -> handleNavigateToLogin')
 
-        this.setState({ view: 'login' })
+        setView('login')
     }
 
-    handleNavigateToHome = () => {
+    const handleNavigateToHome = () => {
         log('INFO', 'App -> handleNavigateToHome')
 
-        this.setState({ view: 'home' })
+        setView('home')
     }
 
-    render() {
-        log('INFO', 'App -> render')
+    return <>
+        {view === 'login' && <Login onNavigateToRegister={handleNavigateToRegister} onLogin={handleNavigateToHome} />}
 
-        return <>
-            {this.state.view === 'login' && <Login onNavigateToRegister={this.handleNavigateToRegister} onLogin={this.handleNavigateToHome} />}
-            
-            {this.state.view === 'register' && <Register onNavigateToLogin={this.handleNavigateToLogin} onRegister={this.handleNavigateToLogin} />}
+        {view === 'register' && <Register onNavigateToLogin={handleNavigateToLogin} onRegister={handleNavigateToLogin} />}
 
-            {this.state.view === 'home' && <Home onLogout={this.handleNavigateToLogin} />}
-        </>
-    }
+        {view === 'home' && <Home onLogout={handleNavigateToLogin} />}
+    </>
 }

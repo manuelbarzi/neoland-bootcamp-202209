@@ -1,27 +1,36 @@
-// const useState = React.useState
-// const useEffect = React.useEffect
-
-const { useState, useEffect } = React
-
 function Header(props) {
     log('INFO', 'Header -> render')
 
-    const [toggleButtonText, setToggleButtonText] = useState('menu')
+    const [toggleButtonText, setToggleButtonText] = React.useState('menu')
 
-    useEffect(() => {
+    // componentDidMount() {
+    //     log('INFO', 'Header -> componentDidMount')
+    // }
+
+    // React.useEffect(() => log('INFO', 'Header -> effect "componentDidMount"'), [])
+
+    // componentWillUnmount() {
+    //     log('INFO', 'Header -> componentWillUnmount')
+    // }
+
+    // React.useEffect(() => () => log('INFO', 'Header -> effect "componentWillUnmount"'), [])
+
+    React.useEffect(() => {
         log('INFO', 'Header -> effect "componentDidMount"')
 
         return () => log('INFO', 'Header -> effect "componentWillUnmount"')
     }, [])
 
-    useEffect(() => log('INFO', 'Header -> effect "componentWillReceiveProps"'), [props])
+    // componentWillReceiveProps() {
+    //     log('INFO', 'Header -> componentWillReceiveProps')
+    // }
+
+    React.useEffect(() => log('INFO', 'Header -> effect "componentWillReceiveProps"'), [props])
 
     const handleNavigateToTasks = event => {
         log('INFO', 'Header -> handleNavigateToTasks')
 
         event.preventDefault()
-
-        setToggleButtonText('menu')
 
         props.onNavigateToTasks()
     }
@@ -44,6 +53,7 @@ function Header(props) {
 
         setToggleButtonText(toggleButtonText === 'menu' ? 'close' : 'menu')
     }
+
 
     const handleNavigateToSettings = event => {
         log('INFO', 'Header -> handleNavigateToSettings')
