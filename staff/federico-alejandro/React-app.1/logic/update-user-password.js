@@ -11,10 +11,11 @@
 
     if(Password === newPassword){
         alert('Your new password cannot be the same as your current password')
-
-        return
     
     }
-    
-    //throw new Error('user not found')
+    if (user.password === newPassword){
+        
+    }
+
+    throw new Error('user not found')
 }

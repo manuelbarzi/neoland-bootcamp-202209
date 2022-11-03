@@ -10,9 +10,9 @@
     if (HAS_SPACES_REGEX.test(newPassword)) throw new Error("password has spaces");
 
     if(Password === newPassword){
-        alert('Your new password cannot be the same as your current password')
+        throw new Error('Your new password cannot be the same as your current password')
 
-        return
+        
     
     }
     
