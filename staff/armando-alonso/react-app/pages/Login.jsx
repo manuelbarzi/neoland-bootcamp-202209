@@ -1,11 +1,10 @@
-function LoginPage(props) {
+function Login(props) {
 
     const handleClick = event => {
         event.preventDefault()
 
-        const onRegisterClick = props.onRegisterClick
-
-        onRegisterClick()
+        props.onRegisterClick()
+        
     }
 
     const handleSubmit = event => {
@@ -22,9 +21,7 @@ function LoginPage(props) {
         try {
             user = authenticateUser(email, password)
 
-            const onLoggedIn = props.onLoggedIn
-
-            onLoggedIn()
+            props.onLoggedIn()
 
         } catch (error) {
             alert(error.message)

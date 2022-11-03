@@ -13,16 +13,26 @@
 
     for (let i = 0; i < users.length; i++) {
         const user = users[i];
+
         if (user.email === newEmail) {
             throw new Error('The email ' + newEmail + ' already exists')
         }
     }
     for (let i = 0; i < users.length; i++) {
         const user = users[i];
+
         if (user.email === oldEmail) {
             user.email = newEmail
 
-            throw null
+            for (let j = 0; j < tasks.length; j++) {
+                const task = tasks[j]
+
+                if (task.user === oldEmail) {
+                    task.user = newEmail
+                }
+            }
+
+            return
         }
         
     }

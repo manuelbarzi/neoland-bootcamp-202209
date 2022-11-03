@@ -26,11 +26,9 @@ class App extends React.Component {
         log('INFO', 'App -> render')
 
         return <>
-            {this.state.view === 'login' && <LoginPage onRegisterClick={this.navigateToRegister} onLoggedIn={this.navigateToHome} />}
-            {this.state.view === 'register' && <RegisterPage onLoginClick={this.navigateToLogin} onRegister={this.navigateToLogin}/>}
-            {this.state.view === 'home' && <HomePage onLoggedOut={this.navigateToLogin} />}
+            {this.state.view === 'login' && <Login onRegisterClick={this.navigateToRegister} onLoggedIn={this.navigateToHome} />}
+            {this.state.view === 'register' && <Register onLoginClick={this.navigateToLogin} onRegister={this.navigateToLogin} />}
+            {this.state.view === 'home' && <Home onLogout={this.navigateToLogin} />}
         </>
     }
-
-
 }

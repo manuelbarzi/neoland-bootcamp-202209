@@ -1,4 +1,4 @@
-function RegisterPage(props) {
+function Register(props) {
 
     const handleClick = event => {
         event.preventDefault()
