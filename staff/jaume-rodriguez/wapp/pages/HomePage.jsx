@@ -1,41 +1,32 @@
-class HomePage extends React.Component {
-    constructor() {
-        log("INFO", "HomePage -> render");
-        super();
-    }
+function HomePage(props) {
 
     // HEADER LINKS BRIDGE
-    handleHomeLink = () => {
+    const handleHomeLink = () => {
         log("INFO", "Header Brige: handleHomeLink");
-        this.props.onHomeLink();
+        props.onHomeLink();
     };
 
     // TOGGLE MENU LINKS BRIDGE
-    handleSettingsLink = () => {
+    const handleSettingsLink = () => {
         log("INFO", "Header Brige: handleSettingsLink");
-        this.props.onSettingsAccountLink();
+        props.onSettingsAccountLink();
     };
 
-    handleLogoutLink = () => {
+    const handleLogoutLink = () => {
         log("INFO", "Header Brige: handleLogoutLink");
         user = null;
-        this.props.onLoggedoutLink();
+        props.onLoggedoutLink();
     };
 
-    // TASKS MANAGER
-
-
-    render() {
-        return (
-            <main className="min-h-screen bg-sky-500">
-                {/* HEADER */}
-                <Header
-                    onHomeLink={this.handleHomeLink}
-                    onSettingsAccountLink={this.handleSettingsLink}
-                    onLoggedoutLink={this.handleLogoutLink}
-                />
-                <Tasks />
-            </main>
-        );
-    }
+    return (
+        <main className="min-h-screen bg-sky-500">
+            {/* HEADER */}
+            <Header
+                onHomeLink={handleHomeLink}
+                onSettingsAccountLink={handleSettingsLink}
+                onLoggedoutLink={handleLogoutLink}
+            />
+            <Tasks />
+        </main>
+    );
 }

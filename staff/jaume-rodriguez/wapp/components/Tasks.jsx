@@ -16,8 +16,8 @@ function Tasks() {
 
         try {
             const tasks = retrieveTasks(user.id)
-            //setTasks({ tasks: tasks })
             setTasks(tasks)
+
         } catch (error) {
             alert(error.message)
         }
