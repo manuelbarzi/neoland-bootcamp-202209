@@ -36,8 +36,7 @@ function Task(props) {
     }
 
     
-
-    return <article key={props.task.id} className="rounded-lg border-2 p-1">
+    return <article  key={props.task.id} className="rounded-lg border-2 p-1">
         <p suppressContentEditableWarning={true} contentEditable="true" onKeyUp={event => handleUpdateTaskText(props.task.id, event.target.innerText)}>{props.task.text}</p>
         <div className="flex justify-between">
             <button className="material-symbols-outlined" onClick={() => handleDeleteTask(props.task.id)}>delete</button>

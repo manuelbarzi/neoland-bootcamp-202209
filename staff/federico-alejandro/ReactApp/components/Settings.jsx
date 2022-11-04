@@ -1,23 +1,18 @@
-class Settings extends React.Component {
-    constructor() {
-        log('INFO', 'Settings -> constructor')
+const { useState, useEffect } = React
 
-        super()
-        this.state = {
-            view: 'settings'
-        }
-    }
+function Settings() {
+    log.info('Settings -> constructor')
 
-    componentDidMount() {
-        log('INFO', 'Settings -> componentDidMount')
+    const [view, setView] = useState('settings')
 
-    }
-    componentWillUnmount() {
-        log('INFO', 'Settings -> componentWillUnMount')
-    }
+    useEffect(() => {
+        log.info('Settings -> componentDidMount')
 
-    handleUpdateUserEmail = event => {
-        log('INFO', 'Home -> handleUpdateUserEmail')
+        return () => log.info('Settings -> componentWillUnMount')
+    }, [])
+
+    const handleUpdateUserEmail = event => {
+        log.info('Settings -> handleUpdateUserEmail')
 
         event.preventDefault()
 
@@ -34,8 +29,8 @@ class Settings extends React.Component {
         }
     }
 
-    handleUpdateUserName = event => {
-        log('INFO', 'Settings -> handleUpdateUserName')
+    const handleUpdateUserName = event => {
+        log.info('Settings -> handleUpdateUserName')
 
         event.preventDefault()
 
@@ -52,8 +47,8 @@ class Settings extends React.Component {
         }
     }
 
-    handleUpdateUserPassword = event => {
-        log('INFO', 'Settings -> handleUpdateUserPassword')
+    const handleUpdateUserPassword = event => {
+        log.info('Settings -> handleUpdateUserPassword')
 
         event.preventDefault()
 
@@ -74,27 +69,25 @@ class Settings extends React.Component {
         }
     }
 
-    render() {
-        return <section className='flex flex-col items-center' >
-            <h2 className='font-extrabold text-2xl mb-3'>Settings</h2>
-            <div className='flex flex-col items-end border-8 p-3 border-blue-600 rounded-lg'>
-                <form className='block' onSubmit={this.handleUpdateUserEmail}>
-                    <label htmlFor='email' className='font-extrabold'>Email</label>
-                    <input name='email' type='email' id='email' placeholder=' input an email' defaultValue={user.email} className='m-3 border-b border-black w-50 rounded-md' />
-                    <button className='m-5 text-sm border-transparent rounded-md font-serif bg-blue-600 text-white w-14'>Save</button>
-                </form>
-                <form className='block' onSubmit={this.handleUpdateUserName}>
-                    <label htmlFor='name' className='font-extrabold'>Name</label>
-                    <input name='name' type='name' id='name' placeholder=' Name' defaultValue={user.name} className='m-3 border-b border-black w-50 rounded-md' />
-                    <button className='m-5 text-sm border-transparent rounded-md font-serif bg-blue-600 text-white w-14'>Save</button>
-                </form>
-                <form className='block' onSubmit={this.handleUpdateUserPassword}>
-                    <label htmlFor='password' className='font-extrabold'>Password</label>
-                    <input name='password' type='password' id='password' placeholder=' Input a new password' className='m-3 border-b border-black w-50 rounded-md' />
-                    <button className='m-5 text-sm border-transparent rounded-md font-serif bg-blue-600 text-white w-14'>Save</button>
-                </form>
-            </div>
-        </section>
-    }
-
+    return <section className='flex flex-col items-center' >
+        <h2 className='font-extrabold text-2xl mb-3'>Settings</h2>
+        <div className='flex flex-col items-end border-8 p-3 border-blue-600 rounded-lg'>
+            <form className='block' onSubmit={handleUpdateUserEmail}>
+                <label htmlFor='email' className='font-extrabold'>Email</label>
+                <input name='email' type='email' id='email' placeholder=' input an email' defaultValue={user.email} className='m-3 border-b border-black w-50 rounded-md' />
+                <button className='m-5 text-sm border-transparent rounded-md font-serif bg-blue-600 text-white w-14'>Save</button>
+            </form>
+            <form className='block' onSubmit={handleUpdateUserName}>
+                <label htmlFor='name' className='font-extrabold'>Name</label>
+                <input name='name' type='name' id='name' placeholder=' Name' defaultValue={user.name} className='m-3 border-b border-black w-50 rounded-md' />
+                <button className='m-5 text-sm border-transparent rounded-md font-serif bg-blue-600 text-white w-14'>Save</button>
+            </form>
+            <form className='block' onSubmit={handleUpdateUserPassword}>
+                <label htmlFor='password' className='font-extrabold'>Password</label>
+                <input name='password' type='password' id='password' placeholder=' Input a new password' className='m-3 border-b border-black w-50 rounded-md' />
+                <button className='m-5 text-sm border-transparent rounded-md font-serif bg-blue-600 text-white w-14'>Save</button>
+            </form>
+        </div>
+    </section>
 }
+

@@ -1,37 +1,42 @@
-class App extends React.Component {
-    constructor() {
-        log('INFO', 'App -> constructor')
+const { useState, useEffect } = React
 
-        super()
-        user = users[0]
-        this.state = { view: 'home' }
+function App(props) {
+    log.info('App -> render')
 
+    user = users[0] // forzar home con usuario
+    const [view, setView] = useState('home')
 
+    useEffect(() => {
+        log.info('App -> componentDidMount')
 
+        return () => log.info('App -> componentWillUnMount')
+    }, [])
+
+    useEffect(() => log.info('App -> effect "componentWillReceiveProps"'), [props])
+
+    const navigateToRegister = () => {
+        log.info('App -> navigateToRegister')
+
+        setView('register')
     }
-    componentDidMount() {
-        log('INFO', 'App -> componentDidMount')
 
+    const navigateToLogin = () => {
+        log.info('App -> navigateToLogin')
+
+        setView('login')
     }
-    componentWillUnmount() {
-        log('INFO', 'App -> componentWillUnMount')
+
+    const navigateToHome = () => {
+        log.info('App -> navigateToHome')
+
+        setView('home')
     }
-    navigateToRegister = () => this.setState({ view: 'register' })
 
-    navigateToLogin = () => this.setState({ view: 'login'})
+    return <> {/*si esto es cierto, entonces mostrame la login page*/}
+        {view === 'login' && <LoginPage onNavigateToRegister={navigateToRegister} onLogIn={navigateToHome} />}
+        {view === 'register' && <RegisterPage onNavigateToLogin={navigateToLogin} onRegisterUser={navigateToLogin} />}
+        {view === 'home' && <HomePage onLogout={navigateToLogin} />}
+        {/*{this.state.view === 'settings' && <SettingPage />}*/}
+    </>
 
-    navigateToHome = () => this.setState({ view: 'home'})
-
-
-
-    render() {
-        log('INFO', 'App -> redner')
-
-        return <> {/*si esto es cierto, entonces mostrame la login page*/}
-            {this.state.view === 'login' && <LoginPage onNavigateToRegister={this.navigateToRegister} onLogIn={this.navigateToHome} />}
-            {this.state.view === 'register' && <RegisterPage onNavigateToLogin={this.navigateToLogin} onRegisterUser={this.navigateToLogin} />}
-            {this.state.view === 'home' && <HomePage onLogout={this.navigateToLogin} />}
-            {/*{this.state.view === 'settings' && <SettingPage />}*/}
-        </>
-    }
 }

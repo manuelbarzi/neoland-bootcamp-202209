@@ -1,5 +1,5 @@
 function LoginPage(props) {
-    log('INFO', 'LoginPage -> render')
+    log.info('LoginPage -> render')
 
     const handleClick = event => {
         event.preventDefault()
@@ -23,9 +23,7 @@ function LoginPage(props) {
         try {
             user = authenticateUser(email, password)
 
-            const onLogIn = props.onLogIn
-
-            onLogIn()
+            props.onLogIn()
         } catch (error) {
             alert(error.message)
 

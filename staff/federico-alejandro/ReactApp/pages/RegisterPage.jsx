@@ -1,5 +1,5 @@
 function RegisterPage(props) {
-    log('INFO', 'RegisterPage -> render')
+    log.info('RegisterPage -> render')
 
     const handleClick = event => {
         event.preventDefault()

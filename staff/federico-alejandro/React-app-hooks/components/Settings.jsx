@@ -1,4 +1,4 @@
-const {useState, useEffect} = React
+const { useState, useEffect } = React
 
 function Settings() {
     log.info('Settings -> render')
@@ -10,7 +10,7 @@ function Settings() {
 
         return () => log.info('Settings -> effect "componentWillUnMount"')
     }, [])
-    
+
 
     const handleUpdateUserEmail = event => {
         log.info('Settings -> handleUpdateUserEmail')
@@ -52,7 +52,7 @@ function Settings() {
         log.info('Settings -> handleUpdateUserPassword')
 
         event.preventDefault()
-        
+
         const newPassword = event.target.password.value
         try {
 
@@ -68,30 +68,29 @@ function Settings() {
             alert(error.message)
             event.target.password.value = ''
         }
-        
+
     }
 
-    
-        return <section className='flex flex-col items-center mt-44' >
-            <h2 className='font-extrabold'>Settings</h2>
-            <div className='flex flex-col items-end'>
-                <form className='block' onSubmit={handleUpdateUserEmail}>
-                    <label htmlFor='email' className='font-extrabold'>Email</label>
-                    <input name='email' type='email' id='email' placeholder=' input an email' defaultValue={user.email} className='m-3 border-b border-black w-50 rounded-md' />
-                    <button className='m-5 text-sm border-transparent rounded-md font-serif bg-blue-500 w-14'>Save</button>
-                </form>
-                <form className='block' onSubmit={handleUpdateUserName}>
-                    <label htmlFor='name' className='font-extrabold'>Name</label>
-                    <input name='name' type='name' id='name' placeholder=' Name' defaultValue={user.name} className='m-3 border-b border-black w-50 rounded-md' />
-                    <button className='m-5 text-sm border-transparent rounded-md font-serif bg-blue-500 w-14'>Save</button>
-                </form>
-                <form className='block' onSubmit={handleUpdateUserPassword}>
-                    <label htmlFor='password' className='font-extrabold'>Password</label>
-                    <input name='password' type='password' id='password' placeholder=' Input a new password' className='m-3 border-b border-black w-50 rounded-md' />
-                    <button className='m-5 text-sm border-transparent rounded-md font-serif bg-blue-500 w-14'>Save</button>
-                </form>
-            </div>
-        </section>
-    
+    return <section className='flex flex-col items-center mt-44' >
+        <h2 className='font-extrabold'>Settings</h2>
+        <div className='flex flex-col items-end'>
+            <form className='block' onSubmit={handleUpdateUserEmail}>
+                <label htmlFor='email' className='font-extrabold'>Email</label>
+                <input name='email' type='email' id='email' placeholder=' input an email' defaultValue={user.email} className='m-3 border-b border-black w-50 rounded-md' />
+                <button className='m-5 text-sm border-transparent rounded-md font-serif bg-blue-500 w-14'>Save</button>
+            </form>
+            <form className='block' onSubmit={handleUpdateUserName}>
+                <label htmlFor='name' className='font-extrabold'>Name</label>
+                <input name='name' type='name' id='name' placeholder=' Name' defaultValue={user.name} className='m-3 border-b border-black w-50 rounded-md' />
+                <button className='m-5 text-sm border-transparent rounded-md font-serif bg-blue-500 w-14'>Save</button>
+            </form>
+            <form className='block' onSubmit={handleUpdateUserPassword}>
+                <label htmlFor='password' className='font-extrabold'>Password</label>
+                <input name='password' type='password' id='password' placeholder=' Input a new password' className='m-3 border-b border-black w-50 rounded-md' />
+                <button className='m-5 text-sm border-transparent rounded-md font-serif bg-blue-500 w-14'>Save</button>
+            </form>
+        </div>
+    </section>
+
 
 }

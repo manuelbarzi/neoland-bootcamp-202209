@@ -1,7 +1,7 @@
 const { useState, useEffect } = React
 
 function App(props) { // se extienden los componentes desde react
-    log('INFO', 'App -> render')
+    log.info('App -> render')
 
      user = users[0] //forzar home con usuario
      const [view, setView] = useState ('home')
@@ -9,29 +9,29 @@ function App(props) { // se extienden los componentes desde react
     //const [view, setView] = useState('login')
 
     useEffect(() => {
-        log('INFO', 'App -> effect "componentDidMount"')
+        log.info('App -> effect "componentDidMount"')
 
-        return () => log('INFO', 'App -> effect "componentWillUnmount"')
+        return () => log.info('App -> effect "componentWillUnmount"')
     }, [])
 
-    useEffect(() => log('INFO', 'App -> effect "componentWillReceiveProps"'), [props])
+    useEffect(() => log.info('App -> effect "componentWillReceiveProps"'), [props])
 
 
     const navigateToRegister = () => {
-        log('INFO', 'App -> navigateToRegister')
+        log.info('App -> navigateToRegister')
 
         setView('register')
 
     }
 
     const navigateToLogin = () => {
-        log('INFO', 'App -> navigateToLogin')
+        log.info('App -> navigateToLogin')
 
         setView('login')
     }
 
     const navigateToHome = () => {
-        log('INFO', 'App -> navigateToHome')
+        log.info('App -> navigateToHome')
 
         setView('home') //funciones ya bindeadas (funcion flecha)
     }
