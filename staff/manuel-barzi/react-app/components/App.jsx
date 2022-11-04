@@ -7,11 +7,11 @@ function App(props) {
     // const view = viewState[0]
     // const setView = viewState[1]
 
-    // const [view, setView] = useState('login')
+    const [view, setView] = useState('login')
 
     // NOTE force user logged in already, to go faster to home page
-    user = users[2]
-    const [view, setView] = useState('home')
+    // user = users[2]
+    // const [view, setView] = useState('home')
 
     useEffect(() => {
         log.info('App -> effect "componentDidMount"')
