@@ -1,0 +1,49 @@
+.robot-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.head {
+    background-color: burlywood;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.hat {
+    background-color: rgb(28, 27, 28);
+    height: 150px;
+    width: 100px;
+    border-radius: 150px 150px 0 0;
+}
+
+.mid-body {
+    display: flex;
+    flex-direction: row;
+}
+
+.chest {
+    background-color: rgb(229, 25, 25);
+    height: 300px;
+    width: 100px;
+}
+
+.arm {
+    background-color: rgb(209, 72, 60);
+    height: 100px;
+    width: 25px;
+}
+
+.lower-body {
+    display: flex;
+    flex-direction: row;
+    width: 100px;
+    justify-content: space-between;
+}
+
+.leg {
+    background-color: rgb(8, 7, 7);
+    height: 150px;
+    width: 40px;
+}

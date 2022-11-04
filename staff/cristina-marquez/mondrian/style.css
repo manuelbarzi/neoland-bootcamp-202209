@@ -1,0 +1,57 @@
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+div {
+    display: grid;
+    text-align: center;
+    grid-template-areas:
+        "a a b b b b"
+        "a a b b b b"
+        "a a b b b b"
+        "c c b b b b"
+        "c c b b b b"
+        "d d e e e f";
+}
+
+.art {
+    background-color: black;
+    gap: 20px;
+    border: 20px solid black;
+    height: 50vh;
+    width: 50vh;
+
+}
+
+
+.square:nth-child(1) {
+    grid-area: a;
+    background-color: yellow;
+}
+
+.square:nth-child(2) {
+    grid-area: b;
+    background-color: red;
+}
+
+.square:nth-child(3) {
+    grid-area: c;
+    background-color: white;
+}
+
+.square:nth-child(4) {
+    grid-area: d;
+    background-color: darkblue;
+}
+
+.square:nth-child(5) {
+    grid-area: e;
+    background-color: white;
+}
+
+.square:nth-child(6) {
+    grid-area: f;
+    background-color: white;
+}
