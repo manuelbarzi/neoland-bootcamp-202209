@@ -2,13 +2,19 @@ const { useState } = React
 
 function App() {
     const [view, setView] = useState('Search')
+    const [vehicle, setVehicle] = useState()
 
-    const navigateToDetail = () => setView('Detail')
+    const navigateToDetail = (vehicle) => {
+        setVehicle(vehicle)
+        setView('Detail')
+    }
 
     return <>
         {view === 'Search' && <Search
-            onVehicleClick={navigateToDetail}
+            onDetail={navigateToDetail}
         />}
-        {view === 'Detail' && <Detail />}
+        {view === 'Detail' && <Detail
+            vehicle={vehicle}
+        />}
     </>
 }
