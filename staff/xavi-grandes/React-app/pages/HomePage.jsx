@@ -66,8 +66,8 @@ class HomePage extends React.Component {
     }
   }
   
-  handleNavigateToSettings = event => {
-    event.preventDefault()
+  handleNavigateToSettings = () => {
+    log('INFO', 'Home -> handleNavigateToSettings')
 
     this.setState({view: 'settings'})
   }
@@ -105,12 +105,17 @@ class HomePage extends React.Component {
     }
   }
 
+  handleNavigateToTasks = () => {
+    log('INFO', 'Home -> handleNavigateToTasks')
+
+    this.setState({ view: 'tasks' })
+  }
+
   render() {
     log("INFO", "Home -> render");
 
     return <main className=" min-h-screen w-full h-full self-start">
         <Header 
-          onNavigateToHome={this.handleReturnHome}
           onNavigateToTasks={this.handleNavigateToTasks}
           onAddTask={this.handleAddTask}
           onNavigateToSettings={this.handleNavigateToSettings}
@@ -188,7 +193,7 @@ class HomePage extends React.Component {
           </div>
         </section>}
 
-        {this.state.view === 'settings' && <section className="flex flex-col items-center">
+        {/* { {this.state.view === 'settings' && <Settings /> /*<section className="flex flex-col items-center">
           <div className="m-4 rounded-xl bg-white border border-black ">
                 <h2 className="m-2 text-xl font-bold">Settings</h2>
                 <form className="mr-2 ml-2 flex flex-col" onSubmit={this.handleUpdateUserEmail}>
@@ -197,8 +202,8 @@ class HomePage extends React.Component {
                     <button className="bg-red-400 border border-black rounded-md w-32 m-2 self-center">Save</button>
                 </form>
           </div>
-            </section>}
-
+            </section>} */} */}
+          }
       </main>
   }
 }
