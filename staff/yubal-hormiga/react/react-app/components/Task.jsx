@@ -1,8 +1,8 @@
 function Task(props) {
-    log('INFO', 'Task -> render')
+    log.info('Task -> render')
 
     const handleUpdateTaskText = (taskId, newText) => {
-        log('INFO', 'Task -> handleUpdateTaskText')
+        log.info('Task -> handleUpdateTaskText')
 
         try {
             updateTaskText(user.email, taskId, newText)
@@ -12,7 +12,7 @@ function Task(props) {
     }
 
     const handleDeleteTask = taskId => {
-        log('INFO', 'Task -> handleDeleteTask')
+        log.info('Task -> handleDeleteTask')
 
         try {
             deleteTask(user.email, taskId)
@@ -24,7 +24,7 @@ function Task(props) {
     }
 
     const handleUpdateTaskStatus = (taskId, newStatus) => {
-        log('INFO', 'Task -> handleUpdateTaskStatus')
+        log.info('Task -> handleUpdateTaskStatus')
 
         try {
             updateTaskStatus(user.email, taskId, newStatus)
@@ -35,7 +35,7 @@ function Task(props) {
         }
     }
 
-    return <article key={props.task.id} className="border-2 p-1">
+    return <article key={props.task.id} className="border-2 p-3 rounded-xl">
         <p suppressContentEditableWarning={true} contentEditable="true" onKeyUp={event => handleUpdateTaskText(props.task.id, event.target.innerText)}>{props.task.text}</p>
 
         <button className="material-symbols-outlined" onClick={() => handleDeleteTask(props.task.id)}>delete</button>

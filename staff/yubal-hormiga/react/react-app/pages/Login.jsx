@@ -1,8 +1,8 @@
 function Login(props) {
-    log('INFO', 'Login -> render')
+    log.info('Login -> render')
 
     const handleNavigateToRegister = event => {
-        log('INFO', 'Login -> handleNavigateToRegister')
+        log.info('Login -> handleNavigateToRegister')
 
         event.preventDefault()
 
@@ -10,7 +10,7 @@ function Login(props) {
     }
 
     const handleLogin = event => {
-        log('INFO', 'Login -> handleLogin')
+        log.info('Login -> handleLogin')
 
         event.preventDefault()
 
