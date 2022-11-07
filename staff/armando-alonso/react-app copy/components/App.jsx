@@ -1,0 +1,34 @@
+class App extends React.Component {
+    constructor() {
+        log('INFO', 'App -> constructor')
+
+        super()
+
+        this.state = { view: 'login' }
+
+    }
+    
+    componentDidMount() {
+        log('INFO', 'App -> componentDidMount')
+    }
+
+    componentWillUnmount() {
+        log('INFO', 'App -> componentWillUnmount')
+    }
+
+    navigateToRegister = () => this.setState({ view: 'register' })
+
+    navigateToLogin = () => this.setState({ view: 'login' })
+
+    navigateToHome = () => this.setState({ view: 'home'})
+
+    render() {
+        log('INFO', 'App -> render')
+
+        return <>
+            {this.state.view === 'login' && <Login onRegisterClick={this.navigateToRegister} onLoggedIn={this.navigateToHome} />}
+            {this.state.view === 'register' && <Register onLoginClick={this.navigateToLogin} onRegister={this.navigateToLogin} />}
+            {this.state.view === 'home' && <Home onLogout={this.navigateToLogin} />}
+        </>
+    }
+}
