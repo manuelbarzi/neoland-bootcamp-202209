@@ -32,26 +32,28 @@ function Search(props) {
         })
     }
 
-    return <main className="min-screen-full p-6 my-12 flex flex-col flex-wrap items-center justify-center text-center font-semibold">
-        <form onSubmit={handleSearch}>
-            <input type='text' name='query' placeholder='Criteria' className="m-12" />
-            <button>
-                🔍
-            </button>
-        </form>
+    return <>
+        <main className="min-screen-full p-6 my-12 flex flex-col flex-wrap items-center justify-center text-center font-semibold">
+            <form onSubmit={handleSearch}>
+                <input type='text' name='query' placeholder='Criteria' className="m-12 px-2" />
+                <button>
+                    🔍
+                </button>
+            </form>
 
-        {!vehicles ? <></> : !vehicles.length ? <p>No results</p> :
-            <ul>
-                {vehicles.map(vehicle =>
-                    <li key={vehicle.id} className="m-12">
-                        <h2>{vehicle.name}</h2>
-                        <img
-                            src={vehicle.thumbnail}
-                            onClick={() => handleVehicleClick(event, vehicle.id)} />
-                        <p className="font-semibold">Price: {vehicle.price}</p>
-                    </li>)
-                }
-            </ul>
-        }
-    </main>
+            {!vehicles ? <></> : !vehicles.length ? <p>No results</p> :
+                <ul>
+                    {vehicles.map(vehicle =>
+                        <li key={vehicle.id} className="m-12">
+                            <h2>{vehicle.name}</h2>
+                            <img
+                                src={vehicle.thumbnail}
+                                onClick={() => handleVehicleClick(event, vehicle.id)} />
+                            <p className="font-semibold">Price: {vehicle.price}</p>
+                        </li>)
+                    }
+                </ul>
+            }
+        </main>
+    </>
 }

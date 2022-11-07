@@ -8,6 +8,9 @@ function App() {
         setVehicle(vehicle)
         setView('Detail')
     }
+    const navigateToSearch = () => {
+        setView('Search')
+    }
 
     return <>
         {view === 'Search' && <Search
@@ -15,6 +18,7 @@ function App() {
         />}
         {view === 'Detail' && <Detail
             vehicle={vehicle}
+            backLink={navigateToSearch}
         />}
     </>
 }
