@@ -11,9 +11,9 @@ class Human extends Shape {
         super.render()
     }
 
-    // talk() {
-    //     console.log(`'Me llamo ' ${nombre} + '. ' ${hash}`)
-    // }
+    talk() {
+        console.log(`'Me llamo ' ${nombre} + '. ' ${hash}`)
+    }
 
     // accion() {
         //Take

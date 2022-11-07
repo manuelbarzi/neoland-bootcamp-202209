@@ -1,20 +1,22 @@
 //CASE succeds on new user (happy)
 {
-const name = 'Ju Anjo'
-const email = 'ju@anjo.com'
-const password = '123123123'
+    const name = 'Ju Anjo'
+    const email = 'ju@anjo.com'
+    const password = '123123123'
 
-const res = registerUser(name, email, password)
+    const res = registerUser(name, email, password)
 
-console.assert(res === undefined)
+    console.assert(res === undefined)
 
-let found = false
+    let found = false
 
-for(let i = 0; i < users.length; i++) {
-    const user = users[i]
+    for (let i = 0; i < users.length; i++) {
+        const user = users[i]
 
-    if(user.email === email) found = true    
-}
+        if (user.email === email) found = true
+    }
+
+    console.assert(found)
 }
 
 //CASE fails on existing user (unhappy)
@@ -29,9 +31,9 @@ for(let i = 0; i < users.length; i++) {
 
     let _error = null
 
-    try{
+    try {
         registerUser(user.name, user.mail, user.password)
-    }catch (error) {
+    } catch (error) {
         _error = error
     }
 
@@ -43,14 +45,14 @@ for(let i = 0; i < users.length; i++) {
 {
     let _error = null
 
-    try{
-        registerUser('','ti@gre.com', '123123123')
-    }catch (error) {
+    try {
+        registerUser('', 'ti@gre.com', '123123123')
+    } catch (error) {
         _error = error
     }
-    
+
     console.assert(_error instanceof Error)
     console.assert(_error.message === 'name length is less than 1')
 }
 
-//Faltan mas casos unhappies
+    //Faltan mas casos unhappies

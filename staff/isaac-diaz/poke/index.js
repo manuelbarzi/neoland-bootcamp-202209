@@ -20,10 +20,10 @@ class Shape {
         this.position.y = y
     }
 
-    // talk() {
-    //     console.log(`${hash} + ${nombre}`)
-    // }
-    
+    talk() {
+        console.log(`${hash} + ${nombre}`)
+    }
+
     // accion() {
     //     this.accion.attack('pokemon')
     //     this.accion.take('object')
@@ -76,7 +76,7 @@ document.onkeydown = function (event) {
     bulba.render()
     squirt.render()
     pp.render()
-    potion.render()
+    // potion.render()
 
     //Solo funciona el ultimo caso, creo que se pisan
     if (

@@ -1,4 +1,4 @@
-class Object extends Shape {
+class Item extends Shape {
     constructor(icon) {
         super()
 
@@ -21,7 +21,7 @@ class Object extends Shape {
 // mochila.name = 'mochila'
 // mochila.space = (50, huecos)
 
-const potion = new Object('🧪')
+const potion = new Item('🧪')
 potion.name = 'poti'
 // potion.hueco = 1
 // potion.effect = (100, pts)

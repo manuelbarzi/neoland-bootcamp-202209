@@ -1,8 +1,8 @@
 class Pokemon extends Shape {
-    constructor(icon) {
+    constructor(icon, name, hash) {
         super()
         // this.life = 5
-
+        this.name = name
         this.icon = icon
     }
 
@@ -12,13 +12,18 @@ class Pokemon extends Shape {
         super.render()
     }
     
+
+    talk() {
+        console.log(`'Me llamo ' ${name} + '. ' ${hash}`)
+    }
+
     // status(level > 10) {
     //     live = (level * 10)
     //     level = 6
     //     attack = (level * 2)
     //     // exp = ??
 
-     // status(level < 10 && level > 20) {
+     // status(level =< 10 && level > 20) {
     //     live = (level * 15)
     //     level = 6
     //     attack = (level * 2.5)
@@ -95,11 +100,12 @@ char.render()
 
 
 const bulba = new Pokemon('🌱')
+bulba.im
 bulba.name = 'bulbajuani'
 bulba.hash = 'bulba bulba'
 //bulba.talk()
 // bulba = instanceof Plant
-bulba.move(375, 100)
+bulba.move(370, 100)
 bulba.render()
 
 const squirt = new Pokemon('💧')
