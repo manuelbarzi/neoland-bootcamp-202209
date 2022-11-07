@@ -1,0 +1,27 @@
+/* resets */
+
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+}
+
+/* layout - BEM */
+
+.container { /* block */
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center;
+    gap: .5rem;
+}
+
+.container__item--left { /* block__element--modifier */
+    align-self: start;
+}
+
+.container__item--right { /* block__element--modifier */
+    align-self: end;
+}
