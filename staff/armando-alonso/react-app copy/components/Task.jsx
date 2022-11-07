@@ -32,7 +32,7 @@ function Task(props) {
         log('INFO', 'Tasks -> handleUpdateTaskStatus')
 
         try {
-            updateTaskStatus(user.email, taskId, newStatus)
+            handleUpdateTaskText(user.email, taskId, newStatus)
 
             props.onUpdateTaskStatus()
 
@@ -43,7 +43,8 @@ function Task(props) {
     }
 
 
-    return<article key={props.task.id} className="border-2 p-1">
+    return <>
+            <article key={props.task.id} className="border-2 p-1">
                 <p suppressContentEditableWarning={true} contentEditable="true" onKeyUp={event => handleUpdateTaskText(props.task.id, event.target.innerText)}>{props.task.text}</p>
 
                 <button className="material-symbols-outlined" onClick={() => handleDeleteTask(props.task.id)}>delete</button>
@@ -52,19 +53,20 @@ function Task(props) {
                     <option disabled hidden className="text-sm" value=''>width_normal</option>
                     {props.task.status === 'todo' ? <>
                         <option value='doing'>DOING</option>
-                        <option value='done'>D0NE</option>
+                        <option value='done'>DONE</option>
                     </>
                         :
-                        props.task.status === 'doing' ? <>
-                            <option value='todo'>TODO</option>
-                            <option value='done'>D0NE</option>
+                        props.task.status === 'todo' ? <>
+                            <option value='doing'>DOING</option>
+                            <option value='done'>DONE</option>
                         </>
                             :
                             <>
-                                <option value='todo'>TODO</option>
                                 <option value='doing'>DOING</option>
+                                <option value='done'>DONE</option>
                             </>
                     }
                 </select>
             </article>
+            </>
 }

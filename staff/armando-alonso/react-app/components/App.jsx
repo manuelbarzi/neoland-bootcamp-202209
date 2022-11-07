@@ -1,34 +1,50 @@
-class App extends React.Component {
-    constructor() {
-        log('INFO', 'App -> constructor')
+const { useState, useEffect } = React
 
-        super()
+function App(props) {
+    log('INFO', 'App -> render')
 
-        this.state = { view: 'login' }
+    const [view, setView] = useState('login')
 
+    useEffect(() => {
+        log('INFO', 'App -> effect "componentDidMount"')
+
+        return () => log('INFO', 'App -> effect "componentWillUnmount')
+    }, [])
+
+    useEffect(() => log('INFO', 'App -> effect "componentWillReceiveProps"'), [props])
+
+
+    const navigateToRegister = () => {
+        log('INFO', 'App -> navigateToRegister')
+
+        setView( 'register' )
     }
-    
-    componentDidMount() {
-        log('INFO', 'App -> componentDidMount')
+
+    const navigateToLogin = () => {
+        log('INFO', 'App -> navigateToLogin')
+
+        setView( 'login' )
     }
+    const navigateToHome = () => {
+        log('INFO', 'App -> navigateToHome')
 
-    componentWillUnmount() {
-        log('INFO', 'App -> componentWillUnmount')
+        setView( 'home' )
     }
-
-    navigateToRegister = () => this.setState({ view: 'register' })
-
-    navigateToLogin = () => this.setState({ view: 'login' })
-
-    navigateToHome = () => this.setState({ view: 'home'})
-
-    render() {
-        log('INFO', 'App -> render')
 
         return <>
-            {this.state.view === 'login' && <Login onRegisterClick={this.navigateToRegister} onLoggedIn={this.navigateToHome} />}
-            {this.state.view === 'register' && <Register onLoginClick={this.navigateToLogin} onRegister={this.navigateToLogin} />}
-            {this.state.view === 'home' && <Home onLogout={this.navigateToLogin} />}
+            {view === 'login' && 
+                <Login 
+                    onRegisterClick={navigateToRegister} 
+                    onLoggedIn={navigateToHome} 
+                />}
+            {view === 'register' && 
+                <Register 
+                    onLoginClick={navigateToLogin} 
+                    onRegister={navigateToLogin} 
+                />}
+            {view === 'home' && 
+                <Home 
+                    onLogout={navigateToLogin} 
+                />}
         </>
     }
-}

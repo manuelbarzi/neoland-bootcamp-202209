@@ -1,13 +1,4 @@
-function updateTaskStatus(userEmail, taskId, newStatus) {
-
-    if (typeof userEmail !== 'string') throw new TypeError('userEmail is not a string')
-    if (!IS_EMAIL_REGEX.test(userEmail)) throw new Error('userEmail is not valid')
-
-    if (typeof taskId !== 'string') throw new TypeError('taskId is not a string')
-    if (taskId.length < 6 || !taskId.startsWith('task-')) throw new Error('invalid taskId')
-
-    if (typeof newStatus !== 'string') throw new TypeError('newStatus is not a string')
-    if (newStatus !== 'todo' && newStatus !== 'doing' && newStatus !== 'done') throw new Error('newStatus is not valid')
+function updateTaskText(userEmail, taskId, text) {
 
     // COMPROBAMOS SI EL USUARIO EXISTE
     
@@ -41,6 +32,6 @@ function updateTaskStatus(userEmail, taskId, newStatus) {
     
           if (foundTask.user !== userEmail) throw new Error('task with id ' + taskId + ' does not belong to user with email ' + userEmail)
           
-          foundTask.status = newStatus
+          foundTask.text = text
         
     }

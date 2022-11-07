@@ -1,4 +1,4 @@
-function updateTaskStatus(userEmail, taskId, newStatus) {
+function handleUpdateTaskText(userEmail, taskId, newStatus) {
 
     if (typeof userEmail !== 'string') throw new TypeError('userEmail is not a string')
     if (!IS_EMAIL_REGEX.test(userEmail)) throw new Error('userEmail is not valid')

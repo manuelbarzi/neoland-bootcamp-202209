@@ -1,4 +1,4 @@
-function createTask(emailUser, status) {
+function createTask(emailUser) {
 
     if (typeof emailUser !== 'string') throw new Error('email is not a string')
     if (!IS_EMAIL_REGEX.test(emailUser)) throw new Error('email is not valid')
@@ -30,7 +30,7 @@ function createTask(emailUser, status) {
         id: nextTaskId,
         user: emailUser,
         text: '',
-        status
+        status: 'todo'
     }
 
     tasks.push(task)

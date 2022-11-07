@@ -1,72 +1,51 @@
-class Home extends React.Component {
-    constructor() {
-        log('INFO', 'Home -> constructor')
+const { useState, useEffect } = React
 
-        super()
+function Home(props) {
+        log('INFO', 'Home -> render')
 
-        this.state = { view: 'tasks', timestamp: Date.now() }
-    }
+        const [view, setView] = useState('tasks')
+        const [timestamp, setTimestamp] = useState(Date.now())
 
-    componentDidMount() {
-        log('INFO', 'Home -> componentDidMount')
-    }
+        useEffect(() => {
+            log('INFO', 'Home -> effect "componentDidMount"')
 
-    componentWillUnmount() {
-        log('INFO', 'Home -> componentWillUnmount')
-    }
+            return () => log('INFO', 'Home -> effect "componentWillUnmount"')
+        }, [])
 
-    componentWillReceiveProps() {
-        log('INFO', 'Home -> componentWillReceiveProps')
-    }
+        useEffect(() => log('INFO', 'Home -> effect "componentWillReceiveProps"'), [props])
 
-    handleLogout = () => {
+
+    const handleLogout = () => {
         log('INFO', 'Home -> logout')
 
         user = null
         
-        this.props.onLogout()
+        props.onLogout()
 
     }
 
-    handleAddTask = () => {
-        log('INFO', 'Home -> handleAddTask')
-
-        this.setState({ timestamp: Date.now() })
-    }
-
-
-    handleNavigateToSettings = () => {
+    const handleNavigateToSettings = () => {
         log('INFO', 'Home -> handleNavigateToSettings')
         
-        this.setState({ view: 'settings' })
+        setView( 'settings' )
     }
 
 
-    handleNavigateToTasks = () => {
+    const handleNavigateToTasks = () => {
         log('INFO', 'Home -> handleNavigateToTasks')
         
-        this.setState({ view: 'tasks' })
+        setView( 'tasks' )
     }
         
-
-
-    render () {
-        log('INFO', 'Home -> render')
-
                 return <main className="flex flex-col bg-[#ffe97d]">
                             <Header 
-                                onNavigateToTasks={this.handleNavigateToTasks}
-                                onNavigateToSettings={this.handleNavigateToSettings}
-                                onLogout={this.handleLogout} />
+                                onNavigateToTasks={handleNavigateToTasks}
+                                onNavigateToSettings={handleNavigateToSettings}
+                                onLogout={handleLogout} />
 
-                            {this.state.view === 'tasks' && <Tasks 
-                                onAddTask={this.handleAddTask}
-                            />}
+                            {view === 'tasks' && <Tasks />}
 
-                            {this.state.view === 'settings' && <Settings 
-                                onUpdateEmail={this.handleUpdateUserEmail}
-                            />}
+                            {view === 'settings' && <Settings />}
             
                         </main>
-    }
 }

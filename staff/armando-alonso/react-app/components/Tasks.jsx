@@ -1,48 +1,31 @@
-class Tasks extends React.Component {
-    constructor() {
+const { useState, useEffect } = React
+
+function Tasks(props) {
     log('INFO', 'Tasks -> render')
 
-    super()
+    const [tasks, setTasks] = useState([])
 
-    this.state = { tasks: [] }
+    useEffect(() => {
+        log('INFO', 'App -> effect "componentDidMount"')
 
-}
+        return () => log('INFO', 'App -> effect "componentWillUnmount"')
+    }, [])
 
-    componentDidMount() {
-        log('INFO', 'Home -> componentDidMount')
+    useEffect(() => {
+        log('INFO', 'Tasks -> effect "componentWillReceiveProps"')
 
-        try {
-            const tasks = retrieveTasks(user.email)
-
-            this.setState({ tasks })
-
-        } catch (error) {
-
-            alert(error.message)
-            
-        }
-    }
-
-    componentWillUnmount() {
-        log('INFO', 'Tasks -> componentWillUnmount')
-    }
-
-    componentWillReceiveProps() {
-        log('INFO', 'Tasks -> componentWillReceiveProps')
-
-        this.handleRefreshTasks()
-    }
+        handleRefreshTasks()
+    }, [props])
 
 
-
-    handleRefreshTasks = () => {
+    const handleRefreshTasks = () => {
         log('INFO', 'Tasks -> handleRefreshTasks')
 
         try {
 
             const tasks = retrieveTasks(user.email)
 
-            this.setState({ tasks })
+            setTasks(tasks)
 
         } catch (error) {
 
@@ -50,13 +33,14 @@ class Tasks extends React.Component {
         }
     }
 
-    handleAddTask = () => {
+    const handleAddTask = (status) => {
+
         log('INFO', 'Tasks -> handleAddTask')
 
         try {
-            createTask(user.email)
+            createTask(user.email, status)
 
-            this.handleRefreshTasks()
+            handleRefreshTasks()
             
           } catch (error) {
 
@@ -64,54 +48,50 @@ class Tasks extends React.Component {
           }
     }
 
-render() {
-    log('INFO', 'Tasks -> render')
-
     return <section className="flex flex-col items-center bg-[#D3EBCD] h-screen mt-12">
     <h2 className="p-4">Tasks</h2>
     <div className="flex flex-col sm:flex-row gap-20 bg-[#AEDBCE]">
         <section className="flex flex-col gap-2 border-2 p-2">
             <h2 className="flex flex-col items-center">TODO</h2>
-            {this.state.tasks.filter(task => task.status === 'todo').map(task => 
+            {tasks.filter(task => task.status === 'todo').map(task => 
                 <Task
                     key={task.id}
                     task={task}
-                    onDeleteTask={this.handleRefreshTasks}
-                    onUpdateTaskStatus={this.handleRefreshTasks}
+                    onDeleteTask={handleRefreshTasks}
+                    onUpdateTaskStatus={handleRefreshTasks}
                     alternateStatuses={['DOING', 'D0NE']}
                 />
             )}
-            <button className="material-symbols-outlined" onClick={this.handleAddTask}>add</button>
+            <button className="material-symbols-outlined" onClick={event => handleAddTask('todo')}>add</button>
         </section>
         <section className="flex flex-col gap-2 border-2 p-2">
             <h2 className="flex flex-col items-center">DOING</h2>
-            {this.state.tasks.filter(task => task.status === 'doing').map(task => 
+            {tasks.filter(task => task.status === 'doing').map(task => 
                 <Task
                     key={task.id}
                     task={task}
-                    onDeleteTask={this.handleRefreshTasks}
-                    onUpdateTaskStatus={this.handleRefreshTasks}
+                    onDeleteTask={handleRefreshTasks}
+                    onUpdateTaskStatus={handleRefreshTasks}
                     alternateStatuses={['TODO', 'D0NE']}
                 />
             )}
-            <button className="material-symbols-outlined" onClick={this.handleAddTask}>add</button>
+            <button className="material-symbols-outlined" onClick={event => handleAddTask('doing')}>add</button>
         </section>
         <section className="flex flex-col gap-2 border-2 p-2">
             <h2 className="flex flex-col items-center">DONE</h2>
-            {this.state.tasks.filter(task => task.status === 'done').map(task => 
+            {tasks.filter(task => task.status === 'done').map(task => 
                 <Task
                     key={task.id}
                     task={task}
-                    onDeleteTask={this.handleRefreshTasks}
-                    onUpdateTaskStatus={this.handleRefreshTasks}
+                    onDeleteTask={handleRefreshTasks}
+                    onUpdateTaskStatus={handleRefreshTasks}
                     alternateStatuses={['TODO', 'DOING']}
                 />
             )}
-            <button className="material-symbols-outlined" onClick={this.handleAddTask}>add</button>
+            <button className="material-symbols-outlined" onClick={event => handleAddTask('done')}>add</button>
         </section>
     </div>
     </section>
-    }
 }
 
 
