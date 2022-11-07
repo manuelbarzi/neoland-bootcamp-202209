@@ -1,27 +1,22 @@
-class App extends React.Component{
-    constructor(){
-        super()
+const { useState } = React
 
-        this.state = {view: 'login'}
-    }
+function App() {
 
-    navigateToRegister = () => this.setState({ view:'register' })
+    const [view, setView] = useState('login')
 
-    navigateToLogin = () => this.setState({ view:'login' })
+    const navigateToRegister = () => setView('register')
 
-    navigateToHome = () => this.setState({ view:'home' })
+    const navigateToLogin = () => setView('login')
 
-    navigateToSettings = () => this.setState({view: 'settings'})
+    const navigateToHome = () => setView('home')
 
-    render(){
-        return <>
-        { this.state.view === 'login' && <LoginPage onRegisterClick={ this.navigateToRegister } 
-        onLoggedIn={ this.navigateToHome }/> }
-        { this.state.view === 'register' && <RegisterPage onLoginClick={ this.navigateToLogin } onRegister={this.navigateToLogin}/> }
-        { (this.state.view === 'home' || this.state.view ==='settings') && <NavBar onLogOut={this.navigateToLogin} onSettings={this.navigateToSettings} onHomeLink={this.navigateToHome}/>}
-        { this.state.view === 'home' && <HomePage />}
-        { this.state.view === 'settings' && <SettingsPage  /> }
+    const navigateToSettings = () => setView('settings')
 
-        </>
-    }
+    return <>
+        {view === 'login' && <LoginPage onRegisterClick={navigateToRegister}
+            onLoggedIn={navigateToHome} />}
+        {view === 'register' && <RegisterPage onLoginClick={navigateToLogin} onRegister={navigateToLogin} />}
+        {view === 'home' && <HomePage onLogOut={navigateToLogin} onSettings={navigateToSettings} onHomeLink={navigateToHome} />}
+        {view === 'settings' && <SettingsPage onLogOut={navigateToLogin} onSettings={navigateToSettings} onHomeLink={navigateToHome} />}
+    </>
 }

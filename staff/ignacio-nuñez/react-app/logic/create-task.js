@@ -1,4 +1,6 @@
-function createTask(email, text) {
+function createTask(email, status) {
+    if (typeof status !== 'string') throw new Error('status is not a string')
+    if(status !== 'todo' && status !=='doing' && status !=='done') throw new Error('invalid status')
 
     if (typeof email !== 'string') throw new Error('email is not a string')
     if (!IS_EMAIL_REGEX.test(email)) throw new Error('email is not valid')
@@ -28,8 +30,8 @@ function createTask(email, text) {
     const task = {
         id: nextTaskId,
         user: email,
-        text: text,
-        status: 'todo'
+        text: '',
+        status
     }
 
     tasks.push(task)

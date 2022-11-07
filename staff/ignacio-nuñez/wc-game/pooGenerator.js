@@ -15,7 +15,7 @@ const lluviaCacaIntervalId = setInterval(() => {
         if (pooRain.position.y <= 0){
             failCondition()
             clearInterval(pooRainIntervalId)
-            setTimeout(() => pooRain.container.remove(), 10000)
+            setTimeout(() => pooRain.container.remove(), 20000)
         }
     }, 3)
 }, 1000)

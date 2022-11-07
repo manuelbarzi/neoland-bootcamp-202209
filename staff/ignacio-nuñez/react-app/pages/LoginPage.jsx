@@ -19,7 +19,7 @@ function LoginPage(props) {
             user =  authenticateUser(email, password)
         
             const onLoggedIn = props.onLoggedIn
-    
+            
             onLoggedIn()
         } catch (error) {
             alert(error.message)

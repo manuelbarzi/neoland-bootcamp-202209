@@ -119,3 +119,22 @@ console.assert(spliceNumbers7[4] === 50)
 console.assert(spliceNumbers7[5] === 60)
 console.assert(spliceNumbers7[6] === 70)
 console.assert(spliceNumbers7[7] === 80)
+
+// case insert 4 numbers in array, and delete 2
+const spliceNumbers8 = [10,20,30,40,50,60]
+
+let result8 = spliceNumbers8.splice(3, 2, 15, 25, 35, 45)
+
+console.assert(result8.length === 2)
+console.assert(result8[0] === 40)
+console.assert(result8[1] === 50)
+
+console.assert(spliceNumbers8.length === 8)
+console.assert(spliceNumbers8[0] === 10)
+console.assert(spliceNumbers8[1] === 20)
+console.assert(spliceNumbers8[2] === 30)
+console.assert(spliceNumbers8[3] === 15)
+console.assert(spliceNumbers8[4] === 25)
+console.assert(spliceNumbers8[5] === 35)
+console.assert(spliceNumbers8[6] === 45)
+console.assert(spliceNumbers8[7] === 60)

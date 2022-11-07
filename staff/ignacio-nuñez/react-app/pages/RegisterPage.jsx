@@ -7,30 +7,27 @@ function RegisterPage(props) {
         onLoginClick()
     }
 
-    const onRegisterUser = event =>{
-       
+    const onRegisterUser = event => {
         event.preventDefault()
 
         const form = event.target
 
-        const name= form.name.value
+        const name = form.name.value
         const email = form.email.value
         const password = form.password.value
 
         try {
-           registerUser(name, email, password)
+            registerUser(name, email, password)
 
-           alert('user correctly registered')
-        
+            alert('user correctly registered')
+
             const onRegister = props.onRegister
             onRegister()
         } catch (error) {
             alert(error.message)
-    
+
             form.password.value = ''
         }
-
-       
     }
 
     return <div className="flex h-full justify-center items-center bg-rose-700">

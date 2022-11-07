@@ -1,46 +1,51 @@
-class NavBar extends React.Component {
-    constructor() {
-        super()
+const {useState, useEffect} = React
 
-        this.state = {toggleButtonText: 'Menu'}
-    }
-    logout = () => {
+function NavBar(props){
+    const [toggleButtonText, setToggleButtonText] = useState('Menu')
+
+    const logout = () => {
         user = null
 
-        const onLogOut = this.props.onLogOut
+        const onLogOut = props.onLogOut
 
         onLogOut()
     }
 
-    settings = (event) =>{
+    const settings = (event) => {
         event.preventDefault()
 
-        const onSettings = this.props.onSettings
+        setToggleButtonText('Menu')
+
+        const onSettings = props.onSettings
 
         onSettings()
     }
 
-    goToHome = (event) =>{
+    const goToHome = (event) => {
         event.preventDefault()
 
-        const onHomeLink = this.props.onHomeLink
+        setToggleButtonText('Menu')
+
+        const onHomeLink = props.onHomeLink
 
         onHomeLink()
     }
 
-    toggleMenu = () => this.setState({ toggleButtonText: this.state.toggleButtonText === 'Menu' ? 'Close' : 'Menu' })
+    const closeMenuClick = () => setToggleButtonText('Menu')
 
-    render() {
-        return <header className="h-20 bg-orange-500 grid grid-cols-12">
-            <nav className="flex justify-between p-5 h-full col-start-1 col-end-13 text-2xl">
-                <a href="" onClick={this.goToHome} className="h-fit self-center">Home</a>
-                <span className="">{user && user.name}</span>
-                <button className="material-symbols-outlined" onClick={this.toggleMenu}>{this.state.toggleButtonText}</button>
-            </nav>
-            {this.state.toggleButtonText === 'Close' && <div className="m-2 flex flex-col bg-orange-300 p-2 col-start-12 col-end-13 rounded-lg">
-                <a href="" className="text-center" onClick={this.settings}>Settings</a>
-                <button className="" onClick={this.logout}>Log Out</button>
-            </div>}
-        </header>
-        }
+
+    const toggleMenu = () =>  toggleButtonText === 'Menu' ? setToggleButtonText('Close') : setToggleButtonText('Menu') 
+
+    return <header className="fixed w-full h-20 bg-orange-500 grid grid-cols-12">
+        {toggleButtonText === 'Close' && <div className="absolute w-screen h-screen" onClick={closeMenuClick}></div>}
+        <nav className="z-20 flex items-center justify-between p-4 h-full col-start-1 col-end-13 text-2xl">
+            <a href="" onClick={goToHome} className="z-10 h-fit self-center material-symbols-outlined text-5xl">Home</a>
+            <span className="h-9">{user && user.name}</span>
+            <button className="material-symbols-outlined" onClick={toggleMenu}>{toggleButtonText}</button>
+        </nav>
+        {toggleButtonText === 'Close' && <div className="shadow-xl flex flex-col bg-orange-300 p-2 col-start-11 col-end-13 rounded-lg">
+            <a href="" className="z-10 text-center mt-2 text-xl border-solid border-black border-2 rounded-lg" onClick={settings}>Settings <span className="material-symbols-outlined">settings</span></a>
+            <button className="mt-2 z-10 text-xl border-solid border-black border-2 rounded-lg" onClick={logout}>Logout <span className="material-symbols-outlined">logout</span></button>
+        </div>}
+    </header>
 }

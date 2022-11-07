@@ -2,34 +2,42 @@ Array.prototype.splice = function (start, deleteCount, items) {
     const eliminatedElements = []
     const argumentsLength = arguments.length - 2
     let argumentsCounter = 2
+    const elementsMovement = argumentsLength - deleteCount
+    let deletedCounter = deleteCount
 
-    if (arguments.length <= 2) {
+    // no items to insert
+    if (!argumentsLength) {
         for (let i = 0; i < deleteCount; i++) {
-            for (let j = start; j < this.length - 1; j++) {
-                if (j === start) eliminatedElements[eliminatedElements.length] = this[j]
+            for (let j = start; j < this.length; j++) {
+                if (deletedCounter) {
+                    eliminatedElements[eliminatedElements.length] = this[j]
 
+                    deletedCounter--
+                }
                 this[j] = this[j + 1]
             }
             this.length--
         }
         return eliminatedElements
     }
-    deleteCount > this.length - start ? deleteCount = this.length - start : deleteCount
-    !deleteCount ? argumentsLengthOrDeleteCount = argumentsLength : argumentsLengthOrDeleteCount = deleteCount
 
-    if (!deleteCount || deleteCount < 0) {
-        for (let i = 0; i < argumentsLength; i++) {
-            for (let j = this.length; j > start; j--) {
-
-                this[j] = this[j - 1]
-            }
+    // move elements on the array
+    for (let i = 0; i < elementsMovement; i++) {
+        for (let j = this.length - 1; j >= start; j--) {
+            this[j + 1] = this[j]
         }
     }
-    for (let i = 0; i < argumentsLengthOrDeleteCount; i++) {
-        if (deleteCount) eliminatedElements[eliminatedElements.length] = this[i + start]
 
-        this[i + start] = arguments[argumentsCounter]
+    // insert elements into array and add eliminated to returned array 
+    for (let i = start; i < (start + argumentsLength); i++) {
+        if (deletedCounter) {
+            eliminatedElements[eliminatedElements.length] = this[i + elementsMovement]
+            deletedCounter--
+        }
+        this[i] = arguments[argumentsCounter]
+
         argumentsCounter++
     }
+
     return eliminatedElements
 }

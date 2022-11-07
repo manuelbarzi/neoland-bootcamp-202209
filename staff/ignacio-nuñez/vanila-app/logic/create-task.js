@@ -1,4 +1,4 @@
-function createTask(email, text) {
+function createTask(email) {
 
     if (typeof email !== 'string') throw new Error('email is not a string')
     if (!IS_EMAIL_REGEX.test(email)) throw new Error('email is not valid')
@@ -28,7 +28,7 @@ function createTask(email, text) {
     const task = {
         id: nextTaskId,
         user: email,
-        text: text,
+        text: '',
         status: 'todo'
     }
 
