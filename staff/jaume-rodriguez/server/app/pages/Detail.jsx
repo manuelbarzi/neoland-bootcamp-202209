@@ -1,8 +1,10 @@
 const { useState, useEffect } = React
 function Detail(props) {
 
+    // OBTENEMOS LAS PROPS DE DE LA APP
     const [vehicle, setVehicle] = useState(props.vehicle)
 
+    // ENVIAMOS UNA PETICIÓN COMO PROP A LA APP
     const handleBackLink = (event) => {
         event.preventDefault()
 
@@ -34,7 +36,7 @@ function Detail(props) {
                                 <p className="font-semibold mt-2">Price</p>
                                 <p className="">{vehicle.price}</p>
                                 <p className="font-semibold mt-2">URL</p>
-                                <a href="" onClick="">{vehicle.url}</a>
+                                <a href={vehicle.url} onClick="">Vehicle Link</a>
                             </div>
                         </li>
                     </ul>

@@ -3,22 +3,25 @@ function Search(props) {
 
     const [vehicles, setVehicles] = useState()
 
+    // OBTENEMOS INFORMACIÓN DEL SERVIDOR
     const handleSearch = (event) => {
         event.preventDefault()
 
         const { value: query } = event.target.query
-
-        searchVehicles(query, (error, vehicles) => {
-            if (error) {
-                alert(error.message)
-
-                return
-            }
-
-            setVehicles(vehicles)
-        })
+        try {
+            searchVehicles(query, (error, vehicles) => {
+                if (error) {
+                    alert(error.message)
+                    return
+                }
+                setVehicles(vehicles)
+            })
+        } catch (error) {
+            alert(error.message)
+        }
     }
 
+    // OBTENEMOS INFORMACIÓN DEL SERVIDOR Y LA ENVIAMOS COMO PROP AL COMPO APP
     const handleVehicleClick = (event, vehicleId) => {
         log('INFO', 'Search: handleonVehicleClick')
         event.preventDefault()
