@@ -1,0 +1,90 @@
+/* resets */
+
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+}
+
+/* layout - BEM */
+
+/* container */
+
+.container {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center;
+    gap: .5rem;
+    box-sizing: border-box;
+}
+
+.container--full {
+    width: 100%;
+    height: 100%;
+}
+
+.container--full-width {
+    width: 100%;
+}
+
+.container--full-height {
+    height: 100%;
+} 
+
+.container--content-start {
+    justify-content: start;
+}
+
+.container--items-start {
+    align-items: start;
+}
+
+.container--row {
+    flex-direction: row;
+}
+
+.container--content-space-between {
+    justify-content: space-between;
+}
+
+.container--padding-s {
+    padding: .5rem;
+}
+
+.container--padding-m {
+    padding: 1rem;
+}
+
+.container--padding-h-s {
+    padding: 0 .5rem;
+}
+
+.container--padding-h-m {
+    padding: 0 1rem;
+}
+
+.container--border {
+    /* border-width: 1px;
+    border-style: solid;
+    border-color: black; */
+    border: 1px solid black; /* short-hand css rule */
+}
+
+
+/* container__item */
+
+.container__item--left { /* block__element--modifier */
+    align-self: start;
+}
+
+.container__item--right { /* block__element--modifier */
+    align-self: end;
+}
+
+
+
+
+

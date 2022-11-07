@@ -1,0 +1,16 @@
+ul{
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    width: 800px;
+    height: 800px;
+    list-style: none;
+    border: 6px solid black;
+    padding: 0;
+}
+
+.black{
+    background-color: black;
+}
+
+
