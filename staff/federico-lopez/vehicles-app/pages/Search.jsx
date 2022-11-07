@@ -37,11 +37,8 @@ function Search() {
         <input type="text" name="query" placeholder="criteria" />
         <button>🔍</button>
       </form>
-      {!vehicles ? (
-        <></>
-      ) : !vehicles.length ? (
-        <p>no results</p>
-      ) : (
+      {vehicles && !vehicles.length && <p>no results</p>}
+      {vehicles && !!vehicles.length && (
         <ul>
           {vehicles.map((vehicle) => {
             return (
