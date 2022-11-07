@@ -7,9 +7,9 @@ function App(props) {
     const [view, setView] = useState('home')
 
     useEffect(() => {
-        log.info('App -> componentDidMount')
+        log.info('App -> effect "componentDidMount"')
 
-        return () => log.info('App -> componentWillUnMount')
+        return () => log.info('App -> effect "componentWillUnMount"')
     }, [])
 
     useEffect(() => log.info('App -> effect "componentWillReceiveProps"'), [props])

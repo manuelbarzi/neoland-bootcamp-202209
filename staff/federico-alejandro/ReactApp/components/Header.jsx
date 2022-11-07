@@ -46,7 +46,7 @@ function Header(props) {
         props.onLogout()
     }
 
-    return <header className="flex flex-col">
+    return <header className="flex flex-col fixed w-full">
         <div className="flex justify-between">
             <span className="font-extrabold italic text-2xl my-8 ml-3">
                 {user && user.name}

@@ -44,4 +44,5 @@ function LoginPage(props) {
             <a href='' onClick={handleClick} className='animate-pulse underline font-bold text-white text-lg italic self-center p-2 content-end'>Register</a>
         </form>
     </main>
+        
 }

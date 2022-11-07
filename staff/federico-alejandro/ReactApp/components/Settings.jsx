@@ -6,9 +6,9 @@ function Settings() {
     const [view, setView] = useState('settings')
 
     useEffect(() => {
-        log.info('Settings -> componentDidMount')
+        log.info('Settings -> effect "componentDidMount"')
 
-        return () => log.info('Settings -> componentWillUnMount')
+        return () => log.info('Settings -> effect "componentWillUnMount"')
     }, [])
 
     const handleUpdateUserEmail = event => {

@@ -1,13 +1,15 @@
 function retrieveVehicle(vehicleId, callback) {
     if(typeof vehicleId !== 'string') throw new TypeError('vehicleId is not a string')
     if(typeof callback !== 'function') throw new TypeError('callback is not a function')
-    
+    // XHR permite hacer peticion(conectar) y obtener respuesta
     const xhr = new XMLHttpRequest
 
-    xhr.onload = () => {
-        var json = xhr.responseText
+    xhr.onload = () => { //configuar como atender esa respuesta
+        var json = xhr.responseText 
+        // json(subconjunto de la notación literal de objetos de JavaScript) en forma de string, utilizado para enviar datos 
 
-        var result = JSON.parse(json)
+        var result = JSON.parse(json) // covierte ese json a objeto 
+        // JSON.stringify -> te convierte un objeto en string 
 
         callback(null, result)
     }

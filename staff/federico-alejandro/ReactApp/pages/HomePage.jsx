@@ -1,61 +1,51 @@
-class HomePage extends React.Component {
-    constructor() {
-        log('INFO', 'HomePage -> render')
+const { useState, useEffect } = React
 
-        super()
+function HomePage(props) {
+    log.info('HomePage -> render')
 
-        this.state = { view: 'tasks', timestamp: Date.now() }
-    }
+    const [view, setView] = useState('tasks')
+    const [timestamp, setTimestamp] = useState(Date.now())
 
-    componentDidMount() {
-        log('INFO', 'Home -> componentDidMount')
+    useEffect(() => {
+        log.info('Home -> effect "componentDidMount"')
 
-    }
-    componentWillUnmount() {
-        log('INFO', 'Home -> componentWillUnmount')
-    }
+        return () => log.info('Home -> efffect "componentWillUnmount"')
 
-    componentWillReceiveProps() {
-        log('INFO', 'Home -> componentWillReceiveProps')
-    }
+    }, [])
 
-    handleLogout = () => {
-        log('INFO', 'Home -> handleLogout')
+    useEffect(() => log.info('Home -> effect "componentWillReceiveProps"'), [props])
+
+    const handleLogout = () => {
+        log.info('Home -> handleLogout')
 
         user = null
 
-        this.props.onLogout()
+        props.onLogout()
     }
 
+    const handleNavigateToSettings = () => {
+        log.info('Home -> handleNavigateToSettings')
 
-    handleNavigateToSettings = () => {
-        log('INFO', 'Home -> handleNavigateToSettings')
-
-        this.setState({ view: 'settings' })
+        setView('settings')
     }
 
-    handleNavigateToTasks = () => {
-        log('INFO', 'Home -> handleNavigateToTasks')
+    const handleNavigateToTasks = () => {
+        log.info('Home -> handleNavigateToTasks')
 
-        this.setState({ view: 'tasks' })
-
+        setView('tasks')
     }
 
-    render() {
-        log('INFO', 'Home -> render')
-
-        return <main className="min-h-screen w-full ">
-            <Header
-                onNavigateToTasks={this.handleNavigateToTasks}
-                onAddTask={this.handleAddTask}
-                onNavigateToSettings={this.handleNavigateToSettings}
-                onLogout={this.handleLogout}
-                view={this.state.view}
-            />
-
-           {this.state.view === 'tasks' && <Tasks />}
+    return <main className="min-h-screen w-full ">
+        <Header
+            onNavigateToTasks={handleNavigateToTasks}
+            onNavigateToSettings={handleNavigateToSettings}
+            onLogout={handleLogout}
+            view={view}
             
-            {this.state.view === 'settings' && <Settings />}
-        </main>
-    }
+        />
+
+        {view === 'tasks' && <Tasks />}
+
+        {view === 'settings' && <Settings />}
+    </main>
 }

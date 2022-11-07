@@ -5,48 +5,52 @@ function Tasks(props) {
 
     const [tasks, setTasks] = useState([])
     const [time, setTime] = useState(new Date().toDateString('es-ES'))
-}
 
-useEffect(() => {
-    log.info('Home -> componentDidMount')
+    // this.state = {
+    //     tasks: [],
+    //     time: new Date().toLocaleString('es-ES')
 
-    return () => log.info('Tasks -> componentWillUnmount')
 
-}, [])
+    useEffect(() => {
+        log.info('Tasks -> effect "componentDidMount"')
 
-useEffect(() => {
-    log.info('Tasks ->  effect "componentWillReceiveProps"')
+        return () => log.info('Tasks -> effect "componentWillUnmount"')
 
-    handleRefreshTasks()
-}, [props])
+    }, [])
 
-const handleRefreshTasks = () => {
-    log.info('Tasks -> handleRefreshTasks')
+    useEffect(() => {
+        log.info('Tasks ->  effect "componentWillReceiveProps"')
 
-    try {
-        const tasks = retrieveTasks(user.email)
+        handleRefreshTasks()
+    }, [props])
 
-        setTasks(tasks)
-    } catch (error) {
-        alert(error.message)
-    }
-}
+    const handleRefreshTasks = () => {
+        log.info('Tasks -> handleRefreshTasks')
 
-const handleAddTask = () => {
-    log.info('Tasks -> handleAddTask')
+        try {
+            const tasks = retrieveTasks(user.email)
 
-    try {
-        createTask(user.email)
-
-        const tasks = retrieveTasks(user.email)
-
-        setTasks(tasks)
-    } catch (error) {
-        alert(error.message)
+            setTasks(tasks)
+        } catch (error) {
+            alert(error.message)
+        }
     }
 
+    const handleAddTask = () => {
+        log.info('Tasks -> handleAddTask')
 
-    return <section className="mt-14 flex flex-col items-center gap-4">
+        try {
+            createTask(user.email)
+
+            const tasks = retrieveTasks(user.email)
+
+            setTasks(tasks)
+        } catch (error) {
+            alert(error.message)
+        }
+    }
+
+    return <section className="mt-24 flex flex-col items-center gap-4">
         <h2 className="text-3xl font-extrabold italic">Tasks</h2>
         <time className="font-extrabold m-2 underline">{time}</time>
         <div className="flex flex-col sm:flex-row gap-x-44">
@@ -80,7 +84,5 @@ const handleAddTask = () => {
             <button onClick={handleAddTask}>+ Add task</button>
         </div>
     </section>
+
 }
-
-
-
