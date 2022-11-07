@@ -1,6 +1,6 @@
 const { useState } = React
 
-function Search(props) {
+function Search() {
     const [vehicles, setVehicles] = useState()
 
     const handleSearch = event => {
@@ -23,9 +23,7 @@ function Search(props) {
         }
     }
 
-    const handleNavigateToDetail = vehicleId => props.onNavigateToDetail(vehicleId)
-
-    return <main>
+    return <main className="">
         <form onSubmit={handleSearch}>
             <input type="text" name="query" placeholder="criteria" />
             <button>🔍</button>
@@ -38,8 +36,8 @@ function Search(props) {
                     <p>no results</p>
                     :
                     <ul>
-                        {vehicles.map(vehicle => <li key={vehicle.id} onClick={() => handleNavigateToDetail(vehicle.id)}>
-                            <h2>{vehicle.name} ({vehicle.id})</h2>
+                        {vehicles.map(vehicle => <li>
+                            <h2>{vehicle.name}</h2>
                             <img src={vehicle.thumbnail} />
                             <p>{vehicle.price}</p>
                         </li>)}
