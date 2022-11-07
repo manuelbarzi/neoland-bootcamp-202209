@@ -1,10 +1,7 @@
-function at(string, index) {
-    if (index === undefined)
-        index = 0
+function at(s, index = 0) {
+    if (index < 0) {
 
-    if (index < 0)
-        index = string.length + index
-
-    return string[index]
+        return s[s.length + index];  //var newIndex = s.length + index
+    }
+    return s[index];
 }
-

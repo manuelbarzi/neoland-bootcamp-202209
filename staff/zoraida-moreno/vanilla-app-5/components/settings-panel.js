@@ -28,7 +28,7 @@ settingsEmailForm.onsubmit = function(event) {
     var result = updateUserEmail(user.email, newEmail)
 
     if (result instanceof Error) {
-        alert(result.message)
+        alert(error.message)
 
         return
     }

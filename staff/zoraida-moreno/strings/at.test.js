@@ -1,3 +1,7 @@
+// El método At() de String devuelve en un nuevo String el carácter UTF-16 de una cadena.
+ //acepta enteros positivos y negativos(cuando es neg cuenta de derecha a izquierda empezando por el ultimo indice)
+ //cuando el indice esta fuera de rango devuelve undefined.
+
 // CASE returns 'h' for string 'hola mundo' at index 0
 
 var s = 'hola mundo'

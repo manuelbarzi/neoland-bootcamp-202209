@@ -16,7 +16,7 @@ log('DEBUG', 'submit register')
 const result = registerUser(name, email, password)
 
 if (result instanceof Error) {
-    alert( result.message)
+    alert(error.message)
 
     return
 }

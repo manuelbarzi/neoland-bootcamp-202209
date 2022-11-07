@@ -1,41 +1,90 @@
-var tasksPanel = document.createElement('section')
-tasksPanel.className = 'container container--full-width'
+const tasksPanel = document.createElement('section')
+tasksPanel.className = 'flex flex-col items-center'
 
-var tasksTitle = document.createElement('h2')
+const tasksTitle = document.createElement('h2')
 tasksTitle.innerText = 'Tasks'
 
-var tasksContentPanel = document.createElement('div')
-tasksContentPanel.className = 'container container--row container--items-start'
+const tasksContentPanel = document.createElement('div')
+tasksContentPanel.className = 'flex flex-col sm:flex-row gap-4'
 
-var tasksTodoColumn = document.createElement('section')
+const tasksTodoColumn = document.createElement('section')
 tasksTodoColumn.innerText = 'TODO'
-tasksTodoColumn.className = 'container container--border container--padding-s container--items-start'
+tasksTodoColumn.className = 'flex flex-col gap-2 border-2 p-2'
 
-var taskCard = createTaskCard('buy milk')
-tasksTodoColumn.append(taskCard)
-
-var taskCard2 = createTaskCard('buy eggs')
-tasksTodoColumn.append(taskCard2)
-
-var taskCard3 = createTaskCard('buy tomatoes and bananas')
-tasksTodoColumn.append(taskCard3)
-
-var tasksDoingColumn = document.createElement('section')
+const tasksDoingColumn = document.createElement('section')
 tasksDoingColumn.innerText = 'DOING'
-tasksDoingColumn.className = 'container container--border container--padding-s'
+tasksDoingColumn.className = 'border-2 p-2'
 
-var tasksDoneColumn = document.createElement('section')
+const tasksDoneColumn = document.createElement('section')
 tasksDoneColumn.innerText = 'DONE'
-tasksDoneColumn.className = 'container container--border container--padding-s'
+tasksDoneColumn.className = 'border-2 p-2'
 
 tasksContentPanel.append(tasksTodoColumn, tasksDoingColumn, tasksDoneColumn)
 
 tasksPanel.append(tasksTitle, tasksContentPanel)
 
-function createTaskCard(text) {
-    var taskCard = document.createElement('article')
-    taskCard.innerText = text
-    taskCard.className = 'container container--border container--padding-s container--full-width'
+function createTaskCard(taskID, text) {
+    const taskCard = document.createElement('article')
+    taskCard.className = 'border-2 p-1'
+   
+    const taskText = document.createElement('p')
+    taskText.innerText = text
+    taskText.contentEditable = true
+
+    taskText.onkeyup = function() {
+        try {
+            updateTaskText(user.email, taskID, taskText.innerText)
+        } catch (error) {
+            alert(error.message)
+        }
+    }
+    
+    const taskDeleteButton = docuemnt.createElement('button')
+    taskDeleteButton.className = 'material-symbols-outlined'
+    taskDeleteButton.innerText = 'delete'
+
+    taskDeleteButton.onclick = function () {
+       try {
+           deleteTask(user.email, taskID)
+
+           taskCard.remove()
+       } catch (error) {
+           alert(error.messaje)
+        }
+    }
+
+    taskCard.append(taskText, taskDeleteButton)
 
     return taskCard
+}
+
+function clearTasksCards() {
+    const myTasksCards = tasksPanel.querySelectorAll('article')
+
+    for (let i = 0; i < myTasksCards.length; i++) {
+        const myTaskCard = myTasksCards[i]
+
+        myTaskCard.remove()
+    }  
+}
+
+function renderTasksCards() {
+    try {
+        const myTasks = retrieveTasks(user.email)
+
+        for (let i = 0; i < myTasks.length; i++) {
+            const myTask = myTasks[i]
+
+            const myTaskCard = createTaskCard(myTask.id, myTask.text)
+
+            if (myTask.status === 'todo')
+                tasksTodoColumn.append(myTaskCard)
+            else if (myTask.status === 'doing')
+                tasksDoingColumn.append(myTaskCard)
+            else if (myTask.status === 'done')
+                tasksDoneColumn.append(myTaskCard)
+        }
+    } catch (error) {
+        alert(error.message)
+    }
 }

@@ -1,40 +1,40 @@
-var settingsPanel = document.createElement('section')
-settingsPanel.className = 'container container--full-width'
+const settingsPanel = document.createElement('section')
+settingsPanel.className = 'flex flex-col gap-2'   //'container container--full-width'
 
-var settingsTitle = document.createElement('h2')
+const settingsTitle = document.createElement('h2')
 settingsTitle.innerText = 'Settings'
 
-var settingsEmailForm = document.createElement('form')
+const settingsEmailForm = document.createElement('form')
 
-var settingsEmailLabel = document.createElement('label')
+const settingsEmailLabel = document.createElement('label')
 settingsEmailLabel.innerText = 'E-mail'
 settingsEmailLabel.htmlFor = 'settings-email'
 
-var settingsEmailInput = document.createElement('input')
+const settingsEmailInput = document.createElement('input')
 settingsEmailInput.type = 'email'
 settingsEmailInput.id = 'settings-email'
 settingsEmailInput.placeholder = 'input an e-mail'
 settingsEmailInput.value = 'e@gmail.com'
+settingsEmailInput.className = 'border-b border-black'
 
-var settingsEmailButton = document.createElement('button')
-settingsEmailButton.innerText ='Save'
+const settingsEmailButton = document.createElement('button')
+settingsEmailButton.innerText = 'Save'
+settingsEmailButton.className = 'p-2 border rounded-xl hover:animate-spin';
 
 settingsEmailForm.append(settingsEmailLabel, settingsEmailInput, settingsEmailButton)
 
 settingsEmailForm.onsubmit = function(event) {
     event.preventDefault()
     
-    var newEmail = settingsEmailInput.value
+    const newEmail = settingsEmailInput.value
 
-    var result = updateUserEmail(user.email, newEmail)
+    try {
+        updateUserEmail(user.email, newEmail)
 
-    if (result instanceof Error) {
-        alert(result.message)
-
-        return
-
+        alert('E-mail updated')
+    } catch (error) {
+        alert(error.message)
     }
-    alert('E-mail update')
 }
 
 settingsPanel.append(settingsTitle, settingsEmailForm)

@@ -16,7 +16,7 @@ form.onsubmit = function (event) {
     
 
     if ( result instanceof Error) {
-        alert(result.message)
+        alert(error.message)
 
         return
     }
