@@ -1,4 +1,4 @@
-const STEP = 5
+const STEP = 1
 
 const police = {
     icon: '🚔',
@@ -7,7 +7,7 @@ const police = {
 
 const thief = {
     icon: '🚘',
-    x: 2 * STEP
+    x: 5
 }
 
 setInterval(() => {
@@ -19,7 +19,7 @@ setInterval(() => {
     //if (police.x > thief.x) thief.x = police.x // BAD friend!
 
     render()
-}, 2000)
+}, 100)
 
 function render() {
     console.log('='.repeat(100))
