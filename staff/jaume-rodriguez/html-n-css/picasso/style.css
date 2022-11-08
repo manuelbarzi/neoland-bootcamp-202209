@@ -1,0 +1,392 @@
+/* Reset */
+* {
+    box-sizing: border-box;
+}
+
+html, body{
+    height: 100%;
+    margin: 0;
+}
+
+body{
+    background-color: antiquewhite;
+}
+
+/* Layout */
+.container{
+    display: flex; /* Como se comportan los hijos  */
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;    /* gap espacio entre items | Unidades rem relativas > Pixeles */
+}
+
+/* Figura Geométrica */
+
+.nameAnimal{
+    position: fixed;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 50px;
+    top: 250px;
+    left: 150px;
+}
+
+.signature{
+    position: fixed;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    color: rgb(48, 48, 48);
+    top: 240px;
+    left: 152px;
+}
+
+.cabezaZorro{
+    z-index: 1;
+    position: fixed;
+    background-color: rgb(233, 69, 69);
+    height: 10rem;
+    width: 10rem;
+    top: 180px;
+    left: 486px;
+}
+
+.sombraCabezaZorro{
+    z-index: 3;
+    position: fixed;
+    background-color: rgb(175, 41, 41);
+    height: 10rem;
+    width: 3rem;
+    top: 180px;
+    left: 543px;
+}
+
+.ojoDer{
+    z-index: 2;
+    position: fixed;
+    background-color: rgb(0, 0, 0);
+    height: 1.6rem;
+    width: 3.2rem;
+    top: 225px;
+    left: 593px;
+    border-radius: 50rem 50rem 0rem 0rem;
+}
+
+.ojoDerIris{
+    z-index: 3;
+    position: fixed;
+    background-color: rgb(233, 69, 69);
+    height: 0.5rem;
+    width: 1rem;
+    top: 243px;
+    left: 610px;
+    border-radius: 50rem 50rem 0rem 0rem;
+}
+
+.ojoIzq{
+    z-index: 2;
+    position: fixed;
+    background-color: rgb(0, 0, 0);
+    height: 1.6rem;
+    width: 3.2rem;
+    top: 225px;
+    left: 490px;
+    border-radius: 50rem 50rem 0rem 0rem;
+}
+
+.ojoIzqIris{
+    z-index: 3;
+    position: fixed;
+    background-color: rgb(233, 69, 69);
+    height: 0.5rem;
+    width: 1rem;
+    top: 243px;
+    left: 507px;
+    border-radius: 50rem 50rem 0rem 0rem;
+}
+
+.nariz{
+    z-index: 4;
+    position: fixed;
+    width: 0rem;
+    height: 0rem;
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    border-bottom: 50px solid #000000;
+    rotate: left;
+    top: 290px;
+    left: 542px;
+}  
+
+.orejaDer{
+    z-index: 2;
+    position: fixed;
+    background-color: rgb(255, 174, 67);
+    height: 3rem;
+    width: 3rem;
+    top: 132px;
+    left: 598px;
+    border-radius: 150% 0% 0% 0%;
+}
+
+.sombraOrejaDer{
+    z-index: 3;
+    position: fixed;
+    background-color: rgb(0, 0, 0);
+    height: 1.5rem;
+    width: 1.5rem;
+    top: 157px;
+    left: 622px;
+    border-radius: 150% 0% 0% 0%;
+}
+
+.orejaIzq{
+    z-index: 2;
+    position: fixed;
+    background-color: rgb(255, 174, 67);
+    height: 3rem;
+    width: 3rem;
+    top: 132px;
+    left: 486px;
+    border-radius: 0% 150% 0% 0%;
+}
+
+.sombraOrejaIzq{
+    z-index: 3;
+    position: fixed;
+    background-color: rgb(0, 0, 0);
+    height: 1.5rem;
+    width: 1.5rem;
+    top: 157px;
+    left: 486px;
+    border-radius: 0% 150% 0% 0%;
+}
+
+.mofleteDer{
+    z-index: 4;
+    position: fixed;
+    background-color: rgb(255, 174, 67);
+    height: 3rem;
+    width: 3rem;
+    top: 292px;
+    left: 598px;
+    border-radius: 150% 0% 0% 0%;
+}
+
+.mofleteIzq{
+    z-index: 4;
+    position: fixed;
+    background-color: rgb(255, 174, 67);
+    height: 3rem;
+    width: 3rem;
+    top: 292px;
+    left: 486px;
+    border-radius: 0% 150% 0% 0%;
+}
+
+
+.cuerpoZorro{
+    z-index: 1;
+    position: fixed;
+    background-color: rgb(233, 69, 69);
+    height: 10rem;
+    width: 10rem;
+    top: 340px;
+    left: 486px;
+}
+
+.sombraCuerpoZorro{
+    z-index: 2;
+    position: fixed;
+    background-color: rgb(248, 193, 109);
+    height: 10rem;
+    width: 10rem;
+    top: 340px;
+    left: 486px;
+    border-radius: 0rem 0rem 0rem 100%;
+}
+
+.patasZorroUno{
+    z-index: 1;
+    position: fixed;
+    background-color: rgb(0, 0, 0);
+    height: 10rem;
+    width: 3rem;
+    top: 500px;
+    left: 486px;
+}
+
+.patasZorroDos{
+    z-index: 1;
+    position: fixed;
+    background-color: rgb(0, 0, 0);
+    height: 10rem;
+    width: 3rem;
+    top: 500px;
+    left: 598px;
+}
+
+.traseroZorro{
+    z-index: 1;
+    position: fixed;
+    background-color: rgb(175, 41, 41);
+    height: 10rem;
+    width: 10rem;
+    top: 340px;
+    left: 646px;
+    border-radius: 0rem 100% 0rem 0rem;
+}
+
+.colaZorroUno{
+    z-index: 1;
+    position: fixed;
+    background-color: rgb(175, 41, 41);
+    height: 10rem;
+    width: 10rem;
+    top: 500px;
+    left: 646px;
+    border-radius: 100% 100% 0 100%;
+}
+
+.sombraColaZorroUno{
+    z-index: 2;
+    position: fixed;
+    background-color: rgb(255, 174, 67);
+    height: 10rem;
+    width: 10rem;
+    top: 500px;
+    left: 646px;
+    border-radius: 100% 100% 100% 100%;
+}
+
+.sombraPequenyaColaZorroUno{
+    z-index: 3;
+    position: fixed;
+    background-color: rgb(255, 207, 145);
+    height: 5rem;
+    width: 5rem;
+    top: 540px;
+    left: 687px;
+    border-radius: 100% 100% 100% 100%;
+}
+
+.colaZorroDos{
+    z-index: 1;
+    position: fixed;
+    background-color: rgb(233, 69, 69);
+    height: 10rem;
+    width: 10rem;
+    top: 660px;
+    left: 646px;
+    border-radius: 0 0% 150% 0%;
+}
+
+.colaZorroTres{
+    z-index: 1;
+    position: fixed;
+    background-color: rgb(233, 69, 69);
+    height: 10rem;
+    width: 10rem;
+    top: 660px;
+    left: 486px;
+}
+
+.sombraColaZorroTresUno{
+    z-index: 2;
+    position: fixed;
+    width: 0rem;
+    height: 0rem;
+    border-right: 40px solid rgb(175, 41, 41);
+    border-top: 40px solid transparent;
+    border-left: 40px solid transparent;
+    border-bottom: 40px solid rgb(175, 41, 41);
+    top: 740px;
+    left: 566px;
+}
+
+.sombraColaZorroTresDos{
+    z-index: 2;
+    position: fixed;
+    width: 0rem;
+    height: 0rem;
+    border-right: 40px solid rgb(175, 41, 41);
+    border-top: 40px solid transparent;
+    border-left: 40px solid transparent;
+    border-bottom: 40px solid rgb(175, 41, 41);
+    top: 660px;
+    left: 566px;
+}   
+
+.sombraColaZorroTresTres{
+    z-index: 2;
+    position: fixed;
+    width: 0rem;
+    height: 0rem;
+    border-right: 40px solid rgb(175, 41, 41);
+    border-top: 40px solid transparent;
+    border-left: 40px solid transparent;
+    border-bottom: 40px solid rgb(175, 41, 41);
+    top: 740px;
+    left: 487px;
+}  
+
+.colaZorroCuatro{
+    z-index: 1;
+    position: fixed;
+    background-color: rgb(255, 174, 67);
+    height: 10rem;
+    width: 10rem;
+    top: 660px;
+    left: 326px;
+    border-radius: 150% 0% 0% 0%;
+}
+
+.sombraColaZorroCuatro{
+    z-index: 2;
+    position: fixed;
+    width: 0rem;
+    height: 0rem;
+    border-right: 80px solid rgb(248, 193, 109);
+    border-top: 80px solid transparent;
+    border-left: 80px solid transparent;
+    border-bottom: 80px solid rgb(248, 193, 109);
+    top: 660px;
+    left: 326px;
+}  
+
+.sombraColaZorroCuatroUno{
+    z-index: 2;
+    position: fixed;
+    width: 0rem;
+    height: 0rem;
+    border-right: 25px solid transparent;
+    border-top: 25px solid rgb(255, 174, 67);
+    border-left: 25px solid rgb(255, 174, 67);
+    border-bottom: 25px solid transparent;
+    top: 770px;
+    left: 436px;
+}  
+
+.sombraColaZorroCuatroDos{
+    z-index: 2;
+    position: fixed;
+    width: 0rem;
+    height: 0rem;
+    border-right: 25px solid transparent;
+    border-top: 25px solid rgb(255, 174, 67);
+    border-left: 25px solid rgb(255, 174, 67);
+    border-bottom: 25px solid transparent;
+    top: 710px;
+    left: 436px;
+}  
+
+.sombraColaZorroCuatroTres{
+    z-index: 2;
+    position: fixed;
+    width: 0rem;
+    height: 0rem;
+    border-right: 25px solid transparent;
+    border-top: 25px solid rgb(255, 174, 67);
+    border-left: 25px solid rgb(255, 174, 67);
+    border-bottom: 25px solid transparent;
+    top: 770px;
+    left: 377px;
+}  
