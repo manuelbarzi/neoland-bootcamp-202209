@@ -1,0 +1,290 @@
+[
+    {
+        "name": "Julian",
+        "surname": "Champagnie",
+        "team": "Philadelphia 76ers",
+        "number": "55",
+        "position": "Forward",
+        "country": "USA",
+        "photo": "https://cdn.nba.com/headshots/nba/latest/260x190/1630577.png"
+    },
+    {
+        "name": "Tyrese",
+        "surname": "Maxey",
+        "team": "Philadelphia 76ers",
+        "number": "0",
+        "position": "Guard",
+        "country": "USA",
+        "photo": "https://cdn.nba.com/headshots/nba/latest/260x190/1630178.png"
+    },
+    {
+        "name": "James",
+        "surname": "Harden",
+        "team": "Philadelphia 76ers",
+        "number": "1",
+        "position": "Guard",
+        "country": "USA",
+        "photo": "https://cdn.nba.com/headshots/nba/latest/260x190/201935.png"
+    },
+    {
+        "name": "Montrezl",
+        "surname": "Harrell",
+        "team": "Philadelphia 76ers",
+        "number": "5",
+        "position": "Forward-center",
+        "country": "USA",
+        "photo": "https://cdn.nba.com/headshots/nba/latest/260x190/1626149.png"
+    },
+    {
+        "name": "De'Anthony",
+        "surname": "Melton",
+        "team": "Philadelphia 76ers",
+        "number": "8",
+        "position": "Guard",
+        "country": "USA",
+        "photo": "https://cdn.nba.com/headshots/nba/latest/260x190/1629001.png"
+    },
+    {
+        "name": "Jaden",
+        "surname": "Springer",
+        "team": "Philadelphia 76ers",
+        "number": "11",
+        "position": "Guard",
+        "country": "USA",
+        "photo": "https://cdn.nba.com/headshots/nba/latest/260x190/1630531.png"
+    },
+    {
+        "name": "Tobias",
+        "surname": "Harris",
+        "team": "Philadelphia 76ers",
+        "number": "12",
+        "position": "Forward",
+        "country": "USA",
+        "photo": "https://cdn.nba.com/headshots/nba/latest/260x190/202699.png"
+    },
+    {
+        "name": "P.J.",
+        "surname": "Tucker",
+        "team": "Philadelphia 76ers",
+        "number": "17",
+        "position": "Forward",
+        "country": "USA",
+        "photo": "https://cdn.nba.com/headshots/nba/latest/260x190/200782.png"
+    },
+    {
+        "name": "Shake",
+        "surname": "Milton",
+        "team": "Philadelphia 76ers",
+        "number": "18",
+        "position": "Guard-forward",
+        "country": "USA",
+        "photo": "https://cdn.nba.com/headshots/nba/latest/260x190/1629003.png"
+    },
+    {
+        "name": "Georges",
+        "surname": "Niang",
+        "team": "Philadelphia 76ers",
+        "number": "20",
+        "position": "Forward",
+        "country": "USA",
+        "photo": "https://cdn.nba.com/headshots/nba/latest/260x190/1627777.png"
+    },
+    {
+        "name": "Joel",
+        "surname": "Embiid",
+        "team": "Philadelphia 76ers",
+        "number": "21",
+        "position": "Forward",
+        "country": "USA",
+        "photo": "https://cdn.nba.com/headshots/nba/latest/260x190/203954.png"
+    },
+    {
+        "name": "Matisse",
+        "surname": "Thybulle",
+        "team": "Philadelphia 76ers",
+        "number": "22",
+        "position": "Guard-forward",
+        "country": "USA",
+        "photo": "https://cdn.nba.com/headshots/nba/latest/260x190/1629680.png"
+    },
+    {
+        "name": "MatisDanuel",
+        "surname": "House Jr.",
+        "team": "Philadelphia 76ers",
+        "number": "25",
+        "position": "Power-forward",
+        "country": "USA",
+        "photo": "https://cdn.nba.com/headshots/nba/latest/260x190/1627863.png"
+    },
+    {
+        "name": "Furkan",
+        "surname": "Korkmaz",
+        "team": "Philadelphia 76ers",
+        "number": "30",
+        "position": "Guard-forward",
+        "country": "USA",
+        "photo": "https://cdn.nba.com/headshots/nba/latest/260x190/1627788.png"
+    },
+    {
+        "name": "Michael",
+        "surname": "Foster Jr.",
+        "team": "Philadelphia 76ers",
+        "number": "35",
+        "position": "Forward",
+        "country": "USA",
+        "photo": "https://cdn.nba.com/headshots/nba/latest/260x190/1630701.png"
+    },
+    {
+        "name": "Paul",
+        "surname": "Reed",
+        "team": "Philadelphia 76ers",
+        "number": "44",
+        "position": "Forward",
+        "country": "USA",
+        "photo": "https://cdn.nba.com/headshots/nba/latest/260x190/1630194.png"
+    },
+    {
+        "name": "Kevin",
+        "surname": "Love",
+        "team": "Cleveland Cavaliers",
+        "number": "0",
+        "position": "Forward",
+        "country": "USA",
+        "photo": "https://cdn.nba.com/headshots/nba/latest/260x190/201567.png"
+    },
+    {
+        "name": "Caris",
+        "surname": "LeVert",
+        "team": "Cleveland Cavaliers",
+        "number": "3",
+        "position": "Guard",
+        "country": "USA",
+        "photo": "https://cdn.nba.com/headshots/nba/latest/260x190/1627747.png"
+    },
+    {
+        "name": "Evan",
+        "surname": "Mobley",
+        "team": "Cleveland Cavaliers",
+        "number": "4",
+        "position": "Center",
+        "country": "USA",
+        "photo": "https://cdn.nba.com/headshots/nba/latest/260x190/1630596.png"
+    },
+    {
+        "name": "Lamar",
+        "surname": "Stevens",
+        "team": "Cleveland Cavaliers",
+        "number": "8",
+        "position": "Forward",
+        "country": "USA",
+        "photo": "https://cdn.nba.com/headshots/nba/latest/260x190/1630205.png"
+    },
+    {
+        "name": "Dylan",
+        "surname": "Windler",
+        "team": "Cleveland Cavaliers",
+        "number": "9",
+        "position": "Guard-forward",
+        "country": "USA",
+        "photo": "https://cdn.nba.com/headshots/nba/latest/260x190/1629685.png"
+    },
+    {
+        "name": "Darius",
+        "surname": "Garland",
+        "team": "Cleveland Cavaliers",
+        "number": "10",
+        "position": "Guard",
+        "country": "USA",
+        "photo": "https://cdn.nba.com/headshots/nba/latest/260x190/1629636.png"
+    },
+    {
+        "name": "Ricky",
+        "surname": "Rubio",
+        "team": "Cleveland Cavaliers",
+        "number": "13",
+        "position": "Guard",
+        "country": "Spain",
+        "photo": "https://cdn.nba.com/headshots/nba/latest/260x190/201937.png"
+    },
+    {
+        "name": "Isaiah",
+        "surname": "Mobley",
+        "team": "Cleveland Cavaliers",
+        "number": "15",
+        "position": "Forward",
+        "country": "Spain",
+        "photo": "https://cdn.nba.com/headshots/nba/latest/260x190/1630600.png"
+    },
+    {
+        "name": "Cedi",
+        "surname": "Osman",
+        "team": "Cleveland Cavaliers",
+        "number": "16",
+        "position": "Forward",
+        "country": "USA",
+        "photo": "https://cdn.nba.com/headshots/nba/latest/260x190/1626224.png"
+    },
+    {
+        "name": "Raul",
+        "surname": "Neto",
+        "team": "Cleveland Cavaliers",
+        "number": "19",
+        "position": "Guard",
+        "country": "USA",
+        "photo": "https://cdn.nba.com/headshots/nba/latest/260x190/203526.png"
+    },
+    {
+        "name": "Mamadi",
+        "surname": "Diakite",
+        "team": "Cleveland Cavaliers",
+        "number": "21",
+        "position": "Guard",
+        "country": "USA",
+        "photo": "https://cdn.nba.com/headshots/nba/latest/260x190/1629603.png"
+    },
+    {
+        "name": "Jarrett",
+        "surname": "Allen",
+        "team": "Cleveland Cavaliers",
+        "number": "31",
+        "position": "Center",
+        "country": "USA",
+        "photo": "https://cdn.nba.com/headshots/nba/latest/260x190/1628386.png"
+    },
+    {
+        "name": "Dean",
+        "surname": "Wade",
+        "team": "Cleveland Cavaliers",
+        "number": "32",
+        "position": "Forward-center",
+        "country": "USA",
+        "photo": "https://cdn.nba.com/headshots/nba/latest/260x190/1629731.png"
+    },
+    {
+        "name": "Robin",
+        "surname": "Lopez",
+        "team": "Cleveland Cavaliers",
+        "number": "33",
+        "position": "Center",
+        "country": "USA",
+        "photo": "https://cdn.nba.com/headshots/nba/latest/260x190/201577.png"
+    },
+    {
+        "name": "Isaac",
+        "surname": "Okoro",
+        "team": "Cleveland Cavaliers",
+        "number": "35",
+        "position": "Forward-center",
+        "country": "USA",
+        "photo": "https://cdn.nba.com/headshots/nba/latest/260x190/1630171.png"
+    },
+    {
+        "name": "Donovan",
+        "surname": "Mitchell",
+        "team": "Cleveland Cavaliers",
+        "number": "45",
+        "position": "Forward-center",
+        "country": "USA",
+        "photo": "https://cdn.nba.com/headshots/nba/latest/260x190/1628378.png"
+    }
+]
