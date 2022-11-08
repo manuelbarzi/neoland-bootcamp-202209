@@ -1,18 +1,12 @@
-// JAUME VERSION
+const { createReadStream, createWriteStream } = require('fs')
 
-const fs = require('fs')
+const { argv: [, , from, to], memoryUsage } = process
 
-const a = process.argv[2]
-const b = process.argv[3]
+console.log('before stream', memoryUsage())
 
+const rs = createReadStream(from)
+const ws = createWriteStream(to)
 
-fs.copyFile(a, b, (error) => {
-    if (error) {
-        console.log(error.message)
+rs.pipe(ws)
 
-        return
-    }
-
-})
-
-console.log('File Copied')
+ws.on('finish', () => console.log('after stream', memoryUsage()))
