@@ -1,0 +1,39 @@
+*{
+    margin: 0;
+}
+
+header {
+    /* interno */
+    background-color: blue;
+
+    /* externo */
+    position: fixed;
+    width: 100%;
+    top: 0;
+    height: 30px;
+}
+
+.burguer-list{
+    /* interno */
+    background-color: inherit;
+    width: 100px;
+    gap: 2px;
+
+    /* externo */
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+section {
+    margin: 100px 0;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+}
+
+span .material-symbols-outlined {
+    width: 10px;
+}

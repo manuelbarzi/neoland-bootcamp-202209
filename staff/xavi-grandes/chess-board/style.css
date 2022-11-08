@@ -1,0 +1,46 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: cornsilk;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.tablero {
+    height: 80vw;
+    width: 80vw;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    border: 1rem solid black;
+    text-align: center;
+}
+
+.box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: fit-content;
+    min-height: fit-content;
+}
+
+.white {
+    background-color: white;
+}
+
+.black {
+    background-color: rgb(205, 197, 197);
+    color: white;
+}
+
+.token {
+    width: 90%;
+    height: 90%;
+}
+
