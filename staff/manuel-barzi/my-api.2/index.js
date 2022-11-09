@@ -1,23 +1,19 @@
-const express = require('express')
+const { createServer } = require('http')
 const { readFile } = require('fs')
+const parseQueryStringFromUrl = require('./utils/parseQueryStringFromUrl')
 
-const api = express()
-
-api.get('/hello-world', (req, res) => res.send('hola mundo'))
-
-api.get('/search', (req, res) => {
+const api = createServer((req, res) => {
     readFile('db.json', 'utf8', (error, json) => {
         if (error) {
-            res.status(500)
-            res.setHeader('Content-type', 'application/json')
-            res.send(`{ "error": ${error.message} }`)
+            res.writeHead(500, { 'Content-type': 'application/json' })
+            res.end(`{ "error": ${error.message} }`)
 
             return
         }
 
         const data = JSON.parse(json)
 
-        const { q, name, surname } = req.query
+        const { q, name, surname } = parseQueryStringFromUrl(req.url)
 
         let filtered = data
 
@@ -30,10 +26,8 @@ api.get('/search', (req, res) => {
         if (surname)
             filtered = filtered.filter(item => item.surname.includes(surname))
 
-        res.status(200)
-        res.setHeader('Content-type', 'application/json')
-        //res.send(JSON.stringify(filtered))
-        res.json(filtered)
+        res.writeHead(200, { 'Content-type': 'application/json' })
+        res.end(JSON.stringify(filtered))
     })
 })
 
