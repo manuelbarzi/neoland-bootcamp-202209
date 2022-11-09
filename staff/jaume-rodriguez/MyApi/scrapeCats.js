@@ -1,7 +1,6 @@
 var { XMLHttpRequest } = require("xmlhttprequest")
 var { JSDOM } = require('jsdom')
-
-var q = 'simpsons'
+const { writeFile } = require('fs')
 
 var xhr = new XMLHttpRequest
 
@@ -18,17 +17,28 @@ xhr.onload = () => {
     var results = []
 
     boxes.forEach(box => {
+
         var backgroundImage = box.querySelector('.Thumbnail_image__ucHEX').style.backgroundImage
 
         var imageUrl = 'https://http.cat/' + backgroundImage.substring(5, backgroundImage.length - 2)
 
-        var result = { imageUrl } // code, text
+        const code = box.querySelector(".Thumbnail_title__RZPuS").textContent;
+
+        // const text = box.querySelector(".Thumbnail_content__YPxza > p").textContent;
+        const text = box.querySelector("p").textContent;
+        var result = { imageUrl, code, text }
         results.push(result)
     })
 
-    console.log(JSON.stringify(results))
+    const json = JSON.stringify(results)
 
-    // TODO save results in db.json (in json format)
+    writeFile('db.json', json, (error => {
+        if (error) {
+            console.log('writeFile Failed')
+        } else {
+            console.log('suceesss')
+        }
+    }));
 }
 
 // req
