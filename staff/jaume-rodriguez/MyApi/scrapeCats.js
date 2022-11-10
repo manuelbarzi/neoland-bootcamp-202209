@@ -25,7 +25,7 @@ xhr.onload = () => {
         results.push(result)
     })
 
-    const json = JSON.stringify(results)
+    const json = JSON.stringify(results, null, 4)
 
     writeFile('db.json', json, (error => {
         if (error) {

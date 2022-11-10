@@ -14,7 +14,11 @@
     "code": "102",
     "text": "Processing"
   },
-  { "imageUrl": "https://http.cat/images/200.jp", "code": "200", "text": "OK" },
+  {
+    "imageUrl": "https://http.cat/images/200.jp",
+    "code": "200",
+    "text": "OK"
+  },
   {
     "imageUrl": "https://http.cat/images/201.jp",
     "code": "201",
