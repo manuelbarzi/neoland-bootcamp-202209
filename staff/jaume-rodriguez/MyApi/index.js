@@ -3,9 +3,11 @@ const { readFile } = require('fs')
 
 const api = express()
 
-api.get('/hello-world', (req, res) => res.send('hola mundo'))
+// api.get('/search', (req, res) => res.send('hola mundo')) -> Ejemplo
 
-api.get('/search', (req, res) => {
+
+// http://localhost:8080/MyApi?
+api.get('/MyApi', (req, res) => {
     readFile('db.json', 'utf8', (error, json) => {
         if (error) {
             res.status(500)
@@ -16,19 +18,25 @@ api.get('/search', (req, res) => {
         }
 
         const data = JSON.parse(json)
-
-        const { q, name, surname } = req.query
+        const { q, imageUrl, code, text } = req.query
 
         let filtered = data
 
+        // http://localhost:8080/MyApi?q=
         if (q)
-            filtered = filtered.filter(item => item.name.includes(q) || item.surname.includes(q) || item.email.includes(q) || item.phone.includes(q))
+            filtered = filtered.filter(item => item.imageUrl.includes(q) || item.code.includes(q) || item.text.includes(q))
 
-        if (name)
-            filtered = filtered.filter(item => item.name.includes(name))
+        // http://localhost:8080/MyApi?imageUrl=
+        if (imageUrl)
+            filtered = filtered.filter(item => item.imageUrl.includes(imageUrl))
 
-        if (surname)
-            filtered = filtered.filter(item => item.surname.includes(surname))
+        // http://localhost:8080/MyApi?code=
+        if (code)
+            filtered = filtered.filter(item => item.code.includes(code))
+
+        // http://localhost:8080/MyApi?text=
+        if (text)
+            filtered = filtered.filter(item => item.text.includes(text))
 
         res.status(200)
         res.setHeader('Content-type', 'application/json')
