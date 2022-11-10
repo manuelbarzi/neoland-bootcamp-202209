@@ -48,6 +48,5 @@ function render() {
         usa.icon = '💥'
         console.log(usa.icon)
     }
-
     
 }
