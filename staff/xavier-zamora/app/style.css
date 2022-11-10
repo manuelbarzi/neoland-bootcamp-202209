@@ -1,0 +1,124 @@
+/* Reset */
+h1, h2, h3, h4, h5, h6{
+    margin: 0%;
+    
+}
+
+/* index y login*/
+*{
+    box-sizing: 100%;
+}
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    background-color: rgb(255, 255, 255);
+}
+
+.container { 
+    margin: 0.5rem;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.container__item--left { 
+    align-self: start;
+}
+
+.container__item--right { 
+    align-self: center;
+    margin-bottom: 2rem;
+}
+#A{
+    margin-bottom: 1rem;
+    margin-left: 6rem;
+    margin-right: 6rem;
+}
+#aform{
+    margin-bottom: 3rem;
+    text-decoration: none;
+    color: blue;
+}
+h2{
+    margin-top: 3rem;
+    color: rgb(0, 221, 255);
+    animation-name: myframes3;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+form{
+    border: 4px solid rgb(0, 221, 255);
+    border-radius: 7%;
+    animation-name: myframes2;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    background-color: azure;
+}
+#buttonform{
+    border-radius: 5%;
+    margin-top: 1rem;
+    background-color: rgb(0, 221, 255);
+    color: white;
+    width: 40%;
+    animation-name: myframes;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+@keyframes myframes {
+    0%{
+        background-color: rgb(0, 0, 0);
+    }
+    50%{
+        background-color: rgb(0, 221, 255);
+    }
+}
+@keyframes myframes2 {
+    0%{
+        border:4px solid rgb(0,0,0); 
+    }
+    50%{
+        border:4px solid rgb(0, 221, 255);
+    }
+}
+@keyframes myframes3 {
+    0%{
+        color: rgb(0,0,0); 
+    }
+    50%{
+        color: rgb(0, 221, 255);
+    }
+}
+
+/* Header */
+
+.header{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgb(0, 255, 255);
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 1);
+}
+.header__menu{
+    position: fixed;
+    top: 36px;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+    background-color: inherit;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 1);
+}
+button{
+    background-color: transparent;
+    border: none;
+}
+.header__title{
+    margin-left: 5%;
+    font-size: 1em;
+}
