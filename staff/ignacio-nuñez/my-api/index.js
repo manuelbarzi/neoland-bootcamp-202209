@@ -1,39 +1,36 @@
-const { createServer } = require('http')
+const express = require('express')
 const { readFile } = require('fs')
 
-function paseQueryString(url){
-    const query = url.substring(2).split('&').reduce((params, item)=>{
-        const [key, value] = item.split('=')
+const api = express()
 
-        params[key] = value
-
-        return params
-    }, {})
-
-    return query
-}
-
-const api = createServer((req, res) =>{
+api.get('/search', (req, res) =>{
     readFile('db.json', 'utf8', (error, json)=>{
         if(error){
-            res.writeHead(500,{ 'content-type': 'application/json' })
-
-            res.end(`{ "error": ${error.message} }`)
+            res.status(500)
+            res.setHeader('content-type', 'application/json')
+            res.end(`{ "error": "${error.message}" }`)
 
             return
         }
-        const query = paseQueryString(req.url)
-
-        res.writeHead(200, { 'content-type': 'application/json' })
-
         const data = JSON.parse(json)
 
-        const userRetrieve = data.filter(db=>{
-            return db.name.includes(query.name) || db.surname.includes(query.surname) || 
-            db.email.includes(query.email) || db.phone.includes(query.phone)
-        })
+        const { q, name, surname } = req.query
+        
+         let filtered = data
 
-        res.end(JSON.stringify(userRetrieve)) 
+        if (q)
+            filtered = filtered.filter(item => item.name.includes(q) || item.surname.includes(q) || item.email.includes(q) || item.phone.includes(q))
+        
+        if (name)
+            filtered = filtered.filter(item => item.name.includes(name))
+
+        if (surname)
+            filtered = filtered.filter(item => item.surname.includes(surname))
+        
+        res.status(200)
+        res.setHeader('content-type', 'application/json')
+        
+        res.json(filtered)
     })
 })
 

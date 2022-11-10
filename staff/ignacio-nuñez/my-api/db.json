@@ -1,32 +1,342 @@
 [
-    {
-        "name": "Pepito",
-        "surname": "Grillo",
-        "email": "pepito@grillo.com",
-        "phone": "+34 123123123"
-    },
-    {
-        "name": "Wendy",
-        "surname": "Darling",
-        "email": "wendy@darling.com",
-        "phone": "+34123123124"
-    },
-    {
-        "name": "Peter",
-        "surname": "Pan",
-        "email": "peter@pan.com",
-        "phone": "+34123123125"
-    },
-    {
-        "name": "Cu",
-        "surname": "Lebron",
-        "email": "cu@lebron.com",
-        "phone": "+34123123126"
-    },
-    {
-        "name": "Pata",
-        "surname": "Nata",
-        "email": "pata@nata.com",
-        "phone": "+34123123127"
-    }
+ {
+  "imageUrl": "https://http.cat/images/100.jpg",
+  "codeStatus": "100",
+  "textStatus": "Continue"
+ },
+ {
+  "imageUrl": "https://http.cat/images/101.jpg",
+  "codeStatus": "101",
+  "textStatus": "Switching Protocols"
+ },
+ {
+  "imageUrl": "https://http.cat/images/102.jpg",
+  "codeStatus": "102",
+  "textStatus": "Processing"
+ },
+ {
+  "imageUrl": "https://http.cat/images/200.jpg",
+  "codeStatus": "200",
+  "textStatus": "OK"
+ },
+ {
+  "imageUrl": "https://http.cat/images/201.jpg",
+  "codeStatus": "201",
+  "textStatus": "Created"
+ },
+ {
+  "imageUrl": "https://http.cat/images/202.jpg",
+  "codeStatus": "202",
+  "textStatus": "Accepted"
+ },
+ {
+  "imageUrl": "https://http.cat/images/203.jpg",
+  "codeStatus": "203",
+  "textStatus": "Non-Authoritative Information"
+ },
+ {
+  "imageUrl": "https://http.cat/images/204.jpg",
+  "codeStatus": "204",
+  "textStatus": "No Content"
+ },
+ {
+  "imageUrl": "https://http.cat/images/206.jpg",
+  "codeStatus": "206",
+  "textStatus": "Partial Content"
+ },
+ {
+  "imageUrl": "https://http.cat/images/207.jpg",
+  "codeStatus": "207",
+  "textStatus": "Multi-Status"
+ },
+ {
+  "imageUrl": "https://http.cat/images/300.jpg",
+  "codeStatus": "300",
+  "textStatus": "Multiple Choices"
+ },
+ {
+  "imageUrl": "https://http.cat/images/301.jpg",
+  "codeStatus": "301",
+  "textStatus": "Moved Permanently"
+ },
+ {
+  "imageUrl": "https://http.cat/images/302.jpg",
+  "codeStatus": "302",
+  "textStatus": "Found"
+ },
+ {
+  "imageUrl": "https://http.cat/images/303.jpg",
+  "codeStatus": "303",
+  "textStatus": "See Other"
+ },
+ {
+  "imageUrl": "https://http.cat/images/304.jpg",
+  "codeStatus": "304",
+  "textStatus": "Not Modified"
+ },
+ {
+  "imageUrl": "https://http.cat/images/305.jpg",
+  "codeStatus": "305",
+  "textStatus": "Use Proxy"
+ },
+ {
+  "imageUrl": "https://http.cat/images/307.jpg",
+  "codeStatus": "307",
+  "textStatus": "Temporary Redirect"
+ },
+ {
+  "imageUrl": "https://http.cat/images/308.jpg",
+  "codeStatus": "308",
+  "textStatus": "Permanent Redirect"
+ },
+ {
+  "imageUrl": "https://http.cat/images/400.jpg",
+  "codeStatus": "400",
+  "textStatus": "Bad Request"
+ },
+ {
+  "imageUrl": "https://http.cat/images/401.jpg",
+  "codeStatus": "401",
+  "textStatus": "Unauthorized"
+ },
+ {
+  "imageUrl": "https://http.cat/images/402.jpg",
+  "codeStatus": "402",
+  "textStatus": "Payment Required"
+ },
+ {
+  "imageUrl": "https://http.cat/images/403.jpg",
+  "codeStatus": "403",
+  "textStatus": "Forbidden"
+ },
+ {
+  "imageUrl": "https://http.cat/images/404.jpg",
+  "codeStatus": "404",
+  "textStatus": "Not Found"
+ },
+ {
+  "imageUrl": "https://http.cat/images/405.jpg",
+  "codeStatus": "405",
+  "textStatus": "Method Not Allowed"
+ },
+ {
+  "imageUrl": "https://http.cat/images/406.jpg",
+  "codeStatus": "406",
+  "textStatus": "Not Acceptable"
+ },
+ {
+  "imageUrl": "https://http.cat/images/407.jpg",
+  "codeStatus": "407",
+  "textStatus": "Proxy Authentication Required"
+ },
+ {
+  "imageUrl": "https://http.cat/images/408.jpg",
+  "codeStatus": "408",
+  "textStatus": "Request Timeout"
+ },
+ {
+  "imageUrl": "https://http.cat/images/409.jpg",
+  "codeStatus": "409",
+  "textStatus": "Conflict"
+ },
+ {
+  "imageUrl": "https://http.cat/images/410.jpg",
+  "codeStatus": "410",
+  "textStatus": "Gone"
+ },
+ {
+  "imageUrl": "https://http.cat/images/411.jpg",
+  "codeStatus": "411",
+  "textStatus": "Length Required"
+ },
+ {
+  "imageUrl": "https://http.cat/images/412.jpg",
+  "codeStatus": "412",
+  "textStatus": "Precondition Failed"
+ },
+ {
+  "imageUrl": "https://http.cat/images/413.jpg",
+  "codeStatus": "413",
+  "textStatus": "Payload Too Large"
+ },
+ {
+  "imageUrl": "https://http.cat/images/414.jpg",
+  "codeStatus": "414",
+  "textStatus": "Request-URI Too Long"
+ },
+ {
+  "imageUrl": "https://http.cat/images/415.jpg",
+  "codeStatus": "415",
+  "textStatus": "Unsupported Media Type"
+ },
+ {
+  "imageUrl": "https://http.cat/images/416.jpg",
+  "codeStatus": "416",
+  "textStatus": "Request Range Not Satisfiable"
+ },
+ {
+  "imageUrl": "https://http.cat/images/417.jpg",
+  "codeStatus": "417",
+  "textStatus": "Expectation Failed"
+ },
+ {
+  "imageUrl": "https://http.cat/images/418.jpg",
+  "codeStatus": "418",
+  "textStatus": "I’m a teapot"
+ },
+ {
+  "imageUrl": "https://http.cat/images/420.jpg",
+  "codeStatus": "420",
+  "textStatus": "Enhance Your Calm"
+ },
+ {
+  "imageUrl": "https://http.cat/images/421.jpg",
+  "codeStatus": "421",
+  "textStatus": "Misdirected Request"
+ },
+ {
+  "imageUrl": "https://http.cat/images/422.jpg",
+  "codeStatus": "422",
+  "textStatus": "Unprocessable Entity"
+ },
+ {
+  "imageUrl": "https://http.cat/images/423.jpg",
+  "codeStatus": "423",
+  "textStatus": "Locked"
+ },
+ {
+  "imageUrl": "https://http.cat/images/424.jpg",
+  "codeStatus": "424",
+  "textStatus": "Failed Dependency"
+ },
+ {
+  "imageUrl": "https://http.cat/images/425.jpg",
+  "codeStatus": "425",
+  "textStatus": "Too Early"
+ },
+ {
+  "imageUrl": "https://http.cat/images/426.jpg",
+  "codeStatus": "426",
+  "textStatus": "Upgrade Required"
+ },
+ {
+  "imageUrl": "https://http.cat/images/429.jpg",
+  "codeStatus": "429",
+  "textStatus": "Too Many Requests"
+ },
+ {
+  "imageUrl": "https://http.cat/images/431.jpg",
+  "codeStatus": "431",
+  "textStatus": "Request Header Fields Too Large"
+ },
+ {
+  "imageUrl": "https://http.cat/images/444.jpg",
+  "codeStatus": "444",
+  "textStatus": "No Response"
+ },
+ {
+  "imageUrl": "https://http.cat/images/450.jpg",
+  "codeStatus": "450",
+  "textStatus": "Blocked by Windows Parental Controls"
+ },
+ {
+  "imageUrl": "https://http.cat/images/451.jpg",
+  "codeStatus": "451",
+  "textStatus": "Unavailable For Legal Reasons"
+ },
+ {
+  "imageUrl": "https://http.cat/images/497.jpg",
+  "codeStatus": "497",
+  "textStatus": "HTTP Request Sent to HTTPS Port"
+ },
+ {
+  "imageUrl": "https://http.cat/images/498.jpg",
+  "codeStatus": "498",
+  "textStatus": "Token expired/invalid"
+ },
+ {
+  "imageUrl": "https://http.cat/images/499.jpg",
+  "codeStatus": "499",
+  "textStatus": "Client Closed Request"
+ },
+ {
+  "imageUrl": "https://http.cat/images/500.jpg",
+  "codeStatus": "500",
+  "textStatus": "Internal Server Error"
+ },
+ {
+  "imageUrl": "https://http.cat/images/501.jpg",
+  "codeStatus": "501",
+  "textStatus": "Not Implemented"
+ },
+ {
+  "imageUrl": "https://http.cat/images/502.jpg",
+  "codeStatus": "502",
+  "textStatus": "Bad Gateway"
+ },
+ {
+  "imageUrl": "https://http.cat/images/503.jpg",
+  "codeStatus": "503",
+  "textStatus": "Service Unavailable"
+ },
+ {
+  "imageUrl": "https://http.cat/images/504.jpg",
+  "codeStatus": "504",
+  "textStatus": "Gateway Timeout"
+ },
+ {
+  "imageUrl": "https://http.cat/images/506.jpg",
+  "codeStatus": "506",
+  "textStatus": "Variant Also Negotiates"
+ },
+ {
+  "imageUrl": "https://http.cat/images/507.jpg",
+  "codeStatus": "507",
+  "textStatus": "Insufficient Storage"
+ },
+ {
+  "imageUrl": "https://http.cat/images/508.jpg",
+  "codeStatus": "508",
+  "textStatus": "Loop Detected"
+ },
+ {
+  "imageUrl": "https://http.cat/images/509.jpg",
+  "codeStatus": "509",
+  "textStatus": "Bandwidth Limit Exceeded"
+ },
+ {
+  "imageUrl": "https://http.cat/images/510.jpg",
+  "codeStatus": "510",
+  "textStatus": "Not Extended"
+ },
+ {
+  "imageUrl": "https://http.cat/images/511.jpg",
+  "codeStatus": "511",
+  "textStatus": "Network Authentication Required"
+ },
+ {
+  "imageUrl": "https://http.cat/images/521.jpg",
+  "codeStatus": "521",
+  "textStatus": "Web Server Is Down"
+ },
+ {
+  "imageUrl": "https://http.cat/images/522.jpg",
+  "codeStatus": "522",
+  "textStatus": "Connection Timed Out"
+ },
+ {
+  "imageUrl": "https://http.cat/images/523.jpg",
+  "codeStatus": "523",
+  "textStatus": "Origin Is Unreachable"
+ },
+ {
+  "imageUrl": "https://http.cat/images/525.jpg",
+  "codeStatus": "525",
+  "textStatus": "SSL Handshake Failed"
+ },
+ {
+  "imageUrl": "https://http.cat/images/599.jpg",
+  "codeStatus": "599",
+  "textStatus": "Network Connect Timeout Error"
+ }
 ]
