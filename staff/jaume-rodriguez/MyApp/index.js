@@ -27,6 +27,13 @@ app.get('/', (req, res) => {
 app.get('/search', (req, res) => {
     const { q } = req.query
 
+    /*     const testCallback = (error, cats) => {
+            res.status(200)
+            res.setHeader('Content-Type', 'text/html')
+            res.send('mis cojones')
+        }
+        searchHttpCats(q, testCallback) */
+
     searchHttpCats(q, (error, cats) => {
         if (error) {
             res.status(500)
