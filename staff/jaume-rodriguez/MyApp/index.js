@@ -1,38 +1,125 @@
 const express = require('express')
 const searchHttpCats = require('./logic/searchHttpCats')
+const authenticateUser = require('./logic/authenticateUser')
+const retrieveUser = require('./logic/retrieveUser')
+const bodyParser = require("body-parser");
+const formUrlEncodedBodyParser = require("./middlewares/formUrlEncodedBodyParser");
+
+const jsonBodyParser = bodyParser.json();
+// middleware to parse json
+
+const formBodyParser = bodyParser.urlencoded({ extended: false });
+// middleware to parse urlencoded form
 
 const app = express()
 
 app.use(express.static('public'))
 
-app.get('/', (req, res) => {
+app.get('/login', (req, res) => {
     res.status(200)
     res.setHeader('Content-Type', 'text/html')
-    res.send(`
-    <html>
-    <head>
-        <title>Http Cats</title>
-    </head>
-    <body>
-        <h1>Search</h1>
-        <form action="/search">
-            <input type="text" name="q">
-            <button>Search</button>
-        </form>
-    </body>
-    </html>`)
+    res.send(`<html class="h-screen">
+                <head>
+                    <title>Http Cats</title>
+                    <link href="/style.css" rel="stylesheet" />
+                </head>
+                <body class="flex h-full justify-center">
+                    <div class="h-full flex flex-col flex-wrap justify-center items-center">
+                        <form class="flex flex-col items-start flex-wrap" action="/login" method="post">
+                            <input type="email" name="email" placeholder="email" />
+                            <input class="p-4" type="password" name="password" placeholder="password" />
+                            <button class="self-center">Login</button>
+                        </form>
+                         <a href="/register">Register</a>
+                    </div>
+                </body>
+            </html>`)
 })
 
-// http://localhost/search?q=
+app.post("/login", formBodyParser, (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        authenticateUser(email, password, (error, user) => {
+            if (error) {
+                res.status(500)
+                res.send(error.message)
+
+                return
+            }
+
+            res.setHeader('set-cookie', `id=${user.id}`)
+            res.redirect('/')
+        })
+    } catch (error) {
+        res.status(500)
+        res.send(error.message)
+    }
+});
+
+app.get('/', (req, res) => {
+    const { cookie } = req.headers // id=user-2
+
+    if (!cookie) {
+        res.redirect('/login')
+
+        return
+    }
+
+    const [, userId] = cookie.split('=')
+
+    try {
+        retrieveUser(userId, (error, user) => {
+            if (error) {
+                res.status(500)
+                res.send(error.message)
+
+                return
+            }
+
+            res.setHeader('Content-Type', 'text/html')
+            res.send(`<html>
+                <head>
+                    <title>Http Cats</title>
+                    <link href="/style.css" rel="stylesheet" />
+                </head>
+                <body class="flex flex-col items-center">
+                    hello ${user.name}!
+                    
+                </body>
+            </html>`)
+        })
+    } catch (error) {
+        res.status(500)
+        res.send(error.message)
+    }
+})
+
+app.get('/register', (req, res) => {
+    res.status(200)
+    res.setHeader('Content-Type', 'text/html')
+    res.send(`<html>
+                <head>
+                    <title>Http Cats</title>
+                    <link href="/style.css" rel="stylesheet" />
+                </head>
+                <body class="flex h-full justify-center">
+                    <div class="h-full flex flex-col flex-wrap justify-center items-center">
+                        <form class="flex flex-col items-start flex-wrap">
+                            <input type="name" name="name" placeholder="name" />
+                            <input type="email" name="email" placeholder="email" />
+                            <input type="password" name="password" placeholder="password" />
+                            <button class="self-center">Register</button>
+                        </form>
+                        <a href="/login">Login</a>
+                    </div>
+                </body>
+            </html>`)
+})
+
+// http://localhost/search?q=C
 app.get('/search', (req, res) => {
     const { q } = req.query
-
-    /*     const testCallback = (error, cats) => {
-            res.status(200)
-            res.setHeader('Content-Type', 'text/html')
-            res.send('mis cojones')
-        }
-        searchHttpCats(q, testCallback) */
 
     searchHttpCats(q, (error, cats) => {
         if (error) {
@@ -49,6 +136,7 @@ app.get('/search', (req, res) => {
 
             return
         }
+
         res.status(200)
         res.setHeader('Content-Type', 'text/html')
         res.send(`<html>
@@ -56,6 +144,11 @@ app.get('/search', (req, res) => {
                     <title>Http Cats</title>
                 </head>
                 <body>
+                    <h1>Search</h1>
+                    <form action="/search">
+                        <input type="text" name="q" value="${q}">
+                        <button>Search</button>
+                    </form>
                     <h1>Results</h1>
                     <ul>
                         ${cats.reduce((lis, cat) => {
