@@ -1,21 +1,21 @@
-const express = require('express')
+const { createServer } = require('http')
 const { readFile } = require('fs')
+const parseQueryStringFromUrl = require('./utils/parseQueryStringFromUrl')
 
-const api = express()
+const PORT = 8080 
 
-api.get('/search', (req, res) => {
+const api = createServer((req, res) => {
     readFile('db.json', 'utf8', (error, json) => {
-         if (error) {
-            res.status(500)
-            res.setHeader('Content-Type', 'application/json')
-            res.json({ error: error.message })
+        if (error) {
+            res.writeHead(500, { 'Content-type': 'application/json' })
+            res.end(`{ "error": ${error.message} }`)
 
             return
         }
 
         const data = JSON.parse(json)
 
-        const { q, name, surname } = req.query
+        const { q, name, surname } = parseQueryStringFromUrl(req.url)
 
         let filtered = data
 
@@ -28,11 +28,10 @@ api.get('/search', (req, res) => {
         if (surname)
             filtered = filtered.filter(item => item.surname.includes(surname))
 
-        res.status(200)
-        res.setHeader('Content-type', 'application/json')
-        //res.send(JSON.stringify(filtered))
-        res.json(filtered)
+        res.writeHead(200, { 'Content-type': 'application/json' })
+        res.end(JSON.stringify(filtered))
     })
 })
 
-api.listen(8081)
+api.listen(PORT)
+console.log('server listen on port 8080')

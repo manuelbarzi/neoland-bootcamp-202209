@@ -3,12 +3,14 @@ const { readFile } = require('fs')
 
 const api = express()
 
+api.get('/hello-world', (req, res) => res.send('hola mundo'))
+
 api.get('/search', (req, res) => {
     readFile('db.json', 'utf8', (error, json) => {
-         if (error) {
+        if (error) {
             res.status(500)
-            res.setHeader('Content-Type', 'application/json')
-            res.json({ error: error.message })
+            res.setHeader('Content-type', 'application/json')
+            res.send(`{ "error": ${error.message} }`)
 
             return
         }
@@ -35,4 +37,4 @@ api.get('/search', (req, res) => {
     })
 })
 
-api.listen(8081)
+api.listen(8080)
