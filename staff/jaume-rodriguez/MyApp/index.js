@@ -3,19 +3,18 @@ const searchHttpCats = require('./logic/searchHttpCats')
 const authenticateUser = require('./logic/authenticateUser')
 const retrieveUser = require('./logic/retrieveUser')
 const bodyParser = require("body-parser");
-const formUrlEncodedBodyParser = require("./middlewares/formUrlEncodedBodyParser");
 
 const jsonBodyParser = bodyParser.json();
 // middleware to parse json
-
 const formBodyParser = bodyParser.urlencoded({ extended: false });
+// Ejemplo en ./middlewares/formUrlEncodedBodyParser
 // middleware to parse urlencoded form
 
 const app = express()
 
 app.use(express.static('public'))
 
-app.get('/login', (req, res) => {
+const loginFormTemplate = (req, res) => {
     res.status(200)
     res.setHeader('Content-Type', 'text/html')
     res.send(`<html class="h-screen">
@@ -34,13 +33,13 @@ app.get('/login', (req, res) => {
                     </div>
                 </body>
             </html>`)
-})
+}
+app.get('/login', loginFormTemplate)
 
-app.post("/login", formBodyParser, (req, res) => {
+const loginFormRequest = (req, res) => {
     const { email, password } = req.body;
-
     try {
-        authenticateUser(email, password, (error, user) => {
+        const userFind = (error, user) => {
             if (error) {
                 res.status(500)
                 res.send(error.message)
@@ -50,14 +49,17 @@ app.post("/login", formBodyParser, (req, res) => {
 
             res.setHeader('set-cookie', `id=${user.id}`)
             res.redirect('/')
-        })
+        }
+        authenticateUser(email, password, userFind)
+
     } catch (error) {
         res.status(500)
         res.send(error.message)
     }
-});
+}
+app.post("/login", formBodyParser, loginFormRequest);
 
-app.get('/', (req, res) => {
+const indexTemplate = (req, res) => {
     const { cookie } = req.headers // id=user-2
 
     if (!cookie) {
@@ -66,10 +68,31 @@ app.get('/', (req, res) => {
         return
     }
 
-    const [, userId] = cookie.split('=')
+    const { q } = req.query
+    const formSearchTemplate =
+        `<h1>Search</h1>
+        <form action="/search">
+            <input type="text" name="q" value="${q}">
+            <button>Search</button>
+        </form>`;
+    if (q === undefined) {
+        res.status(200)
+        res.setHeader('Content-Type', 'text/html')
+        res.send(`<html>
+        <head>
+        <title>Http Cats</title>
+        </head>
+        <body> 
+        ${formSearchTemplate}
+        </body>
+        </html>`);
 
+        return
+    }
+
+    const [, userId] = cookie.split('=')
     try {
-        retrieveUser(userId, (error, user) => {
+        const userTouch = (error, user) => {
             if (error) {
                 res.status(500)
                 res.send(error.message)
@@ -88,14 +111,17 @@ app.get('/', (req, res) => {
                     
                 </body>
             </html>`)
-        })
+        }
+        retrieveUser(userId, userTouch)
+
     } catch (error) {
         res.status(500)
         res.send(error.message)
     }
-})
+}
+app.get('/', indexTemplate)
 
-app.get('/register', (req, res) => {
+const registerFormTemplate = (req, res) => {
     res.status(200)
     res.setHeader('Content-Type', 'text/html')
     res.send(`<html>
@@ -115,13 +141,34 @@ app.get('/register', (req, res) => {
                     </div>
                 </body>
             </html>`)
-})
+}
+app.get('/register', registerFormTemplate)
 
 // http://localhost/search?q=C
-app.get('/search', (req, res) => {
+const searchTemplate = (req, res) => {
     const { q } = req.query
+    const formSearchTemplate =
+        `<h1>Search</h1>
+                <form action="/search">
+                    <input type="text" name="q" value="${q}">
+                    <button>Search</button>
+                </form>`;
+    if (q === undefined) {
+        res.status(200)
+        res.setHeader('Content-Type', 'text/html')
+        res.send(`<html>
+        <head>
+            <title>Http Cats</title>
+        </head>
+        <body> 
+        ${formSearchTemplate}
+        </body>
+        </html>`);
 
-    searchHttpCats(q, (error, cats) => {
+        return
+    }
+
+    const catsFinder = (error, cats) => {
         if (error) {
             res.status(500)
             res.setHeader('Content-Type', 'text/html')
@@ -144,11 +191,7 @@ app.get('/search', (req, res) => {
                     <title>Http Cats</title>
                 </head>
                 <body>
-                    <h1>Search</h1>
-                    <form action="/search">
-                        <input type="text" name="q" value="${q}">
-                        <button>Search</button>
-                    </form>
+                ${formSearchTemplate}
                     <h1>Results</h1>
                     <ul>
                         ${cats.reduce((lis, cat) => {
@@ -161,7 +204,22 @@ app.get('/search', (req, res) => {
                     </ul>
                 </body>
             </html>`)
-    })
-})
+    }
+    searchHttpCats(q, catsFinder)
+}
+app.get('/search', searchTemplate)
+/* function generateSearchPageTemplate(cats) {
+    let result = `<html>
+    <head>
+        <title>Http Cats</title>
+    </head>
+    <body>
+    <h1>Search</h1>
+    <form action="/search">
+        <input type="text" name="q" value="${q}">
+        <button>Search</button>
+    </form>`;
+    return result;
+}; */
 
 app.listen(80)

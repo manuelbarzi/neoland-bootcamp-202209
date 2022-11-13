@@ -5,15 +5,16 @@ function authenticateUser(email, password, callback) {
     if (typeof password !== 'string') throw new TypeError('password is not a string')
     if (typeof callback !== 'function') throw new TypeError('callback is not a function')
 
-    readFile('./data/users.json', 'utf8', (error, json) => {
+    const onUsersReady = (error, data) => {
         if (error) {
             callback(error)
 
             return
         }
 
-        const users = JSON.parse(json)
-
+        // const userFinder = user => user.email === email;
+        // const user = users.find(userFinder);
+        const users = JSON.parse(data);
         const user = users.find(user => user.email === email)
 
         if (!user) {
@@ -27,9 +28,10 @@ function authenticateUser(email, password, callback) {
 
             return
         }
-
         callback(null, user)
-    })
+    }
+
+    readFile('./data/users.json', 'utf8', onUsersReady)
 }
 
 module.exports = authenticateUser

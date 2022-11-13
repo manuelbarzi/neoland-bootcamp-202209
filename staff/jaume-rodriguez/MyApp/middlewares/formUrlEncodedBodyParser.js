@@ -23,3 +23,5 @@ function formUrlEncodedBodyParser(req, res, next) {
 }
 
 module.exports = formUrlEncodedBodyParser;
+
+// EJEMPLO DE body-parser METHOD
