@@ -1,24 +1,35 @@
 // importamos la función para crear el servidor del módulo http
-const express = require("express")
+const { createServer } = require("http")
 // importamos la función para leer archivos en disco del módulo fs (fileSystem)
 const { readFile } = require("fs")
 
-const api = express()
+function parseQueryStringFromUrl (url) {
+    // req.url -> '/?name=Pepito&surname=Grillo'
+    const query = url.substring(2).split('&').reduce((params, item) => {
+        const[key, value] = item.split('=')
 
-api.get("/search", (req, res) => {
+        params[key] = value
+
+        return
+    }, {})
+
+    return query
+}
+
+ const api = createServer((req, res) => {
     readFile("db.json", "utf8", (error, json) => {
         if (error) {
-            res.setStatus(500)
-            res.setHeader('Content-type', 'applicaton/json')
-            res.send(`{"error": ${error.message} }`)
+            res.writeHead(500, { 'Content-type': 'applicaton/json' })
+            
+            res.end(`{"error": ${error.message} }`)
 
             return
         }
 
         const data = JSON.parse(json)
 
-        const { q, name, surname } = req.query
-
+        const { q, name, surname } = parseQueryStringFromUrl(req.url)
+        
         let filtered = data
 
         if (q)
@@ -42,7 +53,7 @@ api.get("/search", (req, res) => {
 })
 
 // el método listen prende el servidor en el número de puerto que le paso por parámetro
-api.listen(8081)
+api.listen(8080)
 console.log("server listen on port 8080")
 // para inicializar el servidor con debugger utilizar el siguiente script:
 // node --inspect-brk <filename>

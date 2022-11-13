@@ -5,6 +5,8 @@ const { readFile } = require("fs")
 
 const api = express()
 
+api.get('/hello-world', req, res => res.end('hola mundo'))
+
 api.get("/search", (req, res) => {
     readFile("db.json", "utf8", (error, json) => {
         if (error) {
@@ -42,7 +44,7 @@ api.get("/search", (req, res) => {
 })
 
 // el método listen prende el servidor en el número de puerto que le paso por parámetro
-api.listen(8081)
+api.listen(8080)
 console.log("server listen on port 8080")
 // para inicializar el servidor con debugger utilizar el siguiente script:
 // node --inspect-brk <filename>
