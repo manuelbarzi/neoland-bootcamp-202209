@@ -2,6 +2,8 @@ const express = require('express')
 const searchHttpCats = require('./logic/searchHttpCats')
 const authenticateUser = require('./logic/authenticateUser')
 const retrieveUser = require('./logic/retrieveUser')
+const registerUser = require('./logic/registerUser')
+
 const bodyParser = require("body-parser");
 
 const jsonBodyParser = bodyParser.json();
@@ -122,6 +124,13 @@ const indexTemplate = (req, res) => {
 app.get('/', indexTemplate)
 
 const registerFormTemplate = (req, res) => {
+    const { cookie } = req.headers // id=user-2
+    if (cookie) {
+        res.redirect('/')
+
+        return
+    }
+
     res.status(200)
     res.setHeader('Content-Type', 'text/html')
     res.send(`<html>
@@ -129,20 +138,37 @@ const registerFormTemplate = (req, res) => {
                     <title>Http Cats</title>
                     <link href="/style.css" rel="stylesheet" />
                 </head>
-                <body class="flex h-full justify-center">
-                    <div class="h-full flex flex-col flex-wrap justify-center items-center">
-                        <form class="flex flex-col items-start flex-wrap">
-                            <input type="name" name="name" placeholder="name" />
-                            <input type="email" name="email" placeholder="email" />
-                            <input type="password" name="password" placeholder="password" />
-                            <button class="self-center">Register</button>
-                        </form>
-                        <a href="/login">Login</a>
-                    </div>
+                <body class="flex flex-col items-center">
+                    <form class="flex flex-col items-center" method="post" action="/register">
+                        <input type="name" name="name" placeholder="name" />
+                        <input type="email" name="email" placeholder="email" />
+                        <input type="password" name="password" placeholder="password" />
+                        <button>Register</button>
+                    </form>
+                    <a href="/login">Login</a>
                 </body>
             </html>`)
 }
 app.get('/register', registerFormTemplate)
+
+const registerFormRequest = (req, res) => {
+    const { name, email, password } = req.body;
+    try {
+        registerUser(name, email, password, error => {
+            if (error) {
+                res.status(500)
+                res.send(error.message)
+
+                return
+            }
+            res.redirect('/login')
+        })
+    } catch (error) {
+        res.status(500)
+        res.send(error.message)
+    }
+}
+app.post('/register', formBodyParser, registerFormRequest)
 
 // http://localhost/search?q=C
 const searchTemplate = (req, res) => {
