@@ -1,9 +1,9 @@
 module.exports = {
-  homeGet: require("./homeGet"),
-  loginGet: require("./loginGet"),
-  loginPost: require("./loginPost"),
-  logoutPost: require("./logoutPost"),
-  registerGet: require("./registerGet"),
-  registerPost: require("./registerPost"),
-  searchGet: require("./searchGet"),
+  homeGet: require("./homeGet.js"),
+  loginGet: require("./loginGet.js"),
+  loginPost: require("./loginPost.js"),
+  logoutPost: require("./logoutPost.js"),
+  registerGet: require("./registerGet.js"),
+  registerPost: require("./registerPost.js"),
+  searchGet: require("./searchGet.js"),
 };
