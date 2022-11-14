@@ -28,11 +28,5 @@
         "name": "Lo Rito",
         "email": "lo@rito.com",
         "password": "123123123"
-    },
-    {
-        "id": "user-6",
-        "name": "Gu Sanito",
-        "email": "gu@sanito.com",
-        "password": "123123123"
     }
 ]
