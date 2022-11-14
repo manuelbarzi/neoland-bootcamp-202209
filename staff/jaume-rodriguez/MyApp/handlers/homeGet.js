@@ -1,0 +1,44 @@
+const retrieveUser = require('../logic/retrieveUser')
+
+module.exports = (req, res) => {
+    const { cookie } = req.headers
+
+    if (!cookie) {
+        res.redirect('/login')
+
+        return
+    }
+
+    const [, userId] = cookie.split('=')
+    try {
+        const userTouch = (error, user) => {
+            if (error) {
+                res.status(500)
+                res.send(error.message)
+
+                return
+            }
+
+            res.setHeader('Content-Type', 'text/html')
+            res.send(`<html>
+                <head>
+                    <title>Http Cats</title>
+                    <link href="/style.css" rel="stylesheet" />
+                </head>
+                <body class="flex flex-col items-center">
+                    hello ${user.name}!
+                    <h1>Search</h1>
+                    <form action="/search">
+                        <input type="text" name="q">
+                        <button>Search</button>
+                    </form>
+                </body>
+            </html>`)
+        }
+        retrieveUser(userId, userTouch)
+
+    } catch (error) {
+        res.status(500)
+        res.send(error.message)
+    }
+}

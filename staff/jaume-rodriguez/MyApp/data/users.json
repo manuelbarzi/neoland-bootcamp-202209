@@ -16,11 +16,5 @@
         "name": "asd",
         "email": "asd@asd.com",
         "password": "asdasdasd"
-    },
-    {
-        "id": "user-4",
-        "name": "asd",
-        "email": "aaa@asd.com",
-        "password": "asdasdasd"
     }
 ]

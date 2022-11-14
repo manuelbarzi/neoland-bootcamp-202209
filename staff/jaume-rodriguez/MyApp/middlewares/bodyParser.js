@@ -1,4 +1,4 @@
-function formUrlEncodedBodyParser(req, res, next) {
+function bodyParser(req, res, next) {
     let content = "";
 
     req.on("data", (chunk) => (content += chunk.toString()));
@@ -22,6 +22,6 @@ function formUrlEncodedBodyParser(req, res, next) {
     });
 }
 
-module.exports = formUrlEncodedBodyParser;
+module.exports = bodyParser;
 
 // EJEMPLO DE body-parser METHOD
