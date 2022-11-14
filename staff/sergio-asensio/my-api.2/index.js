@@ -2,8 +2,6 @@ const { createServer } = require('http')
 const { readFile } = require('fs')
 const parseQueryStringFromUrl = require('./utils/parseQueryStringFromUrl')
 
-const PORT = 8080 
-
 const api = createServer((req, res) => {
     readFile('db.json', 'utf8', (error, json) => {
         if (error) {
@@ -33,5 +31,4 @@ const api = createServer((req, res) => {
     })
 })
 
-api.listen(PORT)
-console.log('server listen on port 8080')
+api.listen(8080)
