@@ -2,21 +2,12 @@ const express = require('express')
 const searchHttpCats = require('./logic/searchHttpCats')
 const authenticateUser = require('./logic/authenticateUser')
 const retrieveUser = require('./logic/retrieveUser')
-const registerUser = require('./logic/registerUser')
 
 const app = express()
 
 app.use(express.static('public'))
 
 app.get('/login', (req, res) => {
-    const { cookie } = req.headers // id=user-2
-
-    if (cookie) {
-        res.redirect('/')
-
-        return
-    }
-
     res.status(200)
     res.setHeader('Content-Type', 'text/html')
     res.send(`<html>
@@ -41,7 +32,7 @@ app.post('/login', (req, res) => {
     req.on('data', chunk => content += chunk.toString())
 
     req.on('end', () => {
-        // email=wendy%40darling.com&password=123123123 // url-encoded
+        // email=wendy%40darling.com&password=123123123
 
         let { email, password } = content.split('&').reduce((body, keyValue) => {
             const [key, value] = keyValue.split('=')
@@ -54,7 +45,7 @@ app.post('/login', (req, res) => {
         email = email.replace('%40', '@')
 
         try {
-            authenticateUser(email, password, (error, userId) => {
+            authenticateUser(email, password, (error, user) => {
                 if (error) {
                     res.status(500)
                     res.send(error.message)
@@ -62,7 +53,7 @@ app.post('/login', (req, res) => {
                     return
                 }
 
-                res.setHeader('set-cookie', `id=${userId}`) // session cookie
+                res.setHeader('set-cookie', `id=${user.id}`)
                 res.redirect('/')
             })
         } catch (error) {
@@ -110,14 +101,6 @@ app.get('/', (req, res) => {
 })
 
 app.get('/register', (req, res) => {
-    const { cookie } = req.headers // id=user-2
-
-    if (cookie) {
-        res.redirect('/')
-
-        return
-    }
-    
     res.status(200)
     res.setHeader('Content-Type', 'text/html')
     res.send(`<html>
@@ -126,7 +109,7 @@ app.get('/register', (req, res) => {
                     <link href="/style.css" rel="stylesheet" />
                 </head>
                 <body class="flex flex-col items-center">
-                    <form class="flex flex-col items-center" method="post" action="/register">
+                    <form class="flex flex-col items-center">
                         <input type="name" name="name" placeholder="name" />
                         <input type="email" name="email" placeholder="email" />
                         <input type="password" name="password" placeholder="password" />
@@ -135,44 +118,6 @@ app.get('/register', (req, res) => {
                     <a href="/login">Login</a>
                 </body>
             </html>`)
-})
-
-app.post('/register', (req, res) => {
-    let content = ''
-
-    req.on('data', chunk => content += chunk.toString())
-
-    req.on('end', () => {
-        // name=Wendy%20Darling&email=wendy%40darling.com&password=123123123 // url-encoded
-
-        let { name, email, password } = content.split('&').reduce((body, keyValue) => {
-            // const { 0: key, 1: value } = keyValue.split('=')
-            const [key, value] = keyValue.split('=')
-
-            body[key] = value
-
-            return body
-        }, {})
-
-        name = name.replace('+', ' ')
-        email = email.replace('%40', '@')
-
-        try {
-            registerUser(name, email, password, error => {
-                if (error) {
-                    res.status(500)
-                    res.send(error.message)
-
-                    return
-                }
-
-                res.redirect('/login')
-            })
-        } catch (error) {
-            res.status(500)
-            res.send(error.message)
-        }
-    })
 })
 
 // http://localhost/search?q=C
