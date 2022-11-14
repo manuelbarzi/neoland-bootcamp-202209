@@ -1,82 +1,34 @@
-const express = require("express");
+require('dotenv').config()
 
-// guardo en una constante global, el requisito de la lógica
-const searchHttpCats = require('./logic/searchHttpCats')
+const express = require ('express')
 
-const app = express();
+const loginGet = require('./handlers/loginGet')
+const loginPost = require('./handlers/loginPost')
+const homeGet = require('./handlers/homeGet')
+const logoutPost = requiere('./handlers/logoutPost')
+const registerGet = require('./handlers/registerGet')
+const registerPost = require ('./handlers/registerPost')
+const searchGet = require('./handlers/searchGet')
 
-// usamos el siguiente código para servir imágenes, archivos CSS y archivos JavaScript en un directorio llamado public: y usamos la funcion (express.static()) para determinar el archivo a servir mediante la combinación req.url con el rootdirectorio proporcionado.
-// use -> para culaquier ruta
-app.use(express.static("public"));
+const formBodyParser = require('./utils/formBodyParser')
 
+const app = express()
 
-// yo decido cual será el controlador de la ruta
-// no hay petiticon de datos al servidor
-// la app coge la web '/' y responde con la renderizacion del código 200
-app.get("/", (req, res) => {
-    res.status(200);
-    res.setHeader("Content-Type", "text/html");
-    res.send(` <html>
-                    <head>
-                        <title>Http Cats</title>
-                    </head>
-                    <body>
-                        <h1>Search</h1>
-                        <form action='/search'>
-                            <input type='text' name='q'>
-                            <button>Search</button>
-                        </form>
-                    </body>
-                </html>`);
-})
+// use: todo aquello que está dentro de la función se muestra global, en este caso todo aquello que está dentro de la carpeta /public.
+app.use(express.static('public'))
 
+app.get('/login', loginGet)
+app.post('/login', loginPost)
 
-app.post ('/login', (req, res) => {
-    let content = ''
+app.get('/', homeGet)
 
-    req.on ('data', chunk)
-})
+// usamos el método POST porque no queremos que navegue a ningún lado
+app.post('/logout', logoutPost)
 
+app.get('/register', registerGet)
+app.post('/register', formBodyParser, registerPost)
 
-// http://localhost/search?q=C
-// get = pido al servidor
-app.get('/search', (req, res) => {
-    const { q } = req.query
+app.get('/search', searchGet)
 
-    searchHttpCats(q, (error, cats) => {
-        if (error) {
-            res.status(500)
-            res.setHeader('Content-Type', 'text/html')
-            res.send(`<html>
-                <head>
-                    <title>Http Cats</title>
-                </head>
-                <body>
-                    <h1>Error: ${error.message}</h1>
-                </body>
-            </html>`)
-
-            return
-        }
-
-        res.status(200)
-        res.setHeader('Content-Type', 'text/html')
-        res.send(`<html>
-                <head>
-                    <title>Http Cats</title>
-                </head>
-                <body>
-                    <h1>Results</h1>
-                    <ul>
-                        ${cats.reduce((lis, cat) => {
-            return lis + `<li>
-                                <img src="${cat.imageUrl}" />
-                                <h2>${cat.code}</h2>
-                                <p>${cat.text}</p>
-                            </li>`
-        }, '')}
-                    </ul>
-                </body>
-            </html>`)
-    })
-})
+const { PORT } = process.env
+app.listen(PORT, () => console.log(`server listening on port ${PORT}`))
