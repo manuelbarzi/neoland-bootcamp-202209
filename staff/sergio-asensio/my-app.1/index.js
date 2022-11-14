@@ -3,7 +3,23 @@ const { readFile } = require('fs')
 
 const app = express()
 
-app.get('/hello-world', (req, res) => {
+app.get('/', (req, res) => {
+    readFile('./public/index.html', (error, html) => {
+        if (error) {
+            res.status(500)
+            res.setHeader('Content-Type', 'application/json')
+            res.json({ error: error.message })
+
+            return
+        }
+
+        res.status(200)
+        res.setHeader('Content-Type', 'text/html')
+        res.send(html)
+    })
+})
+
+app.get('/index.html', (req, res) => {
     readFile('./public/index.html', (error, html) => {
         if (error) {
             res.status(500)
