@@ -5,4 +5,5 @@ module.exports = {
     registerGet: require('./registerGet'),
     registerPost: require('./registerPost'),
     searchGet: require('./searchGet'),
+    logoutPost: require('./logoutPost')
 }

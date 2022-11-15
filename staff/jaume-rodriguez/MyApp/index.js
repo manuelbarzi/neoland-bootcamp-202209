@@ -9,6 +9,7 @@ const {
     registerGet,
     registerPost,
     searchGet,
+    logoutPost,
 } = require("./handlers")
 
 const bodyParser = require("body-parser");
@@ -21,6 +22,8 @@ app.get('/login', loginGet)
 app.post("/login", formBodyParser, loginPost);
 
 app.get('/', homeGet)
+
+app.post('/logout', logoutPost)
 
 app.get('/register', registerGet)
 app.post('/register', formBodyParser, registerPost)

@@ -27,7 +27,10 @@ module.exports = (req, res) => {
                 </head>
                 <body class="flex flex-col items-center">
                     hello ${user.name}!
-                    <h1>Search</h1>
+                    <form action="/logout" method="post">
+                    <button>Logout</button>
+                </form>
+                    <h1 class="text-2xl">Search</h1>
                     <form action="/search">
                         <input type="text" name="q">
                         <button>Search</button>
