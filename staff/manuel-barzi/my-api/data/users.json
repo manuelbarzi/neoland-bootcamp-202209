@@ -40,5 +40,17 @@
         "name": "Mari Posa",
         "email": "mari@posa.com",
         "password": "123123123"
+    },
+    {
+        "id": "user-8",
+        "name": "Cucu Rucho",
+        "email": "cucu@rucho.com",
+        "password": "123123123"
+    },
+    {
+        "id": "user-9",
+        "name": "Ana Conda",
+        "email": "ana@conda.com",
+        "password": "123123123"
     }
 ]

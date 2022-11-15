@@ -1,39 +1,21 @@
+require('dotenv').config()
+
 const express = require('express')
-const { readFile } = require('fs')
+
+const authPost = require('./handlers/authPost')
+const registerPost = require('./handlers/registerPost')
+const searchGet = require('./handlers/searchGet')
+
+const jsonBodyParser = require('./utils/jsonBodyParser')
 
 const api = express()
 
-api.get('/search', (req, res) => {
-    readFile('db.json', 'utf8', (error, json) => {
-         if (error) {
-            res.status(500)
-            res.setHeader('Content-Type', 'application/json')
-            res.json({ error: error.message })
+api.post('/auth', jsonBodyParser, authPost)
 
-            return
-        }
+api.post('/register', jsonBodyParser, registerPost)
 
-        const data = JSON.parse(json)
+api.get('/search', searchGet)
 
-        const { q, name, surname } = req.query
+const { PORT } = process.env
 
-        let filtered = data
-
-        if (q)
-            filtered = filtered.filter(item => item.name.includes(q) || item.surname.includes(q) || item.email.includes(q) || item.phone.includes(q))
-        
-        if (name)
-            filtered = filtered.filter(item => item.name.includes(name))
-
-        if (surname)
-            filtered = filtered.filter(item => item.surname.includes(surname))
-
-        res.status(200)
-        res.setHeader('Content-type', 'application/json')
-        //res.send(JSON.stringify(filtered))
-        res.json(filtered)
-    })
-})
-
-api.listen(8081)
-
+api.listen(PORT, () => console.log(`server listening on port ${PORT}`))
