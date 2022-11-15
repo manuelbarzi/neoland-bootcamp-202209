@@ -65,4 +65,4 @@ app.get('/search', (req, res) => {
 })
 
 app.listen(80)
-console.log('abierto en puero 80')
+console.log('abierto en puerto 80')

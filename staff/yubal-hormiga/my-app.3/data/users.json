@@ -10,11 +10,5 @@
         "name": "Wendy Darling",
         "email": "wendy@darling.com",
         "password": "123123123"
-    },
-    {
-        "id": "user-3",
-        "name": "yubal",
-        "email": "yubalhh@yahoo.es",
-        "password": "123123123"
     }
 ]
