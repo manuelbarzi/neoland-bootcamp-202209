@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express = require('express')
 
 const {
@@ -25,4 +27,5 @@ app.post('/register', formBodyParser, registerPost)
 
 app.get('/search', searchGet)
 
-app.listen(80)
+const { PORT } = process.env
+app.listen(PORT, () => console.log(`server listening on port ${PORT}`))
