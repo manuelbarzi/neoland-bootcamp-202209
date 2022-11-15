@@ -2,9 +2,11 @@ require('dotenv').config()
 
 const express = require('express')
 
-const authPost = require('./handlers/authPost')
-const registerPost = require('./handlers/registerPost')
-const searchGet = require('./handlers/searchGet')
+const {
+    registerPost,
+    searchGet,
+    authPost,
+} = require("./handlers")
 
 const jsonBodyParser = require('./utils/jsonBodyParser')
 
