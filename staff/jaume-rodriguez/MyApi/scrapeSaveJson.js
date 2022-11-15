@@ -10,7 +10,7 @@ scrapeCats((error, results) => {
 
     const json = JSON.stringify(results, null, 4)
 
-    writeFile('./db.json', json, error => {
+    writeFile('./data/cats.json', json, error => {
         if (error)
             console.error(error)
     })

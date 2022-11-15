@@ -16,7 +16,7 @@ function scrapeCats(callback) {
         boxes.forEach(box => {
 
             const backgroundImage = box.querySelector('.Thumbnail_image__ucHEX').style.backgroundImage
-            const imageUrl = 'https://http.cat/' + backgroundImage.substring(5, -1)
+            const imageUrl = 'https://http.cat/' + backgroundImage.slice(5, -1)
             const code = box.querySelector(".Thumbnail_title__RZPuS").textContent;
             // const text = box.querySelector(".Thumbnail_content__YPxza > p").textContent;
             const text = box.querySelector("p").textContent;
