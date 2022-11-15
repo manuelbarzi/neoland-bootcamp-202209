@@ -69,7 +69,7 @@ function Settings() {
         }
     }
 
-    return <section className='flex flex-col items-center' >
+    return <section className='flex flex-col items-center mt-36' >
         <h2 className='font-extrabold text-2xl mb-3'>Settings</h2>
         <div className='flex flex-col items-end border-8 p-3 border-blue-600 rounded-lg'>
             <form className='block' onSubmit={handleUpdateUserEmail}>

@@ -43,12 +43,12 @@ function Task(props) {
                 <option disabled hidden className="text-sm" value="">width_normal</option>
                 {props.task.status === 'todo' ? <>
                     <option className="text-xs text-black" value="doing">DOING</option>
-                    <option className="text-xs text-black" value="done">DONE</option>
+                    <option className="text-xs text-black" value="done">D0NE</option>
                 </>
                     :
                     props.task.status === 'doing' ? <>
                         <option className="text-xs text-black" value="todo">TODO</option>
-                        <option className="text-xs text-black" value="done">DONE</option>
+                        <option className="text-xs text-black" value="done">D0NE</option>
                     </>
                         :
                         <>
