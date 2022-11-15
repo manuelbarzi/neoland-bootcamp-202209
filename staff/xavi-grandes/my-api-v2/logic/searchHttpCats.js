@@ -19,4 +19,4 @@ function searchHttpCats(query, callback) {
     })
 }
 
-module.exports = searchHttpCats
+module.exports = searchHttpCats 
