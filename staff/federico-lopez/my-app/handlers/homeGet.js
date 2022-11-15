@@ -28,7 +28,7 @@ module.exports = (req, res) => {
                         <button>Logout</button>
                     </form>
                     <form action="/search">
-                        <input type="text" name="q">
+                        <input type="text" name="q" required>
                         <button>Search</button>
                     </form>`)
       );
