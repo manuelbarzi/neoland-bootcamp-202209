@@ -7,7 +7,7 @@ function authenticateUser(email, password, callback) {
     if (!password.length) throw new Error('password is empty')
     if (typeof callback !== 'function') throw new TypeError('callback is not a function')
 
-    readFile('./data/users.json', 'utf8', (error, json) => {
+    const parsedUser = (error, json) => {
         if (error) {
             callback(error)
 
@@ -15,7 +15,6 @@ function authenticateUser(email, password, callback) {
         }
 
         const users = JSON.parse(json)
-
         const user = users.find(user => user.email === email)
 
         if (!user) {
@@ -31,7 +30,8 @@ function authenticateUser(email, password, callback) {
         }
 
         callback(null, user.id)
-    })
+    }
+    readFile('./data/users.json', 'utf8', parsedUser)
 }
 
 module.exports = authenticateUser

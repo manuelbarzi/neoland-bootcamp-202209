@@ -12,7 +12,6 @@ function retrieveUser(userId, callback) {
         }
 
         const users = JSON.parse(json)
-
         const user = users.find(user => user.id === userId)
 
         if (!user) {

@@ -4,7 +4,7 @@ module.exports = (req, res) => {
     try {
         const { q } = req.query
 
-        searchHttpCats(q, (error, cats) => {
+        const infoAnalyzed = (error, cats) => {
             if (error) {
                 res.status(500)
                 res.json({ error: error.message })
@@ -13,7 +13,9 @@ module.exports = (req, res) => {
             }
 
             res.json(cats)
-        })
+        }
+        searchHttpCats(q, infoAnalyzed)
+
     } catch (error) {
         res.status(500)
         res.json({ error: error.message })

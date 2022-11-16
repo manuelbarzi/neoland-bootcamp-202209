@@ -1,7 +1,7 @@
 const scrapeCats = require('./logic/scrapeCats')
 const { writeFile } = require('fs')
 
-scrapeCats((error, results) => {
+const dataCollector = (error, results) => {
     if (error) {
         console.error(error)
 
@@ -10,8 +10,10 @@ scrapeCats((error, results) => {
 
     const json = JSON.stringify(results, null, 4)
 
-    writeFile('./data/cats.json', json, error => {
+    const dataTranscribed = error => {
         if (error)
             console.error(error)
-    })
-})
+    }
+    writeFile('./data/cats.json', json, dataTranscribed)
+}
+scrapeCats(dataCollector)

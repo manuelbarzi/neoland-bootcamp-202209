@@ -9,15 +9,13 @@ function registerUser(name, email, password, callback) {
     if (!password.length) throw new Error('password is empty')
     if (typeof callback !== 'function') throw new TypeError('callback is not a function')
 
-    readFile('./data/users.json', 'utf8', (error, json) => {
+    const userCreation = (error, json) => {
         if (error) {
             callback(error)
 
             return
         }
-
         const users = JSON.parse(json)
-
         const exists = users.some(user => user.email === email)
 
         if (exists) {
@@ -27,25 +25,22 @@ function registerUser(name, email, password, callback) {
         }
 
         const { id: lastId } = users[users.length - 1]
-
         const newId = `user-${parseInt(lastId.substring(5)) + 1}`
-
         const user = { id: newId, name, email, password }
-
         users.push(user)
-
         const newJson = JSON.stringify(users, null, 4)
 
-        writeFile('./data/users.json', newJson, error => {
+        const userTranscribed = error => {
             if (error) {
                 callback(error)
 
                 return
             }
-
             callback(null)
-        })
-    })
+        }
+        writeFile('./data/users.json', newJson, userTranscribed)
+    }
+    readFile('./data/users.json', 'utf8', userCreation)
 }
 
 module.exports = registerUser
