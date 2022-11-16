@@ -34,4 +34,4 @@ function authenticateUser (email, password, callback) {
     })
 }
 
-module.exports = registerUser
+module.exports = authenticateUser
