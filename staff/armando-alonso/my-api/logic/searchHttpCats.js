@@ -13,8 +13,8 @@ function searchHttpCats(query, callback) {
 
         const cats = JSON.parse(json)
 
-        const filtered = cats. filter(cat => cat.code.includes(query) || cat.text.includes(query))
-
+        const filtered = cats.filter(cat => cat.code.includes(query) || cat.text.includes(query))
+        
         callback(null, filtered)
     })
 }
