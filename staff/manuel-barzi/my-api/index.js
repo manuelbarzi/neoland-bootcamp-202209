@@ -7,8 +7,11 @@ const registerPost = require('./handlers/registerPost')
 const searchGet = require('./handlers/searchGet')
 
 const jsonBodyParser = require('./utils/jsonBodyParser')
+const cors = require('./utils/cors')
 
 const api = express()
+
+api.use(cors)
 
 api.post('/auth', jsonBodyParser, authPost)
 

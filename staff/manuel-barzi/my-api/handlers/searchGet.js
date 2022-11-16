@@ -12,6 +12,7 @@ module.exports = (req, res) => {
                 return
             }
 
+            // res.setHeader('Access-Control-Allow-Origin', '*')
             res.json(cats)
         })
     } catch (error) {
