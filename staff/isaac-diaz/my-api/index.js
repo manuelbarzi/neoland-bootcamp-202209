@@ -10,6 +10,8 @@ const jsonBodyParser = require('./utils/jsonBodyParser')
 
 const api = express()
 
+api.use(cors)
+
 api.post('/auth', jsonBodyParser, authPost)
 
 api.post('/register', jsonBodyParser, registerPost)
