@@ -30,7 +30,9 @@ function authenticateUser(email, password, callback) {
             return
         }
 
-        callback(null, user.id)
+        delete user.password
+
+        callback(null, user)
     })
 }
 

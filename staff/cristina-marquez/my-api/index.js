@@ -1,6 +1,7 @@
 require('dotenv').config()
 
 const express = require('express')
+const cors = require('cors')
 
 const authPost = require('./handlers/authPost')
 const registerPost = require('./handlers/registerPost')
@@ -8,14 +9,18 @@ const searchGet = require('./handlers/searchGet')
 
 const jsonBodyParser = require('./utils/jsonBodyParser')
 
-const api = express()
+const app = express()
+app.use(cors())
 
-api.post('/auth', jsonBodyParser, authPost)
 
-api.post('/register', jsonBodyParser, registerPost)
+app.post('/auth', jsonBodyParser, authPost)
 
-api.get('/search', searchGet)
+app.post('/register', jsonBodyParser, registerPost)
+
+app.get('/search', searchGet)
+
+
+
 
 const { PORT } = process.env
-
-api.listen(PORT, () => console.log(`server listening on port ${PORT}`))
+app.listen(PORT, () => console.log(`server listening on port ${PORT}`))
