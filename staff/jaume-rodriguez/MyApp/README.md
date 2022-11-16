@@ -1,3 +1,0 @@
-# PATH TO CREATE A NEW APP
-
-> `1. npm`
