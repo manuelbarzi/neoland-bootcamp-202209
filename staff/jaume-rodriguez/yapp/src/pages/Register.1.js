@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import authenticateUser from '../logic/authenticateUser'
 import registerUser from '../logic/registerUser'
 
 function Register(props) {
@@ -29,13 +30,20 @@ function Register(props) {
         const password = passwordInput.value
 
         try {
-            registerUser(name, email, password, (error, userId) => {
+            registerUser(name, email, password, (error) => {
                 if (error) {
                     alert(error.message)
                     return
                 }
-                window.userId = userId
-                props.onLoggedIn()
+
+                authenticateUser(email, password, (error, userId) => {
+                    if (error) {
+                        alert(error.message)
+                        return
+                    }
+                    window.userId = userId
+                    props.onLoggedIn()
+                })
             })
         } catch (error) {
             alert(error.message)
