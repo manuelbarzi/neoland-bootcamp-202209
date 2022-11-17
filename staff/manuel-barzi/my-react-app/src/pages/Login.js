@@ -34,9 +34,8 @@ function Login(props) {
                 }
 
                 window.userId = userId  
+                props.onLogin()
             })
-    
-            props.onLogin()
         } catch(error) {
             alert(error.message)
     

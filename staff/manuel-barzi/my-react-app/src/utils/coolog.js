@@ -41,3 +41,4 @@ log.fatal = function (message) {
 }
 
 export default log
+// module.exports = log
