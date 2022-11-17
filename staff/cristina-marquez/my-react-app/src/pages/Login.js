@@ -6,7 +6,7 @@ function Login(props) {
 
     const { setUser } = useContext(UserContext);
 
-    const handleClick = event => {
+    const handleRegisterClick = event => {
         event.preventDefault()
 
         const onRegisterClick = props.onRegisterClick
@@ -52,7 +52,7 @@ function Login(props) {
                     <input type="password" name="password" placeholder="enter your password" className="border rounded-md" />
                     <button className="bg-pink-500 hover:bg-pink-600 text-white p-2 rounded-lg text-sm">Login</button>
                 </form>
-                <button onClick={handleClick}>Register</button>
+                <button onClick={handleRegisterClick}>Register</button>
             </div>
         </main>
     )

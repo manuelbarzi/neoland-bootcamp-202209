@@ -10,5 +10,17 @@
         "name": "Bob",
         "email": "bob@minion.com",
         "password": "654321"
+    },
+    {
+        "id": 3,
+        "name": "Cristina",
+        "email": "pepes@goteras.com",
+        "password": "qwerty"
+    },
+    {
+        "id": 4,
+        "name": "Cristina",
+        "email": "pepe@goteffras.com",
+        "password": "qwerty"
     }
 ]

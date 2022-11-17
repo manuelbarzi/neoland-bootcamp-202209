@@ -4,7 +4,7 @@ module.exports = (req, res) => {
     let { name, email, password } = req.body
 
     try {
-        registerUser(name, email, password, error => {
+        registerUser(name, email, password, (error, user) => {
             if (error) {
                 res.status(500)
                 res.json({ error: error.message })
@@ -12,7 +12,7 @@ module.exports = (req, res) => {
                 return
             }
 
-            res.status(201).send()
+            res.status(201).send(user)
         })
     } catch (error) {
         res.status(500)

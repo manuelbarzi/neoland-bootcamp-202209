@@ -28,7 +28,7 @@ function registerUser(name, email, password, callback) {
 
         const { id: lastId } = users[users.length - 1]
 
-        const newId = `user-${parseInt(lastId.substring(5)) + 1}`
+        const newId = lastId + 1
 
         const user = { id: newId, name, email, password }
 
@@ -43,7 +43,9 @@ function registerUser(name, email, password, callback) {
                 return
             }
 
-            callback(null)
+            delete user.password
+
+            callback(null, user)
         })
     })
 }
