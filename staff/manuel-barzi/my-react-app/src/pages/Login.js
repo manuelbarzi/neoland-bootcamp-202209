@@ -1,7 +1,7 @@
 import log from '../utils/coolog'
 import authenticateUser from '../logic/authenticateUser'
 
-function Login(props) {
+function Login({ onNavigateToRegister, onLogin }) {
     log.info('Login -> render')
 
     const handleNavigateToRegister = event => {
@@ -9,7 +9,7 @@ function Login(props) {
 
         event.preventDefault()
 
-        props.onNavigateToRegister()
+        onNavigateToRegister()
     }
 
     const handleLogin = event => {
@@ -17,13 +17,7 @@ function Login(props) {
 
         event.preventDefault()
 
-        const form = event.target
-
-        const emailInput = form.email
-        const passwordInput = form.password
-
-        const email = emailInput.value
-        const password = passwordInput.value
+        const { email: { value: email }, password: { value: password } } = event.target
 
         try {
             authenticateUser(email, password, (error, userId) => {
@@ -33,27 +27,27 @@ function Login(props) {
                     return
                 }
 
-                window.userId = userId  
-                props.onLogin()
+                window.userId = userId
+                onLogin()
             })
-        } catch(error) {
+        } catch (error) {
             alert(error.message)
-    
-            passwordInput.value = ''
+
+            event.target.password.value = '' // TODO improve this, do not manipulate the dom directly, do it by means of React
         }
     }
 
     return <main className="flex flex-col items-center gap-2">
         <h2>hola login</h2>
         <form className="flex flex-col gap-2" onSubmit={handleLogin}>
-            <label htmlFor="login-email" className="container__item--left">E-mail</label>
-            <input name="email" type="email" id="login-email" placeholder="input your e-mail" className="border-b border-black" />
-            <label htmlFor="login-password" className="container__item--left">Password</label>
-            <input name="password" type="password" id="login-password" placeholder="input your password" className="border-b border-black" />
+            <label htmlFor="email" className="container__item--left">E-mail</label>
+            <input name="email" type="email" id="email" placeholder="input your e-mail" className="border-b border-black" />
+            <label htmlFor="password" className="container__item--left">Password</label>
+            <input name="password" type="password" id="password" placeholder="input your password" className="border-b border-black" />
             <button className="p-2 border rounded-xl hover:animate-spin">Login</button>
         </form>
 
-        <a href="" className="underline" onClick={handleNavigateToRegister}>Register</a>
+        <a href="" className="underline bg-red-600" onClick={handleNavigateToRegister}>Register</a>
     </main>
 }
 

@@ -11,9 +11,7 @@ module.exports = (req, res) => {
 
                 return
             }
-
-            // res.setHeader('Content-Type', 'application/json')
-            // res.send(JSON.stringify({ userId }))
+            
             res.json({ userId })
         })
     } catch (error) {

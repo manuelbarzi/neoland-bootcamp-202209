@@ -1,13 +1,17 @@
-import { IS_EMAIL_REGEX, HAS_SPACES_REGEX } from '../utils/regex'
+import { IS_EMAIL_REGEX, HAS_SPACES_REGEX, IS_ALPHABETICAL_REGEX } from '../utils/regex'
 
 /**
- * Authenticates a user against API
- * 
+ * Registers a user against API
+ *
+ * @param {string} name The user name 
  * @param {string} email The user email
  * @param {string} password The user password
  * @param {callback} callback The callback to attend the result
  */
-function authenticateUser(email, password, callback) {
+function registerUser(name, email, password, callback) {
+    if (typeof name !== 'string') throw new Error('name is not a string')
+    if (!IS_ALPHABETICAL_REGEX.test(name)) throw new Error('name is not alphabetical')
+
     if (typeof email !== 'string') throw new Error('email is not a string')
     if (!IS_EMAIL_REGEX.test(email)) throw new Error('email is not valid')
 
@@ -30,18 +34,16 @@ function authenticateUser(email, password, callback) {
             return
         }
 
-        const { userId } = JSON.parse(json)
-
-        callback(null, userId)
+        callback(null)
     }
 
     xhr.onerror = () => callback(new Error('connection error'))
 
     
-    xhr.open('POST', 'http://localhost/auth')
+    xhr.open('POST', 'http://localhost/register')
     xhr.setRequestHeader('Content-Type', 'application/json')
 
-    const payload = { email, password }
+    const payload = { name, email, password }
 
     const json = JSON.stringify(payload)
 
@@ -49,12 +51,11 @@ function authenticateUser(email, password, callback) {
 }
 
 /**
- * Attends the result of the authentication
+ * Attends the result of the register
  * 
  * @callback callback
  * 
  * @param {Error} error The authentication error
- * @param {string} userId The id of the user that authenticated
  */
 
-export default authenticateUser
+export default registerUser

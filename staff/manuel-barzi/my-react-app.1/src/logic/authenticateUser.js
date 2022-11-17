@@ -1,12 +1,5 @@
 import { IS_EMAIL_REGEX, HAS_SPACES_REGEX } from '../utils/regex'
 
-/**
- * Authenticates a user against API
- * 
- * @param {string} email The user email
- * @param {string} password The user password
- * @param {callback} callback The callback to attend the result
- */
 function authenticateUser(email, password, callback) {
     if (typeof email !== 'string') throw new Error('email is not a string')
     if (!IS_EMAIL_REGEX.test(email)) throw new Error('email is not valid')
@@ -47,14 +40,5 @@ function authenticateUser(email, password, callback) {
 
     xhr.send(json)
 }
-
-/**
- * Attends the result of the authentication
- * 
- * @callback callback
- * 
- * @param {Error} error The authentication error
- * @param {string} userId The id of the user that authenticated
- */
 
 export default authenticateUser

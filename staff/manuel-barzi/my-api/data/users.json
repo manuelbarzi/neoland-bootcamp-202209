@@ -52,5 +52,11 @@
         "name": "Ana Conda",
         "email": "ana@conda.com",
         "password": "123123123"
+    },
+    {
+        "id": "user-10",
+        "name": "Pepi Nillo",
+        "email": "pepi@nillo.com",
+        "password": "123123123"
     }
 ]
