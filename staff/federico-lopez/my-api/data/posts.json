@@ -1,0 +1,20 @@
+[
+    {
+        "user": "user-1",
+        "text": "blah blah blah",
+        "date": "2022-12-17T12:18:31.429Z",
+        "visibility": "public"
+    },
+    {
+        "user": "user-2",
+        "text": "bleh bleh bleh",
+        "date": "2022-11-27T12:18:31.429Z",
+        "visibility": "private"
+    },
+    {
+        "user": "user-3",
+        "text": "blih blih blih",
+        "date": "2022-12-01T12:18:31.429Z",
+        "visibility": "public"
+    }
+]
