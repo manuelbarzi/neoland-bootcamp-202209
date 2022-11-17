@@ -1,0 +1,65 @@
+[
+    {
+        "postId": "post-1",
+        "content": "asdasdasd",
+        "date": "Thu Nov 17 2022 17:21:54 GMT+0100 (hora estándar de Europa central)",
+        "userId": "user-1",
+        "userName": "Peter Pan"
+    },
+    {
+        "postId": "post-2",
+        "content": "jejejeje",
+        "date": "Thu Nov 17 2022 16:31:54 GMT+0100 (hora estándar de Europa central)",
+        "userId": "user-3",
+        "userName": "luffy"
+    },
+    {
+        "postId": "post-3",
+        "content": "jajajajaja",
+        "date": "Thu Nov 16 2022 17:31:54 GMT+0100 (hora estándar de Europa central)",
+        "userId": "user-2",
+        "userName": "Wendy Darling"
+    },
+    {
+        "postId": "post-4",
+        "content": "hola\n",
+        "date": "Thu Nov 17 2022 17:31:54 GMT+0100 (hora estándar de Europa central)",
+        "userId": "user-1",
+        "userName": "Peter Pan"
+    },
+    {
+        "postId": "post-5",
+        "content": "chao",
+        "date": "Thu Nov 17 2022 17:34:38 GMT+0100 (hora estándar de Europa central)",
+        "userId": "user-1",
+        "userName": "Peter Pan"
+    },
+    {
+        "postId": "post-6",
+        "content": "chaoo",
+        "date": "Thu Nov 17 2022 17:35:36 GMT+0100 (hora estándar de Europa central)",
+        "userId": "user-1",
+        "userName": "Peter Pan"
+    },
+    {
+        "postId": "post-7",
+        "content": "asdasd\n",
+        "date": "Thu Nov 17 2022 17:46:10 GMT+0100 (hora estándar de Europa central)",
+        "userId": "user-1",
+        "userName": "Peter Pan"
+    },
+    {
+        "postId": "post-8",
+        "content": "holaa",
+        "date": "Thu Nov 17 2022 17:50:50 GMT+0100 (hora estándar de Europa central)",
+        "userId": "user-1",
+        "userName": "Peter Pan"
+    },
+    {
+        "postId": "post-9",
+        "content": "holaa",
+        "date": "Thu Nov 17 2022 18:06:09 GMT+0100 (hora estándar de Europa central)",
+        "userId": "user-1",
+        "userName": "Peter Pan"
+    }
+]
