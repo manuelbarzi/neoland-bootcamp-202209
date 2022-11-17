@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import authenticateUser from '../logic/authenticateUser'
+import logo from '../img/logologintrello.png';
 
 function Login(props) {
 
@@ -59,10 +60,11 @@ function Login(props) {
                     Sign in to continue to Home
                 </h1>
                 <form className="flex flex-col justify-start w-96 gap-1 px-12 py-14 rounded bg-white" onSubmit={handleSubmit}>
-                    {/* <img
-                        src="img/logologintrello.png"
+                    <img
+                        src={logo}
+                        alt="logo"
                         className="self-center w-2/5 mb-8"
-                    /> */}
+                    />
                     <label htmlFor="loginEmail"></label>
                     <input
                         name='email'
