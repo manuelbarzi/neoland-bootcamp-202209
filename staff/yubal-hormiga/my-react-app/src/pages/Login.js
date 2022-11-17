@@ -1,8 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import log from '../utils/coolog'
 import authenticateUser from '../logic/authenticateUser'
-import React from 'react'
-
 
 function Login(props) {
     log.info('Login -> render')
@@ -37,16 +35,16 @@ function Login(props) {
                 }
 
                 window.userId = userId  
+                props.onLogin()
             })
     
-            props.onLogin()
         } catch(error) {
             alert(error.message)
     
             passwordInput.value = ''
         }
     }
-  
+
     return <main className="flex flex-col items-center gap-2">
         <h2>hola login</h2>
         <form className="flex flex-col gap-2" onSubmit={handleLogin}>
