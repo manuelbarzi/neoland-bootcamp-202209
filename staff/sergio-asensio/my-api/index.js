@@ -5,10 +5,14 @@ const express = require('express')
 const authPost = require('./handlers/authPost')
 const registerPost = require('./handlers/registerPost')
 const searchGet = require('./handlers/searchGet')
+const cors = require('./utils/corse')
 
 const jsonBodyParser = require('./utils/jsonBodyParser')
 
+
 const api = express()
+
+api.use(cors)
 
 api.post('/auth', jsonBodyParser, authPost)
 
