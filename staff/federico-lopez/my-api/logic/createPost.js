@@ -32,6 +32,8 @@ function createPost(userId, text, visibility, callback) {
       return;
     }
 
+    //TODO create post id
+
     const post = {
       user: userId,
       text,
