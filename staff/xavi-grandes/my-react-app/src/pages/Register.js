@@ -28,8 +28,10 @@ function Register({onNavigateToLogin, onRegisterSubmit}) {
     //   const email = emailInput.value
     //   const password = passwordInput.value
 
+
+    // del form (event.target) recojo el name=name del input name y le indico que su valor se llamará name, lo mismo con email y password
       const { name: { value: name }, email: { value: email }, password: { value: password } } = event.target
-  
+   
       try {
         registerUser(name, email, password, error => {
             if (error) {
@@ -57,7 +59,7 @@ function Register({onNavigateToLogin, onRegisterSubmit}) {
             <label className="self-start" htmlFor="name">Name</label>
             <input
               className="pl-1 bg-gray-200 border-b-2 border-gray-500 "
-              type="name"
+              type="text"
               name="name"
               id="name"
               placeholder="Input your name"
@@ -66,12 +68,12 @@ function Register({onNavigateToLogin, onRegisterSubmit}) {
             />
           </div>
           <div className="flex flex-col gap-1 my-1">
-            <label className="self-start" htmlFor="registerEmail">E-mail</label>
+            <label className="self-start" htmlFor="email">E-mail</label>
             <input 
               className="pl-1 bg-gray-200 border-b-2 border-gray-500 "
               type="email"
               name="email"
-              id="registerEmail"
+              id="email"
               placeholder="input your email"
               required=""
             />

@@ -22,7 +22,16 @@ function authenticateUser(email, password, callback){
 
     xhr.onload = () => {
 
-        const json = xhr.responseText
+        // const json = xhr.responseText
+        const { status, responseText: json } = xhr
+
+        if (status >= 500) {
+            const { error } = JSON.parse(json)
+
+            callback(new Error(error))
+
+            return
+        }
 
         const { userId } = JSON.parse(json)
 
@@ -40,5 +49,14 @@ function authenticateUser(email, password, callback){
 
     xhr.send(body)
 }
+
+/**
+ * Attends the result of the authentication
+ * 
+ * @callback callback
+ * 
+ * @param {Error} error The authentication error
+ * @param {string} userId The id of the user that authenticated
+ */
 
 export default authenticateUser
