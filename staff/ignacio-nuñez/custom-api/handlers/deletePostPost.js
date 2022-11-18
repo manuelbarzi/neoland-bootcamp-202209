@@ -1,10 +1,12 @@
 const deletePost = require('../logic/deletePost')
 
 module.exports = (req, res) => {
-    let { postId, postUserId } = req.body
+    let { body: { postId }, headers: { authorization } } = req
+
+    const userId = authorization.substring(7)
 
     try {
-        deletePost(postId, postUserId, error => {
+        deletePost(postId, userId, error => {
             if (error) {
                 if (error.message === 'Post doesnt exist') {
                     res.status(404).json({ error: error.message })

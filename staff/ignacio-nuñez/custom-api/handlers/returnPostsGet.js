@@ -1,8 +1,12 @@
 const retrievePosts = require("../logic/retrievePosts")
 
 module.exports = (req, res) => {
+    const { authorization } = req.headers
+
+    const userId = authorization.substring(7)
+
     try {
-        retrievePosts((error, posts) => {
+        retrievePosts(userId, (error, posts) => {
             if (error) {
                 res.status(500)
                 res.json({ error: error.message })

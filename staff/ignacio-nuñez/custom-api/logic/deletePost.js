@@ -28,11 +28,13 @@ module.exports = function deletePost(postId, userId, callback){
             return
             }
 
-        const postsAfterDelete = posts.filter(post => post.postId !== postId)
+        const indexOfPostToDelete = posts.findIndex(post => post.postId === postId)
 
-        const jsonPostsAfterDelete = JSON.stringify(postsAfterDelete, null, 4)
+        posts.splice(indexOfPostToDelete, 1)
 
-        writeFile('./data/posts.json', jsonPostsAfterDelete, error => {
+        const jsonPosts = JSON.stringify(posts, null, 4)
+
+        writeFile('./data/posts.json', jsonPosts, error => {
             if (error) {
                 callback(error, 500)
 

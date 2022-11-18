@@ -1,7 +1,10 @@
-function retrievePosts() {
-    return fetch('http://localhost:80/posts', {
+function retrievePosts(userId) {
+    return fetch('http://localhost:80/post/retrieve', {
         method: 'GET',
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 
+            'Authorization': `Bearer ${userId}`,
+            'Content-Type': 'application/json' 
+        }
     })
         .then(res => {
             if (!res.ok) {

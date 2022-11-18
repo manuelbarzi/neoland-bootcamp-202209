@@ -9,7 +9,7 @@ function authenticateUser(email, password) {
     if (password.length < 7) throw new Error('password length is less than 7')
     if (HAS_SPACES_REGEX.test(password)) throw new Error('password has spaces')
 
-    return fetch('http://localhost:80/login', {
+    return fetch('http://localhost:80/user/authenticate', {
         method: 'POST',
         body: JSON.stringify({ email, password }),
         headers: { 'Content-Type': 'application/json' }

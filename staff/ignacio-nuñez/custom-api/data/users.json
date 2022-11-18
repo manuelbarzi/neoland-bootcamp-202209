@@ -22,5 +22,11 @@
         "name": "pepito grillo",
         "email": "pepito@grillo.com",
         "password": "123123123"
+    },
+    {
+        "userId": "user-5",
+        "name": "para lelepipedo",
+        "email": "para@lelepipedo.com",
+        "password": "123123123"
     }
 ]

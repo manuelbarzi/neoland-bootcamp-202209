@@ -1,6 +1,6 @@
 const { readFile } = require('fs')
 
-module.exports = function retrievePosts(callback){
+module.exports = function retrievePosts(userId, callback){
     readFile('./data/posts.json', (error, data) => {
         if (error) {
             console.log(error)
@@ -9,7 +9,11 @@ module.exports = function retrievePosts(callback){
         }
        const posts = JSON.parse(data)
 
-       posts.sort((a, b) => {
+       const postsToRetrieve = posts.filter(post => {
+        return post.visibility === 'public' || post.userId === userId
+       })
+
+       postsToRetrieve.sort((a, b) => {
         if (a.date < b.date) {
           return 1;
         }
@@ -19,6 +23,6 @@ module.exports = function retrievePosts(callback){
         return 0;
       });
 
-        callback(null, posts)
+        callback(null, postsToRetrieve)
     })
 }

@@ -14,20 +14,15 @@ const deletePostPost = require('./handlers/deletePostPost')
 const api = express()
 
 api.use(cors)
-
-api.post('/login', jsonBodyParser, authPost)
-
-api.post('/register', jsonBodyParser, registerPost)
-
 // api.get('/search', searchGet)
 
-api.get('/user/:userId', returnUserGet)
+api.post('/user', jsonBodyParser, registerPost)
+api.post('/user/authenticate', jsonBodyParser, authPost)
+api.get('/user/retrieve', returnUserGet)
 
-api.post('/newPost', jsonBodyParser, newPostPost)
-
-api.get('/posts', returnPostsGet)
-
-api.post('/deletePost',jsonBodyParser, deletePostPost)
+api.post('/post', jsonBodyParser, newPostPost)
+api.post('/post/delete',jsonBodyParser, deletePostPost)
+api.get('/post/retrieve', returnPostsGet)
 
 const { PORT } = process.env
 api.listen(PORT, ()=> console.log(`server running on port: ${PORT}`))

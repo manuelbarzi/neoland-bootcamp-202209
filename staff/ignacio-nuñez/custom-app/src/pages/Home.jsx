@@ -22,7 +22,7 @@ function Home(props) {
         }
 
         try {
-            retrievePosts()
+            retrievePosts(sessionStorage.userId)
                 .then(posts => setPosts(posts))
                 .catch(error => alert(error.message))
         } catch (error) {
@@ -40,29 +40,35 @@ function Home(props) {
     const onCreatePost = event => {
         event.preventDefault()
 
-        const { post: { value: post } } = event.target
+        const { post: { value: post }, visibility: { value: visibility } } = event.target
 
-        try{
-            newPost(post, sessionStorage.userId, user.name)
-            .then(() =>retrievePosts())
-            .then(posts => setPosts(posts))
-            .catch(error =>{
-                alert(error.message)
-            })
-        }catch(error){
+        try {
+            newPost(post, sessionStorage.userId, user.name, visibility)
+                .then(() => retrievePosts(sessionStorage.userId))
+                .then(posts => {
+                    setPosts(posts)
+
+                    event.target.reset()
+                })
+
+                .catch(error => {
+                    alert(error.message)
+                })
+
+        } catch (error) {
             alert(error.message)
         }
     }
 
-    const onDeletePost = (postId, postUserId) =>{
-        try{
+    const onDeletePost = (postId, postUserId) => {
+        try {
             deletePost(postId, postUserId, sessionStorage.userId)
-            .then(() =>retrievePosts())
-            .then(posts => setPosts(posts))
-            .catch(error =>{
-                alert(error.message)
-            })
-        }catch(error){
+                .then(() => retrievePosts(sessionStorage.userId))
+                .then(posts => setPosts(posts))
+                .catch(error => {
+                    alert(error.message)
+                })
+        } catch (error) {
             alert(error.message)
         }
     }
@@ -87,33 +93,38 @@ function Home(props) {
 
     return (<main>
         <button onClick={onLogoutClick}>Logout</button>
-        <h1>Hola {userName}</h1>
         {/* 
         <div>
-            <form onSubmit={searchCat}>
-            <label htmlFor="catSearcher">Search</label>
-            <input type="text" name="query"/>
-            <button>🔎</button>
-            </form>
-        </div> */}
+        <form onSubmit={searchCat}>
+        <label htmlFor="catSearcher">Search</label>
+        <input type="text" name="query"/>
+        <button>🔎</button>
+        </form>
+    </div> */}
+        <div className="flex items-center flex-col">
+            <div>
+                <h1>Hola {userName}</h1>
+                <form onSubmit={onCreatePost}>
+                    <textarea name="post" placeholder="Share your thoughts"></textarea>
+                    <select id="visibility" name="visibility">
+                        <option value="public">Public</option>
+                        <option value="private">Private</option>
+                    </select>
+                    <button>Post</button>
+                </form>
+            </div>
 
-        <div>
-            <form onSubmit={onCreatePost}>
-                <textarea name="post"></textarea>
-                <button>Post</button>
-            </form>
+            <section>
+                {posts.map(post => {
+                    return <article key={post.postId} className="mt-3.5 border solid">
+                        <h2>{post.userName}</h2>
+                        <p>{format(post.date)}</p>
+                        <p>{post.content}</p>
+                        {post.userId === sessionStorage.userId ? <button onClick={() => onDeletePost(post.postId, post.userId)}>Delete</button> : null}
+                    </article>
+                })}
+            </section>
         </div>
-
-        <section>
-            {posts.map(post => {
-                return <article key={post.postId}>
-                    <h2>{post.userName}</h2>
-                    <p>{format(post.date)}</p>
-                    <p>{post.content}</p>
-                    {post.userId === sessionStorage.userId?<button onClick={()=>onDeletePost(post.postId, post.userId)}>Delete</button>: null}
-                </article>
-            })}
-        </section>
     </main>)
 }
 

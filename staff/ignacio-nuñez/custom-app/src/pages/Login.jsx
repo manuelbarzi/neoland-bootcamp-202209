@@ -21,7 +21,7 @@ function Login(props) {
         } catch (error) {
             alert(error.message)
 
-            event.target.password.value = ''
+            event.target.password.reset()
         }
 
     }
@@ -32,8 +32,7 @@ function Login(props) {
         props.onRegisterClick()
     }
 
-    return (<main>
-        <div className="flex h-full justify-center items-center bg-rose-700">
+    return (<div className="flex h-full justify-center items-center bg-rose-700">
             <form onSubmit={handleSubmit} className="w-1/5 shadow-xl bg-orange-500 flex flex-col gap-2 justify-center items-center p-8 border-solid border-black border-2 rounded-lg">
                 <h2 className='text-2xl font-bold'>Log in</h2>
                 <label htmlFor="email" className="self-start">E-mail</label>
@@ -47,8 +46,7 @@ function Login(props) {
                     <a href='' onClick={handleRegisterClick} className="p-1 border-solid border-black border-2 block text-center rounded-lg rounded-lg mt-3.5 w-full bg-orange-200">Register</a>
                 </div>
             </form>
-        </div>
-    </main>)
+        </div>)
 }
 
 export default Login
