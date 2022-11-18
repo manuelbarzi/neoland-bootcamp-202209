@@ -1,13 +1,11 @@
 import log from '../utils/coolog'
 import authenticateUser from '../logic/authenticateUser'
 
-function Login (props){
+function Login ({onRegisterClick, onLoggedIn}){
   log.info('login -> render ')
 
     const handleClick = (event) => {
       event.preventDefault()
-  
-      const onRegisterClick = props.onRegisterClick
   
       onRegisterClick()
     }
@@ -33,9 +31,7 @@ function Login (props){
 
             window.userId = userId
           })
-  
-          const onLoggedIn = props.onLoggedIn
-  
+
           onLoggedIn()
       } catch(error) {
           alert(error.message)
