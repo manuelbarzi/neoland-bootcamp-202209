@@ -21,6 +21,10 @@ function retrieveUser(userId, callback) {
             return
         }
 
+        // sanitize
+        delete user.password
+        delete user.id
+
         callback(null, user)
     })
 }

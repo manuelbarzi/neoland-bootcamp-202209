@@ -1,12 +1,29 @@
 import log from '../utils/coolog'
+import { useEffect, useState } from 'react'
+import retrieveUser from '../logic/retrieveUser'
 
 function Home() {
-    // const log = require('../utils/coolog')
-    // import log from '../utils/coolog' // ERROR fails!
-
     log.info('Home -> render')
 
-    return <h2>hola home</h2>
+    const [user, setUser] = useState()
+
+    useEffect(() => {
+        try {
+            retrieveUser(window.userId, (error, user) => {
+                if (error) {
+                    alert(error.message)
+
+                    return
+                }
+
+                setUser(user)
+            })
+        } catch (error) {
+
+        }
+    }, [])
+
+    return <h2>hola {user ? user.name : 'home'}</h2>
 }
 
 export default Home
