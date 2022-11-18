@@ -1,4 +1,4 @@
-const { readFile } = require('fs')
+ const { readFile } = require('fs')
 
 function authenticateUser (email, password, callback) {
     if (typeof email !== 'string') throw new TypeError ('email is not a string')
