@@ -5,16 +5,16 @@ function catSearcher(query) {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
     })
-    .then(res => {
-        if(!res.ok){
-            throw new Error('Failed on fetching authentication')
-        }
+        .then(res => {
+            if (!res.ok) {
+                throw new Error('Failed on fetching authentication')
+            }
 
-        return res.json()
-    })
-    .then(cats => {
-       return cats
-    })
+            return res.json()
+        })
+        .then(cats => {
+            return cats
+        })
 }
 
 export default catSearcher

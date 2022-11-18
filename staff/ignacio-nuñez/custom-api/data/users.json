@@ -16,5 +16,11 @@
         "name": "luffy",
         "email": "one@piece.com",
         "password": "123123123"
+    },
+    {
+        "userId": "user-4",
+        "name": "pepito grillo",
+        "email": "pepito@grillo.com",
+        "password": "123123123"
     }
 ]

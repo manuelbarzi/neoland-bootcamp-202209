@@ -1,7 +1,7 @@
 const returnUser = require('../logic/returnUser')
 
 module.exports = (req, res) => {
-    const { userId } = req.body
+    const { params: { userId } } = req
 
     try {
         returnUser(userId, (error, user) => {

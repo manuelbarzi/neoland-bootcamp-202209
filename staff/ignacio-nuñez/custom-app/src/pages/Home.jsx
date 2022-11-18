@@ -3,6 +3,7 @@ import newPost from "../logic/new-post"
 import retrievePosts from "../logic/retrieve-posts"
 import retrieveUser from "../logic/retrieve-user"
 import { format, render, cancel, register } from 'timeago.js'
+import deletePost from "../logic/delete-post"
 
 function Home(props) {
 
@@ -43,6 +44,19 @@ function Home(props) {
 
         try{
             newPost(post, sessionStorage.userId, user.name)
+            .then(() =>retrievePosts())
+            .then(posts => setPosts(posts))
+            .catch(error =>{
+                alert(error.message)
+            })
+        }catch(error){
+            alert(error.message)
+        }
+    }
+
+    const onDeletePost = (postId, postUserId) =>{
+        try{
+            deletePost(postId, postUserId, sessionStorage.userId)
             .then(() =>retrievePosts())
             .then(posts => setPosts(posts))
             .catch(error =>{
@@ -96,6 +110,7 @@ function Home(props) {
                     <h2>{post.userName}</h2>
                     <p>{format(post.date)}</p>
                     <p>{post.content}</p>
+                    {post.userId === sessionStorage.userId?<button onClick={()=>onDeletePost(post.postId, post.userId)}>Delete</button>: null}
                 </article>
             })}
         </section>

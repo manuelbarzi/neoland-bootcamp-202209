@@ -19,15 +19,7 @@ module.exports = function registerUser(content, userId, userName, callback) {
             return
         }
 
-        const posts = JSON.parse(json)
-
-        const userExist = posts.some(user => user.userId === userId)
-
-        if (!userExist) {
-            callback(new Error('Invalid User'), 409)
-
-            return
-        }
+        const posts = JSON.parse(json);
 
         [, numberPostId] = posts[posts.length - 1].postId.split('-')
         const postId = `post-${parseInt(numberPostId) + 1}`
@@ -37,17 +29,17 @@ module.exports = function registerUser(content, userId, userName, callback) {
         const post = { postId, content, date, userId, userName }
 
         posts.push(post)
-
+        
         const jsonPosts = JSON.stringify(posts, null, 4)
 
         writeFile('./data/posts.json', jsonPosts, error => {
             if (error) {
-                callback(error, 500)
+                callback(error)
 
                 return
             }
 
-            callback(null, 201)
+            callback(null)
         })
     })
 }

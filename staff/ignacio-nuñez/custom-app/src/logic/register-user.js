@@ -1,7 +1,6 @@
-import { IS_ALPHABETICAL_REGEX, IS_EMAIL_REGEX, HAS_SPACES_REGEX } from '../utils/regex'
+import { IS_EMAIL_REGEX, HAS_SPACES_REGEX } from '../utils/regex'
 
 function registerUser(name, email, password) {
-    console.log(name)
     if (typeof name !== 'string') throw new Error('name is not a string')
     if (!/^[A-Za-z\s]+$/g.test(name)) throw new Error('name is not alphabetical')
 

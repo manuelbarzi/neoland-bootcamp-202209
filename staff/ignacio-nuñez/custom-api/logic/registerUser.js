@@ -22,7 +22,7 @@ module.exports = function registerUser(name, email, password, callback) {
         const userExist = users.some(user => user.email === email)
 
         if (userExist) {
-            callback(new Error('Email already registered'), 409)
+            callback(new Error('Email already registered'))
 
             return
         }
@@ -38,12 +38,12 @@ module.exports = function registerUser(name, email, password, callback) {
 
         writeFile('./data/users.json', jsonUsers, error => {
             if (error) {
-                callback(error, 500)
+                callback(error)
 
                 return
             }
 
-            callback(null, 201)
+            callback(null)
         })
     })
 }

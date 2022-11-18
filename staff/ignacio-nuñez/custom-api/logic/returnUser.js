@@ -20,6 +20,9 @@ module.exports = function returnUser(userId, callback){
 
         return
         }
+        
+        delete user.password
+        delete user.userId
 
         callback(null, user)
     })

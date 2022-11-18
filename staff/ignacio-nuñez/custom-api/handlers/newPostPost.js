@@ -5,14 +5,14 @@ module.exports = (req, res) => {
     let { content, userId, userName } = req.body
 
     try {
-        newPost(content, userId, userName, (error, status) => {
+        newPost(content, userId, userName, error => {
             if (error) {
-                res.status(status)
-                res.json({ error: error.message })
+                res.status(500).json(({ error: 'server error' }))
+
                 return
             }
 
-            res.status(status).send()
+            res.status(200).send()
         })
     } catch (error) {
         res.status(500)

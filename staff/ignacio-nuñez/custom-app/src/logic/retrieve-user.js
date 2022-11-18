@@ -2,9 +2,7 @@ function retrieveUser(userId) {
     if (typeof userId !== 'string') throw new Error('userId is not a string')
 
 
-    return fetch('http://localhost:80/user', {
-        method: 'POST',
-        body: JSON.stringify({ userId }),
+    return fetch(`http://localhost:80/user/${userId}`, {
         headers: { 'Content-Type': 'application/json' }
     })
         .then(res => {
@@ -15,9 +13,7 @@ function retrieveUser(userId) {
             return res.json()
         })
         .then(data => {
-            const { name, email } = data
-            
-            const user = { name, email }
+            const user = data
 
             return user
         })

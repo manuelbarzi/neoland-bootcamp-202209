@@ -5,10 +5,11 @@ const jsonBodyParser = require('./utils/jsonBodyParser')
 const authPost = require('./handlers/authPost')
 const registerPost = require('./handlers/registerPost')
 // const searchGet = require('./handlers/searchGet')
-const returnUserPost = require('./handlers/returnUserPost')
+const returnUserGet = require('./handlers/returnUserGet')
 const returnPostsGet = require('./handlers/returnPostsGet')
 const cors = require('./utils/cors')
 const newPostPost = require('./handlers/newPostPost')
+const deletePostPost = require('./handlers/deletePostPost')
 
 const api = express()
 
@@ -20,11 +21,13 @@ api.post('/register', jsonBodyParser, registerPost)
 
 // api.get('/search', searchGet)
 
-api.post('/user', jsonBodyParser, returnUserPost)
+api.get('/user/:userId', returnUserGet)
 
 api.post('/newPost', jsonBodyParser, newPostPost)
 
 api.get('/posts', returnPostsGet)
+
+api.post('/deletePost',jsonBodyParser, deletePostPost)
 
 const { PORT } = process.env
 api.listen(PORT, ()=> console.log(`server running on port: ${PORT}`))

@@ -1,14 +1,13 @@
-const registerUser = require('../logic/registerUser')
-
+const deletePost = require('../logic/deletePost')
 
 module.exports = (req, res) => {
-    let { name, email, password } = req.body
+    let { postId, postUserId } = req.body
 
     try {
-        registerUser(name, email, password, error => {
+        deletePost(postId, postUserId, error => {
             if (error) {
-                if (error.message === 'Email already registered') {
-                    res.status(401).json({ error: error.message })
+                if (error.message === 'Post doesnt exist') {
+                    res.status(404).json({ error: error.message })
                 } else {
                     res.status(500).json({ error: 'server error' })
                 }
