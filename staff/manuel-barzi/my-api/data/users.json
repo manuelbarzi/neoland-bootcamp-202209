@@ -58,5 +58,11 @@
         "name": "Pepi Nillo",
         "email": "pepi@nillo.com",
         "password": "123123123"
+    },
+    {
+        "id": "user-11",
+        "name": "Neo Land",
+        "email": "neo@land.com",
+        "password": "123123123"
     }
 ]

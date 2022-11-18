@@ -1,19 +1,19 @@
-const retrieveUser = require('../logic/retrieveUser')
+const createPost = require('../logic/createPost')
 
 module.exports = (req, res) => {
-    const { headers: { authorization } } = req
+    const { body: { text, visibility }, headers: { authorization } } = req
 
     const userId = authorization.substring(7)
 
     try {
-        retrieveUser(userId, (error, user) => {
+        createPost(userId, text, visibility, error => {
             if (error) {
                 res.status(500).json({ error: error.message })
 
                 return
             }
 
-            res.json(user)
+            res.status(201).send()
         })
     } catch (error) {
         res.status(500).json({ error: error.message })

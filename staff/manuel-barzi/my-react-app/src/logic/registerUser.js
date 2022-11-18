@@ -40,7 +40,7 @@ function registerUser(name, email, password, callback) {
     xhr.onerror = () => callback(new Error('connection error'))
 
     
-    xhr.open('POST', 'http://localhost/register')
+    xhr.open('POST', 'http://localhost/users')
     xhr.setRequestHeader('Content-Type', 'application/json')
 
     const payload = { name, email, password }

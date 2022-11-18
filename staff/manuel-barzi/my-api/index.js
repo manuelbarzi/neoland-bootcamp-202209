@@ -6,6 +6,7 @@ const authenticateUserHandler = require('./handlers/authenticateUserHandler')
 const registerUserHandler = require('./handlers/registerUserHandler')
 const searchHttpCatsHandler = require('./handlers/searchHttpCatsHandler')
 const retrieveUserHandler = require('./handlers/retrieveUserHandler')
+const createPostHandler = require('./handlers/createPostHandler')
 
 const jsonBodyParser = require('./utils/jsonBodyParser')
 const cors = require('./utils/cors')
@@ -14,13 +15,15 @@ const api = express()
 
 api.use(cors)
 
-api.post('/auth', jsonBodyParser, authenticateUserHandler)
+api.post('/users/auth', jsonBodyParser, authenticateUserHandler)
+api.post('/users', jsonBodyParser, registerUserHandler)
+api.get('/users', retrieveUserHandler)
 
-api.post('/register', jsonBodyParser, registerUserHandler)
+api.post('/posts', jsonBodyParser, createPostHandler)
 
 api.get('/search', searchHttpCatsHandler)
 
-api.get('/users/:userId', retrieveUserHandler)
+
 
 const { PORT } = process.env
 

@@ -20,7 +20,8 @@ function retrieveUser(userId, callback) {
         callback(null, user)
     }
 
-    xhr.open('GET', `http://localhost/users/${userId}`)
+    xhr.open('GET', 'http://localhost/users')
+    xhr.setRequestHeader('Authorization', `Bearer ${userId}`)
     xhr.send()
 }
 
