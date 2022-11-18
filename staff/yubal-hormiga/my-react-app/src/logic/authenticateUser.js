@@ -1,5 +1,11 @@
 import { IS_EMAIL_REGEX, HAS_SPACES_REGEX } from '../utils/regex'
-
+/**
+ * Register a user against API
+ * @param {strim} email The user emial
+ * @param {strim} password The user password
+ * @para {callback} callback The callback to attend the result 
+ * 
+ */
 function authenticateUser(email, password, callback) {
     if (typeof email !== 'string') throw new Error('email is not a string')
     if (!IS_EMAIL_REGEX.test(email)) throw new Error('email is not valid')
@@ -40,5 +46,11 @@ function authenticateUser(email, password, callback) {
 
     xhr.send(json)
 }
-
+/**
+ * Attends the result of the register
+ * 
+ * @callback callback
+ * 
+ * @param {Error} error The authentication error
+ */
 export default authenticateUser
