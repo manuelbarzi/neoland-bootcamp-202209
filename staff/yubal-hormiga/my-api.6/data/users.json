@@ -55,14 +55,14 @@
     },
     {
         "id": "user-10",
-        "name": "Pepi Nillo",
-        "email": "pepi@nillo.com",
+        "name": "Peter Pa",
+        "email": "peter@pa.com",
         "password": "123123123"
     },
     {
         "id": "user-11",
-        "name": "Neo Land",
-        "email": "neo@land.com",
+        "name": "Peter P",
+        "email": "peter@p.com",
         "password": "123123123"
     },
     {
@@ -73,14 +73,8 @@
     },
     {
         "id": "user-13",
-        "name": "Ana Conda",
-        "email": "ana@conda.con",
-        "password": "123123123"
-    },
-    {
-        "id": "user-14",
-        "name": "yubal",
-        "email": "yubalhh@gmail.com",
+        "name": "pedro",
+        "email": "pe@dro.com",
         "password": "123123123"
     }
 ]

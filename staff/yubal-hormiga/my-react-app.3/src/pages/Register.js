@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import log from '../utils/coolog'
 import registerUser from '../logic/registerUser'
 
@@ -17,7 +18,12 @@ function Register({ onNavigateToLogin, onRegister }) {
 
         event.preventDefault()
 
-        const { name: { value: name }, email: { value: email }, password: { value: password } } = event.target
+        // const { name: { value: name }, email: { value: email }, password: { value: password } } = event.target
+
+        const { name: { value: name } } = event.target //! me traigo {  me traigo{ : el nombre valor
+        const { email: { value: email } } = event.target
+        const { password: { value: password } } = event.target
+        
 
         try {
             registerUser(name, email, password, error => {

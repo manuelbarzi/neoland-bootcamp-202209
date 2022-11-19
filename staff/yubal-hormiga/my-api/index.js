@@ -2,19 +2,28 @@ require('dotenv').config()
 
 const express = require('express')
 
-const authPost = require('./handlers/authPost')
-const registerPost = require('./handlers/registerPost')
-const searchGet = require('./handlers/searchGet')
+const authenticateUserHandler = require('./handlers/authenticateUserHandler')
+const registerUserHandler = require('./handlers/registerUserHandler')
+const searchHttpCatsHandler = require('./handlers/searchHttpCatsHandler')
+const retrieveUserHandler = require('./handlers/retrieveUserHandler')
+const createPostHandler = require('./handlers/createPostHandler')
 
 const jsonBodyParser = require('./utils/jsonBodyParser')
 const cors = require('./utils/cors')
+
 const api = express()
+
 api.use(cors)
-api.post('/auth', jsonBodyParser, authPost)
 
-api.post('/register', jsonBodyParser, registerPost)
+api.post('/users/auth', jsonBodyParser, authenticateUserHandler)
+api.post('/users', jsonBodyParser, registerUserHandler)
+api.get('/users', retrieveUserHandler)
 
-api.get('/search', searchGet)
+api.post('/posts', jsonBodyParser, createPostHandler)
+
+api.get('/search', searchHttpCatsHandler)
+
+
 
 const { PORT } = process.env
 
