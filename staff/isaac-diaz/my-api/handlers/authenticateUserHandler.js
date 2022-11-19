@@ -19,6 +19,6 @@ module.exports = (req, res) => {
         })
     } catch (error) {
         res.status(500)
-        res.jsoon({ error: error.message })
+        res.json({ error: error.message })
     }
 }

@@ -6,7 +6,7 @@ function registerUser(name, email, password, callback) {
     if (typeof password !== 'string') throw new TypeError('password is not a string')
     if (typeof callback !== 'function') throw new TypeError('callback is ot a function')
 
-    readFile('./data/users.json' 'utf8', (error, json) => {
+    readFile('./data/users.json', 'utf8', (error, json) => {
         if (error) {
             callback(error)
 
@@ -36,7 +36,7 @@ function registerUser(name, email, password, callback) {
 
         const newJson = JSON.stringify(users, null, 4)
 
-        writeFile('/data/users.json', newJson, error => {
+        writeFile('./data/users.json', newJson, error => {
             if (error) {
                 callback(error)
 

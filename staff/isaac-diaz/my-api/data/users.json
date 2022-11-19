@@ -52,5 +52,17 @@
         "name": "Ana Conda",
         "email": "ana@conda.com",
         "password": "123123123"
+    },
+    {
+        "id": "user-10",
+        "name": "pepito grillo",
+        "email": "pepito@grillo.com",
+        "password": "123123123"
+    },
+    {
+        "id": "user-11",
+        "name": "mugiwara",
+        "email": "mugi@wara.com",
+        "password": "123123123"
     }
 ]

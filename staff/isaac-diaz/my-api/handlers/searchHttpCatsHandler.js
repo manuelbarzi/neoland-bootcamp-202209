@@ -1,5 +1,5 @@
 const retrieveUser = require('../logic/retrieveUser')
-const searchHttpCats = require('../logic/searchHttpCats.')
+const searchHttpCats = require('../logic/searchHttpCats')
 
 module.exports = (req, res) => {
     const { cookie } = req.headers

@@ -4,7 +4,7 @@ function retrieveUser(userId, callback) {
     if(typeof userId !== 'string') throw new Error('userId is not a string')
     if(typeof callback !== 'function') throw new Error('callback is not a function')
 
-    readFile('./data/users.json', 'uft8', (error, json) => {
+    readFile('./data/users.json', 'utf8', (error, json) => {
         if (error) {
             callback(error)
 
