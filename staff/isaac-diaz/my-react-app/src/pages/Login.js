@@ -11,54 +11,54 @@ function Login(props) {
 
         props.onNavigateToRegister()
     }
- 
+
     const handleLogin = event => {
-    log.info('Login -> handleLogin')
+        log.info('Login -> handleLogin')
 
-    event.preventDefault()
+        event.preventDefault()
 
-    const form = event.target
+        const form = event.target
 
-    const emailInput = from.email
+        const emailInput = form.email
 
-    const passwordInput =  form.password
+        const passwordInput = form.password
 
-    const email = emmail.input.value
+        const email = emailInput.value
 
-    const password = password.input.value
+        const password = passwordInput.value
 
-    try{ 
-        authenticateUser(email, password, (error, userId) => {
-            if(error) {
-                alert(error.message)
+        try {
+            authenticateUser(email, password, (error, userId) => {
+                if (error) {
+                    alert(error.message)
 
-                return
-            }
+                    return
+                }
 
-            window.userId = userId
-        })
+                window.userId = userId
+            })
 
-        props.onLogin()
-    } catch (error) {
-        alert(error.message)
+            props.onLogin()
+        } catch (error) {
+            alert(error.message)
 
 
-        passwordInput.value = ''
+            passwordInput.value = ''
+        }
     }
-}
 
-return <main className="flex flex-col items-center gap-2">
-<h2>hola login</h2>
-<form className="flex flex-col gap-2" onSubmit={handleLogin}>
-    <label htmlFor="login-email" className="container__item--left">E-mail</label>
-    <input name="email" type="email" id="login-email" placeholder="input your e-mail" className="border-b border-black" />
-    <label htmlFor="login-password" className="container__item--left">Password</label>
-    <input name="password" type="password" id="login-password" placeholder="input your password" className="border-b border-black" />
-    <button className="p-2 border rounded-xl hover:animate-spin">Login</button>
-</form>
+    return <main className="flex flex-col items-center gap-2">
+        <h2>hola login</h2>
+        <form className="flex flex-col gap-2" onSubmit={handleLogin}>
+            <label htmlFor="login-email" className="container__item--left">E-mail</label>
+            <input name="email" type="email" id="login-email" placeholder="input your e-mail" className="border-b border-black" />
+            <label htmlFor="login-password" className="container__item--left">Password</label>
+            <input name="password" type="password" id="login-password" placeholder="input your password" className="border-b border-black" />
+            <button className="p-2 border rounded-xl hover:animate-spin">Login</button>
+        </form>
 
-<a href="" className="underline" onClick={handleNavigateToRegister}>Register</a>
-</main>
+        <a href="" className="underline" onClick={handleNavigateToRegister}>Register</a>
+    </main>
 }
 
 export default Login

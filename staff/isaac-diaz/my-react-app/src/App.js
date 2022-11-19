@@ -2,7 +2,8 @@ import Login from './pages/Login'
 import { useState } from 'react'
 import Home from './pages/Home'
 import log from './utils/coolog'
-
+import Register from './pages/Register'
+import { FaBeer } from 'react-icons/fa'
 
 function App() {
   log.info('App -> render')
@@ -11,10 +12,15 @@ function App() {
 
   const navigateToHome = () => setView('home')
 
+  const navigateToLogin = () => setView('login')
+
+  const navigateToRegister = () => setView('register')
+
   return <>
   <h1>Hola App</h1>
   
-  {view === 'login' && <Login onLogin={navigateToHome} />}
+  {view === 'login' && <Login onLogin={navigateToHome} onNavigateToRegister={navigateToRegister} />}
+  {view === 'register' && <Register onRegister={navigateToLogin} onNavigateToLogin={navigateToLogin} />}
   {view === 'home' && <Home />}
   </>
 }
