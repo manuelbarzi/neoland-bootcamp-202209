@@ -4,7 +4,7 @@ function retrieveUser(userId, callback) {
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
     if (typeof callback !== 'function') throw new TypeError('callback is not a function')
 
-    readFile('./data/users.json', 'utf8', (error, json) => {
+    const parsedUser = (error, json) => {
         if (error) {
             callback(error)
 
@@ -19,9 +19,9 @@ function retrieveUser(userId, callback) {
 
             return
         }
-
         callback(null, user)
-    })
+    }
+    readFile('./data/users.json', 'utf8', parsedUser)
 }
 
 module.exports = retrieveUser

@@ -1,20 +1,19 @@
-const registerUser = require('../logic/registerUser')
+const updateUserPassword = require('../logic/updateUserPassword')
 
 module.exports = (req, res) => {
-    let { name, email, password } = req.body
+    let { newPassword, userId } = req.body
 
     try {
-        const errorUserCreation = (error, userId) => {
+        const errorUpdate = (error) => {
             if (error) {
                 res.status(500)
                 res.json({ error: error.message })
 
                 return
             }
-            res.json({ userId })
             res.status(201).send()
         }
-        registerUser(name, email, password, errorUserCreation)
+        updateUserPassword(newPassword, userId, errorUpdate)
 
     } catch (error) {
         res.status(500)

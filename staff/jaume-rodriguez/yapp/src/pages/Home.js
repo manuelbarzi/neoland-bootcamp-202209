@@ -1,9 +1,33 @@
-import log from '../utils/coolog'
+import Header from '../components/Header'
+import Tasks from '../components/Tasks'
 
-function Home() {
-    log.info('home -> render')
+function Home(props) {
 
-    return <h2>hola home</h2>
+    // HEADER LINKS BRIDGE
+    const handleHomeLink = () => {
+        props.onHomeLink();
+    };
+
+    // TOGGLE MENU LINKS BRIDGE
+    const handleSettingsLink = () => {
+        props.onSettingsAccountLink();
+    };
+
+    const handleLogoutLink = () => {
+        window.userId = null;
+        props.onLoggedoutLink();
+    };
+
+    return (
+        <main className="min-h-screen bg-sky-500">
+            <Header
+                onHomeLink={handleHomeLink}
+                onSettingsAccountLink={handleSettingsLink}
+                onLoggedoutLink={handleLogoutLink}
+            />
+            <Tasks />
+        </main>
+    );
 }
 
 export default Home

@@ -31,7 +31,7 @@ function authenticateUser(email, password, callback) {
     xhr.onerror = () => callback(new Error('connection error'))
 
 
-    xhr.open('POST', 'http://localhost/auth')
+    xhr.open('POST', 'http://localhost/users/auth')
     xhr.setRequestHeader('Content-Type', 'application/json')
 
     const payload = { email, password }

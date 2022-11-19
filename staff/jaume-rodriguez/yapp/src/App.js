@@ -2,6 +2,7 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import { useState } from 'react'
 import Home from './pages/Home'
+import SettingsAccount from './components/SettingsAccount'
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
   const navigateToLogin = () => setView('Login')
   const navigateToRegister = () => setView('Register')
   const navigateToHome = () => setView('Home')
+  const navigateToSettingsAccount = () => setView('SettingsAccount')
 
   return <>
     {view === 'Login' &&
@@ -42,7 +44,18 @@ function App() {
         loginInputEmailValue={inputEmailValue}
         loginInputPasswordValue={inputPasswordValue}
       />}
-    {view === 'Home' && <Home />}
+    {view === 'Home' &&
+      <Home
+        onHomeLink={navigateToHome}
+        onSettingsAccountLink={navigateToSettingsAccount}
+        onLoggedoutLink={navigateToLogin}
+      />}
+    {view === 'SettingsAccount' &&
+      <SettingsAccount
+        onHomeLink={navigateToHome}
+        onSettingsAccountLink={navigateToSettingsAccount}
+        onLoggedoutLink={navigateToLogin}
+      />}
   </>
 }
 
