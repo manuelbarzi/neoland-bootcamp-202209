@@ -1,0 +1,37 @@
+[
+    {
+        "id": "post-1",
+        "user": "user-1",
+        "text": "blah blah blah",
+        "date": "2022-12-17T12:18:31.429Z",
+        "visibility": "public"
+    },
+    {
+        "id": "post-2",
+        "user": "user-2",
+        "text": "bleh bleh bleh",
+        "date": "2022-11-27T12:18:31.429Z",
+        "visibility": "private"
+    },
+    {
+        "id": "post-3",
+        "user": "user-3",
+        "text": "blih blih blih",
+        "date": "2022-12-01T12:18:31.429Z",
+        "visibility": "public"
+    },
+    {
+        "id": "post-4",
+        "user": "user-12",
+        "text": "21dasdasd",
+        "visibility": "public",
+        "date": "2022-11-18T16:16:28.198Z"
+    },
+    {
+        "id": "post-5",
+        "user": "user-3",
+        "text": "blah blah blah",
+        "date": "2022-12-01T12:18:31.429Z",
+        "visibility": "private"
+    }
+]

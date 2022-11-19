@@ -58,5 +58,17 @@
         "name": "mier coles",
         "email": "mier@coles.com",
         "password": "123123123"
+    },
+    {
+        "id": "user-11",
+        "name": "Fede",
+        "email": "fede@fede.com",
+        "password": "123123123"
+    },
+    {
+        "id": "user-12",
+        "name": "Pepito Grillo",
+        "email": "pepito@grillo.com",
+        "password": "123123123"
     }
 ]

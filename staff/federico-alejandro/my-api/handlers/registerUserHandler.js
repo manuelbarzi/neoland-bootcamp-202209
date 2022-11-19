@@ -15,7 +15,7 @@ module.exports = (req, res) => {
             res.status(201).send()
         })
     } catch (error) {
-        res.status(500)
-        res.json({ error: error.message})
+        res.status(500).json({ error: error.message})
+        
     }
 }

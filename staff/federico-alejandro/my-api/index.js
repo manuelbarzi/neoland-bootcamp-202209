@@ -2,22 +2,30 @@ require('dotenv').config()
 
 const express = require('express')
 
-const authPost = require('./handlers/authPost')
-const registerPost = require('./handlers/registerPost')
-const searchGet = require('./handlers/searchGet')
-const cors = require('./utils/cors')
+const authenticateUserHandler = require('./handlers/authenticateUserHandler')
+const registerUserHandler = require('./handlers/registerUserHandler')
+const searchHttpCatsHandler = require('./handlers/searchHttpCatsHandler')
+const retrieveUserHandler = require('./handlers/retrieveUserHandler')
+const createPostHandler = require('./handlers/createPostHandler')
+
 
 const jsonBodyParser = require('./utils/jsonBodyParser')
+const cors = require('./utils/cors')
+const retrievePublicPostsHandler = require('./handlers/retrievePublicPostsHandler')
+
 
 const api = express()
 
 api.use(cors)
 // jsonBodyParser transforma en objeto el json para luego enviarlo a la otra pagina.
-api.post('/auth', jsonBodyParser, authPost) 
+api.post('/users/auth', jsonBodyParser, authenticateUserHandler) 
+api.post('/users', jsonBodyParser, registerUserHandler)
+api.get('/users', retrieveUserHandler)
 
-api.post('/register', jsonBodyParser, registerPost)
+api.get('/search', searchHttpCatsHandler)
 
-api.get('/search', searchGet)
+api.post('/posts', jsonBodyParser, createPostHandler)
+api.get('/posts', retrievePublicPostsHandler)
 
 const { PORT } = process.env
 

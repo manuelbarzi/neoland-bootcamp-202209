@@ -37,7 +37,7 @@ function registerUser(name, email, password, callback) {
         const newJson = JSON.stringify(users, null, 4)
 
         writeFile('./data/users.json', newJson, error => {
-            if(error) {
+            if (error) {
                 callback(error)
 
                 return
@@ -45,7 +45,7 @@ function registerUser(name, email, password, callback) {
 
             callback(null)
         })
-})
+    })
 
 }
 
