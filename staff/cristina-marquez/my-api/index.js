@@ -2,25 +2,27 @@ require('dotenv').config()
 
 const express = require('express')
 const cors = require('cors')
+const bodyParser = require('body-parser')
 
 const authPost = require('./handlers/authPost')
 const registerPost = require('./handlers/registerPost')
-const searchGet = require('./handlers/searchGet')
+const createnewPost = require('./handlers/createnewPost')
 
-const jsonBodyParser = require('./utils/jsonBodyParser')
 
 const app = express()
 app.use(cors())
+app.use(bodyParser.json())
 
 
-app.post('/auth', jsonBodyParser, authPost)
+app.post('/auth', authPost)
+app.post('/register', registerPost)
+app.post('/posts', createnewPost)
 
-app.post('/register', jsonBodyParser, registerPost)
-
-app.get('/search', searchGet)
+//app.get('/search', searchGet)
 
 
 
 
 const { PORT } = process.env
 app.listen(PORT, () => console.log(`server listening on port ${PORT}`))
+

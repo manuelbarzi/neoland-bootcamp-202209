@@ -1,0 +1,44 @@
+[
+    {
+        "id": "post-1",
+        "user": 1,
+        "text": "Hello",
+        "visibility": "public",
+        "date": "2022-11-18T18:40:24.323Z"
+    },
+    {
+        "id": "post-2",
+        "user": 1,
+        "text": "sersiwrfassf",
+        "visibility": "public",
+        "date": "2022-11-18T19:26:52.199Z"
+    },
+    {
+        "id": "post-3",
+        "user": 1,
+        "text": "sersiwrfassf",
+        "visibility": "public",
+        "date": "2022-11-18T19:27:07.161Z"
+    },
+    {
+        "id": "post-4",
+        "user": 1,
+        "text": "sersiwrfassf",
+        "visibility": "public",
+        "date": "2022-11-18T19:27:10.298Z"
+    },
+    {
+        "id": "post-5",
+        "user": 1,
+        "text": "sersiwrfassf",
+        "visibility": "public",
+        "date": "2022-11-18T19:27:30.936Z"
+    },
+    {
+        "id": "post-6",
+        "user": 1,
+        "text": "sersiwrfassf",
+        "visibility": "public",
+        "date": "2022-11-18T19:27:52.911Z"
+    }
+]
