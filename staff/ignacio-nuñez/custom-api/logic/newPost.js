@@ -14,7 +14,7 @@ module.exports = function registerUser(content, visibility, userName, userId, ca
 
     readFile('./data/users.json', 'utf8', (error, jsonUsers) => {
         if (error) {
-            callback(error, 500)
+            callback(error)
 
             return
         }
@@ -31,7 +31,7 @@ module.exports = function registerUser(content, visibility, userName, userId, ca
 
         readFile('./data/posts.json', 'utf8', (error, json) => {
             if (error) {
-                callback(error, 500)
+                callback(error)
 
                 return
             }

@@ -1,9 +1,14 @@
-function catSearcher(query) {
+function usersSearcher(query, userId) {
     if (typeof query !== 'string') throw new Error('query is not a string')
+    if (query.trim() === '') throw new Error('invalid query')
 
-    return fetch(`http://localhost:80/search?q=${query}`, {
+
+    return fetch(`http://localhost:80/search/users?q=${query}`, {
         method: 'GET',
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 
+            'Authorization': `Bearer ${userId}`,
+            'Content-Type': 'application/json'
+         }
     })
         .then(res => {
             if (!res.ok) {
@@ -12,9 +17,9 @@ function catSearcher(query) {
 
             return res.json()
         })
-        .then(cats => {
-            return cats
+        .then(users => {
+            return users
         })
 }
 
-export default catSearcher
+export default usersSearcher

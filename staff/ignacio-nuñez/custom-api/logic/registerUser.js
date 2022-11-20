@@ -12,7 +12,7 @@ module.exports = function registerUser(name, email, password, callback) {
 
     readFile('./data/users.json', 'utf8', (error, json) => {
         if (error) {
-            callback(error, 500)
+            callback(error)
 
             return
         }

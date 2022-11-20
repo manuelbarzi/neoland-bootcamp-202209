@@ -36,7 +36,7 @@ module.exports = function deletePost(postId, userId, callback){
 
         writeFile('./data/posts.json', jsonPosts, error => {
             if (error) {
-                callback(error, 500)
+                callback(error)
 
                 return
             }
