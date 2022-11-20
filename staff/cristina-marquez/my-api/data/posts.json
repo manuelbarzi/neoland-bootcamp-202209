@@ -15,21 +15,21 @@
     },
     {
         "id": "post-3",
-        "user": 1,
+        "user": 2,
         "text": "sersiwrfassf",
         "visibility": "public",
         "date": "2022-11-18T19:27:07.161Z"
     },
     {
         "id": "post-4",
-        "user": 1,
+        "user": 3,
         "text": "sersiwrfassf",
         "visibility": "public",
         "date": "2022-11-18T19:27:10.298Z"
     },
     {
         "id": "post-5",
-        "user": 1,
+        "user": 2,
         "text": "sersiwrfassf",
         "visibility": "public",
         "date": "2022-11-18T19:27:30.936Z"

@@ -3,10 +3,12 @@ require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
+const authenticateUserMiddleware = require('./middleware/authenticateUser')
 
 const authPost = require('./handlers/authPost')
 const registerPost = require('./handlers/registerPost')
 const createnewPost = require('./handlers/createnewPost')
+const getPosts = require('./handlers/getPosts')
 
 
 const app = express()
@@ -17,6 +19,8 @@ app.use(bodyParser.json())
 app.post('/auth', authPost)
 app.post('/register', registerPost)
 app.post('/posts', createnewPost)
+
+app.get('/posts', authenticateUserMiddleware, getPosts)
 
 //app.get('/search', searchGet)
 
