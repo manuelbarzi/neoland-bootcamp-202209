@@ -33,5 +33,19 @@
         "text": "blah blah blah",
         "date": "2022-12-01T12:18:31.429Z",
         "visibility": "private"
+    },
+    {
+        "id": "post-6",
+        "user": "user-11",
+        "text": "dadadadadada",
+        "visibility": "public",
+        "date": "2022-11-19T13:29:53.759Z"
+    },
+    {
+        "id": "post-7",
+        "user": "user-11",
+        "text": "sasasasasa",
+        "visibility": "public",
+        "date": "2022-11-19T13:36:32.906Z"
     }
 ]
