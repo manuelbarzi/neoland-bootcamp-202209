@@ -160,7 +160,7 @@ function SettingsAccount(props) {
                     </span>
                 </div>
                 {/*SETTINGS ACCOUNT*/}
-                <div className="flex content-start flex-col w-92 gap-1 p-10 border-solid border-b-4 border-x border-sky-800 bg-inherit bg-sky-300">
+                <div className="flex content-start flex-col w-92 gap-1 p-10 border-solid border-b-4 border-x border-sky-800 bg-inherit bg-sky-100">
                     <span className="mb-6 -mt-2 text-xl font-semibold text-sky-800 text-center">Manage your Trello account</span>
                     <hr className="w-full mx-auto my-2 border-black -mt-2 mb-4" />
                     <form className="flex w-full flex-col justify-center" onSubmit={handleUserNameSubmit}>
@@ -191,7 +191,7 @@ function SettingsAccount(props) {
                                     onClick={handleInputNameDisabled}>save</button>
                             )}
                         </div>
-                        <hr className="w-full mx-auto my-1 border-sky-300" />
+                        <hr className="w-full mx-auto my-1 border-sky-400" />
                     </form>
                     <form className="flex w-full justify-center flex-col" onSubmit={handleUserEmailSubmit}>
                         <label htmlFor="updateEmail" className='font-semibold text-sky-900 mb-2'>Email</label>
@@ -222,7 +222,7 @@ function SettingsAccount(props) {
                             )}
                         </div>
                     </form>
-                    <hr className="w-full mx-auto my-1 border-sky-300" />
+                    <hr className="w-full mx-auto my-1 border-sky-400" />
                     <form className="flex w-full justify-center flex-col" onSubmit={handleUserPasswordSubmit}>
                         <label htmlFor="updatePassword" className='font-semibold text-sky-900 mb-2'>Password</label>
                         <div className='flex flex-row'>
@@ -251,7 +251,7 @@ function SettingsAccount(props) {
                         </div>
                     </form>
                     <div className='-my-1'>
-                        <hr className="w-full mx-auto my-1 border-sky-300" />
+                        <hr className="w-full mx-auto my-1 border-sky-400" />
                         <span className="flex">
                             <input
                                 type="checkbox"

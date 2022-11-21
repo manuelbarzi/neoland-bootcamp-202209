@@ -1,6 +1,6 @@
-function updateUserEmail(newEmail, userId, callback) {
-    if (typeof newEmail !== 'string') throw new Error('email is not a string')
-
+function createTask(userId, taskId, callback) {
+    if (typeof userId !== 'string') throw new Error('userId is not a string')
+    if (typeof taskId !== 'string') throw new Error('taskId is not a string')
     if (typeof callback !== 'function') throw new TypeError('callback is not a function')
 
     const xhr = new XMLHttpRequest()
@@ -15,21 +15,20 @@ function updateUserEmail(newEmail, userId, callback) {
 
             return
         }
-
         callback(null)
     }
 
     xhr.onerror = () => callback(new Error('connection error'))
 
 
-    xhr.open('PATCH', 'http://localhost/users/updateUserEmail')
+    xhr.open('DELETE', 'http://localhost/tasks')
     xhr.setRequestHeader('Content-Type', 'application/json')
 
-    const payload = { newEmail, userId }
+    const payload = { userId, taskId }
 
     const json = JSON.stringify(payload)
 
     xhr.send(json)
 }
 
-export default updateUserEmail
+export default createTask

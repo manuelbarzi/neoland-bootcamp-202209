@@ -19,7 +19,7 @@ function updateUserPassword(newPassword, userId, callback) {
     xhr.onerror = () => callback(new Error('connection error'))
 
 
-    xhr.open('POST', 'http://localhost/users/updateUserPassword')
+    xhr.open('PATCH', 'http://localhost/users/updateUserPassword')
     xhr.setRequestHeader('Content-Type', 'application/json')
 
     const payload = { newPassword, userId }

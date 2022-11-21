@@ -5,5 +5,10 @@ module.exports = {
     handlerUpdateUserName: require('./handlerUpdateUserName'),
     handlerUpdateUserEmail: require('./handlerUpdateUserEmail'),
     handlerUpdateUserPassword: require('./handlerUpdateUserPassword'),
+    handlerCreateTask: require('./handlerCreateTask'),
+    handlerRetrieveTasks: require('./handlerRetrieveTasks'),
+    handlerDeleteTask: require('./handlerDeleteTask'),
+    handlerUpdateTaskStatus: require('./handlerUpdateTaskStatus'),
+    handlerUpdateTaskText: require('./handlerUpdateTaskText'),
     searchGet: require('./searchGet')
 }

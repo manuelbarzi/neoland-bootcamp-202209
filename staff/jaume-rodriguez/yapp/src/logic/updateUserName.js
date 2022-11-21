@@ -25,7 +25,7 @@ function updateUserName(newName, userId, callback) {
     xhr.onerror = () => callback(new Error('connection error'))
 
 
-    xhr.open('POST', 'http://localhost/users/updateUserName')
+    xhr.open('PATCH', 'http://localhost/users/updateUserName')
     xhr.setRequestHeader('Content-Type', 'application/json')
 
     const payload = { newName, userId }

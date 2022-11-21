@@ -14,25 +14,32 @@ function Tasks() {
 
     const handleRefreshTasks = () => {
         try {
-            const tasks = retrieveTasks(window.userId)
-            setTasks(tasks)
-
+            retrieveTasks(window.userId, (error, tasks) => {
+                if (error) {
+                    alert(error.message)
+                    return
+                }
+                setTasks(tasks)
+            })
         } catch (error) {
-            alert(error.message)
         }
     }
 
     // TASKS CREATION
     const handleCreateTask = (status) => {
         try {
-            createTask(window.userId, status)
-            handleRefreshTasks()
+            createTask(window.userId, status, (error) => {
+                if (error) {
+                    alert(error.message)
+                    return
+                }
+                handleRefreshTasks()
+            })
 
         } catch (error) {
             alert(error.message)
         }
     }
-
     return (
         <>
             {/* TASKS PANEL*/}
@@ -53,13 +60,13 @@ function Tasks() {
                             </h1>
                         </div>
                         <hr className="w-full mx-auto my-2 border-black" />
-                        {tasks.filter(task => task.status === 'todo').map(task =>
+                        {tasks.map(task => task.status === 'todo' ?
                             // COMPONENTE TASK
                             <Task
                                 key={task.id}
                                 task={task}
                                 onUpdateTaskStatus={handleRefreshTasks}
-                                onDeleteTask={handleRefreshTasks} />)}
+                                onDeleteTask={handleRefreshTasks} /> : null)}
                         <div
                             className="w-full p-2 px-4 flex flex-row items-end rounded border-solid border-sky-600 border-t border-b-4 border-x bg-sky-100 hover:bg-sky-200 cursor-pointer text-sm"
                             onClick={() => { handleCreateTask('todo') }}>
@@ -79,13 +86,13 @@ function Tasks() {
                             </h1>
                         </div>
                         <hr className="w-full mx-auto my-2 border-black" />
-                        {tasks.filter(task => task.status === 'doing').map(task =>
+                        {tasks.map(task => task.status === 'doing' ?
                             // COMPONENTE TASK
                             <Task
                                 key={task.id}
                                 task={task}
                                 onUpdateTaskStatus={handleRefreshTasks}
-                                onDeleteTask={handleRefreshTasks} />)}
+                                onDeleteTask={handleRefreshTasks} /> : null)}
                         <div
                             className="w-full p-2 px-4 flex flex-row items-end rounded border-solid border-sky-600 border-t border-b-4 border-x bg-sky-100 hover:bg-sky-200 cursor-pointer text-sm"
                             onClick={() => { handleCreateTask('doing') }}>
@@ -105,13 +112,13 @@ function Tasks() {
                             </h1>
                         </div>
                         <hr className="w-full mx-auto my-2 border-black" />
-                        {tasks.filter(task => task.status === 'done').map(task =>
+                        {tasks.map(task => task.status === 'done' ?
                             // COMPONENTE TASK
                             <Task
                                 key={task.id}
                                 task={task}
                                 onUpdateTaskStatus={handleRefreshTasks}
-                                onDeleteTask={handleRefreshTasks} />)}
+                                onDeleteTask={handleRefreshTasks} /> : null)}
                         <div
                             className="w-full p-2 px-4 flex flex-row items-end rounded border-solid border-sky-600 border-t border-b-4 border-x bg-sky-100 hover:bg-sky-200 cursor-pointer text-sm"
                             onClick={() => { handleCreateTask('done') }}>

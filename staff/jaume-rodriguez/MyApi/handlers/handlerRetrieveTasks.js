@@ -1,10 +1,12 @@
-const registerUser = require('../logic/registerUser')
+const retrieveTasks = require('../logic/retrieveTasks')
 
 module.exports = (req, res) => {
-    let { name, email, password } = req.body
+    const { headers: { authorization } } = req
+
+    const userId = authorization.substring(7)
 
     try {
-        const errorUserCreation = error => {
+        const returnRetrieve = (error, tasks) => {
             if (error) {
                 res.status(500)
                 res.json({ error: error.message })
@@ -12,10 +14,9 @@ module.exports = (req, res) => {
                 return
             }
 
-            res.status(201).send()
+            res.json(tasks)
         }
-        registerUser(name, email, password, errorUserCreation)
-
+        retrieveTasks(userId, returnRetrieve)
     } catch (error) {
         res.status(500)
         res.json({ error: error.message })
