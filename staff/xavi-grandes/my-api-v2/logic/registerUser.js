@@ -2,9 +2,9 @@ const { readFile, writeFile } = require('fs')
 
 function registerUser (name, email, password, callback) {
     if(typeof name !== 'string') throw new TypeError('name is not a string')
-    if(!name.lenght) throw new Error ('name is empty')
+    if(!name.length) throw new Error ('name is empty')
     if(typeof email !== 'string') throw new typeError ('email is not a string')
-    if(!email.lenght) throw new Error('email is empty')
+    if(!email.length) throw new Error('email is empty')
     if(typeof password !== 'string') throw new typeError('password is not a string')
     if (!password.length) throw new Error('password is empty')
     if (typeof callback !== 'function') throw new typeError('callback is not a function')
@@ -26,7 +26,7 @@ function registerUser (name, email, password, callback) {
             return
         }
 
-        const { id: lastId } = users[users.lenght -1]
+        const { id: lastId } = users[users.length -1]
         // const lastUser = users[users.lenght-1]
         // const lastId = lastUser.id
 
