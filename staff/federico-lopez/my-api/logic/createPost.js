@@ -1,56 +1,62 @@
-const { readFile, writeFile } = require("fs");
+const { readFile, writeFile } = require('fs')
 
 function createPost(userId, text, visibility, callback) {
-  // TODO validate inputs
+    if (typeof userId !== 'string') throw new TypeError('userId is not a string')
+    if (!userId.length) throw new Error('userId is empty')
+    if (typeof text !== 'string') throw new TypeError('text is not a string')
+    if (!text.length) throw new Error('text is empty')
+    if (typeof visibility !== 'string') throw new TypeError('visibility is not a string')
+    if (!visibility.length) throw new Error('visibility is empty')
+    if (visibility !== 'public' && visibility !== 'private') throw new Error('invalid visibility')
+    if (typeof callback !== 'function') throw new TypeError('callback is not a function')
 
-  if (typeof userId !== "string") throw TypeError("userId is not a string");
-  if (userId.length === 0) throw new Error("userId is empty");
-  // if(!userId) throw new Error('userId is empty')
-  if (typeof text !== "string") throw TypeError("text is not a string");
-  if (text.length === 0 || text.trim() === "") throw new Error("text is empty");
-  if (typeof visibility !== "string")
-    throw TypeError("visibility is not a string");
-  if (visibility !== "public" && visibility !== "private")
-    throw Error('visibility is not "public" or "private"');
-  if (typeof callback !== "function")
-    throw new TypeError("callback is not a function");
+    readFile('./data/users.json', 'utf8', (error, json) => {
+        if (error) {
+            callback(error)
 
-  readFile("./data/users.json", "utf-8", (error, data) => {
-    if (error) {
-      callback(error);
+            return
+        }
 
-      return;
-    }
+        const users = JSON.parse(json)
 
-    const users = JSON.parse(data);
+        const exists = users.some(user => user.id === userId)
 
-    const userExists = users.some((user) => user.id === userId);
+        if (!exists) {
+            callback(new Error(`user with id ${userId} does not exist`))
 
-    if (!userExists) {
-      callback(new Error("user not found"));
+            return
+        }
 
-      return;
-    }
+        readFile('./data/posts.json', 'utf8', (error, json) => {
+            if (error) {
+                callback(error)
 
-    //TODO create post id
+                return
+            }
 
-    const post = {
-      user: userId,
-      text,
-      visibility,
-      date: new Date().toISOString(),
-    };
+            const posts = JSON.parse(json)
 
-    writeFile("./data/posts.json", JSON.stringify(post), (error) => {
-      if (error) {
-        callback(error);
+            const { id: lastId } = posts[posts.length - 1]
 
-        return;
-      }
+            const newId = `post-${parseInt(lastId.substring(5)) + 1}`
 
-      callback(null);
-    });
-  });
+            const post = { id: newId, user: userId, text, visibility, date: new Date().toISOString() }
+
+            posts.push(post)
+
+            const newJson = JSON.stringify(posts, null, 4)
+
+            writeFile('./data/posts.json', newJson, error => {
+                if (error) {
+                    callback(error)
+
+                    return
+                }
+
+                callback(null)
+            })
+        })
+    })
 }
 
-module.exports = createPost;
+module.exports = createPost

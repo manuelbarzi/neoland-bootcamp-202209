@@ -1,24 +1,28 @@
-require('dotenv').config()
+require("dotenv").config();
 
-const express = require('express')
+const express = require("express");
 
-const authPost = require('./handlers/authPost')
-const registerPost = require('./handlers/registerPost')
-const searchGet = require('./handlers/searchGet')
+const authenticateUserHandler = require("./handlers/authenticateUserHandler");
+const registerUserHandler = require("./handlers/registerUserHandler");
+const searchHttpCatsHandler = require("./handlers/searchHttpCatsHandler");
+const retrieveUserHandler = require("./handlers/retrieveUserHandler");
+const createPostHandler = require("./handlers/createPostHandler");
 
-const jsonBodyParser = require('./utils/jsonBodyParser')
-const cors = require('./utils/cors')
+const jsonBodyParser = require("./utils/jsonBodyParser");
+const cors = require("./utils/cors");
 
-const api = express()
+const api = express();
 
-api.use(cors)
+api.use(cors);
 
-api.post('/auth', jsonBodyParser, authPost)
+api.post("/users/auth", jsonBodyParser, authenticateUserHandler);
+api.post("/users", jsonBodyParser, registerUserHandler);
+api.get("/users", retrieveUserHandler);
 
-api.post('/register', jsonBodyParser, registerPost)
+api.post("/posts", jsonBodyParser, createPostHandler);
 
-api.get('/search', searchGet)
+api.get("/search", searchHttpCatsHandler);
 
-const { PORT } = process.env
+const { PORT } = process.env;
 
-api.listen(PORT, () => console.log(`server listening on port ${PORT}`))
+api.listen(PORT, () => console.log(`server listening on port ${PORT}`));
