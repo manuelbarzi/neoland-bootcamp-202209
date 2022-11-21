@@ -30,9 +30,9 @@ function Login ({onRegisterClick, onLoggedIn}){
             }
 
             window.userId = userId
+            onLoggedIn()
           })
-
-          onLoggedIn()
+          
       } catch(error) {
           alert(error.message)
   
