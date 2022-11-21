@@ -1,9 +1,11 @@
 // import createPost from '../logic/createPost'
 
-export default function () {
+export default function ({onCreated}) {
 
     const handleCreatePost = event => {
         event.preventDefault()
+
+        onCreated()
     }
 
     return <form className="..." onSubmit={handleCreatePost}>
