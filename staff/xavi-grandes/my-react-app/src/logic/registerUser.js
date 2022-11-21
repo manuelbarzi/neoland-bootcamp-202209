@@ -1,9 +1,16 @@
 import { IS_EMAIL_REGEX, HAS_SPACES_REGEX, IS_ALPHABETICAL_REGEX } from '../utils/regex'
 
-
+/**
+ * Registers a user against API
+ *
+ * @param {string} name The user name 
+ * @param {string} email The user email
+ * @param {string} password The user password
+ * @param {callback} callback The callback to attend the result
+ */
 
 function registerUser (name, email, password, callback ) {
-    if (typeof name !== string) throw new TypeError ('name is not a string')
+    if (typeof name !== 'string') throw new TypeError ('name is not a string')
     if (!IS_ALPHABETICAL_REGEX.test(name)) throw new Error('name is not alphabetical')
 
     if(typeof email !== 'string') throw new TypeError('email is not a string')
@@ -15,7 +22,7 @@ function registerUser (name, email, password, callback ) {
 
     if(typeof callback !== 'function') throw new TypeError ('callback is not a function')
 
-    const xhr = XMLHttpRequest
+    const xhr = new XMLHttpRequest
 
     xhr.onload = () => {
         const {status, responseText: json} = xhr

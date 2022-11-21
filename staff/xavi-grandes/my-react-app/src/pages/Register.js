@@ -2,7 +2,7 @@ import log from '../utils/coolog'
 import registerUser from '../logic/registerUser'  // TODO
 
 
-function Register({onNavigateToLogin, onRegisterSubmit}) {
+function Register({onNavigateToLogin, onRegister}) {
     log.info('Register -> render ')
 
     const handleNavigateToLogin = (event) => {
@@ -40,9 +40,8 @@ function Register({onNavigateToLogin, onRegisterSubmit}) {
                 return
             }
 
-            onRegisterSubmit()
+            onRegister()
         })
-//--//
       } catch (error) {
         alert (error.message)
 

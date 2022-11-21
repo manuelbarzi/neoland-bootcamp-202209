@@ -24,7 +24,7 @@ function App() {
 return <>
   <h1>Hola App</h1>
   {view === 'login' && <Login onLoggedIn={navigateToHome} onRegisterClick={navigateToRegister}/>}
-  {view === 'register' && <Register onNavigateToLogin={navigateToLogin} onRegisterSubmit={navigateToLogin}/>}
+  {view === 'register' && <Register onNavigateToLogin={navigateToLogin} onRegister={navigateToLogin}/>}
   {view === 'home' && <Home />}
   </>
 }
