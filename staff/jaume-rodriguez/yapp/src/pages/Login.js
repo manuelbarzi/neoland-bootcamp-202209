@@ -73,6 +73,7 @@ function Login(props) {
                         id="loginEmail"
                         required=""
                         title="Please use @ and . on your email"
+                        defaultValue={props.registerInputEmailValue}
                         onChange={handleInputEmailValue}
                         className="h-10 border-gray-400 border-2 rounded border-solid text-slate-800 text-base pl-2"
                     />
@@ -84,6 +85,7 @@ function Login(props) {
                         id="loginPassword"
                         required=""
                         title="Please enter at least 8 characters without spaces"
+                        defaultValue={props.registerInputPasswordValue}
                         onChange={handleInputPasswordValue}
                         className="h-10 border-gray-400 border-2 rounded border-solid text-slate-800 text-base pl-2"
                     />

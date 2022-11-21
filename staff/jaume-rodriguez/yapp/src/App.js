@@ -35,6 +35,8 @@ function App() {
         onRegisterLinkClick={navigateToRegister}
         onInputEmailValue={handleInputEmailAndNameValue}
         onInputPasswordValue={handleInputPasswordValue}
+        registerInputEmailValue={inputEmailValue}
+        registerInputPasswordValue={inputPasswordValue}
       />}
     {view === 'Register' &&
       <Register
@@ -43,6 +45,8 @@ function App() {
         loginInputNameValue={inputNameValue}
         loginInputEmailValue={inputEmailValue}
         loginInputPasswordValue={inputPasswordValue}
+        onInputEmailValue={handleInputEmailAndNameValue}
+        onInputPasswordValue={handleInputPasswordValue}
       />}
     {view === 'Home' &&
       <Home

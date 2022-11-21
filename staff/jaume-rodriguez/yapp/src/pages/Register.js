@@ -19,6 +19,16 @@ function Register(props) {
         setInputPasswordText(!inputPasswordText);
     }
 
+    const handleInputEmailValue = (event) => {
+        const newValue = event.target.value
+        props.onInputEmailValue(newValue)
+    }
+
+    const handleInputPasswordValue = (event) => {
+        const newValue = event.target.value
+        props.onInputPasswordValue(newValue)
+    }
+
     // FORM SUBMITS
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -77,6 +87,7 @@ function Register(props) {
                         title="Please use @ and . on your email"
                         className="h-10 border-gray-400 border-2 rounded border-solid text-slate-800 text-base pl-2"
                         defaultValue={props.loginInputEmailValue}
+                        onChange={handleInputEmailValue}
                     />
                     <label htmlFor="registerPassword"></label>
                     <input
@@ -87,6 +98,7 @@ function Register(props) {
                         title="Please enter at least 8 characters without spaces"
                         className="h-10 border-gray-400 border-2 rounded border-solid text-slate-800 text-base pl-2"
                         defaultValue={props.loginInputPasswordValue}
+                        onChange={handleInputPasswordValue}
 
                     />
                     <span className="flex">
