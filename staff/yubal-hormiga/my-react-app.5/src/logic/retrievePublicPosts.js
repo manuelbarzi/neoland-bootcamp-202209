@@ -1,5 +1,4 @@
-/* eslint-disable new-parens */
-function retrieveUser(userId, callback) {
+function retrievePublicPosts(userId, callback) {
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
     if (typeof callback !== 'function') throw new TypeError('callback is not a function')
 
@@ -16,14 +15,14 @@ function retrieveUser(userId, callback) {
             return
         }
 
-        const user = JSON.parse(json)
+        const posts = JSON.parse(json)
 
-        callback(null, user)
+        callback(null, posts)
     }
 
-    xhr.open('GET', 'http://localhost/users')
+    xhr.open('GET', 'http://localhost/posts/public')
     xhr.setRequestHeader('Authorization', `Bearer ${userId}`)
     xhr.send()
 }
 
-export default retrieveUser
+export default retrievePublicPosts
