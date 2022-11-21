@@ -2,7 +2,7 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import { useState } from 'react'
 import Home from './pages/Home'
-import SettingsAccount from './components/SettingsAccount'
+import SettingsAccount from './pages/SettingsAccount'
 
 function App() {
 
