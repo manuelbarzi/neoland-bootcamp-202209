@@ -7,7 +7,8 @@ import log from './utils/coolog'
 function App() { 
   log.info('App -> render')
 
-  const [view, setView] = useState('login')
+  // const [view, setView] = useState('login')
+  const [view, setView] = useState('home')
 
   const navigateToHome = () => {
     setView('home')
@@ -22,7 +23,6 @@ function App() {
   }
 
 return <>
-  <h1>Hola App</h1>
   {view === 'login' && <Login onLoggedIn={navigateToHome} onRegisterClick={navigateToRegister}/>}
   {view === 'register' && <Register onNavigateToLogin={navigateToLogin} onRegister={navigateToLogin}/>}
   {view === 'home' && <Home />}
