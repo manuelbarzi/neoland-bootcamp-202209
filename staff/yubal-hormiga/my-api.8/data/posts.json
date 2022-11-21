@@ -19,19 +19,5 @@
         "text": "bla, bla, bla",
         "visibility": "public",
         "date": "2022-11-21T14:59:49.871Z"
-    },
-    {
-        "id": "post-4",
-        "user": "user-10",
-        "text": "bla, bla, ble",
-        "visibility": "public",
-        "date": "2022-11-21T19:58:56.425Z"
-    },
-    {
-        "id": "post-5",
-        "user": "user-10",
-        "text": "bla, bla, ble, blublu",
-        "visibility": "public",
-        "date": "2022-11-21T19:59:15.206Z"
     }
 ]
