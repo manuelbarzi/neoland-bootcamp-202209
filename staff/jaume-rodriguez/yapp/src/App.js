@@ -3,6 +3,7 @@ import Register from './pages/Register'
 import { useState } from 'react'
 import Home from './pages/Home'
 import SettingsAccount from './pages/SettingsAccount'
+import Community from './pages/Community'
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
   const navigateToRegister = () => setView('Register')
   const navigateToHome = () => setView('Home')
   const navigateToSettingsAccount = () => setView('SettingsAccount')
+  const navigateToCommunity = () => setView('Community')
 
   return <>
     {view === 'Login' &&
@@ -51,12 +53,21 @@ function App() {
     {view === 'Home' &&
       <Home
         onHomeLink={navigateToHome}
+        onCommunityLink={navigateToCommunity}
         onSettingsAccountLink={navigateToSettingsAccount}
         onLoggedoutLink={navigateToLogin}
       />}
     {view === 'SettingsAccount' &&
       <SettingsAccount
         onHomeLink={navigateToHome}
+        onCommunityLink={navigateToCommunity}
+        onSettingsAccountLink={navigateToSettingsAccount}
+        onLoggedoutLink={navigateToLogin}
+      />}
+    {view === 'Community' &&
+      <Community
+        onHomeLink={navigateToHome}
+        onCommunityLink={navigateToCommunity}
         onSettingsAccountLink={navigateToSettingsAccount}
         onLoggedoutLink={navigateToLogin}
       />}

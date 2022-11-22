@@ -1,3 +1,6 @@
+// TODO DRAG AND DROP
+// TODO TAREAS DE GRUPO
+
 import { useState, useEffect } from 'react'
 import Task from '../components/Task'
 import retrieveTasks from '../logic/retrieveTasks'
@@ -44,8 +47,8 @@ function Tasks() {
         <>
             {/* TASKS PANEL*/}
             <section className="flex z-1 w-full justify-center flex-wrap">
-                <div className="flex flex-row justify-center content-center z-0 p-8 bg-sky-500 border-black border-b border-solid w-full h-16">
-                    <span className="self-center font-semibold text-4xl text-sky-100">
+                <div className="flex flex-row justify-center content-center z-0 p-8 bg-sky-100 border-sky-900 border-b border-solid w-full h-16">
+                    <span className="self-center font-semibold text-4xl text-sky-800">
                         My Tasks
                     </span>
                 </div>
@@ -68,7 +71,7 @@ function Tasks() {
                                 onUpdateTaskStatus={handleRefreshTasks}
                                 onDeleteTask={handleRefreshTasks} /> : null)}
                         <div
-                            className="w-full p-2 px-4 flex flex-row items-end rounded border-solid border-sky-600 border-t border-b-4 border-x bg-sky-100 hover:bg-sky-200 cursor-pointer text-sm"
+                            className="w-full p-2 px-4 flex flex-row items-end rounded border-solid border-sky-800 border-t border-b-4 border-x bg-sky-100 hover:bg-sky-200 cursor-pointer text-sm"
                             onClick={() => { handleCreateTask('todo') }}>
                             <span
                                 className="material-symbols-outlined text-black">
@@ -94,7 +97,7 @@ function Tasks() {
                                 onUpdateTaskStatus={handleRefreshTasks}
                                 onDeleteTask={handleRefreshTasks} /> : null)}
                         <div
-                            className="w-full p-2 px-4 flex flex-row items-end rounded border-solid border-sky-600 border-t border-b-4 border-x bg-sky-100 hover:bg-sky-200 cursor-pointer text-sm"
+                            className="w-full p-2 px-4 flex flex-row items-end rounded border-solid border-sky-800 border-t border-b-4 border-x bg-sky-100 hover:bg-sky-200 cursor-pointer text-sm"
                             onClick={() => { handleCreateTask('doing') }}>
                             <span
                                 className="material-symbols-outlined text-black">
@@ -120,7 +123,7 @@ function Tasks() {
                                 onUpdateTaskStatus={handleRefreshTasks}
                                 onDeleteTask={handleRefreshTasks} /> : null)}
                         <div
-                            className="w-full p-2 px-4 flex flex-row items-end rounded border-solid border-sky-600 border-t border-b-4 border-x bg-sky-100 hover:bg-sky-200 cursor-pointer text-sm"
+                            className="w-full p-2 px-4 flex flex-row items-end rounded border-solid border-sky-800 border-t border-b-4 border-x bg-sky-100 hover:bg-sky-200 cursor-pointer text-sm"
                             onClick={() => { handleCreateTask('done') }}>
                             <span
                                 className="material-symbols-outlined text-black">

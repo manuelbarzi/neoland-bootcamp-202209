@@ -1,7 +1,7 @@
 import Header from '../components/Header'
-import Tasks from '../components/Tasks'
+import PublicPosts from '../components/PublicPosts'
 
-function Home(props) {
+function Community(props) {
 
     // HEADER LINKS BRIDGE
     const handleHomeLink = () => {
@@ -30,9 +30,9 @@ function Home(props) {
                 onSettingsAccountLink={handleSettingsLink}
                 onLoggedoutLink={handleLogoutLink}
             />
-            <Tasks />
+            <PublicPosts />
         </main>
     );
 }
 
-export default Home
+export default Community

@@ -55,7 +55,7 @@ function Task(props) {
 
     return (
         <article
-            className="w-full p-4 flex justify-center flex-col mb-4 rounded border-solid border-sky-600 border-t border-b-4 border-x bg-sky-100">
+            className="w-full p-4 flex justify-center flex-col mb-4 rounded border-solid border-sky-800 border-t border-b-4 border-x bg-sky-100">
             <textarea
                 defaultValue={props.task.text}
                 className="flex flex-col text-justify bg-cyan-50 p-4 text-sm border-sky-600 border bg-sky-200 text-black text-[14px] font-normal"

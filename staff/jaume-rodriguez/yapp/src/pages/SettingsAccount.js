@@ -36,6 +36,10 @@ function SettingsAccount(props) {
     };
 
     // TOGGLE MENU LINKS BRIDGE
+    const handleCommunityLink = () => {
+        props.onCommunityLink();
+    };
+
     const handleSettingsLink = () => {
         props.onSettingsAccountLink();
     };
@@ -149,20 +153,23 @@ function SettingsAccount(props) {
             {/* HEADER */}
             <Header
                 onHomeLink={handleHomeLink}
+                onCommunityLink={handleCommunityLink}
                 onSettingsAccountLink={handleSettingsLink}
                 onLoggedoutLink={handleLogoutLink}
             />
             {/* SETTINGS ACCOUNT PANEL*/}
-            <section className="flex z-1 w-full justify-center flex-wrap">
-                <div className="flex flex-row justify-center content-center z-0 p-8 bg-sky-500 border-black border-b border-solid w-full h-16">
-                    <span className="self-center font-semibold text-4xl text-sky-100">
+            <section className="flex flex-col z-1 w-full items-center flex-wrap">
+                <div className="flex flex-row justify-center content-center z-0 p-8 bg-sky-100 border-sky-900 border-b border-solid w-full h-16">
+                    <span className="self-center font-semibold text-4xl text-sky-800">
                         My Account
                     </span>
                 </div>
                 {/*SETTINGS ACCOUNT*/}
-                <div className="flex content-start flex-col w-92 gap-1 p-10 border-solid border-b-4 border-x border-sky-800 bg-inherit bg-sky-100">
-                    <span className="mb-6 -mt-2 text-xl font-semibold text-sky-800 text-center">Manage your Trello account</span>
-                    <hr className="w-full mx-auto my-2 border-black -mt-2 mb-4" />
+                <div className=" flex flex-row w-[24rem] flex-wrap mt-8">
+                    <span className="text-lg text-black text-base font-normal ">Manage your Trello account</span>
+                    <hr className="w-full mx-auto my-2 border-black" />
+                </div>
+                <div className="flex content-start flex-col w-92 gap-1 px-10 py-6 border-solid border-b-4 border-x border-t border-sky-800 bg-sky-100">
                     <form className="flex w-full flex-col justify-center" onSubmit={handleUserNameSubmit}>
                         <label htmlFor="updateName" className='font-semibold text-sky-900 mb-2'>Name</label>
                         <div className='flex flex-row'>
@@ -173,7 +180,7 @@ function SettingsAccount(props) {
                                 id="updateName"
                                 title="Please enter at least 1 character"
                                 disabled={(inputNameDisabled) ? "disabled" : ""}
-                                className="h-10 rounded placeholder:text-slate-800 text-base pl-2 w-64 disabled:bg-sky-200"
+                                className="h-10 rounded placeholder:text-slate-800 text-base pl-2 w-64 disabled:bg-sky-200 border-sky-600 border"
                                 key={user}
                                 defaultValue={user ? user.name : 'Name'}
                             />
@@ -191,8 +198,8 @@ function SettingsAccount(props) {
                                     onClick={handleInputNameDisabled}>save</button>
                             )}
                         </div>
-                        <hr className="w-full mx-auto my-1 border-sky-400" />
                     </form>
+                    <hr className="w-full mx-auto my-1 border-sky-100" />
                     <form className="flex w-full justify-center flex-col" onSubmit={handleUserEmailSubmit}>
                         <label htmlFor="updateEmail" className='font-semibold text-sky-900 mb-2'>Email</label>
                         <div className='flex flex-row'>
@@ -203,7 +210,7 @@ function SettingsAccount(props) {
                                 id="updateEmail"
                                 title="Please use @ and . on your email"
                                 disabled={(inputEmailDisabled) ? "disabled" : ""}
-                                className="h-10 rounded placeholder:text-slate-800 text-base pl-2 w-64 disabled:bg-sky-200"
+                                className="h-10 rounded placeholder:text-slate-800 text-base pl-2 w-64 disabled:bg-sky-200 border-sky-600 border"
                                 key={user}
                                 defaultValue={user ? user.email : 'Email'}
                             />
@@ -222,7 +229,7 @@ function SettingsAccount(props) {
                             )}
                         </div>
                     </form>
-                    <hr className="w-full mx-auto my-1 border-sky-400" />
+                    <hr className="w-full mx-auto my-1 border-sky-100" />
                     <form className="flex w-full justify-center flex-col" onSubmit={handleUserPasswordSubmit}>
                         <label htmlFor="updatePassword" className='font-semibold text-sky-900 mb-2'>Password</label>
                         <div className='flex flex-row'>
@@ -233,7 +240,7 @@ function SettingsAccount(props) {
                                 id="updatePassword"
                                 title="Please enter at least 8 characters without spaces"
                                 disabled={(inputPasswordDisabled) ? "disabled" : ""}
-                                className="h-10 rounded placeholder:text-slate-800 text-base pl-2 w-64 disabled:bg-sky-200"
+                                className="h-10 rounded placeholder:text-slate-800 text-base pl-2 w-64 disabled:bg-sky-200 border-sky-600 border"
                             />
                             {buttonFormPassword === "open" && (
                                 <span
@@ -251,7 +258,7 @@ function SettingsAccount(props) {
                         </div>
                     </form>
                     <div className='-my-1'>
-                        <hr className="w-full mx-auto my-1 border-sky-400" />
+                        <hr className="w-full mx-auto my-1 border-sky-100" />
                         <span className="flex">
                             <input
                                 type="checkbox"

@@ -4,41 +4,5 @@
         "user": "",
         "text": "",
         "status": ""
-    },
-    {
-        "id": "task-9",
-        "user": "user-2",
-        "text": "4",
-        "status": "todo"
-    },
-    {
-        "id": "task-10",
-        "user": "user-2",
-        "text": "2",
-        "status": "doing"
-    },
-    {
-        "id": "task-11",
-        "user": "user-2",
-        "text": "1",
-        "status": "todo"
-    },
-    {
-        "id": "task-12",
-        "user": "user-2",
-        "text": "3",
-        "status": "done"
-    },
-    {
-        "id": "task-13",
-        "user": "user-2",
-        "text": "6",
-        "status": "done"
-    },
-    {
-        "id": "task-14",
-        "user": "user-2",
-        "text": "9",
-        "status": "done"
     }
 ]

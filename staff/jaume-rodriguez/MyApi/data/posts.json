@@ -1,0 +1,10 @@
+[
+  {
+    "id": "post-1",
+    "userId": "user-2",
+    "userName": "asd",
+    "text": "Hola mundo!",
+    "date": "2022-12-17T12:18:31.429Z",
+    "visibility": "public"
+  }
+]
