@@ -1,12 +1,26 @@
-// import createPost from '../logic/createPost'
+import createPost from '../logic/createPost'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 
 export default function ({ onCreated, onClose }) {
   const handleCreatePost = (event) => {
     event.preventDefault();
 
-    onCreated();
-    onClose()
+    const { text: { value: text }, visibility: { value: visibility } } = event.target
+
+    try {
+        createPost(window.userId, text, visibility, error =>{
+            if(error) {
+                alert(error.message)
+                return
+            }
+
+            event.target.reset()
+
+            onCreated();
+        })
+    } catch (error) {
+        alert(error.message)
+    }
   };
 
   return (
