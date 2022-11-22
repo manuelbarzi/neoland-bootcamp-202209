@@ -165,11 +165,11 @@ function SettingsAccount(props) {
                     </span>
                 </div>
                 {/*SETTINGS ACCOUNT*/}
-                <div className=" flex flex-row w-[24rem] flex-wrap mt-8">
+                <div className=" flex flex-row w-[21.6rem] flex-wrap mt-8">
                     <span className="text-lg text-black text-base font-normal ">Manage your Trello account</span>
                     <hr className="w-full mx-auto my-2 border-black" />
                 </div>
-                <div className="flex content-start flex-col w-92 gap-1 px-10 py-6 border-solid border-b-4 border-x border-t border-sky-800 bg-sky-100">
+                <div className="flex content-start flex-col w-92 gap-1 px-6 py-6 border-solid border-b-4 border-x border-t border-sky-800 bg-sky-100">
                     <form className="flex w-full flex-col justify-center" onSubmit={handleUserNameSubmit}>
                         <label htmlFor="updateName" className='font-semibold text-sky-900 mb-2'>Name</label>
                         <div className='flex flex-row'>
@@ -186,7 +186,7 @@ function SettingsAccount(props) {
                             />
                             {buttonFormName === "open" && (
                                 <span
-                                    className="self-start scale-125 p-1 bg-sky-100 rounded text-black mx-2 mt-1 cursor-pointer material-symbols-outlined cursor-pointer"
+                                    className="self-start scale-125 p-1 bg-sky-100 rounded text-black ml-2 mt-1 cursor-pointer material-symbols-outlined cursor-pointer"
                                     onClick={() => {
                                         handleInputNameDisabled();
                                         handleButtonFormName();
@@ -194,7 +194,7 @@ function SettingsAccount(props) {
                             )}
                             {buttonFormName === "close" && (
                                 <button
-                                    className="self-start scale-125 p-1 bg-sky-100 rounded text-black mx-2 mt-1 cursor-pointer material-symbols-outlined"
+                                    className="self-start scale-125 p-1 bg-sky-100 rounded text-black ml-2 mt-1 cursor-pointer material-symbols-outlined"
                                     onClick={handleInputNameDisabled}>save</button>
                             )}
                         </div>
@@ -216,7 +216,7 @@ function SettingsAccount(props) {
                             />
                             {buttonFormEmail === "open" && (
                                 <span
-                                    className="self-start scale-125 p-1 bg-sky-100 rounded text-black mx-2 mt-1 cursor-pointer material-symbols-outlined cursor-pointer"
+                                    className="self-start scale-125 p-1 bg-sky-100 rounded text-black ml-2 mt-1 cursor-pointer material-symbols-outlined cursor-pointer"
                                     onClick={() => {
                                         handleInputEmailDisabled();
                                         handleButtonFormEmail();
@@ -224,7 +224,7 @@ function SettingsAccount(props) {
                             )}
                             {buttonFormEmail === "close" && (
                                 <button
-                                    className="self-start scale-125 p-1 bg-sky-100 rounded text-black mx-2 mt-1 cursor-pointer material-symbols-outlined"
+                                    className="self-start scale-125 p-1 bg-sky-100 rounded text-black ml-2 mt-1 cursor-pointer material-symbols-outlined"
                                     onClick={handleInputEmailDisabled}>save</button>
                             )}
                         </div>
@@ -244,7 +244,7 @@ function SettingsAccount(props) {
                             />
                             {buttonFormPassword === "open" && (
                                 <span
-                                    className="self-start scale-125 p-1 bg-sky-100 rounded text-black mx-2 mt-1 cursor-pointer material-symbols-outlined cursor-pointer"
+                                    className="self-start scale-125 p-1 bg-sky-100 rounded text-black ml-2 mt-1 cursor-pointer material-symbols-outlined cursor-pointer"
                                     onClick={() => {
                                         handleInputPasswordDisabled();
                                         handleButtonFormPassword();
@@ -252,7 +252,7 @@ function SettingsAccount(props) {
                             )}
                             {buttonFormPassword === "close" && (
                                 <button
-                                    className="self-start scale-125 p-1 bg-sky-100 rounded text-black mx-2 mt-1 cursor-pointer material-symbols-outlined"
+                                    className="self-start scale-125 p-1 bg-sky-100 rounded text-black ml-2 mt-1 cursor-pointer material-symbols-outlined"
                                     onClick={handleInputPasswordDisabled}>save</button>
                             )}
                         </div>

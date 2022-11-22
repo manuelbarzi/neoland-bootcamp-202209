@@ -6,7 +6,6 @@ function updateTaskText(userId, taskId, newText, callback) {
     if (typeof taskId !== 'string') throw new TypeError('taskId is not a string')
     if (!taskId.length) throw new Error('taskId is empty')
     if (typeof newText !== 'string') throw new TypeError('newText is not a string')
-    if (!newText.length) throw new Error('newText is empty')
     if (typeof callback !== 'function') throw new TypeError('callback is not a function')
 
     const updateTaskText = (error, json) => {
