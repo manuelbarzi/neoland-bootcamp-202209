@@ -1,14 +1,17 @@
 import { useContext, useEffect, useState } from "react"
-import createNewPost from "../logic/createnewPost"
 import UserContext from "../UserContext"
 import getPosts from "../logic/getPosts"
 import Post from "../components/Post"
+import CreatePost from "../components/CreatePost"
 
+
+//TODO: change create post button position
 
 function Home() {
 
     const { user } = useContext(UserContext)
     const [posts, setPosts] = useState([])
+    const [createPostIsVisible, setCreatePostIsVisible] = useState(false)
 
 
 
@@ -23,22 +26,24 @@ function Home() {
 
     const createNewPostHandler = async (event) => {
         event.preventDefault()
+        setCreatePostIsVisible(true)
 
-        const currentUserId = user.id
-        const text = 'sersiwrfassf'
-        const visibility = 'public'
+    }
 
-        try {
-            await createNewPost(currentUserId, text, visibility)
-        } catch (error) {
-            alert(error.message)
-        }
+    const onCreateNewPostClose = () => {
+        setCreatePostIsVisible(false)
+    }
+
+    const onCreateNewPostCreated = async () => {
+        setCreatePostIsVisible(false)
+        const fetchedPosts = await getPosts()
+        setPosts(fetchedPosts)
     }
 
 
     return (
         <div>
-            <h2>Hello {user.name}</h2>
+            <h2>Hello {user.name}, what's up? </h2>
 
             {/* List posts */}
 
@@ -50,12 +55,11 @@ function Home() {
 
             {/* Create new post */}
             <button onClick={createNewPostHandler}>Create new post</button>
+            {createPostIsVisible && <CreatePost onCreated={onCreateNewPostCreated} onClose={onCreateNewPostClose} ></CreatePost>
+
+            }
         </div>
     )
-
-
-
-
 
 }
 

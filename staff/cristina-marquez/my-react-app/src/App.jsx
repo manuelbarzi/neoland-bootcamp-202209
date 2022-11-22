@@ -21,7 +21,7 @@ function App() {
 
   return (
     <UserContext.Provider value={providerValue}>
-      <h1>Hello</h1>
+
       {view === 'login' && <Login onLoggedIn={navigateToHome} onRegisterClick={navigateToRegister} />}
       {view === 'register' && <Register onRegister={navigateToHome} />}
       {view === 'home' && <Home />}

@@ -39,7 +39,7 @@ function Register(props) {
 
 
     return (
-        <main className="h-full w-full flex flex-col items-center justify-center bg-pink-600">
+        <main className="h-screen w-screen flex flex-col items-center justify-center bg-pink-600">
             <div className="bg-white flex flex-col border rounded-lg p-3 container-Flex">
                 <form className="flex flex-col items-center justify-center gap-2 m-2 form" onSubmit={handleRegister}>
                     <label htmlFor="name" className="label">Your name</label>
