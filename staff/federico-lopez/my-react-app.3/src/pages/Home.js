@@ -9,7 +9,6 @@ import {
   AiOutlineDelete,
 } from "react-icons/ai";
 import EditPost from "../components/EditPost";
-import DeletePost from "../components/DeletePost";
 
 function Home() {
   log.info("Home -> render");
@@ -18,7 +17,6 @@ function Home() {
   const [posts, setPosts] = useState();
   const [createPostVisible, setCreatePostVisible] = useState(false);
   const [postIdToEdit, setPostIdToEdit] = useState();
-  const [postToDelete, setPostToDelete] = useState();
 
   useEffect(() => {
     try {
@@ -74,10 +72,6 @@ function Home() {
 
   const closeEditPost = () => setPostIdToEdit();
 
-  const openDeletePost = (postId) => setPostToDelete(postId);
-
-  const closeDeletePost = () => setPostToDelete();
-
   const handlePostUpdated = () => {
     try {
       retrievePublicPosts(window.userId, (error, posts) => {
@@ -95,21 +89,8 @@ function Home() {
     }
   };
 
-  const handlePostDeleted = () => {
-    try {
-      retrievePublicPosts(window.userId, (error, posts) => {
-        if (error) {
-          alert(error.message);
-
-          return;
-        }
-
-        setPostToDelete();
-        setPosts(posts);
-      });
-    } catch (error) {
-      alert(error.message);
-    }
+  const handleDeletePost = (postId) => {
+    console.log("TODO delete post " + postId);
   };
 
   return (
@@ -128,12 +109,12 @@ function Home() {
               <strong>{post.user.name || "anonymous"}</strong>
               <p>{post.text}</p>
               <time>{post.date}</time>
-              {post.user.id === window.userId && (
+              {post.user === window.userId && (
                 <div className="flex self-end">
                   <button onClick={() => openEditPost(post.id)}>
                     <AiOutlineEdit size="1rem" />
                   </button>
-                  <button onClick={() => openDeletePost(post.id)}>
+                  <button onClick={() => handleDeletePost(post.id)}>
                     <AiOutlineDelete size="1rem" />
                   </button>
                 </div>
@@ -158,14 +139,6 @@ function Home() {
           postId={postIdToEdit}
           onUpdated={handlePostUpdated}
           onClose={closeEditPost}
-        />
-      )}
-
-      {postToDelete && (
-        <DeletePost
-          postId={postToDelete}
-          onDeleted={handlePostDeleted}
-          onClose={closeDeletePost}
         />
       )}
     </main>
