@@ -73,7 +73,7 @@
         "id": "post-11",
         "user": "user-11",
         "text": "my 2nd post .P",
-        "visibility": "private",
+        "visibility": "public",
         "date": "2022-11-18T12:04:23.271Z"
     },
     {
@@ -82,40 +82,5 @@
         "text": "my 3rd post .P",
         "visibility": "private",
         "date": "2022-11-18T12:04:34.975Z"
-    },
-    {
-        "id": "post-13",
-        "user": "user-11",
-        "text": "hola mundo",
-        "visibility": "public",
-        "date": "2022-11-21T12:03:33.879Z"
-    },
-    {
-        "id": "post-14",
-        "user": "user-11",
-        "text": "hello world",
-        "visibility": "public",
-        "date": "2022-11-21T12:08:30.651Z"
-    },
-    {
-        "id": "post-15",
-        "user": "user-11",
-        "text": "hola mon",
-        "visibility": "public",
-        "date": "2022-11-21T12:08:42.398Z"
-    },
-    {
-        "id": "post-16",
-        "user": "user-11",
-        "text": "pryvit mir",
-        "visibility": "public",
-        "date": "2022-11-21T12:10:57.460Z"
-    },
-    {
-        "id": "post-17",
-        "user": "user-11",
-        "text": "pepito grillo",
-        "visibility": "public",
-        "date": "2022-11-21T12:14:43.228Z"
     }
 ]

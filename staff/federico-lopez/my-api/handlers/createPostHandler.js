@@ -1,24 +1,21 @@
-const createPost = require("../logic/createPost");
+const createPost = require('../logic/createPost')
 
 module.exports = (req, res) => {
-  const {
-    body: { text, visibility },
-    headers: { authorization },
-  } = req;
+    const { body: { text, visibility }, headers: { authorization } } = req
 
-  const userId = authorization.substring(7);
+    const userId = authorization.substring(7)
 
-  try {
-    createPost(userId, text, visibility, (error) => {
-      if (error) {
-        res.status(500).json({ error: error.message });
+    try {
+        createPost(userId, text, visibility, error => {
+            if (error) {
+                res.status(500).json({ error: error.message })
 
-        return;
-      }
+                return
+            }
 
-      res.status(201).send();
-    });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
+            res.status(201).send()
+        })
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+}

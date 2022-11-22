@@ -1,67 +1,98 @@
-import log from '../utils/coolog'
-import { useEffect, useState } from 'react'
-import retrieveUser from '../logic/retrieveUser'
-import createPost from '../logic/createPost'
+import log from "../utils/coolog";
+import { useEffect, useState } from "react";
+import retrieveUser from "../logic/retrieveUser";
+import retrievePublicPosts from "../logic/retrievePublicPosts";
+import CreatePost from "../components/CreatePost.jsx";
 
 function Home() {
-    log.info('Home -> render')
+  log.info("Home -> render");
 
-    const [user, setUser] = useState()
+  const [user, setUser] = useState();
+  const [posts, setPosts] = useState();
+  const [createPostVisible, setCreatePostVisible] = useState(false);
 
-    useEffect(() => {
+  useEffect(() => {
+    try {
+      retrieveUser(window.userId, (error, user) => {
+        if (error) {
+          alert(error.message);
+
+          return;
+        }
+
         try {
-            retrieveUser(window.userId, (error, user) => {
-                if (error) {
-                    alert(error.message)
+          retrievePublicPosts(window.userId, (error, posts) => {
+            if (error) {
+              alert(error.message);
 
-                    return
-                }
+              return;
+            }
 
-                setUser(user)
-            })
+            setUser(user);
+            setPosts(posts);
+          });
         } catch (error) {
-
+          alert(error.message);
         }
-    }, [])
-
-    const handleCreatePost = event => {
-        event.preventDefault()
-
-        const { text: { value: text }, visibility: { value: visibility } } = event.target
-
-        try {
-            createPost(window.userId, text, visibility, error => {
-                if (error) {
-                    alert(error.message)
-
-                    return
-                }
-
-                alert('Post saved')
-                
-                event.target.reset()
-            })
-        } catch(error) {
-            alert(error.message)
-        }
+      });
+    } catch (error) {
+      alert(error.message);
     }
+  }, []);
 
-    return <main>
-        <h2>hola {user ? user.name : 'home'}</h2>
+  const handleEditPost = (postId) => {
+    console.log("TODO edit post " + postId);
+  };
 
-        <h2>create post</h2>
+  const handleDeletePost = (postId) => {
+    console.log("TODO delete post " + postId);
+  };
 
-        <form className="border" onSubmit={handleCreatePost}>
-            <label htmlFor="text">Text</label>
-            <textarea type="text" name="text" id="text" placeholder="input a text"></textarea>
-            <label htmlFor="visibility">Visibility</label>
-            <select id="visibility" name="visibility">
-                <option value="public">public</option>
-                <option value="private">private</option>
-            </select>
-            <button>Post</button>
-        </form>
+  const handlePostCreated = () => {
+    try {
+      retrievePublicPosts(window.userId, (error, posts) => {
+        if (error) {
+          alert(error.message);
+
+          return;
+        }
+
+        setCreatePostVisible(false);
+        setPosts(posts);
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+  const showCreatePost = () => setCreatePostVisible(true);
+
+  return (
+    <main>
+      <h2>hola {user ? user.name : "home"}</h2>
+
+      <button onClick={showCreatePost}>+</button>
+
+      {createPostVisible && <CreatePost onCreated={handlePostCreated} />}
+
+      {posts &&
+        posts.map((post) => (
+          <article key={post.id}>
+            <strong>{post.user}</strong>
+            <p>{post.text}</p>
+            <time>{post.date}</time>
+            {post.user === window.userId && (
+              <>
+                <button onClick={() => handleEditPost(post.id)}>Edit</button>
+                <button onClick={() => handleDeletePost(post.id)}>
+                  Delete
+                </button>
+              </>
+            )}
+          </article>
+        ))}
     </main>
+  );
 }
 
-export default Home
+export default Home;

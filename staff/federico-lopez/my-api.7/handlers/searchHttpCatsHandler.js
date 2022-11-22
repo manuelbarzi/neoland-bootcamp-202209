@@ -1,17 +1,18 @@
-const registerUser = require('../logic/registerUser')
+const searchHttpCats = require('../logic/searchHttpCats')
 
 module.exports = (req, res) => {
-    const { name, email, password } = req.body
-
     try {
-        registerUser(name, email, password, error => {
+        const { q } = req.query
+
+        searchHttpCats(q, (error, cats) => {
             if (error) {
                 res.status(500).json({ error: error.message })
 
                 return
             }
 
-            res.status(201).send()
+            // res.setHeader('Access-Control-Allow-Origin', '*')
+            res.json(cats)
         })
     } catch (error) {
         res.status(500).json({ error: error.message })

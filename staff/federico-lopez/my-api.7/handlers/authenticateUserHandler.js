@@ -1,17 +1,17 @@
-const registerUser = require('../logic/registerUser')
+const authenticateUser = require('../logic/authenticateUser')
 
 module.exports = (req, res) => {
-    const { name, email, password } = req.body
+    let { email, password } = req.body
 
     try {
-        registerUser(name, email, password, error => {
+        authenticateUser(email, password, (error, userId) => {
             if (error) {
                 res.status(500).json({ error: error.message })
 
                 return
             }
-
-            res.status(201).send()
+            
+            res.json({ userId })
         })
     } catch (error) {
         res.status(500).json({ error: error.message })

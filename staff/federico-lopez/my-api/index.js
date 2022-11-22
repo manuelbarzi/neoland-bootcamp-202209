@@ -1,28 +1,32 @@
-require("dotenv").config();
+require('dotenv').config()
 
-const express = require("express");
+const express = require('express')
 
-const authenticateUserHandler = require("./handlers/authenticateUserHandler");
-const registerUserHandler = require("./handlers/registerUserHandler");
-const searchHttpCatsHandler = require("./handlers/searchHttpCatsHandler");
-const retrieveUserHandler = require("./handlers/retrieveUserHandler");
-const createPostHandler = require("./handlers/createPostHandler");
+const authenticateUserHandler = require('./handlers/authenticateUserHandler')
+const registerUserHandler = require('./handlers/registerUserHandler')
+const searchHttpCatsHandler = require('./handlers/searchHttpCatsHandler')
+const retrieveUserHandler = require('./handlers/retrieveUserHandler')
+const createPostHandler = require('./handlers/createPostHandler')
+const retrievePublicPostsHandler  = require('./handlers/retrievePublicPostsHandler')
 
-const jsonBodyParser = require("./utils/jsonBodyParser");
-const cors = require("./utils/cors");
+const jsonBodyParser = require('./utils/jsonBodyParser')
+const cors = require('./utils/cors')
 
-const api = express();
+const api = express()
 
-api.use(cors);
+api.use(cors)
 
-api.post("/users/auth", jsonBodyParser, authenticateUserHandler);
-api.post("/users", jsonBodyParser, registerUserHandler);
-api.get("/users", retrieveUserHandler);
+api.post('/users/auth', jsonBodyParser, authenticateUserHandler)
+api.post('/users', jsonBodyParser, registerUserHandler)
+api.get('/users', retrieveUserHandler)
 
-api.post("/posts", jsonBodyParser, createPostHandler);
+api.post('/posts', jsonBodyParser, createPostHandler)
+api.get('/posts/public', retrievePublicPostsHandler)
 
-api.get("/search", searchHttpCatsHandler);
+api.get('/search', searchHttpCatsHandler)
 
-const { PORT } = process.env;
 
-api.listen(PORT, () => console.log(`server listening on port ${PORT}`));
+
+const { PORT } = process.env
+
+api.listen(PORT, () => console.log(`server listening on port ${PORT}`))
