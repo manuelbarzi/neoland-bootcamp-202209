@@ -23,7 +23,7 @@ function retrievePublicPosts(userId, callback) {
         const user = users.find(user => user.id === userId)
 
         if (!user) {
-            callback(new Error('user not registered'))
+            callback(new Error(`user with id ${userId} does not exist`))
 
             return
         }

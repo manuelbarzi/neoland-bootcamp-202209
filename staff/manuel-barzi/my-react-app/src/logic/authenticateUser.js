@@ -7,7 +7,7 @@ import { IS_EMAIL_REGEX, HAS_SPACES_REGEX } from '../utils/regex'
  * @param {string} password The user password
  * @param {callback} callback The callback to attend the result
  */
-function authenticateUser(email, password, callback) {
+export default function(email, password, callback) {
     if (typeof email !== 'string') throw new Error('email is not a string')
     if (!IS_EMAIL_REGEX.test(email)) throw new Error('email is not valid')
 
@@ -56,5 +56,3 @@ function authenticateUser(email, password, callback) {
  * @param {Error} error The authentication error
  * @param {string} userId The id of the user that authenticated
  */
-
-export default authenticateUser

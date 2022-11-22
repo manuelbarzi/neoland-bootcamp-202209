@@ -121,22 +121,29 @@
     {
         "id": "post-18",
         "user": "user-10",
-        "text": "blah blah y blah",
+        "text": "i <3 programming",
         "visibility": "public",
-        "date": "2022-11-22T08:28:28.826Z"
+        "date": "2022-11-22T12:12:52.704Z"
     },
     {
         "id": "post-19",
         "user": "user-10",
-        "text": "blah blah y blah",
+        "text": "nooo! noooo! me arrepiento, amo a JS, es mi tesssssoro!",
         "visibility": "public",
-        "date": "2022-11-22T08:28:35.183Z"
+        "date": "2022-11-22T12:12:30.819Z"
     },
     {
         "id": "post-20",
         "user": "user-11",
-        "text": "i ❤️ coding",
+        "text": "adios mundo cruel",
         "visibility": "public",
-        "date": "2022-11-22T08:39:31.393Z"
+        "date": "2022-11-22T12:08:05.615Z"
+    },
+    {
+        "id": "post-21",
+        "user": "user-10",
+        "text": "HELLO WORLD",
+        "visibility": "private",
+        "date": "2022-11-22T12:13:38.775Z"
     }
 ]

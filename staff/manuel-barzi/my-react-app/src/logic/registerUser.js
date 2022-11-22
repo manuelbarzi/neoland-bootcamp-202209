@@ -8,7 +8,7 @@ import { IS_EMAIL_REGEX, HAS_SPACES_REGEX, IS_ALPHABETICAL_REGEX } from '../util
  * @param {string} password The user password
  * @param {callback} callback The callback to attend the result
  */
-function registerUser(name, email, password, callback) {
+export default function(name, email, password, callback) {
     if (typeof name !== 'string') throw new Error('name is not a string')
     if (!IS_ALPHABETICAL_REGEX.test(name)) throw new Error('name is not alphabetical')
 
@@ -57,5 +57,3 @@ function registerUser(name, email, password, callback) {
  * 
  * @param {Error} error The authentication error
  */
-
-export default registerUser
