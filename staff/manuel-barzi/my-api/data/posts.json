@@ -117,5 +117,26 @@
         "text": "pepito grillo",
         "visibility": "public",
         "date": "2022-11-21T12:14:43.228Z"
+    },
+    {
+        "id": "post-18",
+        "user": "user-10",
+        "text": "blah blah y blah",
+        "visibility": "public",
+        "date": "2022-11-22T08:28:28.826Z"
+    },
+    {
+        "id": "post-19",
+        "user": "user-10",
+        "text": "blah blah y blah",
+        "visibility": "public",
+        "date": "2022-11-22T08:28:35.183Z"
+    },
+    {
+        "id": "post-20",
+        "user": "user-11",
+        "text": "i ❤️ coding",
+        "visibility": "public",
+        "date": "2022-11-22T08:39:31.393Z"
     }
 ]

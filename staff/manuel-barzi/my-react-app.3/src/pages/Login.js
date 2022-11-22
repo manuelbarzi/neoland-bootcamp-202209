@@ -37,7 +37,8 @@ function Login({ onNavigateToRegister, onLogin }) {
         }
     }
 
-    return <main className="h-full flex flex-col items-center justify-center gap-2">
+    return <main className="flex flex-col items-center gap-2">
+        <h2>hola login</h2>
         <form className="flex flex-col gap-2" onSubmit={handleLogin}>
             <label htmlFor="email" className="container__item--left">E-mail</label>
             <input name="email" type="email" id="email" placeholder="input your e-mail" className="border-b border-black" />
@@ -46,7 +47,7 @@ function Login({ onNavigateToRegister, onLogin }) {
             <button className="p-2 border rounded-xl hover:animate-spin">Login</button>
         </form>
 
-        <a href="" className="underline" onClick={handleNavigateToRegister}>Register</a>
+        <a href="" className="underline bg-red-600" onClick={handleNavigateToRegister}>Register</a>
     </main>
 }
 

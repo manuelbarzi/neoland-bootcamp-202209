@@ -2,14 +2,14 @@ import log from '../utils/coolog'
 import { useEffect, useState } from 'react'
 import retrieveUser from '../logic/retrieveUser'
 import retrievePublicPosts from '../logic/retrievePublicPosts'
-import CreatePost from '../components/CreatePost'
+import CreatePost from '../components/CreatePost.jsx'
 
 function Home() {
     log.info('Home -> render')
 
     const [user, setUser] = useState()
     const [posts, setPosts] = useState()
-    const [createPostVisible, setCreatePostVisible] = useState(false)
+    const [createPostVisibile, setCreatePostVisible] = useState(false)
 
     useEffect(() => {
         try {
@@ -65,16 +65,14 @@ function Home() {
         }
     }
 
-    const openCreatePost = () => setCreatePostVisible(true)
-
-    const closeCreatePost = () => setCreatePostVisible(false)  
+    const showCreatePost = () => setCreatePostVisible(true)
 
     return <main>
         <h2>hola {user ? user.name : 'home'}</h2>
 
-        <button onClick={openCreatePost}>+</button>
+        <button onClick={showCreatePost}>+</button>
 
-        {createPostVisible && <CreatePost onCreated={handlePostCreated} onClose={closeCreatePost} />}
+        {createPostVisibile && <CreatePost onCreated={handlePostCreated} />}
 
         {posts && posts.map(post => <article key={post.id}>
             <strong>{post.user}</strong>
