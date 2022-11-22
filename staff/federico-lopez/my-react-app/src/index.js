@@ -4,7 +4,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css'
 
-window.userId = null
+window.userId = 'user-10'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
