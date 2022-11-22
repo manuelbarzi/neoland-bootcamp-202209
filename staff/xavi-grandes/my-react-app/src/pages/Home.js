@@ -14,10 +14,10 @@ const handlePostCreated = () => {setCreatePostVisible(false)}
 const closeCreatePost = () => setCreatePostVisible(false)
 
     return <main className="bg-blue-200">
-        <div className='h-10 flex items-center gap-10 ml-2'>
+        <header className='h-10 flex items-center gap-10 ml-2'>
             <h1>Welcome to the Home </h1>
             <button onClick={showCreatePost} className="border border-black p-1 bg-gray-200">+</button>
-        </div>
+        </header>
         
         {createPostVisibile && <CreatePost onCreated={handlePostCreated} onClose={closeCreatePost}/>}
         

@@ -17,7 +17,7 @@ export default function (userId, text, visibility, callback) {
     if(visibility !== 'public' && visibility !== 'private') throw new Error('invalid visibility')
     if (typeof callback !== 'function') throw new TypeError('callback is not a function')
 
-    xhr = new XMLHttpRequest
+    const xhr = new XMLHttpRequest
 
     xhr.onload = () => {
         const { status, responseText: json } = xhr
