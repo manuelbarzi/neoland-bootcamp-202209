@@ -10,7 +10,7 @@
         "id": "post-2",
         "user": 1,
         "text": "sersiwrfassf",
-        "visibility": "public",
+        "visibility": "private",
         "date": "2022-11-18T19:26:52.199Z"
     },
     {
@@ -31,7 +31,7 @@
         "id": "post-5",
         "user": 2,
         "text": "sersiwrfassf",
-        "visibility": "public",
+        "visibility": "private",
         "date": "2022-11-18T19:27:30.936Z"
     },
     {
@@ -40,5 +40,68 @@
         "text": "sersiwrfassf",
         "visibility": "public",
         "date": "2022-11-18T19:27:52.911Z"
+    },
+    {
+        "id": "post-7",
+        "user": 1,
+        "text": "sersiwrfassf",
+        "visibility": "public",
+        "date": "2022-11-21T16:09:22.396Z"
+    },
+    {
+        "id": "post-8",
+        "user": 1,
+        "text": "ciao le puuuuuuu",
+        "visibility": "private",
+        "date": "2022-11-21T16:11:33.500Z"
+    },
+    {
+        "id": "post-9",
+        "user": 1,
+        "text": "ciao le puuuuuuu",
+        "visibility": "public",
+        "date": "2022-11-21T16:11:49.235Z"
+    },
+    {
+        "id": "post-10",
+        "user": 1,
+        "text": "this",
+        "visibility": "public",
+        "date": "2022-11-21T16:12:37.544Z"
+    },
+    {
+        "id": "post-11",
+        "user": 1,
+        "text": "post",
+        "visibility": "public",
+        "date": "2022-11-21T16:12:59.887Z"
+    },
+    {
+        "id": "post-12",
+        "user": 1,
+        "text": "is",
+        "visibility": "public",
+        "date": "2022-11-21T16:13:06.039Z"
+    },
+    {
+        "id": "post-13",
+        "user": 2,
+        "text": "the",
+        "visibility": "public",
+        "date": "2022-11-21T16:13:15.751Z"
+    },
+    {
+        "id": "post-14",
+        "user": 2,
+        "text": "most",
+        "visibility": "public",
+        "date": "2022-11-01T00:00:00.000Z"
+    },
+    {
+        "id": "post-15",
+        "user": 2,
+        "text": "recent",
+        "visibility": "public",
+        "date": "2022-11-11T00:00:00.000Z"
     }
 ]

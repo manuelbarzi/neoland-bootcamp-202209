@@ -8,15 +8,30 @@ function getPosts(userId) {
     }
     const posts = JSON.parse(postsJSON)
 
-    const userPosts = posts.filter(post => {
-        if (userId === post.user) {
-
+    const visiblePosts = posts.filter(post => {
+        if (userId === post.user || post.visibility === 'public') {
             return true
-
         }
     })
 
-    return userPosts
+
+    visiblePosts.sort((a, b) => {
+        const aTime = new Date(a.date).getTime()
+        const bTime = new Date(b.date).getTime()
+
+        if (aTime < bTime) {
+            return 1;
+
+        }
+        if (aTime > bTime) {
+            return -1;
+        }
+        return 0
+    }
+
+    )
+
+    return visiblePosts
 }
 
 module.exports = getPosts
