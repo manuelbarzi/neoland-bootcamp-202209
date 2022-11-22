@@ -9,9 +9,9 @@ const [createPostVisibile, setCreatePostVisible] = useState(false)
 
 const showCreatePost = () => setCreatePostVisible(true)
 
-const handlePostCreated = () => {
-    setCreatePostVisible(false)
-}
+const handlePostCreated = () => {setCreatePostVisible(false)}
+
+const closeCreatePost = () => setCreatePostVisible(false)
 
     return <main className="bg-blue-200">
         <div className='h-10 flex items-center gap-10 ml-2'>
@@ -19,7 +19,7 @@ const handlePostCreated = () => {
             <button onClick={showCreatePost} className="border border-black p-1 bg-gray-200">+</button>
         </div>
         
-        {createPostVisibile && <CreatePost onCreated={handlePostCreated}/>}
+        {createPostVisibile && <CreatePost onCreated={handlePostCreated} onClose={closeCreatePost}/>}
         
         <hr/>
         <div>
