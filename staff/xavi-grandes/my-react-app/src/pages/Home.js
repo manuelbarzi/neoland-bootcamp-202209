@@ -14,9 +14,9 @@ const handlePostCreated = () => {
 }
 
     return <main className="bg-blue-200">
-        <div>
-            <h1 className="text-red-500">Welcome to the Home </h1>
-            <button onClick={showCreatePost} >+</button>
+        <div className='h-10 flex items-center gap-10 ml-2'>
+            <h1>Welcome to the Home </h1>
+            <button onClick={showCreatePost} className="border border-black p-1 bg-gray-200">+</button>
         </div>
         
         {createPostVisibile && <CreatePost onCreated={handlePostCreated}/>}
