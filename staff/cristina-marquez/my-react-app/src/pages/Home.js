@@ -5,6 +5,7 @@ import Post from "../components/Post"
 import CreatePost from "../components/CreatePost"
 
 
+
 //TODO: change create post button position
 
 function Home() {
@@ -36,6 +37,10 @@ function Home() {
 
     const onCreateNewPostCreated = async () => {
         setCreatePostIsVisible(false)
+        await refreshPosts()
+    }
+
+    const refreshPosts = async () => {
         const fetchedPosts = await getPosts()
         setPosts(fetchedPosts)
     }
@@ -49,7 +54,8 @@ function Home() {
 
             {posts.length > 0 && posts.map((post) =>
                 <Post key={post.id}
-                    content={post} />
+                    content={post}
+                    onUpdate={refreshPosts} />
             )}
 
 
