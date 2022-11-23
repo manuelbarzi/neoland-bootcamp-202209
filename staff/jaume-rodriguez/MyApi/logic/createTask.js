@@ -1,6 +1,6 @@
 const { readFile, writeFile } = require('fs')
 
-function createtask(userId, statusTask, callback) {
+function createTask(userId, statusTask, callback) {
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
     if (!userId.length) throw new Error('userId is empty')
     if (typeof statusTask !== 'string') throw new TypeError('statusTask is not a string')
@@ -40,4 +40,4 @@ function createtask(userId, statusTask, callback) {
     readFile('./data/tasks.json', 'utf8', taskCreation)
 }
 
-module.exports = createtask
+module.exports = createTask

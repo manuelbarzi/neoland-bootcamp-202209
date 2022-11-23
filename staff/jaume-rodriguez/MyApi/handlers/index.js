@@ -11,5 +11,6 @@ module.exports = {
     handlerUpdateTaskStatus: require('./handlerUpdateTaskStatus'),
     handlerUpdateTaskText: require('./handlerUpdateTaskText'),
     handlerUpdateTaskTitle: require('./handlerUpdateTaskTitle'),
+    handlerCreatePost: require('./handlerCreatePost'),
     searchGet: require('./searchGet')
 }

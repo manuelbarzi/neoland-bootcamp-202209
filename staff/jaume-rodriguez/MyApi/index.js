@@ -16,6 +16,7 @@ const {
     handlerUpdateTaskStatus,
     handlerUpdateTaskText,
     handlerUpdateTaskTitle,
+    handlerCreatePost,
 } = require("./handlers")
 
 const jsonBodyParser = require('./utils/jsonBodyParser')
@@ -40,6 +41,8 @@ api.patch('/updateTaskText', jsonBodyParser, handlerUpdateTaskText)
 api.patch('/updateTaskTitle', jsonBodyParser, handlerUpdateTaskTitle)
 api.delete('/tasks', jsonBodyParser, handlerDeleteTask)
 api.get('/search', searchGet)
+
+api.post('/posts', jsonBodyParser, handlerCreatePost)
 
 const { PORT } = process.env
 

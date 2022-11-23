@@ -2,7 +2,7 @@ import deletePost from '../logic/deletePost'
 import updatePostVisibility from '../logic/updatePostVisibility'
 import updatePostText from '../logic/updatePostText'
 
-function Task(props) {
+function Post(props) {
 
     // TASK FUNCTIONS
     const handleUpdatePostText = (postId, newText) => {
@@ -82,4 +82,4 @@ function Task(props) {
     )
 }
 
-export default Task
+export default Post

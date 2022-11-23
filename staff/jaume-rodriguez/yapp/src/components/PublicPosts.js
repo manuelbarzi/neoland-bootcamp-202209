@@ -26,9 +26,9 @@ function Posts() {
     }
 
     // POSTS CREATION
-    const handleCreatePost = (status) => {
+    const handleCreatePost = (visibility) => {
         try {
-            createPost(window.userId, status, (error) => {
+            createPost(window.userId, visibility, (error) => {
                 if (error) {
                     alert(error.message)
                     return

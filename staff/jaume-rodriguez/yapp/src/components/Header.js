@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react'
 import logoHeader from '../img/trellologo.png';
 import logoMenu from '../img/headermenupanelbotton.png';
 import retrieveUser from '../logic/retrieveUser';
+import { Link } from 'react-router-dom'
 
-function Header(props) {
+function Header() {
 
     const [toggleMenuComponent, setToggleMenuComponent] = useState('open')
     const [user, setUser] = useState()
@@ -22,38 +23,21 @@ function Header(props) {
         }
     }, [])
 
-    // HEADER LINKS
-    const handleHomeLink = () => {
-        props.onHomeLink();
-    };
-
     // TOGGLE MENU OPEN & CLOSE
     const handleToggleMenu = () => {
         setToggleMenuComponent(toggleMenuComponent === "open" ? "close" : "open");
     }
 
-    // TOGGLE MENU LINKS
-    const handleCommunityLink = () => {
-        props.onCommunityLink();
-    };
-
-    const handleSettingsLink = () => {
-        props.onSettingsAccountLink();
-    };
-
-    const handleLogoutLink = () => {
-        props.onLoggedoutLink();
-    };
-
     return (
         <>
             {/* HEADER */}
             <header className="flex flex-row z-0 items-center px-3 py-2 bg-[#0066a0]">
-                <img
-                    src={logoHeader}
-                    alt="logoHeader"
-                    className="w-40 cursor-pointer"
-                    onClick={handleHomeLink} />
+                <Link to="/">
+                    <img
+                        src={logoHeader}
+                        alt="logoHeader"
+                        className="w-40 cursor-pointer" />
+                </Link>
                 <img
                     src={logoMenu}
                     alt="logoMenu"
@@ -66,24 +50,20 @@ function Header(props) {
                     <div className="flex flex-col items-end content-end z-10 w-56 p-4 rounded-sm gap-2 bg-sky-100 border-sky-700 border-b-2 border-l -mt-1">
                         <p className="text-black pr-1">{user ? user.email : 'home'}</p>
                         <hr className="w-full border-sky-700 mx-auto my-2" />
-                        <button
-                            className="text-black pr-1 hover:font-semibold"
-                            onClick={handleCommunityLink}
+                        <Link to="/community"
+                            className="text-black pr-1 hover:font-semibold cursor-pointer"
                         >
                             Community
-                        </button>
-                        <button
-                            className="text-black pr-1 hover:font-semibold"
-                            onClick={handleSettingsLink}
-                        >
+                        </Link>
+                        <Link to="/settings-account"
+                            className="text-black pr-1 hover:font-semibold">
                             Settings
-                        </button>
-                        <button
+                        </Link>
+                        <Link to="/login"
                             className="text-black pr-1 hover:font-semibold"
-                            onClick={handleLogoutLink}
-                        >
+                            onClick={window.userId = null}>
                             Logout
-                        </button>
+                        </Link>
                     </div>
                 </div>
             )}

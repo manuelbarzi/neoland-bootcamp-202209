@@ -5,7 +5,7 @@ import updateUserName from '../logic/updateUserName';
 import updateUserEmail from '../logic/updateUserEmail';
 import updateUserPassword from '../logic/updateUserPassword';
 
-function SettingsAccount(props) {
+function SettingsAccount() {
 
     const [user, setUser] = useState()
     const [buttonFormName, setButtonFormName] = useState('open')
@@ -29,25 +29,6 @@ function SettingsAccount(props) {
         } catch (error) {
         }
     }, [])
-
-    // HEADER LINKS BRIDGE
-    const handleHomeLink = () => {
-        props.onHomeLink();
-    };
-
-    // TOGGLE MENU LINKS BRIDGE
-    const handleCommunityLink = () => {
-        props.onCommunityLink();
-    };
-
-    const handleSettingsLink = () => {
-        props.onSettingsAccountLink();
-    };
-
-    const handleLogoutLink = () => {
-        window.userId = null;
-        props.onLoggedoutLink();
-    };
 
     // FORM BUTTONS VISUAL
     const handleButtonFormName = () => {
@@ -151,12 +132,7 @@ function SettingsAccount(props) {
     return (
         <main className="min-h-screen bg-slate-200">
             {/* HEADER */}
-            <Header
-                onHomeLink={handleHomeLink}
-                onCommunityLink={handleCommunityLink}
-                onSettingsAccountLink={handleSettingsLink}
-                onLoggedoutLink={handleLogoutLink}
-            />
+            <Header />
             {/* SETTINGS ACCOUNT PANEL*/}
             <section className="flex flex-col z-1 w-full items-center flex-wrap">
                 <div className="flex flex-row justify-center content-center z-0 p-8 bg-sky-100 border-sky-900 border-b border-solid w-full h-16">

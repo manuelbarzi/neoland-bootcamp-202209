@@ -1,16 +1,13 @@
 import { useState } from 'react'
 import authenticateUser from '../logic/authenticateUser'
 import logo from '../img/logologintrello.png';
+import { Link, useNavigate } from 'react-router-dom'
 
 function Login(props) {
 
     const [inputPasswordText, setInputPasswordText] = useState(true)
 
-    // FORM LINKS
-    const handleRegisterLinkClick = (event) => {
-        event.preventDefault()
-        props.onRegisterLinkClick()
-    }
+    const navigate = useNavigate()
 
     // FORM INPUTS VALUE
     const handleInputPasswordText = () => {
@@ -45,7 +42,7 @@ function Login(props) {
                     return
                 }
                 window.userId = userId
-                props.onLoggedIn()
+                navigate("/")
             })
 
         } catch (error) {
@@ -99,9 +96,9 @@ function Login(props) {
                         Sign in
                     </button>
                 </form>
-                <a href="/Register" className="mt-2 text-white text-base hover:text-black" onClick={handleRegisterLinkClick}>
+                <Link to="/register" className="mt-2 text-white text-base hover:text-black">
                     Create an account
-                </a>
+                </Link>
             </div>
         </main>
     );

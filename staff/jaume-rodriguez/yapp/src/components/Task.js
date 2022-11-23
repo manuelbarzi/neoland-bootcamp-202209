@@ -96,25 +96,32 @@ function Task(props) {
             </textarea>
             {buttonTaskText === "open" && props.task.text === "" && (
                 <span
-                    className="self-start bg-inherit rounded text-slate-600 cursor-pointer cursor-pointer text-[15px] border-slate-400 border-b-2 px-2 py-1 font-normal hover:bg-white"
+                    className={props.task.status === "todo" ? "self-start rounded text-slate-600 cursor-pointer cursor-pointer text-[15px] border-slate-400 border-b-2 px-2 py-1 font-normal hover:bg-rose-300 bg-rose-200" :
+                        props.task.status === "doing" ? "self-start rounded text-slate-600 cursor-pointer cursor-pointer text-[15px] border-slate-400 border-b-2 px-2 py-1 font-normal hover:bg-blue-300 bg-blue-200" :
+                            "self-start rounded text-slate-600 cursor-pointer cursor-pointer text-[15px] border-slate-400 border-b-2 px-2 py-1 font-normal hover:bg-green-300 bg-green-200"}
                     onClick={() => {
                         handleButtonTaskText();
                     }}>Add a description</span>
-            )}
-            {(buttonTaskText === "close" || props.task.text !== "") && (
-                <textarea
-                    type="text"
-                    defaultValue={props.task.text}
-                    className="flex flex-col text-justify bg-inherit p-2  border-slate-400 text-slate-700 text-[15px] font-normal placeholder:text-slate-600 resize-none rounded focus:outline-none focus:bg-white focus:border-b-2"
-                    rows={props.task.text.length <= 30 ? "1" : "2"}
-                    autoFocus="autofocus"
-                    maxLength="56"
-                    placeholder="add a more detailed description"
-                    onChange={() => handleTextRefresh()}
-                    onKeyUp={(event) => { handleUpdateTaskText(props.task.id, event.target.value) }}
-                >
-                </textarea>
-            )}
+            )
+            }
+            {
+                (buttonTaskText === "close" || props.task.text !== "") && (
+                    <textarea
+                        type="text"
+                        defaultValue={props.task.text}
+                        className={props.task.status === "todo" ? "flex flex-col text-justify bg-rose-200 p-2 border-slate-400 text-slate-700 text-[15px] font-normal placeholder:text-slate-600 resize-none rounded focus:outline-none focus:bg-white focus:border-b-2" :
+                            props.task.status === "doing" ? "flex flex-col text-justify bg-blue-200 p-2 border-slate-400 text-slate-700 text-[15px] font-normal placeholder:text-slate-600 resize-none rounded focus:outline-none focus:bg-white focus:border-b-2" :
+                                "flex flex-col text-justify bg-green-200 p-2 border-slate-400 text-slate-700 text-[15px] font-normal placeholder:text-slate-600 resize-none rounded focus:outline-none focus:bg-white focus:border-b-2"}
+                        rows={props.task.text.length <= 30 ? "1" : props.task.text.length <= 61 ? "2" : props.task.text.length <= 92 ? "3" : "4"}
+                        autoFocus="autofocus"
+                        maxLength="124"
+                        placeholder="add a more detailed description"
+                        onChange={() => handleTextRefresh()}
+                        onKeyUp={(event) => { handleUpdateTaskText(props.task.id, event.target.value) }}
+                    >
+                    </textarea>
+                )
+            }
             <div className='flex flex-row'>
                 <div className="flex flex-row mt-2">
                     <select

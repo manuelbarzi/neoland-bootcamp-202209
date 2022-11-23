@@ -4,10 +4,9 @@ import { useState } from 'react'
 import Home from './pages/Home'
 import SettingsAccount from './pages/SettingsAccount'
 import Community from './pages/Community'
+import { Routes, Route, Navigate } from 'react-router-dom'
 
 function App() {
-
-  const [view, setView] = useState('Login')
   const [inputNameValue, setInputNameValue] = useState('')
   const [inputEmailValue, setInputEmailValue] = useState('')
   const [inputPasswordValue, setInputPasswordValue] = useState('')
@@ -22,56 +21,35 @@ function App() {
     setInputPasswordValue(newValue)
   }
 
-
   // APP PAGES RENDER
-  const navigateToLogin = () => setView('Login')
-  const navigateToRegister = () => setView('Register')
-  const navigateToHome = () => setView('Home')
-  const navigateToSettingsAccount = () => setView('SettingsAccount')
-  const navigateToCommunity = () => setView('Community')
+  const ConditionalHome = () => {
+    return window.userId ?
+      <Home /> :
+      <Navigate replace to="/login" />
+  }
 
-  return <>
-    {view === 'Login' &&
+  return <Routes>
+    <Route path="/login" element={window.userId ?
+      <Navigate replace to="/" /> :
       <Login
-        onLoggedIn={navigateToHome}
-        onRegisterLinkClick={navigateToRegister}
         onInputEmailValue={handleInputEmailAndNameValue}
         onInputPasswordValue={handleInputPasswordValue}
         registerInputEmailValue={inputEmailValue}
         registerInputPasswordValue={inputPasswordValue}
-      />}
-    {view === 'Register' &&
+      />} />
+    <Route path="/register" element={window.userId ?
+      <Navigate replace to="/" /> :
       <Register
-        onLoggedIn={navigateToHome}
-        onLoginLinkClick={navigateToLogin}
         loginInputNameValue={inputNameValue}
         loginInputEmailValue={inputEmailValue}
         loginInputPasswordValue={inputPasswordValue}
         onInputEmailValue={handleInputEmailAndNameValue}
         onInputPasswordValue={handleInputPasswordValue}
-      />}
-    {view === 'Home' &&
-      <Home
-        onHomeLink={navigateToHome}
-        onCommunityLink={navigateToCommunity}
-        onSettingsAccountLink={navigateToSettingsAccount}
-        onLoggedoutLink={navigateToLogin}
-      />}
-    {view === 'SettingsAccount' &&
-      <SettingsAccount
-        onHomeLink={navigateToHome}
-        onCommunityLink={navigateToCommunity}
-        onSettingsAccountLink={navigateToSettingsAccount}
-        onLoggedoutLink={navigateToLogin}
-      />}
-    {view === 'Community' &&
-      <Community
-        onHomeLink={navigateToHome}
-        onCommunityLink={navigateToCommunity}
-        onSettingsAccountLink={navigateToSettingsAccount}
-        onLoggedoutLink={navigateToLogin}
-      />}
-  </>
+      />} />
+    <Route path="/" element={<ConditionalHome />} />
+    <Route path="/settings-account" element={<SettingsAccount />} />
+    <Route path="/community" element={<Community />} />
+  </Routes>
 }
 
 export default App;
