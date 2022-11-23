@@ -15,8 +15,6 @@ function deleteTask(userId, taskId, callback) {
         }
         const tasks = JSON.parse(json)
 
-        //const task = tasks.find(task => task.id === taskId);
-
         tasks.splice(tasks.findIndex(task => task.id === taskId), 1);
 
         const newJson = JSON.stringify(tasks, null, 4)

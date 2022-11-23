@@ -76,6 +76,10 @@ function Task(props) {
         }
     }
 
+    const handleTextRefresh = () => {
+        props.onTextRefresh();
+    };
+
     return (
         <article
             className={props.task.status === "todo" ? "w-full py-2 px-4 flex justify-center flex-col mb-4 rounded border-solid border-sky-800 border-t border-b-4 border-x bg-rose-100" :
@@ -85,7 +89,7 @@ function Task(props) {
                 defaultValue={props.task.title}
                 className="flex flex-col text-justify bg-transparent p-2 mb-1 text-slate-600 text-[15px] font-semibold placeholder:font-normal placeholder:text-slate-600 resize-none focus:outline-none"
                 rows="1"
-                maxLength=""
+                maxLength="30"
                 placeholder="Enter a title"
                 onKeyUp={(event) => handleupdateTaskTitle(props.task.id, event.target.value)}
             >
@@ -99,13 +103,15 @@ function Task(props) {
             )}
             {(buttonTaskText === "close" || props.task.text !== "") && (
                 <textarea
+                    type="text"
                     defaultValue={props.task.text}
                     className="flex flex-col text-justify bg-inherit p-2  border-slate-400 text-slate-700 text-[15px] font-normal placeholder:text-slate-600 resize-none rounded focus:outline-none focus:bg-white focus:border-b-2"
-                    rows="2"
+                    rows={props.task.text.length <= 30 ? "1" : "2"}
                     autoFocus="autofocus"
-                    maxLength="62"
+                    maxLength="56"
                     placeholder="add a more detailed description"
-                    onKeyUp={(event) => handleUpdateTaskText(props.task.id, event.target.value)}
+                    onChange={() => handleTextRefresh()}
+                    onKeyUp={(event) => { handleUpdateTaskText(props.task.id, event.target.value) }}
                 >
                 </textarea>
             )}
