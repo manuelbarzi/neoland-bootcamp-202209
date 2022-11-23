@@ -1,6 +1,6 @@
 import log from '../utils/coolog'
 import {useState} from 'react'
-import CreatePost from '../components/CreatePost.jsx'
+import CreatePost from '../components/CreatePost.js'
 
 function Home () {
 log.info('home -> render')
