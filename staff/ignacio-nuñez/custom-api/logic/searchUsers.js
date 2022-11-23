@@ -1,6 +1,12 @@
 const { readFile } = require('fs')
 
 module.exports = function searchUsers(name, userId, callback) {
+    if (typeof name !== 'string') throw new TypeError('name is not a string')
+    if (!name.length) throw new TypeError('name is empty')
+    if (typeof userId !== 'string') throw new TypeError('userId is not a string')
+    if (!userId.length) throw new TypeError('userId is empty')
+    if (typeof callback !== 'function') throw new TypeError('callback is not a function')
+
     readFile('./data/users.json', (error, data) => {
         if (error) {
             callback(error)
@@ -18,16 +24,17 @@ module.exports = function searchUsers(name, userId, callback) {
         }
 
         const searchedUsers = users.filter(user => {
-            return user.name.toLowerCase().includes(name) && user.userId !== userId
+           if(user.name.toLowerCase().includes(name) && user.userId !== userId){
+            
+            delete user.password
+            delete user.email
+
+            return true
+           }
+
+           return false
         })
 
-        const searchedUsersDataToReturn = searchedUsers.reduce((userData, user) => {
-            const { name, userId } = user
-
-            userData[userData.length] = { name, userId }
-
-            return userData
-        }, [])
-        callback(null, searchedUsersDataToReturn)
+        callback(null, searchedUsers)
     })
 }

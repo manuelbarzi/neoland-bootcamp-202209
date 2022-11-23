@@ -1,6 +1,6 @@
 const { readFile } = require('fs')
 
-module.exports = function returnUser(userId, callback){
+module.exports = function userSearched(userId, searchedUserId, callback){
     if (typeof userId !== 'string') throw new TypeError('id is not a string')
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
     if (typeof callback !== 'function') throw new TypeError('callback is not a function')
@@ -14,17 +14,26 @@ module.exports = function returnUser(userId, callback){
 
         const users = JSON.parse(json)
 
-        const user = users.find(user => user.userId === userId)
+        const user = users.some(user => user.userId === userId)
 
         if(!user){
-        callback(new Error('User not registered'))
+        callback(new Error('invalid user'))
 
         return
         }
         
-        delete user.password
-        delete user.userId
+        const searchedUser =users.find(user => user.userId === searchedUserId)
 
-        callback(null, user)
+        if(!searchedUser){
+            callback(new Error('user dont found'))
+
+            return
+        }
+
+        delete searchedUser.password
+        delete searchedUser.userId
+        delete searchedUser.email
+
+        callback(null, searchedUser)
     })
 }

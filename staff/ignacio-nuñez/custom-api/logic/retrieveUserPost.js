@@ -1,10 +1,11 @@
 const { readFile } = require('fs')
 
-module.exports = function retrievePosts(userId, callback) {
+module.exports = function retrievePosts(userId, postId, callback) {
   if (!userId.length) throw new Error('userId is empty')
   if (typeof userId !== 'string') throw new TypeError('userId is not a string')
+  if (!postId.length) throw new Error('postId is empty')
+  if (typeof postId !== 'string') throw new TypeError('postId is not a string')
   if (typeof callback !== 'function') throw new TypeError('callback is not a function')
-
   readFile('./data/users.json', 'utf8', (error, json) => {
     if (error) {
       callback(error)
@@ -30,29 +31,25 @@ module.exports = function retrievePosts(userId, callback) {
       }
       const posts = JSON.parse(data)
 
-      const postsToRetrieve = posts.filter(post => {
-        return post.visibility === 'public' || post.userId === userId
-      })
+      const post = posts.find(userPost => userPost.postId === postId)
 
-      postsToRetrieve.forEach(post => {
-          userPost = users.find(user => {
-            return post.userId === user.userId
-          })
-          if(!userPost) post.userName = null
-          post.userName = userPost.name
-      });
+      if (!post) {
+        callback(new Error('post dont found'))
 
-      postsToRetrieve.sort((a, b) => {
-        if (a.date < b.date) {
-          return 1;
-        }
-        if (a.date > b.date) {
-          return -1;
-        }
-        return 0;
-      });
+        return
+      }
 
-      callback(null, postsToRetrieve)
+      if (post.userId !== userId) {
+        callback(new Error(`this post doesnt belong to user with id ${userId}`))
+
+        return
+      }
+
+      delete post.date
+      delete post.userName
+      delete post.userId
+
+      callback(null, post)
     })
   })
 }

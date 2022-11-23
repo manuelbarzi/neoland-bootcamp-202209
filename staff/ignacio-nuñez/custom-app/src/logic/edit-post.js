@@ -1,9 +1,14 @@
-function deletePost(postId, postUserId, userId) {
+function editPost(content, visibility, postId, userId) {
+    if (typeof content !== 'string') throw new Error('invalid content')
+    if(!content.length) throw new Error('content is empty')
     if (typeof postId !== 'string') throw new Error('postId is not a string')
-    if(postUserId !== userId) throw new Error('userId is different than postUserId')
+    if(postId.length === 0) throw new Error('invalid user id')
+
+    const post = { content, visibility }
 
     return fetch(`http://localhost:80/posts/${postId}`, {
-        method: 'DELETE',
+        method: 'PATCH',
+        body: JSON.stringify(post),
         headers: { 
             'Authorization': `Bearer ${userId}`,
             'Content-Type': 'application/json'
@@ -16,4 +21,4 @@ function deletePost(postId, postUserId, userId) {
         })
 }
 
-export default deletePost
+export default editPost

@@ -1,7 +1,7 @@
 const deletePost = require('../logic/deletePost')
 
 module.exports = (req, res) => {
-    let { body: { postId }, headers: { authorization } } = req
+    let { params: { postId }, headers: { authorization } } = req
 
     const userId = authorization.substring(7)
 

@@ -70,5 +70,17 @@
         "name": "pamela albornoz",
         "email": "pamela@albornoz.com",
         "password": "123123123"
+    },
+    {
+        "userId": "user-13",
+        "name": "ignacio domingo",
+        "email": "ignacio@gmail.com",
+        "password": "123123123"
+    },
+    {
+        "userId": "user-14",
+        "name": "chavo delocho",
+        "email": "chavo@delocho.com",
+        "password": "123123123"
     }
 ]

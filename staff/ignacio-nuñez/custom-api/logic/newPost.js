@@ -1,11 +1,11 @@
-const { readFile } = require('fs')
-const { writeFile } = require('fs')
+const { readFile, writeFile } = require('fs')
 
 module.exports = function registerUser(content, visibility, userName, userId, callback) {
     if (!content.length) throw new Error('content is empty')
     if (typeof content !== 'string') throw new TypeError('content is not a string')
-    // if (!privacity.length) throw new Error('privacity is empty')
-    // if (typeof privacity !== 'string') throw new TypeError('privacity is not a string')
+    if (!visibility.length) throw new Error('visibility is empty')
+    if (typeof visibility !== 'string') throw new TypeError('visibility is not a string')
+    if(visibility !== 'public' && visibility !== 'private') throw new Error ('invalid visibility')
     if (!userId.length) throw new Error('userId is empty')
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
     if (!userName.length) throw new Error('name is empty')
@@ -46,7 +46,7 @@ module.exports = function registerUser(content, visibility, userName, userId, ca
             } else {
                 postId = 'post-1'
             }
-            const date = Date()
+            const date = new Date()
 
             const post = { postId, content, visibility, date, userName, userId }
 

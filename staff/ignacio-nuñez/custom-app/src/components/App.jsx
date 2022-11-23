@@ -4,34 +4,46 @@ import Register from '../pages/Register'
 import Home from '../pages/Home'
 import UserPerfil from "../pages/UserPerfil";
 import SearchedUserPerfil from "../pages/SearchedUserPerfil";
-const { useState } = React
-
+import { Routes, Route, Navigate } from 'react-router-dom'
+import { useState } from 'react'
 function App() {
-  const [view, setView] = useState(sessionStorage.userId ? "home": "login")
-  const [searchedUser,  setSearchedUser] = useState()
+  const [searchedUser, setSearchedUser] = useState()
 
-  const navigateToHome = () => setView('home')
+  const onSearchedUserClick = (searchedUser) => {
+    setSearchedUser(searchedUser)
+  }
 
-  const navigateToLogin = () => setView('login')
+  const ConditionalHome = () => {
 
-  const navigateToRegister = () => setView('register')
+    return sessionStorage.userId ? <Home onSearchedUserClick={onSearchedUserClick} /> : <Navigate replace to="/login" />
+  }
 
-  const navigateToPerfil = () => setView('perfil')
+  const ConditionalUserPerfil = () => {
 
-  const onSearchedUserClick = (searchedUserId) =>{
-    setSearchedUser(searchedUserId)
-
-    setView('searchedUserPerfil')
+    return sessionStorage.userId ? <UserPerfil onSearchedUserClick={onSearchedUserClick} /> : <Navigate replace to="/login" />
   }
 
   return (
-    <>
-      {view === 'login' && <Login onAuthenticate={navigateToHome} onRegisterClick={navigateToRegister} />}
-      {view === 'register' && <Register onRegister={navigateToLogin} onLoginClick={navigateToLogin}/>}
-      {view === 'home' && <Home onLogoutClick={navigateToLogin} onPerfilClick={navigateToPerfil} onSearchedUserClick={onSearchedUserClick} onHomeClick={navigateToHome}/>}
-      {view === 'perfil' && <UserPerfil onLogoutClick={navigateToLogin} onHomeClick={navigateToHome} onSearchedUserClick={onSearchedUserClick} onPerfilClick={navigateToPerfil}/>}
-      {view === 'searchedUserPerfil' && <SearchedUserPerfil onLogoutClick={navigateToLogin} onHomeClick={navigateToHome} onSearchedUserClick={onSearchedUserClick} onSearchUser={searchedUser} onPerfilClick={navigateToPerfil}/>}
-    </>
+    <Routes>
+      {<Route path="/login"
+        element={sessionStorage.userId ? <Navigate replace to="/" /> : <Login />}
+      />}
+       {<Route path="/register"
+        element={sessionStorage.userId ? <Navigate replace to="/" /> : <Register />}
+      />}
+      {<Route path="/"
+        element={<ConditionalHome />}
+
+      />}
+       {<Route path="/perfil"
+        element={<ConditionalUserPerfil />}
+      />}
+      {
+        <Route path='/user/:userId'
+          element={<SearchedUserPerfil />}
+          searchedUser={searchedUser}
+        />}
+    </Routes>
   );
 }
 

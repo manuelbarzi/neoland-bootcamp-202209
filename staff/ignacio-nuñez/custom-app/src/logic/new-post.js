@@ -7,7 +7,7 @@ function newPost(content, userId, userName, visibility) {
 
     const post = { content, userName, visibility }
 
-    return fetch('http://localhost:80/post', {
+    return fetch('http://localhost:80/posts', {
         method: 'POST',
         body: JSON.stringify(post),
         headers: {

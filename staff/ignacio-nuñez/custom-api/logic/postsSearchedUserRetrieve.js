@@ -1,8 +1,14 @@
 const { readFile } = require('fs')
 
 module.exports = function retrieveUserPerfil(userId, userSearchedId, callback) {
+    if (!userId.length) throw new Error('userId is empty')
+    if (typeof userId !== 'string') throw new TypeError('userId is not a string')
+    if (!userSearchedId.length) throw new Error('userSearchedId is empty')
+    if (typeof userSearchedId !== 'string') throw new TypeError('userSearchedId is not a string')
+    if (typeof callback !== 'function') throw new TypeError('callback is not a function')
+
     readFile('./data/users.json', (error, usersData) => {
-        if(error){
+        if (error) {
             callback(error)
 
             return
@@ -11,7 +17,7 @@ module.exports = function retrieveUserPerfil(userId, userSearchedId, callback) {
 
         const validateUser = users.some(user => user.userId === userId)
 
-        if(!validateUser){
+        if (!validateUser) {
             callback(new Error(`user with id ${userId} does not exist`))
 
             return

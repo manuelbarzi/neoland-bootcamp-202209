@@ -1,13 +1,12 @@
-function retrieveSearchedUser(userId, searchedUserId) {
-    if(typeof userId !== 'string') throw new TypeError('invalid user id')
-    if(typeof searchedUserId !== 'string') throw new TypeError('invalid searched user id')
-    
-    return fetch(`http://localhost:80/searched/user/${searchedUserId}`, {
-        method: 'GET',
+function retrieveSearchedUser(userId) {
+    if (typeof userId !== 'string') throw new TypeError('userId is not a string')
+    if(!userId.length) throw new Error('userId is empty')
+
+    return fetch(`http://localhost:80/search/users/${userId}`, {
         headers: { 
             'Authorization': `Bearer ${userId}`,
-            'Content-Type': 'application/json' 
-        }
+            'Content-Type': 'application/json'
+         }
     })
         .then(res => {
             if (!res.ok) {
@@ -16,8 +15,10 @@ function retrieveSearchedUser(userId, searchedUserId) {
 
             return res.json()
         })
-        .then(posts => {
-            return posts
+        .then(data => {
+            const user = data
+
+            return user.name
         })
 }
 

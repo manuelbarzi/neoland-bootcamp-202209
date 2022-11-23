@@ -1,5 +1,8 @@
-function retrievePostsPerfil(userId) {
-    return fetch('http://localhost:80/posts/retrieve/perfil', {
+function retrieveSearchedUserPosts(userId, searchedUserId) {
+    if(typeof userId !== 'string') throw new TypeError('invalid user id')
+    if(typeof searchedUserId !== 'string') throw new TypeError('invalid searched user id')
+    
+    return fetch(`http://localhost:80/search/posts/${searchedUserId}`, {
         method: 'GET',
         headers: { 
             'Authorization': `Bearer ${userId}`,
@@ -18,4 +21,4 @@ function retrievePostsPerfil(userId) {
         })
 }
 
-export default retrievePostsPerfil
+export default retrieveSearchedUserPosts

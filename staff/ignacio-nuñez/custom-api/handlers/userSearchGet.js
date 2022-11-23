@@ -1,12 +1,12 @@
-const retrieveUserPerfil = require('../logic/retrieveUserPerfil')
+const userSearched = require('../logic/userSearched')
 
 module.exports = (req, res) => {
-    const { headers: { authorization }, params: { searchedUserId } } = req
+    const { headers: { authorization }, params: { searchUserId } } = req
 
     const userId = authorization.substring(7)
 
     try {
-        retrieveUserPerfil(userId, searchedUserId, (error, user) => {
+        userSearched(userId, searchUserId, (error, searchedUser) => {
             if (error) {
                 res.status(500)
                 res.json({ error: error.message })
@@ -14,7 +14,7 @@ module.exports = (req, res) => {
                 return
             }
 
-            res.json(user)
+            res.json(searchedUser)
         })
     } catch (error) {
         res.status(500)
