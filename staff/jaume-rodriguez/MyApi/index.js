@@ -15,6 +15,7 @@ const {
     handlerDeleteTask,
     handlerUpdateTaskStatus,
     handlerUpdateTaskText,
+    handlerUpdateTaskTitle,
 } = require("./handlers")
 
 const jsonBodyParser = require('./utils/jsonBodyParser')
@@ -36,6 +37,7 @@ api.post('/tasks', jsonBodyParser, handlerCreateTask)
 api.get('/tasks', handlerRetrieveTasks)
 api.patch('/tasks', jsonBodyParser, handlerUpdateTaskStatus)
 api.patch('/updateTaskText', jsonBodyParser, handlerUpdateTaskText)
+api.patch('/updateTaskTitle', jsonBodyParser, handlerUpdateTaskTitle)
 api.delete('/tasks', jsonBodyParser, handlerDeleteTask)
 api.get('/search', searchGet)
 

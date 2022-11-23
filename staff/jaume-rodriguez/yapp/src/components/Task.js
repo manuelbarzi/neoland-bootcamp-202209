@@ -1,8 +1,17 @@
+import { useState } from 'react'
+
 import deleteTask from '../logic/deleteTask'
 import updateTaskStatus from '../logic/updateTaskStatus'
 import updateTaskText from '../logic/updateTaskText'
+import updateTaskTitle from '../logic/updateTaskTitle'
 
 function Task(props) {
+
+    const [buttonTaskText, setButtonTaskText] = useState("open")
+
+    const handleButtonTaskText = () => {
+        setButtonTaskText(buttonTaskText === "open" ? "close" : "open");
+    }
 
     // TASK FUNCTIONS
     const handleUpdateTaskText = (taskId, newText) => {
@@ -12,7 +21,21 @@ function Task(props) {
                     alert(error.message)
                     return
                 }
-                props.onUpdateTaskStatus()
+            });
+        } catch (error) {
+            alert(error.message);
+
+            return;
+        }
+    }
+
+    const handleupdateTaskTitle = (taskId, newTitle) => {
+        try {
+            updateTaskTitle(window.userId, taskId, newTitle, (error) => {
+                if (error) {
+                    alert(error.message)
+                    return
+                }
             });
         } catch (error) {
             alert(error.message);
@@ -55,46 +78,72 @@ function Task(props) {
 
     return (
         <article
-            className="w-full p-4 flex justify-center flex-col mb-4 rounded border-solid border-sky-800 border-t border-b-4 border-x bg-sky-100">
+            className={props.task.status === "todo" ? "w-full py-2 px-4 flex justify-center flex-col mb-4 rounded border-solid border-sky-800 border-t border-b-4 border-x bg-rose-100" :
+                props.task.status === "doing" ? " w-full py-2 px-4 flex justify-center flex-col mb-4 rounded border-solid border-sky-800 border-t border-b-4 border-x bg-blue-100" :
+                    " w-full py-2 px-4 flex justify-center flex-col mb-4 rounded border-solid border-sky-800 border-t border-b-4 border-x bg-green-100"}>
             <textarea
-                defaultValue={props.task.text}
-                className="flex flex-col text-justify bg-cyan-50 p-4 text-sm border-sky-600 border bg-sky-200 text-black text-[14px] font-normal"
-                onKeyUp={(event) => handleUpdateTaskText(props.task.id, event.target.value)}
+                defaultValue={props.task.title}
+                className="flex flex-col text-justify bg-transparent p-2 mb-1 text-slate-600 text-[15px] font-semibold placeholder:font-normal placeholder:text-slate-600 resize-none focus:outline-none"
+                rows="1"
+                maxLength=""
+                placeholder="Enter a title"
+                onKeyUp={(event) => handleupdateTaskTitle(props.task.id, event.target.value)}
             >
             </textarea>
-            <div className="flex flex-row mt-3">
-                <select
-                    className="text-black bg-inherit self-end font-normal text-base"
-                    onChange={(event) => handleUpdateTaskStatus(props.task.id, event.target.value)}
+            {buttonTaskText === "open" && props.task.text === "" && (
+                <span
+                    className="self-start bg-inherit rounded text-slate-600 cursor-pointer cursor-pointer text-[15px] border-slate-400 border-b-2 px-2 py-1 font-normal hover:bg-white"
+                    onClick={() => {
+                        handleButtonTaskText();
+                    }}>Add a description</span>
+            )}
+            {(buttonTaskText === "close" || props.task.text !== "") && (
+                <textarea
+                    defaultValue={props.task.text}
+                    className="flex flex-col text-justify bg-inherit p-2  border-slate-400 text-slate-700 text-[15px] font-normal placeholder:text-slate-600 resize-none rounded focus:outline-none focus:bg-white focus:border-b-2"
+                    rows="2"
+                    autoFocus="autofocus"
+                    maxLength="62"
+                    placeholder="add a more detailed description"
+                    onKeyUp={(event) => handleUpdateTaskText(props.task.id, event.target.value)}
                 >
-                    <option disabled selected hidden value=''>
-                        {props.task.status === 'todo' ? 'Pendiente' :
-                            props.task.status === 'doing' ? 'En proceso' :
-                                props.task.status === 'done' ? 'Hecho' : 'Estado'}
-                    </option>
-                    {props.task.status === 'todo' ? <>
-                        <option value="doing">En Proceso</option>
-                        <option value="done">Hecho</option>
-                    </>
-                        :
-                        props.task.status === 'doing' ? <>
-                            <option value="todo">Pendiente</option>
+                </textarea>
+            )}
+            <div className='flex flex-row'>
+                <div className="flex flex-row mt-2">
+                    <select
+                        className="text-black bg-inherit self-end font-normal text-base"
+                        onChange={(event) => handleUpdateTaskStatus(props.task.id, event.target.value)}
+                    >
+                        <option disabled selected hidden value=''>
+                            {props.task.status === 'todo' ? 'Pendiente' :
+                                props.task.status === 'doing' ? 'En proceso' :
+                                    props.task.status === 'done' ? 'Hecho' : 'Estado'}
+                        </option>
+                        {props.task.status === 'todo' ? <>
+                            <option value="doing">En Proceso</option>
                             <option value="done">Hecho</option>
                         </>
                             :
-                            <>
+                            props.task.status === 'doing' ? <>
                                 <option value="todo">Pendiente</option>
-                                <option value="doing">En Proceso</option>
+                                <option value="done">Hecho</option>
                             </>
-                    }
-                </select>
+                                :
+                                <>
+                                    <option value="todo">Pendiente</option>
+                                    <option value="doing">En Proceso</option>
+                                </>
+                        }
+                    </select>
+                </div>
                 <button
-                    className="material-symbols-outlined self-center rounded cursor-pointer border-none mt-3 ml-auto text-sky-900"
+                    className="material-symbols-outlined self-center rounded cursor-pointer border-none mt-4 ml-auto text-sky-900"
                     onClick={() => handleDeleteTask(props.task.id)}
                 >delete
                 </button>
             </div>
-        </article>
+        </article >
     )
 }
 

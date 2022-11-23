@@ -23,7 +23,7 @@ function Community(props) {
     };
 
     return (
-        <main className="min-h-screen bg-sky-500">
+        <main className="min-h-screen bg-slate-200">
             <Header
                 onHomeLink={handleHomeLink}
                 onCommunityLink={handleCommunityLink}

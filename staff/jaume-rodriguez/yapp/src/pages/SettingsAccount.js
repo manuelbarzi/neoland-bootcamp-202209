@@ -149,7 +149,7 @@ function SettingsAccount(props) {
     };
 
     return (
-        <main className="min-h-screen bg-sky-500">
+        <main className="min-h-screen bg-slate-200">
             {/* HEADER */}
             <Header
                 onHomeLink={handleHomeLink}

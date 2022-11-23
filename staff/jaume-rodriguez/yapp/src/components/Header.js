@@ -48,7 +48,7 @@ function Header(props) {
     return (
         <>
             {/* HEADER */}
-            <header className="flex flex-row z-0 items-center px-3 py-2 bg-sky-800">
+            <header className="flex flex-row z-0 items-center px-3 py-2 bg-[#0066a0]">
                 <img
                     src={logoHeader}
                     alt="logoHeader"

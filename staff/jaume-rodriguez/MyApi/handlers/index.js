@@ -10,5 +10,6 @@ module.exports = {
     handlerDeleteTask: require('./handlerDeleteTask'),
     handlerUpdateTaskStatus: require('./handlerUpdateTaskStatus'),
     handlerUpdateTaskText: require('./handlerUpdateTaskText'),
+    handlerUpdateTaskTitle: require('./handlerUpdateTaskTitle'),
     searchGet: require('./searchGet')
 }

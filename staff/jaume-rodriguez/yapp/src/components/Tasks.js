@@ -71,7 +71,7 @@ function Tasks() {
                                 onUpdateTaskStatus={handleRefreshTasks}
                                 onDeleteTask={handleRefreshTasks} /> : null)}
                         <div
-                            className="w-full p-2 px-4 flex flex-row items-end rounded border-solid border-sky-800 border-t border-b-4 border-x bg-sky-100 hover:bg-sky-200 cursor-pointer text-sm"
+                            className="w-full p-2 px-4 flex flex-row items-end rounded border-solid border-sky-800 border-t border-b-4 border-x bg-rose-200 hover:bg-rose-300 cursor-pointer text-sm"
                             onClick={() => { handleCreateTask('todo') }}>
                             <span
                                 className="material-symbols-outlined text-black">
@@ -97,7 +97,7 @@ function Tasks() {
                                 onUpdateTaskStatus={handleRefreshTasks}
                                 onDeleteTask={handleRefreshTasks} /> : null)}
                         <div
-                            className="w-full p-2 px-4 flex flex-row items-end rounded border-solid border-sky-800 border-t border-b-4 border-x bg-sky-100 hover:bg-sky-200 cursor-pointer text-sm"
+                            className="w-full p-2 px-4 flex flex-row items-end rounded border-solid border-sky-800 border-t border-b-4 border-x bg-blue-200 hover:bg-blue-300 cursor-pointer text-sm"
                             onClick={() => { handleCreateTask('doing') }}>
                             <span
                                 className="material-symbols-outlined text-black">
@@ -123,7 +123,7 @@ function Tasks() {
                                 onUpdateTaskStatus={handleRefreshTasks}
                                 onDeleteTask={handleRefreshTasks} /> : null)}
                         <div
-                            className="w-full p-2 px-4 flex flex-row items-end rounded border-solid border-sky-800 border-t border-b-4 border-x bg-sky-100 hover:bg-sky-200 cursor-pointer text-sm"
+                            className="w-full p-2 px-4 flex flex-row items-end rounded border-solid border-sky-800 border-t border-b-4 border-x bg-green-200 hover:bg-green-300 cursor-pointer text-sm"
                             onClick={() => { handleCreateTask('done') }}>
                             <span
                                 className="material-symbols-outlined text-black">

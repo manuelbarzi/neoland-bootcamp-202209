@@ -20,6 +20,7 @@ function createtask(userId, statusTask, callback) {
         const task = {
             id: nextTaskId,
             user: userId,
+            title: "",
             text: "",
             status: statusTask
         }

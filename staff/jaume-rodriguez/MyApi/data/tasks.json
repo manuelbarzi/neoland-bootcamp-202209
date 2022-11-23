@@ -2,13 +2,22 @@
     {
         "id": "task-1",
         "user": "",
+        "title": "",
         "text": "",
         "status": ""
     },
     {
         "id": "task-2",
         "user": "user-2",
+        "title": "Prueba",
+        "text": "lograda!",
+        "status": "todo"
+    },
+    {
+        "id": "task-3",
+        "user": "user-2",
+        "title": "",
         "text": "",
-        "status": "doing"
+        "status": "done"
     }
 ]
