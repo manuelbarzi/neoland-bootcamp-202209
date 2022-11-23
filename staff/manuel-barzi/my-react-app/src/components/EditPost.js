@@ -37,8 +37,6 @@ export default function ({ onUpdated, onClose, postId }) {
                     return
                 }
 
-                event.target.reset()
-
                 onUpdated()
             })
         } catch (error) {
@@ -49,6 +47,7 @@ export default function ({ onUpdated, onClose, postId }) {
     return <div className="bg-[#aaaa] fixed top-0 h-full w-full flex flex-col justify-center items-center overflow-hidden" onClick={onClose}>
         <div className="bg-[white] p-5 rounded-xl flex flex-col items-end" onClick={event => event.stopPropagation()}>
             <AiOutlineCloseCircle size="1.5rem" onClick={onClose} className="cursor-pointer" />
+
             <form className="flex flex-col gap-2" onSubmit={submitUpdatePost}>
                 <label htmlFor="text">Text</label>
                 <textarea type="text" name="text" id="text" placeholder="input a text" defaultValue={post?.text}></textarea>

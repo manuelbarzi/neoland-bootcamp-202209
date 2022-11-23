@@ -21,41 +21,6 @@
         "visibility": "public"
     },
     {
-        "id": "post-4",
-        "user": "user-10",
-        "text": "blah blah y blah",
-        "visibility": "public",
-        "date": "2022-11-18T11:37:45.925Z"
-    },
-    {
-        "id": "post-5",
-        "user": "user-10",
-        "text": "blah blah y blah",
-        "visibility": "public",
-        "date": "2022-11-18T11:39:30.958Z"
-    },
-    {
-        "id": "post-6",
-        "user": "user-10",
-        "text": "blah blah y blah",
-        "visibility": "public",
-        "date": "2022-11-18T11:39:50.682Z"
-    },
-    {
-        "id": "post-7",
-        "user": "user-10",
-        "text": "blah blah y blah",
-        "visibility": "public",
-        "date": "2022-11-18T11:39:51.273Z"
-    },
-    {
-        "id": "post-8",
-        "user": "user-10",
-        "text": "blah blah y blah",
-        "visibility": "public",
-        "date": "2022-11-18T11:39:51.784Z"
-    },
-    {
         "id": "post-9",
         "user": "user-10",
         "text": "mi primer texto serio",
@@ -124,26 +89,5 @@
         "text": "i <3 programming",
         "visibility": "public",
         "date": "2022-11-22T12:12:52.704Z"
-    },
-    {
-        "id": "post-19",
-        "user": "user-10",
-        "text": "nooo! noooo! me arrepiento, amo a JS, es mi tesssssoro!",
-        "visibility": "public",
-        "date": "2022-11-22T12:12:30.819Z"
-    },
-    {
-        "id": "post-20",
-        "user": "user-11",
-        "text": "adios mundo cruel",
-        "visibility": "public",
-        "date": "2022-11-22T12:08:05.615Z"
-    },
-    {
-        "id": "post-21",
-        "user": "user-10",
-        "text": "HELLO WORLD",
-        "visibility": "private",
-        "date": "2022-11-22T12:13:38.775Z"
     }
 ]

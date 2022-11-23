@@ -10,6 +10,7 @@ const createPostHandler = require('./handlers/createPostHandler')
 const retrievePublicPostsHandler  = require('./handlers/retrievePublicPostsHandler')
 const retrievePostHandler = require('./handlers/retrievePostHandler')
 const updatePostHandler = require('./handlers/updatePostHandler')
+const deletePostHandler = require('./handlers/deletePostHandler')
 
 const jsonBodyParser = require('./utils/jsonBodyParser')
 const cors = require('./utils/cors')
@@ -26,6 +27,7 @@ api.post('/posts', jsonBodyParser, createPostHandler)
 api.get('/posts/public', retrievePublicPostsHandler)
 api.get('/posts/:postId', retrievePostHandler)
 api.patch('/posts/:postId', jsonBodyParser, updatePostHandler)
+api.delete('/posts/:postId', deletePostHandler)
 
 api.get('/search', searchHttpCatsHandler)
 

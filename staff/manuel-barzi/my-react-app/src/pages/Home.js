@@ -5,6 +5,7 @@ import retrievePublicPosts from '../logic/retrievePublicPosts'
 import CreatePost from '../components/CreatePost'
 import { AiOutlinePlusCircle, AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai'
 import EditPost from '../components/EditPost'
+import DeletePost from '../components/DeletePost'
 
 function Home() {
     log.info('Home -> render')
@@ -13,6 +14,7 @@ function Home() {
     const [posts, setPosts] = useState()
     const [createPostVisible, setCreatePostVisible] = useState(false)
     const [postIdToEdit, setPostIdToEdit] = useState()
+    const [postIdToDelete, setPostIdToDelete] = useState()
 
     useEffect(() => {
         try {
@@ -85,8 +87,25 @@ function Home() {
         }
     }
 
-    const handleDeletePost = postId => {
-        console.log('TODO delete post ' + postId)
+    const openDeletePost = postId => setPostIdToDelete(postId)
+
+    const closeDeletePost = () => setPostIdToDelete()
+
+    const handlePostDeleted = () => {
+        try {
+            retrievePublicPosts(window.userId, (error, posts) => {
+                if (error) {
+                    alert(error.message)
+
+                    return
+                }
+
+                setPostIdToDelete()
+                setPosts(posts)
+            })
+        } catch (error) {
+            alert(error.message)
+        }
     }
 
     return <main className="overflow-hidden">
@@ -101,7 +120,7 @@ function Home() {
                 <time>{post.date}</time>
                 {post.user === window.userId && <div className="flex self-end">
                     <button onClick={() => openEditPost(post.id)}><AiOutlineEdit size="1rem" /></button>
-                    <button onClick={() => handleDeletePost(post.id)}><AiOutlineDelete size="1rem" /></button>
+                    <button onClick={() => openDeletePost(post.id)}><AiOutlineDelete size="1rem" /></button>
                 </div>}
             </article>)}
         </div>}
@@ -111,6 +130,7 @@ function Home() {
         {createPostVisible && <CreatePost onCreated={handlePostCreated} onClose={closeCreatePost} />}
 
         {postIdToEdit && <EditPost postId={postIdToEdit} onUpdated={handlePostUpdated} onClose={closeEditPost} />}
+        {postIdToDelete && <DeletePost postId={postIdToDelete} onDeleted={handlePostDeleted} onClose={closeDeletePost} />}
     </main>
 }
 
