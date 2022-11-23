@@ -110,15 +110,15 @@ function Home() {
 
     return <main className="overflow-hidden">
         <header className="fixed bg-[white] w-full h-[2rem] top-0 flex justify-center">
-            <p>{user ? user.name : 'home'}</p>
+            <p>hola {user ? user.name : 'home'}</p>
         </header>
 
         {posts && <div className="flex flex-col items-center gap-2 py-[2rem]">
             {posts.map(post => <article key={post.id} className="border rounded-xl w-[50%] flex flex-col p-5">
-                <a href={`/users/${post.user.id}`}><strong>{post.user.name}</strong></a>
+                <strong>{post.user}</strong>
                 <p>{post.text}</p>
                 <time>{post.date}</time>
-                {post.user.id === window.userId && <div className="flex self-end">
+                {post.user === window.userId && <div className="flex self-end">
                     <button onClick={() => openEditPost(post.id)}><AiOutlineEdit size="1rem" /></button>
                     <button onClick={() => openDeletePost(post.id)}><AiOutlineDelete size="1rem" /></button>
                 </div>}

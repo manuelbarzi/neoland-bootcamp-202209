@@ -49,14 +49,6 @@ function retrievePublicPosts(userId, callback) {
 
             publics.sort((a, b) => a.date > b.date? -1 :  a.date < b.date? 1 : 0)
 
-            publics.forEach(post => {
-                const user = users.find(user => user.id === post.user)
-
-                const { id, name } = user
-
-                post.user = { id, name }
-            })
-
             callback(null, publics)
         })
     })

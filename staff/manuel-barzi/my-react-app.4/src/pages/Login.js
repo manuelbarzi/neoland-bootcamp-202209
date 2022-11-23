@@ -1,11 +1,16 @@
 import log from '../utils/coolog'
 import authenticateUser from '../logic/authenticateUser'
-import { Link, useNavigate } from 'react-router-dom'
 
-function Login() {
+function Login({ onNavigateToRegister, onLogin }) {
     log.info('Login -> render')
 
-    const navigate = useNavigate()
+    const handleNavigateToRegister = event => {
+        log.info('Login -> handleNavigateToRegister')
+
+        event.preventDefault()
+
+        onNavigateToRegister()
+    }
 
     const handleLogin = event => {
         log.info('Login -> handleLogin')
@@ -23,8 +28,7 @@ function Login() {
                 }
 
                 window.userId = userId
-                
-                navigate('/')
+                onLogin()
             })
         } catch (error) {
             alert(error.message)
@@ -42,7 +46,7 @@ function Login() {
             <button className="p-2 border rounded-xl hover:animate-spin">Login</button>
         </form>
 
-        <Link to="/register" className="underline">Register</Link>
+        <a href="" className="underline" onClick={handleNavigateToRegister}>Register</a>
     </main>
 }
 

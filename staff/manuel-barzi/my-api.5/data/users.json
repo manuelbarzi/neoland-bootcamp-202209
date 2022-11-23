@@ -64,17 +64,5 @@
         "name": "Neo Land",
         "email": "neo@land.com",
         "password": "123123123"
-    },
-    {
-        "id": "user-12",
-        "name": "Cara Melon",
-        "email": "cara@melon.com",
-        "password": "123123123"
-    },
-    {
-        "id": "user-13",
-        "name": "Abe Jorro",
-        "email": "abe@jorro.com",
-        "password": "123123123"
     }
 ]
