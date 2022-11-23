@@ -23,7 +23,7 @@ function retrievePublicPosts(userId, callback) {
         const user = users.find(user => user.id === userId)
 
         if (!user) {
-            callback(new Error('user not registered'))
+            callback(new Error(`user with id ${userId} does not exist`))
 
             return
         }
@@ -48,6 +48,14 @@ function retrievePublicPosts(userId, callback) {
             })
 
             publics.sort((a, b) => a.date > b.date? -1 :  a.date < b.date? 1 : 0)
+
+            publics.forEach(post => {
+                const user = users.find(user => user.id === post.user)
+
+                const { id, name } = user
+
+                post.user = { id, name }
+            })
 
             callback(null, publics)
         })

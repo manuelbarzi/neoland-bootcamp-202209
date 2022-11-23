@@ -1,17 +1,19 @@
-const searchHttpCats = require('../logic/searchHttpCats')
+const retrievePublicPosts = require('../logic/retrievePublicPosts')
 
 module.exports = (req, res) => {
-    try {
-        const { q } = req.query
+    const { headers: { authorization } } = req
 
-        searchHttpCats(q, (error, cats) => {
+    const userId = authorization.substring(7)
+
+    try {
+        retrievePublicPosts(userId, (error, posts) => {
             if (error) {
                 res.status(500).json({ error: error.message })
 
                 return
             }
 
-            res.json(cats)
+            res.json(posts)
         })
     } catch (error) {
         res.status(500).json({ error: error.message })

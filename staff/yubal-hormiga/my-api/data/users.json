@@ -94,5 +94,41 @@
         "name": "yubalhh",
         "email": "yubalhh@yahoo.ess",
         "password": "123123123"
+    },
+    {
+        "id": "user-18",
+        "name": "pedro",
+        "email": "pedroo@pedro.com",
+        "password": "123123123"
+    },
+    {
+        "id": "user-19",
+        "name": "Pedro",
+        "email": "pedro@pedro.con",
+        "password": "123123123"
+    },
+    {
+        "id": "user-20",
+        "name": "maria",
+        "email": "maria@maria.com",
+        "password": "123123123"
+    },
+    {
+        "id": "user-21",
+        "name": "yubal",
+        "email": "yyubalhh@yahoo.es",
+        "password": "123123123"
+    },
+    {
+        "id": "user-22",
+        "name": "yubal",
+        "email": "yuubalhh@yahoo.es",
+        "password": "123123123"
+    },
+    {
+        "id": "user-23",
+        "name": "pepe",
+        "email": "ppepito@grillo.com",
+        "password": "123123123"
     }
 ]

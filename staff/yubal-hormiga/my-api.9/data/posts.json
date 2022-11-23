@@ -1,0 +1,72 @@
+[
+    {
+        "id": "post-1",
+        "user": "user-1",
+        "text": "blah bldsgfdgdgfg",
+        "date": "2022-11-22T15:51:59.442Z",
+        "visibility": "public"
+    },
+    {
+        "id": "post-2",
+        "user": "user-2",
+        "text": "bleh bleh bleh",
+        "date": "2022-11-27T12:18:31.429Z",
+        "visibility": "private"
+    },
+    {
+        "id": "post-3",
+        "user": "user-10",
+        "text": "bla, bla, bla",
+        "visibility": "public",
+        "date": "2022-11-21T14:59:49.871Z"
+    },
+    {
+        "id": "post-4",
+        "user": "user-10",
+        "text": "bla, bla, ble",
+        "visibility": "public",
+        "date": "2022-11-21T19:58:56.425Z"
+    },
+    {
+        "id": "post-5",
+        "user": "user-10",
+        "text": "bla, bla, ble, blublu",
+        "visibility": "public",
+        "date": "2022-11-21T19:59:15.206Z"
+    },
+    {
+        "id": "post-6",
+        "user": "user-9",
+        "text": "hgola",
+        "visibility": "public",
+        "date": "2022-11-21T20:03:35.496Z"
+    },
+    {
+        "id": "post-7",
+        "user": "user-9",
+        "text": "tolete",
+        "visibility": "private",
+        "date": "2022-11-21T20:04:00.455Z"
+    },
+    {
+        "id": "post-8",
+        "user": "user-9",
+        "text": "ana conda",
+        "visibility": "public",
+        "date": "2022-11-21T20:04:49.423Z"
+    },
+    {
+        "id": "post-9",
+        "user": "user-20",
+        "text": "hola",
+        "visibility": "public",
+        "date": "2022-11-22T19:45:57.507Z"
+    },
+    {
+        "id": "post-10",
+        "user": "user-15",
+        "text": "feo",
+        "visibility": "public",
+        "date": "2022-11-22T19:49:38.370Z"
+    }
+]

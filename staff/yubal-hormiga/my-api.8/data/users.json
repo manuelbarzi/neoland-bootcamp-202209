@@ -94,5 +94,11 @@
         "name": "yubalhh",
         "email": "yubalhh@yahoo.ess",
         "password": "123123123"
+    },
+    {
+        "id": "user-18",
+        "name": "yubal",
+        "email": "yyubalhh@yahoo.es",
+        "password": "123123123"
     }
 ]
