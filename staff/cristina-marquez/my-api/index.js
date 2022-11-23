@@ -10,7 +10,7 @@ const registerPost = require('./handlers/registerPost')
 const createnewPost = require('./handlers/createnewPost')
 const getPosts = require('./handlers/getPosts')
 const updatePost = require('./handlers/updatePost')
-// const deletePost = require('./handlers/deletePost')
+const deletePost = require('./handlers/deletePost')
 
 
 const app = express()
@@ -24,7 +24,7 @@ app.post('/register', registerPost)
 app.get('/posts', authenticateUserMiddleware, getPosts)
 app.post('/posts', createnewPost)
 app.patch('/posts/:postId', updatePost)
-// app.delete('/posts/:postId', deletePost)
+app.delete('/posts/:postId', deletePost)
 
 
 //app.get('/search', searchGet)
