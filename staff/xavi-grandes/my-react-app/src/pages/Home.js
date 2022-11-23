@@ -7,10 +7,10 @@ import { AiOutlinePlusCircle, AiOutlineEdit, AiOutlineDelete } from 'react-icons
 import EditPost from '../components/EditPost'
 import DeletePost from '../components/DeletePost'
 
-function Home () {
-log.info('home -> render')
+function Home() {
+    log.info('Home -> render')
 
-const [user, setUser] = useState()
+    const [user, setUser] = useState()
     const [posts, setPosts] = useState()
     const [createPostVisible, setCreatePostVisible] = useState(false)
     const [postIdToEdit, setPostIdToEdit] = useState()
@@ -45,28 +45,28 @@ const [user, setUser] = useState()
         }
     }, [])
 
-const openCreatePost = () => setCreatePostVisible(true)
+    const openCreatePost = () => setCreatePostVisible(true)
 
-const closeCreatePost = () => setCreatePostVisible(false)
+    const closeCreatePost = () => setCreatePostVisible(false)
 
-const handlePostCreated = () => {
-    try {
-        retrievePublicPosts(window.userId, (error, posts) => {
-            if (error) {
-                alert(error.message)
+    const handlePostCreated = () => {
+        try {
+            retrievePublicPosts(window.userId, (error, posts) => {
+                if (error) {
+                    alert(error.message)
 
-                return
-            }
+                    return
+                }
 
-            setCreatePostVisible(false)
-            setPosts(posts)
-        })
-    } catch (error) {
-        alert(error.message)
+                setCreatePostVisible(false)
+                setPosts(posts)
+            })
+        } catch (error) {
+            alert(error.message)
+        }
     }
-}
 
-const openEditPost = postId => setPostIdToEdit(postId)
+    const openEditPost = postId => setPostIdToEdit(postId)
 
     const closeEditPost = () => setPostIdToEdit()
 
@@ -108,7 +108,7 @@ const openEditPost = postId => setPostIdToEdit(postId)
         }
     }
 
-    return <main className=" bg-blue-200 overflow-hidden">
+    return <main className="overflow-hidden">
         <header className="fixed bg-[white] w-full h-[2rem] top-0 flex justify-center">
             <p>{user ? user.name : 'home'}</p>
         </header>
