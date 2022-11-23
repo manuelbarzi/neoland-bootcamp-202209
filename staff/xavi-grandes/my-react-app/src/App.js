@@ -7,8 +7,8 @@ import log from './utils/coolog'
 function App() { 
   log.info('App -> render')
 
-  // const [view, setView] = useState('login')
-  const [view, setView] = useState('home')
+  const [view, setView] = useState('login')
+  // const [view, setView] = useState('home')
 
   const navigateToHome = () => {
     setView('home')
