@@ -1,4 +1,5 @@
 import createPost from '../logic/createPost'
+import Button from './Button'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 
 export default function ({ onCreated, onClose }) {

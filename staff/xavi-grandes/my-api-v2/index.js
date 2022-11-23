@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const express = require("express");
 
-const authPost = require("./handlers/authPost");
+const authenticateUserHandler = require("./handlers/authenticateUserHandler");
 const registerUserHandler = require('./handlers/registerUserHandler')
 const searchGet = require("./handlers/searchGet");
 
@@ -13,8 +13,10 @@ const api = express();
 
 api.use(cors)
 
-api.post("/auth", jsonBodyParser, authPost);
+api.post("/auth", jsonBodyParser, authenticateUserHandler);
 api.post('/users', jsonBodyParser, registerUserHandler)
+
+api.post('/posts', jsonBodyParser, createPostHandler)
 
 api.get("/search", searchGet);
 

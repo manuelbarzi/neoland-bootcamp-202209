@@ -5,13 +5,29 @@ import CreatePost from '../components/CreatePost.jsx'
 function Home () {
 log.info('home -> render')
 
+const [user, setUser] = useState()
+const [posts, setPosts] = useState()
 const [createPostVisibile, setCreatePostVisible] = useState(false)
+const [postIdToEdit, setPostIdToEdit] = useState()
 
 const showCreatePost = () => setCreatePostVisible(true)
-
-const handlePostCreated = () => {setCreatePostVisible(false)}
-
 const closeCreatePost = () => setCreatePostVisible(false)
+const handlePostCreated = () => {
+    try {
+        retrievePublicPosts(window.userId, (error, posts) => {
+            if (error) {
+                alert(error.message)
+
+                return
+            }
+
+            setCreatePostVisible(false)
+            setPosts(posts)
+        })
+    } catch (error) {
+        alert(error.message)
+    }
+}
 
     return <main className="bg-blue-200">
         <header className='h-10 flex items-center gap-10 ml-2'>
