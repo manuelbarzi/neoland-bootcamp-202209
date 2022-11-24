@@ -6,6 +6,7 @@ import CreatePost from '../components/CreatePost'
 import { AiOutlinePlusCircle, AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai'
 import EditPost from '../components/EditPost'
 import DeletePost from '../components/DeletePost'
+import { Link } from 'react-router-dom'
 
 function Home() {
     log.info('Home -> render')
@@ -115,7 +116,7 @@ function Home() {
 
         {posts && <div className="flex flex-col items-center gap-2 py-[2rem]">
             {posts.map(post => <article key={post.id} className="border rounded-xl w-[50%] flex flex-col p-5">
-                <a href={`/users/${post.user.id}`}><strong>{post.user.name}</strong></a>
+                <Link to={`/profile/${post.user.id}`}><strong>{post.user.name}</strong></Link>
                 <p>{post.text}</p>
                 <time>{post.date}</time>
                 {post.user.id === window.userId && <div className="flex self-end">

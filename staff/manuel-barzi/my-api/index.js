@@ -11,6 +11,8 @@ const retrievePublicPostsHandler  = require('./handlers/retrievePublicPostsHandl
 const retrievePostHandler = require('./handlers/retrievePostHandler')
 const updatePostHandler = require('./handlers/updatePostHandler')
 const deletePostHandler = require('./handlers/deletePostHandler')
+const retrievePostsFromUserHandler = require('./handlers/retrievePostsFromUserHandler')
+const retrieveAUserHandler = require('./handlers/registerAUserHandler')
 
 const jsonBodyParser = require('./utils/jsonBodyParser')
 const cors = require('./utils/cors')
@@ -22,6 +24,9 @@ api.use(cors)
 api.post('/users/auth', jsonBodyParser, authenticateUserHandler)
 api.post('/users', jsonBodyParser, registerUserHandler)
 api.get('/users', retrieveUserHandler)
+api.get('/users/:targetUserId', retrieveAUserHandler)
+
+api.get('/users/:targetUserId/posts', retrievePostsFromUserHandler)
 
 api.post('/posts', jsonBodyParser, createPostHandler)
 api.get('/posts/public', retrievePublicPostsHandler)
