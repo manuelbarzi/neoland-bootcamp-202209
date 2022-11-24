@@ -57,7 +57,7 @@ function Posts() {
                         <Post
                             key={post.id}
                             post={post}
-                            onUpdatePostStatus={handleRefreshPosts}
+                            onUpdatePostVisibility={handleRefreshPosts}
                             onDeletePost={handleRefreshPosts} /> : null)}
                     <section className="flex flex-col items-center bg-white p-4 w-80 font-semibold bg-inherit text-white">
                         <div className="flex flex-row w-full">

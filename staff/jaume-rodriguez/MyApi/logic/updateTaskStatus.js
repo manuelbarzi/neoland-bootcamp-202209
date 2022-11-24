@@ -33,7 +33,7 @@ function updateTaskStatus(userId, taskId, newStatus, callback) {
 
         const newJson = JSON.stringify(tasks, null, 4)
 
-        const TaskStatusTranscribed = error => {
+        const taskStatusTranscribed = error => {
             if (error) {
                 callback(error)
 
@@ -41,7 +41,7 @@ function updateTaskStatus(userId, taskId, newStatus, callback) {
             }
             callback(null)
         }
-        writeFile('./data/tasks.json', newJson, TaskStatusTranscribed)
+        writeFile('./data/tasks.json', newJson, taskStatusTranscribed)
     }
     readFile('./data/tasks.json', 'utf8', updateTaskStatus)
 }

@@ -5,19 +5,5 @@
         "title": "",
         "text": "",
         "status": ""
-    },
-    {
-        "id": "task-2",
-        "user": "user-2",
-        "title": "",
-        "text": "",
-        "status": "todo"
-    },
-    {
-        "id": "task-3",
-        "user": "user-2",
-        "title": "",
-        "text": "",
-        "status": "doing"
     }
 ]

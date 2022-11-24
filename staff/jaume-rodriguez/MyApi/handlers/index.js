@@ -12,5 +12,9 @@ module.exports = {
     handlerUpdateTaskText: require('./handlerUpdateTaskText'),
     handlerUpdateTaskTitle: require('./handlerUpdateTaskTitle'),
     handlerCreatePost: require('./handlerCreatePost'),
+    handlerRetrievePosts: require('./handlerRetrievePosts'),
+    handlerDeletePost: require('./handlerDeletePost'),
+    handlerUpdatePostText: require('./handlerUpdatePostText'),
+    handlerUpdatePostVisibility: require('./handlerUpdatePostVisibility'),
     searchGet: require('./searchGet')
 }

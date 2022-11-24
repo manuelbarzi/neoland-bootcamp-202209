@@ -1,4 +1,4 @@
-function createTask(userId, taskId, callback) {
+function deleteTask(userId, taskId, callback) {
     if (typeof userId !== 'string') throw new Error('userId is not a string')
     if (typeof taskId !== 'string') throw new Error('taskId is not a string')
     if (typeof callback !== 'function') throw new TypeError('callback is not a function')
@@ -31,4 +31,4 @@ function createTask(userId, taskId, callback) {
     xhr.send(json)
 }
 
-export default createTask
+export default deleteTask

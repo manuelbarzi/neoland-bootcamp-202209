@@ -61,7 +61,7 @@ function Header() {
                         </Link>
                         <Link to="/login"
                             className="text-black pr-1 hover:font-semibold"
-                            onClick={window.userId = null}>
+                            onClick={() => window.userId = null}>
                             Logout
                         </Link>
                     </div>

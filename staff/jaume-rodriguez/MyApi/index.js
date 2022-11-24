@@ -17,6 +17,10 @@ const {
     handlerUpdateTaskText,
     handlerUpdateTaskTitle,
     handlerCreatePost,
+    handlerRetrievePosts,
+    handlerDeletePost,
+    handlerUpdatePostText,
+    handlerUpdatePostVisibility,
 } = require("./handlers")
 
 const jsonBodyParser = require('./utils/jsonBodyParser')
@@ -43,6 +47,10 @@ api.delete('/tasks', jsonBodyParser, handlerDeleteTask)
 api.get('/search', searchGet)
 
 api.post('/posts', jsonBodyParser, handlerCreatePost)
+api.get('/posts', handlerRetrievePosts)
+api.delete('/posts', jsonBodyParser, handlerDeletePost)
+api.patch('/updatePostText', jsonBodyParser, handlerUpdatePostText)
+api.patch('/posts', jsonBodyParser, handlerUpdatePostVisibility)
 
 const { PORT } = process.env
 

@@ -27,6 +27,16 @@ function App() {
       <Home /> :
       <Navigate replace to="/login" />
   }
+  const ConditionalSettingsAccount = () => {
+    return window.userId ?
+      <SettingsAccount /> :
+      <Navigate replace to="/login" />
+  }
+  const ConditionalCommunity = () => {
+    return window.userId ?
+      <Community /> :
+      <Navigate replace to="/login" />
+  }
 
   return <Routes>
     <Route path="/login" element={window.userId ?
@@ -47,8 +57,8 @@ function App() {
         onInputPasswordValue={handleInputPasswordValue}
       />} />
     <Route path="/" element={<ConditionalHome />} />
-    <Route path="/settings-account" element={<SettingsAccount />} />
-    <Route path="/community" element={<Community />} />
+    <Route path="/settings-account" element={<ConditionalSettingsAccount />} />
+    <Route path="/community" element={<ConditionalCommunity />} />
   </Routes>
 }
 

@@ -28,7 +28,7 @@ function Post(props) {
                     alert(error.message)
                     return
                 }
-                props.onUpdateTaskStatus()
+                props.onUpdatePostVisibility()
             });
 
         } catch (error) {
@@ -68,9 +68,17 @@ function Post(props) {
                     onChange={(event) => handleUpdatePostVisibility(props.post.id, event.target.value)}
                 >
                     <option disabled selected hidden value=''>
-                        {props.task.visibility === 'public' ? 'Público' :
-                            props.task.visibility === 'private' ? 'Privado' : 'Estado'}
+                        {props.post.visibility === 'public' ? 'Público' :
+                            props.post.visibility === 'private' ? 'Privado' : 'Estado'}
                     </option>
+                    {props.post.visibility === 'public' ? <>
+                        <option value="private">Privado</option>
+                    </>
+                        :
+                        <>
+                            <option value="private">Privado</option>
+                        </>
+                    }
                 </select>
                 <button
                     className="material-symbols-outlined self-center rounded cursor-pointer border-none mt-3 ml-auto text-sky-900"
