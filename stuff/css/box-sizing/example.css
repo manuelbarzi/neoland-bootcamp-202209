@@ -1,0 +1,27 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+}
+
+.face {
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+  gap: 3rem;
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
+  background-color: red;
+}
+
+.eye {
+  width: 30px;
+  height: 30px;
+  background-color: blue;
+  border-radius: 100%;
+}
+
+/* flex-container and flex-items */
