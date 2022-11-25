@@ -17,39 +17,40 @@ const retrieveAUserHandler = require('./handlers/retrieveAUserHandler')
 
 const jsonBodyParser = require('./utils/jsonBodyParser')
 const cors = require('./utils/cors')
-const context = require('./logic/context')
 
 const { MONGODB_URL } = process.env
 
 const client = new MongoClient(MONGODB_URL)
 
-client.connect()
-    .then(connection => {
-        console.log(`db connected to ${MONGODB_URL}`)
+client.connect((error, connection) => {
+    if (error) {
+        console.error(error)
 
-        context.db = connection.db('test')
+        return
+    }
 
-        const api = express()
+    console.log(`db connected to ${MONGODB_URL}`)
 
-        api.use(cors)
+    const api = express()
 
-        api.post('/users/auth', jsonBodyParser, authenticateUserHandler)
-        api.post('/users', jsonBodyParser, registerUserHandler)
-        api.get('/users', retrieveUserHandler)
-        api.get('/users/:targetUserId', retrieveAUserHandler)
+    api.use(cors)
 
-        api.get('/users/:targetUserId/posts', retrievePostsFromUserHandler)
+    api.post('/users/auth', jsonBodyParser, authenticateUserHandler)
+    api.post('/users', jsonBodyParser, registerUserHandler)
+    api.get('/users', retrieveUserHandler)
+    api.get('/users/:targetUserId', retrieveAUserHandler)
 
-        api.post('/posts', jsonBodyParser, createPostHandler)
-        api.get('/posts/public', retrievePublicPostsHandler)
-        api.get('/posts/:postId', retrievePostHandler)
-        api.patch('/posts/:postId', jsonBodyParser, updatePostHandler)
-        api.delete('/posts/:postId', deletePostHandler)
+    api.get('/users/:targetUserId/posts', retrievePostsFromUserHandler)
 
-        api.get('/search', searchHttpCatsHandler)
+    api.post('/posts', jsonBodyParser, createPostHandler)
+    api.get('/posts/public', retrievePublicPostsHandler)
+    api.get('/posts/:postId', retrievePostHandler)
+    api.patch('/posts/:postId', jsonBodyParser, updatePostHandler)
+    api.delete('/posts/:postId', deletePostHandler)
 
-        const { PORT } = process.env
+    api.get('/search', searchHttpCatsHandler)
 
-        api.listen(PORT, () => console.log(`server listening on port ${PORT}`))
-    })
-    .catch(error => console.error(error))
+    const { PORT } = process.env
+
+    api.listen(PORT, () => console.log(`server listening on port ${PORT}`))
+})

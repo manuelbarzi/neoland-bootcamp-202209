@@ -96,47 +96,5 @@
         "text": "hola mundo",
         "visibility": "public",
         "date": "2022-11-25T11:07:35.553Z"
-    },
-    {
-        "id": "post-20",
-        "user": "user-12",
-        "text": "hola mundo",
-        "visibility": "public",
-        "date": "2022-11-25T11:22:22.616Z"
-    },
-    {
-        "id": "post-21",
-        "user": "user-12",
-        "text": "hola mundo 1",
-        "visibility": "public",
-        "date": "2022-11-25T11:22:41.790Z"
-    },
-    {
-        "id": "post-22",
-        "user": "user-12",
-        "text": "hola mundo 2",
-        "visibility": "public",
-        "date": "2022-11-25T11:22:41.791Z"
-    },
-    {
-        "id": "post-23",
-        "user": "user-12",
-        "text": "hola mundo 1",
-        "visibility": "public",
-        "date": "2022-11-25T11:23:45.331Z"
-    },
-    {
-        "id": "post-24",
-        "user": "user-12",
-        "text": "hola mundo 3",
-        "visibility": "public",
-        "date": "2022-11-25T11:23:45.334Z"
-    },
-    {
-        "id": "post-25",
-        "user": "user-12",
-        "text": "hola mundo 30",
-        "visibility": "public",
-        "date": "2022-11-25T11:24:24.807Z"
     }
 ]

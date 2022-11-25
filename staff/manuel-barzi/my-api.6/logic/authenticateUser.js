@@ -1,4 +1,4 @@
-const context = require('./context')
+const { readFile } = require('fs')
 
 /**
  * Authenticates a user against DB
@@ -7,26 +7,38 @@ const context = require('./context')
  * @param {string} password The user password
  * @param {callback} callback The callback to attend the result
  */
-function authenticateUser(email, password) {
+function authenticateUser(email, password, callback) {
     if (typeof email !== 'string') throw new TypeError('email is not a string')
     if (!email.length) throw new Error('email is empty')
     if (typeof password !== 'string') throw new TypeError('password is not a string')
     if (!password.length) throw new Error('password is empty')
+    if (typeof callback !== 'function') throw new TypeError('callback is not a function')
 
-    const { db } = context
+    readFile('./data/users.json', 'utf8', (error, json) => {
+        if (error) {
+            callback(error)
 
-    const users = db.collection('users')
+            return
+        }
 
-    return users.findOne({ email })
-        .then(user => {
-            if (!user)
-                throw new Error('user not registered')
+        const users = JSON.parse(json)
 
-            if (user.password !== password)
-                throw new Error('wrong password')
+        const user = users.find(user => user.email === email)
 
-            return user._id.toString()
-        })
+        if (!user) {
+            callback(new Error('user not registered'))
+
+            return
+        }
+
+        if (user.password !== password) {
+            callback(new Error('wrong password'))
+
+            return
+        }
+
+        callback(null, user.id)
+    })
 }
 
 /**
