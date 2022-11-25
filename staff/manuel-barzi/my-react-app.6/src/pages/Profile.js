@@ -5,7 +5,7 @@ import retrievePostsFromUser from '../logic/retrievePostsFromUser'
 import { useParams } from 'react-router-dom'
 import Header from '../components/Header'
 
-export default function () {
+export default function ({ onLoggedOut }) {
     log.info('Profile -> render')
 
     const [user, setUser] = useState()
@@ -41,8 +41,8 @@ export default function () {
         }
     }, [])
 
-    return <main className="overflow-hidden bg-white dark:bg-black text-black dark:text-white h-full">
-        <Header userName={user?.name} />
+    return <main className="overflow-hidden">
+        <Header userName={user?.name} onLoggedOut={onLoggedOut} />
 
         {posts && <div className="flex flex-col items-center gap-2 py-[2rem]">
             {posts.map(post => <article key={post.id} className="border rounded-xl w-[50%] flex flex-col p-5">

@@ -89,5 +89,12 @@
         "text": "i <3 programming",
         "visibility": "public",
         "date": "2022-11-22T12:12:52.704Z"
+    },
+    {
+        "id": "post-19",
+        "user": "user-12",
+        "text": "hola mundo",
+        "visibility": "public",
+        "date": "2022-11-25T11:07:35.553Z"
     }
 ]

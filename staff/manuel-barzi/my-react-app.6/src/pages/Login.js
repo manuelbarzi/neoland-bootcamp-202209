@@ -1,13 +1,11 @@
 import log from '../utils/coolog'
 import authenticateUser from '../logic/authenticateUser'
-import { Link } from 'react-router-dom'
-import { useContext } from 'react'
-import Context from '../components/Context'
+import { Link, /*useNavigate*/ } from 'react-router-dom'
 
-function Login() {
+function Login({ onLoggedIn }) {
     log.info('Login -> render')
 
-    const { login } = useContext(Context)
+    // const navigate = useNavigate()
 
     const handleLogin = event => {
         log.info('Login -> handleLogin')
@@ -23,8 +21,11 @@ function Login() {
 
                     return
                 }
+
+                sessionStorage.userId = userId
                 
-                login(userId)
+                //navigate('/')
+                onLoggedIn()
             })
         } catch (error) {
             alert(error.message)
@@ -33,7 +34,7 @@ function Login() {
         }
     }
 
-    return <main className="h-full flex flex-col items-center justify-center gap-2 bg-white dark:bg-black text-black dark:text-white">
+    return <main className="h-full flex flex-col items-center justify-center gap-2">
         <form className="flex flex-col gap-2" onSubmit={handleLogin}>
             <label htmlFor="email" className="container__item--left">E-mail</label>
             <input name="email" type="email" id="email" placeholder="input your e-mail" className="border-b border-black" />

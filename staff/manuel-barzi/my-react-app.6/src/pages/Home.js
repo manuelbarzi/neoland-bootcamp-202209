@@ -3,14 +3,13 @@ import { useEffect, useState } from 'react'
 import retrieveUser from '../logic/retrieveUser'
 import retrievePublicPosts from '../logic/retrievePublicPosts'
 import CreatePost from '../components/CreatePost'
-import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai'
+import { AiOutlinePlusCircle, AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai'
 import EditPost from '../components/EditPost'
 import DeletePost from '../components/DeletePost'
 import { Link } from 'react-router-dom'
 import Header from '../components/Header'
-import Footer from '../components/Footer'
 
-function Home() {
+function Home({ onLoggedOut }) {
     log.info('Home -> render')
 
     const [user, setUser] = useState()
@@ -111,8 +110,8 @@ function Home() {
         }
     }
 
-    return <main className="overflow-hidden bg-white dark:bg-black text-black dark:text-white">
-        <Header userName={user?.name} />
+    return <main className="overflow-hidden">
+        <Header userName={user?.name} onLoggedOut={onLoggedOut} />
 
         {posts && <div className="flex flex-col items-center gap-2 py-[2rem]">
             {posts.map(post => <article key={post.id} className="border rounded-xl w-[50%] flex flex-col p-5">
@@ -126,7 +125,7 @@ function Home() {
             </article>)}
         </div>}
 
-        <Footer onCreate={openCreatePost} />
+        <footer className="fixed bg-[white] w-full h-[2rem] bottom-0 flex justify-center"><button onClick={openCreatePost}><AiOutlinePlusCircle size="1.5rem" /></button></footer>
 
         {createPostVisible && <CreatePost onCreated={handlePostCreated} onClose={closeCreatePost} />}
 
