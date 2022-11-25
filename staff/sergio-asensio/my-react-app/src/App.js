@@ -1,27 +1,42 @@
 import Login from './pages/Login'
 import Home from './pages/Home'
+import log from './utils/coolog'
 import Register from './pages/Register'
-
+import { Routes, Route, Navigate } from 'react-router-dom'
+import Profile from './pages/Profile'
 import { useState } from 'react'
-
+import Context from './components/Context'
 
 function App() {
-  const [view, setView] = useState('login')
+  log.info('App -> render')
 
-  const navigateToHome = () => setView('home')
+  const [loggedIn, setLoggedIn] = useState(!!sessionStorage.userId)
 
-  const navigateToLogin = () => setView('login')
+  const login = userId => {
+    sessionStorage.userId = userId
+     
+    setLoggedIn(true)
+  }
 
-  const navigateToRegister = () => setView('register')
+  const logout = () => {
+    delete sessionStorage.userId
 
-  return <>
-  <h1>hola</h1>
+    setLoggedIn(false)
+  }
 
-  { view === 'login'  && <Login onLogin={navigateToHome} onNavigateToRegister={navigateToRegister}/>}
-  { view === 'home' && <Home/> }
-  { view === 'register' && <Register onNavigateToLogin={navigateToLogin} onRegister={navigateToLogin}/>}
-
-  </>
+  return <Context.Provider value={{ login, logout }}>
+    {loggedIn ? <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/profile/:targetUserId" element={<Profile />} />
+      <Route path="*" element={<Navigate replace to="/" />} />
+    </Routes>
+      :
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="*" element={<Navigate replace to="/login" />} />
+      </Routes>}
+  </Context.Provider>
 }
 
 export default App;
