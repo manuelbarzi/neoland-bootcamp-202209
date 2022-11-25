@@ -1,18 +1,13 @@
 import { useContext } from 'react'
 import authenticateUser from "../logic/authenticateUser"
 import UserContext from '../UserContext';
+import { Link, useNavigate } from 'react-router-dom'
 
-function Login(props) {
+function Login() {
 
     const { setUser } = useContext(UserContext);
+    const navigate = useNavigate()
 
-    const handleRegisterClick = event => {
-        event.preventDefault()
-
-        const onRegisterClick = props.onRegisterClick
-
-        onRegisterClick()
-    }
 
     const handleSubmit = async (event) => {
         event.preventDefault()
@@ -32,9 +27,8 @@ function Login(props) {
 
             console.log('INFO', `User ${authenticatedUser.email} successfully logged in`)
 
-            const onLoggedIn = props.onLoggedIn
-
-            onLoggedIn()
+            // Navigate to home
+            navigate('/')
 
         } catch (error) {
             alert(error.message)
@@ -52,7 +46,7 @@ function Login(props) {
                     <input type="password" name="password" placeholder="enter your password" className="border rounded-md" />
                     <button className="bg-teal-500 hover:bg-teal-600 text-white p-2 rounded-lg text-sm">Login</button>
                 </form>
-                <button onClick={handleRegisterClick}>Register</button>
+                <Link to="/register" className="underline">Register</Link>
             </div>
         </main>
     )

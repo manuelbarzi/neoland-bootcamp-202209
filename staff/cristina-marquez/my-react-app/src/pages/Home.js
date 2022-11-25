@@ -6,8 +6,6 @@ import CreatePost from "../components/CreatePost"
 
 
 
-//TODO: change create post button position
-
 function Home() {
 
     const { user } = useContext(UserContext)
@@ -50,6 +48,11 @@ function Home() {
         <div>
             <h2>Hello {user.name}, what's up? </h2>
 
+            {/* Create new post */}
+
+            <button onClick={createNewPostHandler}>Create new post</button>
+            {createPostIsVisible && <CreatePost onCreated={onCreateNewPostCreated} onClose={onCreateNewPostClose} ></CreatePost>}
+
             {/* List posts */}
 
             {posts.length > 0 && posts.map((post) =>
@@ -59,11 +62,6 @@ function Home() {
             )}
 
 
-            {/* Create new post */}
-            <button onClick={createNewPostHandler}>Create new post</button>
-            {createPostIsVisible && <CreatePost onCreated={onCreateNewPostCreated} onClose={onCreateNewPostClose} ></CreatePost>
-
-            }
         </div>
     )
 

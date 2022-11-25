@@ -22,5 +22,11 @@
         "name": "Cristina",
         "email": "pepe@goteffras.com",
         "password": "qwerty"
+    },
+    {
+        "id": 5,
+        "name": "cris",
+        "email": "lalala@lalala.com",
+        "password": "123456"
     }
 ]

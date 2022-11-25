@@ -9,7 +9,6 @@ function Post({ content, onUpdate }) {
     const [deletePostIsVisible, setDeletePostIsVisible] = useState(false)
 
 
-
     const updatePostHandler = (event) => {
         event.preventDefault()
         setUpdatePostIsVisible(true)
@@ -33,7 +32,6 @@ function Post({ content, onUpdate }) {
         setDeletePostIsVisible(false)
 
     }
-
 
 
     return (
