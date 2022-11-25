@@ -3,8 +3,8 @@ const { readFile } = require('fs')
 /**
  * Retrieves all public posts (from all users)
  * 
- * @param {string} userId The user id
- * @param {function} callback The callback function
+ * @param {*} userId 
+ * @param {*} callback 
  */
 function retrievePublicPosts(userId, callback) {
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
@@ -41,19 +41,21 @@ function retrievePublicPosts(userId, callback) {
                 if (post.visibility === 'public') {
                     delete post.visibility
 
-                    const user = users.find(user => user.id === post.user)
-
-                    const { id, name } = user
-
-                    post.user = { id, name }
-
                     return true
                 }
 
                 return false
             })
 
-            publics.sort((a, b) => a.date > b.date ? -1 : a.date < b.date ? 1 : 0)
+            publics.sort((a, b) => a.date > b.date? -1 :  a.date < b.date? 1 : 0)
+
+            publics.forEach(post => {
+                const user = users.find(user => user.id === post.user)
+
+                const { id, name } = user
+
+                post.user = { id, name }
+            })
 
             callback(null, publics)
         })

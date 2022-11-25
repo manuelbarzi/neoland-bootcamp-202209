@@ -17,7 +17,7 @@ function retrieveUser(userId, callback) {
         const user = users.find(user => user.id === userId)
 
         if (!user) {
-            callback(new Error(`user with id ${userId} does not exist`))
+            callback(new Error('user not registered'))
 
             return
         }

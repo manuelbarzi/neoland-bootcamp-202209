@@ -1,20 +1,19 @@
-
-const retrievePublicPosts = require('../logic/retrievePublicPosts')
+const deletePost = require('../logic/deletePost')
 
 module.exports = (req, res) => {
-    const { headers: { authorization } } = req
+    const { headers: { authorization }, params: { postId } } = req
 
     const userId = authorization.substring(7)
 
     try {
-        retrievePublicPosts(userId, (error, posts) => {
+        deletePost(userId, postId, error => {
             if (error) {
                 res.status(500).json({ error: error.message })
 
                 return
             }
 
-            res.json(posts)
+            res.status(204).send()
         })
     } catch (error) {
         res.status(500).json({ error: error.message })

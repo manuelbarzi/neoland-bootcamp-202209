@@ -130,23 +130,5 @@
         "name": "pepe",
         "email": "ppepito@grillo.com",
         "password": "123123123"
-    },
-    {
-        "id": "user-24",
-        "name": "maria",
-        "email": "mmaria@maria.com",
-        "password": "123123123"
-    },
-    {
-        "id": "user-25",
-        "name": "yubal",
-        "email": "yuballhhh@yahoo.es",
-        "password": "123123123"
-    },
-    {
-        "id": "user-26",
-        "name": "pedro",
-        "email": "pepitto@grillo.com",
-        "password": "123123123"
     }
 ]

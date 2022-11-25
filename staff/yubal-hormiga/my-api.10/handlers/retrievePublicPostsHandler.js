@@ -1,4 +1,3 @@
-
 const retrievePublicPosts = require('../logic/retrievePublicPosts')
 
 module.exports = (req, res) => {

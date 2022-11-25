@@ -128,22 +128,8 @@
     {
         "id": "post-22",
         "user": "user-15",
-        "text": "tonto",
+        "text": "feo",
         "visibility": "public",
-        "date": "2022-11-25T14:25:53.997Z"
-    },
-    {
-        "id": "post-23",
-        "user": "user-24",
-        "text": "hola",
-        "visibility": "public",
-        "date": "2022-11-24T08:10:18.066Z"
-    },
-    {
-        "id": "post-24",
-        "user": "user-10",
-        "text": "Estupendo compi",
-        "visibility": "public",
-        "date": "2022-11-24T15:13:54.425Z"
+        "date": "2022-11-23T15:48:48.952Z"
     }
 ]
