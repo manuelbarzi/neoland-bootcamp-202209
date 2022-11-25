@@ -7,9 +7,8 @@ import { AiOutlinePlusCircle, AiOutlineEdit, AiOutlineDelete } from 'react-icons
 import EditPost from '../components/EditPost'
 import DeletePost from '../components/DeletePost'
 import { Link } from 'react-router-dom'
-import Header from '../components/Header'
 
-function Home({ onLoggedOut }) {
+function Home() {
     log.info('Home -> render')
 
     const [user, setUser] = useState()
@@ -20,7 +19,7 @@ function Home({ onLoggedOut }) {
 
     useEffect(() => {
         try {
-            retrieveUser(sessionStorage.userId, (error, user) => {
+            retrieveUser(window.userId, (error, user) => {
                 if (error) {
                     alert(error.message)
 
@@ -28,7 +27,7 @@ function Home({ onLoggedOut }) {
                 }
 
                 try {
-                    retrievePublicPosts(sessionStorage.userId, (error, posts) => {
+                    retrievePublicPosts(window.userId, (error, posts) => {
                         if (error) {
                             alert(error.message)
 
@@ -53,7 +52,7 @@ function Home({ onLoggedOut }) {
 
     const handlePostCreated = () => {
         try {
-            retrievePublicPosts(sessionStorage.userId, (error, posts) => {
+            retrievePublicPosts(window.userId, (error, posts) => {
                 if (error) {
                     alert(error.message)
 
@@ -74,7 +73,7 @@ function Home({ onLoggedOut }) {
 
     const handlePostUpdated = () => {
         try {
-            retrievePublicPosts(sessionStorage.userId, (error, posts) => {
+            retrievePublicPosts(window.userId, (error, posts) => {
                 if (error) {
                     alert(error.message)
 
@@ -95,7 +94,7 @@ function Home({ onLoggedOut }) {
 
     const handlePostDeleted = () => {
         try {
-            retrievePublicPosts(sessionStorage.userId, (error, posts) => {
+            retrievePublicPosts(window.userId, (error, posts) => {
                 if (error) {
                     alert(error.message)
 
@@ -111,14 +110,16 @@ function Home({ onLoggedOut }) {
     }
 
     return <main className="overflow-hidden">
-        <Header userName={user?.name} onLoggedOut={onLoggedOut} />
+        <header className="fixed bg-[white] w-full h-[2rem] top-0 flex justify-center">
+            <p>{user ? user.name : 'home'}</p>
+        </header>
 
         {posts && <div className="flex flex-col items-center gap-2 py-[2rem]">
             {posts.map(post => <article key={post.id} className="border rounded-xl w-[50%] flex flex-col p-5">
                 <Link to={`/profile/${post.user.id}`}><strong>{post.user.name}</strong></Link>
                 <p>{post.text}</p>
                 <time>{post.date}</time>
-                {post.user.id === sessionStorage.userId && <div className="flex self-end">
+                {post.user.id === window.userId && <div className="flex self-end">
                     <button onClick={() => openEditPost(post.id)}><AiOutlineEdit size="1rem" /></button>
                     <button onClick={() => openDeletePost(post.id)}><AiOutlineDelete size="1rem" /></button>
                 </div>}

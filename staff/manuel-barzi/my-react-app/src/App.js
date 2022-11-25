@@ -3,25 +3,30 @@ import Home from './pages/Home'
 import log from './utils/coolog'
 import Register from './pages/Register'
 import { Routes, Route, Navigate } from 'react-router-dom'
-import Hello from './components/Hello'
 import Profile from './pages/Profile'
+import { useState } from 'react'
 
 function App() {
   log.info('App -> render')
 
-  const ConditionalHome = () => {
-    log.info('ConditionalHome -> render')
+  const [loggedIn, setLoggedIn] = useState(!!sessionStorage.userId)
 
-    return window.userId ? <Home /> : <Navigate replace to="/login" />
-  }
+  const handleLoggedIn = () => setLoggedIn(true)
 
-  return <Routes>
-    <Route path="/login" element={window.userId ? <Navigate replace to="/" /> : <Login />} />
-    <Route path="/register" element={window.userId ? <Navigate replace to="/" /> : <Register />} />
-    <Route path="/" element={<ConditionalHome />} />
-    <Route path="/hello/:who" element={<Hello />} />
-    <Route path="/profile/:targetUserId" element={<Profile />}/>
+  const handleLoggedOut = () => setLoggedIn(false)
+
+  return loggedIn ? <Routes>
+    <Route path="/" element={<Home onLoggedOut={handleLoggedOut} />} />
+    <Route path="/profile/:targetUserId" element={<Profile onLoggedOut={handleLoggedOut} />} />
+    <Route path="*" element={<Navigate replace to="/" />} />
   </Routes>
+    :
+    <Routes>
+      <Route path="/login" element={<Login onLoggedIn={handleLoggedIn} />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="*" element={<Navigate replace to="/login" />} />
+    </Routes>
+
 }
 
 export default App;

@@ -1,11 +1,11 @@
 import log from '../utils/coolog'
 import authenticateUser from '../logic/authenticateUser'
-import { Link, /*useNavigate*/ } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
-function Login({ onLoggedIn }) {
+function Login() {
     log.info('Login -> render')
 
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
 
     const handleLogin = event => {
         log.info('Login -> handleLogin')
@@ -22,10 +22,9 @@ function Login({ onLoggedIn }) {
                     return
                 }
 
-                sessionStorage.userId = userId
+                window.userId = userId
                 
-                //navigate('/')
-                onLoggedIn()
+                navigate('/')
             })
         } catch (error) {
             alert(error.message)

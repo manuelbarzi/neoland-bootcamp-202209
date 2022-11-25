@@ -9,7 +9,7 @@ export default function ({ onCreated, onClose }) {
         const { text: { value: text }, visibility: { value: visibility } } = event.target
 
         try {
-            createPost(sessionStorage.userId, text, visibility, error => {
+            createPost(window.userId, text, visibility, error => {
                 if (error) {
                     alert(error.message)
 

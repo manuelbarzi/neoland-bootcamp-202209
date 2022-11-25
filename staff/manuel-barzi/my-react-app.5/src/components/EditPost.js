@@ -9,7 +9,7 @@ export default function ({ onUpdated, onClose, postId }) {
 
     useEffect(() => {
         try {
-            retrievePost(sessionStorage.userId, postId, (error, post) => {
+            retrievePost(window.userId, postId, (error, post) => {
                 if (error) {
                     alert(error.message)
 
@@ -30,7 +30,7 @@ export default function ({ onUpdated, onClose, postId }) {
         const { text: { value: text }, visibility: { value: visibility } } = event.target
 
         try {
-            updatePost(sessionStorage.userId, postId, text, visibility, error => {
+            updatePost(window.userId, postId, text, visibility, error => {
                 if (error) {
                     alert(error.message)
 
