@@ -1,7 +1,9 @@
 const createPost = require('../logic/createPost')
 
 module.exports = (req, res) => {
-    let { userId, visibilityPost } = req.body
+    const { body: { text, visibility }, headers: { authorization } } = req
+
+    const userId = authorization.substring(7)
 
     try {
         const errorCreation = (error) => {
@@ -13,7 +15,7 @@ module.exports = (req, res) => {
             }
             res.status(201).send()
         }
-        createPost(userId, visibilityPost, errorCreation)
+        createPost(userId, text, visibility, errorCreation)
 
     } catch (error) {
         res.status(500)

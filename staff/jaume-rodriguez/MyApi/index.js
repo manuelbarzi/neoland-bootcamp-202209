@@ -17,10 +17,13 @@ const {
     handlerUpdateTaskText,
     handlerUpdateTaskTitle,
     handlerCreatePost,
-    handlerRetrievePosts,
+    handlerRetrievePublicPosts,
+    handlerRetrievePost,
     handlerDeletePost,
-    handlerUpdatePostText,
+    handlerUpdatePost,
     handlerUpdatePostVisibility,
+    handlerRetrieveAUser,
+    handlerRetrievePostsFromUser,
 } = require("./handlers")
 
 const jsonBodyParser = require('./utils/jsonBodyParser')
@@ -31,12 +34,13 @@ api.use(cors)
 
 api.post('/users/auth', jsonBodyParser, handlerAuth)
 api.post('/users', jsonBodyParser, handlerRegister)
-// 3. Recibimos la información de Register (React) y la pasamos a su handler en la API
 
 api.get('/users', handlerRetrieveUser)
 api.patch('/users/updateUserName', jsonBodyParser, handlerUpdateUserName)
 api.patch('/users/updateUserEmail', jsonBodyParser, handlerUpdateUserEmail)
 api.patch('/users/updateUserPassword', jsonBodyParser, handlerUpdateUserPassword)
+api.get('/users/:targetUserId', handlerRetrieveAUser)
+api.get('/users/:targetUserId/posts', handlerRetrievePostsFromUser)
 
 api.post('/tasks', jsonBodyParser, handlerCreateTask)
 api.get('/tasks', handlerRetrieveTasks)
@@ -47,10 +51,12 @@ api.delete('/tasks', jsonBodyParser, handlerDeleteTask)
 api.get('/search', searchGet)
 
 api.post('/posts', jsonBodyParser, handlerCreatePost)
-api.get('/posts', handlerRetrievePosts)
-api.delete('/posts', jsonBodyParser, handlerDeletePost)
-api.patch('/updatePostText', jsonBodyParser, handlerUpdatePostText)
+api.get('/posts/public', handlerRetrievePublicPosts)
+api.get('/posts/:postId', handlerRetrievePost)
+api.patch('/posts/:postId', jsonBodyParser, handlerUpdatePost)
+api.delete('/posts/:postId', handlerDeletePost)
 api.patch('/posts', jsonBodyParser, handlerUpdatePostVisibility)
+
 
 const { PORT } = process.env
 

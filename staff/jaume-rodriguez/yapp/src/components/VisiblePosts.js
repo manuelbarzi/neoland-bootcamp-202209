@@ -2,7 +2,7 @@ import deletePost from '../logic/deletePost'
 import updatePostVisibility from '../logic/updatePostVisibility'
 import updatePostText from '../logic/updatePostText'
 
-function Post(props) {
+function VisiblePosts(props) {
 
     // TASK FUNCTIONS
     const handleUpdatePostText = (postId, newText) => {
@@ -90,4 +90,4 @@ function Post(props) {
     )
 }
 
-export default Post
+export default VisiblePosts

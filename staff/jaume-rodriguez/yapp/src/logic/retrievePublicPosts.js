@@ -1,13 +1,11 @@
-function deletePost(userId, postId, callback) {
+function retrievePosts(userId, callback) {
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
     if (!userId.length) throw new Error('userId is empty')
-    if (typeof postId !== 'string') throw new TypeError('postId is not a string')
-    if (!postId.length) throw new Error('postId is empty')
     if (typeof callback !== 'function') throw new TypeError('callback is not a function')
 
     const xhr = new XMLHttpRequest()
 
-    xhr.onload = () => {
+    xhr.onload = function () {
         const { status, responseText: json } = xhr
 
         if (status >= 500) {
@@ -18,15 +16,14 @@ function deletePost(userId, postId, callback) {
             return
         }
 
-        callback(null)
+        const posts = JSON.parse(json)
+
+        callback(null, posts)
     }
 
-    xhr.onerror = () => callback(new Error('connection error'))
-
-    xhr.open('DELETE', `http://localhost/posts/${postId}`)
+    xhr.open('GET', 'http://localhost/posts/public')
     xhr.setRequestHeader('Authorization', `Bearer ${userId}`)
-
     xhr.send()
 }
 
-export default deletePost
+export default retrievePosts

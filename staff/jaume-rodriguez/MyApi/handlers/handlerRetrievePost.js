@@ -1,4 +1,4 @@
-const deletePost = require('../logic/deletePost')
+const retrievePost = require('../logic/retrievePost')
 
 module.exports = (req, res) => {
     const { headers: { authorization }, params: { postId } } = req
@@ -6,15 +6,17 @@ module.exports = (req, res) => {
     const userId = authorization.substring(7)
 
     try {
-        deletePost(userId, postId, error => {
+        const returnRetrieve = (error, post) => {
             if (error) {
                 res.status(500).json({ error: error.message })
 
                 return
             }
 
-            res.status(204).send()
-        })
+            res.json(post)
+        }
+        retrievePost(userId, postId, returnRetrieve)
+
     } catch (error) {
         res.status(500).json({ error: error.message })
     }

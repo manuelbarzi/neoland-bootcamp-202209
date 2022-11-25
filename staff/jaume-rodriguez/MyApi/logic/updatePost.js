@@ -1,8 +1,10 @@
 const { readFile, writeFile } = require('fs')
 
-function createPost(userId, text, visibility, callback) {
+module.exports = function (userId, postId, text, visibility, callback) {
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
     if (!userId.length) throw new Error('userId is empty')
+    if (typeof postId !== 'string') throw new TypeError('postId is not a string')
+    if (!postId.length) throw new Error('postId is empty')
     if (typeof text !== 'string') throw new TypeError('text is not a string')
     if (!text.length) throw new Error('text is empty')
     if (typeof visibility !== 'string') throw new TypeError('visibility is not a string')
@@ -26,7 +28,7 @@ function createPost(userId, text, visibility, callback) {
             return
         }
 
-        const postCreation = (error, json) => {
+        const updatePost = (error, json) => {
             if (error) {
                 callback(error)
 
@@ -34,22 +36,27 @@ function createPost(userId, text, visibility, callback) {
             }
 
             const posts = JSON.parse(json)
-            const { id: lastId } = posts[posts.length - 1]
-            const postId = `post-${parseInt(lastId.substring(5)) + 1}`
+            const post = posts.find(post => post.id === postId)
 
-            const date = new Date()
-            const post = {
-                id: postId,
-                user: userId,
-                text,
-                visibility,
-                date
+            if (!post) {
+                callback(new Error(`post with id ${postId} does not exist`))
+
+                return
             }
-            posts.push(post)
+
+            if (post.user !== userId) {
+                callback(new Error(`post with id ${postId} does not belong to user with id ${userId}`))
+
+                return
+            }
+
+            post.text = text
+            post.visibility = visibility
+            post.date = new Date().toISOString()
 
             const newJson = JSON.stringify(posts, null, 4)
 
-            const postTranscribed = error => {
+            const parsedPost = error => {
                 if (error) {
                     callback(error)
 
@@ -57,11 +64,9 @@ function createPost(userId, text, visibility, callback) {
                 }
                 callback(null)
             }
-            writeFile('./data/posts.json', newJson, postTranscribed)
+            writeFile('./data/posts.json', newJson, parsedPost)
         }
-        readFile('./data/posts.json', 'utf8', postCreation)
+        readFile('./data/posts.json', 'utf8', updatePost)
     }
     readFile('./data/users.json', 'utf8', userConfirmation)
 }
-
-module.exports = createPost

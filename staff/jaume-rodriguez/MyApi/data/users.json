@@ -1,14 +1,20 @@
 [
-  {
-    "id": "user-1",
-    "name": "Peter Pan",
-    "email": "peter@pan.com",
-    "password": "123123123"
-  },
-  {
-    "id": "user-2",
-    "name": "asd",
-    "email": "asd@asd.com",
-    "password": "asdasdasd"
-  }
+    {
+        "id": "user-1",
+        "name": "Peter Pan",
+        "email": "peter@pan.com",
+        "password": "123123123"
+    },
+    {
+        "id": "user-2",
+        "name": "asd",
+        "email": "asd@asd.com",
+        "password": "asdasdasd"
+    },
+    {
+        "id": "user-3",
+        "name": "jrodriguezroca",
+        "email": "jrodriguezroca@gmail.com",
+        "password": "asdasdasd"
+    }
 ]

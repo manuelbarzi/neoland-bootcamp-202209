@@ -1,5 +1,3 @@
-// 1. Llamamos a la lógica de Register (React) con los parametros del form
-
 import { useState } from 'react'
 import registerUser from '../logic/registerUser'
 import logo from '../img/logologintrello.png';

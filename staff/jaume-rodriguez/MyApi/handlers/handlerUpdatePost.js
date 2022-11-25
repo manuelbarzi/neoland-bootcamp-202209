@@ -1,12 +1,12 @@
-const deletePost = require('../logic/deletePost')
+const updatePost = require('../logic/updatePost')
 
 module.exports = (req, res) => {
-    const { headers: { authorization }, params: { postId } } = req
+    const { body: { text, visibility }, headers: { authorization }, params: { postId } } = req
 
     const userId = authorization.substring(7)
 
     try {
-        deletePost(userId, postId, error => {
+        const errorUpdate = error => {
             if (error) {
                 res.status(500).json({ error: error.message })
 
@@ -14,7 +14,8 @@ module.exports = (req, res) => {
             }
 
             res.status(204).send()
-        })
+        }
+        updatePost(userId, postId, text, visibility, errorUpdate)
     } catch (error) {
         res.status(500).json({ error: error.message })
     }

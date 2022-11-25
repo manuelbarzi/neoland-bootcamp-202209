@@ -1,4 +1,4 @@
-const retrievePosts = require('../logic/retrievePosts')
+const retrievePublicPosts = require('../logic/retrievePublicPosts')
 
 module.exports = (req, res) => {
     const { headers: { authorization } } = req
@@ -16,7 +16,8 @@ module.exports = (req, res) => {
 
             res.json(posts)
         }
-        retrievePosts(userId, returnRetrieve)
+        retrievePublicPosts(userId, returnRetrieve)
+
     } catch (error) {
         res.status(500)
         res.json({ error: error.message })

@@ -1,5 +1,3 @@
-// 5. Leemos los parametros recibidos por el handler (API), ejecutamos la lógica que se nos pide y luego transcribimos los datos dentro de la DB.
-
 const { readFile, writeFile } = require('fs')
 
 function registerUser(name, email, password, callback) {

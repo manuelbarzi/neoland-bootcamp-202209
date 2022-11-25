@@ -1,5 +1,3 @@
-// 2. Enviamos los parametros del Form con xhr.send(json)
-
 import { IS_EMAIL_REGEX, HAS_SPACES_REGEX, IS_ALPHABETICAL_REGEX } from '../utils/regex'
 
 function registerUser(name, email, password, callback) {

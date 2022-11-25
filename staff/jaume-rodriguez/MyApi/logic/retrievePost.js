@@ -1,4 +1,4 @@
-const { readFile, writeFile } = require('fs')
+const { readFile } = require('fs')
 
 module.exports = function (userId, postId, callback) {
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
@@ -7,7 +7,7 @@ module.exports = function (userId, postId, callback) {
     if (!postId.length) throw new Error('postId is empty')
     if (typeof callback !== 'function') throw new TypeError('callback is not a function')
 
-    const userConfimation = (error, json) => {
+    const userConfirmation = (error, json) => {
         if (error) {
             callback(error)
 
@@ -15,15 +15,15 @@ module.exports = function (userId, postId, callback) {
         }
 
         const users = JSON.parse(json)
-        const exists = users.some(user => user.id === userId)
+        const user = users.find(user => user.id === userId)
 
-        if (!exists) {
+        if (!user) {
             callback(new Error(`user with id ${userId} does not exist`))
 
             return
         }
 
-        const postDelete = (error, json) => {
+        const parsedPost = (error, json) => {
             if (error) {
                 callback(error)
 
@@ -31,8 +31,7 @@ module.exports = function (userId, postId, callback) {
             }
 
             const posts = JSON.parse(json)
-            const postIndex = posts.findIndex(post => post.id === postId)
-            const post = posts[postIndex]
+            const post = posts.find(post => post.id === postId)
 
             if (!post) {
                 callback(new Error(`post with id ${postId} does not exist`))
@@ -46,20 +45,13 @@ module.exports = function (userId, postId, callback) {
                 return
             }
 
-            posts.splice(postIndex, 1)
-            const newJson = JSON.stringify(posts, null, 4)
+            delete post.id
+            delete post.date
+            delete post.user
 
-            const errorParsed = error => {
-                if (error) {
-                    callback(error)
-
-                    return
-                }
-                callback(null)
-            }
-            writeFile('./data/posts.json', newJson, errorParsed)
+            callback(null, post)
         }
-        readFile('./data/posts.json', 'utf8', postDelete)
+        readFile('./data/posts.json', 'utf8', parsedPost)
     }
-    readFile('./data/users.json', 'utf8', userConfimation)
+    readFile('./data/users.json', 'utf8', userConfirmation)
 }

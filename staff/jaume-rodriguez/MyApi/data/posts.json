@@ -1,10 +1,23 @@
 [
-  {
-    "id": "post-1",
-    "userId": "",
-    "userName": "",
-    "text": "",
-    "date": "",
-    "visibility": ""
-  }
+    {
+        "id": "post-1",
+        "user": "",
+        "text": "",
+        "date": "",
+        "visibility": ""
+    },
+    {
+        "id": "post-2",
+        "user": "user-2",
+        "text": "asd",
+        "visibility": "public",
+        "date": "2022-11-25T03:34:39.157Z"
+    },
+    {
+        "id": "post-3",
+        "user": "user-3",
+        "text": "asdasdasdasd",
+        "visibility": "public",
+        "date": "2022-11-25T14:22:13.062Z"
+    }
 ]

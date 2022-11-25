@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Home from './pages/Home'
 import SettingsAccount from './pages/SettingsAccount'
 import Community from './pages/Community'
+import Profile from './pages/Profile'
 import { Routes, Route, Navigate } from 'react-router-dom'
 
 function App() {
@@ -59,6 +60,7 @@ function App() {
     <Route path="/" element={<ConditionalHome />} />
     <Route path="/settings-account" element={<ConditionalSettingsAccount />} />
     <Route path="/community" element={<ConditionalCommunity />} />
+    <Route path="/profile/:targetUserId" element={<Profile />} />
   </Routes>
 }
 
