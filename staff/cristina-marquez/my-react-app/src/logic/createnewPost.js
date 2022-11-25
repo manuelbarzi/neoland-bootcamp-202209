@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-async function createNewPost(user, text, visibility) {
+async function createNewPost(userId, text, visibility) {
 
     if (typeof text !== 'string') throw new TypeError('text is not a string')
     if (!text.length) throw new Error('text is empty')
@@ -10,7 +10,11 @@ async function createNewPost(user, text, visibility) {
 
     if (visibility !== 'public' && visibility !== 'private') throw new Error('invalid visibility')
 
-    const response = await axios.post('http://localhost:8080/posts', { user, text, visibility })
+    console.log('sending')
+
+    const response = await axios.post('http://localhost:8080/posts', { userId, text, visibility })
+
+    console.log(response)
     return response.data
 
 }

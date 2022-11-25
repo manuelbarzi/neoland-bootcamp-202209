@@ -7,29 +7,6 @@ async function authenticateUser(email, password) {
     const response = await axios.post('http://localhost:8080/auth', { email, password })
     return response.data
 
-    // ...
-
-    // const xhr = new XMLHttpRequest()
-
-    // xhr.onload = () => {
-    //     const json = xhr.responseText
-
-    //     const { userId } = JSON.parse(json)
-
-    //     callback(null, userId)
-    // }
-
-    // xhr.onerror = () => callback(new Error('connection error'))
-
-
-    // xhr.open('POST', 'http://localhost/auth')
-    // xhr.setRequestHeader('Content-Type', 'application/json')
-
-    // const payload = { email, password }
-
-    // const json = JSON.stringify(payload)
-
-    // xhr.send(json)
 }
 
 export default authenticateUser

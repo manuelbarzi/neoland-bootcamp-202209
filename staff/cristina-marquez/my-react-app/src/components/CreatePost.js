@@ -13,7 +13,7 @@ function CreatePost({ onCreated, onClose }) {
         const { text: { value: text }, visibility: { value: visibility } } = event.target
 
         try {
-            await createNewPost(user.id, text, visibility)
+            await createNewPost(user._id, text, visibility)
             event.target.reset()
             onCreated()
         } catch (error) {

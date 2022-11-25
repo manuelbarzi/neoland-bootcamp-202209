@@ -1,53 +1,26 @@
-const { readFile, writeFile } = require('fs')
+const context = require('./context')
 
-function registerUser(name, email, password, callback) {
+async function registerUser(name, email, password) {
     if (typeof name !== 'string') throw new TypeError('name is not a string')
     if (!name.length) throw new Error('name is empty')
     if (typeof email !== 'string') throw new TypeError('email is not a string')
     if (!email.length) throw new Error('email is empty')
     if (typeof password !== 'string') throw new TypeError('password is not a string')
     if (!password.length) throw new Error('password is empty')
-    if (typeof callback !== 'function') throw new TypeError('callback is not a function')
 
-    readFile('./data/users.json', 'utf8', (error, json) => {
-        if (error) {
-            callback(error)
+    const { db } = context
+    const users = db.collection('users')
 
-            return
-        }
 
-        const users = JSON.parse(json)
+    const user = await users.findOne({ email })
 
-        const exists = users.some(user => user.email === email)
+    if (user) {
+        throw new Error('user already registered')
+    }
 
-        if (exists) {
-            callback(new Error(`user with email ${email} already exists`))
+    const result = await users.insertOne({ name, email, password })
+    return result.insertedId
 
-            return
-        }
-
-        const { id: lastId } = users[users.length - 1]
-
-        const newId = lastId + 1
-
-        const user = { id: newId, name, email, password }
-
-        users.push(user)
-
-        const newJson = JSON.stringify(users, null, 4)
-
-        writeFile('./data/users.json', newJson, error => {
-            if (error) {
-                callback(error)
-
-                return
-            }
-
-            delete user.password
-
-            callback(null, user)
-        })
-    })
 }
 
 module.exports = registerUser

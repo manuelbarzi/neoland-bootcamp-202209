@@ -40,6 +40,7 @@ function Home() {
 
     const refreshPosts = async () => {
         const fetchedPosts = await getPosts()
+        console.log('refreshed')
         setPosts(fetchedPosts)
     }
 

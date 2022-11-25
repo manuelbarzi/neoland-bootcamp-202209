@@ -1,19 +1,12 @@
 const authenticateUser = require('../logic/authenticateUser')
 
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
     let { email, password } = req.body
 
     try {
-        authenticateUser(email, password, (error, user) => {
-            if (error) {
-                res.status(500)
-                res.json({ error: error.message })
+        const dbUser = await authenticateUser(email, password)
+        res.status(200).send({ _id: dbUser._id, email: dbUser.email, name: dbUser.name })
 
-                return
-            }
-
-            res.json(user)
-        })
     } catch (error) {
         res.status(500)
         res.json({ error: error.message })
