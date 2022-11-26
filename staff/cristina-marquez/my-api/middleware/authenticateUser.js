@@ -4,7 +4,7 @@ module.exports = (req, res, next) => {
         // const userToken = req.headers['Authorization']
         // const user = checkUserTokenInDB(userToken)
 
-        const userId = 1
+        const userId = '6380e27c0a0bf82556418fcd'
 
         // Set user in request context
         req.user = {

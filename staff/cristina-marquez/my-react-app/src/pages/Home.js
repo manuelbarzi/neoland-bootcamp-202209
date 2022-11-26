@@ -57,7 +57,7 @@ function Home() {
             {/* List posts */}
 
             {posts.length > 0 && posts.map((post) =>
-                <Post key={post.id}
+                <Post key={post._id}
                     content={post}
                     onUpdate={refreshPosts} />
             )}

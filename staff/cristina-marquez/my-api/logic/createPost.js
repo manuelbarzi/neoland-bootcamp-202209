@@ -12,7 +12,15 @@ async function createPost(userId, text, visibility) {
 
     const posts = db.collection('posts')
 
-    const result = await posts.insertOne({ userId, text, visibility })
+
+    const currentTime = new Date().toISOString()
+
+    const result = await posts.insertOne({
+        userId,
+        text,
+        visibility,
+        date: currentTime
+    })
 
 
     return result.newPostId

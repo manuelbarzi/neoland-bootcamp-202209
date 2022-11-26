@@ -1,37 +1,60 @@
-const { readFileSync } = require('fs')
+const context = require('./context')
 
-function getPosts(userId) {
-    const postsJSON = readFileSync('./data/posts.json', { encoding: 'utf8', flag: 'r' });
+async function getPosts(userId) {
 
-    if (!postsJSON) {
-        throw new Error('Could not read posts database file')
-    }
-    const posts = JSON.parse(postsJSON)
+    const { db } = context
+    const postsDB = db.collection('posts')
 
-    const visiblePosts = posts.filter(post => {
-        if (userId === post.user || post.visibility === 'public') {
-            return true
+    const postsCursor = postsDB.find({ $or: [{ visibility: 'public' }, { userId }] }, { sort: { date: -1 } })
+
+    const agg = postsDB.aggregate([{ $or: [{ visibility: 'public' }, { userId }] }, { sort: { date: -1 } }, {
+        $lookup:
+        {
+            from: "users",
+            localField: "userId",
+            foreignField: "_id",
+            as: "userInfo"
         }
-    })
+    }])
+
+    const posts = await agg.toArray()
 
 
-    visiblePosts.sort((a, b) => {
-        const aTime = new Date(a.date).getTime()
-        const bTime = new Date(b.date).getTime()
+    return posts
 
-        if (aTime < bTime) {
-            return 1;
-
-        }
-        if (aTime > bTime) {
-            return -1;
-        }
-        return 0
-    }
-
-    )
-
-    return visiblePosts
 }
 
 module.exports = getPosts
+
+
+// const postsJSON = readFileSync('./data/posts.json', { encoding: 'utf8', flag: 'r' });
+
+// if (!postsJSON) {
+//     throw new Error('Could not read posts database file')
+// }
+// const posts = JSON.parse(postsJSON)
+
+// const visiblePosts = posts.filter(post => {
+//     if (userId === post.user || post.visibility === 'public') {
+//         return true
+//     }
+// })
+
+
+// visiblePosts.sort((a, b) => {
+//     const aTime = new Date(a.date).getTime()
+//     const bTime = new Date(b.date).getTime()
+
+//     if (aTime < bTime) {
+//         return 1;
+
+//     }
+//     if (aTime > bTime) {
+//         return -1;
+//     }
+//     return 0
+// }
+
+// )
+
+// return visiblePosts

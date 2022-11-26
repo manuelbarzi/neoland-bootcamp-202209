@@ -37,7 +37,7 @@ function Post({ content, onUpdate }) {
     return (
         <div className="flex flex-col items-center justify-center mb-5">
             <div className="border  rounded-md shadow-sm flex flex-col justify-between content-center">
-                <h2 className="pt-1 pl-1 pb-1 bg-teal-500 rounded-t-md text-white">{content.user}</h2>
+                <h2 className="pt-1 pl-1 pb-1 bg-teal-500 rounded-t-md text-white">{content.userId}</h2>
                 <p>{content.text}</p>
                 <p>{new Date(content.date).toLocaleString()}</p>
                 <button onClick={deletePostHandler}> <AiOutlineDelete /></button>
