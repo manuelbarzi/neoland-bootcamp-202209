@@ -16,7 +16,7 @@ function Task(props) {
     // TASK FUNCTIONS
     const handleUpdateTaskText = (taskId, newText) => {
         try {
-            updateTaskText(window.userId, taskId, newText, (error) => {
+            updateTaskText(sessionStorage.userId, taskId, newText, (error) => {
                 if (error) {
                     alert(error.message)
                     return
@@ -31,7 +31,7 @@ function Task(props) {
 
     const handleupdateTaskTitle = (taskId, newTitle) => {
         try {
-            updateTaskTitle(window.userId, taskId, newTitle, (error) => {
+            updateTaskTitle(sessionStorage.userId, taskId, newTitle, (error) => {
                 if (error) {
                     alert(error.message)
                     return
@@ -46,7 +46,7 @@ function Task(props) {
 
     const handleUpdateTaskStatus = (taskId, newStatus) => {
         try {
-            updateTaskStatus(window.userId, taskId, newStatus, (error) => {
+            updateTaskStatus(sessionStorage.userId, taskId, newStatus, (error) => {
                 if (error) {
                     alert(error.message)
                     return
@@ -63,7 +63,7 @@ function Task(props) {
 
     const handleDeleteTask = (taskId) => {
         try {
-            deleteTask(window.userId, taskId, (error) => {
+            deleteTask(sessionStorage.userId, taskId, (error) => {
                 if (error) {
                     alert(error.message)
                     return

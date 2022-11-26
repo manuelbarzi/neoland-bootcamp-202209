@@ -8,7 +8,7 @@ function EditPost({ onUpdated, onClose, postId }) {
 
     useEffect(() => {
         try {
-            retrievePost(window.userId, postId, (error, post) => {
+            retrievePost(sessionStorage.userId, postId, (error, post) => {
                 if (error) {
                     alert(error.message)
 
@@ -29,7 +29,7 @@ function EditPost({ onUpdated, onClose, postId }) {
         const { text: { value: text }, visibility: { value: visibility } } = event.target
 
         try {
-            updatePost(window.userId, postId, text, visibility, error => {
+            updatePost(sessionStorage.userId, postId, text, visibility, error => {
                 if (error) {
                     alert(error.message)
 

@@ -7,7 +7,7 @@ function VisiblePosts(props) {
     // TASK FUNCTIONS
     const handleUpdatePostText = (postId, newText) => {
         try {
-            updatePostText(window.userId, postId, newText, (error) => {
+            updatePostText(sessionStorage.userId, postId, newText, (error) => {
                 if (error) {
                     alert(error.message)
                     return
@@ -23,7 +23,7 @@ function VisiblePosts(props) {
 
     const handleUpdatePostVisibility = (postId, newVisibility) => {
         try {
-            updatePostVisibility(window.userId, postId, newVisibility, (error) => {
+            updatePostVisibility(sessionStorage.userId, postId, newVisibility, (error) => {
                 if (error) {
                     alert(error.message)
                     return
@@ -40,7 +40,7 @@ function VisiblePosts(props) {
 
     const handleDeletePost = (postId) => {
         try {
-            deletePost(window.userId, postId, (error) => {
+            deletePost(sessionStorage.userId, postId, (error) => {
                 if (error) {
                     alert(error.message)
                     return

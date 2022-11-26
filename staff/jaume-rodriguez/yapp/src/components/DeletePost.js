@@ -6,7 +6,7 @@ function DeletePost({ postId, onDeleted, onClose }) {
         event.preventDefault()
 
         try {
-            deletePost(window.userId, postId, error => {
+            deletePost(sessionStorage.userId, postId, error => {
                 if (error) {
                     alert(error.message)
 

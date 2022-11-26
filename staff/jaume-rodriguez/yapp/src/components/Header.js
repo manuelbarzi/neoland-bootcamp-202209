@@ -3,15 +3,18 @@ import logoHeader from '../img/trellologo.png';
 import logoMenu from '../img/headermenupanelbotton.png';
 import retrieveUser from '../logic/retrieveUser';
 import { Link } from 'react-router-dom'
+import Context from './Context'
+import { useContext } from 'react'
 
 function Header() {
+    const { logout } = useContext(Context)
 
     const [toggleMenuComponent, setToggleMenuComponent] = useState('open')
     const [user, setUser] = useState()
 
     useEffect(() => {
         try {
-            retrieveUser(window.userId, (error, user) => {
+            retrieveUser(sessionStorage.userId, (error, user) => {
                 if (error) {
                     alert(error.message)
 
@@ -61,7 +64,7 @@ function Header() {
                         </Link>
                         <Link to="/login"
                             className="text-black pr-1 hover:font-semibold"
-                            onClick={() => window.userId = null}>
+                            onClick={logout}>
                             Logout
                         </Link>
                     </div>

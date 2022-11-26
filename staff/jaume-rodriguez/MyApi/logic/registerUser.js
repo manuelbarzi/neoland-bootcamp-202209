@@ -36,7 +36,7 @@ function registerUser(name, email, password, callback) {
 
                 return
             }
-            callback(null, user.id)
+            callback(null, user.id, user.name)
         }
         writeFile('./data/users.json', newJson, userTranscribed)
     }

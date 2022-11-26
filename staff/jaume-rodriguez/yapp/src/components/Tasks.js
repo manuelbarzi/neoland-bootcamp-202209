@@ -18,7 +18,7 @@ function Tasks() {
 
     const handleRefreshTasks = () => {
         try {
-            retrieveTasks(window.userId, (error, tasks) => {
+            retrieveTasks(sessionStorage.userId, (error, tasks) => {
                 if (error) {
                     alert(error.message)
                     return
@@ -32,7 +32,7 @@ function Tasks() {
     // TASKS CREATION
     const handleCreateTask = (status) => {
         try {
-            createTask(window.userId, status, (error) => {
+            createTask(sessionStorage.userId, status, (error) => {
                 if (error) {
                     alert(error.message)
                     return

@@ -25,9 +25,9 @@ function registerUser(name, email, password, callback) {
             return
         }
 
-        const { userId } = JSON.parse(json)
+        const { userId, userName } = JSON.parse(json)
 
-        callback(null, userId)
+        callback(null, userId, userName)
     }
 
     xhr.onerror = () => callback(new Error('connection error'))

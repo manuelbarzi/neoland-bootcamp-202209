@@ -11,13 +11,27 @@
         "user": "user-2",
         "text": "asd",
         "visibility": "public",
-        "date": "2022-11-25T03:34:39.157Z"
+        "date": "2022-11-25T16:29:04.633Z"
     },
     {
         "id": "post-3",
-        "user": "user-3",
-        "text": "asdasdasdasd",
+        "user": "user-2",
+        "text": "gggggggg",
         "visibility": "public",
-        "date": "2022-11-25T14:22:13.062Z"
+        "date": "2022-11-25T16:30:43.372Z"
+    },
+    {
+        "id": "post-4",
+        "user": "user-2",
+        "text": "locuraa!",
+        "visibility": "public",
+        "date": "2022-11-26T01:27:29.934Z"
+    },
+    {
+        "id": "post-5",
+        "user": "user-2",
+        "text": "1",
+        "visibility": "public",
+        "date": "2022-11-26T01:34:40.828Z"
     }
 ]

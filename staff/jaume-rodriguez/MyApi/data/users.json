@@ -10,11 +10,5 @@
         "name": "asd",
         "email": "asd@asd.com",
         "password": "asdasdasd"
-    },
-    {
-        "id": "user-3",
-        "name": "jrodriguezroca",
-        "email": "jrodriguezroca@gmail.com",
-        "password": "asdasdasd"
     }
 ]

@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import authenticateUser from '../logic/authenticateUser'
 import logo from '../img/logologintrello.png';
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { useContext } from 'react'
+import Context from '../components/Context'
 
 function Login(props) {
-
+    const { login } = useContext(Context)
     const [inputPasswordText, setInputPasswordText] = useState(true)
-
-    const navigate = useNavigate()
 
     // FORM INPUTS VALUE
     const handleInputPasswordText = () => {
@@ -35,16 +35,14 @@ function Login(props) {
         const password = passwordInput.value
 
         try {
-            authenticateUser(email, password, (error, userId) => {
+            authenticateUser(email, password, (error, userId, userName) => {
                 if (error) {
                     alert(error.message)
 
                     return
                 }
-                window.userId = userId
-                navigate("/")
+                login(userId, userName)
             })
-
         } catch (error) {
             alert(error.message)
         }

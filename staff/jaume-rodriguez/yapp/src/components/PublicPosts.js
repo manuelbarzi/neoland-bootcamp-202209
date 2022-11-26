@@ -8,7 +8,6 @@ import DeletePost from '../components/DeletePost'
 import { Link } from 'react-router-dom'
 
 function Posts() {
-
     const [user, setUser] = useState()
     const [posts, setPosts] = useState()
     const [createPostVisible, setCreatePostVisible] = useState(false)
@@ -18,7 +17,7 @@ function Posts() {
     // TASKS REFRESH
     useEffect(() => {
         try {
-            retrieveUser(window.userId, (error, user) => {
+            retrieveUser(sessionStorage.userId, (error, user) => {
                 if (error) {
                     alert(error.message)
 
@@ -26,7 +25,7 @@ function Posts() {
                 }
 
                 try {
-                    retrievePublicPosts(window.userId, (error, posts) => {
+                    retrievePublicPosts(sessionStorage.userId, (error, posts) => {
                         if (error) {
                             alert(error.message)
 
@@ -47,7 +46,7 @@ function Posts() {
 
     const handlePostCreated = () => {
         try {
-            retrievePublicPosts(window.userId, (error, posts) => {
+            retrievePublicPosts(sessionStorage.userId, (error, posts) => {
                 if (error) {
                     alert(error.message)
 
@@ -64,7 +63,7 @@ function Posts() {
 
     const handlePostUpdated = () => {
         try {
-            retrievePublicPosts(window.userId, (error, posts) => {
+            retrievePublicPosts(sessionStorage.userId, (error, posts) => {
                 if (error) {
                     alert(error.message)
 
@@ -81,7 +80,7 @@ function Posts() {
 
     const handlePostDeleted = () => {
         try {
-            retrievePublicPosts(window.userId, (error, posts) => {
+            retrievePublicPosts(sessionStorage.userId, (error, posts) => {
                 if (error) {
                     alert(error.message)
 
@@ -125,7 +124,7 @@ function Posts() {
                             onClick={openCreatePost}>
                             <span
                                 className="text-center m-auto text-[1.1rem] text-slate-800 font-semibold ">
-                                Share your thoughts {user ? user.name : 'home'}</span>
+                                Share your thoughts {user ? sessionStorage.userName : 'home'}</span>
                         </div>
                     </section>
                     {/* POST*/}
@@ -141,11 +140,11 @@ function Posts() {
                                     className="flex flex-col text-justify p-4 text-sm border-sky-700 border-t bg-sky-100 text-black text-[15px] font-normal py-4">{post.text}</p>
                                 <div className="flex self-end w-full">
                                     <time className='self-end ml-auto px-2 text-slate-600'>{format(post.date)}</time>
-                                    {post.user.id === window.userId &&
+                                    {post.user.id === sessionStorage.userId &&
                                         <button
                                             className="material-symbols-outlined self-center cursor-pointer mt-3 text-sky-900 hover:bg-sky-200"
                                             onClick={() => openEditPost(post.id)}>edit</button>}
-                                    {post.user.id === window.userId &&
+                                    {post.user.id === sessionStorage.userId &&
                                         <button
                                             className="material-symbols-outlined self-center cursor-pointer border-none mt-3 text-black hover:bg-sky-200"
                                             onClick={() => openDeletePost(post.id)}>delete</button>}

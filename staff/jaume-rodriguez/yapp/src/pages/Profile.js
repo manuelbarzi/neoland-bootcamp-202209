@@ -14,7 +14,7 @@ function Profile() {
     // TASKS REFRESH
     useEffect(() => {
         try {
-            retrieveAUser(window.userId, targetUserId, (error, user) => {
+            retrieveAUser(sessionStorage.userId, targetUserId, (error, user) => {
                 if (error) {
                     alert(error.message)
 
@@ -22,7 +22,7 @@ function Profile() {
                 }
 
                 try {
-                    retrievePostsFromUser(window.userId, targetUserId, (error, posts) => {
+                    retrievePostsFromUser(sessionStorage.userId, targetUserId, (error, posts) => {
                         if (error) {
                             alert(error.message)
 
@@ -45,7 +45,7 @@ function Profile() {
         <>
             <Header />
             {/* POSTS PANEL*/}
-            <section className="flex z-1 w-full justify-center flex-wrap">
+            <section className="flex z-1 justify-center place-content-start flex-wrap bg-slate-200 min-h-screen">
                 <div className="flex flex-row justify-center content-center z-0 p-8 bg-sky-100 border-sky-900 border-b border-solid w-full h-16">
                     <span className="self-center font-semibold text-4xl text-sky-800">
                         {user ? user.name : 'home'} Profile

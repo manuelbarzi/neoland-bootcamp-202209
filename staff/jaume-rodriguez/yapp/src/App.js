@@ -6,11 +6,27 @@ import SettingsAccount from './pages/SettingsAccount'
 import Community from './pages/Community'
 import Profile from './pages/Profile'
 import { Routes, Route, Navigate } from 'react-router-dom'
+import Context from './components/Context'
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState(!!sessionStorage.userId)
   const [inputNameValue, setInputNameValue] = useState('')
   const [inputEmailValue, setInputEmailValue] = useState('')
   const [inputPasswordValue, setInputPasswordValue] = useState('')
+
+
+  // LOGIN & LOGOUT
+  const login = (userId, userName) => {
+    sessionStorage.userId = userId
+    sessionStorage.userName = userName
+
+    setLoggedIn(true)
+  }
+  const logout = () => {
+    delete sessionStorage.userId
+
+    setLoggedIn(false)
+  }
 
   // FORMS INFO VALUE
   const handleInputEmailAndNameValue = (newValue) => {
@@ -22,46 +38,31 @@ function App() {
     setInputPasswordValue(newValue)
   }
 
-  // APP PAGES RENDER
-  const ConditionalHome = () => {
-    return window.userId ?
-      <Home /> :
-      <Navigate replace to="/login" />
-  }
-  const ConditionalSettingsAccount = () => {
-    return window.userId ?
-      <SettingsAccount /> :
-      <Navigate replace to="/login" />
-  }
-  const ConditionalCommunity = () => {
-    return window.userId ?
-      <Community /> :
-      <Navigate replace to="/login" />
-  }
-
-  return <Routes>
-    <Route path="/login" element={window.userId ?
-      <Navigate replace to="/" /> :
-      <Login
-        onInputEmailValue={handleInputEmailAndNameValue}
-        onInputPasswordValue={handleInputPasswordValue}
-        registerInputEmailValue={inputEmailValue}
-        registerInputPasswordValue={inputPasswordValue}
-      />} />
-    <Route path="/register" element={window.userId ?
-      <Navigate replace to="/" /> :
-      <Register
-        loginInputNameValue={inputNameValue}
-        loginInputEmailValue={inputEmailValue}
-        loginInputPasswordValue={inputPasswordValue}
-        onInputEmailValue={handleInputEmailAndNameValue}
-        onInputPasswordValue={handleInputPasswordValue}
-      />} />
-    <Route path="/" element={<ConditionalHome />} />
-    <Route path="/settings-account" element={<ConditionalSettingsAccount />} />
-    <Route path="/community" element={<ConditionalCommunity />} />
-    <Route path="/profile/:targetUserId" element={<Profile />} />
-  </Routes>
+  return <Context.Provider value={{ login, logout }}>
+    {loggedIn ? <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/settings-account" element={<SettingsAccount />} />
+      <Route path="/community" element={<Community />} />
+      <Route path="/profile/:targetUserId" element={<Profile />} />
+      <Route path="*" element={<Navigate replace to="/" />} />
+    </Routes>
+      :
+      <Routes>
+        <Route path="/login" element={<Login
+          onInputEmailValue={handleInputEmailAndNameValue}
+          onInputPasswordValue={handleInputPasswordValue}
+          registerInputEmailValue={inputEmailValue}
+          registerInputPasswordValue={inputPasswordValue}
+        />} />
+        <Route path="/register" element={<Register
+          loginInputNameValue={inputNameValue}
+          loginInputEmailValue={inputEmailValue}
+          loginInputPasswordValue={inputPasswordValue}
+          onInputEmailValue={handleInputEmailAndNameValue}
+          onInputPasswordValue={handleInputPasswordValue} />} />
+        <Route path="*" element={<Navigate replace to="/login" />} />
+      </Routes>}
+  </Context.Provider>
 }
 
 export default App;

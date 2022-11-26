@@ -18,7 +18,7 @@ function SettingsAccount() {
 
     useEffect(() => {
         try {
-            retrieveUser(window.userId, (error, user) => {
+            retrieveUser(sessionStorage.userId, (error, user) => {
                 if (error) {
                     alert(error.message)
 
@@ -64,7 +64,7 @@ function SettingsAccount() {
         const newName = nameInput.value
 
         try {
-            updateUserName(newName, window.userId, (error) => {
+            updateUserName(newName, sessionStorage.userId, (error) => {
                 if (error) {
                     alert(error.message)
                     return
@@ -88,7 +88,7 @@ function SettingsAccount() {
         const newEmail = emailInput.value
 
         try {
-            updateUserEmail(newEmail, window.userId, (error) => {
+            updateUserEmail(newEmail, sessionStorage.userId, (error) => {
                 if (error) {
                     alert(error.message)
                     return
@@ -112,7 +112,7 @@ function SettingsAccount() {
         const newPassword = passwordInput.value
 
         try {
-            updateUserPassword(newPassword, window.userId, (error) => {
+            updateUserPassword(newPassword, sessionStorage.userId, (error) => {
                 if (error) {
                     alert(error.message)
                     return
