@@ -7,7 +7,7 @@ async function getPosts(userId) {
 
     const postsCursor = postsDB.find({ $or: [{ visibility: 'public' }, { userId }] }, { sort: { date: -1 } })
 
-    const agg = postsDB.aggregate([{ $or: [{ visibility: 'public' }, { userId }] }, { sort: { date: -1 } }, {
+    const agg = postsDB.aggregate([{
         $lookup:
         {
             from: "users",

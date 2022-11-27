@@ -11,7 +11,7 @@ function UpdatePost({ onUpdated, onClose, post }) {
         const { text: { value: text }, visibility: { value: visibility } } = event.target
 
         try {
-            await updatePost(post.id, text, visibility)
+            await updatePost(post._id, text, visibility)
             event.target.reset()
 
             onUpdated()
