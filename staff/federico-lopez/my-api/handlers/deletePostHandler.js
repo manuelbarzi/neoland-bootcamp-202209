@@ -1,21 +1,18 @@
-const deletePost = require('../logic/deletePost')
+const deletePost = require("../logic/deletePost");
 
 module.exports = (req, res) => {
-    const { headers: { authorization }, params: { postId } } = req
+  const {
+    headers: { authorization },
+    params: { postId },
+  } = req;
 
-    const userId = authorization.substring(7)
+  const userId = authorization.substring(7);
 
-    try {
-        deletePost(userId, postId, error => {
-            if (error) {
-                res.status(500).json({ error: error.message })
-
-                return
-            }
-
-            res.status(204).send()
-        })
-    } catch (error) {
-        res.status(500).json({ error: error.message })
-    }
-}
+  try {
+    deletePost(userId, postId)
+      .then(() => res.status(204).send())
+      .catch((error) => res.status(500).json({ error: error.message }));
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};

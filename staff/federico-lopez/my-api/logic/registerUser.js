@@ -18,6 +18,7 @@ function registerUser(name, email, password) {
 
             return users.insertOne({ name, email, password })
         })
+        .then(() => {})
 }
 
 module.exports = registerUser
