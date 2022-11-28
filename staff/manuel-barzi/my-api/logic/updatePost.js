@@ -1,6 +1,7 @@
-const { readFile, writeFile } = require('fs')
+const { ObjectId } = require('mongodb')
+const context = require('./context')
 
-module.exports = function(userId, postId, text, visibility, callback) {
+module.exports = function (userId, postId, text, visibility) {
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
     if (!userId.length) throw new Error('userId is empty')
     if (typeof postId !== 'string') throw new TypeError('postId is not a string')
@@ -10,63 +11,25 @@ module.exports = function(userId, postId, text, visibility, callback) {
     if (typeof visibility !== 'string') throw new TypeError('visibility is not a string')
     if (!visibility.length) throw new Error('visibility is empty')
     if (visibility !== 'public' && visibility !== 'private') throw new Error('invalid visibility')
-    if (typeof callback !== 'function') throw new TypeError('callback is not a function')
 
-    readFile('./data/users.json', 'utf8', (error, json) => {
-        if (error) {
-            callback(error)
+    const { db } = context
 
-            return
-        }
+    const users = db.collection('users')
+    const posts = db.collection('posts')
 
-        const users = JSON.parse(json)
+    return users.findOne({ _id: ObjectId(userId) })
+        .then(user => {
+            if (!user)
+                throw new Error(`user with id ${userId} does not exist`)
 
-        const exists = users.some(user => user.id === userId)
-
-        if (!exists) {
-            callback(new Error(`user with id ${userId} does not exist`))
-
-            return
-        }
-
-        readFile('./data/posts.json', 'utf8', (error, json) => {
-            if (error) {
-                callback(error)
-
-                return
-            }
-
-            const posts = JSON.parse(json)
-
-            const post = posts.find(post => post.id === postId)
-
-            if (!post) {
-                callback(new Error(`post with id ${postId} does not exist`))
-    
-                return
-            }
-
-            if (post.user !== userId) {
-                callback(new Error(`post with id ${postId} does not belong to user with id ${userId}`))
-
-                return
-            }
-
-            post.text = text
-            post.visibility = visibility
-            post.date = new Date().toISOString()
-
-            const newJson = JSON.stringify(posts, null, 4)
-
-            writeFile('./data/posts.json', newJson, error => {
-                if (error) {
-                    callback(error)
-
-                    return
-                }
-
-                callback(null)
-            })
+            return posts.findOne({ _id: ObjectId(postId) })
         })
-    })
+        .then(post => {
+            if (!post)
+                throw new Error(`post with id ${postId} does not exist`)
+
+
+            return posts.updateOne({ _id: ObjectId(postId) }, { $set: { text, visibility, date: new Date } })
+        })
+        .then(() => { })
 }

@@ -36,9 +36,9 @@ function Login() {
     return <main className="h-full flex flex-col items-center justify-center gap-2 bg-white dark:bg-black text-black dark:text-white">
         <form className="flex flex-col gap-2" onSubmit={handleLogin}>
             <label htmlFor="email" className="container__item--left">E-mail</label>
-            <input name="email" type="email" id="email" placeholder="input your e-mail" className="border-b border-black" />
+            <input name="email" type="email" id="email" placeholder="input your e-mail" className="border-b border-black text-black" />
             <label htmlFor="password" className="container__item--left">Password</label>
-            <input name="password" type="password" id="password" placeholder="input your password" className="border-b border-black" />
+            <input name="password" type="password" id="password" placeholder="input your password" className="border-b border-black text-black" />
             <button className="p-2 border rounded-xl hover:animate-spin">Login</button>
         </form>
 

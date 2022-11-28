@@ -1,63 +1,45 @@
-const { readFile } = require('fs')
+const { ObjectId } = require('mongodb')
+const context = require('./context')
 
 /**
  * Retrieves all public posts (from all users)
  * 
  * @param {string} userId The user id
- * @param {function} callback The callback function
  */
-function retrievePublicPosts(userId, callback) {
+function retrievePublicPosts(userId) {
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
     if (!userId.length) throw new Error('userId is empty')
-    if (typeof callback !== 'function') throw new TypeError('callback is not a function')
 
-    readFile('./data/users.json', 'utf8', (error, json) => {
-        if (error) {
-            callback(error)
+    const { db } = context
 
-            return
-        }
+    const users = db.collection('users')
+    const posts = db.collection('posts')
 
-        const users = JSON.parse(json)
+    return users.findOne({ _id: ObjectId(userId) })
+        .then(user => {
+            if (!user)
+                throw new Error(`user with id ${userId} does not exist`)
 
-        const user = users.find(user => user.id === userId)
 
-        if (!user) {
-            callback(new Error(`user with id ${userId} does not exist`))
-
-            return
-        }
-
-        readFile('./data/posts.json', 'utf8', (error, json) => {
-            if (error) {
-                callback(error)
-
-                return
-            }
-
-            const posts = JSON.parse(json)
-
-            const publics = posts.filter(post => {
-                if (post.visibility === 'public') {
-                    delete post.visibility
-
-                    const user = users.find(user => user.id === post.user)
-
-                    const { id, name } = user
-
-                    post.user = { id, name }
-
-                    return true
-                }
-
-                return false
-            })
-
-            publics.sort((a, b) => a.date > b.date ? -1 : a.date < b.date ? 1 : 0)
-
-            callback(null, publics)
+            return posts.find({ visibility: 'public' }).sort({ date: -1 }).toArray()
         })
-    })
+        .then(publicPosts => {
+            const userFinds = publicPosts.map(publicPost => users.findOne({ _id: ObjectId(publicPost.user) }))
+
+            return Promise.all(userFinds)
+                .then(publicPostUsers => {
+                    publicPosts.forEach((publicPost, index) => {
+                        const { _id, name } = publicPostUsers[index]
+
+                        publicPost.user = { id: _id.toString(), name }
+
+                        publicPost.id = publicPost._id.toString()
+                        delete publicPost._id
+                    })
+
+                    return publicPosts
+                })
+        })
 }
 
 module.exports = retrievePublicPosts
