@@ -1,28 +1,18 @@
-const { readFileSync, writeFileSync } = require('fs')
+const context = require('./context')
+const ObjectId = require('mongodb').ObjectId;
 
-function deletePost(postId) {
-    const postsJSON = readFileSync('./data/posts.json', { encoding: 'utf8', flag: 'r' });
-    if (!postsJSON) {
-        throw new Error('Could not read posts database file')
-    }
-    const posts = JSON.parse(postsJSON)
 
-    let postIndexInArray = null;
-    posts.map((post, i) => {
-        if (post.id === postId) {
-            postIndexInArray = i
-        }
-    })
+async function deletePost(postId) {
 
-    if (postIndexInArray === null) {
-        throw new Error('post not found')
-    }
 
-    posts.splice(postIndexInArray, 1)
+    const { db } = context
+    const postsDB = db.collection('posts')
 
-    const newJson = JSON.stringify(posts, null, 4)
+    const result = await postsDB.deleteOne({ _id: new ObjectId(postId) })
 
-    writeFileSync('./data/posts.json', newJson)
+    console.log(`deleting ${postId}`)
+
+    return result
 
 }
 

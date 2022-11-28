@@ -7,17 +7,9 @@ async function getPosts(userId) {
 
     const postsCursor = postsDB.find({ $or: [{ visibility: 'public' }, { userId }] }, { sort: { date: -1 } })
 
-    const agg = postsDB.aggregate([{
-        $lookup:
-        {
-            from: "users",
-            localField: "userId",
-            foreignField: "_id",
-            as: "userInfo"
-        }
-    }])
 
-    const posts = await agg.toArray()
+
+    const posts = await postsCursor.toArray()
 
 
     return posts

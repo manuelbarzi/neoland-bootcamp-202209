@@ -14,7 +14,6 @@ async function createNewPost(userId, text, visibility) {
 
     const response = await axios.post('http://localhost:8080/posts', { userId, text, visibility })
 
-    console.log(response)
     return response.data
 
 }

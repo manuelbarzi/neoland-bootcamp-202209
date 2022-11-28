@@ -9,7 +9,7 @@ function DeletePost({ onClose, onUpdated, post }) {
 
 
         try {
-            deletePost(post.id)
+            deletePost(post._id)
 
             onUpdated()
         } catch (error) {
