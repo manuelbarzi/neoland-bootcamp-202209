@@ -1,14 +1,14 @@
-import { useContext, useEffect, useState } from "react"
-import UserContext from "../UserContext"
+import { useEffect, useState } from "react"
 import getPosts from "../logic/getPosts"
 import Post from "../components/Post"
 import CreatePost from "../components/CreatePost"
+import Navbar from "../components/Navbar"
 
 
 
 function Home() {
 
-    const { user } = useContext(UserContext)
+
     const [posts, setPosts] = useState([])
     const [createPostIsVisible, setCreatePostIsVisible] = useState(false)
 
@@ -47,20 +47,24 @@ function Home() {
 
     return (
         <div>
-            <h2>Hello {user.name}, what's up? </h2>
+            <Navbar></Navbar>
 
-            {/* Create new post */}
+            <section className="pt-4">
 
-            <button onClick={createNewPostHandler}>Create new post</button>
-            {createPostIsVisible && <CreatePost onCreated={onCreateNewPostCreated} onClose={onCreateNewPostClose} ></CreatePost>}
+                {/* Create new post */}
 
-            {/* List posts */}
+                <button onClick={createNewPostHandler}>Create new post</button>
+                {createPostIsVisible && <CreatePost onCreated={onCreateNewPostCreated} onClose={onCreateNewPostClose} ></CreatePost>}
 
-            {posts.length > 0 && posts.map((post) =>
-                <Post key={post._id}
-                    content={post}
-                    onUpdate={refreshPosts} />
-            )}
+                {/* List posts */}
+
+                {posts.length > 0 && posts.map((post) =>
+                    <Post key={post._id}
+                        content={post}
+                        onUpdate={refreshPosts} />
+                )}
+            </section>
+
 
 
         </div>
