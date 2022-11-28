@@ -37,12 +37,12 @@ function Register(props) {
         const password = passwordInput.value
 
         try {
-            registerUser(name, email, password, (error, userId, userName) => {
+            registerUser(name, email, password, (error, userId) => {
                 if (error) {
                     alert(error.message)
                     return
                 }
-                login(userId, userName)
+                login(userId)
             })
         } catch (error) {
             alert(error.message)

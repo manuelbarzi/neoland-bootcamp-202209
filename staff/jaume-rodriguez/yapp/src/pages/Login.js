@@ -35,13 +35,13 @@ function Login(props) {
         const password = passwordInput.value
 
         try {
-            authenticateUser(email, password, (error, userId, userName) => {
+            authenticateUser(email, password, (error, userId) => {
                 if (error) {
                     alert(error.message)
 
                     return
                 }
-                login(userId, userName)
+                login(userId)
             })
         } catch (error) {
             alert(error.message)

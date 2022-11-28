@@ -16,9 +16,8 @@ function App() {
 
 
   // LOGIN & LOGOUT
-  const login = (userId, userName) => {
+  const login = (userId) => {
     sessionStorage.userId = userId
-    sessionStorage.userName = userName
 
     setLoggedIn(true)
   }

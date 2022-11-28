@@ -29,7 +29,7 @@ function authenticateUser(email, password, callback) {
             return
         }
 
-        callback(null, user.id, user.name)
+        callback(null, user.id)
     }
     readFile('./data/users.json', 'utf8', parsedUser)
 }

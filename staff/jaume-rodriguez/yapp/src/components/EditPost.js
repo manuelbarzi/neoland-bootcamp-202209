@@ -1,24 +1,37 @@
 import { useEffect, useState } from 'react'
 import updatePost from '../logic/updatePost'
+import retrieveUser from '../logic/retrieveUser';
 import retrievePost from '../logic/retrievePost'
 import Button from './Button'
 
 function EditPost({ onUpdated, onClose, postId }) {
+    const [user, setUser] = useState()
     const [post, setPost] = useState()
 
     useEffect(() => {
         try {
-            retrievePost(sessionStorage.userId, postId, (error, post) => {
+            retrieveUser(sessionStorage.userId, (error, user) => {
                 if (error) {
                     alert(error.message)
 
                     return
                 }
+                try {
+                    retrievePost(sessionStorage.userId, postId, (error, post) => {
+                        if (error) {
+                            alert(error.message)
 
-                setPost(post)
+                            return
+                        }
+
+                        setPost(post)
+                        setUser(user)
+                    })
+                } catch (error) {
+                    alert(error.message)
+                }
             })
         } catch (error) {
-            alert(error.message)
         }
     },)
 
@@ -55,9 +68,10 @@ function EditPost({ onUpdated, onClose, postId }) {
                     type="text"
                     name="text"
                     id="text"
-                    placeholder={"What's in your mind, " + sessionStorage.userName + " ?"}
+                    placeholder={"What's in your mind, " + (user ? user.name : "") + " ?"}
                     rows="3"
-                    className=" placeholder:text-slate-700 flex flex-col text-justify p-4 text-sm border-sky-700 border bg-sky-200 text-black text-[15px] font-normal py-4 mt-3" defaultValue={post?.text}></textarea>
+                    className=" placeholder:text-slate-700 flex flex-col text-justify p-4 text-sm border-sky-700 border bg-sky-200 text-black text-[15px] font-normal py-4 mt-3"
+                    defaultValue={post?.text}></textarea>
                 <select id="visibility" name="visibility" defaultValue={post?.visibility} className="text-black bg-inherit self-start font-semibold text-sky-700">
                     <option value="public">Anyone can see it</option>
                     <option value="private">Only friends can see it</option>

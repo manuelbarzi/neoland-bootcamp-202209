@@ -23,9 +23,9 @@ function authenticateUser(email, password, callback) {
             return
         }
 
-        const { userId, userName } = JSON.parse(json)
+        const { userId } = JSON.parse(json)
 
-        callback(null, userId, userName)
+        callback(null, userId)
     }
 
     xhr.onerror = () => callback(new Error('connection error'))

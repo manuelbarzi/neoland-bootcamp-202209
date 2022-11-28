@@ -124,7 +124,7 @@ function Posts() {
                             onClick={openCreatePost}>
                             <span
                                 className="text-center m-auto text-[1.1rem] text-slate-800 font-semibold ">
-                                Share your thoughts,  {user ? sessionStorage.userName : 'home'}</span>
+                                Share your thoughts,  {user ? user.name : 'home'}</span>
                         </div>
                     </section>
                     {/* POST*/}
