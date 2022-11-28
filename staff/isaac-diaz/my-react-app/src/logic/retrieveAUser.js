@@ -1,6 +1,8 @@
-export default function retrieveUser(userId, callback) {
+export default function (userId, targetUserId, callback) {
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
     if (!userId.length) throw new Error('userId is empty')
+    if (typeof targetUserId !== 'string') throw new TypeError('targetUserId is not a string')
+    if (!targetUserId.length) throw new Error('targerUserId is empty')
     if (typeof callback !== 'function') throw new TypeError('callback is not a function')
 
     const xhr = new XMLHttpRequest
@@ -19,10 +21,13 @@ export default function retrieveUser(userId, callback) {
         const user = JSON.parse(json)
 
         callback(null, user)
+
     }
 
-    xhr.open('GET', 'http://localhost/users')
+    xhr.open('GET', `http://localhost/users/${targetUserId}`)
     xhr.setRequestHeader('Authorization', `Bearer ${userId}`)
     xhr.send()
+
 }
+
 

@@ -1,19 +1,19 @@
-const retrieveUser = require('../logic/retrieveUser')
+const deletePost = require('../logic/deletePost')
 
 module.exports = (req, res) => {
-    const { headers: { authorization } } = req
+    const { params: { postId }, headers: { authorization } } = req
 
     const userId = authorization.substring(7)
 
-    try{
-        retrieveUser(userId, (error, user) => {
+    try {
+        deletePost(userId, postId, (error) => {
             if (error) {
                 res.status(500).json({ error: error.message })
 
                 return
             }
 
-            res.json(user)
+            res.status(204).send()
         })
     } catch (error) {
         res.status(500).json({ error: error.message })

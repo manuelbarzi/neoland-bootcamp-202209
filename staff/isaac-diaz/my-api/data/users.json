@@ -64,5 +64,17 @@
         "name": "mugiwara",
         "email": "mugi@wara.com",
         "password": "123123123"
+    },
+    {
+        "id": "user-12",
+        "name": "chipichop",
+        "email": "chipi@chop.com",
+        "password": "123123123"
+    },
+    {
+        "id": "user-13",
+        "name": "bandolero",
+        "email": "band@olero.com",
+        "password": "123123123"
     }
 ]

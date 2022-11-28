@@ -1,13 +1,10 @@
 const { readFile, writeFile } = require('fs')
 
-function createPost(userId, text, visibility, callback) {
+module.exports = function (userId, postId, callback) {
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
     if (!userId.length) throw new Error('userId is empty')
-    if (typeof text !== 'string') throw new TypeErrror('text is not a string')
-    if (!text.length) throw new Error('text is empty')
-    if (typeof visibility !== 'string') throw new TypeError('visibiity is not a string')
-    if (!visibility.length) throw new Error('visibility is empty')
-    if (visibility !== 'public' && visibility !== 'private') throw new Error('invalid visibility')
+    if (typeof postId !== 'string') throw new TypeError('postId is not a string')
+    if (!postId.length) throw new Error('postId is empty')
     if (typeof callback !== 'function') throw new TypeError('callback is not a function')
 
     readFile('./data/users.json', 'utf8', (error, json) => {
@@ -19,9 +16,9 @@ function createPost(userId, text, visibility, callback) {
 
         const users = JSON.parse(json)
 
-        const exist = users.some(user => user.id === userId)
+        const user = users.some((user) => user.id === userId)
 
-        if (!exist) {
+        if (!user) {
             callback(new Error(`users with id ${userId} does not string`))
 
             return
@@ -36,17 +33,27 @@ function createPost(userId, text, visibility, callback) {
 
             const posts = JSON.parse(json)
 
-            const { id: lastId } = posts[posts.length - 1]
+            const postIndex = posts.findIndex(post => post.id === postId)
 
-            const newId = `post-${parseInt(lastId.substring(5)) + 1}`
+            const post = posts[postIndex]
 
-            const post = { id: newId, user: userId, text, visibility, date: new Date().toISOString() }
+            if (!post) {
+                callback(new Error(`post with id ${postId} does not exist`))
 
-            posts.push(post)
+                return
+            }
+
+            if (post.user !== userId) {
+                callback(new error(`post with id ${postId} does not belong to user with id ${userId}`))
+
+                return
+            }
+
+            posts.splice(postIndex, 1)
 
             const newJson = JSON.stringify(posts, null, 4)
 
-            writeFile('./data/posts.json', newJson, error => {
+            writeFile('./data/posts.json', newJson, (error) => {
                 if (error) {
                     callback(error)
 
@@ -58,7 +65,5 @@ function createPost(userId, text, visibility, callback) {
 
         })
     })
-
 }
 
-module.exports = createPost

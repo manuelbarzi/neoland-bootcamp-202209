@@ -1,16 +1,11 @@
 import log from '../utils/coolog'
 import registerUser from '../logic/registerUser'
+import { Link, useNavigate } from 'react-router-dom'
 
-function Register({ onNavigateToLogin, onRegister }) {
+export default function () {
     log.info('Register -> render')
 
-    const handleNavigateToLogin = event => {
-        log.info('Register -> handleNavigateToLogin')
-
-        event.preventDefault()
-
-        onNavigateToLogin()
-    }
+    const navigate = useNavigate()
 
     const handleRegister = event => {
         log.info('Register -> handleRegister')
@@ -27,7 +22,7 @@ function Register({ onNavigateToLogin, onRegister }) {
                     return
                 }
 
-                onRegister()
+                navigate('/login')
             })
         } catch (error) {
             alert(error.message)
@@ -48,8 +43,7 @@ function Register({ onNavigateToLogin, onRegister }) {
             <button className="p-2 border rounded-xl hover:animate-spin">Register</button>
         </form>
 
-        <a href="" className="underline" onClick={handleNavigateToLogin}>Login</a>
+        <Link to="/login" className="underline">Login</Link>
     </main>
 }
 
-export default Register

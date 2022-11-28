@@ -1,28 +1,40 @@
 require('dotenv').config()
 
 const express = require('express')
-const cors = require('./utils/cors')
+
 const authenticateUserHandler = require('./handlers/authenticateUserHandler')
 const registerUserHandler = require('./handlers/registerUserHandler')
 const searchHttpCatsHandler = require('./handlers/searchHttpCatsHandler')
 const retrieveUserHandler = require('./handlers/retrieveUserHandler')
+const createPostHandler = require('./handlers/createPostHandler')
+const retrieveAccesPostsHandler = require('./handlers/retrieveAccesPostsHandler')
+const retrievePostHandler = require('./handlers/retrievePostHandler')
+const updatePostHandler = require('./handlers/updatePostHandler')
+const deletePostHandler = require('./handlers/deletePostHandler')
+const retrievePostsFromUserHandler = require('./handlers/retrievePostsFromUserHandler')
+const retrieveAUserHandler = require('./handlers/retrieveAUserHandler')
 
 const jsonBodyParser = require('./utils/jsonBodyParser')
-const searchHttpCatsHandler = require('./handlers/searchHttpCatsHandler')
+const cors = require('./utils/cors')
 
 const api = express()
 
 api.use(cors)
 
-api.post('/users/auth', jsonBodyParser, authenticateUserHandler)
-
+api.post('/user/auth', jsonBodyParser, authenticateUserHandler)
 api.post('/users', jsonBodyParser, registerUserHandler)
-
 api.get('/users', retrieveUserHandler)
+api.get('/users/:targetUserId', retrieveAUserHandler)
 
-api.get('/search', searchHttpCatsHandler)
+api.get('/users/:targetUserId/posts', retrievePostsFromUserHandler)
 
 api.post('/posts', jsonBodyParser, createPostHandler)
+api.get('/posts/access', retrieveAccesPostsHandler)
+api.get('/posts/:postId', retrievePostHandler)
+api.patch('/posts/:postId', jsonBodyParser, updatePostHandler)
+api.delete('/posts/:postId', deletePostHandler)
+
+api.get('/search', searchHttpCatsHandler)
 
 const { PORT } = process.env
 

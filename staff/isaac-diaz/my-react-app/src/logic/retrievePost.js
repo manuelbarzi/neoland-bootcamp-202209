@@ -1,6 +1,8 @@
-export default function retrieveUser(userId, callback) {
+export default function (userId, postId, callback) {
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
     if (!userId.length) throw new Error('userId is empty')
+    if (typeof postId !== 'string') throw new TypeError('postId is not a string')
+    if (!postId.length) throw new Error('postId is empty')
     if (typeof callback !== 'function') throw new TypeError('callback is not a function')
 
     const xhr = new XMLHttpRequest
@@ -16,13 +18,13 @@ export default function retrieveUser(userId, callback) {
             return
         }
 
-        const user = JSON.parse(json)
+        const post = JSON.parse(json)
 
-        callback(null, user)
+        callback(null, post)
     }
 
-    xhr.open('GET', 'http://localhost/users')
-    xhr.setRequestHeader('Authorization', `Bearer ${userId}`)
+    xhr.open = ('GET', `http://localhost/posts/${postId}`)
+    xhr.setRequestHeader = ('Authorization', `Bearer ${userId}`)
     xhr.send()
 }
 

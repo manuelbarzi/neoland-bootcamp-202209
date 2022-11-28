@@ -8,8 +8,8 @@ import { IS_EMAIL_REGEX, HAS_SPACES_REGEX } from '../utils/regex'
  * @param {callback} callback The callback to attend the result
  */
 
-function authenticateUser(email, password, callback) {
-    if(typeof email !== 'string') throw new TypeError('email is not a string')
+export default function authenticateUser(email, password, callback) {
+    if (typeof email !== 'string') throw new TypeError('email is not a string')
     if (!IS_EMAIL_REGEX.test(email)) throw new Error('email is not valid')
 
     if(typeof password !== 'string') throw new TypeError('password is not a string')
@@ -39,12 +39,12 @@ function authenticateUser(email, password, callback) {
 
     xhr.onerror = () => callback(new Error('connection error'))
 
-    xhr.open('POST', 'http://localhost/auth')
+    xhr.open('POST', 'http://localhost/user/auth')
     xhr.setRequestHeader('Content-type', 'application/json')
 
-    const playload = { email, password }
+    const payload = { email, password }
 
-    const json = JSON. stringify(playload)
+    const json = JSON.stringify(payload)
 
     xhr.send(json)
 } 
@@ -58,4 +58,3 @@ function authenticateUser(email, password, callback) {
  * @param {string} userId The id of the user that authenticated
  */
 
-export default authenticateUser

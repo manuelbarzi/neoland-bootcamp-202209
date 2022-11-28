@@ -9,15 +9,15 @@ import { IS_EMAIL_REGEX, HAS_SPACES_REGEX, IS_ALPHABETICAL_REGEX } from '../util
  * @param {callback} callback The callback to attend the result
  */
 
-function registerUser(name, email, password, callback) {
+export default function (name, email, password, callback) {
     if (typeof name !== 'string') throw new TypeError('Name is not a string')
     if (name.length >= 2) throw new Error('Need more characters')
     if (!IS_ALPHABETICAL_REGEX.test(name)) throw new Error('Name is not alphabetical')
 
-    if(typeof email !== 'string') throw new TypeError('Email is not a string')
-    if(!IS_EMAIL_REGEX.test(email)) throw new Error('Email is not valid')
-   
-    if (typeof password !== 'string') throw new Error('password is not a string')
+    if (typeof email !== 'string') throw new TypeError('Email is not a string')
+    if (!IS_EMAIL_REGEX.test(email)) throw new Error('Email is not valid')
+
+    if (typeof password !== 'string') throw new TypeError('password is not a string')
     if (password.length < 8) throw new Error('password length is less than 8')
     if (HAS_SPACES_REGEX.test(password)) throw new Error('password has spaces')
 
@@ -28,7 +28,7 @@ function registerUser(name, email, password, callback) {
     xhr.onload = () => {
         const { status, responseText: json } = xhr
 
-        if(status >= 500) { 
+        if (status >= 500) {
             const { error } = JSON.parse(json)
 
             callback(new Error(error))
@@ -44,12 +44,12 @@ function registerUser(name, email, password, callback) {
     xhr.open('POST', 'http://localhost/register')
     xhr.setRequestHeader('Content-type', 'application/json')
 
-    const playload = { name, email, password } 
+    const payload = { name, email, password }
 
-    const json = JSON.stringify(playload)
+    const json = JSON.stringify(payload)
 
 
-    xhr.send(json)   
+    xhr.send(json)
 
 }
 
@@ -61,4 +61,3 @@ function registerUser(name, email, password, callback) {
  * @param {Error} error The authentication error
  */
 
- export default registerUser

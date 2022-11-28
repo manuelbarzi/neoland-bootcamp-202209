@@ -1,28 +1,33 @@
 import Login from './pages/Login'
-import { useState } from 'react'
 import Home from './pages/Home'
 import log from './utils/coolog'
 import Register from './pages/Register'
-import { FaBeer } from 'react-icons/fa'
+import { Routes, Route, Navigate } from 'react-router-dom'
+import Profile from './pages/Profile'
+import { useState } from 'react'
 
-function App() {
+export default function App() {
   log.info('App -> render')
 
-  const [view, setView] = useState('login')
+  const [loggedIn, setLoggedIn] = useState(!!sessionStorage.userId)
 
-  const navigateToHome = () => setView('home')
+  const handleLoggedIn = () => setLoggedIn(true)
 
-  const navigateToLogin = () => setView('login')
+  const handleLoggedOut = () => setLoggedIn(false)
 
-  const navigateToRegister = () => setView('register')
-
-  return <>
-  <h1>Hola App</h1>
+  return loggedIn ? <Routes>
+    <Route path="/" element={<Home onLoggedOut={handleLoggedOut} />} />
+    <Route path="/profile/:targetUserId" element={<Profile onLoggedOut={handleLoggedOut} />} />
+    <Route path="*" element={<Navigate replace to="/" />} />
+  </Routes>
+  :
+  <Routes>
+    <Route path="/login" element={<Login onLoggedIn={handleLoggedIn} />} />
+    <Route path="/register" element={<Register />} />
+    <Route path="*" element={<Navigate replace to="/login" />} />
+  </Routes>
   
-  {view === 'login' && <Login onLogin={navigateToHome} onNavigateToRegister={navigateToRegister} />}
-  {view === 'register' && <Register onRegister={navigateToLogin} onNavigateToLogin={navigateToLogin} />}
-  {view === 'home' && <Home />}
-  </>
+  
 }
 
-export default App;
+
