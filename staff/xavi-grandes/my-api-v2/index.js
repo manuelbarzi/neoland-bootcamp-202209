@@ -1,38 +1,50 @@
-require('dotenv').config()
+require("dotenv").config();
 
-const express = require('express')
+const express = require("express");
 
-const authenticateUserHandler = require('./handlers/authenticateUserHandler')
-const registerUserHandler = require('./handlers/registerUserHandler')
-const searchHttpCatsHandler = require('./handlers/searchHttpCatsHandler')
-const retrieveUserHandler = require('./handlers/retrieveUserHandler')
-const createPostHandler = require('./handlers/createPostHandler')
-const retrievePublicPostsHandler  = require('./handlers/retrievePublicPostsHandler')
-const retrievePostHandler = require('./handlers/retrievePostHandler')
-const updatePostHandler = require('./handlers/updatePostHandler')
-const deletePostHandler = require('./handlers/deletePostHandler')
+const { MongoClient } = require("mongodb");
+const context = require("./logic/context");
 
-const jsonBodyParser = require('./utils/jsonBodyParser')
-const cors = require('./utils/cors')
+const authenticateUserHandler = require("./handlers/authenticateUserHandler");
+const registerUserHandler = require("./handlers/registerUserHandler");
+const searchHttpCatsHandler = require("./handlers/searchHttpCatsHandler");
+const retrieveUserHandler = require("./handlers/retrieveUserHandler");
+const createPostHandler = require("./handlers/createPostHandler");
+const retrievePublicPostsHandler = require("./handlers/retrievePublicPostsHandler");
+const retrievePostHandler = require("./handlers/retrievePostHandler");
+const updatePostHandler = require("./handlers/updatePostHandler");
+const deletePostHandler = require("./handlers/deletePostHandler");
 
-const api = express()
+const jsonBodyParser = require("./utils/jsonBodyParser");
+const cors = require("./utils/cors");
 
-api.use(cors)
+const { PORT, MONGO_URL } = process.env;
 
-api.post('/users/auth', jsonBodyParser, authenticateUserHandler)
-api.post('/users', jsonBodyParser, registerUserHandler)
-api.get('/users', retrieveUserHandler)
+const client = new MongoClient(MONGO_URL);
 
-api.post('/posts', jsonBodyParser, createPostHandler)
-api.get('/posts/public', retrievePublicPostsHandler)
-api.get('/posts/:postId', retrievePostHandler)
-api.patch('/posts/:postId', jsonBodyParser, updatePostHandler)
-api.delete('/posts/:postId', deletePostHandler)
+client
+  .connect()
+  .then((connection) => {
+    console.log("connected to DB on url " + MONGO_URL);
 
-api.get('/search', searchHttpCatsHandler)
+    context.db = connection.db("test");
 
+    const api = express();
 
+    api.use(cors);
 
-const { PORT } = process.env
+    api.post("/users/auth", jsonBodyParser, authenticateUserHandler);
+    api.post("/users", jsonBodyParser, registerUserHandler);
+    api.get("/users", retrieveUserHandler);
 
-api.listen(PORT, () => console.log(`server listening on port ${PORT}`))
+    api.post("/posts", jsonBodyParser, createPostHandler);
+    api.get("/posts/public", retrievePublicPostsHandler);
+    api.get("/posts/:postId", retrievePostHandler);
+    api.patch("/posts/:postId", jsonBodyParser, updatePostHandler);
+    api.delete("/posts/:postId", deletePostHandler);
+
+    api.get("/search", searchHttpCatsHandler);
+
+    api.listen(PORT, () => console.log(`server listening on port ${PORT}`));
+  })
+  .catch((error) => console.log(error));

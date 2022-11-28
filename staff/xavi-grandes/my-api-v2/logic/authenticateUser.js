@@ -1,45 +1,59 @@
- const { readFile } = require('fs')
+//  const { readFile } = require('fs')
+const context = require('./context')
 
  /**
  * Authenticates a user against DB
  * 
  * @param {string} email The user email
  * @param {string} password The user password
- * @param {callback} callback The callback to attend the result
  */
 
-function authenticateUser (email, password, callback) {
+function authenticateUser (email, password) {
     if (typeof email !== 'string') throw new TypeError ('email is not a string')
     if (!email.length) throw new Error ('email is empty') 
     if (typeof password !== 'string') throw new typeError ('password is not a string')
-    if (typeof callback !== 'function') throw new typeError ('callback is not a function')
+    // if (typeof callback !== 'function') throw new typeError ('callback is not a function')
 
-    readFile('./data/users.json', 'utf8', (error, json) => {
-        if (error) {
-            callback (error)
+    const { db } = context
 
-            return
-        }
+    const users = db.collection('users')
 
-        const users = JSON.parse(json)
+    return users.findOne({ email })
+    .then(user => {
+        if(!user) throw Error ('user not registered')
 
-        const user = users.find(_user => _user.email === email)
-        //la variable user que se encuentra dentro del callback es independiente de la const user.
+        if(user.password !== password)
+            throw new Error('password wrong')
 
-        if(!user) {
-            callback(new Error('user not registered'))
+        return user._id.toString()
+    }) 
 
-            return
-        }
+    // readFile('./data/users.json', 'utf8', (error, json) => {
+    //     if (error) {
+    //         callback (error)
 
-        if(user.password !== password) {
-            callback(new Error('wrong password'))
+    //         return
+    //     }
 
-            return
-        }
+    //     const users = JSON.parse(json)
 
-        callback(null, user.id)
-    })
+    //     const user = users.find(_user => _user.email === email)
+    //     //la variable user que se encuentra dentro del callback es independiente de la const user.
+
+    //     if(!user) {
+    //         callback(new Error('user not registered'))
+
+    //         return
+    //     }
+
+    //     if(user.password !== password) {
+    //         callback(new Error('wrong password'))
+
+    //         return
+    //     }
+
+    //     callback(null, user.id)
+    // })
 }
 
 /**
