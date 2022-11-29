@@ -21,8 +21,8 @@ function deleteTask(userId, taskId, callback) {
     xhr.onerror = () => callback(new Error('connection error'))
 
 
-    xhr.open('DELETE', 'http://localhost/tasks')
-    xhr.setRequestHeader('Content-Type', 'application/json')
+    xhr.open('DELETE', `http://localhost/tasks/${taskId}`)
+    xhr.setRequestHeader('Authorization', `Bearer ${userId}`)
 
     const payload = { userId, taskId }
 

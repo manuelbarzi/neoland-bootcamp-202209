@@ -1,43 +1,32 @@
-const { readFile, writeFile } = require('fs')
+const { ObjectId } = require('mongodb')
+const context = require('./context')
 
-function updateTaskText(userId, taskId, newText, callback) {
+module.exports = function (userId, taskId, newText) {
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
     if (!userId.length) throw new Error('userId is empty')
     if (typeof taskId !== 'string') throw new TypeError('taskId is not a string')
     if (!taskId.length) throw new Error('taskId is empty')
     if (typeof newText !== 'string') throw new TypeError('newText is not a string')
-    if (typeof callback !== 'function') throw new TypeError('callback is not a function')
+    if (!newText.length) throw new Error('newText is empty')
 
-    const updateTaskText = (error, json) => {
-        if (error) {
-            callback(error)
+    const { db } = context
 
-            return
-        }
-        const tasks = JSON.parse(json)
-        const databaseTask = tasks.find(task => task.id === taskId)
-        if (databaseTask === undefined) {
+    const users = db.collection('users')
+    const tasks = db.collection('tasks')
 
-            callback(new Error(`taskId not found`))
-            return
-        }
+    return users.findOne({ _id: ObjectId(userId) })
+        .then(user => {
+            if (!user)
+                throw new Error(`user with id ${userId} does not exist`)
 
-        // Valores y referencia / Valor = copia / referencia = puntero
-        databaseTask.text = newText
+            return tasks.findOne({ _id: ObjectId(taskId) })
+        })
+        .then(task => {
+            if (!task)
+                throw new Error(`post with id ${taskId} does not exist`)
 
-        const newJson = JSON.stringify(tasks, null, 4)
 
-        const TaskTextTranscribed = error => {
-            if (error) {
-                callback(error)
-
-                return
-            }
-            callback(null)
-        }
-        writeFile('./data/tasks.json', newJson, TaskTextTranscribed)
-    }
-    readFile('./data/tasks.json', 'utf8', updateTaskText)
+            return tasks.updateOne({ _id: ObjectId(taskId) }, { $set: { text: newText } })
+        })
+        .then(() => { })
 }
-
-module.exports = updateTaskText

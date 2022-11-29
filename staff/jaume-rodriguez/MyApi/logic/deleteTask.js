@@ -1,35 +1,36 @@
-const { readFile, writeFile } = require('fs')
+const context = require("./context");
+const { ObjectId } = require("mongodb");
 
-function deleteTask(userId, taskId, callback) {
-    if (typeof userId !== 'string') throw new TypeError('userId is not a string')
-    if (!userId.length) throw new Error('userId is empty')
-    if (typeof taskId !== 'string') throw new TypeError('taskId is not a string')
-    if (!taskId.length) throw new Error('taskId is empty')
-    if (typeof callback !== 'function') throw new TypeError('callback is not a function')
+module.exports = function (userId, taskId) {
+    if (typeof userId !== "string") throw new TypeError("userId is not a string");
+    if (!userId.length) throw new Error("userId is empty");
+    if (typeof taskId !== "string") throw new TypeError("taskId is not a string");
+    if (!taskId.length) throw new Error("taskId is empty");
 
-    const taskDelete = (error, json) => {
-        if (error) {
-            callback(error)
+    const { db } = context;
 
-            return
-        }
-        const tasks = JSON.parse(json)
+    const users = db.collection("users");
+    const tasks = db.collection("tasks");
 
-        tasks.splice(tasks.findIndex(task => task.id === taskId), 1);
+    return users.findOne({ _id: new ObjectId(userId) })
+        .then((user) => {
+            if (!user) throw new Error(`user with id ${userId} not found`);
 
-        const newJson = JSON.stringify(tasks, null, 4)
+            return tasks.findOne({ _id: new ObjectId(taskId) });
+        })
+        .then((task) => {
+            if (!task) throw new Error(`task with id ${taskId} not found`);
 
-        const taskTranscribed = error => {
-            if (error) {
-                callback(error)
+            if (task.user.toString() !== userId)
+                throw new Error(
+                    `task with id ${taskId} does not belong to user ${userId}`
+                );
 
-                return
-            }
-            callback(null)
-        }
-        writeFile('./data/tasks.json', newJson, taskTranscribed)
-    }
-    readFile('./data/tasks.json', 'utf8', taskDelete)
-}
+            return tasks.deleteOne({ _id: new ObjectId(taskId) });
+        })
+        .then(result => {
+            const { acknowledged } = result
 
-module.exports = deleteTask
+            if (!acknowledged) throw new Error(`could not delete post with id ${taskId}`)
+        })
+};

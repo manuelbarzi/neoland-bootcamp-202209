@@ -22,7 +22,6 @@ const {
     handlerRetrievePost,
     handlerDeletePost,
     handlerUpdatePost,
-    handlerUpdatePostVisibility,
     handlerRetrieveAUser,
     handlerRetrievePostsFromUser,
 } = require("./handlers")
@@ -56,10 +55,10 @@ client.connect()
 
         api.post('/tasks', jsonBodyParser, handlerCreateTask)
         api.get('/tasks', handlerRetrieveTasks)
-        api.patch('/tasks', jsonBodyParser, handlerUpdateTaskStatus)
-        api.patch('/updateTaskText', jsonBodyParser, handlerUpdateTaskText)
-        api.patch('/updateTaskTitle', jsonBodyParser, handlerUpdateTaskTitle)
-        api.delete('/tasks', jsonBodyParser, handlerDeleteTask)
+        api.patch('/tasks/:taskId', jsonBodyParser, handlerUpdateTaskStatus)
+        api.patch('/tasks/text/:taskId', jsonBodyParser, handlerUpdateTaskText)
+        api.patch('/tasks/title/:taskId', jsonBodyParser, handlerUpdateTaskTitle)
+        api.delete('/tasks/:taskId', jsonBodyParser, handlerDeleteTask)
         api.get('/search', searchGet)
 
         api.post('/posts', jsonBodyParser, handlerCreatePost)
@@ -67,7 +66,6 @@ client.connect()
         api.get('/posts/:postId', handlerRetrievePost)
         api.patch('/posts/:postId', jsonBodyParser, handlerUpdatePost)
         api.delete('/posts/:postId', handlerDeletePost)
-        api.patch('/posts', jsonBodyParser, handlerUpdatePostVisibility)
 
 
         const { PORT } = process.env

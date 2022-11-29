@@ -1,6 +1,8 @@
 function updateTaskStatus(userId, taskId, newStatus, callback) {
-    if (typeof userId !== 'string') throw new Error('userId is not a string')
-    if (typeof taskId !== 'string') throw new Error('taskId is not a string')
+    if (typeof userId !== 'string') throw new TypeError('userId is not a string')
+    if (!userId.length) throw new Error('userId is empty')
+    if (typeof taskId !== 'string') throw new TypeError('taskId is not a string')
+    if (!taskId.length) throw new Error('taskId is empty')
     if (typeof newStatus !== 'string') throw new Error('newStatus is not a string')
     if (typeof callback !== 'function') throw new TypeError('callback is not a function')
 
@@ -23,10 +25,11 @@ function updateTaskStatus(userId, taskId, newStatus, callback) {
     xhr.onerror = () => callback(new Error('connection error'))
 
 
-    xhr.open('PATCH', 'http://localhost/tasks')
+    xhr.open('PATCH', `http://localhost/tasks/${taskId}`)
+    xhr.setRequestHeader('Authorization', `Bearer ${userId}`)
     xhr.setRequestHeader('Content-Type', 'application/json')
 
-    const payload = { userId, taskId, newStatus }
+    const payload = { taskId, newStatus }
 
     const json = JSON.stringify(payload)
 

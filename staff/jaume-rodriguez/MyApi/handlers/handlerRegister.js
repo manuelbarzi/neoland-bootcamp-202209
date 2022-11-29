@@ -1,25 +1,14 @@
-// 4. Capturamos los parametros que nos pasa el index.js (API) y la pasamos a su lógica de Register (API)
-
 const registerUser = require('../logic/registerUser')
 
 module.exports = (req, res) => {
-    let { name, email, password } = req.body
+    const { name, email, password } = req.body
 
     try {
-        const userCreation = (error, userId) => {
-            if (error) {
-                res.status(500)
-                res.json({ error: error.message })
-
-                return
-            }
-            res.json({ userId })
-            res.status(201).send()
-        }
-        registerUser(name, email, password, userCreation)
-
+        registerUser(name, email, password)
+            .then(userId => res.status(201).json({ userId }))
+            // .then(() => res.status(201).send())
+            .catch(error => res.status(500).json({ error: error.message }))
     } catch (error) {
-        res.status(500)
-        res.json({ error: error.message })
+        res.status(500).json({ error: error.message })
     }
 }

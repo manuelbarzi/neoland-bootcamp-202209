@@ -23,7 +23,8 @@ function updateTaskTitle(userId, taskId, newTitle, callback) {
     xhr.onerror = () => callback(new Error('connection error'))
 
 
-    xhr.open('PATCH', 'http://localhost/updateTaskTitle')
+    xhr.open('PATCH', `http://localhost/tasks/title/${taskId}`)
+    xhr.setRequestHeader('Authorization', `Bearer ${userId}`)
     xhr.setRequestHeader('Content-Type', 'application/json')
 
     const payload = { userId, taskId, newTitle }

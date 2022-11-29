@@ -1,46 +1,23 @@
-const { readFile, writeFile } = require('fs')
+const { ObjectId } = require('mongodb')
+const context = require('./context')
 
-function updateUserName(newName, userId, callback) {
-    if (typeof newName !== 'string') throw new TypeError('name is not a string')
-    if (!newName.length) throw new Error('name is empty')
-    if (!userId.length) throw new Error('name is empty')
-    if (typeof callback !== 'function') throw new TypeError('callback is not a function')
+module.exports = function (userId, newName) {
+    if (!userId.length) throw new Error('userId is empty')
+    if (typeof userId !== 'string') throw new TypeError('userId is not a string')
+    if (!newName.length) throw new Error('Name is empty')
+    if (typeof newName !== 'string') throw new TypeError('Name is not a string')
 
-    const updateUserName = (error, json) => {
-        if (error) {
-            callback(error)
+    const { db } = context
 
-            return
-        }
-        const users = JSON.parse(json)
-        const databaseUser = users.find(user => user.id === userId)
-        if (databaseUser === undefined) {
+    const users = db.collection('users')
 
-            callback(new Error(`userId not found`))
-            return
-        }
+    return users.findOne({ _id: ObjectId(userId) })
+        .then(user => {
+            if (!user)
+                throw new Error(`user with id ${userId} does not exist`)
 
-        if (databaseUser.name === newName) {
-            callback(new Error(`Your new name cannot be the same as your current name`))
+            return users.updateOne({ _id: ObjectId(userId) }, { $set: { name: newName } })
+        })
+        .then(() => { })
 
-            return
-        }
-        // Valores y referencia / Valor = copia / referencia = puntero
-        databaseUser.name = newName
-
-        const newJson = JSON.stringify(users, null, 4)
-
-        const userNameTranscribed = error => {
-            if (error) {
-                callback(error)
-
-                return
-            }
-            callback(null)
-        }
-        writeFile('./data/users.json', newJson, userNameTranscribed)
-    }
-    readFile('./data/users.json', 'utf8', updateUserName)
 }
-
-module.exports = updateUserName

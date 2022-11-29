@@ -1,22 +1,27 @@
-const { readFile } = require('fs')
+const { ObjectId } = require('mongodb')
+const context = require('./context')
 
-function retrieveTasks(userId, callback) {
+function retrieveTasks(userId) {
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
-    if (typeof callback !== 'function') throw new TypeError('callback is not a function')
+    if (!userId.length) throw new Error('userId is empty')
 
-    const parsedTasks = (error, json) => {
-        if (error) {
-            callback(error)
+    const { db } = context
 
-            return
-        }
+    const users = db.collection('users')
+    const tasks = db.collection('tasks')
 
-        const tasks = JSON.parse(json)
-        const task = tasks.filter(task => task.user === userId);
+    return users.findOne({ _id: ObjectId(userId) })
+        .then(user => {
+            if (!user)
+                throw new Error(`user with id ${userId} does not exist`)
 
-        callback(null, task)
-    }
-    readFile('./data/tasks.json', 'utf8', parsedTasks)
+            return tasks.find({ user: ObjectId(userId) }).toArray()
+        })
+        .then(userTasks => {
+            userTasks.forEach(userTask => {
+                userTask.id = userTask._id.toString()
+            })
+            return userTasks
+        })
 }
-
 module.exports = retrieveTasks

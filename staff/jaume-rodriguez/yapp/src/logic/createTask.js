@@ -20,6 +20,7 @@ function createTask(userId, statusTask, callback) {
 
 
     xhr.open('POST', 'http://localhost/tasks')
+    xhr.setRequestHeader('Authorization', `Bearer ${userId}`)
     xhr.setRequestHeader('Content-Type', 'application/json')
 
     const payload = { userId, statusTask }

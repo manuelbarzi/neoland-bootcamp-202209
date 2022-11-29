@@ -1,9 +1,8 @@
-import { IS_ALPHABETICAL_REGEX } from '../utils/regex'
-
 function updateUserName(newName, userId, callback) {
-    if (typeof newName !== 'string') throw new Error('password is not a string')
-    if (!IS_ALPHABETICAL_REGEX.test(newName)) throw new Error('name is not valid')
-
+    if (typeof userId !== 'string') throw new TypeError('userId is not a string')
+    if (!userId.length) throw new Error('userId is empty')
+    if (typeof newName !== 'string') throw new Error('name is not a string')
+    if (!newName.length) throw new Error('newName is empty')
     if (typeof callback !== 'function') throw new TypeError('callback is not a function')
 
     const xhr = new XMLHttpRequest()
@@ -24,11 +23,11 @@ function updateUserName(newName, userId, callback) {
 
     xhr.onerror = () => callback(new Error('connection error'))
 
-
-    xhr.open('PATCH', 'http://localhost/users/updateUserName')
+    xhr.open('PATCH', `http://localhost/users/updateUserName`)
+    xhr.setRequestHeader('Authorization', `Bearer ${userId}`)
     xhr.setRequestHeader('Content-Type', 'application/json')
 
-    const payload = { newName, userId }
+    const payload = { newName }
 
     const json = JSON.stringify(payload)
 

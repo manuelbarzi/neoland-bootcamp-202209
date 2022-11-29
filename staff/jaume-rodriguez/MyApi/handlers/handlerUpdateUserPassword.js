@@ -1,22 +1,15 @@
 const updateUserPassword = require('../logic/updateUserPassword')
 
 module.exports = (req, res) => {
-    let { newPassword, userId } = req.body
+    const { body: { newPassword }, headers: { authorization } } = req
+
+    const userId = authorization.substring(7)
 
     try {
-        const errorUpdate = (error) => {
-            if (error) {
-                res.status(500)
-                res.json({ error: error.message })
-
-                return
-            }
-            res.status(201).send()
-        }
-        updateUserPassword(newPassword, userId, errorUpdate)
-
+        updateUserPassword(userId, newPassword)
+            .then(() => res.status(204).send())
+            .catch(error => res.status(500).json({ error: error.message }))
     } catch (error) {
-        res.status(500)
-        res.json({ error: error.message })
+        res.status(500).json({ error: error.message })
     }
 }

@@ -1,22 +1,15 @@
 const updateTaskStatus = require('../logic/updateTaskStatus')
 
 module.exports = (req, res) => {
-    let { userId, taskId, newStatus } = req.body
+    const { body: { newStatus }, headers: { authorization }, params: { taskId } } = req
+
+    const userId = authorization.substring(7)
 
     try {
-        const errorStatusUpdate = (error) => {
-            if (error) {
-                res.status(500)
-                res.json({ error: error.message })
-
-                return
-            }
-            res.status(201).send()
-        }
-        updateTaskStatus(userId, taskId, newStatus, errorStatusUpdate)
-
+        updateTaskStatus(userId, taskId, newStatus)
+            .then(() => res.status(204).send())
+            .catch(error => res.status(500).json({ error: error.message }))
     } catch (error) {
-        res.status(500)
-        res.json({ error: error.message })
+        res.status(500).json({ error: error.message })
     }
 }

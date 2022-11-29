@@ -1,22 +1,15 @@
 const updateTaskText = require('../logic/updateTaskText')
 
 module.exports = (req, res) => {
-    let { userId, taskId, newText } = req.body
+    const { body: { newText }, headers: { authorization }, params: { taskId } } = req
+
+    const userId = authorization.substring(7)
 
     try {
-        const errorUpdateTaskText = (error) => {
-            if (error) {
-                res.status(500)
-                res.json({ error: error.message })
-
-                return
-            }
-            res.status(201).send()
-        }
-        updateTaskText(userId, taskId, newText, errorUpdateTaskText)
-
+        updateTaskText(userId, taskId, newText)
+            .then(() => res.status(204).send())
+            .catch(error => res.status(500).json({ error: error.message }))
     } catch (error) {
-        res.status(500)
-        res.json({ error: error.message })
+        res.status(500).json({ error: error.message })
     }
 }

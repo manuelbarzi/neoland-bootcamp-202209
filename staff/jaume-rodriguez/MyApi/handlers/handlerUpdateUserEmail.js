@@ -1,22 +1,15 @@
 const updateUserEmail = require('../logic/updateUserEmail')
 
 module.exports = (req, res) => {
-    let { newEmail, userId } = req.body
+    const { body: { newEmail }, headers: { authorization } } = req
+
+    const userId = authorization.substring(7)
 
     try {
-        const errorUpdate = (error) => {
-            if (error) {
-                res.status(500)
-                res.json({ error: error.message })
-
-                return
-            }
-            res.status(201).send()
-        }
-        updateUserEmail(newEmail, userId, errorUpdate)
-
+        updateUserEmail(userId, newEmail)
+            .then(() => res.status(204).send())
+            .catch(error => res.status(500).json({ error: error.message }))
     } catch (error) {
-        res.status(500)
-        res.json({ error: error.message })
+        res.status(500).json({ error: error.message })
     }
 }

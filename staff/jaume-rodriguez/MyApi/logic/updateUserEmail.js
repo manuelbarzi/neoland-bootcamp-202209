@@ -1,46 +1,23 @@
-const { readFile, writeFile } = require('fs')
+const { ObjectId } = require('mongodb')
+const context = require('./context')
 
-function updateUserEmail(newEmail, userId, callback) {
-    if (typeof newEmail !== 'string') throw new TypeError('email is not a string')
+module.exports = function (userId, newEmail) {
+    if (!userId.length) throw new Error('userId is empty')
+    if (typeof userId !== 'string') throw new TypeError('userId is not a string')
     if (!newEmail.length) throw new Error('email is empty')
-    if (!userId.length) throw new Error('email is empty')
-    if (typeof callback !== 'function') throw new TypeError('callback is not a function')
+    if (typeof newEmail !== 'string') throw new TypeError('email is not a string')
 
-    const updateUserEmail = (error, json) => {
-        if (error) {
-            callback(error)
+    const { db } = context
 
-            return
-        }
-        const users = JSON.parse(json)
-        const databaseUser = users.find(user => user.id === userId)
-        if (databaseUser === undefined) {
+    const users = db.collection('users')
 
-            callback(new Error(`userId not found`))
-            return
-        }
+    return users.findOne({ _id: ObjectId(userId) })
+        .then(user => {
+            if (!user)
+                throw new Error(`user with id ${userId} does not exist`)
 
-        if (databaseUser.email === newEmail) {
-            callback(new Error(`Your new email cannot be the same as your current email`))
+            return users.updateOne({ _id: ObjectId(userId) }, { $set: { email: newEmail } })
+        })
+        .then(() => { })
 
-            return
-        }
-        // Valores y referencia / Valor = copia / referencia = puntero
-        databaseUser.email = newEmail
-
-        const newJson = JSON.stringify(users, null, 4)
-
-        const userEmailTranscribed = error => {
-            if (error) {
-                callback(error)
-
-                return
-            }
-            callback(null)
-        }
-        writeFile('./data/users.json', newJson, userEmailTranscribed)
-    }
-    readFile('./data/users.json', 'utf8', updateUserEmail)
 }
-
-module.exports = updateUserEmail

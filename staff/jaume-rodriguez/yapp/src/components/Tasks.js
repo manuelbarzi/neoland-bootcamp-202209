@@ -67,7 +67,7 @@ function Tasks() {
                         {tasks.map(task => task.status === 'todo' ?
                             // COMPONENTE TASK
                             <Task
-                                key={task.id}
+                                key={task._id}
                                 task={task}
                                 onUpdateTaskStatus={handleRefreshTasks}
                                 onTextRefresh={handleRefreshTasks}
@@ -94,7 +94,7 @@ function Tasks() {
                         {tasks.map(task => task.status === 'doing' ?
                             // COMPONENTE TASK
                             <Task
-                                key={task.id}
+                                key={task._id}
                                 task={task}
                                 onUpdateTaskStatus={handleRefreshTasks}
                                 onTextRefresh={handleRefreshTasks}
@@ -121,7 +121,7 @@ function Tasks() {
                         {tasks.map(task => task.status === 'done' ?
                             // COMPONENTE TASK
                             <Task
-                                key={task.id}
+                                key={task._id}
                                 task={task}
                                 onUpdateTaskStatus={handleRefreshTasks}
                                 onTextRefresh={handleRefreshTasks}

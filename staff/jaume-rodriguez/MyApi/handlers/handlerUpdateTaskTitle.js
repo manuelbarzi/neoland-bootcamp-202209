@@ -1,22 +1,15 @@
 const updateTaskTitle = require('../logic/updateTaskTitle')
 
 module.exports = (req, res) => {
-    let { userId, taskId, newTitle } = req.body
+    const { body: { newTitle }, headers: { authorization }, params: { taskId } } = req
+
+    const userId = authorization.substring(7)
 
     try {
-        const errorUpdateTaskTitle = (error) => {
-            if (error) {
-                res.status(500)
-                res.json({ error: error.message })
-
-                return
-            }
-            res.status(201).send()
-        }
-        updateTaskTitle(userId, taskId, newTitle, errorUpdateTaskTitle)
-
+        updateTaskTitle(userId, taskId, newTitle)
+            .then(() => res.status(204).send())
+            .catch(error => res.status(500).json({ error: error.message }))
     } catch (error) {
-        res.status(500)
-        res.json({ error: error.message })
+        res.status(500).json({ error: error.message })
     }
 }

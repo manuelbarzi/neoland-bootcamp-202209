@@ -1,22 +1,18 @@
-const deleteTask = require('../logic/deleteTask')
+const deleteTask = require("../logic/deleteTask");
 
 module.exports = (req, res) => {
-    let { userId, taskId } = req.body
+    const {
+        headers: { authorization },
+        params: { taskId },
+    } = req;
+
+    const userId = authorization.substring(7);
 
     try {
-        const errorDelete = (error) => {
-            if (error) {
-                res.status(500)
-                res.json({ error: error.message })
-
-                return
-            }
-            res.status(201).send()
-        }
-        deleteTask(userId, taskId, errorDelete)
-
+        deleteTask(userId, taskId)
+            .then(() => res.status(204).send())
+            .catch((error) => res.status(500).json({ error: error.message }));
     } catch (error) {
-        res.status(500)
-        res.json({ error: error.message })
+        res.status(500).json({ error: error.message });
     }
-}
+};

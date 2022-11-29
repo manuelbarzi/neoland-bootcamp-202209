@@ -6,20 +6,10 @@ module.exports = (req, res) => {
     const userId = authorization.substring(7)
 
     try {
-        const returnRetrieve = (error, posts) => {
-            if (error) {
-                res.status(500)
-                res.json({ error: error.message })
-
-                return
-            }
-
-            res.json(posts)
-        }
-        retrievePublicPosts(userId, returnRetrieve)
-
+        retrievePublicPosts(userId)
+            .then(posts => res.json(posts))
+            .catch(error => res.status(500).json({ error: error.message }))
     } catch (error) {
-        res.status(500)
-        res.json({ error: error.message })
+        res.status(500).json({ error: error.message })
     }
 }

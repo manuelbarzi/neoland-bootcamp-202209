@@ -125,27 +125,31 @@ function Task(props) {
             <div className='flex flex-row'>
                 <div className="flex flex-row mt-2">
                     <select
+                        defaultValue=""
                         className="text-black bg-inherit self-end font-normal text-base"
                         onChange={(event) => handleUpdateTaskStatus(props.task.id, event.target.value)}
                     >
-                        <option disabled selected hidden value=''>
+                        <option value='' hidden>
                             {props.task.status === 'todo' ? 'Pendiente' :
                                 props.task.status === 'doing' ? 'En proceso' :
                                     props.task.status === 'done' ? 'Hecho' : 'Estado'}
                         </option>
                         {props.task.status === 'todo' ? <>
-                            <option value="doing">En Proceso</option>
+                            <option value="todo">Pendiente</option>
+                            <option value="doing">En proceso</option>
                             <option value="done">Hecho</option>
                         </>
                             :
                             props.task.status === 'doing' ? <>
                                 <option value="todo">Pendiente</option>
+                                <option value="doing">En proceso</option>
                                 <option value="done">Hecho</option>
                             </>
                                 :
                                 <>
                                     <option value="todo">Pendiente</option>
-                                    <option value="doing">En Proceso</option>
+                                    <option value="doing">En proceso</option>
+                                    <option value="done">Hecho</option>
                                 </>
                         }
                     </select>

@@ -22,6 +22,7 @@ function retrieveUser(userId, callback) {
 
     xhr.open('GET', `http://localhost/users`)
     xhr.setRequestHeader('Authorization', `Bearer ${userId}`)
+    xhr.setRequestHeader('Content-Type', 'application/json')
     xhr.send()
 }
 

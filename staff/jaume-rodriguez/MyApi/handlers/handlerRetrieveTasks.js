@@ -4,21 +4,14 @@ module.exports = (req, res) => {
     const { headers: { authorization } } = req
 
     const userId = authorization.substring(7)
-
+    debugger
     try {
-        const returnRetrieve = (error, tasks) => {
-            if (error) {
-                res.status(500)
-                res.json({ error: error.message })
-
-                return
-            }
-
-            res.json(tasks)
-        }
-        retrieveTasks(userId, returnRetrieve)
+        retrieveTasks(userId)
+            .then(tasks => {
+                res.json(tasks)
+            })
+            .catch(error => res.status(500).json({ error: error.message }))
     } catch (error) {
-        res.status(500)
-        res.json({ error: error.message })
+        res.status(500).json({ error: error.message })
     }
 }

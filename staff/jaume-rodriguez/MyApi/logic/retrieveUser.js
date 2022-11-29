@@ -1,27 +1,25 @@
-const { readFile } = require('fs')
+const context = require('./context')
+const { ObjectId } = require('mongodb')
 
-function retrieveUser(userId, callback) {
+function retrieveUser(userId) {
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
-    if (typeof callback !== 'function') throw new TypeError('callback is not a function')
+    if (!userId.length) throw new Error('userId is empty')
 
-    const parsedUser = (error, json) => {
-        if (error) {
-            callback(error)
+    const { db } = context
 
-            return
-        }
+    const users = db.collection('users')
 
-        const users = JSON.parse(json)
-        const user = users.find(user => user.id === userId)
+    return users.findOne({ _id: ObjectId(userId) })
+        .then(user => {
+            if (!user)
+                throw new Error(`user with id ${userId} does not exist`)
 
-        if (!user) {
-            callback(new Error('user not registered'))
+            // sanitize
+            delete user.password
+            delete user._id
 
-            return
-        }
-        callback(null, user)
-    }
-    readFile('./data/users.json', 'utf8', parsedUser)
+            return user
+        })
 }
 
 module.exports = retrieveUser

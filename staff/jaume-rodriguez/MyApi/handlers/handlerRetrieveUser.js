@@ -6,19 +6,10 @@ module.exports = (req, res) => {
     const userId = authorization.substring(7)
 
     try {
-        const returnUser = (error, user) => {
-            if (error) {
-                res.status(500)
-                res.json({ error: error.message })
-
-                return
-            }
-
-            res.json(user)
-        }
-        retrieveUser(userId, returnUser)
+        retrieveUser(userId)
+            .then(user => res.json(user))
+            .catch(error => res.status(500).json({ error: error.message }))
     } catch (error) {
-        res.status(500)
-        res.json({ error: error.message })
+        res.status(500).json({ error: error.message })
     }
 }

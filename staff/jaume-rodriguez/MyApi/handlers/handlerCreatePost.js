@@ -6,19 +6,10 @@ module.exports = (req, res) => {
     const userId = authorization.substring(7)
 
     try {
-        const errorCreation = (error) => {
-            if (error) {
-                res.status(500)
-                res.json({ error: error.message })
-
-                return
-            }
-            res.status(201).send()
-        }
-        createPost(userId, text, visibility, errorCreation)
-
+        createPost(userId, text, visibility)
+            .then(() => res.status(201).send())
+            .catch(error => res.status(500).json({ error: error.message }))
     } catch (error) {
-        res.status(500)
-        res.json({ error: error.message })
+        res.status(500).json({ error: error.message })
     }
 }
