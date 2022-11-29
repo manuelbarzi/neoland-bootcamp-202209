@@ -7,7 +7,6 @@ const context = require("./logic/context");
 
 const authenticateUserHandler = require("./handlers/authenticateUserHandler");
 const registerUserHandler = require("./handlers/registerUserHandler");
-const searchHttpCatsHandler = require("./handlers/searchHttpCatsHandler");
 const retrieveUserHandler = require("./handlers/retrieveUserHandler");
 const createPostHandler = require("./handlers/createPostHandler");
 const retrievePublicPostsHandler = require("./handlers/retrievePublicPostsHandler");
@@ -42,8 +41,6 @@ client
     api.get("/posts/:postId", retrievePostHandler);
     api.patch("/posts/:postId", jsonBodyParser, updatePostHandler);
     api.delete("/posts/:postId", deletePostHandler);
-
-    api.get("/search", searchHttpCatsHandler);
 
     api.listen(PORT, () => console.log(`server listening on port ${PORT}`));
   })
