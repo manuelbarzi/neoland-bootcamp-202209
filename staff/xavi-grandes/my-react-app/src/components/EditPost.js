@@ -6,10 +6,11 @@ import retrievePost from '../logic/retrievePost'
 
 export default function ({ onUpdated, onClose, postId }) {
     const [post, setPost] = useState()
+    const [visibility, setVisibility] = useState()
 
     useEffect(() => {
         try {
-            retrievePost(window.userId, postId, (error, post) => {
+            retrievePost(sessionStorage.userId, postId, (error, post) => {
                 if (error) {
                     alert(error.message)
 
@@ -17,6 +18,7 @@ export default function ({ onUpdated, onClose, postId }) {
                 }
 
                 setPost(post)
+                setVisibility(post.visibility)
             })
         } catch(error) {
             alert(error.message)
@@ -30,7 +32,7 @@ export default function ({ onUpdated, onClose, postId }) {
         const { text: { value: text }, visibility: { value: visibility } } = event.target
 
         try {
-            updatePost(window.userId, postId, text, visibility, error => {
+            updatePost(sessionStorage.userId, postId, text, visibility, error => {
                 if (error) {
                     alert(error.message)
 
@@ -44,15 +46,17 @@ export default function ({ onUpdated, onClose, postId }) {
         }
     }
 
+    const changeVisibility = event => setVisibility(event.target.value)
+
     return <div className="bg-[#aaaa] fixed top-0 h-full w-full flex flex-col justify-center items-center overflow-hidden" onClick={onClose}>
-        <div className="bg-[white] p-5 rounded-xl flex flex-col items-end" onClick={event => event.stopPropagation()}>
+        <div className="p-5 rounded-xl flex flex-col items-end bg-white dark:bg-black text-black dark:text-white" onClick={event => event.stopPropagation()}>
             <AiOutlineCloseCircle size="1.5rem" onClick={onClose} className="cursor-pointer" />
 
             <form className="flex flex-col gap-2" onSubmit={submitUpdatePost}>
                 <label htmlFor="text">Text</label>
-                <textarea type="text" name="text" id="text" placeholder="input a text" defaultValue={post?.text}></textarea>
+                <textarea className="text-black" type="text" name="text" id="text" placeholder="input a text" defaultValue={post?.text}></textarea>
                 <label htmlFor="visibility">Visibility</label>
-                <select id="visibility" name="visibility" defaultValue={post?.visibility}>
+                <select className="text-black" id="visibility" name="visibility" value={visibility} onChange={changeVisibility}>
                     <option value="public">public</option>
                     <option value="private">private</option>
                 </select>
