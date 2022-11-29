@@ -1,4 +1,4 @@
-const retrievePost = require('../logic/retrievePost')
+const retrievePosts = require('../logic/retrievePosts')
 
 module.exports = (req, res) => {
     const { headers: { authorization }, params: { postId } } = req
@@ -6,15 +6,9 @@ module.exports = (req, res) => {
     const userId = authorization.substring(7)
 
     try {
-        retrievePost(userId, postId, (error, post) => {
-            if (error) {
-                res.status(500).json({ error: error.message })
-
-                return
-            }
-
-            res.json(post)
-        })
+        retrievePosts(userId, postId)
+            .then(posts => res.json(posts))
+            .catch(error => res.status(500).json({ error: error.message }))
     } catch (error) {
         res.status(500).json({ error: error.message })
     }
