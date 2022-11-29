@@ -18,7 +18,11 @@ function registerUser(name, email, password) {
 
             return users.insertOne({ name, email, password })
         })
-        .then(() => {})
+        .then(result => {
+            const { acknowledged } = result
+
+            if (!acknowledged) throw new Error(`could not create user`)
+         })
 }
 
 module.exports = registerUser

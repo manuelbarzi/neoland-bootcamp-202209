@@ -25,7 +25,11 @@ function createPost(userId, text, visibility) {
 
             return posts.insertOne(post)
         })
-        .then(() => { })
+        .then(result => {
+            const { acknowledged } = result
+
+            if (!acknowledged) throw new Error('could not create post')
+        })
 }
 
 module.exports = createPost
