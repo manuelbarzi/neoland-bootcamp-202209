@@ -4,8 +4,10 @@ import retrieveUser from '../logic/retrieveUser'
 import retrievePublicPosts from '../logic/retrievePublicPosts'
 import CreatePost from '../components/CreatePost'
 import { AiOutlinePlusCircle, AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai'
+import { BiLogOut } from 'react-icons/bi'
 import EditPost from '../components/EditPost'
 import DeletePost from '../components/DeletePost'
+import { Link, useNavigate } from 'react-router-dom'
 
 function Home() {
     log.info('Home -> render')
@@ -15,6 +17,9 @@ function Home() {
     const [createPostVisible, setCreatePostVisible] = useState(false)
     const [postIdToEdit, setPostIdToEdit] = useState()
     const [postIdToDelete, setPostIdToDelete] = useState()
+    // const [logOutToLogin, setLogOutToLogin] = useState()
+
+    // const Logout = () => setLogOutToLogin()
 
     useEffect(() => {
         try {
@@ -109,12 +114,14 @@ function Home() {
     }
 
     return <main className="overflow-hidden">
-        <header className="fixed bg-[white] w-full h-[2rem] top-0 flex justify-center">
+        <header className="fixed bg-[white] w-full h-[2rem] top-0 flex place-content-around ">
             <p>{user ? user.name : 'home'}</p>
+            {/* <button className='flex gap-1' onClick={Logout}>Log out <BiLogOut size="1.5rem" /></button> */}
+            <Link to="/login" className="flex gap-1">Log out <BiLogOut size="1.5rem" /></Link> 
         </header>
 
-        {posts && <div className="flex flex-col items-center gap-2 py-[2rem]">
-            {posts.map(post => <article key={post.id} className="border rounded-xl w-[50%] flex flex-col p-5">
+        {posts && <div className="flex flex-col items-center gap-2 py-[2.5rem]">
+            {posts.map(post => <article key={post.id} className="bg-white border rounded-xl w-[50%] flex flex-col p-5">
                 <a href={`/users/${post.user.id}`}><strong>{post.user.name}</strong></a>
                 <p>{post.text}</p>
                 <time>{post.date}</time>
