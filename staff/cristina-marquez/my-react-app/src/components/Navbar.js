@@ -5,25 +5,26 @@ import { AiOutlineLogout } from "react-icons/ai";
 
 function Navbar() {
 
+    const { user, setUser } = useContext(UserContext)
 
-    const { user } = useContext(UserContext)
 
     const logoutHandler = () => {
+        try {
+            setUser(null)
+
+        } catch (error) {
+            alert(error.message)
+        }
 
     }
 
+    return <header className="fixed flex justify-between bg-teal-600 w-full p-3 text-white">
 
-
-    return <header className="fixed flex justify-between bg-teal-600 w-full">
-
-        <span id="username-header-span" className="text-white">Hello {user.name} what's up?</span>
-
-        <button className=" text-white" onClick={logoutHandler}>logout</button>
+        <span id="username-header-span" >Hello {user.name} what's up?</span>
+        <button onClick={logoutHandler}><AiOutlineLogout /> </button>
 
 
     </header >
-
-
 
 }
 

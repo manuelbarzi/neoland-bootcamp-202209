@@ -40,7 +40,7 @@ function Home() {
 
     const refreshPosts = async () => {
         const fetchedPosts = await getPosts()
-        console.log('refreshed')
+        console.log('refreshed', fetchedPosts)
         setPosts(fetchedPosts)
     }
 
@@ -49,7 +49,7 @@ function Home() {
         <div>
             <Navbar></Navbar>
 
-            <section className="pt-4">
+            <section className="pt-10">
 
                 {/* Create new post */}
 
@@ -61,7 +61,7 @@ function Home() {
                 {posts.length > 0 && posts.map((post) =>
                     <Post key={post._id}
                         content={post}
-                        onUpdate={refreshPosts} />
+                        onRefreshPosts={refreshPosts} />
                 )}
             </section>
 

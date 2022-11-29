@@ -3,7 +3,7 @@ import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import UpdatePost from "./UpdatePost";
 import DeletePost from "./DeletePost";
 
-function Post({ content, onUpdate }) {
+function Post({ content, onRefreshPosts }) {
 
     const [updatePostIsVisible, setUpdatePostIsVisible] = useState(false)
     const [deletePostIsVisible, setDeletePostIsVisible] = useState(false)
@@ -20,7 +20,7 @@ function Post({ content, onUpdate }) {
 
     const onUpdatedPost = () => {
         setUpdatePostIsVisible(false)
-        onUpdate()
+        onRefreshPosts()
     }
 
     const deletePostHandler = (event) => {
@@ -33,6 +33,11 @@ function Post({ content, onUpdate }) {
 
     }
 
+    const onDeletedPost = () => {
+        setDeletePostIsVisible(false)
+        onRefreshPosts()
+    }
+
 
     return (
         <div className="flex flex-col items-center justify-center mb-5">
@@ -41,7 +46,7 @@ function Post({ content, onUpdate }) {
                 <p>{content.text}</p>
                 <p>{new Date(content.date).toLocaleString()}</p>
                 <button onClick={deletePostHandler}> <AiOutlineDelete /></button>
-                {deletePostIsVisible && <DeletePost post={content} onUpdated={onUpdatedPost} onClose={onDeletePostClose} ></DeletePost>}
+                {deletePostIsVisible && <DeletePost post={content} onDeleted={onDeletedPost} onClose={onDeletePostClose} ></DeletePost>}
                 <button onClick={updatePostHandler}> <AiOutlineEdit /> </button>
                 {updatePostIsVisible && <UpdatePost post={content} onUpdated={onUpdatedPost} onClose={onUpdatePostClose} ></UpdatePost>}
 

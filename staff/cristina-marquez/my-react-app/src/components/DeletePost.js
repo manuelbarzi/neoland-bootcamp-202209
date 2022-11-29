@@ -2,27 +2,18 @@ import deletePost from "../logic/deletePost"
 import { AiOutlineCloseCircle } from "react-icons/ai";
 
 
-function DeletePost({ onClose, onUpdated, post }) {
+function DeletePost({ onClose, onDeleted, post }) {
 
-
-    const confirmDeletePost = () => {
-
+    const confirmDeletePost = async () => {
 
         try {
-            deletePost(post._id)
-
-            onUpdated()
+            await deletePost(post._id)
+            onDeleted()
         } catch (error) {
             alert(error.message)
 
         }
-
     }
-
-
-
-
-
 
     return <div className="bg-[#aaaa] absolute top-0 left-0 h-full w-full flex flex-col justify-center items-center overflow-hidden" onClick={onClose}>
         <div className="bg-[white] p-5 rounded-xl flex flex-col items-end gap-2" onClick={event => event.stopPropagation()}>
@@ -36,7 +27,6 @@ function DeletePost({ onClose, onUpdated, post }) {
     </div >
 
 }
-
 
 
 export default DeletePost
