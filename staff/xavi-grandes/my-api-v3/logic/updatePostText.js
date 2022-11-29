@@ -1,3 +1,3 @@
-function updatePostText (userId, postId, newText, callback){
+function updatePostText(userId, postId, newText, callback) {
     
 }
