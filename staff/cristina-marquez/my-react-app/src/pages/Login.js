@@ -37,14 +37,14 @@ function Login() {
     }
 
     return (
-        <main className="h-screen w-screen flex flex-col items-center justify-center bg-teal-600">
+        <main className="h-screen w-screen flex flex-col items-center justify-center bg-teal-700">
             <div className="bg-white flex flex-col border rounded-lg p-3">
                 <form className="flex flex-col items-center justify-center gap-2 m-2 form" onSubmit={handleSubmit}>
                     <label htmlFor="email" className="label">Your email</label>
                     <input type="email" name="email" placeholder="enter your email" className="border rounded-md" />
                     <label htmlFor="password" className="label">Your password</label>
                     <input type="password" name="password" placeholder="enter your password" className="border rounded-md" />
-                    <button className="bg-teal-500 hover:bg-teal-600 text-white p-2 rounded-lg text-sm">Login</button>
+                    <button className="bg-pink-500 hover:bg-pink-600 text-white p-2 rounded-lg text-sm">Login</button>
                 </form>
                 <Link to="/register" className="underline">Register</Link>
             </div>

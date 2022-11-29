@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext } from "react"
 import UserContext from "../UserContext";
 import { AiOutlineLogout } from "react-icons/ai";
 
@@ -18,9 +18,9 @@ function Navbar() {
 
     }
 
-    return <header className="fixed flex justify-between bg-teal-600 w-full p-3 text-white">
+    return <header className="fixed flex justify-between bg-teal-600 w-full p-3 text-white text-lg">
 
-        <span id="username-header-span" >Hello {user.name} what's up?</span>
+        <span id="username-header-span" >Hello {user.name}!</span>
         <button onClick={logoutHandler}><AiOutlineLogout /> </button>
 
 

@@ -49,20 +49,28 @@ function Home() {
         <div>
             <Navbar></Navbar>
 
-            <section className="pt-10">
+            <section className="pt-12">
 
-                {/* Create new post */}
+                <div className="pt-3">
 
-                <button onClick={createNewPostHandler}>Create new post</button>
-                {createPostIsVisible && <CreatePost onCreated={onCreateNewPostCreated} onClose={onCreateNewPostClose} ></CreatePost>}
+                    {/* Create new post */}
 
-                {/* List posts */}
+                    <div className="flex justify-center">
 
-                {posts.length > 0 && posts.map((post) =>
-                    <Post key={post._id}
-                        content={post}
-                        onRefreshPosts={refreshPosts} />
-                )}
+                        <button className=" bg-teal-600 hover:bg-teal-700 text-white rounded-lg text-sm p-3" onClick={createNewPostHandler}>What's up?</button>
+                        {createPostIsVisible && <CreatePost onCreated={onCreateNewPostCreated} onClose={onCreateNewPostClose} ></CreatePost>}
+
+                    </div>
+
+                    {/* List posts */}
+
+                    {posts.length > 0 && posts.map((post) =>
+                        <Post key={post._id}
+                            content={post}
+                            onRefreshPosts={refreshPosts} />
+                    )}
+
+                </div>
             </section>
 
 
