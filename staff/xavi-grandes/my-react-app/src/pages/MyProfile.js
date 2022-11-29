@@ -1,17 +1,16 @@
 import log from '../utils/coolog'
 import { useEffect, useState } from 'react'
+import Header from '../components/Header'
 import retrieveUser from '../logic/retrieveUser'
-import retrievePublicPosts from '../logic/retrievePublicPosts'
+import retrievePosts from '../logic/retrievePosts'
+import Footer from '../components/Footer'
 import CreatePost from '../components/CreatePost'
-import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai'
 import EditPost from '../components/EditPost'
 import DeletePost from '../components/DeletePost'
-import { Link } from 'react-router-dom'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
+import { AiOutlineEdit, AiOutlineDelete, AiOutlineLock } from 'react-icons/ai'
 
-function Home() {
-    log.info('Home -> render')
+export default function () {
+    log.info('MyProfile -> render')
 
     const [user, setUser] = useState()
     const [posts, setPosts] = useState()
@@ -29,7 +28,7 @@ function Home() {
                 }
 
                 try {
-                    retrievePublicPosts(sessionStorage.userId, (error, posts) => {
+                    retrievePosts(sessionStorage.userId, (error, posts) => {
                         if (error) {
                             alert(error.message)
 
@@ -54,7 +53,7 @@ function Home() {
 
     const handlePostCreated = () => {
         try {
-            retrievePublicPosts(sessionStorage.userId, (error, posts) => {
+            retrievePosts(sessionStorage.userId, (error, posts) => {
                 if (error) {
                     alert(error.message)
 
@@ -75,7 +74,7 @@ function Home() {
 
     const handlePostUpdated = () => {
         try {
-            retrievePublicPosts(sessionStorage.userId, (error, posts) => {
+            retrievePosts(sessionStorage.userId, (error, posts) => {
                 if (error) {
                     alert(error.message)
 
@@ -96,7 +95,7 @@ function Home() {
 
     const handlePostDeleted = () => {
         try {
-            retrievePublicPosts(sessionStorage.userId, (error, posts) => {
+            retrievePosts(sessionStorage.userId, (error, posts) => {
                 if (error) {
                     alert(error.message)
 
@@ -116,13 +115,13 @@ function Home() {
 
         {posts && <div className="flex flex-col items-center gap-2 py-[2rem]">
             {posts.map(post => <article key={post.id} className="border rounded-xl w-[50%] flex flex-col p-5">
-                <Link to={`/profile/${post.user.id}`}><strong>{post.user.name}</strong></Link>
+                {post.visibility === 'private' && <p className="self-end"><AiOutlineLock /></p>}
                 <p>{post.text}</p>
                 <time>{post.date}</time>
-                {post.user.id === sessionStorage.userId && <div className="flex self-end">
+                <div className="flex self-end">
                     <button onClick={() => openEditPost(post.id)}><AiOutlineEdit size="1rem" /></button>
                     <button onClick={() => openDeletePost(post.id)}><AiOutlineDelete size="1rem" /></button>
-                </div>}
+                </div>
             </article>)}
         </div>}
 
@@ -134,5 +133,3 @@ function Home() {
         {postIdToDelete && <DeletePost postId={postIdToDelete} onDeleted={handlePostDeleted} onClose={closeDeletePost} />}
     </main>
 }
-
-export default Home
