@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import retrieveAUser from '../logic/retrieveAUser'
 import retrievePostsFromUser from '../logic/retrievePostsFromUser'
 import { useParams } from 'react-router-dom'
-// import Header from '../components/Header'
+import Header from '../components/Header'
 import HeaderProfile from '../components/HeaderProfile'
 
 export default function () {

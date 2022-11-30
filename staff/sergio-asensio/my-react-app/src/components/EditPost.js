@@ -6,6 +6,7 @@ import retrievePost from '../logic/retrievePost'
 
 export default function ({ onUpdated, onClose, postId }) {
     const [post, setPost] = useState()
+    const [visibility, setVisibility] = useState()
 
     useEffect(() => {
         try {
@@ -17,6 +18,7 @@ export default function ({ onUpdated, onClose, postId }) {
                 }
 
                 setPost(post)
+                setVisibility(post.visibility)
             })
         } catch(error) {
             alert(error.message)
@@ -44,6 +46,8 @@ export default function ({ onUpdated, onClose, postId }) {
         }
     }
 
+    const changeVisibility = event => setVisibility(event.target.value)
+
     return <div className="bg-[#aaaa] fixed top-0 h-full w-full flex flex-col justify-center items-center overflow-hidden" onClick={onClose}>
         <div className="p-5 rounded-xl flex flex-col items-end bg-white dark:bg-black text-black dark:text-white" onClick={event => event.stopPropagation()}>
             <AiOutlineCloseCircle size="1.5rem" onClick={onClose} className="cursor-pointer" />
@@ -52,7 +56,7 @@ export default function ({ onUpdated, onClose, postId }) {
                 <label htmlFor="text">Text</label>
                 <textarea className="text-black pl-2" type="text" name="text" id="text" placeholder="input a text" defaultValue={post?.text}></textarea>
                 <label htmlFor="visibility">Visibility</label>
-                <select className="text-black" id="visibility" name="visibility" defaultValue={post?.visibility}>
+                <select className="text-black" id="visibility" name="visibility" value={visibility} onChange={changeVisibility}>
                     <option value="public">public</option>
                     <option value="private">private</option>
                 </select>

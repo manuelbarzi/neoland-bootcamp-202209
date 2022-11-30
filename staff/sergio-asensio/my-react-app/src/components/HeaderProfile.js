@@ -3,8 +3,8 @@ import { AiOutlineLogout } from 'react-icons/ai'
 import { IoInvertModeOutline } from 'react-icons/io5'
 import Context from './Context'
 import { useContext } from 'react'
-import { Link} from 'react-router-dom'
-
+import { useNavigate } from 'react-router-dom'
+import { RiArrowGoBackFill } from 'react-icons/ri'
 
 
 export default function ({ userName }) {
@@ -14,9 +14,14 @@ export default function ({ userName }) {
 
     const switchMode = () => document.querySelector('html').classList.toggle('dark')
 
+    const navigate = useNavigate()
 
-    return <header className="fixed bg-[white] w-full h-[2rem] top-0 flex justify-center items-center gap-2 bg-white dark:bg-black text-black dark:text-white">        
-        <Link to={`/profile/${sessionStorage.userId}`}>{userName}</Link>
+    const back = ()=>  navigate('/home')
+
+    return <header className="fixed bg-[white] w-full h-[2rem] top-0 flex justify-center items-center gap-2 bg-white dark:bg-black text-black dark:text-white">
+        <button onClick={back}><RiArrowGoBackFill /></button>
+        
+        <p>{userName}</p>
 
         <button onClick={logout}><AiOutlineLogout /></button>
 

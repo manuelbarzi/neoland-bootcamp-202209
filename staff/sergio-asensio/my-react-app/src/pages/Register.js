@@ -15,15 +15,18 @@ function Register() {
         const { name: { value: name }, email: { value: email }, password: { value: password } } = event.target
 
         try {
-            registerUser(name, email, password, error => {
-                if (error) {
-                    alert(error.message)
+            // registerUser(name, email, password, error => {
+            //     if (error) {
+            //         alert(error.message)
 
-                    return
-                }
+            //         return
+            //     }
 
-                navigate('/login')
-            })
+            //     navigate('/login')
+            // })
+            registerUser(name, email, password)
+                .then(()=> navigate('/login'))
+                .catch(error => error.message)
         } catch (error) {
             alert(error.message)
 

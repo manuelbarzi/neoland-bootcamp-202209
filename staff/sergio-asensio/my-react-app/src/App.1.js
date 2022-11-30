@@ -3,7 +3,7 @@ import Home from './pages/Home'
 import log from './utils/coolog'
 import Register from './pages/Register'
 import { Routes, Route, Navigate } from 'react-router-dom'
-import ConditionalProfile from './pages/ConditionalProfile'
+import Profile from './pages/Profile'
 import { useState } from 'react'
 import Context from './components/Context'
 
@@ -22,13 +22,12 @@ function App() {
     delete sessionStorage.userId
 
     setLoggedIn(false)
-
   }
 
   return <Context.Provider value={{ login, logout }}>
     {loggedIn ? <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/profile/:targetUserId" element={<ConditionalProfile />} />
+      <Route path="/profile/:targetUserId" element={<Profile />} />
       <Route path="*" element={<Navigate replace to="/" />} />
     </Routes>
       :
