@@ -17,6 +17,5 @@ module.exports = {
     handlerDeletePost: require('./handlerDeletePost'),
     handlerUpdatePost: require('./handlerUpdatePost'),
     handlerRetrieveAUser: require('./handlerRetrieveAUser'),
-    handlerRetrievePostsFromUser: require('./handlerRetrievePostsFromUser'),
-    searchGet: require('./searchGet')
+    handlerRetrievePostsFromUser: require('./handlerRetrievePostsFromUser')
 }

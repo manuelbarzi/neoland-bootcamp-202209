@@ -5,7 +5,6 @@ const express = require('express')
 
 const {
     handlerRegister,
-    searchGet,
     handlerAuth,
     handlerRetrieveUser,
     handlerUpdateUserName,
@@ -47,7 +46,7 @@ client.connect()
         api.post('/users/auth', jsonBodyParser, handlerAuth)
         api.post('/users', jsonBodyParser, handlerRegister)
 
-        api.get('/users', handlerRetrieveUser)
+        api.get('/users', jwtVerifier, handlerRetrieveUser)
         api.patch('/users/updateUserName', jwtVerifier, jsonBodyParser, handlerUpdateUserName)
         api.patch('/users/updateUserEmail', jwtVerifier, jsonBodyParser, handlerUpdateUserEmail)
         api.patch('/users/updateUserPassword', jwtVerifier, jsonBodyParser, handlerUpdateUserPassword)
@@ -60,7 +59,6 @@ client.connect()
         api.patch('/tasks/text/:taskId', jwtVerifier, jsonBodyParser, handlerUpdateTaskText)
         api.patch('/tasks/title/:taskId', jwtVerifier, jsonBodyParser, handlerUpdateTaskTitle)
         api.delete('/tasks/:taskId', jwtVerifier, jsonBodyParser, handlerDeleteTask)
-        api.get('/search', jwtVerifier, searchGet)
 
         api.post('/posts', jwtVerifier, jsonBodyParser, handlerCreatePost)
         api.get('/posts/public', jwtVerifier, handlerRetrievePublicPosts)
