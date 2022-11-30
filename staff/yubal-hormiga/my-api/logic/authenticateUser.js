@@ -4,7 +4,6 @@ const context = require('./context')
  * 
  * @param {string} email The user email
  * @param {string} password The user password
- * @param {callback} callback The callback to attend the result
  */
 function authenticateUser(email, password) {
     if (typeof email !== 'string') throw new TypeError('email is not a string')

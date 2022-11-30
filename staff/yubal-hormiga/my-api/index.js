@@ -13,10 +13,12 @@ const updatePostHandler = require('./handlers/updatePostHandler')
 const deletePostHandler = require('./handlers/deletePostHandler')
 const retrievePostsFromUserHandler = require('./handlers/retrievePostsFromUserHandler')
 const retrieveAUserHandler = require('./handlers/retrieveAUserHandler')
+const retrievePostsHandler = require('./handlers/retrievePostsHandler')
 
 const jsonBodyParser = require('./utils/jsonBodyParser')
 const cors = require('./utils/cors')
 const context = require('./logic/context')
+const jwtVerifier = require('./utils/jwtVerifier')
 
 const { MONGODB_URL } = process.env
 
@@ -34,17 +36,17 @@ client.connect()
 
         api.post('/users/auth', jsonBodyParser, authenticateUserHandler)
         api.post('/users', jsonBodyParser, registerUserHandler)
-        api.get('/users', retrieveUserHandler)
-        api.get('/users/:targetUserId', retrieveAUserHandler)
+        api.get('/users', jwtVerifier, retrieveUserHandler)
+        api.get('/users/:targetUserId', jwtVerifier, retrieveAUserHandler)
 
-        api.get('/users/:targetUserId/posts', retrievePostsFromUserHandler)
+        api.get('/users/:targetUserId/posts', jwtVerifier, retrievePostsFromUserHandler)
 
-        api.post('/posts', jsonBodyParser, createPostHandler)
-        api.get('/posts/public', retrievePublicPostsHandler)
-        api.get('/posts/:postId', retrievePostHandler)
-        api.patch('/posts/:postId', jsonBodyParser, updatePostHandler)
-        api.delete('/posts/:postId', deletePostHandler)
-
+        api.post('/posts', jwtVerifier, jsonBodyParser, createPostHandler)
+        api.get('/posts/public', jwtVerifier, retrievePublicPostsHandler)
+        api.get('/posts/:postId', jwtVerifier, retrievePostHandler)
+        api.patch('/posts/:postId', jwtVerifier, jsonBodyParser, updatePostHandler)
+        api.delete('/posts/:postId', jwtVerifier, deletePostHandler)
+        api.get('/posts', jwtVerifier, retrievePostsHandler)
 
         const { PORT } = process.env
 

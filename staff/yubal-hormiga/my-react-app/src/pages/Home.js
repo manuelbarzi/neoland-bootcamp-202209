@@ -3,9 +3,13 @@ import { useEffect, useState } from 'react'
 import retrieveUser from '../logic/retrieveUser'
 import retrievePublicPosts from '../logic/retrievePublicPosts'
 import CreatePost from '../components/CreatePost'
-import { AiOutlinePlusCircle, AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai'
+import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai'
 import EditPost from '../components/EditPost'
 import DeletePost from '../components/DeletePost'
+import { Link } from 'react-router-dom'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+import extractSubFromToken from '../utils/extractSubFromToken'
 
 function Home() {
     log.info('Home -> render')
@@ -18,7 +22,7 @@ function Home() {
 
     useEffect(() => {
         try {
-            retrieveUser(window.userId, (error, user) => {
+            retrieveUser(sessionStorage.token, (error, user) => {
                 if (error) {
                     alert(error.message)
 
@@ -26,7 +30,7 @@ function Home() {
                 }
 
                 try {
-                    retrievePublicPosts(window.userId, (error, posts) => {
+                    retrievePublicPosts(sessionStorage.token, (error, posts) => {
                         if (error) {
                             alert(error.message)
 
@@ -51,7 +55,7 @@ function Home() {
 
     const handlePostCreated = () => {
         try {
-            retrievePublicPosts(window.userId, (error, posts) => {
+            retrievePublicPosts(sessionStorage.token, (error, posts) => {
                 if (error) {
                     alert(error.message)
 
@@ -72,7 +76,7 @@ function Home() {
 
     const handlePostUpdated = () => {
         try {
-            retrievePublicPosts(window.userId, (error, posts) => {
+            retrievePublicPosts(sessionStorage.token, (error, posts) => {
                 if (error) {
                     alert(error.message)
 
@@ -93,7 +97,7 @@ function Home() {
 
     const handlePostDeleted = () => {
         try {
-            retrievePublicPosts(window.userId, (error, posts) => {
+            retrievePublicPosts(sessionStorage.token, (error, posts) => {
                 if (error) {
                     alert(error.message)
 
@@ -108,24 +112,24 @@ function Home() {
         }
     }
 
-    return <main className="overflow-hidden">
-        <header className="fixed bg-[white] w-full h-[2rem] top-0 flex justify-center">
-            <p>{user ? user.name : 'home'}</p>
-        </header>
+    const userId = extractSubFromToken(sessionStorage.token)
+
+    return <main className="overflow-hidden bg-white dark:bg-black text-black dark:text-white">
+        <Header userName={user?.name} />
 
         {posts && <div className="flex flex-col items-center gap-2 py-[2rem]">
             {posts.map(post => <article key={post.id} className="border rounded-xl w-[50%] flex flex-col p-5">
-                <a href={`/users/${post.user.id}`}><strong>{post.user.name}</strong></a>
+                <Link to={`/profile/${post.user.id}`}><strong>{post.user.name}</strong></Link>
                 <p>{post.text}</p>
                 <time>{post.date}</time>
-                {post.user.id === window.userId && <div className="flex self-end">
+                {post.user.id === userId && <div className="flex self-end">
                     <button onClick={() => openEditPost(post.id)}><AiOutlineEdit size="1rem" /></button>
                     <button onClick={() => openDeletePost(post.id)}><AiOutlineDelete size="1rem" /></button>
                 </div>}
             </article>)}
         </div>}
 
-        <footer className="fixed bg-[white] w-full h-[2rem] bottom-0 flex justify-center"><button onClick={openCreatePost}><AiOutlinePlusCircle size="1.5rem" /></button></footer>
+        <Footer onCreate={openCreatePost} />
 
         {createPostVisible && <CreatePost onCreated={handlePostCreated} onClose={closeCreatePost} />}
 
