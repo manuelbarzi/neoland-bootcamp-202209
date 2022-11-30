@@ -1,27 +1,42 @@
 import Login from './pages/Login'
-import { useState } from 'react'
 import Home from './pages/Home'
-import Register from './pages/Register'
 import log from './utils/coolog'
+import Register from './pages/Register'
+import { Routes, Route, Navigate } from 'react-router-dom'
+import ConditionalProfile from './pages/ConditionalProfile'
+import { useState } from 'react'
+import Context from './components/Context'
 
 function App() {
   log.info('App -> render')
 
-  const [view, setView] = useState('login')
+  const [loggedIn, setLoggedIn] = useState(!!sessionStorage.token)
+  
+  const login = token => {
+    sessionStorage.token = token
+     
+    setLoggedIn(true)
+  }
 
-  const navigateToLogin = () => setView('login')
+  const logout = () => {
+    delete sessionStorage.token
 
-  const navigateToHome = () => setView('home')
+    setLoggedIn(false)
+  }
 
-  const navigateToRegister = () => setView('register')
-
-  return <>
-    <h1>hola app</h1>
-
-    {view === 'login' && <Login onLogin={navigateToHome} onNavigateToRegister={navigateToRegister} />}
-    {view === 'register' && <Register onNavigateToLogin={navigateToLogin} onRegisterUser={navigateToLogin} />}
-    {view === 'home' && <Home />}
-  </>
+  return <Context.Provider value={{ login, logout }}>
+    {loggedIn ? <Routes>
+      <Route path='/' element={<Home />} />
+      <Route path='/profile/:targetUserId' element={<ConditionalProfile />} />
+      <Route path='*' element={<Navigate replace to='/' />} />
+    </Routes>
+      :
+      <Routes>
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='*' element={<Navigate replace to='/login' />} />
+      </Routes>}
+  </Context.Provider>
 }
 
 export default App;

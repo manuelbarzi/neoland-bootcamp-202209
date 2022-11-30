@@ -21,7 +21,7 @@ function registerUser(name, email, password, callback) {
         const exists = users.some(user => user.email === email)
 
         if (exists) {
-            callback(new Error(`use with email ${email} already exists`))
+            callback(new Error(`user with email ${email} already exists`))
 
             return
         }
@@ -46,7 +46,6 @@ function registerUser(name, email, password, callback) {
             callback(null)
         })
     })
-
 }
 
 module.exports = registerUser

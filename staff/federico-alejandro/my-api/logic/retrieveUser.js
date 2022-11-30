@@ -1,6 +1,5 @@
 const { readFile } = require('fs')
 
-
 function retrieveUser(userId, callback) {
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
     if (!userId.length) throw new Error('userId is empty')
@@ -18,11 +17,12 @@ function retrieveUser(userId, callback) {
         const user = users.find(user => user.id === userId)
 
         if (!user) {
-            callback(new Error('user not registered'))
+            callback(new Error(`user with id ${userId} does not exist`))
 
             return
         }
-        // elimino datos que no quiero mostrar
+
+        // sanitize
         delete user.password
         delete user.id
 

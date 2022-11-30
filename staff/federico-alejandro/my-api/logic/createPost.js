@@ -3,7 +3,6 @@ const { readFile, writeFile } = require('fs')
 function createPost(userId, text, visibility, callback) {
     if (typeof userId !== "string") throw TypeError("userId is not a string");
     if (userId.length === 0) throw new Error("userId is empty");
-    // if(!userId) throw new Error('userId is empty')
     if (typeof text !== "string") throw TypeError("text is not a string");
     if (text.length === 0 || text.trim() === "") throw new Error("text is empty");
     if (typeof visibility !== "string") throw TypeError("visibility is not a string");

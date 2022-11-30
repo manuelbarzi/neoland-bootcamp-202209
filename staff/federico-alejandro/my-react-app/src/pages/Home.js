@@ -1,118 +1,143 @@
 import log from '../utils/coolog'
 import { useEffect, useState } from 'react'
 import retrieveUser from '../logic/retrieveUser'
-import createPost from '../logic/createPost'
 import retrievePublicPosts from '../logic/retrievePublicPosts'
+import CreatePost from '../components/CreatePost'
+import DeletePost from '../components/DeletePost'
+import EditPost from '../components/EditPost'
+import { Link } from 'react-router-dom'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+import extractSubFromToken from '../utils/extractSubFromToken'
+
+import { AiOutlineEdit, AiOutlineDelete, } from 'react-icons/ai'
+
 
 function Home() {
     log.info('home -> render')
 
     const [user, setUser] = useState()
-    const [posts, setPosts] = useState([])
-    const [toggleButtonPost, setToggleButtonPost] = useState('menu')
-    const [view, setView] = useState()
+    const [posts, setPosts] = useState()
+    const [createPostVisible, setCreatePostVisible] = useState(false)
+    const [postIdToEdit, setPostIdToEdit] = useState()
+    const [postIdToDelete, setPostIdToDelete] = useState()
+
+
 
 
     useEffect(() => {
         try {
-            retrieveUser(window.userId, (error, user) => {
+            retrieveUser(sessionStorage.token, (error, user) => {
                 if (error) {
                     alert(error.message)
 
                     return
                 }
 
-                setUser(user)
+                try {
+                    retrievePublicPosts(sessionStorage.token, (error, posts) => {
+                        if (error) {
+                            alert(error.message)
+
+                            return
+                        }
+                        setUser(user)
+                        setPosts(posts)
+                    })
+                } catch (error) {
+                    alert(error.message)
+                }
             })
         } catch (error) {
             alert(error.message)
         }
     }, [])
 
-    const handleCreatePost = event => {
-        event.preventDefault()
+    const openCreatePost = () => setCreatePostVisible(true)
 
-        const { text: { value: text }, visibility: { value: visibility } } = event.target
+    const closeCreatePost = () => setCreatePostVisible(false)
 
+    const handlePostCreated = () => {
         try {
-            createPost(window.userId, text, visibility, error => {
+            retrievePublicPosts(sessionStorage.token, (error, posts) => {
                 if (error) {
                     alert(error.message)
 
                     return
                 }
-
-                alert('Post saved')
-
-                event.target.reset()
+                setCreatePostVisible(false)
+                setPosts(posts)
             })
         } catch (error) {
             alert(error.message)
         }
     }
 
-    // const close = document.getElementById('close')
-    // const open = document.getElementById('open')
-    // const newPost = document.getElementById('newPost')
+    const openEditPost = postId => setPostIdToEdit(postId)
 
-    // const openNewPost = () => newPost.classList.add('newPost')
-    // const closeNewPost = () => newPost.classList.remove('newPost')
+    const closeEditPost = () => setPostIdToEdit()
 
-    const handleTogglePost = () =>
-        setToggleButtonPost(toggleButtonPost === 'newPost' ? 'close' : 'newPost')
-
-
-    useEffect(() => {
-        //const { text: { value: text }, visibility: { value: visibility } } = posts
+    const handlePostUpdated = () => {
         try {
-            retrievePublicPosts(window.userId, (error, posts) => {
-                if (posts.visibility === 'public') {
+            retrievePublicPosts(sessionStorage.token, (error, posts) => {
+                if (error) {
+                    alert(error.message)
 
-                    setPosts(posts)
+                    return
                 }
+                setPostIdToEdit()
+                setPosts(posts)
+            })
+        } catch (error) {
+            alert(error.message)
+        }
+    }
 
+    const openDeletePost = postId => setPostIdToDelete(postId)
+
+    const closeDeletePost = () => setPostIdToDelete()
+
+    const handlePostDeleted = () => {
+        try {
+            retrievePublicPosts(sessionStorage.token, (error, posts) => {
                 if (error) {
                     alert(error.message)
 
                     return
                 }
 
-
+                setPostIdToDelete()
+                setPosts(posts)
             })
         } catch (error) {
             alert(error.message)
         }
+    }
 
-    }, [posts])
+    const userId = extractSubFromToken(sessionStorage.token)
 
-    return <main>
-        <h2>Hola {user ? user.name : 'home'}</h2>
+    return <main className='h-full overflow-hidden bg-slate-600 dark:bg-black text-black dark:text-white'>
+        <Header userName={user?.name} />
 
-        <h2>Create Post</h2>
-        <button onClick={handleTogglePost}>Comment</button>
-        {toggleButtonPost === 'close' &&
-            <form onSubmit={handleCreatePost}>
-                <label htmlFor='text'>Text</label>
-                <textarea type='text' name='text' placeholder='input a text'></textarea>
-                <label htmlFor='visibility'>Visibility</label>
-                <select id='visibility' name='visibility'>
-                    <option value='public'>Public</option>
-                    <option value='private'>Private</option>
-                </select>
-                <button>Post</button>
-            </form>}
-        
-            
-        
+        {posts && <div className='flex flex-col items-center gap-2 py-[2rem] '>
+            {posts.map(post => <article key={post.id} className='bg-slate-300 shadow-slate-800 border-b-4 rounded-xl w-[50%] flex flex-col p-5'>
+                <Link to={`/profile/${post.user.id}`}><strong>{post.user.name}</strong></Link>
+                <p>{post.text}</p>
+                <time>{post.date}</time>
+                {post.user.id === userId && <div className='flex self-end'>
+                    <button onClick={() => openEditPost(post.id)}><AiOutlineEdit size='1rem' /></button>
+                    <button onClick={() => openDeletePost(post.id)}><AiOutlineDelete size='1rem' /></button>
+                </div>}
+            </article>)}
+        </div>}
 
-        <section>
-            <h2>Public Posts</h2>
-            {posts.filter(post => post.visibility === 'public').map(post => <post
-                key={post.id}
-                post={post}
-            />)}
+        <Footer onCreate={openCreatePost} />
 
-        </section>
+        {createPostVisible && <CreatePost onCreated={handlePostCreated} onClose={closeCreatePost} />}
+
+        {postIdToEdit && <EditPost postId={postIdToEdit} onUpdated={handlePostUpdated} onClose={closeEditPost} />}
+
+        {postIdToDelete && <DeletePost postId={postIdToDelete} onDeleted={handlePostDeleted} onClose={closeDeletePost} />}
 
     </main>
 }
