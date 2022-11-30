@@ -1,6 +1,6 @@
-export default function (userId, callback) {
-    if (typeof userId !== 'string') throw new TypeError('userId is not a string')
-    if (!userId.length) throw new Error('userId is empty')
+export default function (token, callback) {
+    if (typeof token !== 'string') throw new TypeError('token is not a string')
+    if (!token.length) throw new Error('token is empty')
     if (typeof callback !== 'function') throw new TypeError('callback is not a function')
 
     const xhr = new XMLHttpRequest
@@ -22,6 +22,6 @@ export default function (userId, callback) {
     }
 
     xhr.open('GET', 'http://localhost/posts/public')
-    xhr.setRequestHeader('Authorization', `Bearer ${userId}`)
+    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
     xhr.send()
 }

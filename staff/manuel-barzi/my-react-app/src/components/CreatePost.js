@@ -9,19 +9,7 @@ export default function ({ onCreated, onClose }) {
         const { text: { value: text }, visibility: { value: visibility } } = event.target
 
         try {
-            // createPost(sessionStorage.userId, text, visibility, error => {
-            //     if (error) {
-            //         alert(error.message)
-
-            //         return
-            //     }
-
-            //     event.target.reset()
-
-            //     onCreated()
-            // })
-
-            createPost(sessionStorage.userId, text, visibility)
+            createPost(sessionStorage.token, text, visibility)
                 .then(() => onCreated())
                 .catch(error => alert(error.message))
         } catch (error) {

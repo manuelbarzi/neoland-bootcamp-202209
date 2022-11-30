@@ -30,9 +30,9 @@ export default function (email, password, callback) {
                     return
                 }
 
-                const { userId } = JSON.parse(json)
+                const { token } = JSON.parse(json)
 
-                resolve(userId)
+                resolve(token)
             }
 
             xhr.onerror = () => reject(new Error('connection error'))
@@ -63,9 +63,9 @@ export default function (email, password, callback) {
             return
         }
 
-        const { userId } = JSON.parse(json)
+        const { token } = JSON.parse(json)
 
-        callback(null, userId)
+        callback(null, token)
     }
 
     xhr.onerror = () => callback(new Error('connection error'))
@@ -87,5 +87,5 @@ export default function (email, password, callback) {
  * @callback callback
  * 
  * @param {Error} error The authentication error
- * @param {string} userId The id of the user that authenticated
+ * @param {string} token The token of the user that authenticated
  */

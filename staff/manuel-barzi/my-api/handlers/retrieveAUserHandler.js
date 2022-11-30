@@ -1,11 +1,9 @@
 const retrieveAUser = require('../logic/retrieveAUser')
 
 module.exports = (req, res) => {
-    const { headers: { authorization }, params: { targetUserId } } = req
-
-    const userId = authorization.substring(7)
-
     try {
+        const { params: { targetUserId }, userId } = req
+        
         retrieveAUser(userId, targetUserId)
         .then(user => res.json(user))
         .catch(error => res.status(500).json({ error: error.message }))

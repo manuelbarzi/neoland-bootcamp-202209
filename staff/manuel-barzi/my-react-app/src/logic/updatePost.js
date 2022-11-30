@@ -1,15 +1,15 @@
 /**
  * Updates a post against API
  * 
- * @param {string} userId The user id
+ * @param {string} token The user token
  * @param {string} postId The post id
  * @param {string} text The post text
  * @param {string} visibility The post visibility
  * @param {callback} callback The callback to attend the result
  */
- export default function(userId, postId, text, visibility, callback) {
-    if (typeof userId !== 'string') throw new TypeError('userId is not a string')
-    if (!userId.length) throw new Error('userId is empty')
+ export default function(token, postId, text, visibility, callback) {
+    if (typeof token !== 'string') throw new TypeError('token is not a string')
+    if (!token.length) throw new Error('token is empty')
     if (typeof postId !== 'string') throw new TypeError('postId is not a string')
     if (!postId.length) throw new Error('postId is empty')
     if (typeof text !== 'string') throw new TypeError('text is not a string')
@@ -38,7 +38,7 @@
     xhr.onerror = () => callback(new Error('connection error'))
 
     xhr.open('PATCH', `http://localhost/posts/${postId}`)
-    xhr.setRequestHeader('Authorization', `Bearer ${userId}`)
+    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
     xhr.setRequestHeader('Content-Type', 'application/json')
 
     const payload = { text, visibility }

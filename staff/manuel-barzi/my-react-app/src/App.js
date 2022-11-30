@@ -10,16 +10,16 @@ import Context from './components/Context'
 function App() {
   log.info('App -> render')
 
-  const [loggedIn, setLoggedIn] = useState(!!sessionStorage.userId)
+  const [loggedIn, setLoggedIn] = useState(!!sessionStorage.token)
 
-  const login = userId => {
-    sessionStorage.userId = userId
+  const login = token => {
+    sessionStorage.token = token
      
     setLoggedIn(true)
   }
 
   const logout = () => {
-    delete sessionStorage.userId
+    delete sessionStorage.token
 
     setLoggedIn(false)
   }

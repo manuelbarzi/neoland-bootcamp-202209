@@ -20,7 +20,7 @@ export default function () {
 
     useEffect(() => {
         try {
-            retrieveUser(sessionStorage.userId, (error, user) => {
+            retrieveUser(sessionStorage.token, (error, user) => {
                 if (error) {
                     alert(error.message)
 
@@ -28,7 +28,7 @@ export default function () {
                 }
 
                 try {
-                    retrievePosts(sessionStorage.userId, (error, posts) => {
+                    retrievePosts(sessionStorage.token, (error, posts) => {
                         if (error) {
                             alert(error.message)
 
@@ -53,7 +53,7 @@ export default function () {
 
     const handlePostCreated = () => {
         try {
-            retrievePosts(sessionStorage.userId, (error, posts) => {
+            retrievePosts(sessionStorage.token, (error, posts) => {
                 if (error) {
                     alert(error.message)
 
@@ -74,7 +74,7 @@ export default function () {
 
     const handlePostUpdated = () => {
         try {
-            retrievePosts(sessionStorage.userId, (error, posts) => {
+            retrievePosts(sessionStorage.token, (error, posts) => {
                 if (error) {
                     alert(error.message)
 
@@ -95,7 +95,7 @@ export default function () {
 
     const handlePostDeleted = () => {
         try {
-            retrievePosts(sessionStorage.userId, (error, posts) => {
+            retrievePosts(sessionStorage.token, (error, posts) => {
                 if (error) {
                     alert(error.message)
 
