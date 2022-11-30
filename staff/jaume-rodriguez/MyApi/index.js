@@ -29,6 +29,7 @@ const {
 const jsonBodyParser = require('./utils/jsonBodyParser')
 const cors = require('./utils/cors')
 const context = require('./logic/context')
+const jwtVerifier = require('./utils/jwtVerifier')
 
 const { MONGODB_URL } = process.env
 
@@ -47,25 +48,25 @@ client.connect()
         api.post('/users', jsonBodyParser, handlerRegister)
 
         api.get('/users', handlerRetrieveUser)
-        api.patch('/users/updateUserName', jsonBodyParser, handlerUpdateUserName)
-        api.patch('/users/updateUserEmail', jsonBodyParser, handlerUpdateUserEmail)
-        api.patch('/users/updateUserPassword', jsonBodyParser, handlerUpdateUserPassword)
-        api.get('/users/:targetUserId', handlerRetrieveAUser)
-        api.get('/users/:targetUserId/posts', handlerRetrievePostsFromUser)
+        api.patch('/users/updateUserName', jwtVerifier, jsonBodyParser, handlerUpdateUserName)
+        api.patch('/users/updateUserEmail', jwtVerifier, jsonBodyParser, handlerUpdateUserEmail)
+        api.patch('/users/updateUserPassword', jwtVerifier, jsonBodyParser, handlerUpdateUserPassword)
+        api.get('/users/:targetUserId', jwtVerifier, handlerRetrieveAUser)
+        api.get('/users/:targetUserId/posts', jwtVerifier, handlerRetrievePostsFromUser)
 
-        api.post('/tasks', jsonBodyParser, handlerCreateTask)
-        api.get('/tasks', handlerRetrieveTasks)
-        api.patch('/tasks/:taskId', jsonBodyParser, handlerUpdateTaskStatus)
-        api.patch('/tasks/text/:taskId', jsonBodyParser, handlerUpdateTaskText)
-        api.patch('/tasks/title/:taskId', jsonBodyParser, handlerUpdateTaskTitle)
-        api.delete('/tasks/:taskId', jsonBodyParser, handlerDeleteTask)
-        api.get('/search', searchGet)
+        api.post('/tasks', jwtVerifier, jsonBodyParser, handlerCreateTask)
+        api.get('/tasks', jwtVerifier, handlerRetrieveTasks)
+        api.patch('/tasks/:taskId', jwtVerifier, jsonBodyParser, handlerUpdateTaskStatus)
+        api.patch('/tasks/text/:taskId', jwtVerifier, jsonBodyParser, handlerUpdateTaskText)
+        api.patch('/tasks/title/:taskId', jwtVerifier, jsonBodyParser, handlerUpdateTaskTitle)
+        api.delete('/tasks/:taskId', jwtVerifier, jsonBodyParser, handlerDeleteTask)
+        api.get('/search', jwtVerifier, searchGet)
 
-        api.post('/posts', jsonBodyParser, handlerCreatePost)
-        api.get('/posts/public', handlerRetrievePublicPosts)
-        api.get('/posts/:postId', handlerRetrievePost)
-        api.patch('/posts/:postId', jsonBodyParser, handlerUpdatePost)
-        api.delete('/posts/:postId', handlerDeletePost)
+        api.post('/posts', jwtVerifier, jsonBodyParser, handlerCreatePost)
+        api.get('/posts/public', jwtVerifier, handlerRetrievePublicPosts)
+        api.get('/posts/:postId', jwtVerifier, handlerRetrievePost)
+        api.patch('/posts/:postId', jwtVerifier, jsonBodyParser, handlerUpdatePost)
+        api.delete('/posts/:postId', jwtVerifier, handlerDeletePost)
 
 
         const { PORT } = process.env

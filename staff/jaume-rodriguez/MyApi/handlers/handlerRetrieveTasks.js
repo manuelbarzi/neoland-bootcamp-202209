@@ -1,11 +1,9 @@
 const retrieveTasks = require('../logic/retrieveTasks')
 
 module.exports = (req, res) => {
-    const { headers: { authorization } } = req
-
-    const userId = authorization.substring(7)
-    debugger
     try {
+        const { userId } = req
+
         retrieveTasks(userId)
             .then(tasks => {
                 res.json(tasks)
