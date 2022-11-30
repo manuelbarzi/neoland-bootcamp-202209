@@ -1,9 +1,10 @@
 const createnewPost = require('../logic/createPost')
 
 module.exports = (req, res) => {
-    let { userId, text, visibility } = req.body
+    let { text, visibility } = req.body
 
     try {
+        const userId = req.user.id;
         const newPostId = createnewPost(userId, text, visibility)
         res.status(201).send(newPostId)
     } catch (error) {

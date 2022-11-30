@@ -1,14 +1,22 @@
+const jwt = require('jsonwebtoken')
+
 module.exports = (req, res, next) => {
     try {
-        // Get user's token
-        // const userToken = req.headers['Authorization']
-        // const user = checkUserTokenInDB(userToken)
+        const jwtSecret = process.env.JWT_SECRET
 
-        const userId = '6380e27c0a0bf82556418fcd'
+        // Get user's token
+        const userTokenHeader = req.headers['authorization']
+        // userTokenHeader = Bearer eyJ............
+        const userToken = userTokenHeader.substring(7)
+        // userToken = eyJ....
+
+        const payload = jwt.verify(userToken, jwtSecret)
+
 
         // Set user in request context
         req.user = {
-            id: userId
+            id: payload.sub,
+            email: payload.email
         }
 
         return next();

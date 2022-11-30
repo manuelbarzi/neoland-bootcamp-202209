@@ -2,6 +2,8 @@ import { useContext } from 'react'
 import authenticateUser from "../logic/authenticateUser"
 import UserContext from '../UserContext';
 import { Link, useNavigate } from 'react-router-dom'
+import jwt_decode from "jwt-decode";
+import axios from 'axios';
 
 function Login() {
 
@@ -21,11 +23,22 @@ function Login() {
         const password = passwordInput.value
 
         try {
-            const authenticatedUser = await authenticateUser(email, password)
+            const tokenReponse = await authenticateUser(email, password)
+            const tokenString = tokenReponse.token
+            const decodedToken = jwt_decode(tokenString)
 
-            setUser(authenticatedUser)
 
-            console.log('INFO', `User ${authenticatedUser.email} successfully logged in`)
+            setUser({
+                _id: decodedToken.sub,
+                email: decodedToken.email,
+                name: decodedToken.name,
+                token: tokenString
+            })
+
+            console.log('INFO', `User ${decodedToken.name} successfully logged in`)
+
+            //FIXME: use state manager to set axios default headers
+            axios.defaults.headers.common['Authorization'] = `Bearer ${tokenString}`;
 
             // Navigate to home
             navigate('/')

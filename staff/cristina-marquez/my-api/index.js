@@ -1,6 +1,5 @@
 require('dotenv').config()
 const { MongoClient } = require('mongodb')
-
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
@@ -14,6 +13,7 @@ const updatePost = require('./handlers/updatePost')
 const deletePost = require('./handlers/deletePost')
 
 const context = require('./logic/context')
+const authoriseUser = require('./middleware/authoriseUser')
 
 const { MONGODB_URL } = process.env
 
@@ -37,9 +37,9 @@ client.connect()
         app.post('/register', registerUser)
 
         app.get('/posts', authenticateUserMiddleware, getPosts)
-        app.post('/posts', createnewPost)
-        app.patch('/posts/:postId', updatePost)
-        app.delete('/posts/:postId', deletePost)
+        app.post('/posts', authenticateUserMiddleware, createnewPost)
+        app.patch('/posts/:postId', authenticateUserMiddleware, authoriseUser, updatePost)
+        app.delete('/posts/:postId', authenticateUserMiddleware, authoriseUser, deletePost)
 
 
         //app.get('/search', searchGet)
