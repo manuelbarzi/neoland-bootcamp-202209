@@ -1,6 +1,4 @@
-import { regex, errors } from 'my-commons'
-
-const { IS_EMAIL_REGEX, HAS_SPACES_REGEX, IS_ALPHABETICAL_REGEX } = regex
+import { IS_EMAIL_REGEX, HAS_SPACES_REGEX, IS_ALPHABETICAL_REGEX } from '../utils/regex'
 
 /**
  * Registers a user against API

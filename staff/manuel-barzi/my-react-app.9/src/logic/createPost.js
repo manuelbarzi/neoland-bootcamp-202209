@@ -1,25 +1,19 @@
-import { regex, errors } from 'my-commons'
-
-const { IS_EMAIL_REGEX, HAS_SPACES_REGEX, IS_ALPHABETICAL_REGEX } = regex
-
 /**
- * Registers a user against API
- *
- * @param {string} name The user name 
- * @param {string} email The user email
- * @param {string} password The user password
+ * Creates a post against API
+ * 
+ * @param {string} token The user token
+ * @param {string} text The post text
+ * @param {string} visibility The post visibility
  * @param {callback} callback The callback to attend the result
  */
-export default function (name, email, password, callback) {
-    if (typeof name !== 'string') throw new Error('name is not a string')
-    if (!IS_ALPHABETICAL_REGEX.test(name)) throw new Error('name is not alphabetical')
-
-    if (typeof email !== 'string') throw new Error('email is not a string')
-    if (!IS_EMAIL_REGEX.test(email)) throw new Error('email is not valid')
-
-    if (typeof password !== 'string') throw new Error('password is not a string')
-    if (password.length < 8) throw new Error('password length is less than 8')
-    if (HAS_SPACES_REGEX.test(password)) throw new Error('password has spaces')
+export default function (token, text, visibility, callback) {
+    if (typeof token !== 'string') throw new TypeError('token is not a string')
+    if (!token.length) throw new Error('token is empty')
+    if (typeof text !== 'string') throw new TypeError('text is not a string')
+    if (!text.length) throw new Error('text is empty')
+    if (typeof visibility !== 'string') throw new TypeError('visibility is not a string')
+    if (!visibility.length) throw new Error('visibility is empty')
+    if (visibility !== 'public' && visibility !== 'private') throw new Error('invalid visibility')
 
     if (!callback)
         return new Promise((resolve, reject) => {
@@ -41,10 +35,11 @@ export default function (name, email, password, callback) {
 
             xhr.onerror = () => reject(new Error('connection error'))
 
-            xhr.open('POST', 'http://localhost/users')
+            xhr.open('POST', 'http://localhost/posts')
+            xhr.setRequestHeader('Authorization', `Bearer ${token}`)
             xhr.setRequestHeader('Content-Type', 'application/json')
 
-            const payload = { name, email, password }
+            const payload = { text, visibility }
 
             const json = JSON.stringify(payload)
 
@@ -71,10 +66,11 @@ export default function (name, email, password, callback) {
 
     xhr.onerror = () => callback(new Error('connection error'))
 
-    xhr.open('POST', 'http://localhost/users')
+    xhr.open('POST', 'http://localhost/posts')
+    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
     xhr.setRequestHeader('Content-Type', 'application/json')
 
-    const payload = { name, email, password }
+    const payload = { text, visibility }
 
     const json = JSON.stringify(payload)
 
@@ -82,7 +78,7 @@ export default function (name, email, password, callback) {
 }
 
 /**
- * Attends the result of the register
+ * Attends the result of the post creation
  * 
  * @callback callback
  * 

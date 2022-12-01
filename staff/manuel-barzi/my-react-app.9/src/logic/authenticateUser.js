@@ -1,19 +1,13 @@
-import { regex, errors } from 'my-commons'
-
-const { IS_EMAIL_REGEX, HAS_SPACES_REGEX, IS_ALPHABETICAL_REGEX } = regex
+import { IS_EMAIL_REGEX, HAS_SPACES_REGEX } from '../utils/regex'
 
 /**
- * Registers a user against API
- *
- * @param {string} name The user name 
+ * Authenticates a user against API
+ * 
  * @param {string} email The user email
  * @param {string} password The user password
  * @param {callback} callback The callback to attend the result
  */
-export default function (name, email, password, callback) {
-    if (typeof name !== 'string') throw new Error('name is not a string')
-    if (!IS_ALPHABETICAL_REGEX.test(name)) throw new Error('name is not alphabetical')
-
+export default function (email, password, callback) {
     if (typeof email !== 'string') throw new Error('email is not a string')
     if (!IS_EMAIL_REGEX.test(email)) throw new Error('email is not valid')
 
@@ -36,15 +30,18 @@ export default function (name, email, password, callback) {
                     return
                 }
 
-                resolve()
+                const { token } = JSON.parse(json)
+
+                resolve(token)
             }
 
             xhr.onerror = () => reject(new Error('connection error'))
 
-            xhr.open('POST', 'http://localhost/users')
+
+            xhr.open('POST', 'http://localhost/users/auth')
             xhr.setRequestHeader('Content-Type', 'application/json')
 
-            const payload = { name, email, password }
+            const payload = { email, password }
 
             const json = JSON.stringify(payload)
 
@@ -66,15 +63,18 @@ export default function (name, email, password, callback) {
             return
         }
 
-        callback(null)
+        const { token } = JSON.parse(json)
+
+        callback(null, token)
     }
 
     xhr.onerror = () => callback(new Error('connection error'))
 
-    xhr.open('POST', 'http://localhost/users')
+
+    xhr.open('POST', 'http://localhost/users/auth')
     xhr.setRequestHeader('Content-Type', 'application/json')
 
-    const payload = { name, email, password }
+    const payload = { email, password }
 
     const json = JSON.stringify(payload)
 
@@ -82,9 +82,10 @@ export default function (name, email, password, callback) {
 }
 
 /**
- * Attends the result of the register
+ * Attends the result of the authentication
  * 
  * @callback callback
  * 
  * @param {Error} error The authentication error
+ * @param {string} token The token of the user that authenticated
  */
