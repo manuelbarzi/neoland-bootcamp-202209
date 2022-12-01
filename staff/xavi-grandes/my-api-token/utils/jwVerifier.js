@@ -1,10 +1,10 @@
-const jwt = require ('jsonwebtoken')
+const jwt = require('jsonwebtoken')
 
 const { JWT_SECRET } = process.env
 
 module.exports = (req, res, next) => {
     try {
-        const { headers: {authorization} } = req
+        const { headers: { authorization } } = req
 
         const token = authorization.substring(7)
 
@@ -14,7 +14,8 @@ module.exports = (req, res, next) => {
 
         req.userId = userId
 
+        next()
     } catch (error) {
-        res.status(500).json({ error: error.message })
+        res.status(401).json({ error: error.message })
     }
 }
