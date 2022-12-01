@@ -1,0 +1,86 @@
+[
+    {
+        "id": "post-1",
+        "user": "user-1",
+        "text": "blah blah blah",
+        "date": "2022-12-17T12:18:31.429Z",
+        "visibility": "public"
+    },
+    {
+        "id": "post-2",
+        "user": "user-2",
+        "text": "bleh bleh bleh",
+        "date": "2022-11-27T12:18:31.429Z",
+        "visibility": "private"
+    },
+    {
+        "id": "post-3",
+        "user": "user-3",
+        "text": "blih blih blih",
+        "date": "2022-12-01T12:18:31.429Z",
+        "visibility": "public"
+    },
+    {
+        "id": "post-4",
+        "user": "user-10",
+        "text": "blah blah y blah",
+        "visibility": "public",
+        "date": "2022-11-18T11:37:45.925Z"
+    },
+    {
+        "id": "post-5",
+        "user": "user-10",
+        "text": "blah blah y blah",
+        "visibility": "public",
+        "date": "2022-11-18T11:39:30.958Z"
+    },
+    {
+        "id": "post-6",
+        "user": "user-10",
+        "text": "blah blah y blah",
+        "visibility": "public",
+        "date": "2022-11-18T11:39:50.682Z"
+    },
+    {
+        "id": "post-7",
+        "user": "user-10",
+        "text": "blah blah y blah",
+        "visibility": "public",
+        "date": "2022-11-18T11:39:51.273Z"
+    },
+    {
+        "id": "post-8",
+        "user": "user-10",
+        "text": "blah blah y blah",
+        "visibility": "public",
+        "date": "2022-11-18T11:39:51.784Z"
+    },
+    {
+        "id": "post-9",
+        "user": "user-10",
+        "text": "mi primer texto serio",
+        "visibility": "public",
+        "date": "2022-11-18T12:01:17.960Z"
+    },
+    {
+        "id": "post-10",
+        "user": "user-11",
+        "text": "my first post .P",
+        "visibility": "public",
+        "date": "2022-11-18T12:03:02.518Z"
+    },
+    {
+        "id": "post-11",
+        "user": "user-11",
+        "text": "my 2nd post .P",
+        "visibility": "public",
+        "date": "2022-11-18T12:04:23.271Z"
+    },
+    {
+        "id": "post-12",
+        "user": "user-11",
+        "text": "my 3rd post .P",
+        "visibility": "private",
+        "date": "2022-11-18T12:04:34.975Z"
+    }
+]

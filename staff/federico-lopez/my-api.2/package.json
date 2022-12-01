@@ -1,0 +1,20 @@
+{
+  "name": "my-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "inspect": "node --inspect src/index.js",
+    "inspect-and-stop": "node --inspect-brk index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "jsdom": "^20.0.2",
+    "xmlhttprequest": "^1.8.0"
+  }
+}
