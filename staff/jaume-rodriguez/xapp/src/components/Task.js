@@ -16,27 +16,21 @@ function Task(props) {
     // TASK FUNCTIONS
     const handleUpdateTaskText = (taskId, newText) => {
         try {
-            updateTaskText(sessionStorage.token, taskId, newText, (error) => {
-                if (error) {
-                    alert(error.message)
-                    return
-                }
-            });
-        } catch (error) {
-            alert(error.message);
+            updateTaskText(sessionStorage.token, taskId, newText)
+                .then(() => { })
+                .catch(error => alert(error.message))
 
-            return;
+        } catch (error) {
+            alert(error.message)
         }
     }
 
     const handleupdateTaskTitle = (taskId, newTitle) => {
         try {
-            updateTaskTitle(sessionStorage.token, taskId, newTitle, (error) => {
-                if (error) {
-                    alert(error.message)
-                    return
-                }
-            });
+            updateTaskTitle(sessionStorage.token, taskId, newTitle)
+                .then(() => { })
+                .catch(error => alert(error.message))
+
         } catch (error) {
             alert(error.message);
 
@@ -46,13 +40,9 @@ function Task(props) {
 
     const handleUpdateTaskStatus = (taskId, newStatus) => {
         try {
-            updateTaskStatus(sessionStorage.token, taskId, newStatus, (error) => {
-                if (error) {
-                    alert(error.message)
-                    return
-                }
-                props.onUpdateTaskStatus()
-            });
+            updateTaskStatus(sessionStorage.token, taskId, newStatus)
+                .then(() => props.onUpdateTaskStatus())
+                .catch(error => alert(error.message))
 
         } catch (error) {
             alert(error.message);
@@ -63,13 +53,9 @@ function Task(props) {
 
     const handleDeleteTask = (taskId) => {
         try {
-            deleteTask(sessionStorage.token, taskId, (error) => {
-                if (error) {
-                    alert(error.message)
-                    return
-                }
-                props.onDeleteTask()
-            });
+            deleteTask(sessionStorage.token, taskId)
+                .then(() => props.onDeleteTask())
+                .catch(error => alert(error.message))
 
         } catch (error) {
             alert(error.message);

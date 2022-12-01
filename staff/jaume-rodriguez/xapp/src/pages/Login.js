@@ -28,21 +28,12 @@ function Login(props) {
     const handleSubmit = (event) => {
         event.preventDefault()
 
-        const form = event.target
-        const emailInput = form.email
-        const passwordInput = form.password
-        const email = emailInput.value
-        const password = passwordInput.value
+        const { email: { value: email }, password: { value: password } } = event.target
 
         try {
-            authenticateUser(email, password, (error, token) => {
-                if (error) {
-                    alert(error.message)
-
-                    return
-                }
-                login(token)
-            })
+            authenticateUser(email, password)
+                .then(token => login(token))
+                .catch(error => alert(error.message))
         } catch (error) {
             alert(error.message)
         }

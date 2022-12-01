@@ -10,28 +10,16 @@ function EditPost({ onUpdated, onClose, postId }) {
 
     useEffect(() => {
         try {
-            retrieveUser(sessionStorage.token, (error, user) => {
-                if (error) {
-                    alert(error.message)
+            retrieveUser(sessionStorage.token)
+                .then(user => setUser(user))
+                .catch(error => alert(error.message))
 
-                    return
-                }
-                try {
-                    retrievePost(sessionStorage.token, postId, (error, post) => {
-                        if (error) {
-                            alert(error.message)
+            retrievePost(sessionStorage.token, postId)
+                .then(post => setPost(post))
+                .catch(error => alert(error.message))
 
-                            return
-                        }
-
-                        setPost(post)
-                        setUser(user)
-                    })
-                } catch (error) {
-                    alert(error.message)
-                }
-            })
         } catch (error) {
+            alert(error.message)
         }
     },)
 
@@ -42,15 +30,10 @@ function EditPost({ onUpdated, onClose, postId }) {
         const { text: { value: text }, visibility: { value: visibility } } = event.target
 
         try {
-            updatePost(sessionStorage.token, postId, text, visibility, error => {
-                if (error) {
-                    alert(error.message)
+            updatePost(sessionStorage.token, postId, text, visibility)
+                .then(() => onUpdated())
+                .catch(error => alert(error.message))
 
-                    return
-                }
-
-                onUpdated()
-            })
         } catch (error) {
             alert(error.message)
         }

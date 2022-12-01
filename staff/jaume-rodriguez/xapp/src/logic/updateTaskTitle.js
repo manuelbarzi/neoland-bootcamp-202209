@@ -1,37 +1,40 @@
-function updateTaskTitle(token, taskId, newTitle, callback) {
+function updateTaskTitle(token, taskId, newTitle) {
     if (typeof token !== 'string') throw new Error('token is not a string')
+    if (!token.length) throw new Error('token is empty')
     if (typeof taskId !== 'string') throw new Error('taskId is not a string')
+    if (!taskId.length) throw new Error('taskId is empty')
     if (typeof newTitle !== 'string') throw new Error('newTitle is not a string')
-    if (typeof callback !== 'function') throw new TypeError('callback is not a function')
+    if (!newTitle.length) throw new Error('newTitle is empty')
 
-    const xhr = new XMLHttpRequest()
+    return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest()
 
-    xhr.onload = () => {
-        const { status, responseTitle: json } = xhr
+        xhr.onload = () => {
+            const { status, responseTitle: json } = xhr
 
-        if (status >= 500) {
-            const { error } = JSON.parse(json)
+            if (status >= 500) {
+                const { error } = JSON.parse(json)
 
-            callback(new Error(error))
+                reject(new Error(error))
 
-            return
+                return
+            }
+
+            resolve()
         }
 
-        callback(null)
-    }
-
-    xhr.onerror = () => callback(new Error('connection error'))
+        xhr.onerror = () => reject(new Error('connection error'))
 
 
-    xhr.open('PATCH', `http://localhost/tasks/title/${taskId}`)
-    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
-    xhr.setRequestHeader('Content-Type', 'application/json')
+        xhr.open('PATCH', `http://localhost/tasks/title/${taskId}`)
+        xhr.setRequestHeader('Authorization', `Bearer ${token}`)
+        xhr.setRequestHeader('Content-Type', 'application/json')
 
-    const payload = { token, taskId, newTitle }
+        const payload = { token, taskId, newTitle }
+        const json = JSON.stringify(payload)
 
-    const json = JSON.stringify(payload)
-
-    xhr.send(json)
+        xhr.send(json)
+    })
 }
 
 export default updateTaskTitle

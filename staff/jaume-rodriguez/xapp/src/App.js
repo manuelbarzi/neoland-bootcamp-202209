@@ -1,3 +1,7 @@
+// TODO DRAG AND DROP
+// TODO TAREAS DE GRUPO
+// TODO Sin usuario te deja ver community
+
 import Login from './pages/Login'
 import Register from './pages/Register'
 import { useState } from 'react'

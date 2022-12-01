@@ -28,22 +28,12 @@ function Register(props) {
     const handleSubmit = (event) => {
         event.preventDefault()
 
-        const form = event.target
-        const nameInput = form.name
-        const emailInput = form.email
-        const passwordInput = form.password
-        const name = nameInput.value
-        const email = emailInput.value
-        const password = passwordInput.value
+        const { name: { value: name }, email: { value: email }, password: { value: password } } = event.target
 
         try {
-            registerUser(name, email, password, (error, token) => {
-                if (error) {
-                    alert(error.message)
-                    return
-                }
-                login(token)
-            })
+            registerUser(name, email, password)
+                .then(token => login(token))
+                .catch(error => alert(error.message))
         } catch (error) {
             alert(error.message)
         }

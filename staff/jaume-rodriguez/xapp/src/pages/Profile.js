@@ -14,31 +14,18 @@ function Profile() {
     // TASKS REFRESH
     useEffect(() => {
         try {
-            retrieveAUser(sessionStorage.token, targetUserId, (error, user) => {
-                if (error) {
-                    alert(error.message)
+            retrieveAUser(sessionStorage.token, targetUserId)
+                .then((user) => setUser(user))
+                .catch(error => alert(error.message))
 
-                    return
-                }
+            retrievePostsFromUser(sessionStorage.token, targetUserId)
+                .then((posts) => setPosts(posts))
+                .catch(error => alert(error.message))
 
-                try {
-                    retrievePostsFromUser(sessionStorage.token, targetUserId, (error, posts) => {
-                        if (error) {
-                            alert(error.message)
-
-                            return
-                        }
-
-                        setUser(user)
-                        setPosts(posts)
-                    })
-                } catch (error) {
-                    alert(error.message)
-                }
-            })
         } catch (error) {
             alert(error.message)
         }
+
     }, [targetUserId])
 
     return (

@@ -1,37 +1,37 @@
-function updateUserPassword(newPassword, token, callback) {
+function updateUserPassword(newPassword, token) {
     if (typeof token !== 'string') throw new TypeError('token is not a string')
     if (!token.length) throw new Error('token is empty')
     if (typeof newPassword !== 'string') throw new Error('Password is not a string')
     if (!newPassword.length) throw new Error('newPassword is empty')
-    if (typeof callback !== 'function') throw new TypeError('callback is not a function')
 
-    const xhr = new XMLHttpRequest()
+    return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest()
 
-    xhr.onload = () => {
-        const { status, responseText: json } = xhr
+        xhr.onload = () => {
+            const { status, responseText: json } = xhr
 
-        if (status >= 500) {
-            const { error } = JSON.parse(json)
+            if (status >= 500) {
+                const { error } = JSON.parse(json)
 
-            callback(new Error(error))
+                reject(new Error(error))
 
-            return
+                return
+            }
+
+            resolve()
         }
 
-        callback(null)
-    }
+        xhr.onerror = () => reject(new Error('connection error'))
 
-    xhr.onerror = () => callback(new Error('connection error'))
+        xhr.open('PATCH', `http://localhost/users/updateUserPassword`)
+        xhr.setRequestHeader('Authorization', `Bearer ${token}`)
+        xhr.setRequestHeader('Content-Type', 'application/json')
 
-    xhr.open('PATCH', `http://localhost/users/updateUserPassword`)
-    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
-    xhr.setRequestHeader('Content-Type', 'application/json')
+        const payload = { newPassword }
 
-    const payload = { newPassword }
-
-    const json = JSON.stringify(payload)
-
-    xhr.send(json)
+        const json = JSON.stringify(payload)
+        xhr.send(json)
+    })
 }
 
 export default updateUserPassword

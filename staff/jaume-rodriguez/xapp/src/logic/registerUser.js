@@ -1,6 +1,6 @@
 import { IS_EMAIL_REGEX, HAS_SPACES_REGEX, IS_ALPHABETICAL_REGEX } from '../utils/regex'
 
-function registerUser(name, email, password, callback) {
+function registerUser(name, email, password) {
     if (typeof name !== 'string') throw new Error('name is not a string')
     if (!IS_ALPHABETICAL_REGEX.test(name)) throw new Error('name is not valid')
     if (typeof email !== 'string') throw new Error('email is not a string')
@@ -10,37 +10,35 @@ function registerUser(name, email, password, callback) {
     if (password.length < 8) throw new Error('password length is less than 8')
     if (HAS_SPACES_REGEX.test(password)) throw new Error('password has spaces')
 
-    if (typeof callback !== 'function') throw new TypeError('callback is not a function')
+    return new Promise((resolve, reject) => {
 
-    const xhr = new XMLHttpRequest()
+        const xhr = new XMLHttpRequest()
 
-    xhr.onload = () => {
-        const { status, responseText: json } = xhr
+        xhr.onload = () => {
+            const { status, responseText: json } = xhr
 
-        if (status >= 500) {
-            const { error } = JSON.parse(json)
+            if (status >= 500) {
+                const { error } = JSON.parse(json)
 
-            callback(new Error(error))
+                reject(new Error(error))
 
-            return
+                return
+            }
+
+            const { token } = JSON.parse(json)
+            resolve(token)
         }
 
-        const { token } = JSON.parse(json)
+        xhr.onerror = () => reject(new Error('connection error'))
 
-        callback(null, token)
-    }
+        xhr.open('POST', 'http://localhost/users')
+        xhr.setRequestHeader('Content-Type', 'application/json')
 
-    xhr.onerror = () => callback(new Error('connection error'))
+        const payload = { name, email, password }
+        const json = JSON.stringify(payload)
 
-
-    xhr.open('POST', 'http://localhost/users')
-    xhr.setRequestHeader('Content-Type', 'application/json')
-
-    const payload = { name, email, password }
-
-    const json = JSON.stringify(payload)
-
-    xhr.send(json)
+        xhr.send(json)
+    })
 }
 
 export default registerUser

@@ -1,7 +1,3 @@
-// TODO DRAG AND DROP
-// TODO TAREAS DE GRUPO
-// TODO Sin usuario te deja ver community
-
 import { useState, useEffect } from 'react'
 import Task from '../components/Task'
 import retrieveTasks from '../logic/retrieveTasks'
@@ -18,13 +14,10 @@ function Tasks() {
 
     const handleRefreshTasks = () => {
         try {
-            retrieveTasks(sessionStorage.token, (error, tasks) => {
-                if (error) {
-                    alert(error.message)
-                    return
-                }
-                setTasks(tasks)
-            })
+            retrieveTasks(sessionStorage.token)
+                .then(tasks => setTasks(tasks))
+                .catch(error => alert(error.message))
+
         } catch (error) {
         }
     }
@@ -32,18 +25,15 @@ function Tasks() {
     // TASKS CREATION
     const handleCreateTask = (status) => {
         try {
-            createTask(sessionStorage.token, status, (error) => {
-                if (error) {
-                    alert(error.message)
-                    return
-                }
-                handleRefreshTasks()
-            })
+            createTask(sessionStorage.token, status)
+                .then(() => handleRefreshTasks())
+                .catch(error => alert(error.message))
 
         } catch (error) {
             alert(error.message)
         }
     }
+
     return (
         <>
             {/* TASKS PANEL*/}

@@ -19,28 +19,14 @@ function Posts() {
     // TASKS REFRESH
     useEffect(() => {
         try {
-            retrieveUser(sessionStorage.token, (error, user) => {
-                if (error) {
-                    alert(error.message)
+            retrieveUser(sessionStorage.token)
+                .then(user => setUser(user))
+                .catch(error => alert(error.message))
 
-                    return
-                }
+            retrievePublicPosts(sessionStorage.token)
+                .then(posts => setPosts(posts))
+                .catch(error => alert(error.message))
 
-                try {
-                    retrievePublicPosts(sessionStorage.token, (error, posts) => {
-                        if (error) {
-                            alert(error.message)
-
-                            return
-                        }
-
-                        setUser(user)
-                        setPosts(posts)
-                    })
-                } catch (error) {
-                    alert(error.message)
-                }
-            })
         } catch (error) {
             alert(error.message)
         }
@@ -48,16 +34,13 @@ function Posts() {
 
     const handlePostCreated = () => {
         try {
-            retrievePublicPosts(sessionStorage.token, (error, posts) => {
-                if (error) {
-                    alert(error.message)
+            retrievePublicPosts(sessionStorage.token)
+                .then(posts => {
+                    setCreatePostVisible(false)
+                    setPosts(posts)
+                })
+                .catch(error => alert(error.message))
 
-                    return
-                }
-
-                setCreatePostVisible(false)
-                setPosts(posts)
-            })
         } catch (error) {
             alert(error.message)
         }
@@ -65,16 +48,13 @@ function Posts() {
 
     const handlePostUpdated = () => {
         try {
-            retrievePublicPosts(sessionStorage.token, (error, posts) => {
-                if (error) {
-                    alert(error.message)
+            retrievePublicPosts(sessionStorage.token)
+                .then(posts => {
+                    setPostIdToEdit()
+                    setPosts(posts)
+                })
+                .catch(error => alert(error.message))
 
-                    return
-                }
-
-                setPostIdToEdit()
-                setPosts(posts)
-            })
         } catch (error) {
             alert(error.message)
         }
@@ -82,16 +62,13 @@ function Posts() {
 
     const handlePostDeleted = () => {
         try {
-            retrievePublicPosts(sessionStorage.token, (error, posts) => {
-                if (error) {
-                    alert(error.message)
+            retrievePublicPosts(sessionStorage.token)
+                .then(posts => {
+                    setPostIdToDelete()
+                    setPosts(posts)
+                })
+                .catch(error => alert(error.message))
 
-                    return
-                }
-
-                setPostIdToDelete()
-                setPosts(posts)
-            })
         } catch (error) {
             alert(error.message)
         }
@@ -102,6 +79,7 @@ function Posts() {
     const closeEditPost = () => setPostIdToEdit()
     const openDeletePost = postId => setPostIdToDelete(postId)
     const closeDeletePost = () => setPostIdToDelete()
+
     return (
         <>
             {/* POSTS PANEL*/}

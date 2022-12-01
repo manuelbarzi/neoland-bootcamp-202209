@@ -14,14 +14,10 @@ function Header() {
 
     useEffect(() => {
         try {
-            retrieveUser(sessionStorage.token, (error, user) => {
-                if (error) {
-                    alert(error.message)
+            retrieveUser(sessionStorage.token)
+                .then(user => setUser(user))
+                .catch(error => alert(error.message))
 
-                    return
-                }
-                setUser(user)
-            })
         } catch (error) {
         }
     }, [])

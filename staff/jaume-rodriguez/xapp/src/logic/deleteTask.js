@@ -1,34 +1,37 @@
-function deleteTask(token, taskId, callback) {
+function deleteTask(token, taskId) {
     if (typeof token !== 'string') throw new Error('token is not a string')
+    if (!token.length) throw new Error('token is empty')
     if (typeof taskId !== 'string') throw new Error('taskId is not a string')
-    if (typeof callback !== 'function') throw new TypeError('callback is not a function')
+    if (!taskId.length) throw new Error('taskId is empty')
 
-    const xhr = new XMLHttpRequest()
+    return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest()
 
-    xhr.onload = () => {
-        const { status, responseText: json } = xhr
+        xhr.onload = () => {
+            const { status, responseText: json } = xhr
 
-        if (status >= 500) {
-            const { error } = JSON.parse(json)
+            if (status >= 500) {
+                const { error } = JSON.parse(json)
 
-            callback(new Error(error))
+                reject(new Error(error))
 
-            return
+                return
+            }
+            resolve()
         }
-        callback(null)
-    }
 
-    xhr.onerror = () => callback(new Error('connection error'))
+        xhr.onerror = () => reject(new Error('connection error'))
 
 
-    xhr.open('DELETE', `http://localhost/tasks/${taskId}`)
-    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
+        xhr.open('DELETE', `http://localhost/tasks/${taskId}`)
+        xhr.setRequestHeader('Authorization', `Bearer ${token}`)
 
-    const payload = { token, taskId }
+        const payload = { token, taskId }
 
-    const json = JSON.stringify(payload)
+        const json = JSON.stringify(payload)
 
-    xhr.send(json)
+        xhr.send(json)
+    })
 }
 
 export default deleteTask

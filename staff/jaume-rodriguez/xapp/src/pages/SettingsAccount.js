@@ -18,14 +18,10 @@ function SettingsAccount() {
 
     useEffect(() => {
         try {
-            retrieveUser(sessionStorage.token, (error, user) => {
-                if (error) {
-                    alert(error.message)
+            retrieveUser(sessionStorage.token)
+                .then(user => setUser(user))
+                .catch(error => alert(error.message))
 
-                    return
-                }
-                setUser(user)
-            })
         } catch (error) {
         }
     }, [])
@@ -59,21 +55,16 @@ function SettingsAccount() {
     const handleUserNameSubmit = (event) => {
         event.preventDefault();
 
-        const form = event.target;
-        const nameInput = form.name;
-        const newName = nameInput.value
+        const { name: { value: newName } } = event.target
 
         try {
-            updateUserName(newName, sessionStorage.token, (error) => {
-                if (error) {
-                    alert(error.message)
-                    return
-                }
-                alert('The user name has been changed successfully')
-            })
-            user.name = newName
-            // FORM BUTTON VISUAL
-            handleButtonFormName()
+            updateUserName(newName, sessionStorage.token)
+                .then(() => {
+                    alert('The user name has been changed successfully')
+                    user.name = newName
+                    handleButtonFormName()
+                })
+                .catch(error => alert(error.message))
 
         } catch (error) {
             alert(error.message)
@@ -83,21 +74,16 @@ function SettingsAccount() {
     const handleUserEmailSubmit = (event) => {
         event.preventDefault();
 
-        const form = event.target;
-        const emailInput = form.email;
-        const newEmail = emailInput.value
+        const { email: { value: newEmail } } = event.target
 
         try {
-            updateUserEmail(newEmail, sessionStorage.token, (error) => {
-                if (error) {
-                    alert(error.message)
-                    return
-                }
-                alert('The user email has been changed successfully')
-            })
-            user.email = newEmail
-            // FORM BUTTON VISUAL
-            handleButtonFormEmail()
+            updateUserEmail(newEmail, sessionStorage.token)
+                .then(() => {
+                    alert('The user email has been changed successfully')
+                    user.email = newEmail
+                    handleButtonFormEmail()
+                })
+                .catch(error => alert(error.message))
 
         } catch (error) {
             alert(error.message)
@@ -107,25 +93,21 @@ function SettingsAccount() {
     const handleUserPasswordSubmit = (event) => {
         event.preventDefault();
 
-        const form = event.target;
-        const passwordInput = form.password;
-        const newPassword = passwordInput.value
+        const { password: { value: newPassword } } = event.target
 
         try {
-            updateUserPassword(newPassword, sessionStorage.token, (error) => {
-                if (error) {
-                    alert(error.message)
-                    return
-                }
-                alert('The user password has been changed successfully')
-            })
-            user.password = newPassword
-            passwordInput.value = ''
-            // FORM BUTTON VISUAL
-            handleButtonFormPassword()
+            updateUserPassword(newPassword, sessionStorage.token)
+                .then(() => {
+                    alert('The user password has been changed successfully')
+                    user.password = newPassword
+                    event.target.password.value = ''
+                    handleButtonFormPassword()
+                })
+                .catch(error => alert(error.message))
 
         } catch (error) {
             alert(error.message)
+
         }
     };
 

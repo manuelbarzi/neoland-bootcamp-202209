@@ -1,6 +1,6 @@
 import { IS_EMAIL_REGEX, HAS_SPACES_REGEX } from '../utils/regex'
 
-function authenticateUser(email, password, callback) {
+function authenticateUser(email, password) {
     if (typeof email !== 'string') throw new Error('email is not a string')
     if (!IS_EMAIL_REGEX.test(email)) throw new Error('email is not valid')
 
@@ -8,37 +8,34 @@ function authenticateUser(email, password, callback) {
     if (password.length < 8) throw new Error('password length is less than 8')
     if (HAS_SPACES_REGEX.test(password)) throw new Error('password has spaces')
 
-    if (typeof callback !== 'function') throw new TypeError('callback is not a function')
+    return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest()
 
-    const xhr = new XMLHttpRequest()
+        xhr.onload = () => {
+            const { status, responseText: json } = xhr
 
-    xhr.onload = () => {
-        const { status, responseText: json } = xhr
+            if (status >= 500) {
+                const { error } = JSON.parse(json)
 
-        if (status >= 500) {
-            const { error } = JSON.parse(json)
+                reject(new Error(error))
 
-            callback(new Error(error))
+                return
+            }
 
-            return
+            const { token } = JSON.parse(json)
+            resolve(token)
         }
 
-        const { token } = JSON.parse(json)
+        xhr.onerror = () => reject(new Error('connection error'))
 
-        callback(null, token)
-    }
+        xhr.open('POST', 'http://localhost/users/auth')
+        xhr.setRequestHeader('Content-Type', 'application/json')
 
-    xhr.onerror = () => callback(new Error('connection error'))
+        const payload = { email, password }
+        const json = JSON.stringify(payload)
 
-
-    xhr.open('POST', 'http://localhost/users/auth')
-    xhr.setRequestHeader('Content-Type', 'application/json')
-
-    const payload = { email, password }
-
-    const json = JSON.stringify(payload)
-
-    xhr.send(json)
+        xhr.send(json)
+    })
 }
 
 export default authenticateUser

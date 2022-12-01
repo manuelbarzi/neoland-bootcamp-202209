@@ -1,36 +1,36 @@
-function createTask(token, statusTask, callback) {
+function createTask(token, statusTask) {
     if (typeof token !== 'string') throw new TypeError('token is not a string')
     if (!token.length) throw new Error('token is empty')
     if (!statusTask.length) throw new Error('visibility is empty')
     if (statusTask !== "todo" && statusTask !== "done" && statusTask !== "doing") throw new Error('invalid status provided')
 
-    const xhr = new XMLHttpRequest()
+    return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest()
 
-    xhr.onload = () => {
-        const { status, responseText: json } = xhr
+        xhr.onload = () => {
+            const { status, responseText: json } = xhr
 
-        if (status >= 500) {
-            const { error } = JSON.parse(json)
+            if (status >= 500) {
+                const { error } = JSON.parse(json)
 
-            callback(new Error(error))
+                reject(new Error(error))
 
-            return
+                return
+            }
+            resolve()
         }
-        callback(null)
-    }
 
-    xhr.onerror = () => callback(new Error('connection error'))
+        xhr.onerror = () => reject(new Error('connection error'))
 
+        xhr.open('POST', 'http://localhost/tasks')
+        xhr.setRequestHeader('Authorization', `Bearer ${token}`)
+        xhr.setRequestHeader('Content-Type', 'application/json')
 
-    xhr.open('POST', 'http://localhost/tasks')
-    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
-    xhr.setRequestHeader('Content-Type', 'application/json')
+        const payload = { token, statusTask }
+        const json = JSON.stringify(payload)
 
-    const payload = { token, statusTask }
-
-    const json = JSON.stringify(payload)
-
-    xhr.send(json)
+        xhr.send(json)
+    })
 }
 
 export default createTask

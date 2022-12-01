@@ -1,4 +1,4 @@
-function updatePost(token, postId, text, visibility, callback) {
+function updatePost(token, postId, text, visibility) {
     if (typeof token !== 'string') throw new TypeError('token is not a string')
     if (!token.length) throw new Error('token is empty')
     if (typeof postId !== 'string') throw new TypeError('postId is not a string')
@@ -8,35 +8,35 @@ function updatePost(token, postId, text, visibility, callback) {
     if (typeof visibility !== 'string') throw new TypeError('visibility is not a string')
     if (!visibility.length) throw new Error('visibility is empty')
     if (visibility !== 'public' && visibility !== 'private') throw new Error('invalid visibility')
-    if (typeof callback !== 'function') throw new TypeError('callback is not a function')
 
-    const xhr = new XMLHttpRequest()
+    return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest()
 
-    xhr.onload = () => {
-        const { status, responseText: json } = xhr
+        xhr.onload = () => {
+            const { status, responseText: json } = xhr
 
-        if (status >= 500) {
-            const { error } = JSON.parse(json)
+            if (status >= 500) {
+                const { error } = JSON.parse(json)
 
-            callback(new Error(error))
+                reject(new Error(error))
 
-            return
+                return
+            }
+
+            resolve()
         }
 
-        callback(null)
-    }
+        xhr.onerror = () => reject(new Error('connection error'))
 
-    xhr.onerror = () => callback(new Error('connection error'))
+        xhr.open('PATCH', `http://localhost/posts/${postId}`)
+        xhr.setRequestHeader('Authorization', `Bearer ${token}`)
+        xhr.setRequestHeader('Content-Type', 'application/json')
 
-    xhr.open('PATCH', `http://localhost/posts/${postId}`)
-    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
-    xhr.setRequestHeader('Content-Type', 'application/json')
+        const payload = { text, visibility }
+        const json = JSON.stringify(payload)
 
-    const payload = { text, visibility }
-
-    const json = JSON.stringify(payload)
-
-    xhr.send(json)
+        xhr.send(json)
+    })
 }
 
 export default updatePost

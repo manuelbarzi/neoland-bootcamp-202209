@@ -1,28 +1,29 @@
-function retrieveTasks(token, callback) {
+function retrieveTasks(token) {
     if (typeof token !== 'string') throw new TypeError('token is not a string')
-    if (typeof callback !== 'function') throw new TypeError('callback is not a function')
+    if (!token.length) throw new Error('token is empty')
 
-    const xhr = new XMLHttpRequest()
+    return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest()
 
-    xhr.onload = function () {
-        const { status, responseText: json } = xhr
+        xhr.onload = function () {
+            const { status, responseText: json } = xhr
 
-        if (status >= 500) {
-            const { error } = JSON.parse(json)
+            if (status >= 500) {
+                const { error } = JSON.parse(json)
 
-            callback(new Error(error))
+                reject(new Error(error))
 
-            return
+                return
+            }
+
+            const tasks = JSON.parse(json)
+            resolve(tasks)
         }
 
-        const tasks = JSON.parse(json)
-
-        callback(null, tasks)
-    }
-
-    xhr.open('GET', `http://localhost/tasks`)
-    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
-    xhr.send()
+        xhr.open('GET', `http://localhost/tasks`)
+        xhr.setRequestHeader('Authorization', `Bearer ${token}`)
+        xhr.send()
+    })
 }
 
 export default retrieveTasks

@@ -6,15 +6,10 @@ function DeletePost({ postId, onDeleted, onClose }) {
         event.preventDefault()
 
         try {
-            deletePost(sessionStorage.token, postId, error => {
-                if (error) {
-                    alert(error.message)
+            deletePost(sessionStorage.token, postId)
+                .then(() => onDeleted())
+                .catch(error => alert(error.message))
 
-                    return
-                }
-
-                onDeleted()
-            })
         } catch (error) {
             alert(error.message)
         }

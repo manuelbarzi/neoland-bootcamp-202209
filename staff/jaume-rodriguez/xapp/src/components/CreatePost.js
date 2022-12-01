@@ -8,14 +8,10 @@ function CreatePost({ onCreated, onClose }) {
 
     useEffect(() => {
         try {
-            retrieveUser(sessionStorage.token, (error, user) => {
-                if (error) {
-                    alert(error.message)
+            retrieveUser(sessionStorage.token)
+                .then(user => setUser(user))
+                .catch(error => alert(error.message))
 
-                    return
-                }
-                setUser(user)
-            })
         } catch (error) {
         }
     }, [])
@@ -26,22 +22,14 @@ function CreatePost({ onCreated, onClose }) {
         const { text: { value: text }, visibility: { value: visibility } } = event.target
 
         try {
-            createPost(sessionStorage.token, text, visibility, error => {
-                if (error) {
-                    alert(error.message)
+            createPost(sessionStorage.token, text, visibility)
+                .then(() => onCreated())
+                .catch(error => alert(error.message))
 
-                    return
-                }
-
-                event.target.reset()
-
-                onCreated()
-            })
         } catch (error) {
             alert(error.message)
         }
     }
-
 
     return <div className="bg-[#aaaa] fixed top-0 h-full w-full flex flex-col justify-start items-center overflow-hidden" onClick={onClose}>
         <div className="w-[21rem] p-3 my-3 flex justify-center flex-col rounded-xl border-solid border-sky-700 border-t border-b-4 border-x bg-slate-100 mt-[20rem]" onClick={event => event.stopPropagation()}>
