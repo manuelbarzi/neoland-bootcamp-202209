@@ -1,6 +1,6 @@
-export default function (userId, callback) {
-    if (typeof userId !== 'string') throw new TypeError('userId is not a string')
-    if (!userId.length) throw new Error('userId is empty')
+export default function (token, callback) {
+    if (typeof token !== 'string') throw new TypeError('userId is not a string')
+    if (!token.length) throw new Error('userId is empty')
     
     if (!callback)
         return new Promise((resolve, reject) => {
@@ -25,7 +25,7 @@ export default function (userId, callback) {
             xhr.onerror = () => reject(new Error('connection error'))
 
             xhr.open('GET', 'http://localhost/posts')
-            xhr.setRequestHeader('Authorization', `Bearer ${userId}`)
+            xhr.setRequestHeader('Authorization', `Bearer ${token}`)
             xhr.send()
         })
 
@@ -52,6 +52,6 @@ export default function (userId, callback) {
     xhr.onerror = () => callback(new Error('connection error'))
 
     xhr.open('GET', 'http://localhost/posts')
-    xhr.setRequestHeader('Authorization', `Bearer ${userId}`)
+    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
     xhr.send()
 }

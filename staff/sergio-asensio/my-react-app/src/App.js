@@ -12,14 +12,14 @@ function App() {
 
   const [loggedIn, setLoggedIn] = useState(!!sessionStorage.userId)
 
-  const login = userId => {
-    sessionStorage.userId = userId
+  const login = token => {
+    sessionStorage.token = token
      
     setLoggedIn(true)
   }
 
   const logout = () => {
-    delete sessionStorage.userId
+    delete sessionStorage.token
 
     setLoggedIn(false)
 

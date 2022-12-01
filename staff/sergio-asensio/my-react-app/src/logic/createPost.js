@@ -1,14 +1,14 @@
 /**
  * Creates a post against API
  * 
- * @param {string} userId The user id
+ * @param {string} token The user token
  * @param {string} text The post text
  * @param {string} visibility The post visibility
  * @param {callback} callback The callback to attend the result
  */
-export default function (userId, text, visibility, callback) {
-    if (typeof userId !== 'string') throw new TypeError('userId is not a string')
-    if (!userId.length) throw new Error('userId is empty')
+export default function (token, text, visibility, callback) {
+    if (typeof token !== 'string') throw new TypeError('userId is not a string')
+    if (!token.length) throw new Error('userId is empty')
     if (typeof text !== 'string') throw new TypeError('text is not a string')
     if (!text.length) throw new Error('text is empty')
     if (typeof visibility !== 'string') throw new TypeError('visibility is not a string')
@@ -38,7 +38,7 @@ export default function (userId, text, visibility, callback) {
             xhr.onerror = () => reject(new Error('connection error'))
 
             xhr.open('POST', 'http://localhost/posts')
-            xhr.setRequestHeader('Authorization', `Bearer ${userId}`)
+            xhr.setRequestHeader('Authorization', `Bearer ${token}`)
             xhr.setRequestHeader('Content-Type', 'application/json')
 
             const payload = { text, visibility }
@@ -71,7 +71,7 @@ export default function (userId, text, visibility, callback) {
     xhr.onerror = () => callback(new Error('connection error'))
 
     xhr.open('POST', 'http://localhost/posts')
-    xhr.setRequestHeader('Authorization', `Bearer ${userId}`)
+    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
     xhr.setRequestHeader('Content-Type', 'application/json')
 
     const payload = { text, visibility }

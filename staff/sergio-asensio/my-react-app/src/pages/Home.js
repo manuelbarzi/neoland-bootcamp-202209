@@ -9,7 +9,7 @@ import DeletePost from '../components/DeletePost'
 import { Link } from 'react-router-dom'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-
+import extractSubFromToken from '../utils/extractSubFromToken'
 
 function Home() {
     log.info('Home -> render')
@@ -22,7 +22,7 @@ function Home() {
 
     useEffect(() => {
         try {
-            retrieveUser(sessionStorage.userId, (error, user) => {
+            retrieveUser(sessionStorage.token, (error, user) => {
                 if (error) {
                     alert(error.message)
 
@@ -30,7 +30,7 @@ function Home() {
                 }
 
                 try {
-                    retrievePublicPosts(sessionStorage.userId, (error, posts) => {
+                    retrievePublicPosts(sessionStorage.token, (error, posts) => {
                         if (error) {
                             alert(error.message)
 
@@ -55,7 +55,7 @@ function Home() {
 
     const handlePostCreated = () => {
         try {
-            retrievePublicPosts(sessionStorage.userId, (error, posts) => {
+            retrievePublicPosts(sessionStorage.token, (error, posts) => {
                 if (error) {
                     alert(error.message)
 
@@ -76,7 +76,7 @@ function Home() {
 
     const handlePostUpdated = () => {
         try {
-            retrievePublicPosts(sessionStorage.userId, (error, posts) => {
+            retrievePublicPosts(sessionStorage.token, (error, posts) => {
                 if (error) {
                     alert(error.message)
 
@@ -97,7 +97,7 @@ function Home() {
 
     const handlePostDeleted = () => {
         try {
-            retrievePublicPosts(sessionStorage.userId, (error, posts) => {
+            retrievePublicPosts(sessionStorage.token, (error, posts) => {
                 if (error) {
                     alert(error.message)
 
@@ -112,6 +112,8 @@ function Home() {
         }
     }
 
+    const userId = extractSubFromToken(sessionStorage.token)
+
     return <main className="overflow-hidden bg-white dark:bg-black text-black dark:text-white">
         <Header userName={user?.name} />
     
@@ -121,7 +123,7 @@ function Home() {
                 <Link to={`/profile/${post.user.id}`}><strong>{post.user.name}</strong></Link>
                 <p>{post.text}</p>
                 <time>{post.date}</time>
-                {post.user.id === sessionStorage.userId && <div className="flex self-end">
+                {post.user.id === userId && <div className="flex self-end">
                     <button onClick={() => openEditPost(post.id)}><AiOutlineEdit size="1rem" /></button>
                     <button onClick={() => openDeletePost(post.id)}><AiOutlineDelete size="1rem" /></button>
                 </div>}

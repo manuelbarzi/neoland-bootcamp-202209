@@ -1,6 +1,6 @@
-export default function (userId, targetUserId, callback) {
-    if (typeof userId !== 'string') throw new TypeError('userId is not a string')
-    if (!userId.length) throw new Error('userId is empty')
+export default function ( token, targetUserId, callback) {
+    if (typeof token !== 'string') throw new TypeError('userId is not a string')
+    if (!token.length) throw new Error('userId is empty')
     if (typeof targetUserId !== 'string') throw new TypeError('targetUserId is not a string')
     if (!targetUserId.length) throw new Error('targetUserId is empty')
 
@@ -25,7 +25,7 @@ export default function (userId, targetUserId, callback) {
             }
 
             xhr.open('GET', `http://localhost/users/${targetUserId}`)
-            xhr.setRequestHeader('Authorization', `Bearer ${userId}`)
+            xhr.setRequestHeader('Authorization', `Bearer ${token}`)
             xhr.send()
 
         })
@@ -51,6 +51,6 @@ export default function (userId, targetUserId, callback) {
     }
 
     xhr.open('GET', `http://localhost/users/${targetUserId}`)
-    xhr.setRequestHeader('Authorization', `Bearer ${userId}`)
+    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
     xhr.send()
 }

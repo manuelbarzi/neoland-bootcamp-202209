@@ -6,17 +6,7 @@ export default function ({ postId, onDeleted, onClose }) {
         event.preventDefault()
 
         try {
-            // deletePost(sessionStorage.userId, postId, error => {
-            //     if (error) {
-            //         alert(error.message)
-
-            //         return
-            //     }
-
-            //     onDeleted()
-            // })
-
-            deletePost(sessionStorage.userId, postId)
+            deletePost(sessionStorage.token, postId)
                 .then(() => onDeleted())
                 .catch(error => alert(error.message))
         } catch (error) {

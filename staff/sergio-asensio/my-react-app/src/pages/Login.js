@@ -17,15 +17,6 @@ function Login() {
         const { email: { value: email }, password: { value: password } } = event.target
 
         try {
-            // authenticateUser(email, password, (error, userId) => {
-            //     if (error) {
-            //         alert(error.message)
-
-            //         return
-            //     }
-                
-            //     login(userId)
-            // })
             authenticateUser(email, password)
                 .then(userId => login(userId))
                 .catch(error => alert(error.message))

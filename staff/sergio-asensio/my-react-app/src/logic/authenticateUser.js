@@ -30,9 +30,9 @@ export default function (email, password, callback) {
                     return
                 }
 
-                const { userId } = JSON.parse(json)
+                const { token } = JSON.parse(json)
 
-                resolve( userId)
+                resolve( token)
             }
 
             xhr.onerror = () => reject(new Error('connection error'))

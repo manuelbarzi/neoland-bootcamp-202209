@@ -15,7 +15,7 @@ export default function () {
 
     useEffect(() => {
         try {
-            retrieveAUser(sessionStorage.userId, targetUserId, (error, user) => {
+            retrieveAUser(sessionStorage.token, targetUserId, (error, user) => {
                 if (error) {
                     alert(error.message)
 
@@ -23,7 +23,7 @@ export default function () {
                 }
 
                 try {
-                    retrievePostsFromUser(sessionStorage.userId, targetUserId, (error, posts) => {
+                    retrievePostsFromUser(sessionStorage.token, targetUserId, (error, posts) => {
                         if (error) {
                             alert(error.message)
 
