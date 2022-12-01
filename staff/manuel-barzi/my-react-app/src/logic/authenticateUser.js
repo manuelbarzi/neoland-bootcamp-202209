@@ -1,7 +1,7 @@
 import { regex, errors } from 'my-commons'
 
 const { IS_EMAIL_REGEX, HAS_SPACES_REGEX } = regex
-const { FormatError, AuthError, LengthError, NotFoundError } = errors
+const { FormatError, AuthError, LengthError, NotFoundError, UnexpectedError } = errors
 
 /**
  * Authenticates a user against API
@@ -44,7 +44,11 @@ export default function (email, password) {
                 const { error } = JSON.parse(json)
 
                 reject(new NotFoundError(error))
-            }
+            } else if (status < 500)
+                reject(new UnexpectedError('client error'))
+            else
+                reject(new UnexpectedError('server error'))
+
         }
 
         xhr.onerror = () => reject(new Error('connection error'))
