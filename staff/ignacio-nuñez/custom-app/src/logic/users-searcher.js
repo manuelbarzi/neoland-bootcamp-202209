@@ -1,5 +1,5 @@
-function usersSearcher(query, userId) {
-    if (typeof userId !== 'string') throw new TypeError('invalid user id')
+function usersSearcher(query, token) {
+    if (typeof token !== 'string') throw new TypeError('invalid user id')
     if (typeof query !== 'string') throw new Error('query is not a string')
     if (query.trim() === '') throw new Error('invalid query')
 
@@ -7,7 +7,7 @@ function usersSearcher(query, userId) {
     return fetch(`http://localhost:80/search/users?q=${query}`, {
         method: 'GET',
         headers: {
-            'Authorization': `Bearer ${userId}`,
+            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
         }
     })

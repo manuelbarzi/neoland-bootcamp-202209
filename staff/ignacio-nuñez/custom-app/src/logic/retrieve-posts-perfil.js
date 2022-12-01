@@ -1,5 +1,5 @@
-function retrievePostsPerfil(userId) {
-    return fetch('http://localhost:80/posts/retrieve/perfil', {
+function retrievePostsPerfil(userId, page, limit) {
+    return fetch(`http://localhost:80/posts/perfil?page=${page}&limit=${limit}`, {
         method: 'GET',
         headers: { 
             'Authorization': `Bearer ${userId}`,

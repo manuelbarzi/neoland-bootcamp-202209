@@ -5,46 +5,56 @@ import Home from '../pages/Home'
 import UserPerfil from "../pages/UserPerfil";
 import SearchedUserPerfil from "../pages/SearchedUserPerfil";
 import { Routes, Route, Navigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { Context } from "./Context";
+import retrieveUser from "../logic/retrieve-user";
+
 function App() {
-  const [searchedUser, setSearchedUser] = useState()
+  const [user, setMyUser] = useState()
 
-  const onSearchedUserClick = (searchedUser) => {
-    setSearchedUser(searchedUser)
+  useEffect(() => {
+    if (sessionStorage.token) 
+    retrieveUserHandler()
+  }, [])
+  
+  const handleLogout = () => {
+    setMyUser()
   }
-
-  const ConditionalHome = () => {
-
-    return sessionStorage.userId ? <Home onSearchedUserClick={onSearchedUserClick} /> : <Navigate replace to="/login" />
+  
+  const retrieveUserHandler = () => {
+    retrieveUser(sessionStorage.token)
+    .then(user => {
+      setMyUser(user)
+    })
   }
-
-  const ConditionalUserPerfil = () => {
-
-    return sessionStorage.userId ? <UserPerfil onSearchedUserClick={onSearchedUserClick} /> : <Navigate replace to="/login" />
+  
+  const onLoggedIn = () => {
+    retrieveUserHandler()
   }
 
   return (
-    <Routes>
-      {<Route path="/login"
-        element={sessionStorage.userId ? <Navigate replace to="/" /> : <Login />}
-      />}
-       {<Route path="/register"
-        element={sessionStorage.userId ? <Navigate replace to="/" /> : <Register />}
-      />}
-      {<Route path="/"
-        element={<ConditionalHome />}
-
-      />}
-       {<Route path="/perfil"
-        element={<ConditionalUserPerfil />}
-      />}
-      {
-        <Route path='/user/:userId'
-          element={<SearchedUserPerfil />}
-          searchedUser={searchedUser}
+    <Context.Provider value={{ handleLogout, user }}>
+      <Routes>
+        {<Route path="/login"
+          element={sessionStorage.token ? <Navigate replace to="/" /> : <Login onLoggedIn={onLoggedIn} />}
         />}
-    </Routes>
-  );
+        {<Route path="/register"
+          element={sessionStorage.token ? <Navigate replace to="/" /> : <Register />}
+        />}
+        {<Route path="/"
+          element={sessionStorage.token ? <Home /> : <Navigate replace to="/login"
+          />}
+        />}
+        {<Route path="/perfil"
+          element={sessionStorage.token ? <UserPerfil /> : <Navigate replace to="/login" />}
+        />}
+        {
+          <Route path='/user/:targetUserId'
+            element={sessionStorage.token ? <SearchedUserPerfil /> : <Navigate replace to="/login" />}
+          />}
+      </Routes>
+    </Context.Provider>
+  )
 }
 
 export default App;

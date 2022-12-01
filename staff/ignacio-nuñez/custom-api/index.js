@@ -1,8 +1,8 @@
 require('dotenv').config()
 
+const { MongoClient } = require('mongodb')
 const express = require('express')
-const jsonBodyParser = require('./utils/jsonBodyParser')
-const cors = require('./utils/cors')
+
 const editPost = require('./handlers/editPost')
 const usersSearch = require('./handlers/usersSearch')
 const postsSearchedUserRetrieve = require('./handlers/postsSearchedUserRetrieve')
@@ -16,23 +16,39 @@ const postsUserRetrieve = require('./handlers/postsUserRetrieve')
 const userPostRetrieve = require('./handlers/userPostRetrieve')
 const userSearchGet = require('./handlers/userSearchGet')
 
-const api = express()
+const jsonBodyParser = require('./utils/jsonBodyParser')
+const cors = require('./utils/cors')
+const context = require('./logic/context')
+const jwtVerifier = require('./utils/jwtVerifier')
 
-api.use(cors)
-api.get('/search/users', usersSearch)
-api.get('/search/users/:searchUserId', userSearchGet)
-api.get('/search/posts/:searchedUserId', postsSearchedUserRetrieve)
+const { MONGODB_URL } = process.env
 
-api.post('/user', jsonBodyParser, userRegister)
-api.post('/user/authenticate', jsonBodyParser, userAuthenticate)
-api.get('/user/retrieve', userGet)
-api.get('/user/posts/:postId', userPostRetrieve)
+const client = new MongoClient(MONGODB_URL)
 
-api.post('/posts', jsonBodyParser, createPost)
-api.delete('/posts/:postId', deletePost)
-api.patch('/posts/:postId', jsonBodyParser, editPost)
-api.get('/posts/retrieve', postsAllowedRetrieve)
-api.get('/posts/retrieve/perfil', postsUserRetrieve)
+client.connect()
+    .then(connection => {
+        console.log(`db connected to ${MONGODB_URL}`)
+        context.db = connection.db('test')
 
-const { PORT } = process.env
-api.listen(PORT, ()=> console.log(`server running on port: ${PORT}`))
+        const api = express()
+
+        api.use(cors)
+        api.get('/search/users', jwtVerifier, usersSearch)
+        api.get('/search/users/:searchUserId',jwtVerifier, userSearchGet)
+        api.get('/search/posts/:searchedUserId',jwtVerifier, postsSearchedUserRetrieve)
+
+        api.post('/user', jsonBodyParser, userRegister)
+        api.post('/user/authenticate', jsonBodyParser, userAuthenticate)
+        api.get('/user/retrieve',jwtVerifier, userGet)
+        api.get('/user/posts/:postId',jwtVerifier, userPostRetrieve)
+
+        api.post('/posts',jwtVerifier, jsonBodyParser, createPost)
+        api.delete('/posts/:postId',jwtVerifier, deletePost)
+        api.patch('/posts/:postId',jwtVerifier, jsonBodyParser, editPost)
+        api.get('/posts/perfil',jwtVerifier, postsUserRetrieve)
+        api.get('/posts',jwtVerifier, postsAllowedRetrieve)
+
+        const { PORT } = process.env
+        api.listen(PORT, () => console.log(`server running on port: ${PORT}`))
+    })
+    .catch(error => console.log(error))

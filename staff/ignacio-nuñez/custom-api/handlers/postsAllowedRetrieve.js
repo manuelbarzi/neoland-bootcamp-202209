@@ -1,23 +1,15 @@
 const retrievePosts = require("../logic/retrievePosts")
 
 module.exports = (req, res) => {
-    const { authorization } = req.headers
-
-    const userId = authorization.substring(7)
-
     try {
-        retrievePosts(userId, (error, posts) => {
-            if (error) {
-                res.status(500)
-                res.json({ error: error.message })
+        const { userId, query: { page, limit } } = req
 
-                return
-            }
+        const limitPosts = parseInt(limit)
 
-            res.json(posts)
-        })
+        retrievePosts(userId, page, limitPosts)
+            .then(posts => res.json(posts))
+            .catch(error => res.status(500).json({ error: error.message }))
     } catch (error) {
-        res.status(500)
-        res.json({ error: error.message })
+        res.status(500).json({ error: error.message })
     }
 }

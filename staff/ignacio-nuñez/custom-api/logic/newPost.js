@@ -1,68 +1,33 @@
-const { readFile, writeFile } = require('fs')
+const { ObjectId } = require('mongodb')
+const context = require('./context')
 
-module.exports = function registerUser(content, visibility, userName, userId, callback) {
-    if (!content.length) throw new Error('content is empty')
-    if (typeof content !== 'string') throw new TypeError('content is not a string')
-    if (!visibility.length) throw new Error('visibility is empty')
-    if (typeof visibility !== 'string') throw new TypeError('visibility is not a string')
-    if(visibility !== 'public' && visibility !== 'private') throw new Error ('invalid visibility')
-    if (!userId.length) throw new Error('userId is empty')
+module.exports = function createPost(userId, text, visibility) {
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
-    if (!userName.length) throw new Error('name is empty')
-    if (typeof userName !== 'string') throw new TypeError('name is not a string')
-    if (typeof callback !== 'function') throw new TypeError('callback is not a function')
+    if (!userId.length) throw new Error('userId is empty')
+    if (typeof text !== 'string') throw new TypeError('text is not a string')
+    if (!text.length) throw new Error('text is empty')
+    if (typeof visibility !== 'string') throw new TypeError('visibility is not a string')
+    if (!visibility.length) throw new Error('visibility is empty')
+    if (visibility !== 'public' && visibility !== 'private') throw new Error('invalid visibility')
 
-    readFile('./data/users.json', 'utf8', (error, jsonUsers) => {
-        if (error) {
-            callback(error)
+    const { db } = context
 
-            return
-        }
-        const users = JSON.parse(jsonUsers)
+    const users = db.collection('users')
+    const posts = db.collection('posts')
 
-        const userExist = users.some(user =>user.userId === userId)
-
-        if(!userExist){
-            callback(new Error(`user with id ${userId} does not exist`))
-
-            return 
-        }
+    return users.findOne({ _id: ObjectId(userId) })
+        .then(user => {
+            if (!user)
+                throw new Error(`user with id ${userId} does not exist`)
 
 
-        readFile('./data/posts.json', 'utf8', (error, json) => {
-            if (error) {
-                callback(error)
+            const post = { user: ObjectId(userId), text, visibility, date: new Date() }
 
-                return
-            }
-
-            const posts = JSON.parse(json);
-
-            let postId
-
-            if (posts.length > 0) {
-                [, numberPostId] = posts[posts.length - 1].postId.split('-')
-                postId = `post-${parseInt(numberPostId) + 1}`
-            } else {
-                postId = 'post-1'
-            }
-            const date = new Date()
-
-            const post = { postId, content, visibility, date, userName, userId }
-
-            posts.push(post)
-
-            const jsonPosts = JSON.stringify(posts, null, 4)
-
-            writeFile('./data/posts.json', jsonPosts, error => {
-                if (error) {
-                    callback(error)
-
-                    return
-                }
-
-                callback(null)
-            })
+            return posts.insertOne(post)
         })
-    })
+        .then(result => {
+            const { acknowledged } = result
+
+            if (!acknowledged) throw new Error('could not create post')
+        })
 }

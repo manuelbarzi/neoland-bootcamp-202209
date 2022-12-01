@@ -1,10 +1,10 @@
-function editPost(content, visibility, postId, userId) {
-    if (typeof content !== 'string') throw new Error('invalid content')
-    if(!content.length) throw new Error('content is empty')
+function editPost(text, visibility, postId, userId) {
+    if (typeof text !== 'string') throw new Error('invalid text')
+    if(!text.length) throw new Error('text is empty')
     if (typeof postId !== 'string') throw new Error('postId is not a string')
     if(postId.length === 0) throw new Error('invalid user id')
 
-    const post = { content, visibility }
+    const post = { text, visibility }
 
     return fetch(`http://localhost:80/posts/${postId}`, {
         method: 'PATCH',

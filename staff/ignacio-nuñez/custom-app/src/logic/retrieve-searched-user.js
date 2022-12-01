@@ -1,10 +1,12 @@
-function retrieveSearchedUser(userId) {
-    if (typeof userId !== 'string') throw new TypeError('userId is not a string')
-    if(!userId.length) throw new Error('userId is empty')
+function retrieveSearchedUser(targetUserId, token) {
+    if (typeof targetUserId !== 'string') throw new TypeError('targetUserId is not a string')
+    if(!targetUserId.length) throw new Error('targetUserId is empty')
+    if (typeof token !== 'string') throw new TypeError('token is not a string')
+    if(!token.length) throw new Error('token is empty')
 
-    return fetch(`http://localhost:80/search/users/${userId}`, {
+    return fetch(`http://localhost:80/search/users/${targetUserId}`, {
         headers: { 
-            'Authorization': `Bearer ${userId}`,
+            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
          }
     })

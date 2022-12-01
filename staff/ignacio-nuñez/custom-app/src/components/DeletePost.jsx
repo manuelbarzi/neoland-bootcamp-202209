@@ -10,7 +10,7 @@ function DeletePost({ className, onDeletePostClose, onDeletePost, userPost }) {
 
     const handlerConfirmDeletePost = () => {
         try {
-            deletePost(userPost.postId, userPost.userId, sessionStorage.userId)
+            deletePost(userPost.postId, userPost.userId, sessionStorage.token)
                 .then(() => onDeletePost())
                 .catch(error => alert(error.message))
         } catch (error) {
@@ -23,7 +23,7 @@ function DeletePost({ className, onDeletePostClose, onDeletePost, userPost }) {
     }
 
 
-    return <div className="fixed w-screen h-screen bg-[#aaaa] inset-y-0" onClick={handlerConfirmDeletePostClose}>
+    return <div className="z-20 fixed w-screen h-screen bg-[#aaaa] inset-y-0" onClick={handlerConfirmDeletePostClose}>
         <div onClick={event => event.stopPropagation()} className={`shadow-lg shadow-slate-400 w-1/3 h-1/4 bg-white border-2 p-10 rounded-xl ${className ? className : ""}`}>
             <p className='font-semibold text-lg'>Are you sure that you want to delete this post?</p>
             <div className="mt-7 gap-3 flex items-center justify-between">

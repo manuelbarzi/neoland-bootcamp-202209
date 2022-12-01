@@ -1,11 +1,12 @@
-function retrievePosts(userId) {
-    if(typeof userId !== 'string') throw new TypeError('invalid userId')
-    if(!userId.length) throw new Error('userId is empty')
+function retrievePosts(token, page, limit= 6) {
+    if(typeof page !== 'number') throw new Error('page is not a number')
+    if(typeof token !== 'string') throw new TypeError('token is not a string')
+    if(!token.length) throw new Error('token is empty')
 
-    return fetch('http://localhost:80/posts/retrieve', {
+    return fetch(`http://localhost:80/posts?page=${page}&limit=${limit}`, {
         method: 'GET',
         headers: { 
-            'Authorization': `Bearer ${userId}`,
+            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json' 
         }
     })

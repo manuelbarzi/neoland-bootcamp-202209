@@ -2,24 +2,14 @@ const searchUsers = require("../logic/searchUsers")
 
 module.exports = (req, res) => {
     try {
-        const { query: { q }, headers: { authorization } } = req
-
-        const userId = authorization.substring(7)
+        const { query: { q }, userId } = req
 
         const name = q.toLowerCase()
 
-        searchUsers(name, userId, (error, users) => {
-            if (error) {
-                res.status(500)
-                res.json({ error: error.message })
-
-                return
-            }
-
-            res.json(users)
-        })
+        searchUsers(name, userId)
+            .then(users => res.json(users))
+            .catch(error => res.status(500).json({ error: error.message }))
     } catch (error) {
-        res.status(500)
-        res.json({ error: error.message })
+        res.status(500).json({ error: error.message })
     }
 }

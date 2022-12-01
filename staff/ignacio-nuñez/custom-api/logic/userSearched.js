@@ -1,39 +1,23 @@
-const { readFile } = require('fs')
+const context = require('./context')
+const ObjectId = require('mongodb').ObjectId;
 
-module.exports = function userSearched(userId, searchedUserId, callback){
+module.exports = function returnUser(userId, searchedUserId) {
     if (typeof userId !== 'string') throw new TypeError('id is not a string')
-    if (typeof userId !== 'string') throw new TypeError('userId is not a string')
-    if (typeof callback !== 'function') throw new TypeError('callback is not a function')
+    if (typeof searchedUserId !== 'string') throw new TypeError('userId is not a string')
 
-    readFile('./data/users.json', 'utf8', (error, json) => {
-        if (error) {
-            callback(error)
+    const { db } = context
 
-            return
-        }
+    const users = db.collection('users')
 
-        const users = JSON.parse(json)
+    return users.findOne({ _id: ObjectId(userId) })
+        .then(user => {
+            if (!user) throw new Error(`user with id ${userId} dont exist`)
 
-        const user = users.some(user => user.userId === userId)
+            return users.findOne({ _id: ObjectId(searchedUserId) })
+                .then(user => {
+                    if (!user) throw new Error(`user with id ${userId} dont exist`)
 
-        if(!user){
-        callback(new Error('invalid user'))
-
-        return
-        }
-        
-        const searchedUser =users.find(user => user.userId === searchedUserId)
-
-        if(!searchedUser){
-            callback(new Error('user dont found'))
-
-            return
-        }
-
-        delete searchedUser.password
-        delete searchedUser.userId
-        delete searchedUser.email
-
-        callback(null, searchedUser)
-    })
-}
+                    return user.name
+                })
+        })
+    }

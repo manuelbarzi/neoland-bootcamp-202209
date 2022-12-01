@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import NavBar from "../components/NavBar"
-import retrieveUser from "../logic/retrieve-user"
 import CreatePost from "../components/CreatePost"
 import UserPosts from "../components/UserPosts"
 import EditPost from "../components/EditPost"
 import DeletePost from "../components/DeletePost"
+import { Context } from "../components/Context"
 
-function UserPerfil({ onLogoutClick, onHomeClick, onSearchedUserClick, onPerfilClick }) {
+function UserPerfil() {
+    const {  user } = useContext(Context)
 
-    const [user, setUser] = useState()
     const [creatingPost, setCreatingPost] = useState(false)
     const [postChanged, setPostChanged] = useState()
     const [editingPost, setEditingPost] = useState(false)
@@ -16,16 +16,6 @@ function UserPerfil({ onLogoutClick, onHomeClick, onSearchedUserClick, onPerfilC
     const [deletingPost, setDeletingPost] = useState(false)
 
     const userName = user && user.name
-
-    useEffect(() => {
-        try {
-            retrieveUser(sessionStorage.userId)
-                .then(user => setUser(user))
-                .catch(error => alert(error.message))
-        } catch (error) {
-            alert(error.message)
-        }
-    }, [])
 
     const onCreatePost = () => {
         handlerClosePost()
@@ -43,23 +33,6 @@ function UserPerfil({ onLogoutClick, onHomeClick, onSearchedUserClick, onPerfilC
         handlerCloseDeletingPost()
 
         setPostChanged(Date.now())
-    }
-
-    const handlerLogoutClick = () => {
-        onLogoutClick()
-    }
-
-
-    const handlerHomeClick = () => {
-        onHomeClick()
-    }
-
-    const onSearchUser = (searchedUser) => {
-        onSearchedUserClick(searchedUser)
-    }
-
-    const handlerPerfilClick = () => {
-        onPerfilClick()
     }
 
     const handlerCreatePostClick = () => {
@@ -92,16 +65,12 @@ function UserPerfil({ onLogoutClick, onHomeClick, onSearchedUserClick, onPerfilC
 
     return <main className="min-h-screen bg-slate-100">
         <NavBar
-            onLogoutClick={handlerLogoutClick}
-            onHomeClick={handlerHomeClick}
-            onPerfilClick={handlerPerfilClick}
-            onClickSearchedUser={onSearchUser}
         />
         {creatingPost && <div className="absolute w-full h-full bg-slate-200 opacity-60" onClick={handlerClosePost}></div>
         }
         <div className="flex items-center flex-col">
             <div className="flex items-center flex-col mt-28">
-                <div className="border-2 shadow-sm shadow-slate-600 p-6 w-96 h-20 bg-emerald-200 rounded-xl">
+                <div className="border-2 z-10 shadow-sm shadow-slate-600 p-6 w-96 h-20 bg-emerald-200 rounded-xl">
                     <div onClick={handlerCreatePostClick} className="rounded-xl w-full h-full hover:bg-slate-200 bg-slate-100 block text-slate-500 cursor-pointer">
                         <span className="ml-2">Share your thoughts {userName}</span>
                     </div>

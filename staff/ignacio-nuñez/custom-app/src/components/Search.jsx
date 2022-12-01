@@ -16,7 +16,7 @@ function Search(props) {
             return
         }
         try {
-            timeOutId = setTimeout(() => {usersSearcher(userNameQuery, sessionStorage.userId) 
+            timeOutId = setTimeout(() => {usersSearcher(userNameQuery, sessionStorage.token) 
                 .then(users => {
                     props.usersFounded(users)
                 })
@@ -28,6 +28,9 @@ function Search(props) {
             alert(error.message)
         }
     }
+
+    if(props.handlerSearchInputValue === '')
+        document.querySelector('#userNameQuery').value = ''
 
     return <form>
         <input id="userNameQuery" type="text" name="userNameQuery" className="p-1 outline-none rounded-lg" placeholder="Search" onChange={searchUser} />

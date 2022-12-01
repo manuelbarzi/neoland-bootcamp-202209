@@ -1,22 +1,13 @@
-const editPost = require("../logic/editPost")
+const editPost = require('../logic/editPost')
 
 module.exports = (req, res) => {
-    const { body: { content, visibility }, headers: { authorization }, params: { postId } } = req
-
-    const userId = authorization.substring(7)
-
     try {
-        editPost(userId, postId, content, visibility, error => {
-            if (error) {
-                res.status(500).json(({ error: 'server error' }))
+    const { body: { text, visibility }, userId, params: { postId } } = req
 
-                return
-            }
-
-            res.status(201).send()
-        })
+        editPost(userId, postId, text, visibility)
+            .then(() => res.status(204).send())
+            .catch(error => res.status(500).json({ error: error.message }))
     } catch (error) {
-        res.status(500)
-        res.json({ error: error.message })
+        res.status(500).json({ error: error.message })
     }
 }

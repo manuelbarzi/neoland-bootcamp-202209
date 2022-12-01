@@ -1,50 +1,42 @@
-const { readFile, writeFile } = require('fs')
+const { ObjectId } = require('mongodb')
+const context = require('./context')
 
-module.exports = function editPost(userId, postId, content, visibility, callback) {
+module.exports = function (userId, postId, text, visibility) {
+    if (typeof userId !== 'string') throw new TypeError('userId is not a string')
     if (!userId.length) throw new Error('userId is empty')
     if (typeof postId !== 'string') throw new TypeError('postId is not a string')
     if (!postId.length) throw new Error('postId is empty')
-    if (typeof userId !== 'string') throw new TypeError('userId is not a string')
-    if (!content.length) throw new Error('content is empty')
-    if (typeof content !== 'string') throw new TypeError('content is not a string')
-    if (!visibility.length) throw new Error('visibility is empty')
+    if (typeof text !== 'string') throw new TypeError('text is not a string')
+    if (!text.length) throw new Error('text is empty')
     if (typeof visibility !== 'string') throw new TypeError('visibility is not a string')
+    if (!visibility.length) throw new Error('visibility is empty')
     if (visibility !== 'public' && visibility !== 'private') throw new Error('invalid visibility')
-    if (typeof callback !== 'function') throw new TypeError('callback is not a function')
 
-    readFile('./data/posts.json', 'utf8', (error, json) => {
-        if (error) {
-            callback(error)
+    const { db } = context
 
-            return
-        }
+    const users = db.collection('users')
+    const posts = db.collection('posts')
 
-        const posts = JSON.parse(json);
+    return users.findOne({ _id: ObjectId(userId) })
+        .then(user => {
+            if (!user)
+                throw new Error(`user with id ${userId} does not exist`)
 
-        const date = Date()
-
-        const postToEdit = posts.find(post => post.postId === postId && post.userId === userId)
-
-        if (!postToEdit) {
-            callback(new Error('cant found this post corresponding to the user'))
-
-            return
-        }
-
-        postToEdit.content = content
-        postToEdit.visibility = visibility
-        postToEdit.date = date
-
-        const jsonPosts = JSON.stringify(posts, null, 4)
-
-        writeFile('./data/posts.json', jsonPosts, error => {
-            if (error) {
-                callback(error)
-
-                return
-            }
-
-            callback(null)
+            return posts.findOne({ _id: ObjectId(postId) })
         })
-    })
+        .then(post => {
+            if (!post)
+                throw new Error(`post with id ${postId} does not exist`)
+
+            if (post.user.toString() !== userId)
+                throw new Error(`post with id ${postId} does not belong to user with id ${userId}`)
+
+
+            return posts.updateOne({ _id: ObjectId(postId) }, { $set: { text, visibility, date: new Date } })
+        })
+        .then(result => {
+            const { acknowledged } = result
+
+            if (!acknowledged) throw new Error(`could not update post with id ${postId}`)
+         })
 }

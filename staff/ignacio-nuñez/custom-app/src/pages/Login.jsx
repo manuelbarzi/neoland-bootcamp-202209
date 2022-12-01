@@ -1,7 +1,7 @@
 import authenticateUser from "../logic/authenticate-user"
 import { Link, useNavigate } from 'react-router-dom'
 
-function Login() {
+function Login({onLoggedIn}) {
     const navigate = useNavigate()
 
     const handleSubmit = event => {
@@ -11,8 +11,10 @@ function Login() {
 
         try {
             authenticateUser(email, password)
-                .then(userId => {
-                    sessionStorage.userId = userId
+                .then(token => {
+                    sessionStorage.token = token
+
+                    onLoggedIn()
 
                     navigate('/')
                 })

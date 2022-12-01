@@ -1,29 +1,22 @@
 const authenticateUser = require('../logic/authenticateUser')
+const jwt = require('jsonwebtoken')
 
+const { JWT_SECRET, JWT_EXPIRATION } = process.env
 
 module.exports = (req, res) => {
-    let { email, password } = req.body
-
     try {
-        authenticateUser(email, password, (error, userId) => {
-            if (error) {
-                if (error.message === 'user dont found') {
-                    res.status(404).json({ error: error.message })
-                } else if (error.message === 'wrong password') {
-                    res.status(401).json({ error: error.message })
-                } else {
-                    res.status(500).json({ error: 'server error' })
-                }
+        let { email, password } = req.body
 
-                return
-            }
+        authenticateUser(email, password)
+            .then(userId => {
+                const payload = { sub: userId }
 
-            // res.setHeader('Content-Type', 'application/json')
-            // res.send(JSON.stringify({ userId }))
-            res.json({ userId })
-        })
+                const token = jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRATION })
+
+                res.json({ token })
+            })
+            .catch(error => res.status(500).json({ error: error.message }))
     } catch (error) {
-        res.status(500)
-        res.json({ error: error.message })
+        res.status(500).json({ error: error.message })
     }
 }

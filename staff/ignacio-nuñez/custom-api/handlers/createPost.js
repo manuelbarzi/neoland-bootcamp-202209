@@ -1,22 +1,13 @@
 const newPost = require('../logic/newPost')
 
 module.exports = (req, res) => {
-    const { body: { content, userName, visibility }, headers: { authorization } } = req
-
-    const userId = authorization.substring(7)
-
     try {
-        newPost(content, visibility, userName, userId, error => {
-            if (error) {
-                res.status(500).json(({ error: 'server error' }))
+        const { body: { text, visibility }, userId } = req
 
-                return
-            }
-
-            res.status(201).send()
-        })
+        newPost(userId, text, visibility)
+            .then(() => res.status(201).send())
+            .catch(error => res.status(500).json({ error: error.message }))
     } catch (error) {
-        res.status(500)
-        res.json({ error: error.message })
+        res.status(500).json({ error: error.message })
     }
 }

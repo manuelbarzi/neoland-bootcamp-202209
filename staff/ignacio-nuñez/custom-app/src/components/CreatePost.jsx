@@ -16,7 +16,7 @@ function CreatePost({ className, userInfo, onCreatePostClose, onNewPost }) {
         const { post: { value: post }, visibility: { value: visibility } } = event.target
 
         try {
-            newPost(post, sessionStorage.userId, user.name, visibility)
+            newPost(sessionStorage.token, post, visibility)
                 .then(() => {
                     onNewPost()
                 })
@@ -33,7 +33,7 @@ function CreatePost({ className, userInfo, onCreatePostClose, onNewPost }) {
         onCreatePostClose()
     }
 
-    return <div className="fixed w-screen h-screen bg-[#aaaa] inset-y-0" onClick={handlerClosePost}>
+    return <div className=" z-20 fixed w-screen h-screen bg-[#aaaa] inset-y-0" onClick={handlerClosePost}>
         <div onClick={event => event.stopPropagation()} className={`shadow-lg shadow-slate-400 w-2/6 h-3/6 bg-white border-2 p-4 rounded-xl ${className ? className : ""}`}>
             <div className="flex flex-col items-center">
                 <div className="grid w-full items-center grid-cols-12">

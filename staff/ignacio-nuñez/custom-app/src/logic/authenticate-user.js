@@ -24,9 +24,9 @@ function authenticateUser(email, password) {
             return res.json()
         })
         .then(data => {
-            const { userId } = data
+            const { token  } = data
 
-            return userId
+            return token
         })
 }
 

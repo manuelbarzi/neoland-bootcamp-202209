@@ -1,51 +1,64 @@
-import retrieveUser from "../logic/retrieve-user"
-import { useEffect, useState } from "react"
+import { useState, useContext } from "react"
 import Search from "./Search"
 import SearchUsersResults from "./SearchUsersResults"
 import { Link, useNavigate } from 'react-router-dom'
+import { Context } from "./Context"
 
 function NavBar() {
     const navigate = useNavigate()
+    const { handleLogout, user} = useContext(Context)
 
-    const [user, setUser] = useState()
     const [searchedUsers, setSearchedUsers] = useState()
+    const [searchedUsersState, setSearchedUsersState] = useState(false)
+    const [searchInputValue, setSearchInputValue] = useState()
 
     const userName = user && user.name
 
-    useEffect(() => {
-        try {
-            retrieveUser(sessionStorage.userId)
-                .then(user => setUser(user))
-                .catch(error => alert(error.message))
-        } catch (error) {
-            alert(error.message)
-        }
-    }, [])
-
     const handlerLogoutClick = () => {
         sessionStorage.clear()
-        setUser()
+        handleLogout()
 
         navigate('/login')
     }
 
-    const handlerUsersFounded = usersFounded => setSearchedUsers(usersFounded)
+    const handlerUsersFounded = usersFounded => {
+        setSearchedUsers(usersFounded)
 
-    return <header className="fixed w-full h-20 bg-teal-300 grid grid-cols-12">
+        setSearchInputValue()
+
+        setSearchedUsersState(true)
+    }
+
+    const handlerCloseSearchedUsers = () => setSearchedUsers(false)
+
+    const handlerSearchInputValue = () => {
+        setSearchInputValue('')
+
+        setSearchedUsersState(false)
+    }
+
+    return <header className="z-20 fixed w-full h-20 bg-teal-300 grid grid-cols-12">
         <nav className="flex items-center justify-between p-4 h-20 col-start-1 col-end-13 text-2xl">
-            <div className="flex gap-4">
+            <div className="z-10 flex gap-4">
                 <Link to={'/'}>Home</Link>
-                <Search usersFounded={handlerUsersFounded} />
+                <Search
+                    usersFounded={handlerUsersFounded}
+                    handlerSearchInputValue={searchInputValue}
+                />
             </div>
-            <div className="flex gap-4">
+            <div className="z-10 flex gap-4">
                 <Link to={'/perfil'}>{userName || 'Loading...'}</Link>
                 <button onClick={handlerLogoutClick}>Logout</button>
             </div>
         </nav>
-        {searchedUsers &&
-            <SearchUsersResults
-            usersFounded={searchedUsers}
-            />}
+        {searchedUsers && searchedUsersState &&
+            <>
+                <div className="fixed w-screen h-screen inset-y-0" onClick={handlerCloseSearchedUsers}></div>
+                <SearchUsersResults
+                    closeSearchedUsersResults={handlerSearchInputValue}
+                    usersFounded={searchedUsers}
+                />
+            </>}
     </header>
 }
 
