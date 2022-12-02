@@ -19,6 +19,7 @@
     "jsdom": "^20.0.2",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.12.1",
+    "mycommons": "file:../MyCommons",
     "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {

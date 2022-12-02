@@ -1,14 +1,11 @@
-import { IS_EMAIL_REGEX, HAS_SPACES_REGEX, IS_ALPHABETICAL_REGEX } from '../utils/regex'
+import { errors, validators } from 'mycommons'
+const { FormatError, AuthError, LengthError, NotFoundError, UnexpectedError } = errors
+const { validateName, validateEmail, validatePassword } = validators
 
 function registerUser(name, email, password) {
-    if (typeof name !== 'string') throw new Error('name is not a string')
-    if (!IS_ALPHABETICAL_REGEX.test(name)) throw new Error('name is not valid')
-    if (typeof email !== 'string') throw new Error('email is not a string')
-    if (!IS_EMAIL_REGEX.test(email)) throw new Error('email is not valid')
-
-    if (typeof password !== 'string') throw new Error('password is not a string')
-    if (password.length < 8) throw new Error('password length is less than 8')
-    if (HAS_SPACES_REGEX.test(password)) throw new Error('password has spaces')
+    validateName(name)
+    validateEmail(email)
+    validatePassword(password)
 
     return new Promise((resolve, reject) => {
 
@@ -17,16 +14,32 @@ function registerUser(name, email, password) {
         xhr.onload = () => {
             const { status, responseText: json } = xhr
 
-            if (status >= 500) {
+            if (status === 201) {
+                const { token } = JSON.parse(json)
+
+                resolve(token)
+            } else if (status === 400) {
                 const { error } = JSON.parse(json)
 
-                reject(new Error(error))
+                if (error.includes('is not a'))
+                    reject(new TypeError(error))
+                else if (error.includes('valid') || error.includes('spaces'))
+                    reject(new FormatError(error))
+                else if (error.includes('length'))
+                    reject(new LengthError(error))
+            } else if (status === 401) {
+                const { error } = JSON.parse(json)
 
-                return
-            }
+                reject(new AuthError(error))
+            } else if (status === 404) {
+                const { error } = JSON.parse(json)
 
-            const { token } = JSON.parse(json)
-            resolve(token)
+                reject(new NotFoundError(error))
+            } else if (status < 500)
+                reject(new UnexpectedError('client error'))
+            else
+                reject(new UnexpectedError('server error'))
+
         }
 
         xhr.onerror = () => reject(new Error('connection error'))
