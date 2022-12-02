@@ -50,8 +50,6 @@ client.connect()
 
         const { PORT } = process.env
 
-        console.log('hola mundo')
-
         api.listen(PORT, () => console.log(`server listening on port ${PORT}`))
     })
     .catch(error => console.error(error))
