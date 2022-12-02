@@ -6,11 +6,14 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import ConditionalProfile from './pages/ConditionalProfile'
 import { useState } from 'react'
 import Context from './components/Context'
+import Alert from './components/Alert'
 
 function App() {
   log.info('App -> render')
 
   const [loggedIn, setLoggedIn] = useState(!!sessionStorage.token)
+  const [message, setMessage] = useState()
+  const [level, setLevel] = useState()
 
   const login = token => {
     sessionStorage.token = token
@@ -24,7 +27,14 @@ function App() {
     setLoggedIn(false)
   }
 
-  return <Context.Provider value={{ login, logout }}>
+  const showAlert = (message, level = 'error') => {
+    setMessage(message)
+    setLevel(level)
+  }
+
+  const closeAlert = () => setMessage()
+
+  return <Context.Provider value={{ login, logout, showAlert }}>
     {loggedIn ? <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/profile/:targetUserId" element={<ConditionalProfile />} />
@@ -36,6 +46,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="*" element={<Navigate replace to="/login" />} />
       </Routes>}
+
+      {message && <Alert message={message} level={level} onClose={closeAlert} />}
   </Context.Provider>
 }
 

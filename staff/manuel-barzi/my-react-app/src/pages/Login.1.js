@@ -3,14 +3,15 @@ import authenticateUser from '../logic/authenticateUser'
 import { Link } from 'react-router-dom'
 import { useContext } from 'react'
 import Context from '../components/Context'
-import { errors } from 'my-commons'
-const { FormatError, AuthError, LengthError, NotFoundError, UnexpectedError } = errors
-
+import Alert from '../components/Alert'
+import { useState } from 'react'
 
 function Login() {
     log.info('Login -> render')
 
-    const { login, showAlert } = useContext(Context)
+    const [message, setMessage] = useState()
+
+    const { login } = useContext(Context)
 
     const handleLogin = event => {
         log.info('Login -> handleLogin')
@@ -22,23 +23,15 @@ function Login() {
         try {
             authenticateUser(email, password)
                 .then(token => login(token))
-                .catch(error => {
-                    if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
-                        showAlert(error.message, 'warn')
-                    else if (error instanceof AuthError || error instanceof NotFoundError)
-                        showAlert(error.message, 'error')
-                    else
-                        showAlert(error.message, 'fatal')
-                })
+                .catch(error => setMessage(error.message))
         } catch (error) {
-            if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
-                showAlert(error.message, 'warn')
-            else
-                showAlert(error.message, 'fatal')
+            alert(error.message)
 
             event.target.password.value = '' // TODO improve this, do not manipulate the dom directly, do it by means of React
         }
     }
+
+    const handleCloseAlert = () => setMessage()
 
     return <main className="h-full flex flex-col items-center justify-center gap-2 bg-white dark:bg-black text-black dark:text-white">
         <form className="flex flex-col gap-2" onSubmit={handleLogin}>
@@ -50,6 +43,8 @@ function Login() {
         </form>
 
         <Link to="/register" className="underline">Register</Link>
+
+        {message && <Alert message={message} onClose={handleCloseAlert} />}
     </main>
 }
 
