@@ -1,8 +1,9 @@
+const context = require('./context')
+
 const {
     errors: { FormatError, LengthError, ConflictError, UnexpectedError },
     regex: { IS_EMAIL_REGEX, HAS_SPACES_REGEX, IS_ALPHABETICAL_REGEX }
 } = require('my-commons')
-const { User } = require('../models')
 
 function registerUser(name, email, password) {
     if (typeof name !== 'string') throw new TypeError('name is not a string')
@@ -16,7 +17,16 @@ function registerUser(name, email, password) {
     if (password.length < 8) throw new LengthError('password length is less than 8')
     if (HAS_SPACES_REGEX.test(password)) throw new FormatError('password has spaces')
 
-    return User.create({ name, email, password })
+    const { db } = context
+
+    const users = db.collection('users')
+
+    return users.insertOne({ name, email, password })
+        .then(result => {
+            const { acknowledged } = result
+
+            if (!acknowledged) throw new UnexpectedError(`could not create user`)
+         })
          .catch(error => {
             if (error.message.includes('E11000'))
                 throw new ConflictError(`user with email ${email} already exists`)

@@ -1,5 +1,6 @@
-const { errors: { LengthError, FormatError, NotFoundError, UnexpectedError } } = require('my-commons')
-const { User, Post } = require('../models')
+const { ObjectId } = require('mongodb')
+const context = require('./context')
+const { errors : { LengthError, FormatError, NotFoundError, UnexpectedError }} = require('my-commons')
 
 function createPost(userId, text, visibility) {
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
@@ -10,12 +11,25 @@ function createPost(userId, text, visibility) {
     if (!visibility.length) throw new LengthError('visibility is empty')
     if (visibility !== 'public' && visibility !== 'private') throw new FormatError('invalid visibility')
 
-    return User.findById(userId)
+    const { db } = context
+
+    const users = db.collection('users')
+    const posts = db.collection('posts')
+
+    return users.findOne({ _id: ObjectId(userId) })
         .then(user => {
             if (!user)
                 throw new NotFoundError(`user with id ${userId} does not exist`)
 
-            return Post.create({ user: userId, text, visibility, date: new Date })
+
+            const post = { user: ObjectId(userId), text, visibility, date: new Date }
+
+            return posts.insertOne(post)
+        })
+        .then(result => {
+            const { acknowledged } = result
+
+            if (!acknowledged) throw new UnexpectedError('could not create post')
         })
 }
 

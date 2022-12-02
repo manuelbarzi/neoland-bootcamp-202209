@@ -1,6 +1,6 @@
 require('dotenv').config()
 
-const mongoose = require('mongoose')
+const { MongoClient } = require('mongodb')
 const express = require('express')
 
 const authenticateUserHandler = require('./handlers/authenticateUserHandler')
@@ -22,11 +22,13 @@ const jwtVerifier = require('./utils/jwtVerifier')
 
 const { MONGODB_URL } = process.env
 
-mongoose.connect(MONGODB_URL)
-    .then(() => {
+const client = new MongoClient(MONGODB_URL)
+
+client.connect()
+    .then(connection => {
         console.log(`db connected to ${MONGODB_URL}`)
 
-        context.db = mongoose.connection.client.db('test')
+        context.db = connection.db('test')
 
         const api = express()
 
