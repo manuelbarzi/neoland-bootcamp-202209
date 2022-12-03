@@ -40,16 +40,19 @@ function Login() {
         }
     }
 
-    return <main className="h-full flex flex-col items-center justify-center gap-2 bg-white dark:bg-black text-black dark:text-white">
-        <form className="flex flex-col gap-2" onSubmit={handleLogin}>
-            <label htmlFor="email" className="container__item--left">E-mail</label>
-            <input name="email" type="email" id="email" placeholder="input your e-mail" className="border-b border-black text-black" />
-            <label htmlFor="password" className="container__item--left">Password</label>
-            <input name="password" type="password" id="password" placeholder="input your password" className="border-b border-black text-black" />
-            <button className="p-2 border rounded-xl hover:animate-spin">Login</button>
-        </form>
-
-        <Link to="/register" className="underline">Register</Link>
+    return <main className="h-full flex flex-col items-center justify-center gap-2 bg-green-100 ">
+        <div className='bg-white p-5 rounded-lg'>
+            <form className="flex flex-col gap-4 mb-4" onSubmit={handleLogin}>
+                <label htmlFor="email" className="font-medium container__item--left">E-mail</label>
+                <input name="email" type="email" id="email" placeholder="Introduce tu e-mail" className="border-b border-black text-black" />
+                <label htmlFor="password" className="font-medium container__item--left">Password</label>
+                <input name="password" type="password" id="password" placeholder="Introduce tu contraseña" className="border-b border-black text-black" />
+                <button className="font-medium py-3 px-5 bg-green-600 text-white  hover:bg-gray-700 rounded-md">Entrar</button>
+            </form>
+            <div className='tex-center  text-center '>
+            <Link to="/register" className="font-medium p-2 rounded-md  text-white   bg-gray-700   hover:bg-green-600">Regístrate</Link>
+            </div>
+        </div>
     </main>
 }
 

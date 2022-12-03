@@ -44,7 +44,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="*" element={<Navigate replace to="/home" />} />
+        <Route path="*" element={<Navigate replace to="/login" />} />
       </Routes>}
 
       {message && <Alert message={message} level={level} onClose={closeAlert} />}
