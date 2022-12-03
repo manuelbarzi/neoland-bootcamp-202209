@@ -14,11 +14,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "com": "file:../com",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.7.5",
-    "com": "file:../com"
+    "mongodb": "^4.12.1",
+    "mongoose": "^6.7.5"
   },
   "devDependencies": {
     "chai": "^4.3.7",
@@ -26,4 +27,3 @@
     "nodemon": "^2.0.20"
   }
 }
-  

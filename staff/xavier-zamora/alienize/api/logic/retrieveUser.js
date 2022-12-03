@@ -15,8 +15,6 @@ function retrieveUser(userId) {
 
             delete user._id
 
-            delete user.id
-
             return user
         })
 }
