@@ -45,7 +45,7 @@ function Register() {
             <input name="email" type="email" id="email" placeholder="input your e-mail" className="border-b border-black text-black" />
             <label htmlFor="password" className="container__item--left">Password</label>
             <input name="password" type="password" id="password" placeholder="input your password" className="border-b border-black text-black" />
-            <button className="p-2 border rounded-xl hover:animate-spin">Register</button>
+            <button className="p-2 border rounded-xl">Register</button>
         </form>
 
         <Link to="/login" className="underline">Login</Link>
