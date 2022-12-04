@@ -5,7 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import './index.css'
 import { BrowserRouter as Router } from 'react-router-dom'
 
-//sessionStorage.userId = null
+sessionStorage.userId = null
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

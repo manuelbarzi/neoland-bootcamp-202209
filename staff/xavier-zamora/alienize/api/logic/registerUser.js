@@ -18,8 +18,10 @@ function registerUser(name, email, password) {
 
     const elo = 3000
     const isSearchingGame = false
+    const hasNotGame = false
+    const roomId = 'null'
 
-    return User.create({ name, email, password, elo, isSearchingGame })
+    return User.create({ name, email, password, elo, isSearchingGame, hasNotGame, roomId })
          .catch(error => {
             if (error.message.includes('E11000'))
                 throw new ConflictError(`user with email ${email} already exists`)

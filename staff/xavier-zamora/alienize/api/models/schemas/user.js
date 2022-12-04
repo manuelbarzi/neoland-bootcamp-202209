@@ -22,5 +22,14 @@ module.exports = new Schema({
         type: Boolean,
         default: false,
         required: true
+    },
+    hasNotGame: {
+        type: Boolean,
+        default: false,
+        required: true
+    },
+    roomId: {
+        type: String,
+        required: true
     }
 })

@@ -12,9 +12,17 @@ function retrieveUser(userId) {
 
             // sanitize
             user.id = user._id.toString()
+            user.id = user.email.toString()
+            user.id = user.isSearchingGame.toString()
+            user.id = user.hasNotGame.toString()
+            user.id = user.id.toString()
 
             delete user._id
-
+            delete user.email
+            delete user.isSearchingGame
+            delete user.hasNotGame
+            delete user.id
+            
             return user
         })
 }

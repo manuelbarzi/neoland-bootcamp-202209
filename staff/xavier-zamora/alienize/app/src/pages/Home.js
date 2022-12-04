@@ -37,7 +37,7 @@ function Home() {
     }, [])
 
     return <main className="block h-full w-full bg-blue-800">
-        <Nav userName={'player'} /> 
+        <Nav userName={'name'} /> 
         <div className="h-screen mt-12">
         <ShopScreen></ShopScreen>
         <NewsScreen></NewsScreen>

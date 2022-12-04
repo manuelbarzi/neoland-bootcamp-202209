@@ -55,7 +55,7 @@ export default function registerUser(name, email, password, repeatPassword) {
 
         xhr.onerror = () => reject(new Error('connection error'))
 
-        xhr.open('POST', 'http://localhost/users')
+        xhr.open('POST', 'http://localhost:2000/users')
         xhr.setRequestHeader('Content-Type', 'application/json')
 
         const payload = { name, email, password }

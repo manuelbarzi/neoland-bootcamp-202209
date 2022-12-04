@@ -6,7 +6,7 @@ module.exports = (req, res) => {
 
     try{
         enableSearchGame(userId)
-            .then(() => { res.json()})
+        .then(user => res.json(user))
             .catch(error => {
                 if (error instanceof NotFoundError)
                 res.status(404).json({ error: error.message })
