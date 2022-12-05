@@ -37,18 +37,20 @@ function Register() {
         }
     }
 
-    return <main className="h-full flex flex-col items-center justify-center gap-2 bg-white dark:bg-black text-black dark:text-white">
+    return <main className="h-full flex flex-col items-center justify-center bg-gradient-to-r from-emerald-500 to-emerald-900">
+        <div className=" flex flex-col items-center bg-white p-4 border border-black rounded-lg gap-4">
         <form className="flex flex-col gap-2" onSubmit={handleRegister}>
-            <label htmlFor="name" className="container__item--left">Name</label>
+            <label htmlFor="name" className="text-black font-medium">Name</label>
             <input name="name" type="text" id="name" placeholder="input your name" className="border-b border-black text-black" />
-            <label htmlFor="email" className="container__item--left">E-mail</label>
+            <label htmlFor="email" className="text-black font-medium">E-mail</label>
             <input name="email" type="email" id="email" placeholder="input your e-mail" className="border-b border-black text-black" />
-            <label htmlFor="password" className="container__item--left">Password</label>
+            <label htmlFor="password" className="text-black font-medium">Password</label>
             <input name="password" type="password" id="password" placeholder="input your password" className="border-b border-black text-black" />
-            <button className="p-2 border rounded-xl">Register</button>
+            <button className="p-2 border border-black rounded-xl bg-gray-200">Register</button>
         </form>
 
         <Link to="/login" className="underline">Login</Link>
+        </div>
     </main>
 }
 
