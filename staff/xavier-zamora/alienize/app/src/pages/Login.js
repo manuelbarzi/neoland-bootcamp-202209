@@ -47,7 +47,7 @@ function Login() {
         <h2 className="mb-6 text-black"> LET'S FIGHT </h2>
         <form className="flex flex-col gap-2" onSubmit={handleLogin}>
             <label htmlFor="email" className=""></label>
-            <input name="email" type="email" id="email" placeholder="input your e-mail" className="border-b border-t border-black" />
+            <input name="email" type="email" id="email" placeholder="input your e-mail " className="border-b border-t border-black text-black" />
             <label htmlFor="password" className="container__item--left"></label>
             <input name="password" type="password" id="password" placeholder="input your password" className="border-b border-t border-black text-black" />
             <ButtonLogReg className="mt-8">LOGIN</ButtonLogReg>

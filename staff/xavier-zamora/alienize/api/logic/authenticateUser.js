@@ -4,6 +4,7 @@ const {
 } = require('com')
 const { User } = require('../models')
 
+
 /**
  * Authenticates a user
  * 

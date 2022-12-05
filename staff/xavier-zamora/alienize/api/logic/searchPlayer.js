@@ -20,21 +20,42 @@ function searchPlayer(userId) {
                     const name = users[0].name
                     const elo = users[0].elo
                     const roomIdPass = users[0].roomId
-                    const player1 = {name, elo, roomIdPass} 
+                    const player1 = { name, elo, roomIdPass }
                     const player2 = { "name": player2ForParse.name, "elo": player2ForParse.elo, "roomId": player2ForParse.roomId }
                     const roomId = games.length
 
-                    return Game.create(({ id, player1, player2, roomId })) && User.findOneAndUpdate({ _id: player2ForParse._id }, { isSearchingGame: false, hasNotGame: false, roomId: games.length })
-                      .then(users => {
-                        return User.findOneAndUpdate({ _id: userId }, { isSearchingGame: false, hasNotGame: false, roomId: games.length }).select('-password')
+                    return Game.find({ name })
+                      .then(games => {
+                        if (games.length > 0) {
+                          return
+                        }
+
+                        return Game.create(({ id, player1, player2, roomId })) && User.findOneAndUpdate({ _id: player2ForParse._id }, { isSearchingGame: false, hasNotGame: false, roomId: games.length })
+                          .then(users => {
+                            return User.findOneAndUpdate({ _id: userId }, { isSearchingGame: false, hasNotGame: false, roomId: games.length }).select('-password')
+                          })
                       })
                   })
               }
             }
           } else {
-            return User.findOneAndUpdate({ _id: userId }, { isSearchingGame: true, hasNotGame: true, roomId: '' }).select('-password')
+              return User.find({ _id: userId }).select('-password')
+                .then(users => {
+                  const name = users[0].name
+
+                  return Game.find({ name })
+                    .then(games => {
+                      if (games.length > 0) {
+                        users[0].isSearchingGame === false
+                        return
+                      }
+
+                      return User.findOneAndUpdate({ _id: userId }, { isSearchingGame: true, hasNotGame: true, roomId: '' }).select('-password')
+
+                    })
+                })
           }
-        })
+          })
     })
 }
 
