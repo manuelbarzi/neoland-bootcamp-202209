@@ -2,6 +2,7 @@ import Login from './pages/Login'
 import Home from './pages/Home'
 import log from './utils/coolog'
 import Register from './pages/Register'
+import Profile from './pages/Profile'
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import Context from './components/Context'
@@ -45,6 +46,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="*" element={<Navigate replace to="/login" />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>}
 
       {message && <Alert message={message} level={level} onClose={closeAlert} />}
