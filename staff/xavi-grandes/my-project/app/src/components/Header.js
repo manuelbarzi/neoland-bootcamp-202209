@@ -5,7 +5,7 @@ import Context from './Context'
 import { useContext, useState } from 'react'
 import Menu from './Menu'
 
-export default function Header({ userName }) {
+export default function Header({ userName} ) {
     log.info('Header -> render')
 
     const { logout } = useContext(Context)
@@ -22,11 +22,10 @@ export default function Header({ userName }) {
 
 
     return <header className="fixed bg-[white] w-full h-[3rem] top-0 flex items-center gap-8 bg-gray-100">
-        
         <button className='p-2 ml-1 flex items-center cursor-pointer' onClick={showMenu}><AiOutlineMenu className='h-[20px] w-[20px]'/></button>
         <h1>Mis listas</h1>
+    { show === 'menu' && <Menu onClose={showMenu}/>}
 
-        { show === 'menu' && <Menu />}
 
         {/* TODO: este variable estará dentro del menú. */}
         <p>{userName}</p>
