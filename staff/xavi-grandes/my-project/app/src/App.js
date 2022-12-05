@@ -2,6 +2,8 @@ import Login from './pages/Login'
 import Home from './pages/Home'
 import log from './utils/coolog'
 import Register from './pages/Register'
+import Profile from './pages/Profile'
+import Settings from './pages/Settings'
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import Context from './components/Context'
@@ -39,6 +41,8 @@ function App() {
   return <Context.Provider value={{ login, logout, showAlert }}>
     {loggedIn ? <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/profile" element={<Profile/>} />
+      <Route path="/settings" element={<Settings/>} />
     </Routes>
       :
       <Routes>
