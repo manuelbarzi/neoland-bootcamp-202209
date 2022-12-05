@@ -2,20 +2,27 @@ import log from '../utils/coolog'
 import { IoSettingsOutline } from 'react-icons/io5'
 import { CgProfile } from 'react-icons/cg'
 import { BsListCheck } from 'react-icons/bs'
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
-export default function Menu (props) {
+export default function Menu ({onClose}) {
     log.info('Menu -> render')
 
+    const [show, setShow] = useState('open')
+    const closeMenu = event => {
+        event.preventDefault()
+    
+        setShow(show === 'open'? 'close': 'open')
+    }
 
-
-    return <>
-    <div className="absolute top-[3rem] w-[100%] h-[100vh] bg-[rgba(0,0,0,0.2)]">
-        <div className="h-[100vh] w-4/5 bg-gray-200">
+    return <> 
+    <div className="absolute z-10 top-0 w-[100%] h-[100vh] bg-[rgba(0,0,0,0.2)]" onClick={onClose}>
+        <div className="h-[100vh] w-4/5 bg-gray-200" onClick={event => event.stopPropagation()}>
             <ul className="ml-4 flex flex-col gap-4 h-[100%]">
                 <li className="flex items-center gap-4 mt-2 mb-2 text-2xl">Hola!</li>
-                <li className="flex items-center gap-4 mt-2 mb-2 text-2xl"><BsListCheck/><a>Listas</a></li>
-                <li className="flex items-center gap-4 mt-2 mb-2 text-2xl"><CgProfile/><a>Cuenta</a></li>
-                <li className="flex items-center gap-4 mt-2 mb-2 text-2xl"><IoSettingsOutline/><a>Ajustes</a></li>
+                <li className="flex items-center gap-4 mt-2 mb-2 text-2xl"><BsListCheck/><Link to="/">Listas</Link></li>
+                <li className="flex items-center gap-4 mt-2 mb-2 text-2xl"><CgProfile/><Link to="/Profile">Cuenta</Link></li>
+                <li className="flex items-center gap-4 mt-2 mb-2 text-2xl"><IoSettingsOutline/><Link to="/settings">Ajustes</Link></li>
             </ul>
         </div>
     </div>
