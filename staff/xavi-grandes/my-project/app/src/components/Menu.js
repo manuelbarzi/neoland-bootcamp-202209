@@ -8,12 +8,6 @@ import { Link } from 'react-router-dom'
 export default function Menu ({onClose}) {
     log.info('Menu -> render')
 
-    const [show, setShow] = useState('open')
-    const closeMenu = event => {
-        event.preventDefault()
-    
-        setShow(show === 'open'? 'close': 'open')
-    }
 
     return <> 
     <div className="absolute z-10 top-0 w-[100%] h-[100vh] bg-[rgba(0,0,0,0.2)]" onClick={onClose}>
