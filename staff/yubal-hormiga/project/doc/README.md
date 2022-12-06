@@ -11,12 +11,12 @@ Es una web básica para personas mayores donde podrán  llevar  control de sus g
 ### Use Cases
 
 User
-- Create a note
-- Create a expenditure
-- Update a note
-- Updte a expenditure
-- Delete a note
-- Delete a expenditure
+- Create a appoiment
+- Create a spent
+- Update a appoimment
+- Update a spent
+- Delete a appoiment
+- Delete a spent
 - View profile
 
 
@@ -32,6 +32,7 @@ Hemos usado:
 React : Para crear la base del proyecto
 Tailwind: Es un framework CSS que da prioridad a la utilidad sobre el propio estilo. Este framework  proporciona un conjunto de clases para  dar estructura y estilos, y poder crear rápidamente diseños personalizados
 Autoprefixer: Permite analizar código CSS estándar y añadir los vendor prefixes de CSS necesarios para garantizar que la funcionalidad se adapte lo mejor posible a navegadores antiguos
+........
 
 ### Data Model
 
@@ -40,19 +41,17 @@ User
 - email (String, required, unique)
 - password (String, required)
 
-Note - Appointment
+Appointment
 - user (ObjectId, required)
-- text (String, required)
-- visibility (String, required)
+- title (String)
+- body (String, required)
 - date (Date, required)
-- hour ( hour, required)
 
-
-
-Expenditure - 
+Flow
 - user (ObjectId, required)
-- text (String, required)
-- expenditure ( String, required)
-- visibility (String, required)
+- type (String, required, enum ['income', 'expense'])
+- kind (String, required, enum ['pension', 'gift', 'donation', 'food', 'supply', 'medicine', 'services', 'other'])
+- description (String)
+- amount (Number, required)
 - date (Date, required)
 

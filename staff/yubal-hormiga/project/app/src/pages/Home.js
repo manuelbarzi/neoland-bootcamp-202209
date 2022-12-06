@@ -6,7 +6,7 @@ import { useContext } from 'react'
 import Context from '../components/Context'
 import { errors } from 'com'
 import Pension from './Pension'
-import Appoiment from './Appoiment'
+import Appointment from './Appointment'
 import Memory from './Memory'
 const { FormatError, AuthError, LengthError, NotFoundError } = errors
 
@@ -46,7 +46,7 @@ function Home() {
             </section>
             <section className=' overflow-y-scroll border-2 border-green-800 h-80 row-start-1 row-end-3 col-start-2 col-end-3  w-full p-2 rounded-xl bg-white'>
                 <div>
-                    <Appoiment />
+                    <Appointment />
                 </div>
             </section>
             <section className='border-2 border-green-800 h-40 row-start-3 row-end-4 col-start-2 col-end-3w-full p-2 rounded-xl bg-white'>

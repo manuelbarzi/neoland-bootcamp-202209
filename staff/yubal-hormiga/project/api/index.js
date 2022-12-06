@@ -6,6 +6,9 @@ const express = require('express')
 const authenticateUserHandler = require('./handlers/authenticateUserHandler')
 const registerUserHandler = require('./handlers/registerUserHandler')
 const retrieveUserHandler = require('./handlers/retrieveUserHandler')
+const createAppointmentHandler = require('./handlers/createAppointmentHandler')
+const deleteAppointmentHandler = require('./handlers/deleteAppointmentHandler')
+
 
 const jsonBodyParser = require('./utils/jsonBodyParser')
 const cors = require('./utils/cors')
@@ -24,7 +27,9 @@ mongoose.connect(MONGODB_URL)
         api.post('/users/auth', jsonBodyParser, authenticateUserHandler)
         api.post('/users', jsonBodyParser, registerUserHandler)
         api.get('/users', jwtVerifier, retrieveUserHandler)
-        
+        api.post('/appointment', jwtVerifier, jsonBodyParser, createAppointmentHandler)
+        api.delete('/appointment/:appointmentId', jwtVerifier, deleteAppointmentHandler)
+
         const { PORT } = process.env
 
         api.listen(PORT, () => console.log(`server listening on port ${PORT}`))

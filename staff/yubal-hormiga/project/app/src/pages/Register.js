@@ -48,8 +48,8 @@ function Register() {
             <input name="password" type="password" id="password" placeholder="input your password" className="border-b border-black text-black" />
             <button className="font-medium py-3 px-5 bg-green-600 text-white  hover:bg-gray-700 rounded-md">Regístrate</button>
         </form>
-         <div className='tex-center  text-center '>
-        <Link to="/home" className="font-medium p-2 rounded-md  text-white   bg-gray-700   hover:bg-green-600">Entrar</Link>
+         <div className='tex-center  text-center gap-3 '>
+        <Link to="/login" className="font-medium p-3 rounded-md  text-white   bg-gray-700   hover:bg-green-600">Login</Link>
          </div>
 
         </div>

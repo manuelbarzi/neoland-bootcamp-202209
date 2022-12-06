@@ -49,8 +49,8 @@ function Login() {
                 <input name="password" type="password" id="password" placeholder="Introduce tu contraseña" className="border-b border-black text-black" />
                 <button className="font-medium py-3 px-5 bg-green-600 text-white  hover:bg-gray-700 rounded-md">Entrar</button>
             </form>
-            <div className='tex-center  text-center '>
-            <Link to="/register" className="font-medium p-2 rounded-md  text-white   bg-gray-700   hover:bg-green-600">Regístrate</Link>
+            <div className=' tex-center  text-center gap-3'>
+            <Link to="/register" className="font-medium p-3 rounded-md  text-white   bg-gray-700   hover:bg-green-600">Regístrate</Link>
             </div>
         </div>
     </main>

@@ -1,7 +1,7 @@
 import log from '../utils/coolog'
 
 
-function AppoimentList() {
+function AppointmentList() {
     log.info('AppoimentList -> render')
 
     return <>
@@ -16,4 +16,4 @@ function AppoimentList() {
     </>
 }
 
-export default AppoimentList
+export default AppointmentList
