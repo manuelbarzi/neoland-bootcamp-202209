@@ -3,11 +3,14 @@ import Header from '../components/Header'
 import { GrNext } from "react-icons/gr";
 import { MdDelete } from "react-icons/md";
 import { IoExit } from "react-icons/io5";
-
+import Context from '../components/Context';
+import { useContext } from 'react'
 
 
 export default function () {
     log.info('Profile -> render')
+
+    const { logout } = useContext(Context)
 
     return <>
         <Header />
@@ -20,7 +23,7 @@ export default function () {
             <hr className="bg-black w-4/5" />
             <button className='w-4/5 h-10 flex justify-between items-center'><p>Cambiar contraseña</p><GrNext/></button>
             <hr className="bg-black w-4/5" />
-            <button className='w-4/5 h-10 flex justify-between items-center'><p>Cerrar session</p><IoExit size="1.3rem"/></button>
+            <button className='w-4/5 h-10 flex justify-between items-center' onClick={logout}><p>Cerrar session</p><IoExit size="1.3rem"/></button>
             <button className='w-4/5 h-10 flex justify-between items-center'><p>Borrar cuenta</p><MdDelete size="1.3rem"/></button>
         </main>
     </>
