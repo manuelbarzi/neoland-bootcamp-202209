@@ -7,6 +7,8 @@ import { GrNext } from "react-icons/gr";
 import { MdDelete } from "react-icons/md";
 import { IoExit } from "react-icons/io5";
 import retrieveUser from '../logic/retrieveUser'
+import ChangeEmail from '../components/ChangeEmail';
+import ChangePassword from '../components/ChangePassword';
 
 const { FormatError, AuthError, LengthError, NotFoundError } = errors
 
@@ -37,6 +39,20 @@ export default function () {
         }
     }, [])
 
+    const [show, setShow] = useState('close')
+    const openUpdateEmail = event => {
+        event.preventDefault()
+    
+        setShow(show === 'close'? 'open': 'close')
+    }
+
+    const [openPass, setOpenPass] = useState('close')
+    const openUpdatePassword = event => {
+        event.preventDefault()
+    
+        setOpenPass(openPass === 'close'? 'open': 'close')
+    }
+
     return <>
         <Header />
         <main className="mt-[3rem] flex flex-col items-center gap-4">
@@ -44,12 +60,14 @@ export default function () {
             <img src='../Images/profile.png'/>
             <p className='bg-green-200 p-2'>no me funciona el user.email</p>
             <hr className="bg-black w-4/5" />
-            <button className='w-4/5 h-10 flex justify-between items-center'><p>Cambiar email</p><GrNext/></button>
+            <button className='w-4/5 h-10 flex justify-between items-center' onClick={openUpdateEmail}><p>Cambiar email</p><GrNext/></button>
             <hr className="bg-black w-4/5" />
-            <button className='w-4/5 h-10 flex justify-between items-center'><p>Cambiar contraseña</p><GrNext/></button>
+            <button className='w-4/5 h-10 flex justify-between items-center' onClick={openUpdatePassword}><p>Cambiar contraseña</p><GrNext/></button>
             <hr className="bg-black w-4/5" />
             <button className='w-4/5 h-10 flex justify-between items-center' onClick={logout}><p>Cerrar session</p><IoExit size="1.3rem"/></button>
             <button className='w-4/5 h-10 flex justify-between items-center'><p>Borrar cuenta</p><MdDelete size="1.3rem"/></button>
         </main>
+        { show === 'open' && <ChangeEmail onClose={openUpdateEmail}/>}
+        { openPass === 'open' && <ChangePassword onClose={openUpdatePassword}/>}
     </>
 }
