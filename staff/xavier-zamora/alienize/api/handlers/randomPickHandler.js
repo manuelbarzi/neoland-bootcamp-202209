@@ -1,11 +1,11 @@
-const enableSearchGame = require('../logic/enableSearchGame')
+const randomPick = require('../logic/randomPick')
 const { errors: { FormatError, NotFoundError} } = require('com')
 
 module.exports = (req, res) => {
     const {userId} = req
 
     try{
-        enableSearchGame(userId)
+        randomPick(userId)
         .then(user => res.json(user))
             .catch(error => {
                 if (error instanceof NotFoundError)

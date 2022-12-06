@@ -6,7 +6,9 @@ const express = require('express')
 const authenticateUserHandler = require('./handlers/authenticateUserHandler')
 const registerUserHandler = require('./handlers/registerUserHandler')
 const retrieveUserHandler = require('./handlers/retrieveUserHandler')
-const enableSearchGameHandler = require('./handlers/enableSearchGameHandler')
+const createGameHandler = require('./handlers/createGameHandler')
+const randomPickHandler = require('./handlers/randomPickHandler')
+const atack1Handler = require('./handlers/atack1Handler')
 
 const jsonBodyParser = require('./utils/jsonBodyParser')
 const cors = require('./utils/cors')
@@ -25,7 +27,9 @@ mongoose.connect(MONGODB_URL)
         api.post('/users/auth', jsonBodyParser, authenticateUserHandler)
         api.post('/users', jsonBodyParser, registerUserHandler)
         api.get('/users', jwtVerifier, retrieveUserHandler)
-        api.patch('/matchMaking',jwtVerifier, enableSearchGameHandler)
+        api.patch('/matchMaking',jwtVerifier, createGameHandler)
+        api.get('/randomPick', jwtVerifier, randomPickHandler)
+        api.get('/Battle/atack1', jwtVerifier, atack1Handler )
 
         const { PORT } = process.env
 

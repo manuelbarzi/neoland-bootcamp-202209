@@ -13,7 +13,6 @@ function Register({ onNavigateToLogin }) {
     }
 
     const handleRegister = event => {
-        debugger
         log.info('Register -> handleRegister')
 
         event.preventDefault()

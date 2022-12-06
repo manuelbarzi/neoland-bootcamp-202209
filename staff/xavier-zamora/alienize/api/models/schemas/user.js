@@ -1,5 +1,4 @@
 const { Schema } = require('mongoose')
-const { ObjectId } = require('mongodb')
 
 module.exports = new Schema({
     name: {
@@ -17,20 +16,7 @@ module.exports = new Schema({
     },
     elo: {
         type: Number,
-        required: true
+        required: true,
+        default: 3000
     },
-    isSearchingGame: {
-        type: Boolean,
-        default: false,
-        required: true
-    },
-    hasNotGame: {
-        type: Boolean,
-        default: false,
-        required: true
-    },
-    roomId: {
-        type: String,
-        required: true
-    }
 })

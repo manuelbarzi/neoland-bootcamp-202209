@@ -7,7 +7,7 @@ const { FormatError, AuthError, NotFoundError, UnexpectedError } = errors
  * @param {token} token The user token
  */
 
-export default function enableSearchGame(token) {
+export default function atack1(token) {
     if (typeof token !== 'string') throw new TypeError('token is not a string')
     if (!token.length) throw new FormatError('token is empty')
     return new Promise((resolve, reject) => {
@@ -39,7 +39,7 @@ export default function enableSearchGame(token) {
         }
         xhr.onerror = () => reject(new Error('connection error'))
 
-        xhr.open('PATCH', 'http://localhost:2000/matchMaking')
+        xhr.open('Get', 'http://localhost:2000/Battle/atack1')
         xhr.setRequestHeader('Authorization', `Bearer ${token}`)
 
         xhr.send()

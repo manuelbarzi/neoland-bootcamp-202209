@@ -2,6 +2,8 @@ import Register from './pages/Register'
 import Login from './pages/Login'
 import Home from './pages/Home'
 import Launcher from './pages/Launcher'
+import Pick from './pages/Pick'
+import Battle from './pages/Battle'
 import log from './utils/coolog'
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
@@ -41,6 +43,8 @@ function App() {
     {loggedIn ? <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/Launcher" element={<Launcher />} />
+      <Route path="/Pick" element={<Pick />} />
+      <Route path="/Battle" element={<Battle />} />
     </Routes>
       :
       <Routes>

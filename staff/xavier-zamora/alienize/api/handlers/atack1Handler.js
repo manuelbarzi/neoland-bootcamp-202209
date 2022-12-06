@@ -1,11 +1,11 @@
-const retrieveUser = require('../logic/retrieveUser')
-const { errors: { FormatError, NotFoundError } } = require('../../com')
+const atack1 = require('../logic/atack1')
+const { errors: { FormatError, NotFoundError } } = require('com')
 
 module.exports = (req, res) => {
     try {
         const { userId } = req
 
-        retrieveUser(userId)
+        atack1(userId)
             .then(user => res.json(user))
             .catch(error => {
                 if (error instanceof NotFoundError)
