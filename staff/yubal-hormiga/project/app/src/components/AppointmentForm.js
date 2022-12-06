@@ -17,14 +17,14 @@ function AppointmentForm({setAppointments, appointments}) {
 
     const submitCreateAppointment = event => {
         event.preventDefault()
-        console.log('escribiendo...')
+        console.log('writing')
 
         //*Creamos un Objeto con todos los valores no hace falta añadir el valor ya que es el mismo.
         const objectAppointment ={
             appointment,
             date,
             time,
-            text
+            text,
         }
         // console.log(objectAppoiment)
         setAppointments([...appointments,objectAppointment])
