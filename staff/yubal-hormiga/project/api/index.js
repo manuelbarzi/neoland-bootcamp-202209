@@ -7,6 +7,9 @@ const authenticateUserHandler = require('./handlers/authenticateUserHandler')
 const registerUserHandler = require('./handlers/registerUserHandler')
 const retrieveUserHandler = require('./handlers/retrieveUserHandler')
 const createAppointmentHandler = require('./handlers/createAppointmentHandler')
+const retrieveAppointmentHandler = require('./handlers/retrieveAppointmentHandler')
+const updateAppointmentHandler = require('./handlers/updateAppointmentHandler')
+
 const deleteAppointmentHandler = require('./handlers/deleteAppointmentHandler')
 
 
@@ -28,6 +31,9 @@ mongoose.connect(MONGODB_URL)
         api.post('/users', jsonBodyParser, registerUserHandler)
         api.get('/users', jwtVerifier, retrieveUserHandler)
         api.post('/appointment', jwtVerifier, jsonBodyParser, createAppointmentHandler)
+        api.get('/appointment/:appointmentId', jwtVerifier, retrieveAppointmentHandler)
+        api.patch('/appointment/:appointmentId', jwtVerifier, jsonBodyParser, updateAppointmentHandler)
+
         api.delete('/appointment/:appointmentId', jwtVerifier, deleteAppointmentHandler)
 
         const { PORT } = process.env
