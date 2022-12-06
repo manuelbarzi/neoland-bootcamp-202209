@@ -1,9 +1,8 @@
 import log from '../utils/coolog'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import Context from '../components/Context'
 import retrieveUser from '../logic/retrieveUser'
 import Header from '../components/Header'
-import { useContext } from 'react'
-import Context from '../components/Context'
 import { errors } from 'com'
 const { FormatError, AuthError, LengthError, NotFoundError } = errors
 
@@ -35,7 +34,6 @@ function Home() {
 
     return <>
         {user && <Header userName={user.name}/>}
-        
         <footer className='-z-10 absolute bottom-0 h-[4rem] flex justify-center items-center w-full bg-gray-200'>
             <button className='bg-blue-400 h-[3rem] w-2/5 text-white text-xl p-2 flex justify-center items-center rounded-lg'>+ Crear lista</button>
         </footer>
