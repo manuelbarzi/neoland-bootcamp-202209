@@ -9,6 +9,7 @@ import { IoExit } from "react-icons/io5";
 import retrieveUser from '../logic/retrieveUser'
 import ChangeEmail from '../components/ChangeEmail';
 import ChangePassword from '../components/ChangePassword';
+import profile from '../Images/profile.png'
 
 const { FormatError, AuthError, LengthError, NotFoundError } = errors
 
@@ -16,7 +17,7 @@ export default function () {
     log.info('Profile -> render')
 
     const { logout } = useContext(Context)
-    const [user, setUser] = useState()
+    const [user, setUser] = useState({email:'default@email.com'})
     const { showAlert } = useContext(Context)
 
     useEffect(() => {
@@ -57,8 +58,8 @@ export default function () {
         <Header />
         <main className="mt-[3rem] flex flex-col items-center gap-4">
             <h2 className='mt-2 text-2xl'>Profile</h2>
-            <img src='../Images/profile.png'/>
-            <p className='bg-green-200 p-2'>no me funciona el user.email</p>
+            <img className='h-[5rem]' src={profile} alt="logo-web"/>
+            <p className='bg-green-200 p-2'>{user && user.email}</p>
             <hr className="bg-black w-4/5" />
             <button className='w-4/5 h-10 flex justify-between items-center' onClick={openUpdateEmail}><p>Cambiar email</p><GrNext/></button>
             <hr className="bg-black w-4/5" />
