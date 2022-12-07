@@ -41,15 +41,13 @@ export default function () {
     }, [])
 
     const [show, setShow] = useState('close')
-    const openUpdateEmail = event => {
-        event.preventDefault()
+    const openUpdateEmail = () => {
     
         setShow(show === 'close'? 'open': 'close')
     }
 
     const [openPass, setOpenPass] = useState('close')
-    const openUpdatePassword = event => {
-        event.preventDefault()
+    const openUpdatePassword = () => {
     
         setOpenPass(openPass === 'close'? 'open': 'close')
     }
