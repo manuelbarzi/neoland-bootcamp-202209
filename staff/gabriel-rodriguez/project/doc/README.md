@@ -1,23 +1,24 @@
-# Hello App
+# Cheap Move
 
 ## Intro
 
-This App that blah blah blah...
+This App is based on a price comparison of the main VTC services
 
 ## Functional Description
+
+Compare the prices of the different VTC applications to choose the cheapest
 
 ### Use Cases
 
 User
-- Create a post
-- View all public posts
-- Update a post
-- Delete a post
+- Search destiny & View comparative
 - View profile
 - Change password
 - ...
 
 ## Technical Description
+
+It is an application that, through an API generated with the help of PUPPETER, gets into my VTC service user to get the best price.
 
 ### Data Model
 
@@ -26,8 +27,11 @@ User
 - email (String, required, unique)
 - password (String, required)
 
-Post
-- user (ObjectId, required)
-- text (String, required)
-- visibility (String, required, enum: ['public', 'private])
-- date (Date, required)
+ServiceType
+- name
+
+Service
+- user (ObjectId, ref User)
+- type (ObjectId, ref ServiceType, required)
+- username (String, required)
+- password (String, required)
