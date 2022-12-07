@@ -26,7 +26,7 @@ mongoose.connect(MONGODB_URL)
         api.post('/users/auth', jsonBodyParser, authenticateUserHandler)
         api.post('/users', jsonBodyParser, registerUserHandler)
         api.get('/users', jwtVerifier, retrieveUserHandler)
-        api.path('/users/updateUserEmail', updateUserEmailHandler)
+        api.patch('/users/email', jwtVerifier, jsonBodyParser, updateUserEmailHandler)
         
         const { PORT } = process.env
 
