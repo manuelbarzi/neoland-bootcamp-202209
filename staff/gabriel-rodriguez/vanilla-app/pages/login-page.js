@@ -1,62 +1,69 @@
 log('DEBUG', 'mount login')
 
-var loginForm = document.createElement('form')
-loginForm.className = 'container'
+const loginForm = document.createElement('form')
+loginForm.className = 'flex flex-col gap-2'
 
 loginForm.onsubmit = function (event) {
     event.preventDefault()
 
     log('DEBUG', 'submit login')
 
-    var email = loginEmailInput.value
-    var password = loginPasswordInput.value
+    const email = loginEmailInput.value
+    const password = loginPasswordInput.value
 
-    var result = authenticateUser(email, password)
+    try {
+        user = authenticateUser(email, password)
 
-    if (result instanceof Error) {
-        alert(result.message)
+        loginForm.reset()
 
-        return
+        loginPage.remove()
+        
+        headerUserNameText.innerText = user.name
+    
+        clearTasksCards()
+    
+        renderTasksCards()
+    
+        document.body.append(homePage)    
+    } catch(error) {
+        alert(error.message)
+
+        loginPasswordInput.value = ''
     }
-
-    user = result
-
-    loginForm.reset()
-
-    loginPage.remove()
-    headerUserNameText.innerText = user.name
-    document.body.append(homePage)
 }
 
-var loginEmailLabel = document.createElement('label')
+const loginEmailLabel = document.createElement('label')
 loginEmailLabel.htmlFor = 'login-email'
 loginEmailLabel.className = 'container__item--left'
 loginEmailLabel.innerText = 'E-mail'
 
-var loginEmailInput = document.createElement('input')
+const loginEmailInput = document.createElement('input')
 loginEmailInput.type = 'email'
 loginEmailInput.id = 'login-email'
 loginEmailInput.placeholder = 'input your e-mail'
+loginEmailInput.className = 'border-b border-black'
 
-var loginPasswordLabel = document.createElement('label')
+const loginPasswordLabel = document.createElement('label')
 loginPasswordLabel.htmlFor = 'login-password'
 loginPasswordLabel.className = 'container__item--left'
 loginPasswordLabel.innerText = 'Password'
 
-var loginPasswordInput = document.createElement('input')
+const loginPasswordInput = document.createElement('input')
 loginPasswordInput.type = 'password'
 loginPasswordInput.id = 'login-password'
 loginPasswordInput.placeholder = 'input your password'
+loginPasswordInput.className = 'border-b border-black'
 
-var loginSubmitButton = document.createElement('button')
-loginSubmitButton.className = 'container__item--right'
+const loginSubmitButton = document.createElement('button')
+loginSubmitButton.className = 'p-2 border rounded-xl hover:animate-spin'
 loginSubmitButton.innerText = 'Login'
 
 loginForm.append(loginEmailLabel, loginEmailInput, loginPasswordLabel, loginPasswordInput, loginSubmitButton)
 
-var loginRegisterLink = document.createElement('a')
+const loginRegisterLink = document.createElement('a')
 loginRegisterLink.href = ""
 loginRegisterLink.innerText = 'Register'
+loginRegisterLink.className = 'underline'
 
 loginRegisterLink.onclick = function (event) {
     event.preventDefault()
@@ -67,6 +74,6 @@ loginRegisterLink.onclick = function (event) {
     document.body.append(registerPage)
 }
 
-var loginPage = document.createElement('main')
-loginPage.className = 'container'
+const loginPage = document.createElement('main')
+loginPage.className = 'flex flex-col items-center gap-2'
 loginPage.append(loginForm, loginRegisterLink)
