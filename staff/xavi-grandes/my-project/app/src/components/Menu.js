@@ -14,9 +14,9 @@ export default function Menu ({onClose}) {
         <div className="h-[100vh] w-4/5 bg-gray-200" onClick={event => event.stopPropagation()}>
             <ul className="ml-4 flex flex-col gap-4 h-[100%]">
                 <li className="flex items-center gap-4 mt-2 mb-2 text-2xl">Hola!</li>
-                <li className="flex items-center gap-4 mt-2 mb-2 text-2xl"><BsListCheck/><Link to="/">Listas</Link></li>
-                <li className="flex items-center gap-4 mt-2 mb-2 text-2xl"><CgProfile/><Link to="/Profile">Cuenta</Link></li>
-                <li className="flex items-center gap-4 mt-2 mb-2 text-2xl"><IoSettingsOutline/><Link to="/settings">Ajustes</Link></li>
+                <li className="flex items-center gap-4 mt-2 mb-2 text-2xl" onClick={onClose}><BsListCheck/><Link to="/">Listas</Link></li>
+                <li className="flex items-center gap-4 mt-2 mb-2 text-2xl" onClick={onClose}><CgProfile/><Link to="/Profile">Cuenta</Link></li>
+                <li className="flex items-center gap-4 mt-2 mb-2 text-2xl" onClick={onClose}><IoSettingsOutline/><Link to="/settings">Ajustes</Link></li>
             </ul>
         </div>
     </div>
