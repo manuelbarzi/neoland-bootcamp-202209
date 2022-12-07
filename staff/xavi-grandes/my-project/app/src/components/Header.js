@@ -14,19 +14,12 @@ export default function Header({ userName} ) {
         setShow(show === 'close'? 'menu': 'close')
     }
 
-    // dark mode
-    const switchMode = () => document.querySelector('html').classList.toggle('dark')
-
-
     return <header className="fixed bg-[white] w-full h-[3rem] top-0 flex items-center gap-8 bg-gray-100">
         <button className='p-2 ml-1 flex items-center cursor-pointer' onClick={showMenu}><AiOutlineMenu className='h-[20px] w-[20px]'/></button>
     { show === 'menu' && <Menu onClose={showMenu}/>}
 
-
         {/* TODO: este variable estará dentro del menú. */}
         <p>{userName}</p>
 
-        {/* TODO: este botón estará en la página de perfil. */}
-        <button onClick={switchMode}><IoInvertModeOutline /></button>
     </header>
 }
