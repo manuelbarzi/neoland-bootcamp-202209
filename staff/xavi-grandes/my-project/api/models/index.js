@@ -2,7 +2,13 @@ const { model } = require('mongoose')
 const { user } = require('./schemas')
 
 const User = model('User', user)
+const List = model('List', list)
+const Product = model('Product', product)
+const Item = model('Item', item)
 
 module.exports = {
-    User
+    User,
+    List,
+    Product,
+    Item
 }
