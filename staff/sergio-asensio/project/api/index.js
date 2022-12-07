@@ -10,6 +10,10 @@ const createNoticeHandler = require('./handlers/createNoticeHandler')
 const updateNoticeHandler = require('./handlers/updateNoticeHandler')
 
 const deleteNoticeHandler = require('./handlers/deleteNoticeHandler')
+const retrieveNoticeHandler = require('./handlers/retrieveNoticeHandler')
+const retrieveNoticesHandler = require('./handlers/retrieveNoticesHandler')
+
+
 
 
 
@@ -32,8 +36,12 @@ mongoose.connect(MONGODB_URL)
         api.post('/users', jsonBodyParser, registerUserHandler)
         api.get('/users', jwtVerifier, retrieveUserHandler)
         api.post('/noticias', jwtVerifier, jsonBodyParser, createNoticeHandler)
-        api.patch('/noticias/:noticetId', jwtVerifier, updateNoticeHandler)
+        api.patch('/noticias/:noticeId', jwtVerifier,jsonBodyParser, updateNoticeHandler)
         api.delete('/noticias/:noticeId', jwtVerifier, deleteNoticeHandler)
+        api.get('/noticias/:noticeId', jwtVerifier, retrieveNoticeHandler)
+        api.get('/noticias', jwtVerifier, retrieveNoticesHandler)
+
+
 
 
 

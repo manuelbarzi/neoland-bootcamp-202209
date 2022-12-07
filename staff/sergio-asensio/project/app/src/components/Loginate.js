@@ -44,8 +44,7 @@ export default function Loginate({onClose}) {
 
 
     return <div className="bg-[#aaaa] fixed top-0 h-full w-full flex flex-col justify-center items-center overflow-hidden" onClick={onClose}>
-        <div className="p-5 rounded-xl flex flex-col items-end bg-white dark:bg-black text-black dark:text-white" onClick={event => event.stopPropagation()}>
-
+        <div className="p-5 rounded-xl flex flex-col items-end bg-teal-600 dark:bg-black text-black dark:text-white" onClick={event => event.stopPropagation()}>
             <button onClick={onClose}>-X-</button>
             <form className="flex flex-col gap-2" onSubmit={handleLogin}>
                 <label htmlFor="email">E-mail</label>

@@ -9,7 +9,7 @@ export default function ({ onCreated, onClose }) {
         try {
             createNotice(sessionStorage.token, title, body)
                 .then(() => onCreated())
-                .then(()=> onClose())
+                .then(() => onClose())
                 .catch(error => alert(error.message))
         } catch (error) {
             alert(error.message)
@@ -21,7 +21,7 @@ export default function ({ onCreated, onClose }) {
         <div className="p-5 rounded-xl flex flex-col items-end bg-white dark:bg-black text-black dark:text-white" onClick={event => event.stopPropagation()}>
             <button size="1.5rem" onClick={onClose} className="cursor-pointer"> -X-</button>
             <form className="flex flex-col gap-2" onSubmit={submitCreateNotice}>
-                <label htmlFor="title">title</label>
+                <label htmlFor="title">Title</label>
                 <input className="text-black pl-2" type="text" name="title" id="title" placeholder="input a title"></input>
                 <label htmlFor="body">Notice</label>
                 <textarea className="text-black pl-2" type="text" name="body" id="body" placeholder="input the notice"></textarea>

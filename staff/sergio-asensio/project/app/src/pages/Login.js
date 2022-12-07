@@ -49,7 +49,7 @@ function Login() {
 
     return <main className="h-full">
         <header className='h-1/6 top-0 flex justify-around items-center bg-teal-600	'>
-            <div className='h-20 w-20'>
+            <div className='h-20 w-20 '>
                 <img src={logo}/>
             </div>
             <div>
