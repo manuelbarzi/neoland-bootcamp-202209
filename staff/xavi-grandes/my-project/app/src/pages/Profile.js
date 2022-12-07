@@ -59,7 +59,7 @@ export default function () {
         <main className="mt-[3rem] flex flex-col items-center gap-4">
             <h2 className='mt-2 text-2xl'>Profile</h2>
             <img className='h-[5rem]' src={profile} alt="logo-web"/>
-            <p className='bg-green-200 p-2'>{user && user.email}</p>
+            <p className='bg-green-200 p-2'>{user && user.name}</p>
             <hr className="bg-black w-4/5" />
             <button className='w-4/5 h-10 flex justify-between items-center' onClick={openUpdateEmail}><p>Cambiar email</p><GrNext/></button>
             <hr className="bg-black w-4/5" />
