@@ -6,7 +6,7 @@ const express = require('express')
 const authenticateUserHandler = require('./handlers/authenticateUserHandler')
 const registerUserHandler = require('./handlers/registerUserHandler')
 const retrieveUserHandler = require('./handlers/retrieveUserHandler')
-const updateUserEmailHandler = require('.handler/updateUserEmailHandler')
+const updateUserEmailHandler = require('./handlers/updateUserEmailHandler')
 
 
 const jsonBodyParser = require('./utils/jsonBodyParser')
