@@ -55,7 +55,7 @@ export default function () {
     return <>
         <Header />
         <main className="mt-[3rem] flex flex-col items-center gap-4">
-            <h2 className='mt-2 text-2xl'>Profile</h2>
+            <h2 className='mt-2 text-2xl'>Perfil</h2>
             <img className='h-[5rem]' src={profile} alt="logo-web"/>
             <p className='bg-green-200 p-2'>{user && user.name}</p>
             <hr className="bg-black w-4/5" />
