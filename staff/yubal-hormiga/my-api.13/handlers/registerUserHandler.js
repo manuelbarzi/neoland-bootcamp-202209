@@ -1,10 +1,10 @@
-const updateAppointment = require('../logic/updateAppointment')
+const registerUser = require('../logic/registerUser')
 
 module.exports = (req, res) => {
     try {
-        const { body: { title, body, date}, params:{ appointmentId},  userId } = req
+    const { name, email, password } = req.body
 
-        updateAppointment(userId, title, body, date , appointmentId)
+        registerUser(name, email, password)
             .then(() => res.status(201).send())
             .catch(error => res.status(500).json({ error: error.message }))
     } catch (error) {

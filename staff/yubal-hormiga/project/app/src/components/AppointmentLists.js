@@ -13,7 +13,7 @@ function AppoimentLists({ appointments, setAppointment }) {
         <div className='rounded-lg shadow-md flex gap-5 pb-1'>
 
           <div className='w-2/12'>
-            <p className='font-semibold text-lg flex flex-row'>Cita: <spam>{appointment.appointment}</spam></p>
+            <p className='font-semibold text-lg flex flex-row'>Cita: <spam>{appointment.title}</spam></p>
           </div>
 
           <div className='w-3/12' >

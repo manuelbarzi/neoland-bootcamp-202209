@@ -4,13 +4,13 @@ function AppointmentForm({setAppointments, appointments}) {
     log.info('AppoimentForm -> render')
 
     //*States */
-    const [appointment, setAppointment] = useState('')
+    const [title, setTitle] = useState('')
     const [date, setDate] = useState('')
     const [time, setTime] = useState('')
     const [text, setText] = useState('')
 
     //*Eventos */
-    const appointmentName = event => setAppointment(event.target.value)
+    const appointmentTitle = event => setTitle(event.target.value)
     const appointmentDate = event => setDate(event.target.value)
     const appointmentTime = event => setTime(event.target.value)
     const appointmentText = event => setText(event.target.value)
@@ -21,7 +21,7 @@ function AppointmentForm({setAppointments, appointments}) {
 
         //*Creamos un Objeto con todos los valores no hace falta añadir el valor ya que es el mismo.
         const objectAppointment ={
-            appointment,
+            title,
             date,
             time,
             text,
@@ -29,7 +29,7 @@ function AppointmentForm({setAppointments, appointments}) {
         // console.log(objectAppoiment)
         setAppointments([...appointments,objectAppointment])
 
-        setAppointment('')
+        setTitle('')
         setDate('')
         setTime('')
         setText('')
@@ -38,7 +38,7 @@ function AppointmentForm({setAppointments, appointments}) {
         <form className=' rounded-lg p-2 mb-4 ' onSubmit={submitCreateAppointment}>
             <div className='flex shadow-md mb-3 '>
                 <label htmlFor='appointment' className=' w-20 font-semibold text-lg flex justify-start'>Cita</label>
-                <input id='appointment' className='text-center w-full font-semibold text-lg  placeholder-gray-500 ' type='text' placeholder='Nombre de  Cita' value={appointment} onChange={appointmentName}/>  {/*  value ->Para recoger nombre de la Cita Onchange como hicimos con el edit de post- para recoger los cambios */}
+                <input id='appointment' className='text-center w-full font-semibold text-lg  placeholder-gray-500 ' type='text' placeholder='Nombre de  Cita' value={ title } onChange={appointmentTitle}/>  {/*  value ->Para recoger nombre de la Cita Onchange como hicimos con el edit de post- para recoger los cambios */}
                  
             </div>
             <div className='flex shadow-md mb-3'>

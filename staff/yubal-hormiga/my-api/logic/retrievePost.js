@@ -1,5 +1,5 @@
-const { ObjectId } = require('mongodb')
-const context = require('./context')
+const { errors: { FormatError, NotFoundError } } = require('my-commons')
+const { User, Appointment } = require('../models')
 
 /**
  * Retrieves a post from user
@@ -8,32 +8,27 @@ const context = require('./context')
  * @param {string} postId The post id
 
  */
-module.exports = function (userId, postId) {
+module.exports = function (userId, appointmentId) {
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
-    if (!userId.length) throw new Error('userId is empty')
-    if (typeof postId !== 'string') throw new TypeError('postId is not a string')
-    if (!postId.length) throw new Error('postId is empty')
+    if (!userId.length) throw new FormatError('userId is empty')
+    if (typeof <appointmentId> !== 'string') throw new TypeError('appointmentId is not a string')
+    if (!appointmentId.length) throw new FormatError('appointmentId is empty')
 
-    const { db } = context
-
-    const users = db.collection('users')
-    const posts = db.collection('posts')
-
-    return users.findOne({ _id: ObjectId(userId) })
+    return User.findById(userId) // .findOne({ _id: ... })
         .then(user => {
             if (!user)
-                throw new Error(`user with id ${userId} does not exist`)
+                throw new NotFoundError(`user with id ${userId} does not exist`)
 
-            return posts.findOne({ _id: ObjectId(postId) })
+            return Appoiment.findById(appointmentId).lean()
         })
-        .then(post => {
-            if (!post)
-                throw new Error(`post with id ${postId} does not exist`)
+        .then(appointment => {
+            if (!appointment)
+                throw new NotFoundError(`appointmet with id ${appointmentId} does not exist`)
 
-            delete post._id
-            delete post.user
-            delete post.date
+            delete appointment._id
+            delete appointment.user
+            delete appointment.date
 
-            return post
+            return appointment
         })
 }

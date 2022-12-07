@@ -4,25 +4,20 @@ const { Types: { ObjectId } } = Schema
 module.exports = new Schema({
     user: {
         type: ObjectId,
+        ref: 'User'
+    },
+    text: {
+        type: String,
         required: true
     },
-    title: {
+    visibility: {
         type: String,
-        required: true,
-    },
-    body: {
-        type: String,
+        enum: ['public', 'private'],
+        default: 'public',
         required: true
     },
     date: {
         type: Date,
-        require:true
-    },
+        required: true
+    }
 })
-
-// Appointment
-// - user (ObjectId, required)
-// - title (String)
-// - body (String, required)
-// - date (Date, required)
-

@@ -1,13 +1,13 @@
-const { errors: { FormatError, NotFoundError } } = require('../../my-commons')
+// const { errors: { FormatError, NotFoundError } } = require('../../my-commons')
 const { User, Appointment } = require('../models')
 
-module.exports = function (userId, appointmentId, tittle, visibility) {
+module.exports = function (userId, title, body, date, appointmentId) {
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
     if (!userId.length) throw new Error('userId is empty')
     if (typeof appointmentId !== 'string') throw new TypeError('postId is not a string')
     if (!appointmentId.length) throw new Error('postId is empty')
-    if (typeof text !== 'string') throw new TypeError('text is not a string')
-    if (!text.length) throw new Error('text is empty')
+    if (typeof title !== 'string') throw new TypeError('text is not a string')
+    if (!title.length) throw new Error('text is empty')
 
 
 
@@ -15,8 +15,8 @@ module.exports = function (userId, appointmentId, tittle, visibility) {
         .then(user => {
             if (!user)
                 throw new Error(`user with id ${userId} does not exist`)
-
-            return Appointment.findById(appointmentId).lean()
+                //?.lean() consultar
+            return Appointment.findById(appointmentId)
         })
         .then(appointment => {
             if (!appointment)
@@ -26,11 +26,7 @@ module.exports = function (userId, appointmentId, tittle, visibility) {
                 throw new Error(`appointment with id ${appointmentId} does not belong to user with id ${userId}`)
 
 
-            return appointment.updateOne({appointmentId}, { $set: { tittle, visibility, date: new Date } })
+            return Appointment.updateOne({_id:appointmentId}, { $set: { title, body, date} })
         })
-        .then(result => {
-            const { acknowledged } = result
 
-            if (!acknowledged) throw new Error(`could not update appointment with id ${appointmentId}`)
-         })
 }
