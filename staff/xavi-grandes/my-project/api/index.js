@@ -6,6 +6,8 @@ const express = require('express')
 const authenticateUserHandler = require('./handlers/authenticateUserHandler')
 const registerUserHandler = require('./handlers/registerUserHandler')
 const retrieveUserHandler = require('./handlers/retrieveUserHandler')
+const updateUserEmailHandler = require('.handler/updateUserEmailHandler')
+
 
 const jsonBodyParser = require('./utils/jsonBodyParser')
 const cors = require('./utils/cors')
@@ -24,6 +26,7 @@ mongoose.connect(MONGODB_URL)
         api.post('/users/auth', jsonBodyParser, authenticateUserHandler)
         api.post('/users', jsonBodyParser, registerUserHandler)
         api.get('/users', jwtVerifier, retrieveUserHandler)
+        api.path('/users/updateUserEmail', updateUserEmailHandler)
         
         const { PORT } = process.env
 
