@@ -1,4 +1,7 @@
-import { IS_EMAIL_REGEX, HAS_SPACES_REGEX } from '../utils/regex'
+import { regex, errors } from 'my-commons'
+
+const { IS_EMAIL_REGEX, HAS_SPACES_REGEX } = regex
+const { FormatError, AuthError, LengthError, NotFoundError, UnexpectedError } = errors
 /**
  * authenticates a user against API
  * 
@@ -22,19 +25,31 @@ function authenticateUser(email, password, callback) {
             xhr.onload = () => {
                 const { status, responseText: json } = xhr
 
-                if (status >= 500) {
+                if (status === 200) {
+                    const { token } = JSON.parse(json)
+
+                    resolve(token)
+                } else if (status === 400) {
                     const { error } = JSON.parse(json)
 
-                    reject(new Error(error))
+                    if (error.includes('is not a'))
+                        reject(new TypeError(error))
+                    else if (error.includes('valid') || error.includes('spaces'))
+                        reject(new FormatError(error))
+                    else if (error.includes('length'))
+                        reject(new LengthError(error))
+                } else if (status === 401) {
+                    const { error } = JSON.parse(json)
+                    reject(new AuthError(error))
+                } else if (status === 404) {
+                    const { error } = JSON.parse(json)
+                    reject(new NotFoundError(error))
+                } else if (status < 500)
+                    reject(new UnexpectedError('client error'))
+                else
+                    reject(new UnexpectedError('server error'))
 
-                    return
-                }
-
-                const { token } = JSON.parse(json)
-
-                resolve(token)
             }
-
             xhr.onerror = () => reject(new Error('connection error'))
 
             xhr.open('POST', 'http://localhost/users/auth')
@@ -55,17 +70,28 @@ function authenticateUser(email, password, callback) {
     xhr.onload = () => {
         const { status, responseText: json } = xhr
 
-        if (status >= 500) {
+        if (status === 200) {
+            const { token } = JSON.parse(json)
+
+            callback(null, token)
+        } else if (status === 400) {
             const { error } = JSON.parse(json)
-
-            callback(new Error(error))
-
-            return
-        }
-
-        const { token } = JSON.parse(json)
-
-        callback(null, token)
+            if (error.includes('is not a'))
+                callback(new TypeError(error))
+            else if (error.includes('valid' || error.includes('spaces')))
+                callback(new FormatError(error))
+            else if (error.includes('length'))
+                callback(new LengthError(error))
+        } else if (status === 401) {
+            const { error } = JSON.parse(json)
+            callback(new AuthError(error))
+        } else if (status === 404) {
+            const { error } = JSON.parse(json)
+            callback(new NotFoundError(error))
+        } else if (status < 500)
+            callback(new UnexpectedError('client error'))
+        else
+            callback(new UnexpectedError('server error'))
     }
 
     xhr.onerror = () => callback(new Error('connection error'))

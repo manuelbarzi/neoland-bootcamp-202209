@@ -15,13 +15,12 @@ function Header({ userName }) {
 
     //const userId = extractSubFromToken(sessionStorage.token)
 
-    return <header className='fixed bg-[white] w-full h-[2rem] top-0 flex justify-center items-center gap-2 bg-white dark:bg-black text-black dark:text-white'>
-        {/*<Link to={`/profile/${userId}`}>{userName}</Link>*/}
-        <p className='font-bold'>{userName}</p>
-
-        <button onClick={logout}><AiOutlineLogout /></button>
-
-        <button onClick={switchMode}><IoInvertModeOutline /></button>
+    return <header className='fixed bg-[white] w-full h-[2rem] top-0 flex justify-between items-center gap-2 dark:bg-black text-black dark:text-white'>
+        <p className='font-bold mx-1.5'>{userName}</p>
+        <div className='mx-1.5'>
+            <button onClick={logout}><AiOutlineLogout /></button>
+            <button onClick={switchMode}><IoInvertModeOutline /></button>
+        </div>
     </header>
 }
 export default Header

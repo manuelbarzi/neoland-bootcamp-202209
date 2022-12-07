@@ -8,7 +8,8 @@ import EditPost from '../components/EditPost'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 
-import { AiOutlinePlusCircle, AiOutlineEdit, AiOutlineDelete, AiOutlineLock, AiFillHome } from 'react-icons/ai'
+import { AiOutlineEdit, AiOutlineDelete, AiOutlineLock } from 'react-icons/ai'
+
 
 function MyProfile() {
     log.info('MyProfile -> render')
@@ -112,27 +113,20 @@ function MyProfile() {
 
         {posts && <div className='flex flex-col items-center gap-2 py-[2rem]'>
             {posts.map(post => <article key={post.id} className='bg-slate-300 shadow-slate-800 border-b-4 rounded-xl w-[50%] flex flex-col p-5'>
-                <p>{post.text}</p>
-                {post.visibility === 'private' && <p className='self-end'><AiOutlineLock /></p>}
-                <time>{post.date}</time>
-                <div className='flex self-end'>
+                <time className='flex justify-end'>{post.date}</time>
+                <p  className='border-2 bg-slate-200 border-slate-400 rounded-xl'>{post.text}</p>
+                <div className='flex self-end pb-0'>
                     <button onClick={() => openEditPost(post.id)}><AiOutlineEdit size='1rem' /></button>
                     <button onClick={() => openDeletePost(post.id)}><AiOutlineDelete size='1rem' /></button>
+                    {post.visibility === 'private' && <p className='self-end'><AiOutlineLock /></p>}
                 </div>
             </article>)}
         </div>}
 
-        <Footer />
-
-        <footer className='fixed bg-[white] w-full h-[2rem] bottom-0 flex justify-around'>
-            <button onClick={'/'}><AiFillHome size='1.5rem' /></button>
-            <button onClick={openCreatePost}><AiOutlinePlusCircle size='1.5rem' /></button>
-        </footer>
+        <Footer onCreate={openCreatePost} />
 
         {createPostVisible && <CreatePost onCreated={handlePostCreated} onClose={closeCreatePost} />}
-
         {postIdToEdit && <EditPost postId={postIdToEdit} onUpdated={handlePostUpdated} onClose={closeEditPost} />}
-
         {postIdToDelete && <DeletePost postId={postIdToDelete} onDeleted={handlePostDeleted} onClose={closeDeletePost} />}
 
     </main>

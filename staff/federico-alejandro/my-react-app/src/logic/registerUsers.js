@@ -1,4 +1,6 @@
-import { IS_ALPHABETICAL_REGEX, IS_EMAIL_REGEX, HAS_SPACES_REGEX } from '../utils/regex'
+import { regex, errors } from 'my-commons'
+const { IS_ALPHABETICAL_REGEX, IS_EMAIL_REGEX, HAS_SPACES_REGEX } = regex
+const { FormatError, LengthError, ConflictError, UnexpectedError } = errors
 
 /**
  * Registers a user in API
@@ -28,15 +30,23 @@ function registerUser(name, email, password, callback) {
             xhr.onload = () => {
                 const { status, responseText: json } = xhr
 
-                if (status >= 500) {
+                if (status === 201)
+                    resolve()
+                else if (status === 400) {
                     const { error } = JSON.parse(json)
-
-                    reject(new Error(error))
-
-                    return
-                }
-
-                resolve()
+                    if (error.includes('is not a'))
+                        reject(new TypeError(error))
+                    else if (error.includes('valid') || error.includes('spaces'))
+                        reject(new FormatError(error))
+                    else if (error.includes('length'))
+                        reject(new LengthError(error))
+                } else if (status === 409) {
+                    const { error } = JSON.parse(json)
+                    reject(new ConflictError(error.message))
+                } else if (status < 500)
+                    reject(new UnexpectedError('client error'))
+                else
+                    reject(new UnexpectedError('server error'))
             }
 
             xhr.onerror = () => reject(new Error('connection error'))
@@ -58,15 +68,23 @@ function registerUser(name, email, password, callback) {
     xhr.onload = () => {
         const { status, responseText: json } = xhr
 
-        if (status >= 500) {
+        if (status === 201)
+            callback(null)
+        else if (status === 400) {
             const { error } = JSON.parse(json)
-
-            callback(new Error(error))
-
-            return
-        }
-
-        callback(null)
+            if (error.includes('is not a'))
+                callback(new TypeError(error))
+            else if (error.includes('valid') || error.includes('spaces'))
+                callback(new FormatError(error))
+            else if (error.includes('length'))
+                callback(new LengthError(error))
+        } else if (status === 409) {
+            const { error } = JSON.parse(json)
+            callback(new ConflictError(error.message))
+        } else if (status < 500)
+            callback(new UnexpectedError('client error'))
+        else
+            callback(new UnexpectedError('server error'))
     }
 
     xhr.onerror = () => callback(new Error('connection error'))

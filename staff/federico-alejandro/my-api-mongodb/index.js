@@ -1,6 +1,6 @@
 require('dotenv').config()
-
-const { MongoClient } = require('mongodb')
+//const { MongoClient } = require('mongodb')
+const mongoose = require('mongoose')
 const express = require('express')
 
 const authenticateUserHandler = require('./handlers/authenticateUserHandler')
@@ -23,13 +23,16 @@ const jwtVerifier = require('./utils/jwtVerifier')
 
 const { MONGODB_URL } = process.env
 
-const client = new MongoClient(MONGODB_URL)
+//const client = new MongoClient(MONGODB_URL)
 
-client.connect()
-    .then(conecction => {
+
+//client.connect()
+mongoose.connect(MONGODB_URL)
+    .then(() => { //connection
         console.log(`db connected to ${MONGODB_URL}`)
 
-        context.db = conecction.db('test')
+        //context.db = connection.db('test')
+        context.db = mongoose.connection.client.db('test')
 
         const api = express()
 
@@ -40,12 +43,11 @@ client.connect()
         api.get('/users', jwtVerifier, retrieveUserHandler)
         api.get('/users/:targetUserId', jwtVerifier, retrieveAUserHandler)
        
-        
         api.get('/users/:targetUserId/posts', jwtVerifier, retrievePostsFromUserHandler)
         
         api.post('/posts', jwtVerifier, jsonBodyParser, createPostHandler)
         api.get('/posts/public', jwtVerifier, retrievePublicPostsHandler)
-        api.get('./posts/:postId', jwtVerifier, retrievePostHandler)
+        api.get('/posts/:postId', jwtVerifier, retrievePostHandler)
         api.patch('/posts/:postId', jwtVerifier, jsonBodyParser, updatePostHandler)
         api.delete('/posts/:postId', jwtVerifier, deletePostHandler)
         api.get('/posts',jwtVerifier, retrievePostsUserHandler)

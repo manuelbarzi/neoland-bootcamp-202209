@@ -4,7 +4,7 @@ function retrieveUser(token, callback) {
 
     if (!callback)
         return new Promise((resolve, reject) => {
-            const xhr = new XMLHttpRequest
+            const xhr = new XMLHttpRequest()
 
             xhr.onload = function () {
                 const { status, responseText: json } = xhr
@@ -29,7 +29,7 @@ function retrieveUser(token, callback) {
         })
 
     if (typeof callback !== 'function') throw new TypeError('callback is not a function')
-    const xhr = new XMLHttpRequest
+    const xhr = new XMLHttpRequest()
 
     xhr.onload = function () {
         const { status, responseText: json } = xhr
