@@ -6,7 +6,7 @@ function createAppointment(userId, title,body, date) {
     if (!userId.length) throw new LengthError('userId is empty')
     if (typeof title !== 'string') throw new TypeError('title is not a string')
     if (!title.length) throw new LengthError('title is empty')
-   
+   // TODO validate inputs
 
     return User.findById(userId)
         .then(user => {

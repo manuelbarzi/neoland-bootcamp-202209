@@ -36,7 +36,7 @@ function Login() {
             else
                 showAlert(error.message, 'fatal')
 
-            event.target.password.value = '' // TODO improve this, do not manipulate the dom directly, do it by means of React
+            event.target.password.value = '' 
         }
     }
 

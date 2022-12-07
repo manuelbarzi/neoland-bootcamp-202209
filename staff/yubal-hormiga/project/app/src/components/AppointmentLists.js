@@ -25,7 +25,7 @@ function AppoimentLists({ appointments, setAppointment }) {
           </div>
 
           <div>
-            <p className=' min-w-full font-semibold text-lg '>{appointment.text}</p>
+            <p className=' min-w-full font-semibold text-lg '>{appointment.body}</p>
           </div>
 
           <div className=''>
