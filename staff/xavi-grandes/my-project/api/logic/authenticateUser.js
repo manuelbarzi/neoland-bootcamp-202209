@@ -2,6 +2,7 @@ const {
     errors: { FormatError, LengthError, NotFoundError, AuthError },
     regex: { IS_EMAIL_REGEX, HAS_SPACES_REGEX }
 } = require('com')
+
 const { User } = require('../models')
 
 /**
