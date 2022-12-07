@@ -1,9 +1,9 @@
 const { Schema } = require('mongoose')
+const { Types: { ObjectId } } = Schema
 
 module.exports = new Schema({
     list: {
         type: ObjectId
-        // - list (ObjectId, buying list id)
     },
     price: {
         type: Number
