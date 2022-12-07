@@ -6,7 +6,7 @@ export default function ({ onDeleted, onClose, postId }) {
         event.preventDefault()
 
         try {
-            deletePost(sessionStorage.userId, postId, error => {
+            deletePost(sessionStorage.token, postId, error => {
             if (error) {
                 alert(error.messsage)
 

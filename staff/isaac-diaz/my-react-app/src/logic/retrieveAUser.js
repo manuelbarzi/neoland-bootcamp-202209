@@ -1,32 +1,35 @@
-export default function (userId, targetUserId, callback) {
-    if (typeof userId !== 'string') throw new TypeError('userId is not a string')
-    if (!userId.length) throw new Error('userId is empty')
+export default function (token, targetUserId, callback) {
+    if (typeof token !== 'string') throw new TypeError('token is not a string')
+    if (!token.length) throw new Error('token is empty')
     if (typeof targetUserId !== 'string') throw new TypeError('targetUserId is not a string')
     if (!targetUserId.length) throw new Error('targerUserId is empty')
-    if (typeof callback !== 'function') throw new TypeError('callback is not a function')
 
-    const xhr = new XMLHttpRequest
+    if (!callback)
+        return new Promise((resolve, reject) => {
+            const xhr = new XMLHttpRequest
 
-    xhr.onload = function () {
-        const { status, responseText: json } = xhr
+            xhr.onload = function () {
+                const { status, responseText: json } = xhr
 
-        if (status >= 500) {
-            const { error } = JSON.parse(json)
+                if (status >= 500) {
+                    const { error } = JSON.parse(json)
 
-            callback(new Error(error))
+                    reject(new Error(error))
 
-            return
-        }
+                    return
+                }
 
-        const user = JSON.parse(json)
+                const user = JSON.parse(json)
 
-        callback(null, user)
+                resolve(user)
 
-    }
+            }
 
-    xhr.open('GET', `http://localhost/users/${targetUserId}`)
-    xhr.setRequestHeader('Authorization', `Bearer ${userId}`)
-    xhr.send()
+            xhr.open('GET', `http://localhost/users/${targetUserId}`)
+            xhr.setRequestHeader('Authorization', `Bearer ${token}`)
+            xhr.send()
+
+        })   
 
 }
 

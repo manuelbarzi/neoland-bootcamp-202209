@@ -1,59 +1,44 @@
-const { readFile } = require("fs")
+const { ObjectId } = require('mongodb')
+const context = require('./context')
 
-function retrieveAccessPosts(userId, callback) {
+module.exports = function (userId) {
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
     if (!userId.length) throw new Error('userId is empty')
-    if (typeof callback !== 'function') throw new TypeError('callback is not a function')
 
-    readFile('./data/users.json', 'utf8', (error, json) => {
-        if (error) {
-            callback(error)
+    const { db } = context
 
-            return
-        }
+    const users = db.collection('users')
+    const posts = db.collection('posts')
 
-        const users = JSON.parse(json)
+    return users.findOne({ _id: ObjectId(userId) })
+        .then(user => {
+            if (!user)
+                throw new Error(`user with id ${userId} does not exist`)
 
-        const user = users.find(user => user.id === userId)
-
-        if (!user) {
-            callback(new error('user with id ${userId} does not exist'))
-
-            return
-        }
-
-        readFile('./data/posts.json', 'utf8', (error, json) => {
-            if (error) {
-                callback(error)
-
-                return
-            }
-
-            const posts = JSON.parse(json)
-
-            const postsToReturn = posts.filter(post => {
-                if (post.user === userId || post.visibility === 'public') {
-                    delete post.visibility
-
-                    return true
-                }
-
-                return false
-            })
-
-            postsToReturn.sort((a, b) => a.date > b.date ? -1 : a.date < b.date ? 1 : 0)
-
-            postsToReturn.forEach(post => {
-                const user = users.find(user => user.id === post.user)
-
-                const { id, name } = user
-
-                post.user = { id, name }
-            })
-
-            callback(null, postsToReturn)
+            return posts.find({ visibility: 'public' }).sort({ date: -1 }).toArray()
         })
-    })
+        .then(publicPost => {
+            const userFinds = publicPost.map(publicPost => users.findOne({ _id: ObjectId(publicPost.user) }))
+
+            return Promise.all(userFinds)
+                .then(publicPostUsers => {
+                    publicPost.forEach((publicPost, index) => {
+                        const { _id, name } = publicPostUsers[index]
+
+                        publicPost.user = { id: _id.toString(), name }
+
+                        publicPost.id = publicPost._id.toString()
+                        delete publicPost._id
+                    })
+
+                    return publicPost
+                })
+        })
 }
 
-module.exports = retrieveAccessPosts
+
+            // TODO const postsToReturn = posts.filter(post => {
+            //     if (post.user === userId || post.visibility === 'public') {
+            //         delete post.visibility
+
+

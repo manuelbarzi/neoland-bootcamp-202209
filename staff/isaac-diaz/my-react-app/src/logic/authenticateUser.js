@@ -1,58 +1,70 @@
-import { IS_EMAIL_REGEX, HAS_SPACES_REGEX } from '../utils/regex'
+import { regex, errors } from 'my-commons'
+
+const { IS_EMAIL_REGEX, HAS_SPACES_REGEX } = regex
+const { FormatError, AuthError, LengthError, NotFoundError, UnexpectedError } = errors
 
 /**
  * Authenticates a user against API
  * 
  * @param {string} email The user email
  * @param {string} password The user password
- * @param {callback} callback The callback to attend the result
  */
-
-export default function authenticateUser(email, password, callback) {
+export default function authenticateUser(email, password) {
     if (typeof email !== 'string') throw new TypeError('email is not a string')
     if (!IS_EMAIL_REGEX.test(email)) throw new Error('email is not valid')
 
-    if(typeof password !== 'string') throw new TypeError('password is not a string')
-    if(password.length < 8) throw new Error('Need eigth carachters')
+    if (typeof password !== 'string') throw new TypeError('password is not a string')
+    if (password.length < 8) throw new Error('Need eigth carachters')
     if (HAS_SPACES_REGEX.test(password)) throw new Error('password has spaces')
 
-    if(typeof callback !== 'function') throw new TypeError('callback is not a function')
+    return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest
 
-    const xhr = new XMLHttpRequest
+        xhr.onload = () => {
+            const { status, responseText: json } = xhr
 
-    xhr.onload = () => {
-        const { status, responseText: json } = xhr  
+            if (status === 200) {
+                const { token } = JSON.parse(json)
 
-        if(status >= 500) {
-            const { error } = JSON.parse(json)
-            
-            callback(new Error(error))
-    
-            return
+                resolve(token)
+            } else if (status === 400) {
+                const { error } = JSON.parse(json)
 
+                if (error.includes('is not a'))
+                    reject(new TypeError(error))
+                else if (error.includes('valid'))
+                    reject(new FormatError(error))
+                else if (error.includes('length'))
+                    reject(new LengthError(error))
+            } else if (status === 401) {
+                const { error } = JSON.parse(json)
+
+                reject(new AuthError(error))
+            } else if (status === 404) {
+                const { error } = JSON.parse(json)
+
+                reject(new NotFoundError(error))
+            } else if (status < 500)
+                reject(new UnexpectedError('client error'))
+            else
+                reject(new UnexpectedError('server error'))
         }
-        const { userId } = JSON.parse(json)
 
-        callback(null, userId)
+        xhr.onerror = () => reject(new Error('connection error'))
 
-    }
+        xhr.open('POST', 'http://localhost/user/auth')
+        xhr.setRequestHeader('Content-Type', 'application/json')
 
-    xhr.onerror = () => callback(new Error('connection error'))
+        const payload = { email, password }
 
-    xhr.open('POST', 'http://localhost/user/auth')
-    xhr.setRequestHeader('Content-type', 'application/json')
+        const json = JSON.stringify(payload)
 
-    const payload = { email, password }
-
-    const json = JSON.stringify(payload)
-
-    xhr.send(json)
-} 
+        xhr.send(json)
+    })
+}
 
 /**
- * Attends the result of the authentication
- * 
- * @callback callback
+ * Attends the result of the authentication 
  * 
  * @param {Error} error The authentication error
  * @param {string} userId The id of the user that authenticated

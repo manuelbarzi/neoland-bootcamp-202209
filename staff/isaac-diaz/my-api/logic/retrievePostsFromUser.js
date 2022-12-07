@@ -1,62 +1,35 @@
-const { readFile } = require('fs')
+const { ObjectId } = require('mongodb')
+const context = require('./context')
 
- function retrieveAccesPosts(userId, targetUserId, callback) {
+module.exports = function (userId, targetUserId) {
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
     if (!userId.length) throw new Error('userId is empty')
     if (typeof targetUserId !== 'string') throw new TypeError('targetUserId is not a string')
     if (!targetUserId.length) throw new Error('targerUserId is empty')
-    if (typeof callback !== 'function') throw new TypeError('callback is not a function')
 
-    readFile('./data/users.json', 'utf8', (error, json) => {
-        if (error) {
-            callback(error)
+    const { db } = context
 
-            return
-        }
+    const users = db.collection('users')
+    const posts = db.collection('posts')
 
-        const users = JSON.parse(json)
+    return users.findOne({ _id: ObjectId(userId) })
+        .then(user => {
+            if (!user) throw new Error(`user with id ${userId} does not exist`)
 
-        const user = users.find(user => user.id === userId)
+            return users.findOne({ _id: ObjectId(targetUserId) })
+        })
+        .then(targetUser => {
+            if (!targetUser) throw new Error(`target user with id ${userId} does not exist`)
 
-        if (!user) {
-            callback(new Error(`user with id ${userId} does not exist`))
-
-            return
-        }
-
-        const targetUser = users.find(user => user.id === targetUserId)
-
-        if (!targetUser) {
-            callback(new Error(`user with id ${userId} does not exist`))
-
-            return
-        }
-
-        readFile('./data/posts.json', 'utf8', (error, json) => {
-            if (error) {
-                callback(error)
-
-                return
-            }
-
-            const posts = JSON.parse(json)
-
-            const targetPosts = posts.filter(post => {
-                if (post.visibility === 'public' && post.user === targetUserId) {
-                    delete post.visibility
-                    delete post.user
-
-                    return true
-                }
-
-                return false
+            return posts.find({ user: ObjectId(targetUserId), visibility: 'public' }).sort({ date: -1 }).toArray()
+        })
+        .then(userPosts => {
+            userPosts.forEach(userPost => {
+                delete userPost._id
+                delete userPost.user
+                delete userPost.visibility
             })
 
-            targetPosts.sort((a, b) => a.date > b.date? -1 : a.date < b.date? 1 : 0)
-
-            callback(null, targetPosts)
+            return userPosts
         })
-    })
 }
-
-module.exports = retrieveAccesPosts

@@ -1,8 +1,34 @@
-export default function (userId, postId, callback) {
-    if (typeof userId !== 'string') throw new TypeError('userId is not a string')
-    if (!userId.length) throw new Error('userId is empty')
+export default function (token, postId, callback) {
+    if (typeof token !== 'string') throw new TypeError('token is not a string')
+    if (!token.length) throw new Error('token is empty')
     if (typeof postId !== 'string') throw new TypeError('postId is not a string')
     if (!postId.length) throw new Error('postId is empty')
+
+    if (!callback)
+        return new Promise((resolve, reject) => {
+            const xhr = new XMLHttpRequest
+
+            xhr.onload = function () {
+                const { status, responseText: json } = xhr
+
+                if (status >= 500) {
+                    const { error } = JSON.parse(json)
+
+                    resolve(new Error(error))
+
+                    return
+                }
+
+                const post = JSON.parse(json)
+
+                reject(post)
+            }
+
+            xhr.open = ('GET', `http://localhost/posts/${postId}`)
+            xhr.setRequestHeader = ('Authorization', `Bearer ${token}`)
+            xhr.send()
+        })
+
     if (typeof callback !== 'function') throw new TypeError('callback is not a function')
 
     const xhr = new XMLHttpRequest
@@ -24,7 +50,7 @@ export default function (userId, postId, callback) {
     }
 
     xhr.open = ('GET', `http://localhost/posts/${postId}`)
-    xhr.setRequestHeader = ('Authorization', `Bearer ${userId}`)
+    xhr.setRequestHeader = ('Authorization', `Bearer ${token}`)
     xhr.send()
 }
 

@@ -1,49 +1,31 @@
-const { readFile } = require('fs')
+const { ObjectId } = require('mongodb')
+const context = require('./context')
 
-function retrievePost(userId, postId, callback) {
+module.exports = function (userId, postId) {
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
     if (!userId.length) throw new Error('userId is empty')
     if (typeof postId !== 'string') throw new TypeError('postId is not a string')
-    if (!postId.length) throw new Error('postId is empty')
-    if (typeof callback !== 'function') throw new TypeError('callback is not a function')
+    if (!postId.length) throw new Error('postId is empty') 
 
-    readFile('./data/users.json', 'utf8', (error, json) => {
-        if (error) {
-            callback(error)
+    const { db } = context
 
-            return
-        }
+    const users = db.collection('users')
 
-        const users = JSON.parse(json)
+    const posts = db.collection('posts')
 
-        const user = users.find(user => user.id === userId)
+    return users.findOne({ _id: ObjectId(userId) })
+        .then(user => {
+            if(!user) throw new Error(`user with id ${userId} does not exist`)
 
-        if (!user) {
-            callback(new Error('user not registered'))
-
-            return
-        }
-     
-
-        readFile('./data/posts.json', 'utf8', (error, json) => {
-            if (error) {
-                callback(error)
-
-                return
-            }
-
-            const posts = JSON.parse(json)       
-
-            const post = posts.find(post => post.id === postId)
-
-            if (!post) {
-                callback(new Error('post not created'))
-
-                return
-            }
-
-            callback(null, post)
+            return posts.findOne({ _id: ObjectId(postId) })
         })
-    })
+        .then(post => {
+            if(!post) throw new Error(`post with id ${postId} does not exist`)
+
+            delete post._id
+            delete post.user
+            delete post.date
+
+            return post
+        })    
 }
-module.exports = retrievePost

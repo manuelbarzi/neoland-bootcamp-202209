@@ -11,7 +11,7 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 
 
-export default function ({ onLoggedOut }) {
+export default function () {
     log.info('home -> render')
 
     const [user, setUser] = useState()
@@ -22,7 +22,7 @@ export default function ({ onLoggedOut }) {
 
     useEffect(() => {
         try {
-            retrieveUser(sessionStorage.userId, (error, user) => {
+            retrieveUser(sessionStorage.token, (error, user) => {
                 if (error) {
                     alert(error.message)
 
@@ -30,7 +30,7 @@ export default function ({ onLoggedOut }) {
                 }
 
                 try {
-                    retrieveAccessPosts(sessionStorage.userId, (error, posts) => {
+                    retrieveAccessPosts(sessionStorage.token, (error, posts) => {
                         if (error) {
                             alert(error.message)
 
@@ -55,7 +55,7 @@ export default function ({ onLoggedOut }) {
 
     const handlePostCreated = () => {
         try {
-            retrieveAccessPosts(sessionStorage.userId, (error, posts) => {
+            retrieveAccessPosts(sessionStorage.token, (error, posts) => {
                 if (error) {
                     alert(error.message)
 
@@ -76,7 +76,7 @@ export default function ({ onLoggedOut }) {
 
     const handlePostUpdated = () => {
         try {
-            retrieveAccessPosts(sessionStorage.userId, (error, posts) => {
+            retrieveAccessPosts(sessionStorage.token, (error, posts) => {
                 if (error) {
                     alert(error.message)
 
@@ -97,7 +97,7 @@ export default function ({ onLoggedOut }) {
 
     const handlePostDeleted = () => {
         try {
-            retrieveAccessPosts(sessionStorage.userId, (error, posts) => {
+            retrieveAccessPosts(sessionStorage.token, (error, posts) => {
                 if (error) {
                     alert(error.message)
 
@@ -112,15 +112,15 @@ export default function ({ onLoggedOut }) {
         }
     }
 
-    return <main className="overflow-hidden">
-        <Header userName={user?.name} onLoggedOut={onLoggedOut} />
+    return <main className="overflow-hidden bg-white dark:bg-black text-black dark:text-white">
+        <Header userName={user?.name} />
 
         {posts && <div className="flex flex-col items-center gap-2 py-[2rem]">
             {posts.map(post => <article key={post.id} className="border rounded-xl w-[50%] flex flex-col p-5">
                 <Link to={`/profile/${post.user.id}`}><strong>{post.user.name}</strong></Link>
                 <p>{post.text}</p>
                 <time>{post.date}</time>
-                {post.user.id === sessionStorage.userId && <div className="flex self-end">
+                {post.user.id === sessionStorage.token && <div className="flex self-end">
                     <button onClick={() => openEditPost(post.id)}><AiOutlineEdit size="1rem" /></button>
                     <button onClick={() => openDeletePost(post.id)}><AiOutlineDelete size="1rem" /></button>
                 </div>}

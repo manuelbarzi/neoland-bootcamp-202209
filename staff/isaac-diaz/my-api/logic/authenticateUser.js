@@ -1,51 +1,46 @@
-const { readFile } = require('fs')
+const context = require('./context')
+const {
+    errors: { FormatError, LengthError, NotFoundError, AuthError },
+    regex: { IS_EMAIL_REGEX, HAS_SPACES_REGEX }
+} = require('my-commons')
 
 /**
  * Authenticates a user against DB
  * 
  * @param {string} email The user email
  * @param {string} password The user password
- * @param {callback} callback The callback to attend the result
  */
 
-function authenticateUser(email, password, callback) {
-    if(typeof email !== 'string') throw new TypeError('email is not a string')
-    if (!email.length) throw new Error('email is empty')
-    if(typeof password !== 'string') throw new TypeError('password is not a string')
-    if (!password.length) throw new Error('password is empty')
-    if(typeof callback !== 'function') throw new TypeError('callback is not a function')
+function authenticateUser(email, password) {
+    if (typeof email !== 'string') throw new TypeError('email is not a string')
+    if (!IS_EMAIL_REGEX.test(email)) throw new FormatError('email is not valid')
+    if (typeof password !== 'string') throw new TypeError('password is not a string')
+    if (password.length < 8) throw new LengthError('password length is less than 8')
+    if (HAS_SPACES_REGEX.test(password)) throw new FormatError('password has spaces')
 
-    readFile('./data/users.json', 'utf8', (error, json) => {
-        if (error) {
-            callback(error)
+    const { db } = context
 
-            return
-        }
+    const users = db.collection('users')
 
-        const users = JSON.parse(json)
+    return users.findOne({ email })
+        .then(user => {
+            if (!user)
+                throw new NotFoundError('user not registered')
 
-        const user = users.find(user => user.email === email)
+            if (user.password !== password)
+                throw new AuthError('wrong password')
 
-        if(!user) {
-            callback(new Error('user not registered'))
-
-            return
-        }
-
-        if(user.password !== password) {
-            callback(new Error('wrong password'))
-
-            return 
-        }
-
-        callback(null, user.id)
-    })
+            return user._id.toString()
+        })
 }
+
+
+module.exports = authenticateUser
+
+
 
 /**
  * Attends the result of the authentication
- * 
- * @callback callback
  * 
  * @param {Error} error The authentication error
  * @param {string} userId The id of the user that authenticated
