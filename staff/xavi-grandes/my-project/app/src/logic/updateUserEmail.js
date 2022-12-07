@@ -1,39 +1,44 @@
-import { regex } from 'com'
-
-const { IS_EMAIL_REGEX } = regex
-
 /**
  * Update user email
  * 
- * @param {string} userEmail Client current e-mail
+ * @param {string} token Client 
  * @param {string} newEmail The new email that client wants.
  */
-export default function (userEmail, newEmail) {
-if (typeof userEmail !== 'string') throw new TypeError ('userEmail is not a string')
-if (!IS_EMAIL_REGEX.test(userEmail)) throw new Error('userEmail is not valid')
-// test has to be change to new DataBase project
+
+export default function (token, newEmail) {
+if (typeof token !== 'string') throw new TypeError ('token is not a string')
+if (!token.length) throw new Error('token is empty')
 
 if (typeof newEmail !== 'string') throw new TypeError('newEmail is not a string')
-if (!IS_EMAIL_REGEX.test(newEmail)) throw new Error('newEmail is not valid')
-// test has to be change to new DataBase project
+if (!newEmail.length) throw new Error('newEmail is empty')
+// regex
 
-for (let i = 0; i < users.length; i++) {
-    const user = users[i]
+return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest()
 
-    if (user.email === newEmail)
-        throw new Error('user with e-mail ' + newEmail + ' already exists')
-}
+    xhr.onload = () => {
+        const { status, responseText: json } = xhr
 
-for (let i = 0; i < users.length; i++) {
-    const user = users[i]
+        if (status >= 500) {
+            const { error } = JSON.parse(json)
 
-    if (user.email === userEmail) {
-        user.email = newEmail
+            reject(new Error(error))
 
-        return
+            return
+        }
+
+        resolve()
     }
-}
 
-throw new Error('user with e-mail ' + userEmail + ' not found')
+    xhr.onerror = () => reject(new Error('connection error'))
 
+    xhr.open('PATCH', `http://localhost/users/email`)
+    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
+    xhr.setRequestHeader('Content-Type', 'application/json')
+
+    const payload = { newEmail }
+    const json = JSON.stringify(payload)
+
+    xhr.send(json)
+})
 }
