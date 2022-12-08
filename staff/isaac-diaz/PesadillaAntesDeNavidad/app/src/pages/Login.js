@@ -3,7 +3,9 @@ import authenticateUser from '../logic/authenticateUser'
 import { Link } from 'react-router-dom'
 import { useContext } from 'react'
 import Context from '../components/Context'
-import { AuthError, FormatError, LengthError, NotFoundError } from '../../../com/errors'
+import { errors } from 'com'
+const { FormatError, AuthError, LengthError, NotFoundError } = errors
+
 
 function Login() {
     log.info('Login -> render')
@@ -44,7 +46,7 @@ function Login() {
             <input name='email' type='email' id='email' placeholder='input your e-mail' className='border-b border-black text-black' />
             <label htmlFor='password' className='container__item-left'>Password</label>
             <input name='password' type='password' id='password' placeholder='input your password' className='border-b border-black text-black' />
-            <button className='p-2 border rounded-xl hover:animate-spin'>Login</button>
+            <button className='p-2 border rounded-xl hover:animate-pulse'>Login</button>
         </form>
 
         <Link to='/register' className='underline'>Register</Link>

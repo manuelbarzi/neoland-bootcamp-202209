@@ -1,5 +1,7 @@
-const user = require('./user')
+const users = require('./users')
+const vehicles = require('./vehicles')
 
 module.exports = {
-    user
+    users,
+    vehicles
 }

@@ -2,14 +2,14 @@
 
 ## Intro
 
-This App is for view the state your cars
+This App is for view the state of your cars
 
 ## Functional Description
 
 ### Use Cases
 
 User
-- View list of vehicles (brand, model, license, licenseDate)
+- View list of vehicles (brand, model, license, licenseDate, kms)
 - View a vehicle (full detail, state, ...)
 - Create a vehicle
 - Update a vehicle

@@ -3,7 +3,9 @@ import registerUser from '../logic/registerUser'
 import { Link, useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import Context from '../components/Context'
-import { ConflictError, FormatError, LengthError } from '../../../com/errors'
+import { errors } from 'com'
+const { FormatError, LengthError, ConflictError } = errors
+
 
 function Register() {
     log.info('Register -> render')

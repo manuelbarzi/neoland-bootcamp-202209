@@ -36,7 +36,7 @@ function App() {
 
     const closeAlert = () => setMessage()
 
-    return <Context.provider value={{ login, logout, showAlert }}>
+    return <Context.Provider value={{ login, logout, showAlert }}>
         {loggedIn ? <Routes>
             <Route path='/' element={<Home />} />
         </Routes>
@@ -48,7 +48,7 @@ function App() {
             </Routes>}
 
         {message && <Alert message={message} level={level} onClose={closeAlert} />}
-    </Context.provider>
+    </Context.Provider>
 }
 
 export default App

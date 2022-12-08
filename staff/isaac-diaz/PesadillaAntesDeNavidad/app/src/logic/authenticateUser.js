@@ -1,6 +1,6 @@
-import { AuthError, FormatError, LengthError, NotFoundError, UnexpectedError } from '../../../com/errors'
-import { HAS_SPACES_REGEX, IS_ALPHABETICAL_REGEX } from '../../../com/regex'
-
+import { errors, regex } from 'com'
+const { FormatError, AuthError, LengthError, NotFoundError, UnexpectedError } = errors
+const { IS_EMAIL_REGEX, HAS_SPACES_REGEX } = regex
 /**
  * Authtenticate Users
  * 
@@ -10,7 +10,7 @@ import { HAS_SPACES_REGEX, IS_ALPHABETICAL_REGEX } from '../../../com/regex'
 
 export default function authenticateUser(email, password) {
     if (typeof email !== 'string') throw new TypeError('email is not a string')
-    if (!IS_ALPHABETICAL_REGEX) throw new FormatError('email is not alphabetical')
+    if (!IS_EMAIL_REGEX.test(email)) throw new FormatError('email is not alphabetical')
 
     if (typeof password !== 'string') throw new TypeError('password is not a string')
     if (password.length < 8) throw new LengthError('passwrord length is less than 8')

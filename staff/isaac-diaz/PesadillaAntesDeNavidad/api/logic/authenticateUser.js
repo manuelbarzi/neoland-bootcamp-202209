@@ -1,7 +1,13 @@
-const { FormatError, LengthError, NotFoundError, AuthError } = require('com/errors')
-const { HAS_SPACES_REGEX, IS_EMAIL_REGEX } = require('com/regex')
+const { 
+    errors: {
+        LengthError, FormatError, AuthError, NotFoundError
+    },
+    regex: {
+        IS_EMAIL_REGEX, HAS_SPACES_REGEX
+    }
+} = require('com')
 
-const { User } = require('../models')
+const { Users } = require('../models')
 
 /**
 * Authtenticates a User
@@ -18,7 +24,7 @@ function authenticateUser(email, password) {
     if (password.length < 8) throw new LengthError('password length is less than 8')
     if (HAS_SPACES_REGEX.test(password)) throw new FormatError('password has spaces')
 
-    return User.findOne({ email })
+    return Users.findOne({ email })
         .then(user => {
             if (!user)
                 throw new NotFoundError('user not registered')

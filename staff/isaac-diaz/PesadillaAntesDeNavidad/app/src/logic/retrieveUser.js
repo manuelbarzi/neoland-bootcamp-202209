@@ -1,4 +1,6 @@
-import { AuthError, LengthError, NotFoundError, UnexpectedError } from "../../../com/errors"
+import { errors } from 'com'
+const { AuthError, LengthError, NotFoundError, UnexpectedError } = errors
+
 
 /**
  * Retrieve Users
@@ -11,7 +13,7 @@ export default function retrieveUser(token) {
     if (!token.length) throw new LengthError('token is empty')
 
     return new Promise((resolve, reject) => {
-        const xhr = XMLHttpRequest()
+        const xhr = new XMLHttpRequest()
 
         xhr.onload = function () {
             const { status, responseText: json } = xhr

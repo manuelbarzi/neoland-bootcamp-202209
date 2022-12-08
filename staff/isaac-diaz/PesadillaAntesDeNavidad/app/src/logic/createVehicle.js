@@ -1,6 +1,7 @@
 import { json } from 'react-router-dom'
-import { regex, error } from '../../../com'
-import { LengthError } from '../../../com/errors'
+import { errors } from 'com'
+const { LengthError } = errors
+
 
 
 export default function createVehicle(userId, vehicleId) {

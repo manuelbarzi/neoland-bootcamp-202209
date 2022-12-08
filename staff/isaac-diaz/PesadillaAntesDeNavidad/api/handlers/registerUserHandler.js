@@ -1,6 +1,10 @@
 const registerUser = require('../logic/registerUser')
 
-const { errors: { FormatError, LengthErrror, ConflictError } } = require('../../com')
+const { 
+    errors: {
+        LengthError, FormatError, ConflictError, UnexpectedError
+    }
+} = require('com')
 
 module.exports = (req, res) => {
     try {
@@ -15,7 +19,7 @@ module.exports = (req, res) => {
                     res.status(500).json({ error: error.message })
             })
     } catch (error) {
-        if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthErrror)
+        if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
             res.status(400).json({ error: error.message })
         else
             res.status(500).json({ error: error.message })

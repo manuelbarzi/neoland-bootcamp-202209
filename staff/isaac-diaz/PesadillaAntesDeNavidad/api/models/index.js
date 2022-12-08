@@ -1,8 +1,10 @@
 const { model } = require('mongoose')
-const { user } = require('./schemas')
+const { users, vehicles } = require('./schemas')
 
-const User = model('User', user)
+const Users = model('Users', users)
+const Vehicles = model('Vehicles', vehicles)
 
 module.exports = {
-    User
+    Users,
+    Vehicles
 }

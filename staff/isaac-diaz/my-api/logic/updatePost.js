@@ -29,11 +29,6 @@ module.exports = function (userId, postId, text, visibility) {
                 throw new Error(`post with id ${postId} does not exist`)
 
             return posts.updateOne({ _id: ObjectId(postId) }, { $set: { text, visibility, date: new Date } })
-        })
-        .then(result => { 
-            const { acknowledged } = result
-            
-            if(!acknowledged) throw new Error(`could not update post with id ${userId}`)
-        })
+        })      
 }
 

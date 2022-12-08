@@ -1,12 +1,15 @@
 const createVehicle = require('../logic/createVehicle')
-const jwt = require('jsonwebtoken')
-const { LengthError, FormatError, NotFoundError } = require('com')
+const { 
+    errors: {
+        LengthError, FormatError, NotFoundError, AuthError
+    }
+} = require('com')
 
 module.exports = (req, res) => {
     try {
         const { body: { brand, model, type, license, lisenceDate, kms }, userId } = req
 
-        createVehicle(userId, brand, model, type, license)
+        createVehicle(userId, brand, model, type, license, lisenceDate, kms)
             .then(() => res.status(201).send())
             .catch(error => {
                 if (error instanceof NotFoundError)
