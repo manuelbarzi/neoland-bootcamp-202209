@@ -23,7 +23,6 @@ function retrieveNotices(userId) {
                 notice.id = notice._id.toString()
                 delete notice._id
 
-                delete notice.id
                 delete notice.__v
                 delete notice.user
                 delete notice.date

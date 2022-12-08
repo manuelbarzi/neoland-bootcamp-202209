@@ -13,17 +13,18 @@ function retrieveNotice(userId, noticeId) {
             if (!user)
                 throw new NotFoundError(`user with id ${userId} does not exist`)
 
-            return Notice.findById(noticeId).select('-__v')
+            return Notice.findById(noticeId).select('-__v').lean()
         })
-
         .then(notice => {
             if (notice.user.toString() !== userId)
                 throw new NotFoundError(`notice with id ${noticeId} does not belong to this user`)
+            notice.id = notice._id.toString()
 
+            delete notice._id
 
-         
             return notice
         })
+        
 }
 
 module.exports = retrieveNotice
