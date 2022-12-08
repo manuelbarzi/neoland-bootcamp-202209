@@ -2,18 +2,30 @@
  * Creates a post against API
  * 
  * @param {string} token The user token
+ * @param {string} title The title text
  * @param {string} text The post text
  * @param {string} visibility The post visibility
+ * @param {string} image The image post
  * @param {callback} callback The callback to attend the result
  */
 function createPost(token, title, text, visibility, image, callback) {
     if (typeof token !== 'string') throw new TypeError('token is not a string')
     if (!token.length) throw new Error('token is empty')
+
+    if (typeof title !== 'string') throw new TypeError('title is not a string')
+    if (!title.length) throw new Error('title is empty')
+
     if (typeof text !== 'string') throw new TypeError('text is not a string')
     if (!text.length) throw new Error('text is empty')
+
     if (typeof visibility !== 'string') throw new TypeError('visibility is not a string')
     if (!visibility.length) throw new Error('visibility is empty')
     if (visibility !== 'public' && visibility !== 'private') throw new Error('invalid visibility')
+
+    if (image) {
+        if (typeof image !== 'string') throw new TypeError('image is not a string')
+        if (!image.length) throw new Error('image is empty')
+    }
 
     if (!callback)
         return new Promise((resolve, reject) => {
@@ -39,7 +51,9 @@ function createPost(token, title, text, visibility, image, callback) {
             xhr.setRequestHeader('Authorization', `Bearer ${token}`)
             xhr.setRequestHeader('Content-Type', 'application/json')
 
-            const payload = { title, text, visibility, image }
+            const payload = { title, text, visibility }
+
+            if (image) payload.image = image
 
             const json = JSON.stringify(payload)
 
@@ -48,6 +62,7 @@ function createPost(token, title, text, visibility, image, callback) {
 
 
     if (typeof callback !== 'function') throw new TypeError('callback is not a function')
+
     const xhr = new XMLHttpRequest()
 
     xhr.onload = () => {
@@ -70,7 +85,9 @@ function createPost(token, title, text, visibility, image, callback) {
     xhr.setRequestHeader('Authorization', `Bearer ${token}`)
     xhr.setRequestHeader('Content-Type', 'application/json')
 
-    const payload = { title, text, visibility, image }
+    const payload = { title, text, visibility  }
+
+    if (image) payload.image = image
 
     const json = JSON.stringify(payload)
 

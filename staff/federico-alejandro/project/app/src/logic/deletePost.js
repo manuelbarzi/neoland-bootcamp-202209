@@ -13,7 +13,7 @@ function deletePost(token, postId, callback) {
 
     if (!callback)
         return new Promise((resolve, reject) => {
-            const xhr = new XMLHttpRequest
+            const xhr = new XMLHttpRequest()
 
             xhr.onload = () => {
                 const { status } = xhr
@@ -43,7 +43,7 @@ function deletePost(token, postId, callback) {
         })
 
     if (typeof callback !== 'function') throw new TypeError('callback is not a function')
-    const xhr = new XMLHttpRequest
+    const xhr = new XMLHttpRequest()
 
     xhr.onload = () => {
         const { status } = xhr

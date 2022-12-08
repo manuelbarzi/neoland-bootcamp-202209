@@ -18,5 +18,15 @@ const { User, Post } = require('../models')
             return Post.find({user: userId}).sort({ date: -1 }).lean()
 
     })
+    .then(posts => {
+        posts.forEach(post => {
+            post.id = post._id.toString()
+
+            delete post._id
+            delete post.__v
+        })
+
+        return posts
+    })
 }
 module.exports = retrievePostsUser

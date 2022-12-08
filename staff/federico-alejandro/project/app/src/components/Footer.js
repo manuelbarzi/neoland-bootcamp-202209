@@ -1,7 +1,8 @@
-import { AiOutlinePlusCircle, AiFillHome } from 'react-icons/ai'
-import { BsPersonCircle } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 import extractSubFromToken from '../utils/extractSubFromToken'
+
+import { AiOutlinePlusCircle, AiFillHome } from 'react-icons/ai'
+import { BsPersonCircle } from 'react-icons/bs'
 
 function Footer({onCreate}) {
     const userId = extractSubFromToken(sessionStorage.token)

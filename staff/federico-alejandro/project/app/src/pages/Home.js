@@ -4,7 +4,6 @@ import { useContext } from 'react'
 import { errors } from 'com'
 import { Link } from 'react-router-dom'
 
-import retrieveUser from '../logic/retrieveUser'
 import retrievePublicPosts from '../logic/retrievePublicPosts'
 
 import Header from '../components/Header'
@@ -21,7 +20,6 @@ const { FormatError, AuthError, LengthError, NotFoundError } = errors
 function Home() {
     log.info('Home -> render')
 
-    const [user, setUser] = useState()
     const [posts, setPosts] = useState()
     const { showAlert } = useContext(Context)
     
@@ -31,8 +29,8 @@ function Home() {
 
     useEffect(() => {
         try {
-            retrieveUser(sessionStorage.token)
-                .then(user => setUser(user))
+            retrievePublicPosts(sessionStorage.token)
+                .then(posts => setPosts(posts))
                 .catch(error => {
                     if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
                         showAlert(error.message, 'warn')
@@ -41,24 +39,6 @@ function Home() {
                     else
                         showAlert(error.message, 'fatal')
                 })
-            try {
-                retrievePublicPosts(sessionStorage.token)
-                    //.then(user => setUser(user)) //debe ir o no?
-                    .then(posts => setPosts(posts))
-                    .catch(error => {
-                        if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
-                            showAlert(error.message, 'warn')
-                        else if (error instanceof AuthError || error instanceof NotFoundError)
-                            showAlert(error.message, 'error')
-                        else
-                            showAlert(error.message, 'fatal')
-                    })
-            } catch (error) {
-                if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
-                    showAlert(error.message, 'warn')
-                else
-                    showAlert(error.message, 'fatal')
-            }
         } catch (error) {
             if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
                 showAlert(error.message, 'warn')
@@ -66,8 +46,8 @@ function Home() {
                 showAlert(error.message, 'fatal')
         }
     }, [])
-    const openCreatePost = () => setCreatePostVisible(true)
 
+    const openCreatePost = () => setCreatePostVisible(true)
     const closeCreatePost = () => setCreatePostVisible(false)
 
     const handlePostCreated = () => {
@@ -87,7 +67,6 @@ function Home() {
     }
 
     const openEditPost = postId => setPostIdToEdit(postId)
-
     const closeEditPost = () => setPostIdToEdit()
 
     const handlePostUpdated = () => {
@@ -107,7 +86,6 @@ function Home() {
     }
 
     const openDeletePost = postId => setPostIdToDelete(postId)
-
     const closeDeletePost = () => setPostIdToDelete()
 
     const handlePostDeleted = () => {
@@ -118,7 +96,6 @@ function Home() {
 
                     return
                 }
-
                 setPostIdToDelete()
                 setPosts(posts)
             })
@@ -130,20 +107,25 @@ function Home() {
     const userId = extractSubFromToken(sessionStorage.token)
 
     return <main className="overflow-hidden bg-white dark:bg-black text-black dark:text-white">
-          <Header userName={user?.name} />
+          <Header />
        
         {posts && <div className='flex flex-col items-center gap-4 py-[3rem] '>
             {posts.map(post => <article key={post.id} className='bg-green-400 rounded-xl w-[50%] flex flex-col p-5'>
                 <div className='flex justify-between '><Link to={`/profile/${post.user.id}`}><strong>{post.user.name}</strong></Link>
                     <time>{post.date}</time>
                 </div>
-                <p className='border-2 bg-slate-200 border-slate-400 rounded-xl'>{post.text}</p>
-                {post.user.id === userId && <div className='flex justify-between'>
+                <div className='border-2 bg-green-200 rounded-xl m-2'>
+                <h2>{post.title}</h2>
+                <p >{post.text}</p>
+                {post.image && <div className="w-20 h-20"><img src={post.image} /></div>}
+                </div>
+                {post.user.id === userId && <div className='flex justify-end'>
                     <div>
                         <button onClick={() => openEditPost(post.id)}><AiOutlineEdit size='1rem' /></button>
                         <button onClick={() => openDeletePost(post.id)}><AiOutlineDelete size='1rem' /></button>
                     </div>
                 </div>}
+                <hr className='border-black' />
             </article>)}
         </div>}
 

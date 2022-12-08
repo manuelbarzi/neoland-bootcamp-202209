@@ -14,11 +14,13 @@ const deletePostHandler = require('./handlers/deletePostHandler')
 const retrievePostsFromUserHandler = require('./handlers/retrievePostsFromUserHandler')
 const retrieveAUserHandler = require('./handlers/retrieveAUserHandler')
 const retrievePostsUserHandler = require('./handlers/retrievePostsUserHandler')
+const createCommentHandler = require('./handlers/createCommentHandler')
+const retrieveCommentHandler = require('./handlers/retrieveCommentHandler')
 
 const jsonBodyParser = require('./utils/jsonBodyParser')
 const cors = require('./utils/cors')
 const jwtVerifier = require('./utils/jwtVerifier')
-//const context = require('./logic/context')
+
 
 const { MONGODB_URL } = process.env
 
@@ -43,6 +45,11 @@ mongoose.connect(MONGODB_URL)
     api.patch('/posts/:postId', jwtVerifier, jsonBodyParser, updatePostHandler)
     api.delete('/posts/:postId', jwtVerifier, deletePostHandler)
     api.get('/posts',jwtVerifier, retrievePostsUserHandler)
+
+    api.post('/posts/:postId/comment', jwtVerifier, jsonBodyParser, createCommentHandler)
+    api.get('/posts/:postId/comment')
+
+
     
         const { PORT } = process.env
 

@@ -1,12 +1,10 @@
-const { Schema } = require('moongose')
+const { Schema } = require('mongoose')
 const { Types: { ObjectId } } = Schema
 
 module.exports = new Schema({
     post: {
-        post: {
-            type: ObjectId,
-            ref: 'Post'
-        }
+        type: ObjectId,
+        ref: 'Post'
     },
     user: {
         type: ObjectId,
@@ -16,15 +14,11 @@ module.exports = new Schema({
         type: String,
         required: true
     },
-    visibility: {
-        type: String,
-        required: true
-    },
     date: {
         type: Date,
-        default: new Date,
+        default: Date.now,
         required: true
     },
-    answers: [Comments]
+    // answers: [comment]
 
 })

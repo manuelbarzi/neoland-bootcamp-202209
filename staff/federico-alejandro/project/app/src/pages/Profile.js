@@ -51,7 +51,9 @@ function Profile() {
         {posts && <div className='flex flex-col items-center gap-2 py-[2rem]'>
             {posts.map(post => <article key={post.id} className='bg-slate-300 shadow-slate-800 border-b-4 rounded-xl w-[50%] flex flex-col p-5'>
             <time className='flex justify-end'>{post.date}</time>
+            <h2>{post.title}</h2>
                 <p>{post.text}</p>
+                {post.image && <div className="w-20 h-20"><img src={post.image} /></div>}
             </article>)}
         </div>}
 

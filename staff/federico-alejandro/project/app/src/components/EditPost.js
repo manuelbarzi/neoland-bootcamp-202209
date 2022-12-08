@@ -1,8 +1,9 @@
-import updatePost from '../logic/updatePost'
-import Button from './Button'
-import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { useEffect, useState } from 'react'
+import Button from './Button'
+import updatePost from '../logic/updatePost'
 import retrievePost from '../logic/retrievePost'
+
+import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { MdOutlineVisibility } from 'react-icons/md'
 
 function EditPost({ onUpdated, onClose, postId }) {
@@ -11,15 +12,9 @@ function EditPost({ onUpdated, onClose, postId }) {
 
     useEffect(() => {
         try {
-            retrievePost(sessionStorage.token, postId, (error, post) => {
-                if (error) {
-                    alert(error.message)
-
-                    return
-                }
-
-                setPost(post)
-            })
+            retrievePost(sessionStorage.token, postId)
+                .then(post => setPost(post))
+                .catch(error => alert(error.message)) 
         } catch (error) {
             alert(error.message)
         }
@@ -28,18 +23,17 @@ function EditPost({ onUpdated, onClose, postId }) {
     const submitUpdatePost = event => {
         event.preventDefault()
 
-        const { text: { value: text }, visibility: { value: visibility } } = event.target
+        const { 
+            title: { value: title },
+            text: { value: text }, 
+            visibility: { value: visibility },
+            image: { value: image }
+        } = event.target
 
         try {
-            updatePost(sessionStorage.token, postId, text, visibility, error => {
-                if (error) {
-                    alert(error.message)
-
-                    return
-                }
-
-                onUpdated()
-            })
+            updatePost(sessionStorage.token, postId, title, text, visibility, image)
+                .then(() => onUpdated())
+                .catch(error => alert(error.message)) 
         } catch (error) {
             alert(error.message)
         }
@@ -52,13 +46,21 @@ function EditPost({ onUpdated, onClose, postId }) {
             <AiOutlineCloseCircle size='1.5rem' onClick={onClose} className='cursor-pointer' />
 
             <form className='flex flex-col gap-2' onSubmit={submitUpdatePost}>
-                <label htmlFor='text'>Text</label>
+                <label htmlFor='text'>Title</label>
+                <input className='text-black border-black resize-y rounded-md' type='text' name='title' id='title' placeholder='input a title' defaultValue={post?.text} />
+
+                <label className='font-bold' htmlFor='text'>Text</label>
                 <textarea className='text-black border-black resize-y rounded-md' type='text' name='text' id='text' placeholder='input a text' defaultValue={post?.text}></textarea>
+
+                <label className='font-bold' htmlFor='image'>Image</label>
+                <input className='text-black border-black resize-y rounded-md' type='text' name='image' id='image' placeholder='input an image url' />
+                
                 <label htmlFor='visibility'><MdOutlineVisibility /></label>
                 <select className='text-black' id='visibility' name='visibility' value={visibility} onChange={changeVisibility}>
                     <option value='public'>public</option>
                     <option value='private'>private</option>
                 </select>
+                
                 <Button>Update</Button>
             </form>
         </div>

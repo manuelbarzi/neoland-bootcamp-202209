@@ -15,6 +15,11 @@ function createPost( userId, title, text, visibility, image) {
     if (!visibility.length) throw new LengthError('visibility is empty')
     if (visibility !== 'public' && visibility !== 'private') throw new FormatError('invalid visibility')
 
+    if (image) {
+        if (typeof image !== 'string') throw new TypeError('image is not a string')
+        if (!image.length) throw new Error('image is empty')
+    }
+
     return User.findById(userId)
         .then(user => {
             if (!user)

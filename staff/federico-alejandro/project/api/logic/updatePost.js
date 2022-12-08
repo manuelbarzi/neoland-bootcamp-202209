@@ -4,14 +4,14 @@ const { User, Post } = require('../models')
  * Update users posts 
  * 
  * @param {string} userId The user id
- * @param {string} title The title of the text
  * @param {string} postId The user id
+ * @param {string} title The title of the text
  * @param {string} text The user text
  * @param {string} visibility The text visibility
  * @param {string} image the image post
  * 
  */
-module.exports = function (userId, title, postId, text, visibility, image) {
+module.exports = function (userId, postId, title, text, visibility, image) {
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
     if (!userId.length) throw new LengthError('userId is empty')
     
@@ -27,6 +27,11 @@ module.exports = function (userId, title, postId, text, visibility, image) {
     if (typeof visibility !== 'string') throw new TypeError('visibility is not a string')
     if (!visibility.length) throw new LengthError('visibility is empty')
     if (visibility !== 'public' && visibility !== 'private') throw new FormatError('invalid visibility')
+
+    if (image) {
+        if (typeof image !== 'string') throw new TypeError('image is not a string')
+        if (!image.length) throw new Error('image is empty')
+    }
 
     return User.findById(userId)
         .then(user => {

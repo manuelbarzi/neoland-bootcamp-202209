@@ -11,6 +11,7 @@ const { User, Post } = require('../models')
 function deletePost(userId, postId) {
     if (typeof userId !== 'string') throw TypeError('userId is not a string');
     if (userId.length === 0) throw new LengthError('userId is empty');
+    
     if (typeof postId !== 'string') throw TypeError('postId is not a string');
     if (postId.length === 0 || postId.trim() === '') throw new LengthError('postId is empty')
 
