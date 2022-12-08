@@ -1,27 +1,18 @@
 const { Schema } = require('mongoose')
 const { ObjectId } = require('mongodb')
-const { Alien } = require('..')
 
 module.exports = new Schema({
-    mode: {
-        type: String,
-        required: true,
-        enum: ["normal"]
-    },
     players: {
         type: [ObjectId],
         ref: 'User'
     },
-    roomId: {
+    turn: {
         type: Number,
-        required: true,
-        unique: true
+        default: 0
     },
-    aliensPlayerOne: {
-        type: Array,
-    },
-    aliensPlayerTwo: {
-        type: Array,
+    hasTurn: {
+        type: Boolean,
+        default: false
     },
     status: {
         type: String,
@@ -29,37 +20,14 @@ module.exports = new Schema({
         enum: ["creating", "playing", "finished"],
         default: "creating"
     },
-    /*attacks: [
-        {
-            from: {
-                type: ObjectId,
-                ref: 'User'
-            },
-            damage: Number,
-            sideEffects: {
-                type: Number,
-            },
-            passives: {
-                type: Boolean,
-            },
-        }
-    ],*/
-    cards: [
-        {
-            from: {
-                type: ObjectId,
-                ref: 'User'
-            },
-            damage: {
-                type: Number,
-            },
-            sideEffects: {
-                type: Number,
-            },
-            passive: {
-                type: Boolean,
-            },
-            required: false
-        }
-    ],
+    aliensPlayerOne: {
+        type: Array,
+    },
+    aliensPlayerTwo: {
+        type: Array,
+    },
+    alienAttacks: {
+        type: Array,
+        ref: 'alienAttack'
+    }
 })

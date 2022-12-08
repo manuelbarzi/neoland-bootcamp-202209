@@ -2,19 +2,24 @@ import { errors } from 'com'
 
 const { FormatError, NotFoundError, UnexpectedError, AuthError } = errors
 
+/**
+ * @param {token} token The user token
+ */
+
+
 export default function retrieveUser(token) {
     if (typeof token !== 'string') throw new TypeError('token is not a string')
     if (!token.length) throw new FormatError('token is empty')
 
     return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest()
-
+        
         xhr.onload = function () {
             const { status, responseText: json } = xhr
-
+            
+            
             if (status === 200) {
                 const user = JSON.parse(json)
-
                 resolve(user)
             } else if (status === 400) {
                 const { error } = JSON.parse(json)

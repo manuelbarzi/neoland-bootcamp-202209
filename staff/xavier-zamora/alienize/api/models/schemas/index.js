@@ -1,13 +1,14 @@
 const user = require('./user')
 const game = require('./game')
-const card = require('./card')
-const atack = require('./atack')
-const alien = require('./alien')
+const aliens = require('./aliens')
+const alienAttacks = require('./alienAttacks')
+const gameAliens = require('./gameAliens')
+
 
 module.exports = {
     user,
     game,
-    card,
-    atack,
-    alien
+    gameAliens,
+    aliens,
+    alienAttacks
 }

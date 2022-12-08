@@ -7,7 +7,7 @@ import { errors } from 'com'
 const { FormatError, AuthError, LengthError, NotFoundError } = errors
 
 function Pick() {
-    log.info('Home -> render')
+    log.info('Pick -> render')
 
     const { showAlert } = useContext(Context)
 

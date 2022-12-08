@@ -1,6 +1,6 @@
 import log from '../utils/coolog'
 import ButtonLogReg from "../components/ButtonLogReg"
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import createGame from '../logic/createGame'
 import { useContext } from 'react'
 import Context from '../components/Context'
@@ -14,7 +14,7 @@ function Launcher() {
     const { showAlert } = useContext(Context)
 
     const createGameHandler = event => {
-      log.info('Pick -> randomPick')
+      log.info('Launcher -> render')
 
       event.preventDefault()
 

@@ -12,8 +12,7 @@ function Battle() {
     const { showAlert } = useContext(Context)
 
     const atack1Handler = event => {
-        debugger
-        log.info('Launcher -> createGame')
+        log.info('Battle -> createGame')
   
         event.preventDefault()
   

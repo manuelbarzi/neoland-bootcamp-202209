@@ -9,15 +9,17 @@ This App it's a game, PVP similar to Pokemón
 ### Use Cases
 
 User
-- Find Game
+- View Games
+- Create Game
+- Join Game
+- Exit Game
 - View profile
-- Change passwordç
-- use cards
+- Change password
+- Use card to attack
+
+### Functional entities
 
 Game
-- Shoot Atacks
-- Shoot Pasives
-- Shoot Cards
 - Update elo
 - Update Stats
 
@@ -26,12 +28,15 @@ Alien
 - Shoot Pasives
 - Update elo
 - Update Stats
+- Shoot Atacks
+- Shoot Pasives
+- Shoot Cards
 
 Card
 - Update Stats
-- enable passives
+- Enable passives
 
-Atack
+Attack
 - Update Stats
 - enable passives
 
@@ -39,44 +44,63 @@ Atack
 
 ### Data Model
 
-User
+Player
 - name (String, required)
 - email (String, required, unique)
 - password (String, required)
 - elo(Number, required)
 
 Game
-- mode (String, required)
-- players ([ObjectId], ref)
-- roomId (Number, required, unique)
+- players ([ObjectId], ref Player)
+- turn (Number, required, ref)
+- hasTurn (Bolean, required)
+- gameData ([Array], ref GameDataType) 
 - status (String, required)
-- atacks ([ObjectId, Number, Number, Boolean])
-- cards ([ObjectId, Number, Number, Boolean])
-- finishGame ([Number, [Object], [Object], [Number]])
+- aliensPlayerOne ([Alien])
+- aliensPlayerTwo ([Alien])
+- alienAtakcs ([AlienAttack], ref AlienAtack)
+
+AlienAttack
+- damage (Number)
+- playerName (String, required)
+- passives ([String], ref PassiveType)
+- date (Date, required)
+
+AlienType
+- name (String, required)
+- type (String, required)
+- atack1: (String, required)
+- atack2: (String, required)
+- atack3: (String, required)
+- atack4: (String, required)
 
 Alien
-- name (String, required)
-- id (Number, required)
-- stats ({String, Number}, required)
-- type (String, required)
-- passives ({String, Boolean})
+- alienType (ObjectId, ref AlienType, required)
+- player (ObjectId, ref Player)
+- healthPoints: (Number, required)
+- especialDefense: (Number, required)
+- fisicDefense: (Number, required)
+- especialAtack: (Number, required)
+- fisicAtack: (Number, required)
+- psiquicalAtack: (Number, required)
+- speed: (Number, required)
+- healing: (Number, required)
+- repeat: (Number, required)
+- pasivesType: ([Strings])
 
-Cards
+PassiveType
 - name (String, required)
-- player (ObjectId, ref ,required)
-- playerObjective (ObjectId, ref, required)
-- id(Number, required)
-- type(String)
-- damage(Number)
-- updateStats {{String, Number}}
-- passives {{String, Number}}
 
-Atack
-- name (String, required)
-- id (Number, required)
-- player (ObjectId, ref, required)
-- playerObjective (ObjectId, ref, required)
-- type (String)
-- damage (Number)
-- updateStats({String, Number})
-- passives({String, Boolean})
+Aliens
+- alienType (ObjectId, ref AlienType, required)
+- player (ObjectId, ref Player)
+- healthPoints: (Number, required)
+- especialDefense: (Number, required)
+- fisicDefense: (Number, required)
+- especialAtack: (Number, required)
+- fisicAtack: (Number, required)
+- psiquicalAtack: (Number, required)
+- speed: (Number, required)
+- healing: (Number, required)
+- repeat: (Number, required)
+- pasivesType: ([Strings])
