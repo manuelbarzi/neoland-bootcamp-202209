@@ -17,7 +17,8 @@ export default function createGame(token) {
             const { status, responseText: json } = xhr
 
             if (status === 200) {
-                return
+                const game = JSON.parse(json)
+                resolve(game)
             } else if (status === 400) {
                 const { error } = JSON.parse(json)
                 if (error.includes('is not a'))
@@ -39,7 +40,7 @@ export default function createGame(token) {
         }
         xhr.onerror = () => reject(new Error('connection error'))
 
-        xhr.open('PATCH', 'http://localhost:2000/matchMaking')
+        xhr.open('GET', 'http://localhost:2000/matchMaking')
         xhr.setRequestHeader('Authorization', `Bearer ${token}`)
 
         xhr.send()

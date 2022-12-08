@@ -17,6 +17,7 @@ function Home() {
     const { showAlert } = useContext(Context)
 
     useEffect(() => {
+        console.log('effect')
         try {
             retrieveUser(sessionStorage.token)
                 .then(user => setUser(user))
@@ -37,7 +38,7 @@ function Home() {
     }, [])
 
     return <main className="block h-full w-full bg-blue-800">
-        <Nav userName={'name'} /> 
+        <Nav userName={user?.name} /> 
         <div className="h-screen mt-12">
         <ShopScreen></ShopScreen>
         <NewsScreen></NewsScreen>

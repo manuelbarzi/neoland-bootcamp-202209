@@ -26,6 +26,14 @@ function App() {
     navigate('/')
   }
 
+  const navPick = () => {
+      navigate('/Pick')
+  }
+
+  const navBattle = () => {
+    navigate('/Battle')
+  }
+
   const logout = () => {
     delete sessionStorage.token
 
@@ -39,7 +47,7 @@ function App() {
 
   const closeAlert = () => setMessage()
 
-  return <Context.Provider value={{ login, logout, showAlert }}>
+  return <Context.Provider value={{ login, logout, showAlert, navPick, navBattle }}>
     {loggedIn ? <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/Launcher" element={<Launcher />} />

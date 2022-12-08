@@ -1,12 +1,13 @@
 const createGame = require('../logic/createGame')
 const { errors: { FormatError, NotFoundError} } = require('com')
+const { game } = require('../models/schemas')
 
 module.exports = (req, res) => {
     const {userId} = req
 
     try{
         createGame(userId)
-        .then(user => res.json(user))
+        .then(game => res.json(game))
             .catch(error => {
                 if (error instanceof NotFoundError)
                 res.status(404).json({ error: error.message })

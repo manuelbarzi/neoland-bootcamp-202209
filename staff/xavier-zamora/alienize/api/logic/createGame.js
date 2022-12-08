@@ -32,7 +32,7 @@ function createGame(userId) {
               } else {
                 game.players.push(userId)
                 game.status = "playing"
-                return game.save()
+                return game
               }
             })
         })

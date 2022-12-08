@@ -7,17 +7,18 @@ const { FormatError, AuthError, NotFoundError, UnexpectedError } = errors
  * @param {token} token The user token
  */
 
-export default function randomPick(token) {
+export default function randomPick(token, gameId) {
     if (typeof token !== 'string') throw new TypeError('token is not a string')
     if (!token.length) throw new FormatError('token is empty')
     return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest()
-
+        
         xhr.onload = function () {
             const { status, responseText: json } = xhr
 
             if (status === 200) {
-                return
+                const game = JSON.parse(json)
+                resolve(game)
             } else if (status === 400) {
                 const { error } = JSON.parse(json)
                 if (error.includes('is not a'))
@@ -39,9 +40,13 @@ export default function randomPick(token) {
         }
         xhr.onerror = () => reject(new Error('connection error'))
 
-        xhr.open('GET', 'http://localhost:2000/randomPick')
+        xhr.open('POST', 'http://localhost:2000/games')
         xhr.setRequestHeader('Authorization', `Bearer ${token}`)
 
-        xhr.send()
+        const payload = {gameId}
+
+        const json = JSON.stringify(payload)
+
+        xhr.send(json)
     })
 }

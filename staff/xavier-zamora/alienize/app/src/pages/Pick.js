@@ -1,43 +1,90 @@
 import log from '../utils/coolog'
 import randomPick from '../logic/randomPicks'
+import retrieveUser from '../logic/retrieveUser'
+import createGame from '../logic/createGame'
 import { useContext, useEffect, useState } from 'react'
 import Context from '../components/Context'
-import { Link } from 'react-router-dom'
 import { errors } from 'com'
 const { FormatError, AuthError, LengthError, NotFoundError } = errors
 
 function Pick() {
-    log.info('Pick -> render')
+  debugger
+  log.info('Pick -> render')
 
-    const { showAlert } = useContext(Context)
+  const { showAlert, navBattle } = useContext(Context)
+  const token = sessionStorage.token
+  const [user, setUser] = useState()
+  const [game, setGame] = useState()
 
-    const randomPickHandler = event => {
-        log.info('Launcher -> createGame')
-  
-        event.preventDefault()
-  
-        const token = sessionStorage.token
-  
-        try{
-          randomPick(token)
-          .then(token => randomPick(token))
-          .catch(error => {
-            if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
+  useEffect(() => {
+    try {
+      retrieveUser(sessionStorage.token)
+        .then(user => setUser(user))
+        .catch(error => {
+          if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
             showAlert(error.message, 'warn')
-        else if (error instanceof AuthError || error instanceof NotFoundError)
+          else if (error instanceof AuthError || error instanceof NotFoundError)
             showAlert(error.message, 'error')
-        else
+          else
             showAlert(error.message, 'fatal')
-          })
-        } catch (error){
-          console.log('TODO')
-        }
-      }
+        })
+    } catch (error) {
+      if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
+        showAlert(error.message, 'warn')
+      else
+        showAlert(error.message, 'fatal')
+    }
+    /*createGameHandler()*/
+    /*randomPickHandler(token)*/
+    navBattle()
+  }, [])
 
-    return <main className="block h-screen w-full bg-blue-800">
-        <h2 onClick={randomPickHandler}>READY</h2>
-        <Link to="/Battle"><h2>Battle</h2></Link>
-    </main>
+  /*const createGameHandler = () => {
+    try {
+      createGame(token)
+        .then(game => setGame(game))
+        .catch(error => {
+          if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
+            showAlert(error.message, 'warn')
+          else if (error instanceof AuthError || error instanceof NotFoundError)
+            showAlert(error.message, 'error')
+          else
+            showAlert(error.message, 'fatal')
+        })
+    } catch (error) {
+      if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
+        showAlert(error.message, 'warn')
+      else
+        showAlert(error.message, 'fatal')
+    }
+  }*/
+
+  /*const randomPickHandler = () => {
+    log.info('Launcher -> createGame')
+
+    const token = sessionStorage.token
+
+    try {
+      randomPick(token)
+        .then(token => randomPick(token))
+        .catch(error => {
+          if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
+            showAlert(error.message, 'warn')
+          else if (error instanceof AuthError || error instanceof NotFoundError)
+            showAlert(error.message, 'error')
+          else
+            showAlert(error.message, 'fatal')
+        })
+    } catch (error) {
+      if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
+        showAlert(error.message, 'warn')
+      else
+        showAlert(error.message, 'fatal')
+    }
+  }*/
+
+  return <main className="block h-screen w-full bg-blue-800">
+  </main>
 }
 
 

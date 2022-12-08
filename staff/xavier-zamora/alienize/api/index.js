@@ -18,6 +18,7 @@ const { MONGODB_URL } = process.env
 
 mongoose.connect(MONGODB_URL)
     .then(() => {
+
         console.log(`db connected to ${MONGODB_URL}`)
 
         const api = express()
@@ -27,8 +28,8 @@ mongoose.connect(MONGODB_URL)
         api.post('/users/auth', jsonBodyParser, authenticateUserHandler)
         api.post('/users', jsonBodyParser, registerUserHandler)
         api.get('/users', jwtVerifier, retrieveUserHandler)
-        api.patch('/matchMaking',jwtVerifier, createGameHandler)
-        api.get('/randomPick', jwtVerifier, randomPickHandler)
+        api.get('/matchMaking',jwtVerifier, createGameHandler)
+        api.post('/games', jwtVerifier, jsonBodyParser, randomPickHandler)
         api.get('/Battle/atack1', jwtVerifier, atack1Handler )
 
         const { PORT } = process.env
