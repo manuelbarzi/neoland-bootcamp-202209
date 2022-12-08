@@ -35,9 +35,6 @@ function Home() {
         }
     }, [])
 
-    
-
-
     return <div className= "h-full  bg-white dark:bg-black text-black dark:text-white">
         {user && <Header userName={user.name} />}
 
@@ -46,18 +43,14 @@ function Home() {
             <h2>NOTICIAS</h2>
             </div></Link>
             
-
-            
             <div className='h-1/4 border-4 border-solid rounded-md'>
                 <h2>ACTIVIDADES</h2> 
             </div>
 
-            
             <div className='h-1/4 border-4 border-solid rounded-md'>
                 <h2>RESERVA HORARIO</h2>
             </div>
         </div>
-
     </div>
 }
 

@@ -36,6 +36,7 @@ export default function retrieveUser(token) {
             else
                 reject(new UnexpectedError('server error'))
         }
+        xhr.onerror = () => reject(new Error('connection error'))
 
         xhr.open('GET', 'http://localhost/users')
         xhr.setRequestHeader('Authorization', `Bearer ${token}`)

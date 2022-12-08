@@ -1,31 +1,35 @@
-// export default function (token) {
-//     if (typeof token !== 'string') throw new TypeError('token is not a string')
-//     if (!token.length) throw new Error('token is empty')
+import { errors } from 'com'
 
-//     return new Promise((resolve, reject) => {
-//         const xhr = new XMLHttpRequest
+const { FormatError, NotFoundError, UnexpectedError, AuthError, LengthError} = errors
 
-//         xhr.onload = function () {
-//             const { status, responseText: json } = xhr
+export default function (token) {
+    if (typeof token !== 'string') throw new TypeError('token is not a string')
+    if (!token.length) throw new LengthError('token is empty')
 
-//             if (status >= 500) {
-//                 const { error } = JSON.parse(json)
+    return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest()
 
-//                 reject(new Error(error))
+        xhr.onload = function () {
+            const { status, responseText: json } = xhr
 
-//                 return
-//             }
+            if (status >= 500) {
+                const { error } = JSON.parse(json)
 
-//             const notices = JSON.parse(json)
+                reject(new Error(error))
 
-//             resolve(notices)
-//         }
+                return
+            }
 
-//         xhr.onerror = () => reject(new Error('connection error'))
+            const notices = JSON.parse(json)
 
-//         xhr.open('GET', 'http://localhost/notices')
-//         xhr.setRequestHeader('Authorization', `Bearer ${token}`)
-//         xhr.send()
-//     })
+            resolve(notices)
+        }
 
-// }
+        xhr.onerror = () => reject(new Error('connection error'))
+
+        xhr.open('GET', 'http://localhost/noticias')
+        xhr.setRequestHeader('Authorization', `Bearer ${token}`)
+        xhr.send()
+    })
+
+}

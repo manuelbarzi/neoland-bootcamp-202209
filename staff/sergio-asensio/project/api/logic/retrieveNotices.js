@@ -5,7 +5,7 @@ const { User, Notice } = require('../models')
  * 
  * @param {string} userId The user id
  */
-function retrievePublicPosts(userId) {
+function retrieveNotices(userId) {
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
     if (!userId.length) throw new LengthError('userId is empty')
 
@@ -26,6 +26,8 @@ function retrievePublicPosts(userId) {
                 delete notice.id
                 delete notice.__v
                 delete notice.user
+                delete notice.date
+
 
                 // if (!notice.user.id) {
                 //     notice.user.id = notice.user._id.toString()
@@ -37,4 +39,4 @@ function retrievePublicPosts(userId) {
         })
 }
 
-module.exports = retrievePublicPosts
+module.exports = retrieveNotices
