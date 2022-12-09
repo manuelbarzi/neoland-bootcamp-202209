@@ -142,7 +142,6 @@ function Home() {
     // }
 
     const openCreatePost = () => setCreatePostVisible(true)
-
     const closeCreatePost = () => setCreatePostVisible(false)
 
     const handlePostCreated = () => {
@@ -162,7 +161,6 @@ function Home() {
     }
 
     const openEditPost = postId => setPostIdToEdit(postId)
-
     const closeEditPost = () => setPostIdToEdit()
 
     const handlePostUpdated = () => {
@@ -182,7 +180,6 @@ function Home() {
     }
 
     const openDeletePost = postId => setPostIdToDelete(postId)
-
     const closeDeletePost = () => setPostIdToDelete()
 
     const handlePostDeleted = () => {

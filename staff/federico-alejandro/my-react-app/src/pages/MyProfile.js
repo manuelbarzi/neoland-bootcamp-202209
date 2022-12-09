@@ -10,7 +10,6 @@ import Footer from '../components/Footer'
 
 import { AiOutlineEdit, AiOutlineDelete, AiOutlineLock } from 'react-icons/ai'
 
-
 function MyProfile() {
     log.info('MyProfile -> render')
 
