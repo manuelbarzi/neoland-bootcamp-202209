@@ -8,7 +8,7 @@ const registerUserHandler = require('./handlers/registerUserHandler')
 const retrieveUserHandler = require('./handlers/retrieveUserHandler')
 const updateUserEmailHandler = require('./handlers/updateUserEmailHandler')
 const updateUserPasswordHandler = require('./handlers/updateUserPasswordHandler')
-const updateCreateListHandler = require ('./handlers/updateCreateListHandler')
+const createListHandler = require ('./handlers/createListHandler')
 
 
 const jsonBodyParser = require('./utils/jsonBodyParser')
@@ -27,7 +27,7 @@ mongoose.connect(MONGODB_URL)
 
         api.post('/users/auth', jsonBodyParser, authenticateUserHandler)
         api.post('/users', jsonBodyParser, registerUserHandler)
-        api.post('/users/list', jwtVerifier, jsonBodyParser, updateCreateListHandler)
+        api.post('/users/list', jwtVerifier, jsonBodyParser, createListHandler)
         api.get('/users', jwtVerifier, retrieveUserHandler)
         api.patch('/users/email', jwtVerifier, jsonBodyParser, updateUserEmailHandler)
         api.patch('/users/password', jwtVerifier, jsonBodyParser, updateUserPasswordHandler)
