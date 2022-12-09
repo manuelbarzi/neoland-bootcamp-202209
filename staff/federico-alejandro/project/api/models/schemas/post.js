@@ -1,5 +1,6 @@
 const { Schema } = require('mongoose')
 const { Types: { ObjectId } } = Schema
+const chat = require('./chat')
 
 module.exports = new Schema({
     user: {
@@ -25,8 +26,8 @@ module.exports = new Schema({
     },
     date: {
         type: Date,
-        default: new Date,
+        default: Date.now,
         required: true
     },
-    comments: ['Comment']
+    chats: [chat]
 })

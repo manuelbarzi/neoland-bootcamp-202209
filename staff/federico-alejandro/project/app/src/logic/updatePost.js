@@ -46,7 +46,7 @@ function updatePost(token, postId, title, text, visibility, image, callback) {
                     return
                 }
 
-                resolve(null)
+                resolve()
             }
 
             xhr.onerror = () => reject(new Error('connection error'))

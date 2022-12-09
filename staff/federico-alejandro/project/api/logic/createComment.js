@@ -1,5 +1,5 @@
 const { errors: { LengthError, NotFoundError } } = require('com')
-const { User, Post, Comment } = require('../models')
+const { User, Post, Comment, Chat } = require('../models')
 
 function createComment(userId, postId, text) {
     if (typeof userId !== "string") throw TypeError("userId is not a string")
@@ -22,11 +22,33 @@ function createComment(userId, postId, text) {
             if (!post)
                 throw new NotFoundError(`post with id ${postId} does not exist`)
 
-            const comment = new Comment({ user: userId, text })
+            let chat = post.chats.find(chat => chat.user.toString() === userId)
 
-            post.comments.push(comment)
+            if (!chat) {
+                chat = new Chat()
 
-            return post.save()
+                chat.user = userId
+
+                post.chats.push(chat)
+
+                return post.save()
+                    .then(post => {
+                        const chat = post.chats.find(chat => chat.user.toString() === userId)
+                        
+                        const comment = new Comment({ user: userId, text })
+
+                        chat.comments.push(comment)
+                        
+                        return post.save()
+                    })
+            } else {
+                const comment = new Comment({ user: userId, text })
+
+                chat.comments.push(comment)
+                
+                return post.save()
+            }
+
         })
         .then(result => {})
 
@@ -51,8 +73,5 @@ function createComment(userId, postId, text) {
     //         debugger
     //     })  
 }
-
-
-
 
 module.exports = createComment

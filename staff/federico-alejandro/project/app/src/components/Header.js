@@ -37,8 +37,8 @@ export default function Header() {
 
     const switchMode = () => document.querySelector('html').classList.toggle('dark')
 
-    return <header className="fixed w-full h-[2rem] flex justify-between items-center gap-2 bg-green-400 dark:bg-black text-black dark:text-white">
-        {user && <p className='font-bold text-white mx-1.5'>{user.name}</p>}
+    return <header className="fixed w-full h-[2rem] flex justify-between items-center gap-2 bg-slate-200 dark:bg-black text-black dark:text-white">
+        {user && <p className='font-bold text-black mx-1.5'>{user.name}</p>}
         <div>
             <button onClick={logout}><AiOutlineLogout /></button>
             <button onClick={switchMode}><IoInvertModeOutline /></button>

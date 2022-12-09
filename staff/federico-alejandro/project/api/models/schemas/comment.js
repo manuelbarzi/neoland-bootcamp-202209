@@ -2,10 +2,6 @@ const { Schema } = require('mongoose')
 const { Types: { ObjectId } } = Schema
 
 module.exports = new Schema({
-    post: {
-        type: ObjectId,
-        ref: 'Post'
-    },
     user: {
         type: ObjectId,
         ref: 'User'
@@ -18,7 +14,5 @@ module.exports = new Schema({
         type: Date,
         default: Date.now,
         required: true
-    },
-    // answers: [comment]
-
+    }
 })

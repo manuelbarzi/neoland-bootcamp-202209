@@ -46,8 +46,8 @@ mongoose.connect(MONGODB_URL)
     api.delete('/posts/:postId', jwtVerifier, deletePostHandler)
     api.get('/posts',jwtVerifier, retrievePostsUserHandler)
 
-    api.post('/posts/:postId/comment', jwtVerifier, jsonBodyParser, createCommentHandler)
-    api.get('/posts/:postId/comment')
+    api.post('/posts/:postId/comments', jwtVerifier, jsonBodyParser, createCommentHandler)
+    api.get('/posts/:postId', jwtVerifier, retrieveCommentHandler)
 
 
     

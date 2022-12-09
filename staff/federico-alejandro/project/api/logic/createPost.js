@@ -25,7 +25,7 @@ function createPost( userId, title, text, visibility, image) {
             if (!user)
                 throw new NotFoundError(`user with id ${userId} does not exist`)
 
-            return Post.create({ user: userId, title, text, visibility, image, date: new Date })
+            return Post.create({ user: userId, title, text, visibility, image, date: new Date() })
         })
 }
 

@@ -1,7 +1,7 @@
 const { errors: { LengthError, NotFoundError } } = require('com')
 const { User, Post, Comment } = require('../models')
 /**
- * Retrieves a post from user
+ * Retrieves a comment from user
  * 
  * @param {string} userId The user id
  * @param {string} postId The post id
@@ -27,15 +27,20 @@ module.exports = function (userId, postId, commentId) {
         .then(post => {
             if (!post) throw new NotFoundError(`post with id ${postId} does not exist`)
 
-            return Comment.findById(commentId)
+            return Comment.findById(commentId).sort({ date: -1 })
         })
         .then(comments => {
             comments.forEach(comment => {
                 comment.id = comment._id.toString()
                 delete comment._id
 
+                // if (!comment.user.id) {
+                //     comment.user.id = comment.user._id.toString()
+                //     delete comment.user._id
+                // }
+
             })
-            return comment
+            return comments
 
         })
 

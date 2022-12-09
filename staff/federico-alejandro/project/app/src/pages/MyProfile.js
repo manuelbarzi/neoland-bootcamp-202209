@@ -12,6 +12,7 @@ import DeletePost from '../components/DeletePost'
 
 import { AiOutlineEdit, AiOutlineDelete, AiOutlineLock } from 'react-icons/ai'
 
+
 function MyProfile() {
     log.info('MyProfile -> render')
 
@@ -105,20 +106,23 @@ function MyProfile() {
         }
     }
 
-    return <main className='overflow-hidden bg-slate-600 dark:bg-black text-black dark:text-white h-full'>
+    return <main className='overflow-hidden bg-green-400 dark:bg-black text-black dark:text-white'>
         <Header userName={user?.name} />
 
-        {posts && <div className='flex flex-col items-center gap-2 py-[2rem]'>
-            {posts.map(post => <article key={post.id} className='bg-slate-300 shadow-slate-800 border-b-4 rounded-xl w-[50%] flex flex-col p-5'>
+        {posts && <div className='flex flex-col items-center gap-4 py-[3rem]'>
+            {posts.map(post => <article key={post.id} className='border bg-white rounded-xl w-[50%] flex flex-col p-[0.25rem]'>
                 <time className='flex justify-end'>{post.date}</time>
-                <p  className='border-2 bg-slate-200 border-slate-400 rounded-xl'>{post.text}</p> 
-                {post.image && <div className="w-20 h-20"><img src={post.image} /></div>}
+                <div className='bg-white m-2 border rounded-xl'>
+                    <h2 className='font-bold'>{post.title}</h2>
+                    <p>{post.text}</p>
+                </div>
+                {post.image && <div className='w-fit h-fit'><img src={post.image} /></div>}
+                <hr className='border-black' />
                 <div className='flex self-end pb-0'>
                     <button onClick={() => openEditPost(post.id)}><AiOutlineEdit size='1rem' /></button>
                     <button onClick={() => openDeletePost(post.id)}><AiOutlineDelete size='1rem' /></button>
                     {post.visibility === 'private' && <p className='self-end'><AiOutlineLock /></p>}
                 </div>
-                
             </article>)}
         </div>}
 
