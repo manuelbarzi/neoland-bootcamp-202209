@@ -1,6 +1,5 @@
 import log from '../utils/coolog'
 import { AiOutlineMenu } from 'react-icons/ai'
-import { IoInvertModeOutline } from 'react-icons/io5'
 import { useState } from 'react'
 import Menu from './Menu'
 
