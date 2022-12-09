@@ -7,6 +7,7 @@ const authenticateUserHandler = require('./handlers/authenticateUserHandler')
 const registerUserHandler = require('./handlers/registerUserHandler')
 const retrieveUserHandler = require('./handlers/retrieveUserHandler')
 const updateUserEmailHandler = require('./handlers/updateUserEmailHandler')
+const updateUserPasswordHandler = require('./handlers/updateUserPasswordHandler')
 
 
 const jsonBodyParser = require('./utils/jsonBodyParser')
@@ -27,6 +28,7 @@ mongoose.connect(MONGODB_URL)
         api.post('/users', jsonBodyParser, registerUserHandler)
         api.get('/users', jwtVerifier, retrieveUserHandler)
         api.patch('/users/email', jwtVerifier, jsonBodyParser, updateUserEmailHandler)
+        api.patch('/users/password', jwtVerifier, jsonBodyParser, updateUserPasswordHandler)
         
         const { PORT } = process.env
 
