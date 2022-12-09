@@ -1,6 +1,5 @@
 import log from '../utils/coolog'
 import { IoCloseCircle } from 'react-icons/io5'
-// import authenticateUser from '../logic/authenticateUser'
 import updateUserPassword from '../logic/updateUserPasword'
 
 
