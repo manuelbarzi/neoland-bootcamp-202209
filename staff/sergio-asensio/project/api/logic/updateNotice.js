@@ -25,7 +25,7 @@ module.exports = function (userId, noticeId, title, body) {
             if (notice.user.toString() !== userId)
                 throw new NotFoundError(`post with id ${noticeId} does not belong to user with id ${userId}`)
             
-            return Notice.updateOne({ _id:noticeId }, { $set: { title, body, date: new Date } })
+            return Notice.updateOne({_id: noticeId }, { $set: { title, body, date: new Date } })
            
         })
 }

@@ -39,11 +39,11 @@ function Home() {
         {user && <Header userName={user.name} />}
 
         <div className='h-full p-8'>
-        <Link to="/noticias"> <div className='h-1/4 border-4 border-solid rounded-md'>
+        <Link to="/noticias"> <div className='h-1/4 border-4 border-solid rounded-md mb-4'>
             <h2>NOTICIAS</h2>
             </div></Link>
             
-            <div className='h-1/4 border-4 border-solid rounded-md'>
+            <div className='h-1/4 border-4 border-solid rounded-md mb-4'>
                 <h2>ACTIVIDADES</h2> 
             </div>
 

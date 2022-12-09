@@ -11,7 +11,6 @@ const { FormatError, LengthError, ConflictError } = errors
 
 export default function Registarte({ onClose }) {
 
-    // const navigate = useNavigate()
     const { showAlert } = useContext(Context)
 
     const handleRegister = event => {

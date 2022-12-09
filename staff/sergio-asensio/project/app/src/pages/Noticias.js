@@ -9,6 +9,8 @@ import { errors } from 'com'
 import Context from '../components/Context'
 import { useContext } from 'react'
 import retrieveNotice from '../logic/retrieveNotice'
+import DeleteNotice from '../logic/deleteNotice'
+import extractSubFromToken from '../utils/extractSubFromToken'
 
 
 const { FormatError, AuthError, LengthError, NotFoundError } = errors
@@ -17,7 +19,10 @@ function Noticias() {
     log.info('Noticias -> render')
 
     const [createNoticeVisible, setCreateNoticeVisible] = useState(false)
-    // const [updateNoticeVisible, setUpdateNoticeVisible] = useState(false)
+
+    const [deleteNoticeVisible, setDeleteNoticeVisible] = useState(false)
+
+    const [updateNoticeVisible, setUpdateNoticeVisible] = useState(false)
     const [notice, setNotice] = useState()
 
 
@@ -56,7 +61,6 @@ function Noticias() {
 
     const openCreateNotice = () => setCreateNoticeVisible(true)
     const closeCreateNotice = () => setCreateNoticeVisible(false)
-
     const handleNoticeCreated = () => noticesRetrieve()
 
     const openUpdateNotice = (noticeId) => {
@@ -64,33 +68,48 @@ function Noticias() {
             retrieveNotice(sessionStorage.token, noticeId)
                 .then(notice => {
                     setNotice(notice)
-                    // setUpdateNoticeVisible(true)
+                    setUpdateNoticeVisible(true)
                 })
                 .catch(error => alert(error.message))
         } catch (error) {
             alert(error.message)
         }
     }
-    const closeUpdateNotice = () => setNotice()
+
+    const closeUpdateNotice = () => setUpdateNoticeVisible(false)
+    const handleNoticeUpdated = () => { 
+        noticesRetrieve()
+        setUpdateNoticeVisible(false)
+    }
+
+    const openDeleteNotice = () => setDeleteNoticeVisible(true)
+
+
+    const userId = extractSubFromToken(sessionStorage.token)
 
     return <><header className='h-1/6 top-0 flex justify-around items-center bg-teal-600	'>
         <h1>Noticias</h1>
         <button onClick={() => openCreateNotice()}> + </button>
         <button onClick={goHome} >HOME</button>
     </header>
-        <div className="flex flex-col items-center gap-2 py-[2rem]">
+        <div className="flex flex-col items-center gap-2 py-[5rem]">
             {notices.map(notice => {
                 return <article key={notice.id} className="border rounded-xl w-[50%] flex flex-col p-5">
                     <p>{notice.title}</p>
                     <p>{notice.body}</p>
+                   {notice.user.id === userId && <div>
+                  
                     <button onClick={() => openUpdateNotice(notice.id)}>Editar</button>
-                    <button>Borrar</button>
+                    <button onClick={() => openDeleteNotice(notice.id)}>Borrar</button>
+                    </div>}
                 </article>
             })}
         </div>
         {createNoticeVisible && <CreateNotice onCreated={handleNoticeCreated} onClose={closeCreateNotice} />}
-        {notice && <UpdateNotice notice={notice} onCreated={handleNoticeCreated} onClose={closeUpdateNotice} />}
-        
+        {updateNoticeVisible && <UpdateNotice notice={notice} onUpdated={handleNoticeUpdated} onClose={closeUpdateNotice} />}
+        {/* {deleteNoticeVisible && <DeleteNotice notice={notice} onDelete={handleNoticeDeleted} onClose={closeDeleteNotice} />} */}
+        {deleteNoticeVisible && <DeleteNotice/>}
+
     </>
 }
 
@@ -98,16 +117,3 @@ export default Noticias
 
 
 
-
-// {/* <main className='p-8'>
-// <div className='w-3/4 border-4 border-solid rounded-md'>
-//     <h2>Pabellon Cerrado</h2>
-//     <p>dfhlkasjdfñmdsfjñildsjfmijñlsfjkvlñasfkddñlv</p>
-// </div>
-
-// {createNoticeVisible && <CreateNotice onCreated={handleNoticeCreated} onClose={closeCreateNotice} />}
-
-// {/* {postIdToEdit && <EditPost postId={postIdToEdit} onUpdated={handlePostUpdated} onClose={closeEditPost} />} */}
-// {/* {postIdToDelete && <DeletePost postId={postIdToDelete} onDeleted={handlePostDeleted} onClose={closeDeletePost} />} */}
-
-// </main> */}

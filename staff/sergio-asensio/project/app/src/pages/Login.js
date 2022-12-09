@@ -19,10 +19,8 @@ function Login() {
     //     console.log('hola')
     // },[1000])
 
-
     const [panelLogin, setPanelLogin] = useState(false)
     const [panelRegister, setPanelRegister] = useState(false)
-
 
     const toLogin = () => {
         if (panelLogin === false){
@@ -61,8 +59,8 @@ function Login() {
             </div>
         </header>
         <div className='h-5/6 flex flex-col items-center justify-center'>
-            { panelLogin === true && <Loginate onClose={closeLoginPanel}/> }
-            { panelRegister === true && <Registarte onClose={closeRegisterPanel}/> }
+            { panelLogin && <Loginate onClose={closeLoginPanel}/> }
+            { panelRegister && <Registarte onClose={closeRegisterPanel}/> }
 
             <div className='border-4 border-solid rounded-2xl overflow-hidden w-2/3 h-2/3'>
                 <img className='w-full h-full' src='https://lafurgoverde.files.wordpress.com/2017/12/11172124-5801-4199-afd6-20b93186a0c3.jpeg?w=2000'/> 

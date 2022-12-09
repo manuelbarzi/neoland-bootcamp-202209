@@ -46,3 +46,8 @@ Booking
 - event (ObjectId, event id)
 - name (String, required)
 - date (String, required)
+
+
+## Issues
+
+__TODO__

@@ -1,29 +1,15 @@
 import updateNotice from '../logic/updateNotice'
-import { useEffect, useState } from 'react'
-import retrieveNotice from '../logic/retrieveNotice'
 
-export default function ({ onUpdated, onClose, noticeId, notice }) {
-    // const [notice, setnotice] = useState()
-
-    // useEffect(() => {
-    //     try {
-    //         retrieveNotice(sessionStorage.token, noticeId)
-    //             .then(()=>setnotice(notice))
-    //             .catch(error => alert(error.message))
-    //     } catch (error) {
-    //         alert(error.message)
-    //     }
-    // }, [])
-
-
+export default function ({ onUpdated, onClose, notice }) {
+    
     const submitUpdateNotice = event => {
         event.preventDefault()
 
         const { title: { value: title }, body: { value: body } } = event.target
 
         try {
-            updateNotice(sessionStorage.token, noticeId, title, body)
-            .then (()=> onUpdated)
+            updateNotice(sessionStorage.token, notice.id, title, body)
+            .then (()=> onUpdated())
             .catch(error => alert(error.message))
         } catch (error) {
             alert(error.message)

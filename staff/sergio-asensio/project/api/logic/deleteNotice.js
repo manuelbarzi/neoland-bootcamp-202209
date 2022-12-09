@@ -15,10 +15,12 @@ module.exports = function (userId, noticeId) {
                 return Notice.findById(noticeId)
         })
         .then (notice => {
+            if(!noticeId) throw new NotFoundError(`post with id ${postId} not found`)
+            
             if (notice.user.toString() !== userId)
                     throw new NotFoundError(`notice with id ${noticeId} does not belong to this user`)
             
-                return Notice.findByIdAndRemove(noticeId)
+                return Notice.deleteOne(noticeId)
         })
 
 

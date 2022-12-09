@@ -2,23 +2,21 @@
  * Creates a post against API
  * 
  * @param {string} token The user token
- * @param {string} noticeId The notice ID
- * @param {string} title The notice title
- * @param {string} body The notice body
+ * @param {string} noticeId The notice title
  */
-export default function (token, noticeId, title, body) {
+export default function (token, noticeId) {
     if (typeof token !== 'string') throw new TypeError('userId is not a string')
     if (!token.length) throw new Error('userId is empty')
-    if (typeof title !== 'string') throw new TypeError('title is not a string')
-    if (!title.length) throw new Error('text is empty')
-    if (typeof body !== 'string') throw new TypeError('body is not a string')
-    if (!body.length) throw new Error('body is empty')
+    if (typeof noticeId !== 'string') throw new TypeError('noticeId is not a string')
+    if (!noticeId.length) throw new Error('noticeId is empty')
+
 
 
     return new Promise((resolve, reject) => {
 
         const xhr = new XMLHttpRequest
     
+
         xhr.onload = () => {
             const { status, responseText: json } = xhr
 
@@ -29,20 +27,17 @@ export default function (token, noticeId, title, body) {
 
                 return
             }
+
             resolve()
         }
 
         xhr.onerror = () => reject(new Error('connection error'))
 
-        xhr.open('PATCH',`http://localhost/noticias/${noticeId}`)
+        xhr.open('DELETE',`http://localhost/noticias/${noticeId}`)
         xhr.setRequestHeader('Authorization', `Bearer ${token}`)
-        xhr.setRequestHeader('Content-Type', 'application/json')
 
-        const payload = { title, body }
 
-        const json = JSON.stringify(payload)
-
-        xhr.send(json)
+        xhr.send()
 
     })
 }

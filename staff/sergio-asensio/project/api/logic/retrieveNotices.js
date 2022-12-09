@@ -13,7 +13,7 @@ function retrieveNotices(userId) {
         .then(user => {
             if (!user)
                 throw new Error(`user with id ${userId} does not exist`)
-
+   
             
             return Notice.find().sort({ date: -1 }).populate('user', '-email -password -__v').lean()
         })
@@ -22,16 +22,14 @@ function retrieveNotices(userId) {
 
                 notice.id = notice._id.toString()
                 delete notice._id
-
                 delete notice.__v
-                delete notice.user
-                delete notice.date
 
 
-                // if (!notice.user.id) {
-                //     notice.user.id = notice.user._id.toString()
-                //     delete notice.user._id
-                // }
+                if (!notice.user.id) {
+                    notice.user.id = notice.user._id.toString()
+                    delete notice.user._id
+                }
+            
             })
 
             return notices
