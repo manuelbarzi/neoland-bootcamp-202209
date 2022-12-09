@@ -47,7 +47,7 @@ export default function ({onClose}) {
             <form className="flex flex-col items-center gap-2" onSubmit={handleUpdateUserEmail}>
                 <label className="self-start ml-3 text-[#1b385b] font-bold" htmlFor="email">E-mail</label>
                 <input className="border-b-2 border-black" name="email" type="email" id="email" placeholder="Inserta tu nuevo email" defaultValue={user?.email} />
-                <button className="w-4/5 bg-[#1b385b] text-white border rounded-lg">Save</button>  
+                <button className="mt-2 w-4/5 bg-[#1b385b] text-white border rounded-lg">Save</button>  
             </form>
         </div>
     </main>
