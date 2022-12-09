@@ -31,3 +31,32 @@ Post
 - text (String, required)
 - visibility (String, required, enum: ['public', 'private])
 - date (Date, required)
+
+## Planning
+
+__BACKLOG__
+
+- share post to a user (visibility = friend)
+- filter posts by user
+- ...
+
+__TODO__
+
+- create unregister user logic
+- ...
+
+__DOING__
+
+- create post logic
+- ...
+
+__REVIEW__
+
+- register user
+- authenticate user
+- ...
+
+__DONE__
+
+- create post component
+- ...
