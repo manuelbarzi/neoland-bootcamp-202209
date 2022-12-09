@@ -11,14 +11,13 @@ export default function ({onClose}) {
         
         event.preventDefault()
 
-    const {  newPassword: { value: newPassword } } = event.target
+    const {  password: { value: password }, newPassword: { value: newPassword } } = event.target
         
     try {
-        // authenticateUser(sessionStorage.token, password)
-        // .then(updateUserPassword(sessionStorage.token, newPassword))
-        updateUserPassword(sessionStorage.token, newPassword)
+        updateUserPassword(sessionStorage.token, password, newPassword)
         .then(() => {
             alert('Pasword has been changed successfully')
+            //Change with show alert
             onClose()
         })
         .catch(error => alert(error.message))
