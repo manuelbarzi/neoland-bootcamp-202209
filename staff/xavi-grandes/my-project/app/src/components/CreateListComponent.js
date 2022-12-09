@@ -1,7 +1,7 @@
 import log from '../utils/coolog'
 import createList from '../logic/createList'
 
-export default function CreateListComponent({onClose}) {
+export default function ({onClose}) {
     log.info('CreateList -> render')
 
   const submitCreateList = (event) => {
@@ -9,8 +9,18 @@ export default function CreateListComponent({onClose}) {
 
     const { title: {value: title} } = event.target
 
-    createList(sessionStorage.token, title)
+    try {
+      createList(sessionStorage.token, title)
+      .then(() => {
+          alert('You create a list')
+          //Change with show alert
+          onClose()
+      })
+      .catch(error => alert(error.message))
 
+    } catch (error){
+      alert(error.message)
+    }
   }
 
   return (

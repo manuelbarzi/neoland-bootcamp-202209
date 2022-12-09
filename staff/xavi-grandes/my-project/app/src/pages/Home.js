@@ -37,8 +37,7 @@ export default function Home() {
     }, [])
 
 
-    const HandleCreateList = event => {
-        event.preventDefault()
+    const HandleCreateList = () => {
 
         setCreateOpen(!isCreateOpen)
     }
