@@ -30,9 +30,9 @@ __Profile__
 [x] Introducir imagen de avatar
 [x] Pintar el email del usuario
 [x] Cerrar sesión 
+[x] Actualizar el email del usuario
+[x] Actualizar el email del usuario
 [ ] Borrar la cuenta del usuario
-[ ] Actualizar el email del usuario
-[ ] Actualizar el email del usuario
 
 
 __Settings__
