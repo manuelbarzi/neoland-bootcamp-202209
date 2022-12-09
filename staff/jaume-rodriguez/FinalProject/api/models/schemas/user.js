@@ -1,5 +1,6 @@
 const { Schema } = require('mongoose')
-const { Types: { ObjectId } } = Schema
+const questPlayed = require('./questPlayed')
+const adventurePlayed = require('./adventurePlayed')
 
 module.exports = new Schema({
     name: {
@@ -20,16 +21,6 @@ module.exports = new Schema({
         default: 100,
         required: true
     },
-    quests: [{
-        type: ObjectId,
-        ref: 'Quest',
-        timesCompleted: Number,
-        required: true
-    }],
-    adventures: [{
-        type: ObjectId,
-        ref: 'Adventure',
-        setpsCompleted: [{ type: Schema.Types.ObjectId, ref: 'Adventure' }],
-        isCompleted: Boolean
-    }]
+    questsPlayed: [questPlayed],
+    adventuresPlayed: [adventurePlayed]
 })

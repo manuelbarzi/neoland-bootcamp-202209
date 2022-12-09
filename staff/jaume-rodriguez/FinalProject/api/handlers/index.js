@@ -1,21 +1,48 @@
 module.exports = {
-    handlerAuth: require('./handlerAuth'),
     handlerRegister: require('./handlerRegister'),
+    handlerAuth: require('./handlerAuth'),
+
     handlerRetrieveUser: require('./handlerRetrieveUser'),
+    handlerRetrieveAUser: require('./handlerRetrieveAUser'),
     handlerUpdateUserName: require('./handlerUpdateUserName'),
     handlerUpdateUserEmail: require('./handlerUpdateUserEmail'),
     handlerUpdateUserPassword: require('./handlerUpdateUserPassword'),
+
     handlerCreateTask: require('./handlerCreateTask'),
     handlerRetrieveTasks: require('./handlerRetrieveTasks'),
-    handlerDeleteTask: require('./handlerDeleteTask'),
-    handlerUpdateTaskStatus: require('./handlerUpdateTaskStatus'),
-    handlerUpdateTaskText: require('./handlerUpdateTaskText'),
     handlerUpdateTaskTitle: require('./handlerUpdateTaskTitle'),
+    handlerUpdateTaskText: require('./handlerUpdateTaskText'),
+    handlerUpdateTaskStatus: require('./handlerUpdateTaskStatus'),
+    handlerDeleteTask: require('./handlerDeleteTask'),
+
     handlerCreatePost: require('./handlerCreatePost'),
-    handlerRetrievePublicPosts: require('./handlerRetrievePublicPosts'),
     handlerRetrievePost: require('./handlerRetrievePost'),
-    handlerDeletePost: require('./handlerDeletePost'),
+    handlerRetrievePostsFromUser: require('./handlerRetrievePostsFromUser'),
+    handlerRetrievePublicPosts: require('./handlerRetrievePublicPosts'),
     handlerUpdatePost: require('./handlerUpdatePost'),
-    handlerRetrieveAUser: require('./handlerRetrieveAUser'),
-    handlerRetrievePostsFromUser: require('./handlerRetrievePostsFromUser')
+    handlerDeletePost: require('./handlerDeletePost'),
+
+    handlerCreateQuest: require('./handlerCreateQuest'),
+    handlerRetrieveQuest: require('./handlerRetrieveQuest'),
+    handlerRetrieveQuests: require('./handlerRetrieveQuests'),
+    handlerRetrieveMainQuests: require('./handlerRetrieveMainQuests'),
+    handlerRetrieveMainRandomQuest: require('./handlerRetrieveMainRandomQuest'),
+    handlerRetrieveWorldQuests: require('./handlerRetrieveWorldQuests'),
+    handlerRetrieveWorldRandomQuest: require('./handlerRetrieveWorldRandomQuest'),
+    handlerUpdateQuest: require('./handlerUpdateQuest'),
+    handlerDeleteQuest: require('./handlerDeleteQuest'),
+    handlerPlayQuest: require('./handlerPlayQuest'),
+
+    handlerCreateAdventure: require('./handlerCreateAdventure'),
+    handlerCreateAdventureStep: require('./handlerCreateAdventureStep'),
+    handlerRetrieveAdventure: require('./handlerRetrieveAdventure'),
+    handlerRetrieveAdventures: require('./handlerRetrieveAdventures'),
+    handlerRetrieveMainAdventures: require('./handlerRetrieveMainAdventures'),
+    handlerRetrieveMainRandomAdventure: require('./handlerRetrieveMainRandomAdventure'),
+    handlerRetrieveWorldAdventures: require('./handlerRetrieveWorldAdventures'),
+    handlerUpdateAdventure: require('./handlerUpdateAdventure'),
+    handlerDeleteAdventure: require('./handlerDeleteAdventure'),
+    handlerDeleteAdventureStep: require('./handlerDeleteAdventureStep'),
+    handlerPlayAdventure: require('./handlerPlayAdventure')
+
 }

@@ -7,6 +7,7 @@
     "start": "node .",
     "watch": "nodemon .",
     "inspect": "node --inspect .",
+    "inspect-nodemon": "nodemon --inspect .",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start-nodemon": "nodemon ."
   },

@@ -12,7 +12,12 @@ module.exports = new Schema({
     },
     isMainQuest: {
         type: Boolean,
-        default: 'false',
+        default: false,
+        required: true
+    },
+    isAdventureStep: {
+        type: Boolean,
+        default: false,
         required: true
     },
     votes: [{

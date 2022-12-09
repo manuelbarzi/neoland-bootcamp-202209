@@ -94,7 +94,7 @@ User
 - adventures: [
   {
   adventure: ObjectId, ref
-  setpsCompleted: Array of ObjectId, ref
+  stepsCompleted: Array of ObjectId, ref
   isCompleted: Boolean
   }
   ]
