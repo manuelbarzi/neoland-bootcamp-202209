@@ -5,17 +5,13 @@ const { HAS_SPACES_REGEX } = regex
  * Update User Passwrod
  * 
  * @param {string} token userId client 
- * @param {string} password actual password of client
  * @param {string} newPassword new password to change
  */
 
-export default function (token, password, newPassword) {
+export default function (token, newPassword) {
     if(typeof token !== 'string') throw new TypeError ('token is not a string')
     if(!token.length) throw new Error('token is empty')
-    if(typeof password !== 'string') throw new TypeError('password is not a string')
-    if(!password.length) throw new Error('password is empty')
-    if (HAS_SPACES_REGEX.test(password)) throw new Error('password has spaces')
-    // cambiar test to project
+
     if(typeof newPassword !== 'string') throw new TypeError('newPassword is not a string')
     if(!newPassword.length) throw new Error('newPassword is empty')
     if (HAS_SPACES_REGEX.test(newPassword)) throw new Error('newPassword has spaces')
@@ -44,7 +40,7 @@ export default function (token, password, newPassword) {
         xhr.setRequestHeader('Authorization', `Bearer ${token}`)
         xhr.setRequestHeader('Content-Type', 'application/json')
 
-        const payload = { password, newPassword }
+        const payload = { newPassword }
         const json = JSON.stringify(payload)
 
         xhr.send(json)
