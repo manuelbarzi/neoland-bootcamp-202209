@@ -7,6 +7,7 @@ import UpdateNotice from '../components/UpdateNotice'
 import DeleteNotice from '../components/DeleteNotice'
 import retrieveNotices from '../logic/retrieveNotices'
 import retrieveNotice from '../logic/retrieveNotice'
+import retrieveUser from '../logic/retrieveUser'
 
 import { errors } from 'com'
 import Context from '../components/Context'
@@ -25,6 +26,8 @@ function Noticias() {
 
     const [updateNoticeVisible, setUpdateNoticeVisible] = useState(false)
     const [notice, setNotice] = useState()
+    const [user, setUser] = useState()
+    const [admin,setAdmin] = useState()
 
 
     const [notices, setNotices] = useState([])
@@ -32,7 +35,32 @@ function Noticias() {
 
     useEffect(() => {
         noticesRetrieve()
+        userRetrieve()
     }, [])
+
+    const userRetrieve = () => {
+        try {
+            retrieveUser(sessionStorage.token)
+                .then(user => {
+                    setUser(user)
+                })
+
+                .catch(error => {
+                    if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
+                        showAlert(error.message, 'warn')
+                    else if (error instanceof AuthError || error instanceof NotFoundError)
+                        showAlert(error.message, 'error')
+                    else
+                        showAlert(error.message, 'fatal')
+                })
+        } catch (error) {
+            if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
+                showAlert(error.message, 'warn')
+            else
+                showAlert(error.message, 'fatal')
+
+        }
+    }
 
     const noticesRetrieve = () => {
         try {
@@ -60,7 +88,10 @@ function Noticias() {
         navigate('/')
     }
 
-    const openCreateNotice = () => setCreateNoticeVisible(true)
+    const openCreateNotice = () => {
+        setCreateNoticeVisible(true)
+        console.log(user.role)
+    }
     const closeCreateNotice = () => setCreateNoticeVisible(false)
     const handleNoticeCreated = () => noticesRetrieve()
 
@@ -102,25 +133,24 @@ function Noticias() {
         setDeleteNoticeVisible(false)
     }
 
-    const userId = extractSubFromToken(sessionStorage.token)
-
     return <><header className='h-1/6 top-0 flex justify-around items-center bg-teal-600	'>
         <h1>Noticias</h1>
-        <button onClick={() => openCreateNotice()}> + </button>
+        
         <button onClick={goHome} >HOME</button>
-    </header>
+        </header>
         <div className="flex flex-col items-center gap-2 py-[5rem]">
             {notices.map(notice => {
                 return <article key={notice.id} className="border rounded-xl w-[50%] flex flex-col p-5">
                     <p>{notice.title}</p>
                     <p>{notice.body}</p>
-                    {notice.user.id === userId && <div>
-
+                    {user.role === 'admin' && <div>
                         <button onClick={() => openUpdateNotice(notice.id)}>Editar</button>
                         <button onClick={() => openDeleteNotice(notice.id)}>Borrar</button>
                     </div>}
                 </article>
             })}
+            
+            <footer><button onClick={() => openCreateNotice()}> + </button></footer>
         </div>
         {createNoticeVisible && <CreateNotice onCreated={handleNoticeCreated} onClose={closeCreateNotice} />}
         {updateNoticeVisible && <UpdateNotice notice={notice} onUpdated={handleNoticeUpdated} onClose={closeUpdateNotice} />}

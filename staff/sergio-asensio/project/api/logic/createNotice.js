@@ -13,6 +13,7 @@ function createNotice(userId, title, body) {
         .then(user => {
             if (!user)
                 throw new NotFoundError(`user with id ${userId} does not exist`)
+            if (user.role !== 'admin') throw new Error('user is not able to create a notice')
 
             return Notice.create({ user: userId, title, body, date: new Date })
         })

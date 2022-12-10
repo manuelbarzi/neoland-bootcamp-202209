@@ -1,6 +1,6 @@
 
 const { errors: { LengthError, NotFoundError } } = require('com')
-const { User, Post, Notice } = require('../models')
+const { User, Notice } = require('../models')
 /**
  * Delete post from a specific user
  * 
@@ -17,14 +17,15 @@ function deleteNotice(userId, noticeId) {
 
     return User.findById(userId)
         .then(user => {
-            if (!user) throw new NotFoundError(`user with id ${userId} does not exist`)
+            if (!user)
+                throw new NotFoundError(`user with id ${userId} does not exist`)
+            if (user.role !== 'admin') throw new Error('user is not able to update a notice')
 
             return Notice.findById(noticeId)
         })
         .then(notice => {
-            if(!noticeId) throw new NotFoundError(`notice with id ${noticeId} not found`)
-
-            if (notice.user.toString() !== userId) throw new Error(`notice with id ${noticeId} does not belong to user ${userId}`)
+            if (!notice)
+                throw new NotFoundError(`post with id ${noticeId} does not exist`)
 
             return Notice.deleteOne({ _id: noticeId })
         })

@@ -13,5 +13,11 @@ module.exports = new Schema({
     password: {
         type: String,
         required: true
+    },
+    role: {
+        type: String,
+        enum: 'admin'        
     }
 })
+
+

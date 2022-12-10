@@ -18,7 +18,11 @@ function Home() {
     useEffect(() => {
         try {
             retrieveUser(sessionStorage.token)
-                .then(user => setUser(user))
+                .then(user => {
+                    setUser(user)
+                    console.log(user.role)
+                })
+
                 .catch(error => {
                     if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
                         showAlert(error.message, 'warn')
