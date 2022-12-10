@@ -1,6 +1,5 @@
 const createGame = require('../logic/createGame')
 const { errors: { FormatError, NotFoundError} } = require('com')
-const { game } = require('../models/schemas')
 
 module.exports = (req, res) => {
     const {userId} = req

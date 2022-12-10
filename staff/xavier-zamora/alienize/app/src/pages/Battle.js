@@ -8,14 +8,13 @@ import { errors } from 'com'
 const { FormatError, AuthError, LengthError, NotFoundError } = errors
 
 function Battle() {
-    log.info('Home -> render')
+    log.info('Battle -> render')
 
     const [user, setUser] = useState()
     const { showAlert } = useContext(Context)
     const token = sessionStorage.token
 
     useEffect(() => {
-      console.log('effect')
       try {
         retrieveUser(sessionStorage.token)
             .then(user => setUser(user))
@@ -36,7 +35,7 @@ function Battle() {
   }, [])
 
     const atack1Handler = event => {
-        log.info('Battle -> createGame')
+        log.info('Battle -> atack1Handler')
   
         event.preventDefault()
   

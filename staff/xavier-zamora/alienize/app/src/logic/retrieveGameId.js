@@ -1,30 +1,29 @@
-import { regex, errors } from 'com'
+import { errors } from 'com'
 
-const { IS_EMAIL_REGEX, HAS_SPACES_REGEX } = regex
-const { FormatError, AuthError, LengthError, NotFoundError, UnexpectedError } = errors
+const { FormatError, NotFoundError, UnexpectedError, AuthError } = errors
 
 /**
- * Authenticates a user
- * 
- * @param {string} token The token 
- * @param {string} userName The userName
+ * @param {token} token The user token
  */
 
-export default function createGame(token, userName) {
+
+export default function retrieveGameId(token) {
     if (typeof token !== 'string') throw new TypeError('token is not a string')
     if (!token.length) throw new FormatError('token is empty')
-    if(typeof userName !== 'string') throw new TypeError('userName is not string')
+
     return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest()
-
+        
         xhr.onload = function () {
+
             const { status, responseText: json } = xhr
 
             if (status === 200) {
-                const game = JSON.parse(json)
-                resolve(game)
+                const gameId = JSON.parse(json)
+                resolve(gameId)
             } else if (status === 400) {
                 const { error } = JSON.parse(json)
+
                 if (error.includes('is not a'))
                     reject(new TypeError(error))
                 else if (error.includes('empty'))
@@ -42,11 +41,9 @@ export default function createGame(token, userName) {
             else
                 reject(new UnexpectedError('server error'))
         }
-        xhr.onerror = () => reject(new Error('connection error'))
 
-        xhr.open('GET', 'http://localhost:2000/matchMaking/users/${userName}')
+        xhr.open('GET', 'http://localhost:2000/retrieveGameId')
         xhr.setRequestHeader('Authorization', `Bearer ${token}`)
-
         xhr.send()
     })
 }

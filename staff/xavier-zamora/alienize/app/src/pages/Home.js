@@ -17,7 +17,6 @@ function Home() {
     const { showAlert } = useContext(Context)
 
     useEffect(() => {
-        console.log('effect')
         try {
             retrieveUser(sessionStorage.token)
                 .then(user => setUser(user))

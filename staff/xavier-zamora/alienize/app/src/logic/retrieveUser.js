@@ -17,7 +17,6 @@ export default function retrieveUser(token) {
         xhr.onload = function () {
             const { status, responseText: json } = xhr
             
-            
             if (status === 200) {
                 const user = JSON.parse(json)
                 resolve(user)

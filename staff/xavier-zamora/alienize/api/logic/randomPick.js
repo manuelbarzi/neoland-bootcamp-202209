@@ -2,20 +2,19 @@ const {
     errors: { FormatError, LengthError, ConflictError, UnexpectedError },
     regex: { IS_EMAIL_REGEX, HAS_SPACES_REGEX, IS_ALPHABETICAL_REGEX }
 } = require('com')
-const { ObjectId } = require('mongodb')
 const { Aliens, GameAliens, Game } = require('../models')
-const { game, gameAliens } = require('../models/schemas')
 
-function randomPick(userId, gameId) {
-    if (typeof userId !== 'string') throw new TypeError('userId is not a string')
-    if (!userId.length) throw new FormatError('userId is empty')
 
-    return Game.findOne({ _id: gameId })
+function randomPick(gameId) {
+    if (typeof gameId !== 'string') throw new TypeError('gameId is not a string')
+    if (!gameId.length) throw new FormatError('gameId is empty')
+
+    return Game.findOne({ gameId })
         .then(game => {
 
             const arrPlayers = [game.players[0], game.players[1]]
 
-            if (game.players.length === 2) {
+            if (arrPlayers[1] !== undefined) {
                 return Aliens.find({})
                     .then(aliens => {
                         const picks = []
@@ -84,7 +83,7 @@ function randomPick(userId, gameId) {
                                 attacks: [picks[9]._doc.atack1, picks[9]._doc.atack2, picks[9]._doc.atack3, picks[9]._doc.atack4], passives: [""], player: game.players[1]
                             }
                         ).then(gameAliens => {
-                            return Game.findOneAndUpdate({ players: userId, players:[arrPlayers[0], arrPlayers[1]], aliensPlayerOne: [gameAliens[0]._id, gameAliens[1]._id, gameAliens[2]._id, gameAliens[3]._id, gameAliens[4]._id], aliensPlayerTwo: [gameAliens[5]._id, gameAliens[6]._id, gameAliens[7]._id, gameAliens[8]._id, gameAliens[9]._id,] }).then(game => {
+                            return Game.findOneAndUpdate({ gameId, players:[arrPlayers[0], arrPlayers[1]], aliensPlayerOne: [gameAliens[0]._id, gameAliens[1]._id, gameAliens[2]._id, gameAliens[3]._id, gameAliens[4]._id], aliensPlayerTwo: [gameAliens[5]._id, gameAliens[6]._id, gameAliens[7]._id, gameAliens[8]._id, gameAliens[9]._id,] }).then(game => {
                 
                                 return game 
                             })

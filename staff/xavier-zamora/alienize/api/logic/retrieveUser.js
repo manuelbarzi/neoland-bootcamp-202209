@@ -11,9 +11,7 @@ function retrieveUser(userId) {
                 throw new NotFoundError(`user with id ${userId} does not exist`)
 
             // sanitize
-            user.id = user._id.toString()
-            user.id = user.email.toString()
-
+         
             delete user._id
             delete user.email
             delete user.isSearchingGame
