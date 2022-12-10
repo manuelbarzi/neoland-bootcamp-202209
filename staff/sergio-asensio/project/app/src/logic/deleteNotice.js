@@ -1,24 +1,20 @@
 /**
- * Creates a post against API
+ * Delete a post against API
  * 
  * @param {string} token The user token
- * @param {string} noticeId The notice title
+ * @param {string} noticeId The post noticeId
  */
-export default function (token, noticeId) {
-    if (typeof token !== 'string') throw new TypeError('userId is not a string')
-    if (!token.length) throw new Error('userId is empty')
+function deleteNotice(token, noticeId) {
+    if (typeof token !== 'string') throw new TypeError('token is not a string')
+    if (!token.length) throw new Error('token is empty')
     if (typeof noticeId !== 'string') throw new TypeError('noticeId is not a string')
     if (!noticeId.length) throw new Error('noticeId is empty')
 
-
-
     return new Promise((resolve, reject) => {
-
-        const xhr = new XMLHttpRequest
-    
+        const xhr = new XMLHttpRequest()
 
         xhr.onload = () => {
-            const { status, responseText: json } = xhr
+            const { status } = xhr
 
             if (status >= 500) {
                 const { error } = JSON.parse(json)
@@ -33,11 +29,17 @@ export default function (token, noticeId) {
 
         xhr.onerror = () => reject(new Error('connection error'))
 
-        xhr.open('DELETE',`http://localhost/noticias/${noticeId}`)
+        xhr.open('DELETE', `http://localhost/noticias/${noticeId}`)
         xhr.setRequestHeader('Authorization', `Bearer ${token}`)
+        xhr.setRequestHeader('Content-Type', 'application/json')
 
+        const payload = { noticeId }
 
-        xhr.send()
+        const json = JSON.stringify(payload)
 
+        xhr.send(json)
     })
+    
 }
+
+export default deleteNotice

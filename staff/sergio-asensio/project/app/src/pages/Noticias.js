@@ -4,12 +4,13 @@ import Header from '../components/Header'
 import { Link, useNavigate } from 'react-router-dom'
 import CreateNotice from '../components/CreateNotice'
 import UpdateNotice from '../components/UpdateNotice'
+import DeleteNotice from '../components/DeleteNotice'
 import retrieveNotices from '../logic/retrieveNotices'
+import retrieveNotice from '../logic/retrieveNotice'
+
 import { errors } from 'com'
 import Context from '../components/Context'
 import { useContext } from 'react'
-import retrieveNotice from '../logic/retrieveNotice'
-import DeleteNotice from '../logic/deleteNotice'
 import extractSubFromToken from '../utils/extractSubFromToken'
 
 
@@ -77,13 +78,29 @@ function Noticias() {
     }
 
     const closeUpdateNotice = () => setUpdateNoticeVisible(false)
-    const handleNoticeUpdated = () => { 
+    const handleNoticeUpdated = () => {
         noticesRetrieve()
         setUpdateNoticeVisible(false)
     }
 
-    const openDeleteNotice = () => setDeleteNoticeVisible(true)
+    const openDeleteNotice = (noticeId) => {
+        try {
+            retrieveNotice(sessionStorage.token, noticeId)
+                .then(notice => {
+                    setNotice(notice)
+                    setDeleteNoticeVisible(true)
+                })
+                .catch(error => alert(error.message))
+        } catch (error) {
+            alert(error.message)
+        }
+    }
 
+    const closeDeleteNotice = () => setDeleteNoticeVisible(false)
+    const handleNoticeDeleted = () => {
+        noticesRetrieve()
+        setDeleteNoticeVisible(false)
+    }
 
     const userId = extractSubFromToken(sessionStorage.token)
 
@@ -97,18 +114,17 @@ function Noticias() {
                 return <article key={notice.id} className="border rounded-xl w-[50%] flex flex-col p-5">
                     <p>{notice.title}</p>
                     <p>{notice.body}</p>
-                   {notice.user.id === userId && <div>
-                  
-                    <button onClick={() => openUpdateNotice(notice.id)}>Editar</button>
-                    <button onClick={() => openDeleteNotice(notice.id)}>Borrar</button>
+                    {notice.user.id === userId && <div>
+
+                        <button onClick={() => openUpdateNotice(notice.id)}>Editar</button>
+                        <button onClick={() => openDeleteNotice(notice.id)}>Borrar</button>
                     </div>}
                 </article>
             })}
         </div>
         {createNoticeVisible && <CreateNotice onCreated={handleNoticeCreated} onClose={closeCreateNotice} />}
         {updateNoticeVisible && <UpdateNotice notice={notice} onUpdated={handleNoticeUpdated} onClose={closeUpdateNotice} />}
-        {/* {deleteNoticeVisible && <DeleteNotice notice={notice} onDelete={handleNoticeDeleted} onClose={closeDeleteNotice} />} */}
-        {deleteNoticeVisible && <DeleteNotice/>}
+        {deleteNoticeVisible && <DeleteNotice notice={notice} onDeleted={handleNoticeDeleted} onClose={closeDeleteNotice} />}
 
     </>
 }

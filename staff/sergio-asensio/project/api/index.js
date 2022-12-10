@@ -37,8 +37,8 @@ mongoose.connect(MONGODB_URL)
         api.get('/users', jwtVerifier, retrieveUserHandler)
         api.post('/noticias', jwtVerifier, jsonBodyParser, createNoticeHandler)
         api.patch('/noticias/:noticeId', jwtVerifier,jsonBodyParser, updateNoticeHandler)
-        api.delete('/noticias/:noticeId', jwtVerifier, deleteNoticeHandler)
         api.get('/noticias/:noticeId', jwtVerifier, retrieveNoticeHandler)
+        api.delete('/noticias/:noticeId', jwtVerifier, deleteNoticeHandler)
         api.get('/noticias', jwtVerifier, retrieveNoticesHandler)
 
 
