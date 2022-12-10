@@ -13,8 +13,11 @@ function randomPick(gameId) {
         .then(game => {
 
             const arrPlayers = [game.players[0], game.players[1]]
+            const playerOnePushed = game.aliensPlayerOne.length
+            const playerTwoPushed = game.aliensPlayerOne.length
+            const aliensPushed = playerOnePushed + playerTwoPushed
 
-            if (arrPlayers[1] !== undefined) {
+            if (arrPlayers[1] !== undefined && aliensPushed === 0) {
                 return Aliens.find({})
                     .then(aliens => {
                         const picks = []
@@ -82,12 +85,7 @@ function randomPick(gameId) {
                                 },
                                 attacks: [picks[9]._doc.atack1, picks[9]._doc.atack2, picks[9]._doc.atack3, picks[9]._doc.atack4], passives: [""], player: game.players[1]
                             }
-                        ).then(gameAliens => {
-                            return Game.findOneAndUpdate({ gameId, players:[arrPlayers[0], arrPlayers[1]], aliensPlayerOne: [gameAliens[0]._id, gameAliens[1]._id, gameAliens[2]._id, gameAliens[3]._id, gameAliens[4]._id], aliensPlayerTwo: [gameAliens[5]._id, gameAliens[6]._id, gameAliens[7]._id, gameAliens[8]._id, gameAliens[9]._id,] }).then(game => {
-                
-                                return game 
-                            })
-                        })
+                        ).then(gameAliens => {})
                     })
                 }
         })
