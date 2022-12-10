@@ -2,24 +2,22 @@ import log from '../utils/coolog'
 import { useState } from 'react'
 import createAppointment from '../logic/createAppointment'
 
-function AppointmentForm({ onNewAppointment }) {
+function AppointmentForm({ onNewAppointment,}) {
     log.info('AppoimentForm -> render')
 
     //*States */
     const [title, setTitle] = useState('')
     const [date, setDate] = useState('')
-    // const [time, setTime] = useState('')
     const [body, setBody] = useState('')
 
     //*Eventos */
     const handleChangeName = event => setTitle(event.target.value)
     const handleChangeDate = event => setDate(event.target.value)
-    // const handleChangeTime = event => setTime(event.target.value)
     const handleChangeText = event => setBody(event.target.value)
 
     const submitCreateAppointment = event => {
         event.preventDefault()
-        console.log('writing')
+        // console.log('writing')
 
         createAppointment(sessionStorage.token, title, body, date, (error) => {
             if (error) {
@@ -33,7 +31,6 @@ function AppointmentForm({ onNewAppointment }) {
             const appointment = {
                 title,
                 date,
-                // time,
                 body,
             }
 
@@ -41,7 +38,6 @@ function AppointmentForm({ onNewAppointment }) {
 
             setTitle('')
             setDate('')
-            // setTime('')
             setBody('')
         })
         // console.log(objectAppoiment)
@@ -56,8 +52,7 @@ function AppointmentForm({ onNewAppointment }) {
             <div className='flex shadow-md mb-3'>
                 <label htmlFor='date' className='flex justify-start w-20 font-semibold text-lg'>Fecha</label>
                 <input type="datetime-local" className='w-full font-semibold text-lg text-center' value={date} onChange={handleChangeDate} />
-                {/* <input id='date' className=' w-full font-semibold text-lg text-center' type='date' value={date} onChange={handleChangeDate} />
-                <input id='time' type="time" className='w-full font-semibold text-lg text-center' value={time} onChange={handleChangeTime} /> */}
+                
             </div>
             <div className='flex shadow-md mb-3'>
                 <label htmlFor='text' className='flex justify-start w-20 font-semibold text-lg'>Texto</label>

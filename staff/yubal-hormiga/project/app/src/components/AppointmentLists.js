@@ -1,7 +1,7 @@
 import log from '../utils/coolog'
 import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai'
 
-function AppoimentLists({ appointments, setAppointment }) {
+function AppoimentLists({ appointments}) {
   // console.log(appointments)
   log.info('AppoimentLists -> render')
 

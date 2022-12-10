@@ -5,7 +5,7 @@ import Header from '../components/Header'
 import { useContext } from 'react'
 import Context from '../components/Context'
 import { errors } from 'com'
-import Pension from './Pension'
+import Flow from './Flow'
 import Appointment from './Appointment'
 import Memory from './Memory'
 const { FormatError, AuthError, LengthError, NotFoundError } = errors
@@ -41,7 +41,7 @@ function Home() {
         <div className='  grid  grid-rows-3 grid-cols-2 gap-2  text-center mx-2'>
             <section className='border-2 border-green-800 row-start-1 row-end-4 col-start-1 col-end-2  w-full p-2 rounded-xl bg-white '>
                 <div>
-                    <Pension />
+                    <Flow />
                 </div>
             </section>
             <section className=' overflow-y-scroll border-2 border-green-800 h-80 row-start-1 row-end-3 col-start-2 col-end-3  w-full p-2 rounded-xl bg-white'>
