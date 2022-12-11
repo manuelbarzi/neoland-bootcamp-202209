@@ -2,9 +2,10 @@ const randomPick = require('../logic/randomPick')
 const { errors: { FormatError, NotFoundError } } = require('com')
 
 module.exports = (req, res) => {
-    const {gameId} = req.body
+    const gameId = req.body
+    const payload = gameId
     try {
-        randomPick(gameId)
+        randomPick(payload)
             .then(game => res.json(game))
             .catch(error => {
                 if (error instanceof NotFoundError)

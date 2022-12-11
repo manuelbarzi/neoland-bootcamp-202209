@@ -6,18 +6,16 @@ const { Aliens, GameAliens, Game } = require('../models')
 
 
 function randomPick(gameId) {
+
     if (typeof gameId !== 'string') throw new TypeError('gameId is not a string')
     if (!gameId.length) throw new FormatError('gameId is empty')
 
-    return Game.findOne({ gameId })
+    return Game.findById({_id: gameId })
         .then(game => {
-
+            if(!game) throw new TypeError('Player have not game')
             const arrPlayers = [game.players[0], game.players[1]]
-            const playerOnePushed = game.aliensPlayerOne.length
-            const playerTwoPushed = game.aliensPlayerOne.length
-            const aliensPushed = playerOnePushed + playerTwoPushed
 
-            if (arrPlayers[1] !== undefined && aliensPushed === 0) {
+            if (arrPlayers[1] !== undefined) {
                 return Aliens.find({})
                     .then(aliens => {
                         const picks = []
@@ -33,7 +31,7 @@ function randomPick(gameId) {
                             {
                                 name: picks[1]._doc.name, type: picks[1]._doc.type, stats: {
                                     healthPoints: picks[1]._doc.healthPoints, especialDefense: picks[1]._doc.especialDefense, fisicDefense: picks[1]._doc.fisicDefense, fisicAttack: picks[1]._doc.fisicAtack, especialAttack: picks[1]._doc.especialAtack, psiquicalAttack: picks[1]._doc.psiquicalAtack, speed: picks[1]._doc.speed, healing: picks[1]._doc.healing, repeat: picks[1]._doc.repeat
-                                },
+                                },  
                                 attacks: [picks[1]._doc.atack1, picks[1]._doc.atack2, picks[1]._doc.atack3, picks[1]._doc.atack4], passives: [""], player: game.players[0]
                             },
                             {
@@ -85,8 +83,13 @@ function randomPick(gameId) {
                                 },
                                 attacks: [picks[9]._doc.atack1, picks[9]._doc.atack2, picks[9]._doc.atack3, picks[9]._doc.atack4], passives: [""], player: game.players[1]
                             }
-                        ).then(gameAliens => {})
+                        ).then(gameAliens => {
+                            return Game.findByIdAndUpdate({_id: gameId }, {players:[arrPlayers[0], arrPlayers[1]], aliensPlayerOne: [gameAliens[0]._id, gameAliens[1]._id, gameAliens[2]._id, gameAliens[3]._id, gameAliens[4]._id], aliensPlayerTwo: [gameAliens[5]._id, gameAliens[6]._id, gameAliens[7]._id, gameAliens[8]._id, gameAliens[9]._id,]}).then(game => { 
+                            })
+                        })
                     })
+                }else{
+                    throw new TypeError('Searching player')
                 }
         })
 }

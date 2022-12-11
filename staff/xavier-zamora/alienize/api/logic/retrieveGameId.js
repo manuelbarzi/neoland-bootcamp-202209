@@ -10,7 +10,7 @@ const {
     
       return Game.findOne({ players: userId }).then(game => {
 
-          return game._id.toString()
+          return game._id
       })
       
     }

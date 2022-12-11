@@ -11,13 +11,13 @@ function createGame(userId) {
   return Game.findOne({ players: userId, status: "playing" })
     .then(previousGame => {
       if (previousGame) {
-        throw new FormatError('This user have a game')
+        throw new TypeError('This user have a game')
       }
 
       return Game.findOne({ players: userId, status: "creating" })
         .then(previousGame => {
           if (previousGame) {
-            throw new FormatError('This user have a game')
+            throw new TypeError('This user have a game')
           }
 
           return Game.findOne({ players: { $size: 1 }, status: "creating" })

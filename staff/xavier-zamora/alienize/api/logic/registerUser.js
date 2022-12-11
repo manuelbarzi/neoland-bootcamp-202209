@@ -16,7 +16,12 @@ function registerUser(name, email, password) {
     if (password.length < 8) throw new LengthError('password length is less than 8')
     if (HAS_SPACES_REGEX.test(password)) throw new FormatError('password has spaces')
 
-    return User.create({ name, email, password, elo, isSearchingGame, hasNotGame })
+    const elo = 3000
+    const isSearchingGame = false
+    const hasNotGame = false
+    const roomId = 'null'
+
+    return User.create({ name, email, password, elo, isSearchingGame, hasNotGame, roomId })
          .catch(error => {
             if (error.message.includes('E11000'))
                 throw new ConflictError(`user with email ${email} already exists`)

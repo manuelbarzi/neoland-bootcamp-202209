@@ -8,10 +8,8 @@ const registerUserHandler = require('./handlers/registerUserHandler')
 const retrieveUserHandler = require('./handlers/retrieveUserHandler')
 const createGameHandler = require('./handlers/createGameHandler')
 const randomPickHandler = require('./handlers/randomPickHandler')
-const pushAliensHandler = require('./handlers/pushAliensHandler')
 const atack1Handler = require('./handlers/atack1Handler')
 const retrieveGameIdHandler = require('./handlers/retrieveGameIdHandler')
-
 
 const jsonBodyParser = require('./utils/jsonBodyParser')
 const cors = require('./utils/cors')
@@ -35,8 +33,6 @@ mongoose.connect(MONGODB_URL)
         api.post('/games/:userId/:gameId', jwtVerifier, jsonBodyParser, randomPickHandler)
         api.get('/Battle/atack1', jwtVerifier, atack1Handler )
         api.get('/retrieveGameId/', jwtVerifier, retrieveGameIdHandler)
-        api.post('/pushAliens/:gameId', jwtVerifier, jsonBodyParser, pushAliensHandler)
-        
 
         const { PORT } = process.env
 
