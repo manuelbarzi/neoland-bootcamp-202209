@@ -10,22 +10,22 @@ function AppoimentLists({ appointments}) {
 
     {appointments.map((appointment) => {
       return (
-        <div className='rounded-lg shadow-md flex gap-5 pb-1'>
+        <div className='rounded-lg shadow-md flex justify-between gap-5 pb-1'>
 
-          <div className='w-2/12'>
+          <div className=''>
             <p className='font-semibold text-lg flex flex-row'>Cita: <spam>{appointment.title}</spam></p>
           </div>
 
-          <div className='w-3/12' >
+          <div className='' >
             <p className='font-semibold text-lg flex flex-row'>{appointment.date}</p>
           </div>
 
-          <div className='w-1/12'>
+          {/* <div className='w-1/12'>
             <p className=' font-semibold text-lg '>{appointment.time}</p>
-          </div>
+          </div> */}
 
           <div>
-            <p className=' min-w-full font-semibold text-lg '>{appointment.body}</p>
+            <p className='font-semibold text-lg '>{appointment.body}</p>
           </div>
 
           <div className=''>

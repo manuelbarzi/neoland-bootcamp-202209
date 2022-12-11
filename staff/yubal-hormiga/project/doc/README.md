@@ -51,7 +51,7 @@ Flow
 - user (ObjectId, required)
 - type (String, required, enum ['income', 'expense'])
 - kind (String, required, enum ['pension', 'gift', 'donation', 'food', 'supply', 'medicine', 'services', 'other'])
-- description (String)
+- description (String,required)
 - amount (Number, required)
 - date (Date, required)
 

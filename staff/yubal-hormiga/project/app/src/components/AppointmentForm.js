@@ -44,6 +44,7 @@ function AppointmentForm({ onNewAppointment,}) {
     }
     return <>
         <form className=' rounded-lg p-2 mb-4 ' onSubmit={submitCreateAppointment}>
+            <div className='flex justify-evenly gap-2'>
             <div className='flex shadow-md mb-3 '>
                 <label htmlFor='appointment' className=' w-20 font-semibold text-lg flex justify-start'>Cita</label>
                 <input id='appointment' className='text-center w-full font-semibold text-lg  placeholder-gray-500 ' type='text' placeholder='Nombre de  Cita' value={title} onChange={handleChangeName} />  {/*  value ->Para recoger nombre de la Cita Onchange como hicimos con el edit de post- para recoger los cambios */}
@@ -51,11 +52,12 @@ function AppointmentForm({ onNewAppointment,}) {
             </div>
             <div className='flex shadow-md mb-3'>
                 <label htmlFor='date' className='flex justify-start w-20 font-semibold text-lg'>Fecha</label>
-                <input type="datetime-local" className='w-full font-semibold text-lg text-center' value={date} onChange={handleChangeDate} />
+                <input type="datetime-local" className=' font-semibold text-lg text-center' value={date} onChange={handleChangeDate} />
                 
             </div>
-            <div className='flex shadow-md mb-3'>
-                <label htmlFor='text' className='flex justify-start w-20 font-semibold text-lg'>Texto</label>
+            </div>
+            <div className='shadow-md mb-3'>
+                <label htmlFor='text' className=' flex justify-center  font-semibold text-lg'>Texto</label>
                 <textarea id='text' className='w-full text-center font-semibold text-lg  placeholder-gray-500 ' placeholder='Describe la cita' value={body} onChange={handleChangeText} />
             </div>
 

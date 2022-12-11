@@ -1,24 +1,24 @@
 import { useState } from 'react'
 import FlowHeader from '../components/FlowHeader'
-import { AiFillPlusCircle } from 'react-icons/ai'
-import { GrFormSubtract } from 'react-icons/gr'
-import FlowModalExpesive from '../components/FlowModalExpesive'
-import FlowModalIncome from '../components/FlowModalIncome'
+import FlowModal from '../components/FlowModal'
+import FlowList from '../components/FlowList'
 
 
 function Flow() {
 
   const [pension, setPension] = useState()
   const [isValidPension, setIsValidPension] = useState(false)
-  const [modalExpensive, setModalExpensive] = useState(false)
-  const [modalIncome, setModalIncome] = useState(false)
+  const [modal, setModal] = useState(false)
+
+  const [flows, setFlows] = useState([])
 
   const handleNewExpense = () => {
-    setModalExpensive(true)
+    setModal(true)
   }
 
-  const handleNewIncome = () => {
-    setModalIncome(true)
+  const handleNewFlow = (flow) => {
+    // console.log(flow) //*Comprobamos que reocoge los datos
+    setFlows([...flows, flow])
   }
 
   return <>
@@ -31,17 +31,22 @@ function Flow() {
       />
 
       {isValidPension && (
-        <div>
-          <button className='bg-green-400  rounded-md p-1' type='button'><AiFillPlusCircle size='1rem' onClick={handleNewIncome} /></button>
-          <button className='bg-red-600  rounded-md p-1' type='button'><GrFormSubtract size='1rem' onClick={handleNewExpense} /></button>
+        <>
+        <main>
+        <div className='my-1'>
+          <button className='font-medium py-1 px-5 my-2 bg-green-600 text-white  hover:bg-gray-700 rounded-md cursor-pointer' type='button' onClick={handleNewExpense}>Agregar un nuevo apunte</button>
         </div>
+        </main>
+        </>
       )}
 
-      {modalExpensive && <FlowModalExpesive
-                           setModalExpensive={setModalExpensive} />}
-
-      {modalIncome && <FlowModalIncome
-                           setModalIncome={setModalIncome} />}
+      {modal && <FlowModal
+        setModal={setModal}
+        onNewFlow={handleNewFlow}
+        />}
+        <  FlowList 
+          flows = { flows }
+        />
     </div>
   </>
 }
