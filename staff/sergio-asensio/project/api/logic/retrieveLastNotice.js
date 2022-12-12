@@ -18,10 +18,16 @@ function retrieveLastNotice(userId) {
             return Notice.findOne().sort({ date: -1 }).lean()
         })
         .then(notice => {
+            if(!notice){
+                return 
+            }
+
+            else {
                 notice.id = notice._id.toString()
                 delete notice._id
                 delete notice.__v
             return notice
+        }
         })
 }
 

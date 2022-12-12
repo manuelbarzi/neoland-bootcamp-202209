@@ -12,12 +12,14 @@ function retrieveNotice(userId, noticeId) {
         .then(user => {
             if (!user)
                 throw new NotFoundError(`user with id ${userId} does not exist`)
+            if (user.role !== 'admin') throw new Error('user is not able to update a notice')
+
 
             return Notice.findById(noticeId).select('-__v').lean()
         })
         .then(notice => {
-            if (notice.user.toString() !== userId)
-                throw new NotFoundError(`notice with id ${noticeId} does not belong to this user`)
+            if (!notice)
+            throw new NotFoundError(`notice with id ${noticeId} does not exist`)
             notice.id = notice._id.toString()
 
             delete notice._id
@@ -28,10 +30,3 @@ function retrieveNotice(userId, noticeId) {
 }
 
 module.exports = retrieveNotice
-
-// "_id": "638f84013317e4d729003ba9",
-// "user": "638e0dda6e6c7baae7cdd36d",
-// "title": "siiiiiiiiiiiiii",
-// "body": "modif",
-// "date": "2022-12-07T10:19:35.904Z",
-// "__v": 0

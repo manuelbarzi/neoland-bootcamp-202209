@@ -1,19 +1,15 @@
 import log from '../utils/coolog'
 import { useEffect, useState } from 'react'
-import Header from '../components/Header'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import CreateNotice from '../components/CreateNotice'
 import UpdateNotice from '../components/UpdateNotice'
 import DeleteNotice from '../components/DeleteNotice'
 import retrieveNotices from '../logic/retrieveNotices'
 import retrieveNotice from '../logic/retrieveNotice'
 import retrieveUser from '../logic/retrieveUser'
-
 import { errors } from 'com'
 import Context from '../components/Context'
 import { useContext } from 'react'
-import extractSubFromToken from '../utils/extractSubFromToken'
-
 
 const { FormatError, AuthError, LengthError, NotFoundError } = errors
 
@@ -32,12 +28,37 @@ function Noticias() {
     const { showAlert } = useContext(Context)
 
     useEffect(() => {
+        userRetrieve()
+        noticesRetrieve()
+        // try {
+        //     Promise.all([retrieveUser(sessionStorage.token), retrieveNotices(sessionStorage.token)])
+        //         .then(([user, notices]) => {
+        //             setUser(user)
+        //             setNotices(notices)
+        //         })
+        //         .catch(error => {
+        //             if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
+        //                 showAlert(error.message, 'warn')
+        //             else if (error instanceof AuthError || error instanceof NotFoundError)
+        //                 showAlert(error.message, 'error')
+        //             else
+        //                 showAlert(error.message, 'fatal')
+        //         })
+        // } catch (error) {
+        //     if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
+        //     showAlert(error.message, 'warn')
+        // else
+        //     showAlert(error.message, 'fatal')
+        // }
+    }, [])
+
+    const userRetrieve = () => {
         try {
-            Promise.all([retrieveUser(sessionStorage.token), retrieveNotices(sessionStorage.token)])
-                .then(([user, notices]) => {
+            retrieveUser(sessionStorage.token)
+                .then(user => {
                     setUser(user)
-                    setNotices(notices)
                 })
+
                 .catch(error => {
                     if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
                         showAlert(error.message, 'warn')
@@ -48,34 +69,11 @@ function Noticias() {
                 })
         } catch (error) {
             if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
-            showAlert(error.message, 'warn')
-        else
-            showAlert(error.message, 'fatal')
+                showAlert(error.message, 'warn')
+            else
+                showAlert(error.message, 'fatal')
         }
-    }, [])
-
-    // const userRetrieve = () => {
-    //     try {
-    //         retrieveUser(sessionStorage.token)
-    //             .then(user => {
-    //                 setUser(user)
-    //             })
-
-    //             .catch(error => {
-    //                 if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
-    //                     showAlert(error.message, 'warn')
-    //                 else if (error instanceof AuthError || error instanceof NotFoundError)
-    //                     showAlert(error.message, 'error')
-    //                 else
-    //                     showAlert(error.message, 'fatal')
-    //             })
-    //     } catch (error) {
-    //         if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
-    //             showAlert(error.message, 'warn')
-    //         else
-    //             showAlert(error.message, 'fatal')
-    //     }
-    // }
+    }
 
     const noticesRetrieve = () => {
         try {
@@ -98,7 +96,6 @@ function Noticias() {
     }
 
     const navigate = useNavigate()
-
     const goHome = () => {
         navigate('/')
     }
@@ -169,11 +166,6 @@ function Noticias() {
         {createNoticeVisible && <CreateNotice onCreated={handleNoticeCreated} onClose={closeCreateNotice} />}
         {updateNoticeVisible && <UpdateNotice notice={notice} onUpdated={handleNoticeUpdated} onClose={closeUpdateNotice} />}
         {deleteNoticeVisible && <DeleteNotice notice={notice} onDeleted={handleNoticeDeleted} onClose={closeDeleteNotice} />}
-
     </>
 }
-
 export default Noticias
-
-
-

@@ -2,11 +2,11 @@ import Login from './pages/Login'
 import Home from './pages/Home'
 import Noticias from './pages/Noticias'
 import log from './utils/coolog'
-import Register from './pages/Register'
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import Context from './components/Context'
 import Alert from './components/Alert'
+import Activities from './pages/Activities'
 
 function App() {
   log.info('App -> render')
@@ -41,6 +41,8 @@ function App() {
     {loggedIn ? <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/noticias" element={<Noticias />} />
+      <Route path="/activities" element={<Activities />} />
+
 
     </Routes>
       :

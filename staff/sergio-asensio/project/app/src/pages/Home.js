@@ -2,12 +2,11 @@ import log from '../utils/coolog'
 import { useEffect, useState } from 'react'
 import retrieveUser from '../logic/retrieveUser'
 import retrieveLastNotice from '../logic/retrieveLastNotice'
-
 import Header from '../components/Header'
 import { useContext } from 'react'
 import Context from '../components/Context'
 import { errors } from 'com'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const { FormatError, AuthError, LengthError, NotFoundError } = errors
 
@@ -40,7 +39,7 @@ function Home() {
             else
                 showAlert(error.message, 'fatal')
         }
-        
+
         try {
             retrieveLastNotice(sessionStorage.token)
                 .then(notice => setNotice(notice))
@@ -58,23 +57,22 @@ function Home() {
             else
                 showAlert(error.message, 'fatal')
         }
-  
+
     }, [])
 
-    return <div className= "h-full  bg-white dark:bg-black text-black dark:text-white">
+    return <div className="h-full  bg-white dark:bg-black text-black dark:text-white">
         {user && <Header userName={user.name} />}
 
         <div className='h-full p-8'>
-        <Link to="/noticias"> <div className='h-1/4 border-4 border-solid rounded-md mb-4'>
-            <h2>NOTICIAS</h2>
-            
-            <p>{notice?.title}</p>
-            <p>{notice?.body}</p>
+            <Link to="/noticias"> <div className='h-1/4 border-4 border-solid rounded-md mb-4'>
+                <h2>NOTICIAS</h2>
+                <p>{notice?.title}</p>
+                <p>{notice?.body}</p>
             </div></Link>
-            
-            <div className='h-1/4 border-4 border-solid rounded-md mb-4'>
-                <h2>ACTIVIDADES</h2> 
-            </div>
+
+            <Link to="activities"><div className='h-1/4 border-4 border-solid rounded-md mb-4'>
+                <h2>12 Meses, 12 Actividades</h2>
+            </div></Link>
 
             <div className='h-1/4 border-4 border-solid rounded-md'>
                 <h2>RESERVA HORARIO</h2>

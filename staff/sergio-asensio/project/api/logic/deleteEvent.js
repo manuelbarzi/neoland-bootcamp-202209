@@ -1,19 +1,19 @@
 
 const { errors: { LengthError, NotFoundError } } = require('com')
-const { User, Notice } = require('../models')
+const { User, Event } = require('../models')
 /**
  * Delete post from a specific user
  * 
  * @param {string} userId The user id
- * @param {string} noticeId The notice id
+ * @param {string} eventId The event id
  * 
  */
-function deleteNotice(userId, noticeId) {
+function deleteEvent(userId, eventId) {
     if (typeof userId !== 'string') throw TypeError('userId is not a string');
     if (userId.length === 0) throw new LengthError('userId is empty');
     
-    if (typeof noticeId !== 'string') throw TypeError('noticeId is not a string');
-    if (noticeId.length === 0 || noticeId.trim() === '') throw new LengthError('noticeId is empty')
+    if (typeof eventId !== 'string') throw TypeError('eventId is not a string');
+    if (eventId.length === 0 || eventId.trim() === '') throw new LengthError('eventId is empty')
 
     return User.findById(userId)
         .then(user => {
@@ -21,13 +21,13 @@ function deleteNotice(userId, noticeId) {
                 throw new NotFoundError(`user with id ${userId} does not exist`)
             if (user.role !== 'admin') throw new Error('user is not able to update a notice')
 
-            return Notice.findById(noticeId)
+            return Event.findById(eventId)
         })
-        .then(notice => {
-            if (!notice)
-                throw new NotFoundError(`post with id ${noticeId} does not exist`)
+        .then(event => {
+            if (!event)
+                throw new NotFoundError(`Event with id ${eventId} does not exist`)
 
-            return Notice.deleteOne({ _id: noticeId })
+            return Event.deleteOne({ _id: eventId })
         })
 }
-module.exports = deleteNotice
+module.exports = deleteEvent
