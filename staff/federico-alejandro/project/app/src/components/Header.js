@@ -3,9 +3,10 @@ import Context from './Context'
 import { useContext, useEffect, useState } from 'react'
 import retrieveUser from '../logic/retrieveUser'
 import { errors } from 'com'
+import LOGO from '../img/LOGO.png'
 
 import { AiOutlineLogout } from 'react-icons/ai'
-import { IoInvertModeOutline } from 'react-icons/io5'
+
 
 const { FormatError, AuthError, LengthError, NotFoundError } = errors
 
@@ -35,13 +36,11 @@ export default function Header() {
         }
     }, [])
 
-    const switchMode = () => document.querySelector('html').classList.toggle('dark')
-
-    return <header className="fixed w-full h-[2rem] flex justify-between items-center gap-2 bg-slate-200 dark:bg-black text-black dark:text-white">
+    return <header className='fixed w-full h-[2.5rem] flex justify-between items-center gap-2 bg-slate-200'>
+        <img src={LOGO} alt='LOGO' className='h-10 ml-4'/>
         {user && <p className='font-bold text-black mx-1.5'>{user.name}</p>}
-        <div>
+        <div className='mr-4'>
             <button onClick={logout}><AiOutlineLogout /></button>
-            <button onClick={switchMode}><IoInvertModeOutline /></button>
         </div>
     </header>
 }

@@ -14,29 +14,29 @@ function retrievePublicPosts(userId, targetUserId) {//targetUserId = persona (ob
     if (!targetUserId.length) throw new LengthError('targetUserId is empty')
 
     return User.findById(userId)
-    .then(user => {
-        if(!user)
-        throw new Error(`user with id ${userId} does not exist`)
+        .then(user => {
+            if (!user)
+                throw new Error(`user with id ${userId} does not exist`)
 
-        return User.findById(targetUserId)
-    })
-    .then(targetUser => {
-        if (!targetUser) throw new Error(`target user with id ${userId} does not exist`)
-
-        return Post.find({visibility: 'public' }).sort({ date: -1 }).populate('user', '-visibility -email -password').select('-__v').lean()
-    })
-    .then(posts => {
-        posts.forEach(post => {
-            post.id = post._id.toString()
-            delete post._id
-
-            if(!post.user.id) {
-                post.user.id = post.user._id.toString()
-                delete post.user._id
-            }
+            return User.findById(targetUserId)
         })
+        .then(targetUser => {
+            if (!targetUser) throw new Error(`target user with id ${userId} does not exist`)
+
+            return Post.find({ user: (targetUserId), visibility: 'public' }).sort({ date: -1 }).populate('user', '-visibility -email -password').select('-__v').lean()
+        })
+        .then(posts => {
+            posts.forEach(post => {
+                post.id = post._id.toString()
+                delete post._id
+
+                if (!post.user.id) {
+                    post.user.id = post.user._id.toString()
+                    delete post.user._id
+                }
+            })
             return posts
-    })
+        })
 }
 
 module.exports = retrievePublicPosts

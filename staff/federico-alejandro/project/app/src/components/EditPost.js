@@ -42,7 +42,7 @@ function EditPost({ onUpdated, onClose, postId }) {
     const changeVisibility = event => setVisibility(event.target.value)
 
     return <div className='bg-[#aaaa] fixed top-0 h-full w-full flex flex-col justify-center items-center overflow-hidden' onClick={onClose}>
-        <div className='p-5 rounded-xl flex flex-col items-end bg-white dark:bg-black text-black dark:text-white' onClick={event => event.stopPropagation()}>
+        <div className='p-5 rounded-xl flex flex-col items-end bg-white' onClick={event => event.stopPropagation()}>
             <AiOutlineCloseCircle size='1.5rem' onClick={onClose} className='cursor-pointer' />
 
             <form className='flex flex-col gap-2' onSubmit={submitUpdatePost}>

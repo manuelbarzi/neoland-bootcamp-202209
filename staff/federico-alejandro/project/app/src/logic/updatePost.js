@@ -1,5 +1,5 @@
 /**
- * Creates a post against API
+ * Update a post against API
  * 
  * @param {string} token The user token
  * @param {string} postId The post id

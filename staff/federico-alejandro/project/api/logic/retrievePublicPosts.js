@@ -36,20 +36,15 @@ function retrievePublicPosts(userId) {
                     delete chat.__v
 
                     chat.comments.forEach(comment => {
-                        delete comment.user                    
-                        delete comment.__v
+                        comment.id = comment._id.toString()
     
-                        if (comment.user.toString() !== userId) {
-                            comment.id = comment._id.toString()
-                            delete comment._id
-                        }
+                        delete comment.__v
+                        delete comment._id
                     })
 
                     post.chats.push(chat)
                 }
             })
-
-
             return posts
         })
 }

@@ -106,17 +106,17 @@ function MyProfile() {
         }
     }
 
-    return <main className='overflow-hidden bg-green-400 dark:bg-black text-black dark:text-white'>
+    return <main className='overflow-hidden bg-gradient-to-b from-[#439A97] via-[#62B6B7] to-[#97DECE]'>
         <Header userName={user?.name} />
 
         {posts && <div className='flex flex-col items-center gap-4 py-[3rem]'>
-            {posts.map(post => <article key={post.id} className='border bg-white rounded-xl w-[50%] flex flex-col p-[0.25rem]'>
-                <time className='flex justify-end'>{post.date}</time>
+            {posts.map(post => <article key={post.id} className=' bg-white rounded-xl w-[25%] flex flex-col p-[0.25rem]'>
+                <time className='flex justify-end h-fit'>{post.date}</time>
                 <div className='bg-white m-2 border rounded-xl'>
                     <h2 className='font-bold'>{post.title}</h2>
                     <p>{post.text}</p>
                 </div>
-                {post.image && <div className='w-fit h-fit'><img src={post.image} /></div>}
+                {post.image && <div className='w-fit h-fit'><img src={post.image} alt='' /></div>}
                 <hr className='border-black' />
                 <div className='flex self-end pb-0'>
                     <button onClick={() => openEditPost(post.id)}><AiOutlineEdit size='1rem' /></button>

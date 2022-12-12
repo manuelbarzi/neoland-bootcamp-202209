@@ -3,8 +3,8 @@ const { errors: { LengthError } } = require('com')
  * Creates a comment against API
  * 
  * @param {string} token The user token
- * @param {string} postId The post id
  * @param {string} text The comment text
+ * @param {string} postId The post id
 
  */
 function createComment(token, text, postId) {
@@ -16,6 +16,7 @@ function createComment(token, text, postId) {
     
     if (typeof postId !== 'string') throw new TypeError('postId is not a string')
     if (!postId.length) throw new LengthError('postId is empty')
+    
 
 
         return new Promise((resolve, reject) => {
@@ -41,7 +42,7 @@ function createComment(token, text, postId) {
             xhr.setRequestHeader('Authorization', `Bearer ${token}`)
             xhr.setRequestHeader('Content-Type', 'application/json')
             
-            const payload = {  text }
+            const payload = { text }
             
             const json = JSON.stringify(payload)
             
