@@ -1,7 +1,7 @@
 import log from '../utils/coolog'
 import createList from '../logic/createList'
 
-export default function ({onClose}) {
+export default function ({onClose, onListCreated }) {
     log.info('CreateList -> render')
 
   const submitCreateList = (event) => {
@@ -13,15 +13,15 @@ export default function ({onClose}) {
       createList(sessionStorage.token, title)
       .then(() => {
           alert('You create a list')
-          //Change with show alert
-          onClose()
+          //Change with show alert 
+          onListCreated()
       })
       .catch(error => alert(error.message))
 
     } catch (error){
       alert(error.message)
     }
-  }
+  } 
 
   return (
     <section className="absolute top-0 z-30 h-[100vh] w-full bg-blue-200">
