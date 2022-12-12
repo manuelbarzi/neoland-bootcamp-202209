@@ -1,23 +1,18 @@
 /* eslint-disable import/no-anonymous-default-export */
 /**
- * Creates a appointmet against API
+ * Deletes a post against API
  * 
  * @param {string} token The user token
- * @param {string} tittle The appointment text
- * @param {string} body The appointment text
- * @param {string} date The appointment date * 
+ * @param {string} appointmet Id The post id
  * @param {callback} callback The callback to attend the result
  */
- export default function (token, title, body, date, callback) {
+export default function (token, appointmentId, callback) {
     if (typeof token !== 'string') throw new TypeError('token is not a string')
     if (!token.length) throw new Error('token is empty')
-    if (typeof title !== 'string') throw new TypeError('text is not a string')
-    if (!title.length) throw new Error('text is empty')
-    if (typeof body !== 'string') throw new TypeError('body is not a string')
-    if (!body.length) throw new Error('body is empty')
-    // TODO validate date
+    if (typeof appointmentId !== 'string') throw new TypeError('appointmentId is not a string')
+    if (!appointmentId.length) throw new Error('appointmentId is empty')
 
-    if (!callback){
+    if (!callback)
         return new Promise((resolve, reject) => {
             const xhr = new XMLHttpRequest
 
@@ -30,8 +25,6 @@
                     reject(new Error(error))
 
                     return
-                } else if (status >= 400) {
-                    //TODO handle client errors
                 }
 
                 resolve()
@@ -39,18 +32,14 @@
 
             xhr.onerror = () => reject(new Error('connection error'))
 
-            xhr.open('POST', 'http://localhost/appointment')
+            xhr.open('DELETE', `http://localhost/appointment/${appointmentId}`)
             xhr.setRequestHeader('Authorization', `Bearer ${token}`)
-            xhr.setRequestHeader('Content-Type', 'application/json')
 
-            const payload = { title, body, date }
-
-            const json = JSON.stringify(payload)
-
-            xhr.send(json)
+            xhr.send()
         })
-    }
+
     if (typeof callback !== 'function') throw new TypeError('callback is not a function')
+
     const xhr = new XMLHttpRequest
 
     xhr.onload = () => {
@@ -69,19 +58,14 @@
 
     xhr.onerror = () => callback(new Error('connection error'))
 
-    xhr.open('POST', 'http://localhost/appointment')
+    xhr.open('DELETE', `http://localhost/appointment/${appointmentId}`)
     xhr.setRequestHeader('Authorization', `Bearer ${token}`)
-    xhr.setRequestHeader('Content-Type', 'application/json')
 
-    const payload = { title, body, date }
-
-    const json = JSON.stringify(payload)
-
-    xhr.send(json)
+    xhr.send()
 }
 
 /**
- * Attends the result of the appointment creation
+ * Attends the result of the post deletion
  * 
  * @callback callback
  * 

@@ -5,9 +5,9 @@ import { useState } from 'react'
 
 function Pension() {
     log.info('Appointment -> render')
-    const [appointments, setAppointments] = useState([]) // Para recoger los datos del Formulario
-    const handleOnNewAppointment = (appointment) => {
-        setAppointments([...appointments, appointment])
+    const [appointmentsChange, setAppointmentsChange] = useState() // Para recoger los datos del Formulario
+    const handleOnNewAppointment = () => {
+        setAppointmentsChange(Date.now())
     }
 
 
@@ -23,7 +23,7 @@ function Pension() {
                 onNewAppointment={handleOnNewAppointment} //*Props
             />
             < AppointmentLists
-                appointments={appointments} //*Props
+                appointmentsChange={appointmentsChange} //*Props
             />
         </div>
     </>

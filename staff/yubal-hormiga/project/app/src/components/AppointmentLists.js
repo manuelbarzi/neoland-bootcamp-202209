@@ -1,11 +1,30 @@
 import log from '../utils/coolog'
 import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai'
+import { useEffect, useState } from 'react'
+import retrieveAppointments from '../logic/retrieveAppointments'
 
-function AppoimentLists({ appointments}) {
+function AppointmentLists({ appointmentsChange}) {
   // console.log(appointments)
+  const[appointments, setAppointments] = useState([])
   log.info('AppoimentLists -> render')
 
+  useEffect(()=>{
+    retrieveAppointmentsHandler()
+  },[])
 
+  useEffect(()=>{
+    retrieveAppointmentsHandler()
+  },[appointmentsChange])
+
+  const retrieveAppointmentsHandler = () =>{
+    try{
+      retrieveAppointments(sessionStorage.token)
+      .then(appointments => setAppointments(appointments))
+      .catch(error => alert(error.message))
+    }catch(error){
+      alert(error.message)
+    }
+  }
   return <>
 
     {appointments.map((appointment) => {
@@ -45,4 +64,4 @@ function AppoimentLists({ appointments}) {
 
 }
 
-export default AppoimentLists
+export default AppointmentLists

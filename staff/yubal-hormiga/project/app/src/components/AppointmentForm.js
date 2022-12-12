@@ -18,14 +18,22 @@ function AppointmentForm({ onNewAppointment,}) {
     const submitCreateAppointment = event => {
         event.preventDefault()
         // console.log('writing')
+        //!OTRA FORMA DE HACERLO
+        try {
+            createAppointment(sessionStorage.token, title, body, date)
+                .then(() => onNewAppointment())
+                .catch(error => alert(error.message))
+        } catch (error) {
+            alert(error.message)
+        }
 
-        createAppointment(sessionStorage.token, title, body, date, (error) => {
-            if (error) {
-                //TODO use show alert
-                alert(error.message)
+        // createAppointment(sessionStorage.token, title, body, date, (error) => {
+        //     if (error) {
+        //         //TODO use show alert
+        //         alert(error.message)
 
-                return
-            }
+        //         return
+        //     }
 
             //*Creamos un Objeto con todos los valores no hace falta añadir el valor ya que es el mismo.
             const appointment = {
@@ -39,7 +47,7 @@ function AppointmentForm({ onNewAppointment,}) {
             setTitle('')
             setDate('')
             setBody('')
-        })
+        // }) //!QUITAR EN CASO DE TRY CATCH
         // console.log(objectAppoiment)
     }
     return <>

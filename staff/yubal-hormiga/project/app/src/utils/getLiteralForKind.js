@@ -1,3 +1,5 @@
+/* eslint-disable no-unreachable */
+/* eslint-disable default-case */
 export function getLiteralForKind(kind) {
     switch(kind) {
         case "food":
