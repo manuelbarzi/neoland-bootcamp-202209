@@ -27,7 +27,6 @@ module.exports = new Schema({
         type: Date,
         require:true
     }
-    
 })
 
 // Flow

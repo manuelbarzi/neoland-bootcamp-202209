@@ -3,14 +3,17 @@ require('dotenv').config()
 const mongoose = require('mongoose')
 const express = require('express')
 
+//!USER
 const authenticateUserHandler = require('./handlers/authenticateUserHandler')
 const registerUserHandler = require('./handlers/registerUserHandler')
 const retrieveUserHandler = require('./handlers/retrieveUserHandler')
+//!APPOIMENT
 const createAppointmentHandler = require('./handlers/createAppointmentHandler')
 const retrieveAppointmentHandler = require('./handlers/retrieveAppointmentHandler')
 const updateAppointmentHandler = require('./handlers/updateAppointmentHandler')
-
 const deleteAppointmentHandler = require('./handlers/deleteAppointmentHandler')
+//!FLOW
+const createFlowHandler = require('./handlers/createFlowHandler')
 
 
 const jsonBodyParser = require('./utils/jsonBodyParser')
@@ -30,12 +33,14 @@ mongoose.connect(MONGODB_URL)
         api.post('/users/auth', jsonBodyParser, authenticateUserHandler)
         api.post('/users', jsonBodyParser, registerUserHandler)
         api.get('/users', jwtVerifier, retrieveUserHandler)
+
         api.post('/appointment', jwtVerifier, jsonBodyParser, createAppointmentHandler)
         api.get('/appointment/:appointmentId', jwtVerifier, retrieveAppointmentHandler)
         api.patch('/appointment/:appointmentId', jwtVerifier, jsonBodyParser, updateAppointmentHandler)
-
         api.delete('/appointment/:appointmentId', jwtVerifier, deleteAppointmentHandler)
-
+        
+        api.post('/flow', jwtVerifier, jsonBodyParser, createFlowHandler)
+        
         const { PORT } = process.env
 
         api.listen(PORT, () => console.log(`server listening on port ${PORT}`))
