@@ -2,7 +2,6 @@ import log from "../utils/coolog";
 import { useContext, useEffect, useState } from "react";
 import Context from "../components/Context";
 import retrieveUser from "../logic/retrieveUser";
-// import retrievelist from '../logic/retrieveList'
 import Header from "../components/Header";
 import CreateListComponent from "../components/CreateListComponent";
 import { errors } from "com";
@@ -14,7 +13,7 @@ export default function Home() {
   log.info("Home -> render");
 
   const [user, setUser] = useState();
-  const [lists, setLists] = useState()
+  const [lists, setLists] = useState();
   const [isCreateOpen, setCreateOpen] = useState(false);
 
   const { showAlert } = useContext(Context);
@@ -22,18 +21,12 @@ export default function Home() {
   useEffect(() => {
     try {
       retrieveUser(sessionStorage.token)
-        .then((user) => setUser(user))
-        .then(() => {
-          retrieveLists(sessionStorage.token, (error, lists) => {
-            if (error) {
-                alert(error.message)
-
-                return
-            }
-
-            setLists(lists)
-          });
+        .then((user) => {
+          setUser(user)
+        
+          return retrieveLists(sessionStorage.token)
         })
+        .then((lists) => setLists(lists))
         .catch((error) => {
           if (
             error instanceof TypeError ||
@@ -61,25 +54,33 @@ export default function Home() {
   };
 
   const handleCreatedList = () => {
-    retrieveLists(sessionStorage.token, (error, lists) => {
-        if (error) {
-            alert(error.message)
+    retrieveLists(sessionStorage.token)
+      .then((lists) => {
+        setLists(lists);
 
-            return
-        }
-
-        setLists(lists)
-
-        toggleCreateListView()
-    })
-  }
+        toggleCreateListView();
+    });
+  };
 
   return (
     <>
-      {isCreateOpen && <CreateListComponent onListCreated={handleCreatedList} onClose={toggleCreateListView} />}
+      {isCreateOpen && (
+        <CreateListComponent
+          onListCreated={handleCreatedList}
+          onClose={toggleCreateListView}
+        />
+      )}
       {user && <Header userName={user.name} />}
       <main className="mt-[3rem] flex flex-col gap-2 items-center">
-        {lists && lists.map(list => <article className="mt-1 bg-blue-300 h-12 w-3/5 rounded-lg flex items-center justify-between px-3 text-lg">{list.title}<MdDelete size="1.3rem"/></article>)}
+        {lists &&
+          lists.map((list) => (
+            <article className="mt-1 bg-blue-300 h-12 w-3/5 rounded-lg flex items-center justify-between px-3 text-lg">
+              {list.title}
+              <button className="h-10 w-10 flex justify-center items-center bg-slate-400">
+                <MdDelete size="1.3rem" />
+              </button>
+            </article>
+          ))}
       </main>
       <footer className="z-10 fixed bottom-0 h-[4rem] flex justify-center items-center w-full bg-gray-200">
         <button
