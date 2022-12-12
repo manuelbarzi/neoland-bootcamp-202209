@@ -24,6 +24,33 @@ module.exports = function retrieveOfferToUpdate(userId, offerId) {
 
             if (offer.user.toString() !== userId) throw new ConflictError(`offer with id ${offerId} does not belong to user with id ${userId}`)
 
+            if(offer.languages){
+            offer.languages.forEach(language=>{
+                language.id = language._id.toString()
+                delete language._id
+            })
+        }
+            if(offer.experiences){
+            offer.experiences.forEach(experience=>{
+                experience.id = experience._id.toString()
+                delete experience._id
+            })
+        }
+            if(offer.studies){
+            offer.studies.forEach(study=>{
+                study.id = study._id.toString()
+                delete study._id
+            })
+        }
+            if(offer.knowledges) {
+             offer.knowledges.forEach(knowledge=>{
+                knowledge.id = knowledge._id.toString()
+                delete knowledge._id
+            })
+        }
+
+            offer.id = offer._id.toString()
+            delete offer._id
             return offer
         })
 }

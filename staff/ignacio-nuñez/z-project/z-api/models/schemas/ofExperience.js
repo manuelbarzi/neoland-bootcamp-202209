@@ -6,7 +6,13 @@ module.exports = new Schema({
     },
     industry: {
         type: String,
-        enum: ['Arts, Entertainment and Recreation', 'Accommodation and Food Services', 'Administration, Business Support and Waste Management Services', 'Educational Services', 'Other Services (except Public Administration)', 'Utilities', 'Professional, Scientific and Technical Services', 'Transportation and Warehousing', 'Construction', 'Information', 'Wholesale Trade', 'Finance and Insurance', 'Retail Trade', 'Healthcare and Social Assistance', 'Agriculture, Forestry, Fishing and Hunting', 'Real Estate and Rental and Leasing', 'Real Estate and Rental and Leasing', 'Manufacturing', 'Specialist Engineering, Infrastructure and Contractors', 'Retail Market Reports', 'Industrial Machinery, Gas and Chemicals', 'Online Retail', 'Consumer Goods and Services', 'Technology', 'Life Sciences']
+        enum: ['Agriculture; plantations;other rural sectors', 'Basic metal production', 'Chemical industries', 'Commerce',
+                'Construction', 'Education', 'Financial services; professional services', 'Food; drink; tobacco', 'Forestry; wood; pulp and paper', 
+                'Health Services', 'Hotels; tourism; catering', 'Mining', 'Mechanical and electrical engineering', 'Media; culture; graphical', 
+                'Oil and gas production; oil refining', 'Postal and telecommunications services', 'Public service', 
+                'Shipping; ports; fisheries; inland waterways', 'Textiles; clothing; leather; footwear', 
+                'Transport (including civil aviation; railways; road transport)', 'Transport equipment manufacturing', 
+                'Utilities (water; gas; electricity)', 'Other industries']
     },
     years: {
         type: String

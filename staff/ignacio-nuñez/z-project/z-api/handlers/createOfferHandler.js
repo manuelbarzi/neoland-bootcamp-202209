@@ -1,16 +1,17 @@
 const createOffer = require('../logic/createOffer')
 
-const { errors: { FormatError, LengthError, NotFoundError } } = require('com')
+const { errors: { FormatError, LengthError, NotFoundError, ConflictError } } = require('com')
 
 module.exports = (req, res) => {
     try {
-        const { title, description, photo, languages, studies, experiences } = req.body
+        const { title, description, photo, languages, studies, experiences, knowledges } = req.body
         const { userId } = req
 
-        createOffer(userId, title, description, photo, languages, studies, experiences)
+        createOffer(userId, title, description, photo, languages, studies, experiences, knowledges)
             .then(() => res.status(201).send())
             .catch(error => {
                 if(error instanceof NotFoundError) res.status(404).json({error:error.message})
+                else if(error instanceof ConflictError) res.status(409).json({error: error.message})
                 else res.status(500).json({ error: error.message })
             })
     } catch (error) {

@@ -29,7 +29,7 @@ function Register() {
     }
 
     return <div className="flex h-screen justify-center items-center bg-slate-100">
-        <form onSubmit={onRegisterUser} className="w-1/4 shadow-lg shadow-slate-400 border-2 bg-teal-300 flex flex-col gap-2 justify-center items-center p-8 rounded-lg">
+        <form onSubmit={onRegisterUser} className="w-4/5 shadow-lg shadow-slate-400 border-2 bg-teal-300 flex flex-col gap-2 justify-center items-center p-8 rounded-lg">
             <h2 className='text-2xl font-bold'>Register</h2>
             <label htmlFor="name" className="self-start">Name</label>
             <input autoFocus className="outline-none p-1 w-full rounded-lg bg-slate-100" type="text" placeholder="Input your Name" name="name" id="name" />
@@ -38,7 +38,7 @@ function Register() {
             <label htmlFor="password" className="self-start">Password</label>
             <input className="outline-none p-1 w-full rounded-lg bg-slate-100" type="password" placeholder="Input you password" name="password" id="password" />
             <p className="self-start">Select your Role</p>
-            <select id="role" name="role" className="w-1/4 rounded-lg p-1 self-start">
+            <select id="role" name="role" className="w-2/4 rounded-lg p-1 self-start">
                         <option value="worker">Worker</option>
                         <option value="company">Company</option>
                     </select>

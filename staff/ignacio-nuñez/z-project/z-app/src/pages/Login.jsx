@@ -31,8 +31,8 @@ function Login({onLoggedIn}) {
 
     }
 
-    return (<div className="flex h-screen justify-center items-center bg-slate-100">
-        <form onSubmit={handleSubmit} className="w-1/5 shadow-lg shadow-slate-400 border-2 bg-teal-300 flex flex-col gap-2 justify-center items-center p-8 rounded-lg">
+    return <div className="flex h-screen justify-center items-center bg-slate-100">
+        <form onSubmit={handleSubmit} className="w-4/5 shadow-lg shadow-slate-400 border-2 bg-teal-300 flex flex-col gap-2 justify-center items-center p-8 rounded-lg">
             <h2 className='text-2xl font-bold'>Log in</h2>
             <label htmlFor="email" className="self-start">E-mail</label>
             <input autoFocus className="outline-none p-1 w-full rounded-lg bg-slate-100" type="email" placeholder="Input your E-mail" name="email" id="email" />
@@ -45,7 +45,7 @@ function Login({onLoggedIn}) {
                 <Link to='/register' className="p-1 block text-center rounded-lg mt-3.5 w-full bg-slate-100">Register</Link>
             </div>
         </form>
-    </div>)
+    </div>
 }
 
 export default Login

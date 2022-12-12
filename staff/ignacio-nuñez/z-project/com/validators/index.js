@@ -6,6 +6,8 @@ const stringValidator = require('./stringValidator')
 const languagesValidator = require('./languagesValidator')
 const ofExperienceValidator = require('./ofExperienceValidator')
 const ofStudyValidator = require('./ofStudyValidator')
+const knowledgeValidator = require('./knowledgeValidator')
+const booleanValidator = require('./booleanValidator')
 
 module.exports ={
     emailValidator,
@@ -15,5 +17,7 @@ module.exports ={
     stringValidator,
     languagesValidator,
     ofExperienceValidator,
-    ofStudyValidator
+    ofStudyValidator,
+    knowledgeValidator,
+    booleanValidator
 }

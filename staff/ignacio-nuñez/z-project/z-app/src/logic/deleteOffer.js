@@ -6,10 +6,10 @@ const { FormatError, ConflictError, LengthError, UnexpectedError, NotFoundError 
 const { stringValidator } = validators
 
 
-function deleteOffer(offerId, offerUserId, token) {
+function deleteOffer( token, offerId, offerUserId) {
+    stringValidator(token, 'token')
     stringValidator(offerId, 'offerId')
     stringValidator(offerUserId, 'offerUserId')
-    stringValidator(token, 'token')
 
     const userId = extractSubFromToken(token)
 

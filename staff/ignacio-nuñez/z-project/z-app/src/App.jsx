@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react'
 import { Context } from "./components/Context";
 import retrieveUser from "./logic/retrieveUser";
 import UserOffers from "./pages/UserOffers";
+import OfferDetail from "./pages/OfferDetail";
 
 function App() {
   const [user, setUser] = useState()
@@ -49,6 +50,10 @@ function App() {
         />}
         {<Route path="/user/profile"
           element={sessionStorage.token ? <UserOffers /> : <Navigate replace to="/login"
+          />}
+        />}
+        {<Route path="/offers/:offerId"
+          element={sessionStorage.token ? <OfferDetail /> : <Navigate replace to="/login"
           />}
         />}
       </Routes>

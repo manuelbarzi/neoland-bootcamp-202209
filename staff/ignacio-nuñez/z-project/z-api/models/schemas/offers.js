@@ -3,15 +3,14 @@ const { Types: { ObjectId } } = Schema
 const language = require('./language')
 const ofStudy = require('./ofStudy')
 const ofExperience = require('./ofExperience')
+const knowledge = require('./ofKnowledge')
 
 module.exports = new Schema({
     title:{
         type: String,
-        required: true
     },
     description:{
         type: String,
-        required: true
     },
     photo:{ 
         type: String
@@ -25,6 +24,12 @@ module.exports = new Schema({
     studies:[ofStudy],
 
     experiences:[ofExperience],
+
+    knowledges:[knowledge],
+
+    published:{
+        type: Boolean,
+    },
     
     user:{
         type: ObjectId,

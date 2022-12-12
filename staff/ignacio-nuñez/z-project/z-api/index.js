@@ -10,7 +10,7 @@ const createOfferHandler = require('./handlers/createOfferHandler')
 const retrieveUserOffersHandler = require('./handlers/retrieveUserOffersHandler')
 const deleteOfferHandler = require('./handlers/deleteOfferHandler')
 const updateOfferHandler = require('./handlers/updateOfferHandler')
-const retrieveOfferToUpdateHandler = require('./handlers/retrieveOfferToUpdateHandler')
+const retrieveOfferDetailHandler = require('./handlers/retrieveOfferDetailHandler')
 
 const jsonBodyParser = require('./utils/jsonBodyParser')
 const cors = require('./utils/cors')
@@ -32,7 +32,7 @@ mongoose.connect(MONGODB_URL)
         api.get('/offers', jwtVerifier, retrieveUserOffersHandler)
         api.delete('/offers/:offerId', jwtVerifier, deleteOfferHandler)
         api.patch('/offers/:offerId', jwtVerifier, jsonBodyParser, updateOfferHandler)
-        api.get('/offers/:offerId', jwtVerifier, retrieveOfferToUpdateHandler)
+        api.get('/offers/:offerId', jwtVerifier, retrieveOfferDetailHandler)
 
         const { PORT } = process.env
         api.listen(PORT, () => console.log(`server running on port: ${PORT}`))

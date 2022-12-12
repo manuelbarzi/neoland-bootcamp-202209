@@ -1,18 +1,19 @@
-import { useContext, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import NavBar from "../components/NavBar"
 import { format } from 'timeago.js'
 import retrieveUserOffers from "../logic/retrieveUserOffers"
 import DeleteOffer from "../components/DeleteOffer"
-import UpdateOffer from "../components/UpdateOffer"
-import { Context } from "../components/Context"
-import retrieveOfferToUpdate from "../logic/retrieveOfferToUpdate"
+import { Link } from "react-router-dom"
+import createOffer from "../logic/createOffer"
+import Button from "../components/Button"
+import updateOffer from "../logic/updateOffer"
+import PublishOffer from "../components/PublishOffer"
 
 function UserOffers() {
     const [offers, setOffers] = useState([])
     const [offerToDelete, setOfferToDelete] = useState()
-    const [offerToUpdate, setOfferToUpdate] = useState()
-
-    const { user } = useContext(Context)
+    const [offerToCreate, setOfferToCreate] = useState()
+    const [offerToPublish, setOfferToPublish] = useState()
 
     useEffect(() => {
         retrieveOfferHandler()
@@ -23,14 +24,18 @@ function UserOffers() {
         setOfferToDelete()
     }
 
-    const onUpdateOffer = () => {
-        retrieveOfferHandler()
-        setOfferToUpdate()
-    }
-
     const onDeleteOfferClose = () => setOfferToDelete()
 
-    const onUpdateOfferClose = () => setOfferToUpdate()
+    const onDeleteOfferClick = (id, userId) => setOfferToDelete({ id, userId })
+
+    const onPublishOffer = () => {
+        retrieveOfferHandler()
+        setOfferToPublish()
+    }
+
+    const onPublishOfferClose = () => setOfferToPublish()
+
+    const onPublishOfferClick = (id, userId, published) => setOfferToPublish({ id, userId, published })
 
     const retrieveOfferHandler = () => {
         try {
@@ -41,82 +46,65 @@ function UserOffers() {
             alert(error.message)
         }
     }
-    const onDeleteOfferClick = (id, userId) => setOfferToDelete({ id, userId })
 
-    const onUpdateOfferClick = (id, userId) => {
-        try{
-            retrieveOfferToUpdate(id, userId, sessionStorage.token)
-            .then(offer => setOfferToUpdate(offer))
-            .catch(error => alert(error.message))
-        } catch(error){
+    const onCreateOffer = () => {
+        retrieveOfferHandler()
+        setOfferToCreate()
+    }
+
+    const onCreateOfferClick = () => {
+        try {
+            if (offers.length >= 3) throw new Error('Upgrade your account to premium to have more than 3 offers')
+
+            const title = 'My New Offer'
+            const description = 'Put a Description'
+
+            createOffer(sessionStorage.token, { title, description })
+                .then(() => onCreateOffer())
+                .catch(error => alert(error.message))
+        } catch (error) {
             alert(error.message)
         }
-        
     }
+
 
     return <main className="min-h-screen bg-slate-100">
         <NavBar
         />
         <div className="flex items-center flex-col">
-            <div className="flex items-center flex-col mt-28">
-                <div className="border-2 z-10 shadow-sm shadow-slate-600 p-6 w-96 h-20 bg-emerald-200 rounded-xl">
-                    <span>My Work Offers</span>
+            <div className="w-full flex items-center flex-col mt-28">
+                <div onClick={onCreateOfferClick} className="flex justify-center items-center font-semibold text-lg border-2 shadow-sm shadow-slate-600 w-5/6 h-20 z-10 rounded-xl bg-emerald-300 cursor-pointer">
+                    <span className="ml-2">Create new Offer</span>
                 </div>
-                <section>
+                <section className="flex items-center flex-col w-5/6">
                     {offers.map(offer => {
-                        return <article key={offer.id} className=" shadow-sm shadow-slate-600 bg-emerald-200 flex flex-col mt-3.5 border-2 p-4 w-96 rounded-xl">
-                            <div className="flex justify-between z-10">
+                        return <article key={offer.id} className=" shadow-sm shadow-slate-600 bg-emerald-200 flex flex-col mt-3.5 border-2 p-4 w-full rounded-xl">
+                            <Link to={`/offers/${offer.id}`} className="flex justify-between z-10">
                                 <h2 className='font-semibold'>{offer.title}</h2>
-                                <p>{format(offer.createDate)}</p>
-                            </div>
-                            <img src={offer.photo} alt="company logo" />
-                            <p>{offer.description}</p>
-                            <h2>Experiences Requireds: {!offer.experiences.length && 'Not Experiences Requireds'}</h2>
-                            {offer.experiences.map(experience => {
-                                return <section key={experience._id}>
-                                    <h3>Position: {experience.position}</h3>
-                                    <h4>Industry: {experience.industry}</h4>
-                                    <span>{experience.years} years of experience</span>
-                                </section>
-                            })}
-                            <div className="flex flex-col">
-                                <h2>Languages: {!offer.languages.length && 'Not Languages Required'}</h2>
-                                {offer.languages.map(language => {
-                                    return <section key={language._id}>
-                                        <span>{language.language}: </span>
-                                        <span>{language.level}</span>
-                                    </section>
-                                })}
-                                <h2>Studies: {!offer.studies.length && 'Not Studies Required'}</h2>
-                                {offer.studies.map(study => {
-                                    return <section key={study._id}>
-                                        <h3>Title: {study.title}</h3>
-                                    </section>
-                                })}
-                            </div>
-                            <div className='z-10 flex justify-end gap-2'>
-                                <button className="self-end border-2 p-2 rounded-xl text-xs" onClick={() => onUpdateOfferClick(offer.id, offer.user.id)}>Edit</button>
-
-                                <button className="self-end border-2 p-2 rounded-xl text-xs" onClick={() => onDeleteOfferClick(offer.id, offer.user.id)}>Delete</button>
+                                <img className="w-1/5 text-xs" src={offer.photo} alt="company logo" />
+                            </Link>
+                            <p className="text-xs">{format(offer.createDate)}</p>
+                            <hr className="w-full border-black mt-3.5" />
+                            <div className='z-10 flex justify-between gap-4 mt-2'>
+                                <Button className="text-md bg-red-400 w-1/2" onClick={() => onDeleteOfferClick(offer.id, offer.user.id)}>Delete</Button>
+                                <Button className="text-md bg-green-400 w-1/2" onClick={() => onPublishOfferClick(offer.id, offer.user.id, offer.published)}>{offer.published ? 'Unpublish': 'Publish'}</Button>
                             </div>
                         </article>
                     })}
                 </section>
                 {offerToDelete &&
                     <DeleteOffer
-                        className="inset-x-1/3 inset-y-1/4 absolute"
+                        className="inset-x-[8.3%] inset-y-1/3 absolute"
                         offerToDelete={offerToDelete}
                         onDeleteOffer={onDeleteOffer}
                         onDeleteOfferClose={onDeleteOfferClose} />}
-                {offerToUpdate && <>
-                    <UpdateOffer
-                        className="inset-x-1/3 inset-y-1/4 absolute"
-                        userInfo={user}
-                        offerToUpdate={offerToUpdate}
-                        onUpdateOffer={onUpdateOffer}
-                        onUpdateOfferClose={onUpdateOfferClose}
-                    />
-                </>}
+                {offerToPublish &&
+                    <PublishOffer
+                        className="inset-x-[5%] inset-y-1/3 absolute"
+                        offerToPublish={offerToPublish}
+                        onPublishOffer={onPublishOffer}
+                        onPublishOfferClose={onPublishOfferClose} />}
+
             </div>
         </div>
     </main>
