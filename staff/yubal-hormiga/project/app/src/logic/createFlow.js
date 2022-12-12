@@ -8,13 +8,19 @@
  * @param {string} visibility The post visibility
  * @param {callback} callback The callback to attend the result
  */
- export default function (token, title, body, date, callback) {
+ export default function (token, type, kind, description, amount, date, callback) {
     if (typeof token !== 'string') throw new TypeError('token is not a string')
     if (!token.length) throw new Error('token is empty')
-    if (typeof title !== 'string') throw new TypeError('text is not a string')
-    if (!title.length) throw new Error('text is empty')
-    if (typeof body !== 'string') throw new TypeError('body is not a string')
-    if (!body.length) throw new Error('body is empty')
+    if (typeof type !== 'string') throw new TypeError('type is not a string')
+    if (!type.length)throw new Error('type is empty')
+    if (typeof kind !== 'string') throw new TypeError('kind is not a string')
+    if (!kind.length) throw new Error('kind is empty')
+    if (typeof description !== 'string') throw new TypeError('description is not a string')
+    if (!description.length) throw new Error('description is empty')
+    if (typeof amount !== 'number') throw new TypeError('amount is not a number')
+    if (!amount) throw new Error('amount is empty')
+    // if (typeof date !== 'number') throw new TypeError('date is not a number')
+    // if (!date.length) throw new LengthError('date is empty')
     // TODO validate date
 
     if (!callback)
@@ -39,11 +45,11 @@
 
             xhr.onerror = () => reject(new Error('connection error'))
 
-            xhr.open('POST', 'http://localhost/appointment')
+            xhr.open('POST', 'http://localhost/flow')
             xhr.setRequestHeader('Authorization', `Bearer ${token}`)
             xhr.setRequestHeader('Content-Type', 'application/json')
 
-            const payload = { title, body, date }
+            const payload = { type, kind, description, amount, date }
 
             const json = JSON.stringify(payload)
 
@@ -70,11 +76,11 @@
 
     xhr.onerror = () => callback(new Error('connection error'))
 
-    xhr.open('POST', 'http://localhost/appointment')
+    xhr.open('POST', 'http://localhost/flow')
     xhr.setRequestHeader('Authorization', `Bearer ${token}`)
     xhr.setRequestHeader('Content-Type', 'application/json')
 
-    const payload = { title, body, date }
+    const payload = { type, kind, description, amount, date }
 
     const json = JSON.stringify(payload)
 

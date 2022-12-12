@@ -1,4 +1,4 @@
-const { errors: { LengthError,  NotFoundError } } = require('../../my-commons')
+const { errors: { LengthError,  NotFoundError} } = require('../../my-commons')
 const { User, Appointment } = require('../models')
 
 function createAppointment(userId, title,body, date) {
@@ -6,7 +6,10 @@ function createAppointment(userId, title,body, date) {
     if (!userId.length) throw new LengthError('userId is empty')
     if (typeof title !== 'string') throw new TypeError('title is not a string')
     if (!title.length) throw new LengthError('title is empty')
-   // TODO validate inputs
+    if (typeof body !== 'string') throw new TypeError('body is not a string')
+    if (!body.length) throw new LengthError('body is empty')
+    // if (typeof date !== 'number') throw new TypeError('date is not a number')
+    // if (!date.length) throw new LengthError('date is empty')
 
     return User.findById(userId)
         .then(user => {

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import createFlow from '../logic/createFlow'
 function FlowModalIncome({ setModal, onNewFlow }) {
     const closeModal = () => {
         setModal(false)
@@ -22,7 +23,16 @@ function FlowModalIncome({ setModal, onNewFlow }) {
     const submitCreateFlow = event => {
         event.preventDefault()
         // console.log('enviando')
-        //*Creamos un Objeto con todos los valores no hace falta añadir el valor ya que es el mismo.
+
+        createFlow(sessionStorage.token, type, kind, description, amount, date, (error) => {
+            if (error) {
+                //TODO use show alert
+                alert(error.message)
+
+                return
+            }
+
+         //*Creamos un Objeto con todos los valores no hace falta añadir el valor ya que es el mismo.
 
         const flow = {
             type,
@@ -39,6 +49,7 @@ function FlowModalIncome({ setModal, onNewFlow }) {
         setDescription('')
         setAmount('')
         setDate('')
+        })
     }
 
     return <>
