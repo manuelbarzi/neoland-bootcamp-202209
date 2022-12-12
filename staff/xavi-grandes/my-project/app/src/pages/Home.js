@@ -7,6 +7,8 @@ import CreateListComponent from "../components/CreateListComponent";
 import { errors } from "com";
 import retrieveLists from "../logic/retrieveLists";
 import { MdDelete } from "react-icons/md";
+// import deleteList from "../../../api/logic/deleteList";
+import DeleteList from "../components/DeleteList";
 const { FormatError, AuthError, LengthError, NotFoundError } = errors;
 
 export default function Home() {
@@ -15,6 +17,7 @@ export default function Home() {
   const [user, setUser] = useState();
   const [lists, setLists] = useState();
   const [isCreateOpen, setCreateOpen] = useState(false);
+  const [listIdToDelete, setListIdToDelete] = useState();
 
   const { showAlert } = useContext(Context);
 
@@ -62,21 +65,36 @@ export default function Home() {
     });
   };
 
+  const openDeleteList = (listId) => {
+    setListIdToDelete(listId)
+  }
+
+  const closeDeletePost = () => setListIdToDelete()
+
+  const handleListDeleted = () => {
+    try {
+      retrieveLists(sessionStorage.token)
+      .then((lists) => {setLists(lists);
+
+            setListIdToDelete()
+        })
+    } catch (error) {
+        alert(error.message)
+    }
+}
+
+
   return (
     <>
-      {isCreateOpen && (
-        <CreateListComponent
-          onListCreated={handleCreatedList}
-          onClose={toggleCreateListView}
-        />
-      )}
+      {isCreateOpen && (<CreateListComponent onListCreated={handleCreatedList} onClose={toggleCreateListView} />)}
+      {listIdToDelete && (<DeleteList listId={listIdToDelete} onClose={closeDeletePost} onDeleted={handleListDeleted} />)}
       {user && <Header userName={user.name} />}
       <main className="mt-[3rem] flex flex-col gap-2 items-center">
         {lists &&
           lists.map((list) => (
             <article className="mt-1 bg-blue-300 h-12 w-3/5 rounded-lg flex items-center justify-between px-3 text-lg">
               {list.title}
-              <button className="h-10 w-10 flex justify-center items-center bg-slate-400">
+              <button className="h-10 w-10 flex justify-center items-center bg-slate-400" onClick={() => openDeleteList(list.id)}>
                 <MdDelete size="1.3rem" />
               </button>
             </article>
