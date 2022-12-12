@@ -7,7 +7,7 @@ import Header from "../components/Header";
 import CreateListComponent from "../components/CreateListComponent";
 import { errors } from "com";
 import retrieveLists from "../logic/retrieveLists";
-import { BsListStars } from "react-icons/bs";
+import { MdDelete } from "react-icons/md";
 const { FormatError, AuthError, LengthError, NotFoundError } = errors;
 
 export default function Home() {
@@ -78,10 +78,10 @@ export default function Home() {
     <>
       {isCreateOpen && <CreateListComponent onListCreated={handleCreatedList} onClose={toggleCreateListView} />}
       {user && <Header userName={user.name} />}
-      <main className="mt-[3rem]">
-        {lists && lists.map(list => <div>{list.title}</div>)}
+      <main className="mt-[3rem] flex flex-col gap-2 items-center">
+        {lists && lists.map(list => <article className="mt-1 bg-blue-300 h-12 w-3/5 rounded-lg flex items-center justify-between px-3 text-lg">{list.title}<MdDelete size="1.3rem"/></article>)}
       </main>
-      <footer className="z-10 absolute bottom-0 h-[4rem] flex justify-center items-center w-full bg-gray-200">
+      <footer className="z-10 fixed bottom-0 h-[4rem] flex justify-center items-center w-full bg-gray-200">
         <button
           className=" bg-blue-400 h-[3rem] w-2/5 text-white text-xl p-2 flex justify-center items-center rounded-lg"
           onClick={toggleCreateListView}
