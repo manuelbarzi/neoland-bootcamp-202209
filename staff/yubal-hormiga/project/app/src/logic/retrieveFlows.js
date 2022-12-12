@@ -17,14 +17,14 @@ export default function (token) {
                 return
             }
 
-            const appointments = JSON.parse(json)
+            const flows = JSON.parse(json)
 
-            resolve(appointments)
+            resolve(flows)
         }
 
         xhr.onerror = () => reject(new Error('connection error'))
 
-        xhr.open('GET', 'http://localhost/appointment')
+        xhr.open('GET', 'http://localhost/flow')
         xhr.setRequestHeader('Authorization', `Bearer ${token}`)
         xhr.send()
     })

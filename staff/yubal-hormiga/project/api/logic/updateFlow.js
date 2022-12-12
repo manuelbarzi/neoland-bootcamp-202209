@@ -22,7 +22,7 @@ module.exports = function (userId, type, kind, description, amount, date, flowId
         .then(user => {
             if (!user)
                 throw new Error(`user with id ${userId} does not exist`)
-                //?.lean() consultar
+            //?.lean() consultar
             return Flow.findById(flowId)
         })
         .then(flow => {
@@ -33,7 +33,7 @@ module.exports = function (userId, type, kind, description, amount, date, flowId
                 throw new Error(`flow with id ${flowId} does not belong to user with id ${userId}`)
 
 
-            return Flow.updateOne({_id:flowId}, { $set: {type, kind, description, amount, date} })
+            return Flow.updateOne({ _id: flowId }, { $set: { type, kind, description, amount, date } })
         })
 
 }

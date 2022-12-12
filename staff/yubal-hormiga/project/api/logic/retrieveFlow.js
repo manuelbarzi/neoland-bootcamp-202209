@@ -3,11 +3,8 @@ const { User, Flow } = require('../models')
 
 /**
  * Retrieves a flow from user
- * 
- * 
  * @param {string} userId The user id
  * @param {string} appointmentId The flow id
-
  */
 module.exports = function (userId, flowId) {
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')

@@ -1,7 +1,6 @@
 
 function FlowForm({ pension, setPension, setIsValidPension }) {
 
-
     //*Eventos
     const handlePension = event => setPension(Number(event.target.value))
 

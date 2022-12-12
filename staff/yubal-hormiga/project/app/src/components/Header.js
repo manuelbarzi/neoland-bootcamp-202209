@@ -8,7 +8,6 @@ export default function Header({ userName }) {
 
     const { logout } = useContext(Context)
 
-
     return <header className='h-full w-full pr-3 pl-3 '>
         <div className='flex  w-full h-full justify-between '>
             <div className=''>
@@ -28,10 +27,5 @@ export default function Header({ userName }) {
         <div className='text-center'>
             <button onClick={logout} className=' rounded-full font-medium bg-gray-700 hover:bg-green-600 text-white hover: p-3 '>Salir</button>
         </div>
-
-
-
-
-
     </header>
 }

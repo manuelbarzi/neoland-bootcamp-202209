@@ -1,12 +1,12 @@
 const { errors: { LengthError, } } = require('../../my-commons')
 const { User, Flow } = require('../models')
 
-function deleteFlow (userId, flowId) {
+function deleteFlow(userId, flowId) {
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
     if (!userId.length) throw new LengthError('userId is empty')
     if (typeof flowId !== 'string') throw new TypeError('flowId is not a string')
     if (!flowId.length) throw new LengthError('flowId is empty')
-   
+
 
     return User.findById(userId)
         .then(user => {

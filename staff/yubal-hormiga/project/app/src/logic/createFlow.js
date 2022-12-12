@@ -8,11 +8,11 @@
  * @param {string} visibility The post visibility
  * @param {callback} callback The callback to attend the result
  */
- export default function (token, type, kind, description, amount, date, callback) {
+export default function (token, type, kind, description, amount, date, callback) {
     if (typeof token !== 'string') throw new TypeError('token is not a string')
     if (!token.length) throw new Error('token is empty')
     if (typeof type !== 'string') throw new TypeError('type is not a string')
-    if (!type.length)throw new Error('type is empty')
+    if (!type.length) throw new Error('type is empty')
     if (typeof kind !== 'string') throw new TypeError('kind is not a string')
     if (!kind.length) throw new Error('kind is empty')
     if (typeof description !== 'string') throw new TypeError('description is not a string')

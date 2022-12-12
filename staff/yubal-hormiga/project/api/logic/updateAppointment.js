@@ -20,7 +20,7 @@ module.exports = function (userId, title, body, date, appointmentId) {
         .then(user => {
             if (!user)
                 throw new Error(`user with id ${userId} does not exist`)
-                //?.lean() consultar
+            //?.lean() consultar
             return Appointment.findById(appointmentId)
         })
         .then(appointment => {
@@ -31,7 +31,7 @@ module.exports = function (userId, title, body, date, appointmentId) {
                 throw new Error(`appointment with id ${appointmentId} does not belong to user with id ${userId}`)
 
 
-            return Appointment.updateOne({_id:appointmentId}, { $set: { title, body, date} })
+            return Appointment.updateOne({ _id: appointmentId }, { $set: { title, body, date } })
         })
 
 }

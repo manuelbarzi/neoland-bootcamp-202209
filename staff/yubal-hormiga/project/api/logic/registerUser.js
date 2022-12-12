@@ -17,7 +17,7 @@ function registerUser(name, email, password) {
     if (HAS_SPACES_REGEX.test(password)) throw new FormatError('password has spaces')
 
     return User.create({ name, email, password })
-         .catch(error => {
+        .catch(error => {
             if (error.message.includes('E11000'))
                 throw new ConflictError(`user with email ${email} already exists`)
 

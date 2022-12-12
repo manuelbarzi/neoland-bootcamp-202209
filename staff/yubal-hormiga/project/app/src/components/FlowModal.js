@@ -5,15 +5,14 @@ function FlowModalIncome({ setModal, onNewFlow }) {
         setModal(false)
     }
 
-
-    //*States */
+    //***States ***
     const [type, setType] = useState('')
     const [kind, setKind] = useState('')
     const [description, setDescription] = useState('')
     const [amount, setAmount] = useState('')
     const [date, setDate] = useState('')
 
-    //*Eventos */
+    //***Eventos***
     const handleChangeType = event => setType(event.target.value)
     const handleChangeKind = event => setKind(event.target.value)
     const handleChangeDescription = event => setDescription(event.target.value)
@@ -23,17 +22,14 @@ function FlowModalIncome({ setModal, onNewFlow }) {
     const submitCreateFlow = event => {
         event.preventDefault()
         // console.log('enviando')
-
-        createFlow(sessionStorage.token, type, kind, description, amount, date, (error) => {
-            if (error) {
-                //TODO use show alert
-                alert(error.message)
-
-                return
-            }
-
-         //*Creamos un Objeto con todos los valores no hace falta añadir el valor ya que es el mismo.
-
+        try {
+            createFlow(sessionStorage.token, type, kind, description, amount, date)
+                .then(() => onNewFlow())
+                .catch(error => alert(error.message))
+        } catch (error) {
+            alert(error.message)
+        }
+        //***Creamos un Objeto con todos los valores no hace falta añadir el valor ya que es el mismo.
         const flow = {
             type,
             kind,
@@ -49,9 +45,7 @@ function FlowModalIncome({ setModal, onNewFlow }) {
         setDescription('')
         setAmount('')
         setDate('')
-        })
     }
-
     return <>
         <div className=' bg-green-100 p-2 rounded-lg'>
             <div className=''>
@@ -106,7 +100,5 @@ function FlowModalIncome({ setModal, onNewFlow }) {
             </form>
         </div>
     </>
-
 }
-
 export default FlowModalIncome

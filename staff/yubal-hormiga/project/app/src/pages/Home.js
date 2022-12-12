@@ -7,7 +7,7 @@ import Context from '../components/Context'
 import { errors } from 'com'
 import Flow from './Flow'
 import Appointment from './Appointment'
-import Memory from './Memory'
+// import Memory from './Memory'
 const { FormatError, AuthError, LengthError, NotFoundError } = errors
 
 function Home() {

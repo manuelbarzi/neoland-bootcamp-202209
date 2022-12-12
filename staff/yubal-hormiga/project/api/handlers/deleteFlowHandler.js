@@ -2,7 +2,7 @@ const deleteFlow = require('../logic/deleteFlow')
 
 module.exports = (req, res) => {
     try {
-    const { params: { flowId }, userId  } = req
+        const { params: { flowId }, userId } = req
 
         deleteFlow(userId, flowId)
             .then(() => res.status(204).send())

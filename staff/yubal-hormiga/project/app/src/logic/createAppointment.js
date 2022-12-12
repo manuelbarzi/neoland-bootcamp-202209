@@ -8,7 +8,7 @@
  * @param {string} date The appointment date * 
  * @param {callback} callback The callback to attend the result
  */
- export default function (token, title, body, date, callback) {
+export default function (token, title, body, date, callback) {
     if (typeof token !== 'string') throw new TypeError('token is not a string')
     if (!token.length) throw new Error('token is empty')
     if (typeof title !== 'string') throw new TypeError('text is not a string')
@@ -17,7 +17,7 @@
     if (!body.length) throw new Error('body is empty')
     // TODO validate date
 
-    if (!callback){
+    if (!callback) {
         return new Promise((resolve, reject) => {
             const xhr = new XMLHttpRequest
 

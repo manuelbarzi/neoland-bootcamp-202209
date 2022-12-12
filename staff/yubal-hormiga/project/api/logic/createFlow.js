@@ -1,4 +1,4 @@
-const { errors: { LengthError,  NotFoundError } } = require('../../my-commons')
+const { errors: { LengthError, NotFoundError } } = require('../../my-commons')
 const { User, Flow } = require('../models')
 
 function createFlow(userId, type, kind, description, amount, date) {

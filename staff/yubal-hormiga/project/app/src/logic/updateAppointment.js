@@ -8,7 +8,7 @@
  * @param {string} visibility The post visibility
  * @param {callback} callback The callback to attend the result
  */
-export default function(token, appointmentId, title, body, date, callback) {
+export default function (token, appointmentId, title, body, date, callback) {
     if (typeof token !== 'string') throw new TypeError('token is not a string')
     if (!token.length) throw new Error('token is empty')
     if (typeof appointmentId !== 'string') throw new TypeError('appointmentId is not a string')
@@ -20,7 +20,7 @@ export default function(token, appointmentId, title, body, date, callback) {
     // if (typeof date !== 'number') throw new TypeError('date is not a number')
     // if (!date) throw new Error('date is empty')
     if (typeof callback !== 'function') throw new TypeError('callback is not a function')
-    
+
     const xhr = new XMLHttpRequest
 
     xhr.onload = () => {

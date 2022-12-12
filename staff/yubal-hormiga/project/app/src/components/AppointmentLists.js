@@ -3,25 +3,25 @@ import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai'
 import { useEffect, useState } from 'react'
 import retrieveAppointments from '../logic/retrieveAppointments'
 
-function AppointmentLists({ appointmentsChange}) {
+function AppointmentLists({ appointmentsChange }) {
   // console.log(appointments)
-  const[appointments, setAppointments] = useState([])
+  const [appointments, setAppointments] = useState([])
   log.info('AppoimentLists -> render')
 
-  useEffect(()=>{
+  useEffect(() => {
     retrieveAppointmentsHandler()
-  },[])
+  }, [])
 
-  useEffect(()=>{
+  useEffect(() => {
     retrieveAppointmentsHandler()
-  },[appointmentsChange])
+  }, [appointmentsChange])
 
-  const retrieveAppointmentsHandler = () =>{
-    try{
+  const retrieveAppointmentsHandler = () => {
+    try {
       retrieveAppointments(sessionStorage.token)
-      .then(appointments => setAppointments(appointments))
-      .catch(error => alert(error.message))
-    }catch(error){
+        .then(appointments => setAppointments(appointments))
+        .catch(error => alert(error.message))
+    } catch (error) {
       alert(error.message)
     }
   }
@@ -39,10 +39,6 @@ function AppointmentLists({ appointmentsChange}) {
             <p className='font-semibold text-lg flex flex-row'>{appointment.date}</p>
           </div>
 
-          {/* <div className='w-1/12'>
-            <p className=' font-semibold text-lg '>{appointment.time}</p>
-          </div> */}
-
           <div>
             <p className='font-semibold text-lg '>{appointment.body}</p>
           </div>
@@ -50,7 +46,6 @@ function AppointmentLists({ appointmentsChange}) {
           <div className=''>
             <div className='flex flex-col self-end gap-1'>
               <button className='bg-green-400  rounded-md p-1' type='button'><AiOutlineEdit size='1rem' /></button>
-
               <button className='bg-red-600  rounded-md p-1' type='button'><AiOutlineDelete size='1rem' /></button>
             </div>
           </div>

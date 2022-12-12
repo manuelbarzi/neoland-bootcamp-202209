@@ -18,10 +18,10 @@ module.exports = function (userId) {
             if (!user)
                 throw new NotFoundError(`user with id ${userId} does not exist`)
 
-            return Flow.find({user:userId}).select('-user -__v').lean()
+            return Flow.find({ user: userId }).select('-user -__v').lean()
         })
         .then(flows => {
-            flows.forEach(flow=>{
+            flows.forEach(flow => {
                 flow.id = flow._id.toString()
 
                 delete flow._id

@@ -2,7 +2,7 @@ const deleteAppointment = require('../logic/deleteAppointment')
 
 module.exports = (req, res) => {
     try {
-    const { params: { appointmentId }, userId  } = req
+        const { params: { appointmentId }, userId } = req
 
         deleteAppointment(userId, appointmentId)
             .then(() => res.status(204).send())

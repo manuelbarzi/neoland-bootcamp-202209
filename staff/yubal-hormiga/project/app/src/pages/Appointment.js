@@ -10,13 +10,6 @@ function Pension() {
         setAppointmentsChange(Date.now())
     }
 
-
-    // useEffect(() => {
-    //     retrieveAppointments(sessionStorage.token, (error, appointments) => {
-    //         setAppointments(appointments)
-    //     })
-    // }, [])
-
     return <>
         <div className=''>
             < AppointmentForm

@@ -3,11 +3,8 @@ const { User, Appointment } = require('../models')
 
 /**
  * Retrieves a appointment from user
- * 
- * 
  * @param {string} userId The user id
  * @param {string} appointmentId The appointment id
-
  */
 module.exports = function (userId, appointmentId) {
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')

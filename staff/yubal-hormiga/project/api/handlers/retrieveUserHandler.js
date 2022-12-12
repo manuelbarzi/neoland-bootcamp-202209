@@ -5,7 +5,7 @@ const { errors: { FormatError, NotFoundError } } = require('../../com')
 module.exports = (req, res) => {
     try {
         const { userId } = req
-    
+
         retrieveUser(userId)
             .then(user => res.json(user))
             .catch(error => {
