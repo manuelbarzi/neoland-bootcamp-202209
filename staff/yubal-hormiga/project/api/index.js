@@ -14,6 +14,9 @@ const updateAppointmentHandler = require('./handlers/updateAppointmentHandler')
 const deleteAppointmentHandler = require('./handlers/deleteAppointmentHandler')
 //!FLOW
 const createFlowHandler = require('./handlers/createFlowHandler')
+const retrieveFlowHandler = require('./handlers/retrieveFlowHandler')
+const updateFlowHandler = require('./handlers/updateFlowHandler')
+const deleteFlowHandler = require('./handlers/deleteFlowHandler')
 
 
 const jsonBodyParser = require('./utils/jsonBodyParser')
@@ -29,17 +32,20 @@ mongoose.connect(MONGODB_URL)
         const api = express()
 
         api.use(cors)
-
+        //!USER
         api.post('/users/auth', jsonBodyParser, authenticateUserHandler)
         api.post('/users', jsonBodyParser, registerUserHandler)
         api.get('/users', jwtVerifier, retrieveUserHandler)
-
+        //!APPOINTMENT
         api.post('/appointment', jwtVerifier, jsonBodyParser, createAppointmentHandler)
         api.get('/appointment/:appointmentId', jwtVerifier, retrieveAppointmentHandler)
         api.patch('/appointment/:appointmentId', jwtVerifier, jsonBodyParser, updateAppointmentHandler)
         api.delete('/appointment/:appointmentId', jwtVerifier, deleteAppointmentHandler)
-        
+        //!FLOW
         api.post('/flow', jwtVerifier, jsonBodyParser, createFlowHandler)
+        api.get('/flow/:flowId', jwtVerifier, retrieveFlowHandler)
+        api.patch('/flow/:flowId', jwtVerifier, jsonBodyParser, updateFlowHandler)
+        api.delete('/flow/:flowId', jwtVerifier, deleteFlowHandler)
         
         const { PORT } = process.env
 
