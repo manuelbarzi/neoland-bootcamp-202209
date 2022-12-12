@@ -12,7 +12,7 @@ module.exports = function (userId, title) {
         if (!user)
             throw new Error(`user with id ${userId} does not exist`)
 
-        return List.create({ title, user: userId })
+        return List.create({ user: userId, title })
     })
     .then(() => { })
     // preguntar a manu
