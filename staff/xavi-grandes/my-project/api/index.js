@@ -9,7 +9,8 @@ const retrieveUserHandler = require('./handlers/retrieveUserHandler')
 const updateUserEmailHandler = require('./handlers/updateUserEmailHandler')
 const updateUserPasswordHandler = require('./handlers/updateUserPasswordHandler')
 const createListHandler = require ('./handlers/createListHandler')
-
+const retrieveListsHandler = require ('./handlers/retrieveListsHandler')
+const deletelistHandler = require ('./handlers/deletelistHandler')
 
 const jsonBodyParser = require('./utils/jsonBodyParser')
 const cors = require('./utils/cors')
@@ -28,10 +29,15 @@ mongoose.connect(MONGODB_URL)
         api.post('/users/auth', jsonBodyParser, authenticateUserHandler)
         api.post('/users', jsonBodyParser, registerUserHandler)
         api.post('/users/list', jwtVerifier, jsonBodyParser, createListHandler)
+        
+        api.get('/users/lists', jwtVerifier, retrieveListsHandler)
         api.get('/users', jwtVerifier, retrieveUserHandler)
+        
         api.patch('/users/email', jwtVerifier, jsonBodyParser, updateUserEmailHandler)
         api.patch('/users/password', jwtVerifier, jsonBodyParser, updateUserPasswordHandler)
         
+        api.delete('/lists/:listId', jwtVerifier, deletelistHandler)
+
         const { PORT } = process.env
 
         api.listen(PORT, () => console.log(`server listening on port ${PORT}`))
