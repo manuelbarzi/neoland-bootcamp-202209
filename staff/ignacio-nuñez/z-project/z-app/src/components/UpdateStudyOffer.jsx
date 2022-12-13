@@ -78,7 +78,7 @@ function UpdateStudyOffer({ className, onUpdateStudyOfferClose, onUpdateStudyOff
                     {studies?.map(study => {
                         return <div key={study.id} className="w-full self-start flex flex-col">
                             <div className='flex p-1'>
-                                <p type="text" name="study" id="study" contentEditable className="outline-none w-full">{study.title ? study.title : 'Put a study here'}</p>
+                                <textarea type="text" name="study" id="study" className="resize-none outline-none w-full" placeholder='Put a study here' defaultValue={study?.title}></textarea>
                                 <Button type="button" className="bg-red-300" onClick={() => handleDeleteStudy(study.id)}>Delete</Button>
                             </div>
                             <hr className="w-full" />

@@ -2,9 +2,10 @@ import { errors, validators } from 'com'
 import extractSubFromToken from '../utils/extractSubFromToken'
 
 const { LengthError, NotFoundError, UnexpectedError, ConflictError } = errors
-const { stringValidator, languagesValidator, ofStudyValidator, ofExperienceValidator, knowledgeValidator, booleanValidator } = validators
+const { stringValidator, languagesValidator, ofStudyValidator, experienceValidator, 
+    knowledgeValidator, modalityValidator, numberValidator, workTimeValidator, booleanValidator } = validators
 
-function updateOffer(token, offerId, offerUserId, { title, description, photo, languages, studies, experiences, knowledges, published } = {}) {
+function updateOffer(token, offerId, offerUserId, { title, description, photo, modality, location, salary, workTime, languages, studies, experiences, knowledges, published } = {}) {
     stringValidator(token, 'token')
     stringValidator(offerId, 'offerId')
     stringValidator(offerUserId, 'offerUserId')
@@ -12,9 +13,13 @@ function updateOffer(token, offerId, offerUserId, { title, description, photo, l
     if (title) stringValidator(title, 'title')
     if (description) stringValidator(description, 'description')
     if (photo) stringValidator(photo, 'photo')
+    if (modality) modalityValidator(modality)
+    if (location) stringValidator(location)
+    if (salary) numberValidator(salary)
+    if (workTime) workTimeValidator(workTime)
     if (languages) languagesValidator(languages)
     if (studies) ofStudyValidator(studies)
-    if (experiences) ofExperienceValidator(experiences)
+    if (experiences) experienceValidator(experiences)
     if (knowledges) knowledgeValidator(knowledges)
     if (typeof published === 'boolean') booleanValidator(published, 'published')
 
@@ -25,8 +30,12 @@ function updateOffer(token, offerId, offerUserId, { title, description, photo, l
     const body = {}
 
     if (title) body.title = title
-    if (description) body.description = description
+    if (description || description === '') body.description = description
     if (photo) body.photo = photo
+    if (modality) body.modality = modality
+    if (location) body.location = location
+    if (salary) body.salary = salary
+    if (workTime) body.workTime = workTime
     if (languages) body.languages = languages
     if (studies) body.studies = studies
     if (experiences) body.experiences = experiences

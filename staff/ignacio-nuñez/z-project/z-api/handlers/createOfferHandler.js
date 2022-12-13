@@ -4,14 +4,14 @@ const { errors: { FormatError, LengthError, NotFoundError, ConflictError } } = r
 
 module.exports = (req, res) => {
     try {
-        const { title, description, photo, languages, studies, experiences, knowledges } = req.body
+        const { title, description, photo, modality, location, salary, workTime, languages, studies, experiences, knowledges } = req.body
         const { userId } = req
 
-        createOffer(userId, title, description, photo, languages, studies, experiences, knowledges)
-            .then(() => res.status(201).send())
+        createOffer(userId, title, description, photo, modality, location, salary, workTime, languages, studies, experiences, knowledges)
+            .then(offerId => res.json(offerId))
             .catch(error => {
-                if(error instanceof NotFoundError) res.status(404).json({error:error.message})
-                else if(error instanceof ConflictError) res.status(409).json({error: error.message})
+                if (error instanceof NotFoundError) res.status(404).json({ error: error.message })
+                else if (error instanceof ConflictError) res.status(409).json({ error: error.message })
                 else res.status(500).json({ error: error.message })
             })
     } catch (error) {

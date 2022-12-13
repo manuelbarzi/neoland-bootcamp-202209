@@ -4,9 +4,9 @@ const { errors: { FormatError, LengthError, ConflictError, NotFoundError } } = r
 
 module.exports = (req, res) => {
     try {
-        const { userId, params: { offerId }, body:{title, description, photo, languages, studies, experiences, knowledges, published} } = req
+        const { userId, params: { offerId }, body:{title, description, photo, modality, location, salary, workTime, languages, studies, experiences, knowledges, published} } = req
 
-        updateOffer(userId, offerId, title, description, photo, languages, studies, experiences, knowledges, published)
+        updateOffer(userId, offerId, title, description, photo, modality, location, salary, workTime, languages, studies, experiences, knowledges, published)
             .then(() => res.status(202).send())
             .catch(error => {
                 if (error instanceof ConflictError) res.status(409).json({ error: error.message })

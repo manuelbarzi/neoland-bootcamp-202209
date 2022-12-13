@@ -1,12 +1,12 @@
 import { errors, validators } from 'com'
 
-const { LengthError, NotFoundError, UnexpectedError } = errors
+const { LengthError, NotFoundError, UnexpectedError, ConflictError } = errors
 const { stringValidator } = validators
 
-function retrieveUserOffers(token) {
+function retrievePublishedOffers(token) {
     stringValidator(token, 'token')
     
-    return fetch(`http://localhost:80/users/offers`, {
+    return fetch(`http://localhost:80/offers`, {
         method: 'GET',
         headers: { 
             'Authorization': `Bearer ${token}`,
@@ -31,6 +31,11 @@ function retrieveUserOffers(token) {
                     .then(error => {
                         throw new NotFoundError(error.error)
                     })
+            } else if (res.status === 409) {
+                return res.json()
+                    .then(error => {
+                        throw new ConflictError(error.error)
+                    })
             }
             else if (res.status < 500)
                 throw new UnexpectedError('client error')
@@ -39,4 +44,4 @@ function retrieveUserOffers(token) {
         })
 }
 
-export default retrieveUserOffers
+export default retrievePublishedOffers

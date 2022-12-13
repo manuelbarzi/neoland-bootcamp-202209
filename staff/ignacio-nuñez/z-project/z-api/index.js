@@ -11,6 +11,8 @@ const retrieveUserOffersHandler = require('./handlers/retrieveUserOffersHandler'
 const deleteOfferHandler = require('./handlers/deleteOfferHandler')
 const updateOfferHandler = require('./handlers/updateOfferHandler')
 const retrieveOfferDetailHandler = require('./handlers/retrieveOfferDetailHandler')
+const retrievePublishedOffersHandler = require('./handlers/retrievePublishedOffersHandler')
+const createCurriculumHandler = require('./handlers/createCurriculumHandler')
 
 const jsonBodyParser = require('./utils/jsonBodyParser')
 const cors = require('./utils/cors')
@@ -27,9 +29,12 @@ mongoose.connect(MONGODB_URL)
         api.post('/users', jsonBodyParser, registerUserHandler)
         api.post('/users/auth', jsonBodyParser, authenticateUserHandler)
         api.get('/users',jwtVerifier, retrieveUserHandler)
+        api.get('/users/offers', jwtVerifier, retrieveUserOffersHandler)
 
+        api.post('/curriculums', jwtVerifier, jsonBodyParser, createCurriculumHandler)
+        
+        api.get('/offers', jwtVerifier, retrievePublishedOffersHandler)
         api.post('/offers', jwtVerifier, jsonBodyParser, createOfferHandler)
-        api.get('/offers', jwtVerifier, retrieveUserOffersHandler)
         api.delete('/offers/:offerId', jwtVerifier, deleteOfferHandler)
         api.patch('/offers/:offerId', jwtVerifier, jsonBodyParser, updateOfferHandler)
         api.get('/offers/:offerId', jwtVerifier, retrieveOfferDetailHandler)

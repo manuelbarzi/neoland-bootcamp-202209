@@ -1,9 +1,9 @@
 const { Schema } = require('mongoose')
 const { Types: { ObjectId } } = Schema
-const language = require('./offers/ofLanguage')
-const study = require('./offers/ofStudy')
-const experience = require('./offers/ofExperience')
-const knowledge = require('./offers/ofKnowledge')
+const language = require('./curriculums/cvLanguage')
+const study = require('./curriculums/cvStudy')
+const experience = require('./curriculums/cvExperience')
+const knowledge = require('./curriculums/cvKnowledge')
 
 module.exports = new Schema({
     title:{
@@ -18,20 +18,6 @@ module.exports = new Schema({
     createDate:{
         type: Date,
         required: true
-    },
-    modality:{
-        type: String,
-        enum: ['remote', 'face-to-face', 'hybrid']
-    },
-    location:{
-        type: String
-    },
-    salary:{
-        type: Number
-    },
-    workTime:{
-        type: String,
-        enum: ['part time', 'full time']
     },
     languages:[language],
     

@@ -1,22 +1,17 @@
 import { errors, validators } from 'com'
 
 const { LengthError, NotFoundError, UnexpectedError, ConflictError } = errors
-const { stringValidator, languagesValidator, ofStudyValidator, ofExperienceValidator, 
-    knowledgeValidator, modalityValidator, numberValidator, workTimeValidator } = validators
+const { stringValidator, languagesValidator, experienceValidator, knowledgeValidator, cvStudyValidator } = validators
 
 
-function createOffer(token, { title, description, photo, modality, location, salary, workTime, languages, studies, experiences, knowledges } = {}) {
+function createCurriculum(token, { title, description, photo, languages, studies, experiences, knowledges } = {}) {
     stringValidator(token, 'token')
     if (title) stringValidator(title, 'title')
     if (description) stringValidator(description, 'description')
     if (photo) stringValidator(photo, 'photo')
-    if (modality) modalityValidator(modality)
-    if (location) stringValidator(location)
-    if (salary) numberValidator(salary)
-    if (workTime) workTimeValidator(workTime)
     if (languages) languagesValidator(languages)
-    if (studies) ofStudyValidator(studies)
-    if (experiences) ofExperienceValidator(experiences)
+    if (studies) cvStudyValidator(studies)
+    if (experiences) experienceValidator(experiences)
     if (knowledges) knowledgeValidator(knowledges)
 
     const body = {}
@@ -24,16 +19,12 @@ function createOffer(token, { title, description, photo, modality, location, sal
     if (title) body.title = title
     if (description) body.description = description
     if (photo) body.photo = photo
-    if (modality) body.modality = modality
-    if (location) body.location = location
-    if (salary) body.salary = salary
-    if (workTime) body.workTime = workTime
     if (languages) body.languages = languages
     if (studies) body.studies = studies
     if (experiences) body.experiences = experiences
     if (knowledges) body.knowledges = knowledges
 
-    return fetch(`http://localhost:80/offers`, {
+    return fetch(`http://localhost:80/curriculums`, {
         method: 'POST',
         body: JSON.stringify(body),
         headers: {
@@ -42,10 +33,7 @@ function createOffer(token, { title, description, photo, modality, location, sal
         }
     })
         .then(res => {
-            if (res.status === 200){
-                return res.json()
-                .then(offerId => offerId)
-            }
+            if (res.status === 201) return
             else if (res.status === 400) {
                 return res.json()
                     .then(error => {
@@ -69,4 +57,4 @@ function createOffer(token, { title, description, photo, modality, location, sal
         })
 }
 
-export default createOffer
+export default createCurriculum

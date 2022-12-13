@@ -19,6 +19,8 @@ function NavBar() {
         <nav className="flex items-center justify-between p-4 h-20 col-start-1 col-end-13 text-2xl">
             <div className="z-10 flex gap-4">
                 <Link to={'/'}>Home</Link>
+                {user?.role === 'worker' && <Link to={'/offers'}>Offers</Link>}
+                {user?.role === 'company' && <Link to={'/curriculums'}>Cv's</Link>}
             </div>
             <div className="z-10 flex gap-4">
                 <Link to={'/user/profile'}>{userName || 'Loading...'}</Link>

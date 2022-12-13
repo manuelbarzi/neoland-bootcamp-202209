@@ -1,8 +1,15 @@
 import authenticateUser from "../logic/authenticateUser"
 import { Link, useNavigate } from 'react-router-dom'
+import { useContext } from 'react'
+import { Context } from "../components/Context"
+import { errors } from 'com'
+const { FormatError, AuthError, LengthError, NotFoundError } = errors
 
-function Login({onLoggedIn}) {
+
+function Login({ onLoggedIn }) {
     const navigate = useNavigate()
+
+    const { showAlert } = useContext(Context)
 
     const handleSubmit = event => {
         event.preventDefault()
@@ -19,14 +26,22 @@ function Login({onLoggedIn}) {
                     navigate('/')
                 })
                 .catch(error => {
-                    alert(error.message)
+                    if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
+                        showAlert(error.message, 'warn')
+                    else if (error instanceof AuthError || error instanceof NotFoundError)
+                        showAlert(error.message, 'error')
+                    else
+                        showAlert(error.message, 'fatal')
 
                     event.target.password.value = ''
                 })
         } catch (error) {
-            alert(error.message)
+            if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
+                showAlert(error.message, 'warn')
+            else
+                showAlert(error.message, 'fatal')
 
-            event.target.password.reset()
+            event.target.password.value = ''
         }
 
     }

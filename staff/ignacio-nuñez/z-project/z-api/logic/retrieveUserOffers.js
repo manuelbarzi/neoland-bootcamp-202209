@@ -2,13 +2,12 @@ const { errors: { NotFoundError },
     validators: { stringValidator }
 } = require('com')
 const { Users, Offers } = require('../models')
-const ofExperience = require('../models/schemas/ofExperience')
 /**
  * Retrieves all user offers
  * 
  * @param {string} userId The user id
  */
-module.exports = function retrieveCompanyOffers(userId) {
+module.exports = function retrieveUserOffers(userId) {
     stringValidator(userId, 'userId')
 
     return Users.findById(userId)
@@ -20,24 +19,6 @@ module.exports = function retrieveCompanyOffers(userId) {
         })
         .then(offers => {
             offers.forEach(offer => {
-                if (offer.languages) {
-                    offer.languages.forEach(language => {
-                        language.id = language._id.toString()
-                        delete language._id
-                    })
-                }
-                if (offer.experiences) {
-                    offer.experiences.forEach(experience => {
-                        experience.id = experience._id.toString()
-                        delete experience._id
-                    })
-                }
-                if (offer.studies) {
-                    offer.studies.forEach(study => {
-                        study.id = study._id.toString()
-                        delete study._id
-                    })
-                }
                 if (!offer.user.id) {
                     offer.user.id = offer.user._id.toString()
                     delete offer.user._id

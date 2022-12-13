@@ -1,11 +1,12 @@
 const { model } = require('mongoose')
-const { users } = require('./schemas')
-const { offers } = require('./schemas')
+const { users, offers, curriculums } = require('./schemas')
 
 const Users = model('Users', users)
 const Offers = model('Offers', offers)
+const Curriculums = model('Curriculums', curriculums)
 
 module.exports = {
     Users,
-    Offers
+    Offers,
+    Curriculums
 }
