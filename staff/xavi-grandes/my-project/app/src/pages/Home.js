@@ -1,14 +1,14 @@
 import log from "../utils/coolog";
 import { useContext, useEffect, useState } from "react";
-import Context from "../components/Context";
-import retrieveUser from "../logic/retrieveUser";
-import Header from "../components/Header";
-import CreateListComponent from "../components/CreateListComponent";
+import { Link } from 'react-router-dom'
 import { errors } from "com";
+import retrieveUser from "../logic/retrieveUser";
 import retrieveLists from "../logic/retrieveLists";
-import { MdDelete } from "react-icons/md";
-// import deleteList from "../../../api/logic/deleteList";
+import Context from "../components/Context";
+import Header from "../components/Header";
 import DeleteList from "../components/DeleteList";
+import CreateListComponent from "../components/CreateListComponent";
+import { MdDelete } from "react-icons/md";
 const { FormatError, AuthError, LengthError, NotFoundError } = errors;
 
 export default function Home() {
@@ -88,12 +88,13 @@ export default function Home() {
     <>
       {isCreateOpen && (<CreateListComponent onListCreated={handleCreatedList} onClose={toggleCreateListView} />)}
       {listIdToDelete && (<DeleteList listId={listIdToDelete} onClose={closeDeletePost} onDeleted={handleListDeleted} />)}
+
       {user && <Header userName={user.name} />}
       <main className="mt-[3rem] flex flex-col gap-2 items-center">
         {lists &&
           lists.map((list) => (
             <article className="mt-1 bg-blue-300 h-12 w-3/5 rounded-lg flex items-center justify-between px-3 text-lg">
-              {list.title}
+              <Link to={`/list/${list.title}`}><strong>{list.title}</strong></Link>
               <button className="h-10 w-10 flex justify-center items-center bg-slate-400" onClick={() => openDeleteList(list.id)}>
                 <MdDelete size="1.3rem" />
               </button>
