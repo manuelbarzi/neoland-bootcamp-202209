@@ -102,7 +102,6 @@ function Noticias() {
 
     const openCreateNotice = () => {
         setCreateNoticeVisible(true)
-        console.log(user.role)
     }
     const closeCreateNotice = () => setCreateNoticeVisible(false)
     const handleNoticeCreated = () => noticesRetrieve()

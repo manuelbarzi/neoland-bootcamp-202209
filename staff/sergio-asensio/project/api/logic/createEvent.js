@@ -18,10 +18,11 @@ function createEvent(userId, title, body, requeriment, capacity, date, inscripti
     if (!capacity) throw new LengthError('capacity is empty')
 
 
-    if (typeof date !== 'string') throw new TypeError('date is not a string')
-    if (!date.length) throw new LengthError('date is empty')
+    // if (typeof date !== 'string') throw new TypeError('date is not a string')
+    // if (!date.length) throw new LengthError('date is empty')
 
     if (typeof inscription !== 'string') throw new TypeError('inscription is not a string')
+    if (inscription !== 'close' && inscription !== 'open') throw new Error('invalid inscription')
     if (!inscription.length) throw new LengthError('inscription is empty')
     
 

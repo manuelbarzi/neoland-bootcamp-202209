@@ -6,7 +6,7 @@ import { Routes, Route, Navigate, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import Context from './components/Context'
 import Alert from './components/Alert'
-import Activities from './pages/Activities'
+import Events from './pages/Events'
 
 function App() {
   log.info('App -> render')
@@ -41,7 +41,7 @@ function App() {
     {loggedIn ? <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/noticias" element={<Noticias />} />
-      <Route path="/activities" element={<Activities />} />
+      <Route path="/events" element={<Events />} />
 
 
     </Routes>

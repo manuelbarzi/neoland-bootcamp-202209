@@ -70,7 +70,7 @@ function Home() {
                 <p>{notice?.body}</p>
             </div></Link>
 
-            <Link to="activities"><div className='h-1/4 border-4 border-solid rounded-md mb-4'>
+            <Link to="events"><div className='h-1/4 border-4 border-solid rounded-md mb-4'>
                 <h2>12 Meses, 12 Actividades</h2>
             </div></Link>
 

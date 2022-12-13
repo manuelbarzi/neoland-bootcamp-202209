@@ -1,5 +1,5 @@
 /**
- * Creates a post against API
+ * Creates a notice against API
  * 
  * @param {string} token The user token
  * @param {string} title The notice title
