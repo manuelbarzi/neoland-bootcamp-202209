@@ -8,6 +8,7 @@ import { Routes, Route, Navigate, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import Context from './components/Context'
 import Alert from './components/Alert'
+import MyList from './pages/MyList'
 
 function App() {
   log.info('App -> render')
@@ -42,6 +43,7 @@ function App() {
     {loggedIn ? <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/profile" element={<Profile/>} />
+      <Route path="/list/:targetListName" element={<MyList/>} />
       <Route path="/settings" element={<Settings/>} />
     </Routes>
       :
