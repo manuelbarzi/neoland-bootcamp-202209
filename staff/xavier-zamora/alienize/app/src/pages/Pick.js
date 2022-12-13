@@ -1,17 +1,13 @@
-
-
 import log from '../utils/coolog'
 import retrieveGameId from '../logic/retrieveGameId'
 import randomPick from '../logic/randomPicks'
 import retrieveUser from '../logic/retrieveUser'
-import pushAliens from '../logic/pushAliens'
 import { useContext, useEffect, useState } from 'react'
 import Context from '../components/Context'
 import { errors } from 'com'
 const { FormatError, AuthError, LengthError, NotFoundError } = errors
 
 function Pick() {
-  debugger
   log.info('Pick -> render')
  
   const [user, setUser] = useState()
@@ -19,10 +15,8 @@ function Pick() {
   const { showAlert, navBattle } = useContext(Context)
 
   useEffect(() => {
-    
     retrieveUserIdHandler()
-    retrieveGameIdHandler()
-    /*navBattle()*/
+    retrieveGameIdHandler()   
   }, [])
 
   const retrieveUserIdHandler = () => {
@@ -48,7 +42,7 @@ function Pick() {
   }
 
   const retrieveGameIdHandler = () => {
-    log.info('Launcher -> createGame')
+    log.info('Launcher -> createGameHandler')
 
     try {
       retrieveGameId(sessionStorage.token)
@@ -69,34 +63,6 @@ function Pick() {
     }
   }
 
-  const functionsHandler = () => {
-    randomPickHandler()
-    pushAliensHandler()
-    navBattle()
-  }
-
-  const pushAliensHandler = () => {
-
-    const game = gameId
-
-    try {
-      pushAliens(sessionStorage.token, game)
-        .then(token => randomPick(token))
-        .catch(error => {
-          if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
-            showAlert(error.message, 'warn')
-          else if (error instanceof AuthError || error instanceof NotFoundError)
-            showAlert(error.message, 'error')
-          else
-            showAlert(error.message, 'fatal')
-        })
-    } catch (error) {
-      if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
-        showAlert(error.message, 'warn')
-      else
-        showAlert(error.message, 'fatal')
-    }
-  }
 
   const randomPickHandler = () => {
     log.info('Launcher -> randomPickHandler')
@@ -121,12 +87,13 @@ function Pick() {
       else
         showAlert(error.message, 'fatal')
     }
+    navBattle()
   }
 
   return <main className="block h-screen w-full bg-blue-800">
     <h2>{user?.name}</h2>
     <h2>{gameId}</h2>
-    <h2 onClick={functionsHandler}>GO FIGHT!</h2>
+    <h2 onClick={randomPickHandler}>GO FIGHT!</h2>
   </main>
 }
 

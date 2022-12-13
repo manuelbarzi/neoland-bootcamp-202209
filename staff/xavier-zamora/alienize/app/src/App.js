@@ -26,6 +26,10 @@ function App() {
     navigate('/')
   }
 
+  const navLogin = () => {
+    navigate('/login')
+  }
+
   const navPick = () => {
       navigate('/Pick')
   }
@@ -47,7 +51,7 @@ function App() {
 
   const closeAlert = () => setMessage()
 
-  return <Context.Provider value={{ login, logout, showAlert, navPick, navBattle }}>
+  return <Context.Provider value={{ login, logout, showAlert, navPick, navBattle, navLogin }}>
     {loggedIn ? <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/Launcher" element={<Launcher />} />

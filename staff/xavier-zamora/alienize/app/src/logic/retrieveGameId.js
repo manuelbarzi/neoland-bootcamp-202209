@@ -38,12 +38,11 @@ export default function retrieveGameId(token) {
                 reject(new NotFoundError(error))
             } else if (status < 500)
                 reject(new UnexpectedError('client error'))
-            else
-                reject(new UnexpectedError('server error'))
         }
 
         xhr.open('GET', 'http://localhost:2000/retrieveGameId')
         xhr.setRequestHeader('Authorization', `Bearer ${token}`)
+
         xhr.send()
     })
 }

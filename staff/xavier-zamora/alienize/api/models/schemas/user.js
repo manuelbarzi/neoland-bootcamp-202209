@@ -19,4 +19,12 @@ module.exports = new Schema({
         required: true,
         default: 3000
     },
+    isSearchingGame: {
+        type: Boolean,
+        default: false
+    },
+    hasNotGame: {
+        type: Boolean,
+        default: false
+    }
 })

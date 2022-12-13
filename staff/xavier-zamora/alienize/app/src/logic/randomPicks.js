@@ -31,6 +31,9 @@ export default function randomPick(token, userName, gameId) {
                     reject(new TypeError(error))
                 else if (error.includes('empty'))
                     reject(new FormatError(error))
+                else if(error.incldes('Searching')){
+                    reject(new TypeError(error))
+                }
             } else if (status === 401) {
                 const { error } = JSON.parse(json)
 
@@ -41,15 +44,13 @@ export default function randomPick(token, userName, gameId) {
                 reject(new NotFoundError(error))
             } else if (status < 500)
                 reject(new UnexpectedError('client error'))
-            else
-                reject(new UnexpectedError('server error'))
         }
         xhr.onerror = () => reject(new Error('connection error'))
 
         xhr.open('POST', 'http://localhost:2000/games/${userName}/${gameId}')
         xhr.setRequestHeader('Authorization', `Bearer ${token}`)
 
-        const payload = {gameId}
+        const payload = gameId
 
         const json = JSON.stringify(payload)
 

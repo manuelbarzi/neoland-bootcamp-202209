@@ -7,7 +7,6 @@ import createGame from '../logic/createGame'
 import { useContext } from 'react'
 import Context from '../components/Context'
 import { errors } from 'com'
-import { useNavigate } from 'react-router-dom'
 const { FormatError, AuthError, LengthError, NotFoundError } = errors
 
 function Launcher() {
@@ -46,7 +45,7 @@ function Launcher() {
   
         try{
           createGame(token, user.name)
-          .then(token => Launcher(token))
+          .then()
           .catch(error => {
             if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
             showAlert(error.message, 'warn')
@@ -56,7 +55,10 @@ function Launcher() {
             showAlert(error.message, 'fatal')
           })
         } catch (error){
-          console.log('TODO')
+            if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
+            showAlert(error.message, 'warn')
+            else
+            showAlert(error.message, 'fatal')
         }
         navPick()
       }

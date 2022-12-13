@@ -37,8 +37,6 @@ export default function retrieveUser(token) {
                 reject(new NotFoundError(error))
             } else if (status < 500)
                 reject(new UnexpectedError('client error'))
-            else
-                reject(new UnexpectedError('server error'))
         }
 
         xhr.open('GET', 'http://localhost:2000/users')

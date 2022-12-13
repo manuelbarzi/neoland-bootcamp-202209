@@ -1,30 +1,28 @@
 import { errors } from 'com'
-const { FormatError, AuthError, NotFoundError, UnexpectedError } = errors
+
+const { FormatError, NotFoundError, UnexpectedError, AuthError } = errors
 
 /**
- * enableSearchGame
- * 
  * @param {token} token The user token
- * @param {gameId} gameId The game id
  */
 
-export default function pushAliens(token, gameId) {
+
+export default function changeTurn(token) {
     if (typeof token !== 'string') throw new TypeError('token is not a string')
     if (!token.length) throw new FormatError('token is empty')
-    if(typeof gameId !== 'string') throw new TypeError('gameId is not string')
 
     return new Promise((resolve, reject) => {
-        
         const xhr = new XMLHttpRequest()
         
         xhr.onload = function () {
             const { status, responseText: json } = xhr
-
+            
             if (status === 200) {
-                const game = JSON.parse(json)
-                resolve(game)
+                const user = JSON.parse(json)
+                resolve(user)
             } else if (status === 400) {
                 const { error } = JSON.parse(json)
+
                 if (error.includes('is not a'))
                     reject(new TypeError(error))
                 else if (error.includes('empty'))
@@ -39,18 +37,10 @@ export default function pushAliens(token, gameId) {
                 reject(new NotFoundError(error))
             } else if (status < 500)
                 reject(new UnexpectedError('client error'))
-            else
-                reject(new UnexpectedError('server error'))
         }
-        xhr.onerror = () => reject(new Error('connection error'))
 
-        xhr.open('POST', 'http://localhost:2000/pushAliens/${gameId}')
+        xhr.open('GET', 'http://localhost:2000/ChangeTurn')
         xhr.setRequestHeader('Authorization', `Bearer ${token}`)
-
-        const payload = {gameId}
-
-        const json = JSON.stringify(payload)
-
-        xhr.send(json)
+        xhr.send()
     })
 }

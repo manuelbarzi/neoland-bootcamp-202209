@@ -1,38 +1,40 @@
 import log from '../utils/coolog'
 import ButtonLogReg from '../components/ButtonLogReg'
 import registerUser from '../logic/registerUser'
-import { Link, /*useNavigate*/ } from 'react-router-dom'
+import { useContext } from 'react'
+import Context from '../components/Context'
+import { Link, useNavigate } from 'react-router-dom'
+import { errors } from 'com'
+const { FormatError, AuthError, LengthError, NotFoundError, ConflictError } = errors
 
-function Register({ onNavigateToLogin }) {
+function Register() {
     log.info('Register -> render')
 
-    const handleNavigateToLogin = () => {
-        log.info('Register -> handleNavigateToLogin')
-
-        onNavigateToLogin()
-    }
+    const navigate = useNavigate()
+    const { showAlert } = useContext(Context)
 
     const handleRegister = event => {
         log.info('Register -> handleRegister')
 
         event.preventDefault()
 
-        const { name: { value: name }, email: { value: email }, password: { value: password }, repeatPassword: { value: repeatPassword }, } = event.target
+        const { name: { value: name }, email: { value: email }, password: { value: password }, repeatPassword: {value: repeatPassword} } = event.target
 
         try {
-            registerUser(name, email, password, repeatPassword, error => {
-                if (error) {
-                    alert(error.message)
-
-                    return
-                }
-
-                handleNavigateToLogin()
-            })
+            registerUser(name, email, password, repeatPassword)
+                .then(() => navigate('/login'))
+                .catch(error => {
+                    if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
+                        showAlert(error.message, 'warn')
+                    else if (error instanceof ConflictError)
+                        showAlert(error.message, 'error')
+                    else
+                        showAlert(error.message, 'fatal')
+                })
         } catch (error) {
-            alert(error.message)
+            showAlert(error.message, 'warn')
 
-            event.target.password.value = '' // TODO improve this, do not manipulate the dom directly, do it by means of React
+            event.target.password.value = ''
         }
     }
 
