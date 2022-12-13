@@ -15,7 +15,7 @@ function retrieveEvents(userId) {
                 throw new Error(`user with id ${userId} does not exist`)
    
             
-            return Event.find().sort({ date: -1 }).populate('user', '-email -password -__v').lean()
+            return Event.find().sort({ monthNumber: 1 }).populate('user', '-email -password -__v').lean()
         })
         .then(events => {
             events.forEach(event => {

@@ -9,7 +9,12 @@ module.exports = new Schema({
 
     month: {
         type: String,
-        required: true
+        required: true,
+        unique: true
+    },
+
+    monthNumber: {
+        type: Number
     },
     
     title: {

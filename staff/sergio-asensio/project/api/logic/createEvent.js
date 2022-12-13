@@ -1,7 +1,7 @@
 const { errors: { LengthError, FormatError, NotFoundError, UnexpectedError } } = require('com')
 const { User, Event } = require('../models')
 
-function createEvent(userId,month, title, body, requeriment, capacity, date, inscription, img) {
+function createEvent(userId, month, title, body, requeriment, capacity, date, inscription, img) {
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
     if (!userId.length) throw new LengthError('userId is empty')
 
@@ -28,16 +28,54 @@ function createEvent(userId,month, title, body, requeriment, capacity, date, ins
     if (typeof inscription !== 'string') throw new TypeError('inscription is not a string')
     if (inscription !== 'close' && inscription !== 'open') throw new Error('invalid inscription')
     if (!inscription.length) throw new LengthError('inscription is empty')
-    
 
-    return User.findById(userId)
-        .then(user => {
-            if (!user)
-                throw new NotFoundError(`user with id ${userId} does not exist`)
-            if (user.role !== 'admin') throw new Error('user is not able to create a event')
+    let monthNumber
 
-            return Event.create({ user: userId,month, title, body, requeriment, capacity, date, inscription, img })
-        })
+    if (month === 'january') {
+         monthNumber = 0
+    }
+    else if (month === 'february'){
+         monthNumber = 1
+    }
+    else if (month === 'march'){
+         monthNumber = 2
+    }
+    else if (month === 'april'){
+         monthNumber = 3
+    }
+    else if (month === 'may'){
+         monthNumber = 4
+    }
+    else if (month === 'june'){
+         monthNumber = 5
+    }
+    else if (month === 'july'){
+         monthNumber = 6
+    }
+    else if (month === 'agost'){
+         monthNumber = 7
+    }
+    else if (month === 'september'){
+         monthNumber = 8
+    }
+    else if (month === 'october'){
+         monthNumber = 9
+    }
+    else if (month === 'november'){
+         monthNumber = 10
+    }
+    else if (month === 'december'){
+         monthNumber = 11
+    }
+
+        return User.findById(userId)
+            .then(user => {
+                if (!user)
+                    throw new NotFoundError(`user with id ${userId} does not exist`)
+                if (user.role !== 'admin') throw new Error('user is not able to create a event')
+
+                return Event.create({ user: userId, month, monthNumber, title, body, requeriment, capacity, date, inscription, img })
+            })
 }
 
 module.exports = createEvent

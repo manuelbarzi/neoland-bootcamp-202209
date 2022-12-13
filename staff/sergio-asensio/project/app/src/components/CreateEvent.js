@@ -20,7 +20,7 @@ export default function ({ closeCreate, month}) {
 
     return <div className="bg-[#aaaa] fixed top-0 h-full w-full flex flex-col justify-center items-center overflow-hidden"
         >
-        <div className="p-5 rounded-xl w-full flex flex-col items-center bg-white dark:bg-black text-black dark:text-white" onClick={event => event.stopPropagation()}>
+        <div className="p-5 rounded-xl flex flex-col items-center bg-white dark:bg-black text-black dark:text-white" onClick={event => event.stopPropagation()}>
             <button size="1.5rem" onClick={closeCreate} className="cursor-pointer"> -X-</button>
             <form className="flex flex-col gap-2" onSubmit={submitCreateEvent}>
                 <label htmlFor="title">Title</label>
