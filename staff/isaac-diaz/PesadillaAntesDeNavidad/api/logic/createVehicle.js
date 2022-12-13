@@ -6,10 +6,10 @@ const {
         IS_ALPHABETICAL_REGEX
     }
 } = require('com')
-const { Users, Vehicles } = require('../models')
+const { User, Vehicle } = require('../models')
 
 
-function createVehicle(userId, brand, model, type, lisence, lisenceDate, kms) {
+function createVehicle(userId, brand, model, type, license, licenseDate, kms) {
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
     if (!userId.length) throw new LengthError('userId is empty')
 
@@ -23,28 +23,27 @@ function createVehicle(userId, brand, model, type, lisence, lisenceDate, kms) {
     if (!type.length) throw new LengthError('type is empty')
     if (!IS_ALPHABETICAL_REGEX.test(type)) throw new FormatError('type is not alphabetical')
 
-    if (typeof lisence !== 'string') throw new TypeError('lisence is not a string')
-    if (!lisence.length) throw new TypeError('lisence is not a string')
-    if (lisence.length > 7) throw new FormatError('lisence not granted')
+    if (typeof license !== 'string') throw new TypeError('license is not a string')
+    if (!license.length) throw new TypeError('license is not a string')
+    if (license.length > 7) throw new FormatError('license not granted')
 
-    if (typeof lisenceDate !== 'string') throw new TypeError('lisenceDate is not a string')
-    if (!lisenceDate.length) throw new LengthError('lisenceDate is empty')
+    if (licenseDate instanceof Date) throw new TypeError('licenseDate is not a date')
 
     if (typeof kms !== 'string') throw new TypeError('kms is not a string')
     if (!kms.length) throw new LengthError('kms is empty')
 
-    return Users.findById(userId)
+    return User.findById(userId)
         .then(user => {
             if (!user)
                 throw new NotFoundError(`user with id ${userId} not found`)
 
-            const vehicle = { user: userId, brand, model, type, lisence, lisenceDate, kms }
-            //TODO lisenceDate need arrive date format...
-            return Vehicles.create(vehicle)
+            const vehicle = { user: userId, brand, model, type, license, licenseDate: new Date(licenseDate), kms }
+            //TODO licenseDate need arrive date format...
+            return Vehicle.create(vehicle)               
 
                 .catch(error => {
                     if (error.message.includes('E11000'))
-                        throw new ConflictError(`vehicle with lisence ${lisence} already exist`)
+                        throw new ConflictError(`vehicle with license ${license} already exist`)
                     throw new UnexpectedError(error.message)
                 })
         })

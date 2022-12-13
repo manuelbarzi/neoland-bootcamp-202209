@@ -8,7 +8,9 @@ const registerUserHandler = require('./handlers/registerUserHandler')
 const retrieveUserHandler = require('./handlers/retrieveUserHandler')
 const createVehicleHandler = require('./handlers/createVehicleHandler')
 const retrieveVehicleHandler = require('./handlers/retrieveVehicleHandler')
+const retrieveVehiclesHandler = require('./handlers/retrieveVehiclesHandler')
 const updateVehicleHandler = require('./handlers/updateVehicleHandler')
+
 
 const jsonBodyParser = require('./utils/jsonBodyParser')
 const cors = require('./utils/cors')
@@ -27,9 +29,10 @@ mongoose.connect(MONGODB_URL)
         api.post('/users/auth', jsonBodyParser, authenticateUserHandler)
         api.post('/users', jsonBodyParser, registerUserHandler)
         api.get('/users', jwtVerifier, retrieveUserHandler)
-        api.post('/vehicles', jwtVerifier, jsonBodyParser, createVehicleHandler)
-        api.get('/vehicles/:vehicleId', jwtVerifier, retrieveVehicleHandler)  
-        api.patch('/vehicles', jwtVerifier, jsonBodyParser, updateVehicleHandler)
+        api.post('/vehicle', jwtVerifier, jsonBodyParser, createVehicleHandler)
+        api.get('/vehicle/:vehicleId', jwtVerifier, retrieveVehicleHandler)  
+        api.get('/vehicles', jwtVerifier, retrieveVehiclesHandler)
+        api.patch('/vehicle/:vehicleId', jwtVerifier, jsonBodyParser, updateVehicleHandler)
 
         const { PORT } = process.env
 

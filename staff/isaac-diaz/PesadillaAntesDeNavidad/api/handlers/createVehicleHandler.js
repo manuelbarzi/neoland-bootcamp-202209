@@ -7,9 +7,9 @@ const {
 
 module.exports = (req, res) => {
     try {
-        const { body: { brand, model, type, license, lisenceDate, kms }, userId } = req
+        const { body: { brand, model, type, license, licenseDate, kms }, userId } = req
 
-        createVehicle(userId, brand, model, type, license, lisenceDate, kms)
+        createVehicle(userId, brand, model, type, license, licenseDate, kms)
             .then(() => res.status(201).send())
             .catch(error => {
                 if (error instanceof NotFoundError)

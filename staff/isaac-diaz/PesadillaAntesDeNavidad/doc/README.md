@@ -38,3 +38,15 @@ Vehicle
 - carriageName (String)
 
 
+
+Problems
+
+-Api:
+
+-update, vehicleId no llega(no se si lo borro por el camino(no deberia) o no lo referencio bien)
+
+App:
+
+-Fuck Hooks, setState y varios, alaracion de rutas y llamadas en onClicks. Intencion de que aparezca el formulario, rellenarlo y enviar a myProfile pero que en Home te quede tu tarjeta de vehiculo con la info basica y boton de editar y borrar.
+
+No se si he de hacer para el tema de revisiones e itv componentes. 

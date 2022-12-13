@@ -19,13 +19,13 @@ module.exports = new Schema({
         type: String,
         required: true
     },
-    lisence: {
+    license: {
         type: String,
         required: true,
         unique: true
     },
-    lisenceDate: {
-        type: String,
+    licenseDate: {
+        type: Date,
         required: true,
     },
     kms: {

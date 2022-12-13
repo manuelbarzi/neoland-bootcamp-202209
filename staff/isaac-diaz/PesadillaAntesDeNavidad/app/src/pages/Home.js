@@ -5,7 +5,8 @@ import Header from '../components/Header'
 import { useContext } from 'react'
 import Context from '../components/Context'
 import { errors } from 'com'
-import Button from '../components/Button'
+import CreateVehicle from '../components/CreateVehicle'
+import TarjetVehicle from '../components/TarjetVehicle'
 
 
 const { AuthError, FormatError, LengthError, NotFoundError } = errors
@@ -17,12 +18,13 @@ function Home() {
     const [user, setUser] = useState()
     // const [vehicles, setVehicles] = useState()
     const { showAlert } = useContext(Context)
-    // const [createVehicleVisible, setCreateVehicleVisible] = useState
+    const [isCreateVehicleVisible, setCreateVehicleVisible] = useState(false)
+    const [isTarjetVehicleVisible, setTarjetVehicleVisible] = useState(false)
 
     useEffect(() => {
         try {
             retrieveUser(sessionStorage.token)
-                .then(user => setUser(user))
+                .then(() => setUser(user))
                 .catch(error => {
                     if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
                         showAlert(error.message, 'warn')
@@ -30,6 +32,12 @@ function Home() {
                         showAlert(error.message, 'error')
                     else
                         showAlert(error.message, 'fatal')
+            /*retrieveVehicles(sessionStorage.token)  
+                .then(() => setVehicles(vehicles))
+                .catch(error => alert(error.message))                  
+                                
+            */     
+                        
                 })
         } catch (error) {
             if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
@@ -39,21 +47,26 @@ function Home() {
         }
     }, [])
 
-    // const openCreateVehicle = () => setCreateVehicleVisible(true)
+    const openCreateVehicle = () => setCreateVehicleVisible(true)
 
-    // const closeCreateVehicle = () => setCreateVehicleVisible(false)
+    const closeCreateVehicle = () => setCreateVehicleVisible(false)
 
-    // const handleVehicleCreated = () => {
-    //     try {
-            
-    //         }
-    //     }
+   
+
+    const handleCreatedVehicle = () => {
+        // TODO evaluar si queremos que cuando se cree un vehículo nuevo se haga alguna otra cosa
+        TarjetVehicle()
+        closeCreateVehicle()
+    }
     
 
     return <main className='h-full overflow-hidden bg-white dark:bg-black text-black dark:text-white'>
+      {/* {isTarjetVehicleVisible && <TarjetVehicle > no se como hacer la tarjeta una vez creo el vehiculo */}
+       
+       {isCreateVehicleVisible && <CreateVehicle onClose={closeCreateVehicle} onCreated={handleCreatedVehicle} />}
         {user && <Header userName={user.name} />}
         <div className='h-full flex flex-col items-center justify-center'>
-            <button className='bg-pink-600 hover:bg-purple-600 duration-700 ease-in-out hover:scale-150 hover:shadow-rose-800 p-12 border rounded-full text-xl'>Go!</button>
+            <button onClick={openCreateVehicle} className='bg-pink-600 hover:bg-purple-600 duration-700 ease-in-out hover:scale-150 hover:shadow-rose-800 p-12 border rounded-full text-xl'>Go!</button>
         </div>
 
     </main>
