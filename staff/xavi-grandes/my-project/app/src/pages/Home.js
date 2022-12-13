@@ -24,8 +24,7 @@ export default function Home() {
   useEffect(() => {
     try {
       retrieveUser(sessionStorage.token)
-        .then((user) => {
-          setUser(user)
+        .then((user) => {setUser(user)
         
           return retrieveLists(sessionStorage.token)
         })
