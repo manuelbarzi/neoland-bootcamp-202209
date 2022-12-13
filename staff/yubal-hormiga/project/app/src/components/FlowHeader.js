@@ -7,17 +7,17 @@ function Flow({ pension, setPension, isValidPension, setIsValidPension }) {
                 <div className="flex justify-around">
                     <div className=' w-20 font-semibold text-lg'>
                         <p>
-                            <span>Presupuesto:</span>{pension}
+                            <span>Presupuesto:</span>{pension}€
                         </p>
                     </div>
                     <div className=' w-20 font-semibold text-lg'>
                         <p>
-                            <span>Gastado:</span>{pension}
+                            <span>Gastado:</span>{pension}€
                         </p>
                     </div>
                     <div className=' w-20 font-semibold text-lg' >
                         <p>
-                            <span>Disponible:</span>{pension}
+                            <span>Disponible:</span>{pension}€
                         </p>
                     </div>
                 </div>

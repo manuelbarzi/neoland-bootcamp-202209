@@ -1,8 +1,8 @@
 import log from '../utils/coolog'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import createAppointment from '../logic/createAppointment'
 
-function AppointmentForm({ onNewAppointment, }) {
+function AppointmentForm({ onNewAppointment, setAppointments, appointment }) {//!setAppointments
     log.info('AppoimentForm -> render')
 
     //*States */
@@ -15,6 +15,15 @@ function AppointmentForm({ onNewAppointment, }) {
     const handleChangeDate = event => setDate(event.target.value)
     const handleChangeText = event => setBody(event.target.value)
 
+    
+    useEffect(()=>{
+        setTitle(appointment.title)
+        setDate(appointment.date)
+        setBody(appointment.body)
+
+//    console.log( Object.keys(appointment))
+    },[appointment])
+  
     const submitCreateAppointment = event => {
         event.preventDefault()
         // console.log('writing')
@@ -38,7 +47,10 @@ function AppointmentForm({ onNewAppointment, }) {
         setTitle('')
         setDate('')
         setBody('')
+
+        setAppointments(appointment)//?
     }
+
     return <>
         <form className=' rounded-lg p-2 mb-4 ' onSubmit={submitCreateAppointment}>
             <div className='flex justify-evenly gap-2'>
@@ -49,7 +61,7 @@ function AppointmentForm({ onNewAppointment, }) {
                 </div>
                 <div className='flex shadow-md mb-3'>
                     <label htmlFor='date' className='flex justify-start w-20 font-semibold text-lg'>Fecha</label>
-                    <input type="datetime-local" className=' font-semibold text-lg text-center' value={date} onChange={handleChangeDate} />
+                    <input type="datetime-local" className=' font-semibold text-lg text-center' value={date} onChange={handleChangeDate}/>
 
                 </div>
             </div>

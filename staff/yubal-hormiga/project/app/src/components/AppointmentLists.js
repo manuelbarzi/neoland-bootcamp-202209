@@ -2,11 +2,16 @@ import log from '../utils/coolog'
 import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai'
 import { useEffect, useState } from 'react'
 import retrieveAppointments from '../logic/retrieveAppointments'
+// import UpdateAppointment from './UpdateAppointment'
 
-function AppointmentLists({ appointmentsChange }) {
+
+function AppointmentLists({ appointmentsChange,appointment, setAppointment }) {
   // console.log(appointments)
+
   const [appointments, setAppointments] = useState([])
-  log.info('AppoimentLists -> render')
+  // const[updateAppointment,setUpdateAppointment] = useState()
+
+  // log.info('AppoimentLists -> render')
 
   useEffect(() => {
     retrieveAppointmentsHandler()
@@ -15,6 +20,8 @@ function AppointmentLists({ appointmentsChange }) {
   useEffect(() => {
     retrieveAppointmentsHandler()
   }, [appointmentsChange])
+
+
 
   const retrieveAppointmentsHandler = () => {
     try {
@@ -25,6 +32,10 @@ function AppointmentLists({ appointmentsChange }) {
       alert(error.message)
     }
   }
+
+  // const handlerOpenAppointment = ()=>{
+  //   setUpdateAppointment(true)
+  // }
   return <>
 
     {appointments.map((appointment) => {
@@ -45,7 +56,7 @@ function AppointmentLists({ appointmentsChange }) {
 
           <div className=''>
             <div className='flex flex-col self-end gap-1'>
-              <button className='bg-green-400  rounded-md p-1' type='button'><AiOutlineEdit size='1rem' /></button>
+              <button onClick={()=>setAppointment(appointment)} className='bg-green-400  rounded-md p-1' type='button'><AiOutlineEdit size='1rem' /></button>
               <button className='bg-red-600  rounded-md p-1' type='button'><AiOutlineDelete size='1rem' /></button>
             </div>
           </div>
@@ -54,7 +65,7 @@ function AppointmentLists({ appointmentsChange }) {
 
       )
     })}
-
+    {/* {updateAppointment && <UpdateAppointment />} */}
   </>
 
 }
