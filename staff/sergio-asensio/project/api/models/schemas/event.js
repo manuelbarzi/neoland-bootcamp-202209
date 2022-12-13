@@ -6,6 +6,12 @@ module.exports = new Schema({
         type: ObjectId,
         ref: 'User'
     },
+
+    month: {
+        type: String,
+        required: true
+    },
+    
     title: {
         type: String,
         required: true

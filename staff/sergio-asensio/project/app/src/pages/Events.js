@@ -1,7 +1,6 @@
 import log from '../utils/coolog'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import  CreateEvent from '../components/CreateEvent'
 import { errors } from 'com'
 import retrieveUser from '../logic/retrieveUser'
 import Context from '../components/Context'
@@ -40,64 +39,109 @@ function Events() {
         }
 
     }, [])
-    const [view, setView] = useState()
-    const [january, setJanuary] = useState()
-    // const [february, setFebruary] = useState()
-
  
     const navigate = useNavigate()
     const goHome = () => {
         navigate('/')
     }
 
-    const goBack = () => {
-        setView()
-    }
-
-    const handlerJanuary = () => {
-        setJanuary(true)
-        setView(true)
-    }
-    const handlerFebruary = () => {
-        setView(true)
+    const handlerMonth=(month) => {
+        navigate(`/events/${month}`)
     }
 
     return <main className="h-full">
         <header className='h-1/6 top-0 flex justify-around items-center bg-teal-600	'>
         <h1>12 MESES, 12 ACTIVIDADES</h1>
                 <button onClick={goHome} >HOME</button>
-                {view && <button onClick={goBack} >BACK</button>}
         </header>
-        
-        
-        {!view &&<div className="grid grid-cols-2 gap-4 p-4">
-            <button onClick={handlerJanuary}>
+        <div className="grid grid-cols-2 gap-4 p-4">
+
+            <button onClick={()=>handlerMonth('january')}>
             <div className='border rounded-xl h-36 p-2'>
                 <h1>ENERO</h1>
                 <p>title</p>
                 <p>resumen</p>
             </div></button>
 
-
-           <button onClick={handlerFebruary}> <div className='border rounded-xl h-36 p-2'>
+            <button onClick={()=>handlerMonth('february')}>
+            <div className='border rounded-xl h-36 p-2'>
                 <h1>FEBRERO</h1>
                 <p>title</p>
                 <p>resumen</p>
-                </div></button>
+            </div></button>
+
+            <button onClick={()=>handlerMonth('march')}>
+            <div className='border rounded-xl h-36 p-2'>
+                <h1>MARZO</h1>
+                <p>title</p>
+                <p>resumen</p>
+            </div></button>
+
+            <button onClick={()=>handlerMonth('april')}>
+            <div className='border rounded-xl h-36 p-2'>
+                <h1>ABRIL</h1>
+                <p>title</p>
+                <p>resumen</p>
+            </div></button>
+
+            <button onClick={()=>handlerMonth('may')}>
+            <div className='border rounded-xl h-36 p-2'>
+                <h1>MAYO</h1>
+                <p>title</p>
+                <p>resumen</p>
+            </div></button>
+
+            <button onClick={()=>handlerMonth('june')}>
+            <div className='border rounded-xl h-36 p-2'>
+                <h1>JUNIO</h1>
+                <p>title</p>
+                <p>resumen</p>
+            </div></button>
+       
+            <button onClick={()=>handlerMonth('july')}>
+            <div className='border rounded-xl h-36 p-2'>
+                <h1>JULIO</h1>
+                <p>title</p>
+                <p>resumen</p>
+            </div></button>
             
-            <div className='border rounded-xl h-36 p-2'>MARZO</div>
-            <div className='border rounded-xl h-36 p-2'>ABRIL</div>
-            <div className='border rounded-xl h-36 p-2'>MAYO</div>
-            <div className='border rounded-xl h-36 p-2'>JUNIO</div>
-            <div className='border rounded-xl h-36 p-2'>JULIO</div>
-            <div className='border rounded-xl h-36 p-2'>AGOSTO</div>
-            <div className='border rounded-xl h-36 p-2'>SEPTIEMBRE</div>
-            <div className='border rounded-xl h-36 p-2'>OCTUBRE</div>
-            <div className='border rounded-xl h-36 p-2'>NOVIEMBRE</div>
-            <div className='border rounded-xl h-36 p-2'>DICIEMBRE</div>
-        </div>}
+            <button onClick={()=>handlerMonth('august')}>
+            <div className='border rounded-xl h-36 p-2'>
+                <h1>AGOSTO</h1>
+                <p>title</p>
+                <p>resumen</p>
+            </div></button>
+           
+            <button onClick={()=>handlerMonth('september')}>
+            <div className='border rounded-xl h-36 p-2'>
+                <h1>SEPTIEMBRE</h1>
+                <p>title</p>
+                <p>resumen</p>
+            </div></button>
+    
+            <button onClick={()=>handlerMonth('october')}>
+            <div className='border rounded-xl h-36 p-2'>
+                <h1>OCTUBRE</h1>
+                <p>title</p>
+                <p>resumen</p>
+            </div></button>
+
+            <button onClick={()=>handlerMonth('november')}>
+            <div className='border rounded-xl h-36 p-2'>
+                <h1>NOVIEMBRE</h1>
+                <p>title</p>
+                <p>resumen</p>
+            </div></button>
+
+            <button onClick={()=>handlerMonth('december')}>
+            <div className='border rounded-xl h-36 p-2'>
+                <h1>DICIEMBRE</h1>
+                <p>title</p>
+                <p>resumen</p>
+            </div></button>
+        </div>
         
-        {january && <CreateEvent closeCreate={() => setJanuary()}/>}
+        {/* {january && <CreateEvent closeCreate={() => setJanuary()}/>} */}
 
     </main>
 

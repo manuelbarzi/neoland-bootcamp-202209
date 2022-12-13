@@ -8,9 +8,13 @@ const { FormatError, NotFoundError, UnexpectedError, AuthError, LengthError} = e
  * @param {string} title The notice title
  * @param {string} body The notice body
  */
-export default function (token, title, body, requeriment, capacity, date, inscription, img) {
+export default function (token,month, title, body, requeriment, capacity, date, inscription, img) {
     if (typeof token !== 'string') throw new TypeError('token is not a string')
     if (!token.length) throw new LengthError('token is empty')
+
+    if (typeof month !== 'string') throw new TypeError('month is not a string')
+    if (!month.length) throw new LengthError('month is empty')
+    if (month !== 'january' && month !== 'february' && month !== 'march' && month !== 'april' && month !== 'may' && month !== 'june' && month !== 'july' && month !== 'august' && month !== 'september' && month !== 'october' && month !== 'november' && month !== 'december') throw new Error('its not a month')
 
     if (typeof title !== 'string') throw new TypeError('title is not a string')
     if (!title.length) throw new LengthError('title is empty')
@@ -58,7 +62,7 @@ export default function (token, title, body, requeriment, capacity, date, inscri
         xhr.setRequestHeader('Authorization', `Bearer ${token}`)
         xhr.setRequestHeader('Content-Type', 'application/json')
 
-        const payload = { title, body, requeriment, capacity, date, inscription, img  }
+        const payload = { month, title, body, requeriment, capacity, date, inscription, img  }
 
         const json = JSON.stringify(payload)
 

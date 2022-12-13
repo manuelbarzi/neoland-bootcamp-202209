@@ -1,14 +1,15 @@
+import { useEffect } from 'react'
 import createEvent from '../logic/createEvent'
 
 
-export default function ({ closeCreate }) {
+export default function ({ closeCreate, month}) {
     const submitCreateEvent = event => {
         event.preventDefault()
 
-        const { title: { value: title }, body: { value: body }, requeriment: { value: requeriment }, capacity: { value: capacity }, date: { value: date }, inscription: { value:inscription }  } = event.target
-
+        const {title: { value: title }, body: { value: body }, requeriment: { value: requeriment }, capacity: { value: capacity }, date: { value: date }, inscription: { value:inscription }  } = event.target
+        
         try {
-            createEvent(sessionStorage.token, title, body, requeriment, Number(capacity), Date(date), inscription)
+            createEvent(sessionStorage.token,month, title, body, requeriment, Number(capacity), Date(date), inscription)
                 // .then(() => onCreated())
                 .then(() => closeCreate())
                 .catch(error => alert(error.message))
@@ -39,8 +40,6 @@ export default function ({ closeCreate }) {
                 
                 <label htmlFor="inscription">Inscription</label>
                 <input className="text-black pl-2" type="text" name="inscription" id="inscription" placeholder="iinscription"></input>
-                
-
                 
 
                 <button>Create</button>
