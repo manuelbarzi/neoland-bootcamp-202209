@@ -1,18 +1,18 @@
 const {
     errors: { NotFoundError, ConflictError },
     validators: { stringValidator, languagesValidator, experienceValidator, ofStudyValidator, knowledgeValidator, 
-        modalityValidator, numberValidator, workTimeValidator }
+        modalityValidator, salaryValidator, workTimeValidator, descriptionValidator }
 } = require('com')
 const { Offers, Users } = require('../models')
 
 module.exports = function createOffer(userId, title, description, photo, modality, location, salary, workTime, languages, studies, experiences, knowledges) {
     stringValidator(userId, 'userId')
     if (title) stringValidator(title, 'title')
-    if (description) stringValidator(description, 'description')
+    if (description) descriptionValidator(description)
     if (photo) stringValidator(photo, 'photo')
     if (modality) modalityValidator(modality)
     if (location) stringValidator(location)
-    if (salary) numberValidator(salary)
+    if (salary) salaryValidator(salary)
     if (workTime) workTimeValidator(workTime)
     if (languages) languagesValidator(languages)
     if (studies) ofStudyValidator(studies)

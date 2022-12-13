@@ -1,9 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import updateOffer from '../logic/updateOffer'
+import errorHandling from '../utils/errorHandling'
 import Button from './Button'
+import { Context } from './Context'
 
 function UpdateStudyOffer({ className, onUpdateStudyOfferClose, onUpdateStudyOffer, offerStudyData }) {
     const [studies, setStudies] = useState(offerStudyData.studies)
+
+    const { showAlert } = useContext(Context)
 
     useEffect(() => {
         document.body.style.overflow = 'hidden'
@@ -32,10 +36,14 @@ function UpdateStudyOffer({ className, onUpdateStudyOfferClose, onUpdateStudyOff
         try {
             updateOffer(sessionStorage.token, offerStudyData.offerId, offerStudyData.offerUserId, { studies })
                 .then(() => onUpdateStudyOffer())
-                .catch(error => alert(error.message))
+                .catch(error => {
+                    const { errorMessage, type } = errorHandling(error)
+                    showAlert(errorMessage, type)
+                })
 
         } catch (error) {
-            alert(error.message)
+            const { errorMessage, type } = errorHandling(error)
+            showAlert(errorMessage, type)
         }
     }
 

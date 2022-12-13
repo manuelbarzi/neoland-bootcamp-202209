@@ -2,17 +2,17 @@ import { errors, validators } from 'com'
 
 const { LengthError, NotFoundError, UnexpectedError, ConflictError } = errors
 const { stringValidator, languagesValidator, ofStudyValidator, ofExperienceValidator, 
-    knowledgeValidator, modalityValidator, numberValidator, workTimeValidator } = validators
+    knowledgeValidator, modalityValidator, salaryValidator, workTimeValidator, titleValidator, descriptionValidator } = validators
 
 
 function createOffer(token, { title, description, photo, modality, location, salary, workTime, languages, studies, experiences, knowledges } = {}) {
     stringValidator(token, 'token')
-    if (title) stringValidator(title, 'title')
-    if (description) stringValidator(description, 'description')
+    if (title) titleValidator(title)
+    if (description) descriptionValidator(description, 'description')
     if (photo) stringValidator(photo, 'photo')
     if (modality) modalityValidator(modality)
     if (location) stringValidator(location)
-    if (salary) numberValidator(salary)
+    if (salary) salaryValidator(salary)
     if (workTime) workTimeValidator(workTime)
     if (languages) languagesValidator(languages)
     if (studies) ofStudyValidator(studies)

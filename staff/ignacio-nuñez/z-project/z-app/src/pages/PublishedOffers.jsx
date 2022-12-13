@@ -4,11 +4,12 @@ import { Context } from "../components/Context"
 import retrievePublishedOffers from "../logic/retrievePublishedOffers"
 import { format } from 'timeago.js'
 import Button from "../components/Button"
+import errorHandling from "../utils/errorHandling"
 
 function PublishedOffers() {
     const [offers, setOffers] = useState([])
 
-    const { user } = useContext(Context)
+    const { user, showAlert } = useContext(Context)
 
     useEffect(() => {
         try {
@@ -16,11 +17,15 @@ function PublishedOffers() {
                 .then(offers => {
                     setOffers(offers)
                 })
-                .catch(error => alert(error.message))
+                .catch(error => {
+                    const { errorMessage, type } = errorHandling(error)
+                    showAlert(errorMessage, type)
+                })
         } catch (error) {
-            alert(error.message)
+            const { errorMessage, type } = errorHandling(error)
+            showAlert(errorMessage, type)
         }
-    },[])
+    }, [])
 
     const userName = user && user.name
 
@@ -87,7 +92,7 @@ function PublishedOffers() {
                                         </div>
                                     }
                                 </div>
-                                    <p className="self-end p-1">{format(offer.createDate)}</p>
+                                <p className="self-end p-1">{format(offer.createDate)}</p>
                             </div>
                             <div className='z-10 flex justify-between gap-4 p-1 mb-2'>
                                 <Button className="text-lg font-semibold bg-red-400 w-1/2">X</Button>

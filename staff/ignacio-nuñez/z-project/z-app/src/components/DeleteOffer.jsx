@@ -1,8 +1,12 @@
-import { useEffect } from 'react'
+import { useEffect, useContext } from 'react'
 import deleteOffer from '../logic/deleteOffer'
+import errorHandling from '../utils/errorHandling'
 import Button from './Button'
+import { Context } from './Context'
 
 function DeleteOffer({ className, offerToDelete, onDeleteOffer, onDeleteOfferClose }) {
+    const { showAlert } = useContext(Context)
+
     useEffect(() => {
         document.body.style.overflow = 'hidden'
 
@@ -13,9 +17,13 @@ function DeleteOffer({ className, offerToDelete, onDeleteOffer, onDeleteOfferClo
         try {
             deleteOffer(sessionStorage.token, offerToDelete.id, offerToDelete.userId)
                 .then(() => onDeleteOffer())
-                .catch(error => alert(error.message))
+                .catch(error => {
+                    const { errorMessage, type } = errorHandling(error)
+                    showAlert(errorMessage, type)
+                })
         } catch (error) {
-            alert(error.message)
+            const { errorMessage, type } = errorHandling(error)
+            showAlert(errorMessage, type)
         }
     }
 

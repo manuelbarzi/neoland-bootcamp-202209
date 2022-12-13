@@ -1,17 +1,21 @@
-import { useEffect } from 'react'
+import { useEffect, useContext } from 'react'
 import updateOffer from '../logic/updateOffer'
+import errorHandling from '../utils/errorHandling'
 import Button from './Button'
+import { Context } from './Context'
 
 function PublishOffer({ className, offerToPublish, onPublishOffer, onPublishOfferClose }) {
+    const { showAlert } = useContext(Context)
+
     useEffect(() => {
         document.body.style.overflow = 'hidden'
 
         return () => document.body.style = ''
     })
 
-    const isPublishedParraf = offerToPublish.published ? 'You want to unpublish this offer?': 'You want to publish this offer?'
+    const isPublishedParraf = offerToPublish.published ? 'You want to unpublish this offer?' : 'You want to publish this offer?'
 
-    const isPublishedButton = offerToPublish.published ? 'Yes, unpublish': 'Yes, publish'
+    const isPublishedButton = offerToPublish.published ? 'Yes, unpublish' : 'Yes, publish'
 
     const confirmPublishOffer = () => {
         try {
@@ -19,9 +23,13 @@ function PublishOffer({ className, offerToPublish, onPublishOffer, onPublishOffe
 
             updateOffer(sessionStorage.token, offerToPublish.id, offerToPublish.userId, { published })
                 .then(() => onPublishOffer())
-                .catch(error => alert(error.message))
+                .catch(error => {
+                    const { errorMessage, type } = errorHandling(error)
+                    showAlert(errorMessage, type)
+                })
         } catch (error) {
-            alert(error.message)
+            const { errorMessage, type } = errorHandling(error)
+            showAlert(errorMessage, type)
         }
     }
 

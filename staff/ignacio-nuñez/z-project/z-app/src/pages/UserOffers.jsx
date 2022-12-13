@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import NavBar from "../components/NavBar"
 import { format } from 'timeago.js'
 import retrieveUserOffers from "../logic/retrieveUserOffers"
@@ -7,11 +7,15 @@ import { Link, useNavigate } from "react-router-dom"
 import createOffer from "../logic/createOffer"
 import Button from "../components/Button"
 import PublishOffer from "../components/PublishOffer"
+import { Context } from "../components/Context"
+import errorHandling from "../utils/errorHandling"
 
 function UserOffers() {
     const [offers, setOffers] = useState([])
     const [offerToDelete, setOfferToDelete] = useState()
     const [offerToPublish, setOfferToPublish] = useState()
+
+    const { showAlert } = useContext(Context)
 
     const navigate = useNavigate()
 
@@ -41,9 +45,13 @@ function UserOffers() {
         try {
             retrieveUserOffers(sessionStorage.token)
                 .then(offers => setOffers(offers))
-                .catch(error => alert(error.message))
+                .catch(error => {
+                    const { errorMessage, type } = errorHandling(error)
+                    showAlert(errorMessage, type)
+                })
         } catch (error) {
-            alert(error.message)
+            const { errorMessage, type } = errorHandling(error)
+            showAlert(errorMessage, type)
         }
     }
 
@@ -55,9 +63,13 @@ function UserOffers() {
 
             createOffer(sessionStorage.token, { title })
                 .then(offerId => navigate(`/offers/${offerId}`))
-                .catch(error => alert(error.message))
+                .catch(error => {
+                    const { errorMessage, type } = errorHandling(error)
+                    showAlert(errorMessage, type)
+                })
         } catch (error) {
-            alert(error.message)
+            const { errorMessage, type } = errorHandling(error)
+            showAlert(errorMessage, type)
         }
     }
 
@@ -80,7 +92,7 @@ function UserOffers() {
                             <hr className="w-full border-black mt-3.5" />
                             <div className='z-10 flex justify-between gap-4 mt-2'>
                                 <Button className="text-md bg-red-400 w-1/2" onClick={() => onDeleteOfferClick(offer.id, offer.user.id)}>Delete</Button>
-                                <Button className="text-md bg-green-400 w-1/2" onClick={() => onPublishOfferClick(offer.id, offer.user.id, offer.published)}>{offer.published ? 'Unpublish': 'Publish'}</Button>
+                                <Button className="text-md bg-green-400 w-1/2" onClick={() => onPublishOfferClick(offer.id, offer.user.id, offer.published)}>{offer.published ? 'Unpublish' : 'Publish'}</Button>
                             </div>
                         </article>
                     })}

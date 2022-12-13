@@ -11,6 +11,7 @@ import OfferDetail from "./pages/OfferDetail";
 import PublishedOffers from "./pages/PublishedOffers";
 import UserCurriculums from "./pages/UserCurriculums";
 import Alert from './components/Alert'
+import errorHandling from "./utils/errorHandling";
 
 function App() {
   const [user, setUser] = useState()
@@ -30,9 +31,13 @@ function App() {
     try {
       retrieveUser(sessionStorage.token)
         .then(user => setUser(user))
-        .catch(error => alert(error.message))
+        .catch(error => {
+          const { errorMessage, type } = errorHandling(error)
+          showAlert(errorMessage, type)
+        })
     } catch (error) {
-      alert(error.message)
+      const { errorMessage, type } = errorHandling(error)
+      showAlert(errorMessage, type)
     }
   }
 
@@ -40,12 +45,12 @@ function App() {
     retrieveUserHandler()
   }
 
-  
+
   const showAlert = (message, level = 'error') => {
     setMessage(message)
     setLevel(level)
   }
-  
+
   const closeAlert = () => setMessage()
 
   return (
@@ -61,14 +66,14 @@ function App() {
           element={sessionStorage.token ? <Home /> : <Navigate replace to="/login"
           />}
         />}
-          {<Route path="/offers"
-          element={sessionStorage.token ? <PublishedOffers/> : <Navigate replace to="/login"
+        {<Route path="/offers"
+          element={sessionStorage.token ? <PublishedOffers /> : <Navigate replace to="/login"
           />}
         />}
         {<Route path="/user/profile"
-          element={!sessionStorage.token ? <Navigate replace to="/login"/> : user?.role === 'company' ? <UserOffers /> : 
-          user?.role === 'worker'? <UserCurriculums />: null}
-          />}
+          element={!sessionStorage.token ? <Navigate replace to="/login" /> : user?.role === 'company' ? <UserOffers /> :
+            user?.role === 'worker' ? <UserCurriculums /> : null}
+        />}
         {<Route path="/offers/:offerId"
           element={sessionStorage.token ? <OfferDetail /> : <Navigate replace to="/login"
           />}

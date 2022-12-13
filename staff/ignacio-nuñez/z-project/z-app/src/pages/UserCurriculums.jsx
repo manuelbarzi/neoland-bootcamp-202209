@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import NavBar from "../components/NavBar"
 import { format } from 'timeago.js'
 import retrieveUserOffers from "../logic/retrieveUserOffers"
@@ -7,12 +7,16 @@ import { Link } from "react-router-dom"
 import createOffer from "../logic/createOffer"
 import Button from "../components/Button"
 import PublishOffer from "../components/PublishOffer"
+import errorHandling from "../utils/errorHandling"
+import { Context } from "../components/Context"
 
 function UserCurriculums() {
     const [offers, setOffers] = useState([])
     const [offerToDelete, setOfferToDelete] = useState()
     const [offerToCreate, setOfferToCreate] = useState()
     const [offerToPublish, setOfferToPublish] = useState()
+
+    const { showAlert } = useContext(Context)
 
     useEffect(() => {
         retrieveOfferHandler()
@@ -40,9 +44,13 @@ function UserCurriculums() {
         try {
             retrieveUserOffers(sessionStorage.token)
                 .then(offers => setOffers(offers))
-                .catch(error => alert(error.message))
+                .catch(error => {
+                    const { errorMessage, type } = errorHandling(error)
+                    showAlert(errorMessage, type)
+                })
         } catch (error) {
-            alert(error.message)
+            const { errorMessage, type } = errorHandling(error)
+            showAlert(errorMessage, type)
         }
     }
 
@@ -60,16 +68,20 @@ function UserCurriculums() {
 
             createOffer(sessionStorage.token, { title, description })
                 .then(() => onCreateOffer())
-                .catch(error => alert(error.message))
+                .catch(error => {
+                    const { errorMessage, type } = errorHandling(error)
+                    showAlert(errorMessage, type)
+                })
         } catch (error) {
-            alert(error.message)
+            const { errorMessage, type } = errorHandling(error)
+            showAlert(errorMessage, type)
         }
     }
 
 
     return <main className="min-h-screen bg-slate-100">
         <NavBar
-        /> 
+        />
         <div className="flex items-center flex-col">
             <div className="w-full flex items-center flex-col mt-28">
                 <div onClick={onCreateOfferClick} className="flex justify-center items-center font-semibold text-lg border-2 shadow-sm shadow-slate-600 w-5/6 h-20 z-10 rounded-xl bg-emerald-300 cursor-pointer">
@@ -87,7 +99,7 @@ function UserCurriculums() {
                             <hr className="w-full border-black mt-3.5" />
                             <div className='z-10 flex justify-between gap-4 mt-2'>
                                 <Button className="text-md bg-red-400 w-1/2" onClick={() => onDeleteOfferClick(offer.id, offer.user.id)}>Delete</Button>
-                                <Button className="text-md bg-green-400 w-1/2" onClick={() => onPublishOfferClick(offer.id, offer.user.id, offer.published)}>{offer.published ? 'Unpublish': 'Publish'}</Button>
+                                <Button className="text-md bg-green-400 w-1/2" onClick={() => onPublishOfferClick(offer.id, offer.user.id, offer.published)}>{offer.published ? 'Unpublish' : 'Publish'}</Button>
                             </div>
                         </article>
                     })}

@@ -1,8 +1,12 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import updateOffer from '../logic/updateOffer'
+import errorHandling from '../utils/errorHandling'
 import Button from './Button'
+import { Context } from './Context'
 
 function UpdateKnowledgeOffer({ className, onUpdateKnowledgeOfferClose, onUpdateKnowledgeOffer, offerKnowledgeData }) {
+    const { showAlert } = useContext(Context)
+
     const [knowledges, setKnowledges] = useState(offerKnowledgeData.knowledges)
 
     useEffect(() => {
@@ -33,10 +37,13 @@ function UpdateKnowledgeOffer({ className, onUpdateKnowledgeOfferClose, onUpdate
         try {
             updateOffer(sessionStorage.token, offerKnowledgeData.offerId, offerKnowledgeData.offerUserId, { knowledges })
                 .then(() => onUpdateKnowledgeOffer())
-                .catch(error => alert(error.message))
-
+                .catch(error => {
+                    const { errorMessage, type } = errorHandling(error)
+                    showAlert(errorMessage, type)
+                })
         } catch (error) {
-            alert(error.message)
+            const { errorMessage, type } = errorHandling(error)
+            showAlert(errorMessage, type)
         }
     }
 

@@ -2,9 +2,7 @@ import authenticateUser from "../logic/authenticateUser"
 import { Link, useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { Context } from "../components/Context"
-import { errors } from 'com'
-const { FormatError, AuthError, LengthError, NotFoundError } = errors
-
+import errorHandling from "../utils/errorHandling"
 
 function Login({ onLoggedIn }) {
     const navigate = useNavigate()
@@ -26,20 +24,16 @@ function Login({ onLoggedIn }) {
                     navigate('/')
                 })
                 .catch(error => {
-                    if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
-                        showAlert(error.message, 'warn')
-                    else if (error instanceof AuthError || error instanceof NotFoundError)
-                        showAlert(error.message, 'error')
-                    else
-                        showAlert(error.message, 'fatal')
+                    const { errorMessage, type } = errorHandling(error)
+
+                    showAlert(errorMessage, type)
 
                     event.target.password.value = ''
                 })
         } catch (error) {
-            if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
-                showAlert(error.message, 'warn')
-            else
-                showAlert(error.message, 'fatal')
+                    const { errorMessage, type } = errorHandling(error)
+
+                    showAlert(errorMessage, type)
 
             event.target.password.value = ''
         }

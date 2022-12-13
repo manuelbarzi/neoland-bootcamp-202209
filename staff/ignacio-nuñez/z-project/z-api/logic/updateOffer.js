@@ -1,19 +1,19 @@
 const {
     errors: { NotFoundError, ConflictError },
     validators: { stringValidator, languagesValidator, ofStudyValidator, experienceValidator, 
-        knowledgeValidator, booleanValidator, modalityValidator, numberValidator, workTimeValidator }
-} = require('com')
+        knowledgeValidator, booleanValidator, modalityValidator, salaryValidator, workTimeValidator, 
+        titleValidator, descriptionValidator } } = require('com')
 const { Users, Offers } = require('../models')
 
 module.exports = function updateOffer(userId, offerId, title, description, photo, modality, location, salary, workTime, languages, studies, experiences, knowledges, published) {
     stringValidator(userId, 'userId')
     stringValidator(offerId, 'offerId')
-    if (title) stringValidator(title, 'title')
-    if (description) stringValidator(description, 'description')
+    if (title) titleValidator(title, 'title')
+    if (description) descriptionValidator(description)
     if (photo) stringValidator(photo, 'photo')
     if (modality) modalityValidator(modality)
     if (location) stringValidator(location)
-    if (salary) numberValidator(salary)
+    if (salary) salaryValidator(salary)
     if (workTime) workTimeValidator(workTime)
     if (languages) languagesValidator(languages)
     if (studies) ofStudyValidator(studies)

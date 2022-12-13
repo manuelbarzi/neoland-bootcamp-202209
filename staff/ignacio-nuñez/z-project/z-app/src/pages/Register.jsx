@@ -1,31 +1,39 @@
 import registerUser from "../logic/registerUser"
-import { Link, useNavigate} from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { Context } from "../components/Context"
+import { useContext } from 'react'
+import errorHandling from "../utils/errorHandling"
 
 function Register() {
     const navigate = useNavigate()
+    const { showAlert } = useContext(Context)
 
     const onRegisterUser = event => {
         event.preventDefault()
 
-        const {name:{value:name}, email: {value:email}, password:{value:password}, role: { value: role}} = event.target
+        const { name: { value: name }, email: { value: email }, password: { value: password }, role: { value: role } } = event.target
 
         try {
             registerUser(name, email, password, role)
-            .then(() =>{
-                alert('user correctly registered')
+                .then(() => {
+                    showAlert('user correctly registered', 'info')
 
-                navigate('/login')
-            })
-            .catch(error =>{
-                alert(error.message)
+                    navigate('/login')
+                })
+                .catch(error => {
+                    const { errorMessage, type } = errorHandling(error)
 
-                event.target.password.value = ''
-            })
+                    showAlert(errorMessage, type)
+
+                    event.target.password.value = ''
+                })
         } catch (error) {
-            alert(error.message)
+            const { errorMessage, type } = errorHandling(error)
+
+            showAlert(errorMessage, type)
 
             event.target.password.value = ''
-        }
+        }   
     }
 
     return <div className="flex h-screen justify-center items-center bg-slate-100">
@@ -39,9 +47,9 @@ function Register() {
             <input className="outline-none p-1 w-full rounded-lg bg-slate-100" type="password" placeholder="Input you password" name="password" id="password" />
             <p className="self-start">Select your Role</p>
             <select id="role" name="role" className="w-2/4 rounded-lg p-1 self-start">
-                        <option value="worker">Worker</option>
-                        <option value="company">Company</option>
-                    </select>
+                <option value="worker">Worker</option>
+                <option value="company">Company</option>
+            </select>
             <button className="p-1 rounded-lg mt-3.5 w-full bg-slate-100">Register</button>
             <hr className="w-full border-black mt-3.5" />
             <div className="div-register mt-2">
@@ -50,6 +58,6 @@ function Register() {
             </div>
         </form>
     </div>
-}       
+}
 
 export default Register

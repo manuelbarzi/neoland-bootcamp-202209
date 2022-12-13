@@ -1,9 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import updateOffer from '../logic/updateOffer'
+import errorHandling from '../utils/errorHandling'
 import Button from './Button'
+import { Context } from './Context'
 
 function UpdateLanguageOffer({ className, onUpdateLanguageOfferClose, onUpdateLanguageOffer, offerLanguageData }) {
     const [languages, setLanguages] = useState(offerLanguageData.languages)
+
+    const { showAlert } = useContext(Context)
 
     useEffect(() => {
         document.body.style.overflow = 'hidden'
@@ -33,11 +37,15 @@ function UpdateLanguageOffer({ className, onUpdateLanguageOfferClose, onUpdateLa
         try {
             updateOffer(sessionStorage.token, offerLanguageData.offerId, offerLanguageData.offerUserId, { languages })
                 .then(() => onUpdateLanguageOffer())
-                .catch(error => alert(error.message))
+                .catch(error => {
+                    const { errorMessage, type } = errorHandling(error)
+                    showAlert(errorMessage, type)
+                })
 
         } catch (error) {
-            alert(error.message)
-        }
+            const { errorMessage, type } = errorHandling(error)
+            showAlert(errorMessage, type)
+}
     }
 
     const closeLanguageOfferHandler = () => {

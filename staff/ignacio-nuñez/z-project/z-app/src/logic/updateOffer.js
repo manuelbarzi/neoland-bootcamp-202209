@@ -2,20 +2,21 @@ import { errors, validators } from 'com'
 import extractSubFromToken from '../utils/extractSubFromToken'
 
 const { LengthError, NotFoundError, UnexpectedError, ConflictError } = errors
-const { stringValidator, languagesValidator, ofStudyValidator, experienceValidator, 
-    knowledgeValidator, modalityValidator, numberValidator, workTimeValidator, booleanValidator } = validators
+const { stringValidator, languagesValidator, ofStudyValidator, experienceValidator,
+    knowledgeValidator, modalityValidator, salaryValidator, workTimeValidator, booleanValidator,
+    titleValidator, descriptionValidator } = validators
 
 function updateOffer(token, offerId, offerUserId, { title, description, photo, modality, location, salary, workTime, languages, studies, experiences, knowledges, published } = {}) {
     stringValidator(token, 'token')
     stringValidator(offerId, 'offerId')
     stringValidator(offerUserId, 'offerUserId')
 
-    if (title) stringValidator(title, 'title')
-    if (description) stringValidator(description, 'description')
+    if (title) titleValidator(title)
+    if (description) descriptionValidator(description, 'description')
     if (photo) stringValidator(photo, 'photo')
     if (modality) modalityValidator(modality)
     if (location) stringValidator(location)
-    if (salary) numberValidator(salary)
+    if (salary) salaryValidator(salary)
     if (workTime) workTimeValidator(workTime)
     if (languages) languagesValidator(languages)
     if (studies) ofStudyValidator(studies)

@@ -27,7 +27,7 @@ function registerUser(name, email, password, role) {
             } else if (res.status === 409) {
                 return res.json()
                     .then(error => {
-                        throw new ConflictError(error.error.message)
+                        throw new ConflictError(error.error)
                     })
             } else if (res.status < 500) throw new UnexpectedError('client error')
             else

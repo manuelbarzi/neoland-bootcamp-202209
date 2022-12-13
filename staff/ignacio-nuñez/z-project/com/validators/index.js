@@ -1,8 +1,7 @@
 const emailValidator = require('./emailValidator')
 const nameValidator = require('./nameValidator')
 const passwordValidator = require('./passwordValidator')
-const workerRoleValidator = require('./workerRoleValidator')
-const companyRoleValidator = require('./companyRoleValidator')
+const roleValidator = require('./roleValidator')
 const stringValidator = require('./stringValidator')
 const languagesValidator = require('./languagesValidator')
 const experienceValidator = require('./experienceValidator')
@@ -11,15 +10,16 @@ const cvStudyValidator = require('./cvStudyValidator')
 const knowledgeValidator = require('./knowledgeValidator')
 const booleanValidator = require('./booleanValidator')
 const modalityValidator = require ('./modalityValidator')
-const numberValidator = require ('./numberValidator')
+const salaryValidator = require ('./salaryValidator')
 const workTimeValidator = require ('./workTimeValidator')
+const titleValidator = require ('./titleValidator')
+const descriptionValidator = require ('./descriptionValidator')
 
 module.exports ={
     emailValidator,
     nameValidator,
     passwordValidator,
-    workerRoleValidator,
-    companyRoleValidator,
+    roleValidator,
     stringValidator,
     languagesValidator,
     experienceValidator,
@@ -28,6 +28,8 @@ module.exports ={
     knowledgeValidator,
     booleanValidator,
     modalityValidator,
-    numberValidator,
-    workTimeValidator
+    salaryValidator,
+    workTimeValidator,
+    titleValidator,
+    descriptionValidator
 }

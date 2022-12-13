@@ -4,48 +4,48 @@ const language = require('./offers/ofLanguage')
 const study = require('./offers/ofStudy')
 const experience = require('./offers/ofExperience')
 const knowledge = require('./offers/ofKnowledge')
+const salary = require('./offers/ofSalary')
 
 module.exports = new Schema({
-    title:{
+    title: {
         type: String,
     },
-    description:{
+    description: {
         type: String,
     },
-    photo:{ 
+    photo: {
         type: String
     },
-    createDate:{
+    createDate: {
         type: Date,
         required: true
     },
-    modality:{
+    modality: {
         type: String,
         enum: ['remote', 'face-to-face', 'hybrid']
     },
-    location:{
+    location: {
         type: String
     },
-    salary:{
-        type: Number
-    },
-    workTime:{
+    salary: salary,
+
+    workTime: {
         type: String,
         enum: ['part time', 'full time']
     },
-    languages:[language],
-    
-    studies:[study],
+    languages: [language],
 
-    experiences:[experience],
+    studies: [study],
 
-    knowledges:[knowledge],
+    experiences: [experience],
 
-    published:{
+    knowledges: [knowledge],
+
+    published: {
         type: Boolean,
     },
-    
-    user:{
+
+    user: {
         type: ObjectId,
         ref: 'Users',
         required: true
