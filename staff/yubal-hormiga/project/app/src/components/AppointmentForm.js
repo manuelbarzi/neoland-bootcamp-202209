@@ -48,7 +48,7 @@ function AppointmentForm({ onNewAppointment, setAppointments, appointment }) {//
         setDate('')
         setBody('')
 
-        setAppointments(appointment)//?
+        // setAppointments(appointment)//?
     }
 
     return <>

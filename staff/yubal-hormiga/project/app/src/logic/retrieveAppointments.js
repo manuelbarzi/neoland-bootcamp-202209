@@ -19,6 +19,10 @@ export default function (token) {
 
             const appointments = JSON.parse(json)
 
+            appointments.forEach(appointment => {
+                appointment.date = new Date(appointment.date)
+            })
+
             resolve(appointments)
         }
 
