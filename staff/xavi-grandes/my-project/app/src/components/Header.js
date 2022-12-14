@@ -3,7 +3,7 @@ import { AiOutlineMenu } from 'react-icons/ai'
 import { useState } from 'react'
 import Menu from './Menu'
 
-export default function Header({ userName} ) {
+export default function Header({ userName, listName } ) {
     log.info('Header -> render')
 
     const [show, setShow] = useState('close')
@@ -18,7 +18,7 @@ export default function Header({ userName} ) {
     { show === 'menu' && <Menu onClose={showMenu}/>}
 
         {/* TODO: este variable estará dentro del menú. */}
-        <p>{userName}</p>
+        <p>{listName? listName: userName}</p>
 
     </header>
 }
