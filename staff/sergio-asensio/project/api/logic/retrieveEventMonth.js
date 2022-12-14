@@ -9,6 +9,8 @@ const { User, Event } = require('../models')
 function retrieveEventMonth(userId, month) {
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
     if (!userId.length) throw new LengthError('userId is empty')
+    if (typeof month !== 'string') throw new TypeError('month is not a string')
+    if (!month.length) throw new LengthError('month does not exist')
 
     return User.findById(userId)
         .then(user => {
@@ -21,6 +23,10 @@ function retrieveEventMonth(userId, month) {
         .then(event => {
             const eventRetrieve = event[0]
 
+            if (!eventRetrieve)
+                return
+                // throw new NotFoundError(`event with id ${event} does not exist`)
+            else
                 eventRetrieve.id = eventRetrieve._id.toString()
                 delete eventRetrieve._id
                 delete eventRetrieve.__v
