@@ -93,7 +93,7 @@ export default function Home() {
         <p onClick={toggleEditProductView}>Aquí irán los productos en lista </p>
         
       </main>
-      <hr className='fixed bottom-[6.5rem] bg-black w-full'></hr>
+      <hr className='fixed bottom-[6.5rem] border border-black w-full'></hr>
       <section className='w-full h-[2.4rem] fixed bottom-[4.1rem] flex justify-around items-center px-2 bg-white'>
         
         <p>Precio total del carrito</p><p>Total</p>
