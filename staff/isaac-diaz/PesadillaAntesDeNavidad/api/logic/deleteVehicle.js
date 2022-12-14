@@ -1,4 +1,4 @@
-const { LengthError, NotFoundError, AuthError } = require('com')
+const { LengthError, NotFoundError } = require('com')
 const { User, Vehicle } = require('../models')
 
 module.exports = function (userId, vehicleId) {

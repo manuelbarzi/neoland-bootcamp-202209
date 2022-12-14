@@ -6,6 +6,7 @@ const {
         IS_ALPHABETICAL_REGEX, HAS_SPACES_REGEX, IS_EMAIL_REGEX
     }
 } = require('com')
+
 const { User } = require('../models')
 
 function registerUser(name, email, password) {

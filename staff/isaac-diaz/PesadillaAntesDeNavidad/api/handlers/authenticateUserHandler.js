@@ -1,7 +1,6 @@
 const authenticateUser = require('../logic/authenticateUser')
 const jwt = require('jsonwebtoken')
-const { NotFoundError, AuthError, FormatError, LengthError } = require('../../com/errors')
-
+const { errors: { NotFoundError, AuthError, FormatError, LengthError } } = require('com')
 const { JWT_SECRET, JWT_EXPIRATION } = process.env
 
 module.exports = (req, res) => {

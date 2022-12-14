@@ -37,7 +37,6 @@ export default function authenticateUser(email, password) {
                     reject(new LengthError(error))
             } else if (status === 401) {
                 const { error } = JSON.parse(json)
-
                 reject(new AuthError(error))
             } else if (status === 404) {
                 const { error } = JSON.parse(json)

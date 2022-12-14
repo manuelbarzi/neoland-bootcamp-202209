@@ -1,3 +1,4 @@
+const { LengthError, NotFoundError } = require('com/errors')
 const deleteVehicle = require('../logic/deleteVehicle')
 
 module.exports = (req, res) => {
@@ -6,8 +7,16 @@ module.exports = (req, res) => {
 
         deleteVehicle(userId, vehicleId)
             .then(() => res.status(204).send())
-            .catch(error => res.status(500).json({ error: error.message }))
+            .catch(error => {
+                if (error instanceof NotFoundError)
+                    res.status(404).json({ erorr: error.message })
+                else
+                    res.status(500).json({ error: error.message })
+            })
     } catch (error) {
-        res.status(500).json({ error: error.message })
+        if (error instanceof TypeError || error instanceof LengthError)
+            res.status(400).json({ error: error.message })
+        else
+            res.status(500).json({ error: error.message })
     }
 }

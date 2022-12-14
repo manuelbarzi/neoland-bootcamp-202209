@@ -11,7 +11,7 @@ export default function({ onCreated, onClose }) {
         const { brand: { value: brand }, model: { value: model }, type: { value: type }, license: { value: license }, licenseDate: { value: licenseDate }, kms: { value: kms } } = event.target
 
         try {
-            createVehicle(sessionStorage.token, brand, model, type, license, licenseDate, kms)
+            createVehicle(sessionStorage.token, brand, model, type, license, new Date(licenseDate), kms)
             .then(() => {   
                 // event.target.reset()
 
@@ -28,8 +28,8 @@ export default function({ onCreated, onClose }) {
 
     return <div className='h-full flex flex-col items-center justify-center gap-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'>
         <form className='flex flex-col items-center justify-center gap-2' onSubmit={submitCreateVehicle}>
-            <label htmlFor='brand'>Brand</label>
-            <input name="brand" type="text" id="brand" placeholder='input your brand'></input>
+            <label className='' htmlFor='brand'>Brand</label>
+            <input className='rounded-xl' name="brand" type="text" id="brand" placeholder='input your brand'></input>
             <label htmlFor='model'>Model</label>
             <input name="model" type="text" id="model" placeholder='input your model'></input>
             <label htmlFor='type'>Type</label>

@@ -1,7 +1,9 @@
 const { User, Vehicle } = require('../models')
 const { regex: {
     IS_ALPHABETICAL_REGEX
-}, errors: { NotFoundError, LengthError, FormatError} } = require('com')
+}, errors: {
+    NotFoundError, LengthError, FormatError }
+} = require('com')
 
 module.exports = function (userId, vehicleId, brand, model, type, license, licenseDate, kms) {
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
@@ -34,13 +36,13 @@ module.exports = function (userId, vehicleId, brand, model, type, license, licen
 
     return User.findById(userId)
         .then(user => {
-            if(!user) throw new NotFoundError(`user with id ${userId} does not exist`)
+            if (!user) throw new NotFoundError(`user with id ${userId} does not exist`)
 
             return Vehicle.find({ user: userId })
         })
         .then(vehicle => {
-            if(!vehicle) throw new NotFoundError(`vehicle with id ${vehicleId} does not exist`)
+            if (!vehicle) throw new NotFoundError(`vehicle with id ${vehicleId} does not exist`)
 
-            return Vehicle.updateOne({_id: vehicleId }, { $set: { brand, model, type, license, licenseDate: new Date(licenseDate), kms} })
+            return Vehicle.updateOne({ _id: vehicleId }, { $set: { brand, model, type, license, licenseDate: new Date(licenseDate), kms } })
         })
 }

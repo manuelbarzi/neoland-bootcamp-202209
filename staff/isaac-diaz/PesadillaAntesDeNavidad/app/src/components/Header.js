@@ -14,9 +14,9 @@ export default function Header({ userName }) {
 
     return <header className='fixed w-full h-[2rem] top-0 flex justify-center items-center gap-2 bg-white dark:bg-black text-black dark:text-white'>
         <div className='flex'>
-            <image src='https://www.muycomputer.com/wp-content/uploads/2019/02/secuela-pesadilla-antes-de-navidad-1-1.jpg'>
-                <Link to='/'></Link>
-            </image>
+            <Link to='/'>
+                <img className='w-5 h-5' src='https://www.muycomputer.com/wp-content/uploads/2019/02/secuela-pesadilla-antes-de-navidad-1-1.jpg' />
+            </Link>
         </div>
         <p>{userName}</p>
 

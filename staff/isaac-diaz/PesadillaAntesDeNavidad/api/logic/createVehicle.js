@@ -24,10 +24,10 @@ function createVehicle(userId, brand, model, type, license, licenseDate, kms) {
     if (!IS_ALPHABETICAL_REGEX.test(type)) throw new FormatError('type is not alphabetical')
 
     if (typeof license !== 'string') throw new TypeError('license is not a string')
-    if (!license.length) throw new TypeError('license is not a string')
+    if (!license.length) throw new TypeError('license is empty')
     if (license.length > 7) throw new FormatError('license not granted')
 
-    if (licenseDate instanceof Date) throw new TypeError('licenseDate is not a date')
+    if (!licenseDate instanceof Date) throw new TypeError('licenseDate is not a date')
 
     if (typeof kms !== 'string') throw new TypeError('kms is not a string')
     if (!kms.length) throw new LengthError('kms is empty')
@@ -37,7 +37,8 @@ function createVehicle(userId, brand, model, type, license, licenseDate, kms) {
             if (!user)
                 throw new NotFoundError(`user with id ${userId} not found`)
 
-            const vehicle = { user: userId, brand, model, type, license, licenseDate: new Date(licenseDate), kms }
+            const vehicle = { user: userId, brand, model, type, license, licenseDate, kms }
+            debugger
             //TODO licenseDate need arrive date format...
             return Vehicle.create(vehicle)               
 

@@ -1,5 +1,4 @@
 const { errors: { LengthError, AuthError, NotFoundError } } = require('com')
-const { NotFoundError } = require('com/errors')
 const { User, Vehicle } = require('../models')
 
 module.exports = function (userId, vehicleId) {
@@ -26,5 +25,4 @@ module.exports = function (userId, vehicleId) {
 
             return vehicle
         })
-
 }

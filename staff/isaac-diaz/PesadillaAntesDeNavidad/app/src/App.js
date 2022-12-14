@@ -2,7 +2,7 @@ import Login from './pages/Login'
 import Home from './pages/Home'
 import log from './utils/coolog'
 import Register from './pages/Register'
-import Stadistics from './pages/Stadistics'
+// import Stadistics from './pages/Stadistics'
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import Context from './components/Context'
@@ -20,7 +20,6 @@ function App() {
         // handle token -> expiration 
         if (sessionStorage.token) {
             const { token } = sessionStorage
-
 
             const payload = token.split(".")[1]
 
@@ -67,12 +66,12 @@ function App() {
     return <Context.Provider value={{ login, logout, showAlert }}>
         {loggedIn ? <Routes>
             <Route path='/' element={<Home />} />
+            {/* <Route path='/stadistics' element={<Stadistics />} /> */}
         </Routes>   
             :
             <Routes>
                 <Route path='/login' element={<Login />} />
                 <Route path='/register' element={<Register />} />
-                {/* <Route path='/stadistics' element={<Stadistics />} /> */}
                 <Route path='*' element={<Navigate replace to='/login' />} />
             </Routes>}
 

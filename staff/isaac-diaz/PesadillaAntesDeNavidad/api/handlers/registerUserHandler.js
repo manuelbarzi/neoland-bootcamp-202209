@@ -1,10 +1,9 @@
 const registerUser = require('../logic/registerUser')
 
-const { 
+const {
     errors: {
-        LengthError, FormatError, ConflictError, UnexpectedError
-    }
-} = require('com')
+        LengthError, FormatError, ConflictError,
+    } } = require('com')
 
 module.exports = (req, res) => {
     try {

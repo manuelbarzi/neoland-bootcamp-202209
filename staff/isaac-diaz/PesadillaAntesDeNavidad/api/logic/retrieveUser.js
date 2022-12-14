@@ -1,4 +1,4 @@
-const { LengthError } = require('com/errors')
+const { errors: { LengthError, NotFoundError } } = require('com')
 const { User } = require('../models')
 
 function retrieveUser(userId) {

@@ -9,7 +9,7 @@ module.exports = (req, res) => {
     try {
         const { body: { brand, model, type, license, licenseDate, kms }, userId } = req
 
-        createVehicle(userId, brand, model, type, license, licenseDate, kms)
+        createVehicle(userId, brand, model, type, license, new Date(licenseDate), kms)
             .then(() => res.status(201).send())
             .catch(error => {
                 if (error instanceof NotFoundError)
@@ -20,7 +20,7 @@ module.exports = (req, res) => {
                     res.status(500).json({ error: error.message })
             })
     } catch (error) {
-        if (error instanceof LengthError || error instanceof FormatError)
+        if (error instanceof TypeError || error instanceof LengthError || error instanceof FormatError)
             res.status(400).json({ error: error.message })
         else
             res.status(500).json({ error: error.message })
