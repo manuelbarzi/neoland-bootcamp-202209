@@ -1,8 +1,8 @@
 import log from '../utils/coolog'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useState, useContext } from 'react'
-import  CreateEvent from '../components/CreateEvent'
-import  DeleteEvent from '../components/DeleteEvent'
+import CreateEvent from '../components/CreateEvent'
+import DeleteEvent from '../components/DeleteEvent'
 import retrieveEventMonth from '../logic/retrieveEventMonth'
 import retrieveUser from '../logic/retrieveUser'
 import { errors } from 'com'
@@ -22,7 +22,7 @@ function EventMonth() {
     const [update, setUpdateEvent] = useState()
     const [deleteEvent, setDeleteEvent] = useState()
 
-    
+
 
     const { showAlert } = useContext(Context)
 
@@ -62,9 +62,10 @@ function EventMonth() {
                 .catch(error => {
                     if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
                         showAlert(error.message, 'warn')
-                    else if (error instanceof AuthError || error instanceof NotFoundError)
+                    else if (error instanceof AuthError)
                         showAlert(error.message, 'error')
-                    else
+                    else if (error instanceof NotFoundError) {
+                    } else
                         showAlert(error.message, 'fatal')
                 })
         } catch (error) {
@@ -75,14 +76,14 @@ function EventMonth() {
         }
     }
 
-    
+
     const goEvents = () => {
         navigate('/events')
     }
 
     const handleCreateEvent = () => {
         setCreateEvent('true')
-        
+
     }
 
     // const handleUpdateEvent = () => {
@@ -95,37 +96,35 @@ function EventMonth() {
 
     return <main className="h-full">
         <header className='h-1/6 top-0 flex justify-around items-center bg-teal-600	'>
-        <h1>12 MESES, 12 ACTIVIDADES</h1>
-        <h2>{month}</h2>
-                <button onClick={goEvents}>Go_Back</button>
+            <h1>12 MESES, 12 ACTIVIDADES</h1>
+            <h2>{month}</h2>
+            <button onClick={goEvents}>Go_Back</button>
         </header>
-            <div>
-            <button >--EDITAR--</button>
-            <p></p>
-            <button onClick={handleDeleteEvent}>--BORRAR--</button>
-            </div>
 
-        { event ? <div>
-        <div>
-            <h1>{event?.title}</h1>
-            <h3>{event?.boody}</h3>
-            <h3>{event?.requeriment}</h3>
-            <h3> Fecha: {event?.date}</h3>
-            <h3> Plazas: {event?.capacity}</h3>
-            <h3>Inscripciones: {event?.inscription}</h3>
-            <img src= {event?.img}/>
-            <h3> Plazas: {event?.capacity}</h3>
-        </div>
+        {event ? <div>
+            <div>
+                <h1>{event?.title}</h1>
+                <h3>{event?.boody}</h3>
+                <h3>{event?.requeriment}</h3>
+                <h3> Fecha: {event?.date}</h3>
+                <h3> Plazas: {event?.capacity}</h3>
+                <h3>Inscripciones: {event?.inscription}</h3>
+                <img src={event?.img} />
+            </div>
             {event?.inscription === 'open' && <div>
                 <p>Pepe</p>
                 <p>Pepe</p>
                 <p>Pepe</p>
                 <p>...</p>
             </div>}
-        </div> : <div><button onClick={handleCreateEvent}>crear</button></div>}
+            <button >--EDITAR--</button>
+            <button onClick={handleDeleteEvent}>--BORRAR--</button>
+        </div> : <div>
+            <button onClick={handleCreateEvent}>crear</button>
+        </div>}
 
-        {createEvent && <CreateEvent month={month} closeCreate={() => setCreateEvent()}/>}
-
+        {createEvent && <CreateEvent month={month} closeCreate={() => setCreateEvent()} />}
+        {deleteEvent && <DeleteEvent month={month} onClose={() => setDeleteEvent()} />}
     </main>
 
 }

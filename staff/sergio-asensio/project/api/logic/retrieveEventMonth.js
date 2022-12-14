@@ -18,20 +18,19 @@ function retrieveEventMonth(userId, month) {
                 throw new Error(`user with id ${userId} does not exist`)
 
 
-            return Event.find({ month }).populate('user', '-email -password -__v').lean()
+            return Event.findOne({ month }).populate('user', '-email -password -__v').lean()
         })
         .then(event => {
-            const eventRetrieve = event[0]
+            // const eventRetrieved = event[0]
 
-            if (!eventRetrieve)
-                return
-                // throw new NotFoundError(`event with id ${event} does not exist`)
-            else
-                eventRetrieve.id = eventRetrieve._id.toString()
-                delete eventRetrieve._id
-                delete eventRetrieve.__v
+            if (!event) {
+                throw new NotFoundError(`event for month ${month} does not exist`)
+            } else
+                event.id = event._id.toString()
+                delete event._id
+                delete event.__v
 
-            return eventRetrieve
+            return event
         })
 }
 

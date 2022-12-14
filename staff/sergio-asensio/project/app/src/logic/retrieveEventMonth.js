@@ -21,6 +21,8 @@ export default function (token, month) {
                 reject(new Error(error))
 
                 return
+            } else if (status === 404) {
+                reject(new NotFoundError('month not found'))
             }
 
             const event = JSON.parse(json)
