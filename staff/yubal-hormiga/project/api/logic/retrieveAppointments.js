@@ -15,13 +15,15 @@ module.exports = function (userId) {
             if (!user)
                 throw new NotFoundError(`user with id ${userId} does not exist`)
 
-            return Appointment.find({ user: userId }).select('-user -__v').lean()
+            return Appointment.find({ user: userId }).sort({date: 1}).lean() //? no recoge sort({ date: -1 }).toArray()
         })
         .then(appointments => {
             appointments.forEach(appointment => {
                 appointment.id = appointment._id.toString()
 
                 delete appointment._id
+                delete appointment.user
+                delete appointment.__v
             })
 
             return appointments

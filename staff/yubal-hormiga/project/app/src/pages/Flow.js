@@ -44,7 +44,7 @@ function Flow() {
         setModal={setModal}
         onNewFlow={handleNewFlow}
       />}
-      <  FlowList
+      <FlowList
         flowsChange={flowsChange}
       />
     </div>
