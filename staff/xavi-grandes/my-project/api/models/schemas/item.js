@@ -5,11 +5,13 @@ module.exports = new Schema({
     list: {
         type: ObjectId
     },
-    price: {
+    title: {
+        type: String
+    },
+    amount: {
         type: Number
     },
     quantity: {
-        type: Number,
-        required: true
+        type: Number
     }
 })
