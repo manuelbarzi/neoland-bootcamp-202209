@@ -34,7 +34,7 @@ mongoose.connect(MONGODB_URL)
         api.post('/product/:listId', jsonBodyParser, createProductHandler)
         
         api.get('/users/lists', jwtVerifier, retrieveListsHandler)
-        api.get('/users/list', jwtVerifier, jsonBodyParser, retrieveListHandler)
+        api.get('/list', jwtVerifier, retrieveListHandler)
         api.get('/users', jwtVerifier, retrieveUserHandler)
         
         api.patch('/users/email', jwtVerifier, jsonBodyParser, updateUserEmailHandler)
