@@ -11,6 +11,7 @@ const updateUserPasswordHandler = require('./handlers/updateUserPasswordHandler'
 const createListHandler = require ('./handlers/createListHandler')
 const createProductHandler = require ('./handlers/createProductHandler')
 const retrieveListsHandler = require ('./handlers/retrieveListsHandler')
+const retrieveListHandler = require ('./handlers/retrieveListHandler')
 const deletelistHandler = require ('./handlers/deletelistHandler')
 
 const jsonBodyParser = require('./utils/jsonBodyParser')
@@ -33,6 +34,7 @@ mongoose.connect(MONGODB_URL)
         api.post('/product/:listId', jsonBodyParser, createProductHandler)
         
         api.get('/users/lists', jwtVerifier, retrieveListsHandler)
+        api.get('/users/list', jwtVerifier, jsonBodyParser, retrieveListHandler)
         api.get('/users', jwtVerifier, retrieveUserHandler)
         
         api.patch('/users/email', jwtVerifier, jsonBodyParser, updateUserEmailHandler)
