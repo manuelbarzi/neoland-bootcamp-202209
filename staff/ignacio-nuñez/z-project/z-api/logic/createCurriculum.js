@@ -1,18 +1,10 @@
 const {
     errors: { NotFoundError, ConflictError },
-    validators: { stringValidator, languagesValidator, experienceValidator, cvStudyValidator, knowledgeValidator }
-} = require('com')
+    validators: { stringValidator } } = require('com')
 const { Curriculums, Users } = require('../models')
 
-module.exports = function createCurriculum(userId, title, description, photo, languages, studies, experiences, knowledges) {
+module.exports = function createCurriculum(userId) {
     stringValidator(userId, 'userId')
-    if (title) stringValidator(title, 'title')
-    if (description) stringValidator(description, 'description')
-    if (photo) stringValidator(photo, 'photo')
-    if (languages) languagesValidator(languages)
-    if (studies) cvStudyValidator(studies)
-    if (experiences) experienceValidator(experiences)
-    if (knowledges) knowledgeValidator(knowledges)
 
     return Users.findById(userId)
         .then(user => {
@@ -29,15 +21,12 @@ module.exports = function createCurriculum(userId, title, description, photo, la
 
             const data = { createDate: new Date(), user: userId }
 
-            if (title) data.title = title
-            if (description) data.description = description
-            if (photo) data.photo = photo
-            if (languages) data.languages = languages
-            if (studies) data.studies = studies
-            if (experiences) data.experiences = experiences
-            if (knowledges) data.knowledges = knowledges
             data.published = false
 
             return Curriculums.create(data)
+        })
+        .then(offer => {
+            offer.id = offer._id.toString()
+            return offer.id
         })
 }

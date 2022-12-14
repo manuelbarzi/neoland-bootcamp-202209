@@ -8,6 +8,7 @@ import { Context } from "./components/Context";
 import retrieveUser from "./logic/retrieveUser";
 import UserOffers from "./pages/UserOffers";
 import OfferDetail from "./pages/OfferDetail";
+import CurriculumDetail from "./pages/CurriculumDetail"
 import PublishedOffers from "./pages/PublishedOffers";
 import UserCurriculums from "./pages/UserCurriculums";
 import Alert from './components/Alert'
@@ -76,6 +77,10 @@ function App() {
         />}
         {<Route path="/offers/:offerId"
           element={sessionStorage.token ? <OfferDetail /> : <Navigate replace to="/login"
+          />}
+        />}
+          {<Route path="/curriculums/:curriculumId"
+          element={sessionStorage.token ? <CurriculumDetail /> : <Navigate replace to="/login"
           />}
         />}
       </Routes>

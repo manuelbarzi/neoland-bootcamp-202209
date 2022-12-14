@@ -23,19 +23,38 @@ module.exports = function retrievePublishedOffers(userId) {
             offers.forEach(offer => {
                 if (offer.languages) {
                     offer.languages.forEach(language => {
+                        language.id = language._id.toString()
+
                         delete language._id
                     })
                 }
                 if (offer.experiences) {
                     offer.experiences.forEach(experience => {
+                        experience.id = experience._id.toString()
+
                         delete experience._id
                     })
                 }
                 if (offer.studies) {
                     offer.studies.forEach(study => {
+                        study.id = study._id.toString()
+
                         delete study._id
                     })
                 }
+                if (offer.knowledges) {
+                    offer.knowledges.forEach(knowledge => {
+                        knowledge.id = knowledge._id.toString()
+
+                        delete knowledge._id
+                    })
+                }
+                if(offer.salary){
+                    offer.salary.id = offer.salary._id.toString()
+
+                    delete offer.salary._id
+                }
+
                 if (!offer.user.id) {
                     delete offer.user._id
                 }

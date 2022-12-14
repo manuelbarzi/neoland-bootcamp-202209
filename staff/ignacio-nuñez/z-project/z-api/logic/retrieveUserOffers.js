@@ -15,7 +15,7 @@ module.exports = function retrieveUserOffers(userId) {
             if (!user)
                 throw new NotFoundError(`user with id ${userId} does not exist`)
 
-            return Offers.find({ user: userId }).sort({ createDate: -1 }).populate('user', '-email -password -__v').select('-description -languages -studies -experiences -knowledges -__v').lean()
+            return Offers.find({ user: userId }).sort({ createDate: -1 }).populate('user', '-email -password -__v').select('-location -modality -workTime -salary -description -languages -studies -experiences -knowledges -__v').lean()
         })
         .then(offers => {
             offers.forEach(offer => {

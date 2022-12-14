@@ -15,6 +15,9 @@ module.exports = new Schema({
     photo:{ 
         type: String
     },
+    location:{
+        type: String
+    },
     createDate:{
         type: Date,
         required: true

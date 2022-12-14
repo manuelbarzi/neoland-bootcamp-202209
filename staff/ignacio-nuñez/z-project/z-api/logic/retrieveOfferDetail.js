@@ -8,7 +8,7 @@ const { Users, Offers } = require('../models')
  * @param {string} userId The user id
  *  @param {string} offerId The offer id
  */
-module.exports = function retrieveOfferToUpdate(userId, offerId) {
+module.exports = function retrieveOfferToDetail(userId, offerId) {
     stringValidator(userId, 'userId')
     stringValidator(offerId, 'offerId')
 
@@ -48,6 +48,11 @@ module.exports = function retrieveOfferToUpdate(userId, offerId) {
                 delete knowledge._id
             })
         }
+        if(offer.salary){
+            offer.salary.id = offer.salary._id.toString()
+            delete offer.salary._id
+        }
+
 
             offer.id = offer._id.toString()
             delete offer._id

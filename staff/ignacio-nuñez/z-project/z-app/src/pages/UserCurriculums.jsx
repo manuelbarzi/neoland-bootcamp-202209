@@ -1,49 +1,50 @@
 import { useEffect, useState, useContext } from "react"
 import NavBar from "../components/NavBar"
 import { format } from 'timeago.js'
-import retrieveUserOffers from "../logic/retrieveUserOffers"
-import DeleteOffer from "../components/DeleteOffer"
-import { Link } from "react-router-dom"
-import createOffer from "../logic/createOffer"
+import retrieveUserCurriculums from "../logic/retrieveUserCurriculums"
+import DeleteCurriculum from "../components/DeleteCurriculum"
+import { Link, useNavigate } from "react-router-dom"
+import createCurriculum from "../logic/createCurriculum"
 import Button from "../components/Button"
-import PublishOffer from "../components/PublishOffer"
-import errorHandling from "../utils/errorHandling"
+import PublishCurriculum from "../components/PublishCurriculum"
 import { Context } from "../components/Context"
+import errorHandling from "../utils/errorHandling"
 
 function UserCurriculums() {
-    const [offers, setOffers] = useState([])
-    const [offerToDelete, setOfferToDelete] = useState()
-    const [offerToCreate, setOfferToCreate] = useState()
-    const [offerToPublish, setOfferToPublish] = useState()
+    const [curriculums, setCurriculums] = useState([])
+    const [curriculumToDelete, setCurriculumToDelete] = useState()
+    const [curriculumToPublish, setCurriculumToPublish] = useState()
 
     const { showAlert } = useContext(Context)
 
+    const navigate = useNavigate()
+
     useEffect(() => {
-        retrieveOfferHandler()
+        retrieveCurriculumHandler()
     }, [])
 
-    const onDeleteOffer = () => {
-        retrieveOfferHandler()
-        setOfferToDelete()
+    const onDeleteCurriculum = () => {
+        retrieveCurriculumHandler()
+        setCurriculumToDelete()
     }
 
-    const onDeleteOfferClose = () => setOfferToDelete()
+    const onDeleteCurriculumClose = () => setCurriculumToDelete()
 
-    const onDeleteOfferClick = (id, userId) => setOfferToDelete({ id, userId })
+    const onDeleteCurriculumClick = (id, userId) => setCurriculumToDelete({ id, userId })
 
-    const onPublishOffer = () => {
-        retrieveOfferHandler()
-        setOfferToPublish()
+    const onPublishCurriculum = () => {
+        retrieveCurriculumHandler()
+        setCurriculumToPublish()
     }
 
-    const onPublishOfferClose = () => setOfferToPublish()
+    const onPublishCurriculumClose = () => setCurriculumToPublish()
 
-    const onPublishOfferClick = (id, userId, published) => setOfferToPublish({ id, userId, published })
+    const onPublishCurriculumClick = (id, userId, published) => setCurriculumToPublish({ id, userId, published })
 
-    const retrieveOfferHandler = () => {
+    const retrieveCurriculumHandler = () => {
         try {
-            retrieveUserOffers(sessionStorage.token)
-                .then(offers => setOffers(offers))
+            retrieveUserCurriculums(sessionStorage.token)
+                .then(curriculums => setCurriculums(curriculums))
                 .catch(error => {
                     const { errorMessage, type } = errorHandling(error)
                     showAlert(errorMessage, type)
@@ -54,20 +55,12 @@ function UserCurriculums() {
         }
     }
 
-    const onCreateOffer = () => {
-        retrieveOfferHandler()
-        setOfferToCreate()
-    }
-
-    const onCreateOfferClick = () => {
+    const onCreateCurriculumClick = () => {
         try {
-            if (offers.length >= 3) throw new Error('Upgrade your account to premium to have more than 3 offers')
+            if (curriculums.length >= 3) throw new Error('Upgrade your account to premium to have more than 3 curriculums')
 
-            const title = 'My New Offer'
-            const description = 'Put a Description'
-
-            createOffer(sessionStorage.token, { title, description })
-                .then(() => onCreateOffer())
+            createCurriculum(sessionStorage.token)
+                .then(curriculumId => navigate(`/curriculums/${curriculumId}`))
                 .catch(error => {
                     const { errorMessage, type } = errorHandling(error)
                     showAlert(errorMessage, type)
@@ -77,46 +70,43 @@ function UserCurriculums() {
             showAlert(errorMessage, type)
         }
     }
-
 
     return <main className="min-h-screen bg-slate-100">
         <NavBar
         />
         <div className="flex items-center flex-col">
             <div className="w-full flex items-center flex-col mt-28">
-                <div onClick={onCreateOfferClick} className="flex justify-center items-center font-semibold text-lg border-2 shadow-sm shadow-slate-600 w-5/6 h-20 z-10 rounded-xl bg-emerald-300 cursor-pointer">
-                    <span className="ml-2">Create new Offer</span>
+                <div onClick={onCreateCurriculumClick} className="flex justify-center items-center font-semibold text-lg border-2 shadow-sm shadow-slate-600 w-5/6 h-20 z-10 rounded-xl bg-emerald-300 cursor-pointer">
+                    <span className="ml-2">Create new Curriculum</span>
                 </div>
-                <h1>hola</h1>
                 <section className="flex items-center flex-col w-5/6">
-                    {offers.map(offer => {
-                        return <article key={offer.id} className=" shadow-sm shadow-slate-600 bg-emerald-200 flex flex-col mt-3.5 border-2 p-4 w-full rounded-xl">
-                            <Link to={`/offers/${offer.id}`} className="flex justify-between z-10">
-                                <h2 className='font-semibold'>{offer.title}</h2>
-                                <img className="w-1/5 text-xs" src={offer.photo} alt="company logo" />
+                    {curriculums.map(curriculum => {
+                        return <article key={curriculum.id} className=" shadow-sm shadow-slate-600 bg-emerald-200 flex flex-col mt-3.5 border-2 p-4 w-full rounded-xl">
+                            <Link to={`/curriculums/${curriculum.id}`} className="flex justify-between z-10">
+                                <h2 className='font-semibold'>{curriculum.title}</h2>
+                                <img className="w-1/5 text-xs" src={curriculum.photo} alt="company logo" />
                             </Link>
-                            <p className="text-xs">{format(offer.createDate)}</p>
+                            <p className="text-xs">{format(curriculum.createDate)}</p>
                             <hr className="w-full border-black mt-3.5" />
                             <div className='z-10 flex justify-between gap-4 mt-2'>
-                                <Button className="text-md bg-red-400 w-1/2" onClick={() => onDeleteOfferClick(offer.id, offer.user.id)}>Delete</Button>
-                                <Button className="text-md bg-green-400 w-1/2" onClick={() => onPublishOfferClick(offer.id, offer.user.id, offer.published)}>{offer.published ? 'Unpublish' : 'Publish'}</Button>
+                                <Button className="text-md bg-red-400 w-1/2" onClick={() => onDeleteCurriculumClick(curriculum.id, curriculum.user.id)}>Delete</Button>
+                                <Button className="text-md bg-green-400 w-1/2" onClick={() => onPublishCurriculumClick(curriculum.id, curriculum.user.id, curriculum.published)}>{curriculum.published ? 'Unpublish' : 'Publish'}</Button>
                             </div>
                         </article>
                     })}
                 </section>
-                {offerToDelete &&
-                    <DeleteOffer
+                {curriculumToDelete &&
+                    <DeleteCurriculum
                         className="inset-x-[8.3%] inset-y-1/3 absolute"
-                        offerToDelete={offerToDelete}
-                        onDeleteOffer={onDeleteOffer}
-                        onDeleteOfferClose={onDeleteOfferClose} />}
-                {offerToPublish &&
-                    <PublishOffer
+                        curriculumToDelete={curriculumToDelete}
+                        onDeleteCurriculum={onDeleteCurriculum}
+                        onDeleteCurriculumClose={onDeleteCurriculumClose} />}
+                {curriculumToPublish &&
+                    <PublishCurriculum
                         className="inset-x-[5%] inset-y-1/3 absolute"
-                        offerToPublish={offerToPublish}
-                        onPublishOffer={onPublishOffer}
-                        onPublishOfferClose={onPublishOfferClose} />}
-
+                        curriculumToPublish={curriculumToPublish}
+                        onPublishCurriculum={onPublishCurriculum}
+                        onPublishCurriculumClose={onPublishCurriculumClose} />}
             </div>
         </div>
     </main>

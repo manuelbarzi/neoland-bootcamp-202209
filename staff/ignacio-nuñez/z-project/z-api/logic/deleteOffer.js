@@ -4,7 +4,7 @@ const {
 } = require('com')
 const { Users, Offers } = require('../models')
 
-module.exports = function deleteWorkOffer(userId, offerId) {
+module.exports = function deleteOffer(userId, offerId) {
     stringValidator(userId, 'userId')
     stringValidator(offerId, 'offerId')
 

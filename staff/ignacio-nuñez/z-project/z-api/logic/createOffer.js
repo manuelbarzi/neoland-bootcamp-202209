@@ -1,23 +1,10 @@
 const {
     errors: { NotFoundError, ConflictError },
-    validators: { stringValidator, languagesValidator, experienceValidator, ofStudyValidator, knowledgeValidator, 
-        modalityValidator, salaryValidator, workTimeValidator, descriptionValidator }
-} = require('com')
+    validators: { stringValidator } } = require('com')
 const { Offers, Users } = require('../models')
 
-module.exports = function createOffer(userId, title, description, photo, modality, location, salary, workTime, languages, studies, experiences, knowledges) {
+module.exports = function createOffer(userId) {
     stringValidator(userId, 'userId')
-    if (title) stringValidator(title, 'title')
-    if (description) descriptionValidator(description)
-    if (photo) stringValidator(photo, 'photo')
-    if (modality) modalityValidator(modality)
-    if (location) stringValidator(location)
-    if (salary) salaryValidator(salary)
-    if (workTime) workTimeValidator(workTime)
-    if (languages) languagesValidator(languages)
-    if (studies) ofStudyValidator(studies)
-    if (experiences) experienceValidator(experiences)
-    if (knowledges) knowledgeValidator(knowledges)
 
     return Users.findById(userId)
         .then(user => {
@@ -34,17 +21,6 @@ module.exports = function createOffer(userId, title, description, photo, modalit
 
             const data = { createDate: new Date(), user: userId }
 
-            if (title) data.title = title
-            if (description) data.description = description
-            if (photo) data.photo = photo
-            if (modality) data.modality = modality
-            if (location) data.location = location
-            if (salary) data.salary = salary
-            if (workTime) data.workTime = workTime
-            if (languages) data.languages = languages
-            if (studies) data.studies = studies
-            if (experiences) data.experiences = experiences
-            if (knowledges) data.knowledges = knowledges
             data.published = false
 
             return Offers.create(data)

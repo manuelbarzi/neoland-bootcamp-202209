@@ -59,9 +59,7 @@ function UserOffers() {
         try {
             if (offers.length >= 3) throw new Error('Upgrade your account to premium to have more than 3 offers')
 
-            const title = 'My New Offer'
-
-            createOffer(sessionStorage.token, { title })
+            createOffer(sessionStorage.token)
                 .then(offerId => navigate(`/offers/${offerId}`))
                 .catch(error => {
                     const { errorMessage, type } = errorHandling(error)

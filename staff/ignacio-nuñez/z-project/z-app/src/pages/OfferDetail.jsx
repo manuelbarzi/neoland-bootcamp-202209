@@ -263,7 +263,7 @@ function OfferDetail() {
                                 <h3 className='font-semibold'>Description:</h3>
                                 {offer?.published ?
                                     <p name='description' id='description' className='ml-1'>{offer?.description}</p> :
-                                    <textarea onChange={updateOfferDescription} maxLength="140" rows='3' name='description' id='description' className='w-full font-medium resize-none outline-none bg-slate-100 rounded-lg' placeholder='Description' defaultValue={offer?.description}></textarea>
+                                    <textarea onChange={updateOfferDescription} maxLength="140" rows='3' name='description' id='description' className='w-full font-medium resize-none outline-none bg-slate-100 rounded-lg' placeholder='Put a description' defaultValue={offer?.description}></textarea>
                                 }
                             </div>
                             <div onClick={() => { return offer.published ? null : onExperienceClick(offer.id, offer.user, offer.experiences) }} className="cursor-pointer rounded-lg bg-emerald-50 p-2">
@@ -303,7 +303,7 @@ function OfferDetail() {
                                     </ul>
                                 }
                             </div>
-                            <div onClick={() =>{return offer.published ? null :  onLanguageClick(offer.id, offer.user, offer.languages)}} className="cursor-pointer rounded-lg bg-slate-100 p-2">
+                            <div onClick={() => { return offer.published ? null : onLanguageClick(offer.id, offer.user, offer.languages) }} className="cursor-pointer rounded-lg bg-slate-100 p-2">
                                 <h2 className='font-semibold'>Languages:</h2>
                                 {!offer?.languages?.length ? <span>Not Languages Required</span> :
                                     <div className="flex flex-wrap">
