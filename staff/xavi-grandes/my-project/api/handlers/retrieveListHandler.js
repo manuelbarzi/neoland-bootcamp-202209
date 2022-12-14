@@ -2,7 +2,7 @@ const retrieveList = require('../logic/retrieveList')
 
 module.exports = (req, res) => {
     try {
-        const { body: { title }, userId } = req
+        const { query: { title }, userId } = req
     
         retrieveList(userId, title)
             .then(list => res.json(list))
