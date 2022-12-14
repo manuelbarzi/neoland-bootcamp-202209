@@ -18,7 +18,6 @@ export default function Home() {
   const [isCreateOpen, setCreateOpen] = useState(false);
   const [isEditOpen, setEditOpen] = useState(false);
   const { targetListName } = useParams()
-  console.log (targetListName)
   const { showAlert } = useContext(Context);
 
   useEffect(() => {
