@@ -45,7 +45,7 @@ function UpdateLanguageOffer({ className, onUpdateLanguageOfferClose, onUpdateLa
         } catch (error) {
             const { errorMessage, type } = errorHandling(error)
             showAlert(errorMessage, type)
-}
+        }
     }
 
     const closeLanguageOfferHandler = () => {
@@ -87,32 +87,32 @@ function UpdateLanguageOffer({ className, onUpdateLanguageOfferClose, onUpdateLa
                     <div className='w-full'>
                         {languages?.map(language => {
                             return <section key={language.id} className="flex self-start w-full">
-                                    <div className='flex w-full gap-6 p-1'>
-                                        <select name="language" id="language" defaultValue={language.language ? language.language : 'select'}
-                                            className="text-md w-3/6 block py-2.5 px-0 text-gray-700 bg-transparent border-0 border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
-                                            <option disabled hidden value="select">Language</option>
-                                            <option value="Chinese">Chinese</option>
-                                            <option value="English">English</option>
-                                            <option value="French">French</option>
-                                            <option value="German">German</option>
-                                            <option value="Italian">Italian</option>
-                                            <option value="Japanese">Japanese</option>
-                                            <option value="Spanish">Spanish</option>
-                                            <option value="Portuguese">Portuguese</option>
-                                        </select>
-                                        <select name="level" id="level" defaultValue={language.level ? language.level : 'select'}
-                                            className="text-md block py-2.5 w-2/6 px-0 text-gray-700 bg-transparent border-0 border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
-                                            <option disabled hidden value="select">Level</option>
-                                            <option value="A1">A1</option>
-                                            <option value="A2">A2</option>
-                                            <option value="B1">B1</option>
-                                            <option value="B2">B2</option>
-                                            <option value="C1">C1</option>
-                                            <option value="C2">C2</option>
-                                        </select>
-                                        <Button type="button" className='bg-red-300' onClick={() => handleDeleteLanguage(language.id)}>Delete</Button>
-                                    </div>
-                                </section>
+                                <div className='flex w-full gap-6 p-1'>
+                                    <select name="language" id="language" defaultValue={language.language ? language.language : 'select'}
+                                        className="text-md w-3/6 block py-2.5 px-0 text-gray-700 bg-transparent border-0 border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                                        <option disabled hidden value="select">Language</option>
+                                        <option value="Chinese">Chinese</option>
+                                        <option value="English">English</option>
+                                        <option value="French">French</option>
+                                        <option value="German">German</option>
+                                        <option value="Italian">Italian</option>
+                                        <option value="Japanese">Japanese</option>
+                                        <option value="Spanish">Spanish</option>
+                                        <option value="Portuguese">Portuguese</option>
+                                    </select>
+                                    <select name="level" id="level" defaultValue={language.level ? language.level : 'select'}
+                                        className="text-md block py-2.5 w-2/6 px-0 text-gray-700 bg-transparent border-0 border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                                        <option disabled hidden value="select">Level</option>
+                                        <option value="A1">A1</option>
+                                        <option value="A2">A2</option>
+                                        <option value="B1">B1</option>
+                                        <option value="B2">B2</option>
+                                        <option value="C1">C1</option>
+                                        <option value="C2">C2</option>
+                                    </select>
+                                    <Button type="button" className='bg-red-300' onClick={() => handleDeleteLanguage(language.id)}>Delete</Button>
+                                </div>
+                            </section>
                         })}
                     </div>
                     <div className='flex justify-between gap-4 mt-5 w-full'>

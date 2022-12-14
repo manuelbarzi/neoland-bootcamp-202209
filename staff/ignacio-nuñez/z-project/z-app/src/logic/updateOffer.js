@@ -1,10 +1,10 @@
 import { errors, validators } from 'com'
 import extractSubFromToken from '../utils/extractSubFromToken'
 
-const { LengthError, NotFoundError, UnexpectedError, ConflictError } = errors
+const { LengthError, NotFoundError, UnexpectedError, ConflictError, ContentError } = errors
 const { stringValidator, languagesValidator, ofStudyValidator, experienceValidator,
     knowledgeValidator, modalityValidator, salaryValidator, workTimeValidator, booleanValidator,
-    titleValidator, descriptionValidator } = validators
+    titleValidator, descriptionValidator, locationValidator } = validators
 
 function updateOffer(token, offerId, offerUserId, { title, description, photo, modality, location, salary, workTime, languages, studies, experiences, knowledges, published } = {}) {
     stringValidator(token, 'token')
@@ -15,7 +15,7 @@ function updateOffer(token, offerId, offerUserId, { title, description, photo, m
     if (description) descriptionValidator(description, 'description')
     if (photo) stringValidator(photo, 'photo')
     if (modality) modalityValidator(modality)
-    if (location) stringValidator(location)
+    if (location) locationValidator(location)
     if (salary) salaryValidator(salary)
     if (workTime) workTimeValidator(workTime)
     if (languages) languagesValidator(languages)
@@ -34,7 +34,7 @@ function updateOffer(token, offerId, offerUserId, { title, description, photo, m
     if (description || description === '') body.description = description
     if (photo) body.photo = photo
     if (modality) body.modality = modality
-    if (location) body.location = location
+    if (location || location === '') body.location = location
     if (salary) body.salary = salary
     if (workTime) body.workTime = workTime
     if (languages) body.languages = languages
@@ -65,10 +65,15 @@ function updateOffer(token, offerId, offerUserId, { title, description, photo, m
                     .then(error => {
                         throw new NotFoundError(error.error)
                     })
+            } else if (res.status === 406) {
+                return res.json()
+                    .then(error => {
+                        throw new ContentError(error.error)
+                    })
             } else if (res.status === 409) {
                 return res.json()
                     .then(error => {
-                        throw new ConflictError(error.error.message)
+                        throw new ConflictError(error.error)
                     })
             } else if (res.status < 500)
                 throw new UnexpectedError('client error')

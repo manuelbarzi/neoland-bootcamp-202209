@@ -1,8 +1,8 @@
 const {
-    errors: { NotFoundError, ConflictError },
-    validators: { stringValidator, languagesValidator, ofStudyValidator, experienceValidator, 
-        knowledgeValidator, booleanValidator, modalityValidator, salaryValidator, workTimeValidator, 
-        titleValidator, descriptionValidator } } = require('com')
+    errors: { NotFoundError, ConflictError, ContentError },
+    validators: { stringValidator, languagesValidator, ofStudyValidator, experienceValidator,
+        knowledgeValidator, booleanValidator, modalityValidator, salaryValidator, workTimeValidator,
+        titleValidator, descriptionValidator, locationValidator } } = require('com')
 const { Users, Offers } = require('../models')
 
 module.exports = function updateOffer(userId, offerId, title, description, photo, modality, location, salary, workTime, languages, studies, experiences, knowledges, published) {
@@ -12,7 +12,7 @@ module.exports = function updateOffer(userId, offerId, title, description, photo
     if (description) descriptionValidator(description)
     if (photo) stringValidator(photo, 'photo')
     if (modality) modalityValidator(modality)
-    if (location) stringValidator(location)
+    if (location) locationValidator(location)
     if (salary) salaryValidator(salary)
     if (workTime) workTimeValidator(workTime)
     if (languages) languagesValidator(languages)
@@ -39,7 +39,7 @@ module.exports = function updateOffer(userId, offerId, title, description, photo
             if (description || description === '') data.description = description
             if (photo) data.photo = photo
             if (modality) data.modality = modality
-            if (location) data.location = location
+            if (location || location === '') data.location = location
             if (salary) data.salary = salary
             if (workTime) data.workTime = workTime
             if (languages) data.languages = languages
@@ -47,8 +47,37 @@ module.exports = function updateOffer(userId, offerId, title, description, photo
             if (experiences) data.experiences = experiences
             if (experiences) data.experiences = experiences
             if (knowledges) data.knowledges = knowledges
-            if (typeof published === 'boolean') data.published = published
+            if (typeof published === 'boolean') {
+                if (published) {
+                    return Offers.findById(offerId)
+                        .then(offer => {
+                            if (offer.description.length < 5)
+                                throw new ContentError('to publish put a description with a length higher than 5')
 
-            return Offers.findByIdAndUpdate(offerId, data)
+                            if (!offer.location)
+                                throw new ContentError('to publish put a location')
+
+                            else if (!offer.workTime && !offer.modality && !offer.salary)
+                                throw new ContentError('to publish put at least one of these: Work time, modality or salary')
+
+                            else if (offer.experiences.length === 0 && offer.studies.length === 0 && offer.languages.length === 0 && offer.knowledges.length === 0)
+                                throw new ContentError('to publish put at least one of these: experience, study, languages or knowledges')
+
+                            data.published = published
+
+                            return Offers.findByIdAndUpdate(offerId, data)
+                        })
+                }
+                data.published = published
+
+                return Offers.findByIdAndUpdate(offerId, data)
+            }
+            return Offers.findById(offerId)
+                .then(offer => {
+                    if (offer.published) throw new ConflictError('You cant update a published offer')
+                })
+                .then(() => {
+                    return Offers.findByIdAndUpdate(offerId, data)
+                })
         })
 }

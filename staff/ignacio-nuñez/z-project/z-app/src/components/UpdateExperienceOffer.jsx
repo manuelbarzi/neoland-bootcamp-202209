@@ -20,19 +20,18 @@ function UpdateExperienceOffer({ className, onUpdateExperienceOfferClose, onUpda
 
         let experiences = []
 
-        if (event.target.industry) {
-            if (!event.target.industry.value) {
-                for (let i = 0; i < event.target.industry.length; i++) {
-                    const industry = event.target.industry[i].value
+        if (event.target.position) {
+            if (!event.target.position.value) {
+                for (let i = 0; i < event.target.position.length; i++) {
                     const position = event.target.position[i].value
                     const years = event.target.years[i].value
 
-                    experiences.push({ industry, position, years })
+                    experiences.push({ position, years })
                 }
             } else {
-                const { industry: { value: industry }, position: { value: position }, years: { value: years } } = event.target
+                const { position: { value: position }, years: { value: years } } = event.target
 
-                experiences.push({ industry, position, years })
+                experiences.push({ position, years })
             }
         }
         try {
@@ -87,7 +86,7 @@ function UpdateExperienceOffer({ className, onUpdateExperienceOfferClose, onUpda
                     <h3 className='font-semibold self-start'>Work Experiences: </h3>
                     {experiences?.map(experience => {
                         return <div key={experience.id} className="w-full self-start flex flex-col">
-                            <div>
+                            {/* <div>
                                 <h3>Industry:</h3>
                                 <select name="industry" id="industry" className='text-sm block py-2.5 px-0 w-full text-gray-700 bg-transparent border-0 border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-gray-200 peer'
                                     defaultValue={experience.industry ? experience.industry : 'select'}>
@@ -116,7 +115,7 @@ function UpdateExperienceOffer({ className, onUpdateExperienceOfferClose, onUpda
                                     <option value="Utilities (water; gas; electricity)">Utilities (water; gas; electricity)</option>
                                     <option value="Other industries">Other industries</option>
                                 </select>
-                            </div>
+                            </div> */}
                             <div>
                                 <label htmlFor="position" className="self-start">Position: </label>
                                 <input type="text" name="position" id="position" className="outline-none" placeholder='Position' defaultValue={experience.position} />

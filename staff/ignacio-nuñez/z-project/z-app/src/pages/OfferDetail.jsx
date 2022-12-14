@@ -213,28 +213,38 @@ function OfferDetail() {
                 <section className="flex items-center flex-col p-2">
                     <article className="flex flex-col gap-2 shadow-sm shadow-slate-600 bg-emerald-200 mt-3.5 border-2 w-full rounded-xl">
                         <div className="flex justify-between z-10 p-2 mt-1">
-                            <textarea onChange={updateOfferTitle} name='title' maxLength="25" id='title' rows='1' className='bg-emerald-200 p-2 border-2 font-semibold resize-none outline-none rounded-lg' defaultValue={offer?.title}></textarea>
+                            {offer?.published ?
+                                <h2 name='title' id='title' className='bg-emerald-200 p-2 border-2 font-semibold rounded-lg'>{offer?.title}</h2> :
+                                <textarea onChange={updateOfferTitle} name='title' maxLength="25" id='title' rows='1' className='bg-emerald-200 p-2 border-2 font-semibold resize-none outline-none rounded-lg' defaultValue={offer?.title}></textarea>
+                            }
                             <img className="w-1/5 text-xs p-2" src={offer?.photo} alt="company logo" />
                         </div>
                         <div className='flex flex-col gap-2 bg-white p-2'>
                             <div className=' rounded-lg bg-emerald-50 p-2'>
                                 <div className='flex gap-6 justify-between'>
-                                    <select onChange={updateOfferWorkTime} name="workTime" id="workTime" defaultValue={offer?.workTime ? offer.workTime : 'select'}
-                                        className="text-md w-1/2 block py-2.5 px-0 text-gray-700 bg-transparent border-0 border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
-                                        <option disabled hidden value="select">Work Time</option>
-                                        <option value="part time">Part time</option>
-                                        <option value="full time">Full time</option>
-                                    </select>
-                                    <select onChange={updateOfferModality} name="modality" id="modality" defaultValue={offer?.modality ? offer.modality : 'select'}
-                                        className="text-md w-1/2 block py-2.5 px-0 text-gray-700 bg-transparent border-0 border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
-                                        <option disabled hidden value="select">Modality</option>
-                                        <option value="remote">Remote</option>
-                                        <option value="hybrid">Hybrid</option>
-                                        <option value="face-to-face">Face-to-face</option>
-                                    </select>
+                                    {offer?.published ?
+                                        <span className="text-md w-1/2 block py-2.5 px-0 text-gray-700 bg-transparent border-0 border-b-2 border-gray-200 capitalize">{offer?.workTime ? offer.workTime : 'Work time'}</span> :
+                                        <select onChange={updateOfferWorkTime} name="workTime" id="workTime" defaultValue={offer?.workTime ? offer.workTime : 'select'}
+                                            className="text-md w-1/2 block py-2.5 px-0 text-gray-700 bg-transparent border-0 border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                                            <option disabled hidden value="select">Work Time</option>
+                                            <option value="part time">Part time</option>
+                                            <option value="full time">Full time</option>
+                                        </select>
+                                    }
+                                    {offer?.published ?
+                                        <span className="text-md w-1/2 block py-2.5 px-0 text-gray-700 bg-transparent border-0 border-b-2 border-gray-200 capitalize">{offer?.modality ? offer.modality : 'Modality'}</span> :
+                                        <select onChange={updateOfferModality} name="modality" id="modality" defaultValue={offer?.modality ? offer.modality : 'select'}
+                                            className="text-md w-1/2 block py-2.5 px-0 text-gray-700 bg-transparent border-0 border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                                            <option disabled hidden value="select">Modality</option>
+                                            <option value="remote">Remote</option>
+                                            <option value="hybrid">Hybrid</option>
+                                            <option value="face-to-face">Face-to-face</option>
+                                        </select>
+                                    }
                                 </div>
                                 <div className='flex gap-6 mt-2'>
-                                    <div onClick={() => onSalaryClick(offer.id, offer.user, offer.salary)} className='flex justify-center w-1/2 cursor-pointer border rounded-md'>
+                                    <div onClick={() => { return offer?.published ? null : onSalaryClick(offer.id, offer.user, offer.salary) }}
+                                        className='flex justify-center w-1/2 cursor-pointer border rounded-md'>
                                         <div className='text-md text-gray-700 flex justify-start p-1 gap-2 w-full'>
                                             <span>Salary:</span>
                                             <div>
@@ -243,26 +253,34 @@ function OfferDetail() {
                                             </div>
                                         </div>
                                     </div>
-                                    <input onChange={updateOfferLocation} type="text" placeholder='Location' className='w-1/2 p-1 outline-none rounded-md bg-emerald-50' />
+                                    {offer?.published ?
+                                        <span className="text-md w-1/2 block py-2.5 px-0 text-gray-700 bg-transparent border-0 border-b-2 border-gray-200 capitalize">{offer?.location ? offer.location : 'Location'}</span> :
+                                        <input onChange={updateOfferLocation} defaultValue={offer?.location} type="text" placeholder='Location' className='w-1/2 p-1 outline-none rounded-md bg-emerald-50' />
+                                    }
                                 </div>
                             </div>
                             <div className='bg-slate-100 p-2 rounded-lg'>
                                 <h3 className='font-semibold'>Description:</h3>
-                                <textarea onChange={updateOfferDescription} maxLength="140" rows='3' name='description' id='description' className='w-full font-medium resize-none outline-none bg-slate-100 rounded-lg' placeholder='Description' defaultValue={offer?.description}></textarea>
+                                {offer?.published ?
+                                    <p name='description' id='description' className='ml-1'>{offer?.description}</p> :
+                                    <textarea onChange={updateOfferDescription} maxLength="140" rows='3' name='description' id='description' className='w-full font-medium resize-none outline-none bg-slate-100 rounded-lg' placeholder='Description' defaultValue={offer?.description}></textarea>
+                                }
                             </div>
-                            <div onClick={() => onExperienceClick(offer.id, offer.user, offer.experiences)} className="cursor-pointer rounded-lg bg-emerald-50 p-2">
+                            <div onClick={() => { return offer.published ? null : onExperienceClick(offer.id, offer.user, offer.experiences) }} className="cursor-pointer rounded-lg bg-emerald-50 p-2">
                                 <h2 className='font-semibold'>Experiences: </h2>
                                 {!offer?.experiences.length && <span> Not Experiences Requireds</span>}
-                                {offer?.experiences.map(experience => {
-                                    return <div key={experience.id}>
-                                        <h3>Position: {experience.position}</h3>
-                                        <h4>Industry: {experience.industry}</h4>
-                                        <span>{experience.years} years of experience</span>
-                                    </div>
-                                })}
+                                <ul className='flex flex-col gap-2'>
+                                    {offer?.experiences.map(experience => {
+                                        return <li key={experience.id}>
+                                            <h3>-Position: {experience.position}</h3>
+                                            <span className='ml-2'>{experience.years} years of experience</span>
+                                            {/* <h4>Industry: {experience.industry}</h4> */}
+                                        </li>
+                                    })}
+                                </ul>
                             </div>
                             <div>
-                                <div onClick={() => onStudyClick(offer.id, offer.user, offer.studies)} className="cursor-pointer rounded-lg bg-slate-100 p-2">
+                                <div onClick={() => { return offer.published ? null : onStudyClick(offer.id, offer.user, offer.studies) }} className="cursor-pointer rounded-lg bg-slate-100 p-2">
                                     <h2 className='font-semibold'>Studies:</h2>
                                     {!offer?.studies?.length ? <span>Not Studies Required</span> :
                                         offer?.studies.map(study => {
@@ -272,20 +290,20 @@ function OfferDetail() {
                                         })}
                                 </div>
                             </div>
-                            <div onClick={() => onKnowledgeClick(offer.id, offer.user, offer.knowledges)} className="cursor-pointer rounded-lg bg-emerald-50 p-2">
+                            <div onClick={() => { return offer.published ? null : onKnowledgeClick(offer.id, offer.user, offer.knowledges) }} className="cursor-pointer rounded-lg bg-emerald-50 p-2">
                                 <h2 className='font-semibold'>Knowledges:</h2>
                                 {!offer?.knowledges?.length ? <span> Not Knowledges Required </span> :
-                                    <div className="flex flex-wrap">
+                                    <ul className="flex flex-wrap gap-2">
                                         {offer?.knowledges.map(knowledge => {
-                                            return <div key={knowledge.id} className="flex gap-1 w-full">
-                                                <span>{knowledge.title}: </span>
-                                                <span>{knowledge.level}</span>
-                                            </div>
+                                            return <li key={knowledge.id} className="max-w-[45%] text-sm flex border flex-col gap-1 rounded-xl p-1">
+                                                <span>{knowledge.title}</span>
+                                                <span>Level: <span className='capitalize'>{knowledge.level}</span></span>
+                                            </li>
                                         })}
-                                    </div>
+                                    </ul>
                                 }
                             </div>
-                            <div onClick={() => onLanguageClick(offer.id, offer.user, offer.languages)} className="cursor-pointer rounded-lg bg-slate-100 p-2">
+                            <div onClick={() =>{return offer.published ? null :  onLanguageClick(offer.id, offer.user, offer.languages)}} className="cursor-pointer rounded-lg bg-slate-100 p-2">
                                 <h2 className='font-semibold'>Languages:</h2>
                                 {!offer?.languages?.length ? <span>Not Languages Required</span> :
                                     <div className="flex flex-wrap">
@@ -349,6 +367,6 @@ function OfferDetail() {
                 }
             </div>
         </div>
-    </main>
+    </main >
 }
 export default OfferDetail

@@ -14,6 +14,7 @@ const salaryValidator = require ('./salaryValidator')
 const workTimeValidator = require ('./workTimeValidator')
 const titleValidator = require ('./titleValidator')
 const descriptionValidator = require ('./descriptionValidator')
+const locationValidator = require ('./locationValidator')
 
 module.exports ={
     emailValidator,
@@ -31,5 +32,6 @@ module.exports ={
     salaryValidator,
     workTimeValidator,
     titleValidator,
-    descriptionValidator
+    descriptionValidator,
+    locationValidator
 }
