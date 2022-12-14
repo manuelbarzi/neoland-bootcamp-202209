@@ -50,11 +50,12 @@ export default function MyList() {
         <CreateProductComponent
           onClose={toggleCreateProductView}
           listId={listId}
+          onProductCreated={toggleCreateProductView}
         />
       )}
       {isEditOpen && <EditProducts onClose={toggleEditProductView} />}
 
-      {<Header listName={targetListName} />}
+      {<Header listName={targetListName}/>}
       <main className="mt-[3rem] flex flex-col gap-2 items-center">
         <p onClick={toggleEditProductView}>Aquí irán los productos en lista </p>
       </main>
