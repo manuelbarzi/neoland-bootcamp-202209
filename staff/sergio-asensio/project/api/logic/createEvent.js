@@ -52,7 +52,7 @@ function createEvent(userId, month, title, body, requeriment, capacity, date, in
     else if (month === 'july'){
          monthNumber = 6
     }
-    else if (month === 'agost'){
+    else if (month === 'august'){
          monthNumber = 7
     }
     else if (month === 'september'){

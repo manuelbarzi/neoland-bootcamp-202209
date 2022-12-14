@@ -2,6 +2,7 @@ import log from '../utils/coolog'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useState, useContext } from 'react'
 import  CreateEvent from '../components/CreateEvent'
+import  DeleteEvent from '../components/DeleteEvent'
 import retrieveEventMonth from '../logic/retrieveEventMonth'
 import retrieveUser from '../logic/retrieveUser'
 import { errors } from 'com'
@@ -17,8 +18,11 @@ function EventMonth() {
 
     const [user, setUser] = useState()
     const [event, setEvent] = useState()
-    const [create, setCreate] = useState()
-    const [update, setUpdate] = useState()
+    const [createEvent, setCreateEvent] = useState()
+    const [update, setUpdateEvent] = useState()
+    const [deleteEvent, setDeleteEvent] = useState()
+
+    
 
     const { showAlert } = useContext(Context)
 
@@ -77,12 +81,16 @@ function EventMonth() {
     }
 
     const handleCreateEvent = () => {
-        setCreate('true')
+        setCreateEvent('true')
         
     }
 
-    const handleUpdateEvent = () => {
-        setUpdate('true')
+    // const handleUpdateEvent = () => {
+    //     setUpdate('true')
+    // }
+
+    const handleDeleteEvent = () => {
+        setDeleteEvent('true')
     }
 
     return <main className="h-full">
@@ -92,9 +100,9 @@ function EventMonth() {
                 <button onClick={goEvents}>Go_Back</button>
         </header>
             <div>
-            <button onClick={handlerUpdate}>--EDITAR--</button>
+            <button >--EDITAR--</button>
             <p></p>
-            <button>--BORRAR--</button>
+            <button onClick={handleDeleteEvent}>--BORRAR--</button>
             </div>
 
         { event ? <div>
@@ -116,10 +124,12 @@ function EventMonth() {
             </div>}
         </div> : <div><button onClick={handleCreateEvent}>crear</button></div>}
 
-        {create && <CreateEvent month={month} closeCreate={() => setCreate()}/>}
+        {createEvent && <CreateEvent month={month} closeCreate={() => setCreateEvent()}/>}
 
     </main>
 
 }
 
 export default EventMonth
+
+// {createNoticeVisible && <CreateNotice onCreated={handleNoticeCreated} onClose={closeCreateNotice} />}
