@@ -46,7 +46,6 @@ function BookingForm({ onUpdate, boats, ports, onDiscard, bookingInfo }) {
                                     <input type="date"
                                         className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                         placeholder="Select a date" data-mdb-toggle="datepicker"
-                                        //defaultValue={formValues.startDate}
                                         defaultValue={bookingInfo ? bookingInfo.startDate : ""}
                                         onChange={(e) => { setStartDate(e.target.value) }} />
                                     <label htmlFor="floatingInput" className="text-gray-700">Select arrival date</label>
@@ -57,7 +56,6 @@ function BookingForm({ onUpdate, boats, ports, onDiscard, bookingInfo }) {
                                     <input type="date"
                                         className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                         placeholder="Select a date" data-mdb-toggle="datepicker"
-                                        //defaultValue={formValues.endDate}
                                         defaultValue={bookingInfo ? bookingInfo.endDate : ""}
                                         onChange={(e) => { setEndDate(e.target.value) }} />
                                     <label htmlFor="floatingInput" className="text-gray-700">Select departure date</label>
@@ -75,7 +73,6 @@ function BookingForm({ onUpdate, boats, ports, onDiscard, bookingInfo }) {
                                     name="port"
                                     aria-label="Port selector"
                                     defaultValue={bookingInfo ? bookingInfo.port : ""}
-                                    //defaultValue={!isEditMode && formValues.port}
                                     disabled={bookingInfo}>
                                     {ports.map(port => (
                                         <option key={port._id} value={port._id}> {port.name}</option>)
@@ -96,7 +93,6 @@ function BookingForm({ onUpdate, boats, ports, onDiscard, bookingInfo }) {
                                     name="boat"
                                     aria-label="Boat selector"
                                     defaultValue={bookingInfo ? bookingInfo.boat : ""}
-                                    //defaultValue={!isEditMode && formValues.boat}
                                     disabled={!!bookingInfo}>
                                     {boats.map(boat => (
                                         <option key={boat._id} value={boat._id}> {boat.name}</option>)
