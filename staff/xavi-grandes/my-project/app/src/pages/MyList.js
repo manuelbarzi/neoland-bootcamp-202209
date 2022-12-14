@@ -1,3 +1,4 @@
+import { useParams } from 'react-router-dom'
 import log from "../utils/coolog";
 import { useContext, useEffect, useState } from "react";
 import Context from "../components/Context";
@@ -16,7 +17,8 @@ export default function Home() {
 //   const [products, setProducts] = useState();
   const [isCreateOpen, setCreateOpen] = useState(false);
   const [isEditOpen, setEditOpen] = useState(false);
-
+  const { targetListName } = useParams()
+  console.log (targetListName)
   const { showAlert } = useContext(Context);
 
   useEffect(() => {
@@ -87,7 +89,7 @@ export default function Home() {
       {isCreateOpen && <CreateProductComponent onClose={toggleCreateProductView} />}
       {isEditOpen && <EditProducts onClose={toggleEditProductView}  />}
 
-      {user && <Header userName={user.name} />}
+      {user && <Header listName={targetListName}  userName={user.name} />}
       <main className="mt-[3rem] flex flex-col gap-2 items-center">
         <p onClick={toggleEditProductView}>Aquí irán los productos en lista </p>
         
