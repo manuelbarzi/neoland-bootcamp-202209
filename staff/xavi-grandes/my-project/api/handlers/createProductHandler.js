@@ -2,7 +2,7 @@ const createProduct = require ('../logic/createProduct')
 
 module.exports = (req, res) => {
     try {
-        const { body: { title }, listId } = req
+        const { body: { title }, params: { listId } } = req
 
         createProduct(listId, title)
             .then(() => res.status(201).send())
