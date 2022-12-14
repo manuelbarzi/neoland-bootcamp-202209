@@ -1,7 +1,10 @@
-import { useEffect, useState } from 'react'
-import getUserInformation from '../logic/userSettings'
-
 function SettingsForm({userInfo}){
+
+    const getLocaleDate = (dateString) => {
+        const dateValue = new Date(dateString)
+        return dateValue.toLocaleDateString()
+    }
+
 
     return (
         <form >
@@ -35,13 +38,18 @@ function SettingsForm({userInfo}){
                     defaultValue={userInfo.surname}/>
             </div>
             <div className="form-group mb-6">
-                <div className="datepicker relative form-floating mb-3 xl:w-96" data-mdb-toggle-button="false">
-                    <input type="date"
-                        className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                        placeholder="Select a date" data-mdb-toggle="datepicker"
-                        defaultValue={userInfo.birthDate}/>
-                    <label htmlFor="floatingInput" className="text-gray-700">Select a date</label>
-                </div>
+                <label htmlFor="birthDateInput" className="form-label inline-block mb-2 text-gray-700">Date of Birth</label>
+                <input
+                    type="text"
+                    className="form-control 
+                block w-full px-3 py-1.5 text-base font-normal 
+                text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 
+                rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 
+                focus:outline-none"
+                    id="birthDateInput"
+                    name="birthDate"
+                    placeholder="Select your birthdate"
+                    defaultValue={ getLocaleDate(userInfo.birthDate)}/>
             </div>
             <div className="form-group mb-6">
                 <label htmlFor="idNumberInput" className="form-label inline-block mb-2 text-gray-700">Identification Number</label>
