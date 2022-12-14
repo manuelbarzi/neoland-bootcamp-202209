@@ -32,14 +32,18 @@ function retrievePublicPosts(userId) {
 
                 if (chat) {
                     delete chat._id
-                    delete chat.user
                     delete chat.__v
 
                     chat.comments.forEach(comment => {
                         comment.id = comment._id.toString()
-    
+
                         delete comment.__v
                         delete comment._id
+
+                        if (!comment.user.id) {
+                            comment.user.id = comment.user._id.toString()
+                            delete comment.user._id
+                        }
                     })
 
                     post.chats.push(chat)
@@ -49,3 +53,4 @@ function retrievePublicPosts(userId) {
         })
 }
 module.exports = retrievePublicPosts
+

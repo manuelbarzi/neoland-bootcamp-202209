@@ -1,6 +1,5 @@
 const retrieveUser = require('../logic/retrieveUser')
-
-const { errors: { FormatError, NotFoundError } } = require('../../com')
+const { errors: { FormatError, NotFoundError } } = require('com')
 
 module.exports = (req, res) => {
     try {

@@ -47,7 +47,7 @@ mongoose.connect(MONGODB_URL)
     api.get('/posts',jwtVerifier, retrievePostsUserHandler)
 
     api.post('/posts/:postId/comments', jwtVerifier, jsonBodyParser, createCommentHandler)
-    api.get('/posts/:postId', jwtVerifier, retrieveCommentHandler)
+    api.get('/posts/:commentId', jwtVerifier, retrieveCommentHandler)
 
 
     

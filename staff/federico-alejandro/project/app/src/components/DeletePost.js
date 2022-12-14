@@ -1,23 +1,33 @@
 import deletePost from '../logic/deletePost'
 import Button from './Button'
+import { errors } from 'com'
+import Context from '../components/Context'
+import { useContext } from 'react'
+
+const { FormatError, AuthError, NotFoundError } = errors
 
 function DeletePost({ postId, onDeleted, onClose }) {
+    const { showAlert } = useContext(Context)
+    
     const confirmDeletePost = event => {
         event.preventDefault()
 
         try {
-            // deletePost(sessionStorage.token, postId, error => {
-            //     if (error) {
-            //         alert(error.message)
-            //         return
-            //     }
-            //     onDeleted()
-            // })
             deletePost(sessionStorage.token, postId)
                 .then(() => onDeleted())
-                .catch(error => alert(error.message))
+                .catch(error => {   
+                    if (error instanceof TypeError || error instanceof FormatError)
+                    showAlert(error.message, 'warn')
+                else if (error instanceof AuthError || error instanceof NotFoundError)
+                    showAlert(error.message, 'error')
+                else
+                    showAlert(error.message, 'fatal')
+                })
         } catch (error) {
-            alert(error.message)
+            if (error instanceof TypeError || error instanceof FormatError)
+            showAlert(error.message, 'warn')
+        else
+            showAlert(error.message, 'fatal')
         }
     }
 

@@ -1,6 +1,13 @@
 const { errors: { LengthError, NotFoundError } } = require('com')
 const { User, Post, Comment, Chat } = require('../models')
-
+/**
+ * Create a comment on a post
+ * 
+ * @param {string} userId The user id
+ * @param {string} postId The post id
+ * @param {string} text The post text
+ * 
+ */
 function createComment(userId, postId, text) {
     if (typeof userId !== "string") throw TypeError("userId is not a string")
     if (userId.length === 0) throw new LengthError("userId is empty")

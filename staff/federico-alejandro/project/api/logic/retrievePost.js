@@ -34,7 +34,6 @@ module.exports = function (userId, postId) {
 
             if (chat) {
                 delete chat._id
-                delete chat.user
                 delete chat.__v
 
                 chat.comments.forEach(comment => {
@@ -42,6 +41,11 @@ module.exports = function (userId, postId) {
 
                     delete comment.__v
                     delete comment._id
+                    
+                if (!comment.user.id) {
+                    comment.user.id = comment.user._id.toString()
+                    delete comment.user._id
+                }
                 })
 
                 post.chats.push(chat)

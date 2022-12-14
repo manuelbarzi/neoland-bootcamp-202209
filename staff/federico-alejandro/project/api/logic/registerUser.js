@@ -3,6 +3,13 @@ const {
     regex: { IS_EMAIL_REGEX, HAS_SPACES_REGEX, IS_ALPHABETICAL_REGEX }
 } = require('../../com')
 const { User } = require('../models')
+/**
+ * Register a user
+ * 
+ * @param {string} name The user name
+ * @param {string} email The user email
+ * @param {string} password The user password
+ */
 
 function registerUser(name, email, password) {
     if (typeof name !== 'string') throw new TypeError('name is not a string')
