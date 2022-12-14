@@ -3,17 +3,16 @@ import { getLiteralForKind } from '../utils/getLiteralForKind'
 import { getLiteralForType } from '../utils/getLiteralForType'
 import { useEffect, useState } from 'react'
 import retrieveFlows from '../logic/retrieveFlows'
+import UpdateFlow from './UpdateFlow'
 
 function FlowList({ flowsChange }) {
-  
   const [flows, setFlows] = useState([])
-  useEffect(() => {
-    retrieveFlowsHandler()
-  }, [])
+  const [updateFlow, setUpdateFlow] = useState()
 
   useEffect(() => {
     retrieveFlowsHandler()
   }, [flowsChange])
+
 
   const retrieveFlowsHandler = () => {
     try {
@@ -23,6 +22,15 @@ function FlowList({ flowsChange }) {
     } catch (error) {
       alert(error.message)
     }
+  }
+  const handleUpdateClose = () => {
+    setUpdateFlow()
+  }
+
+  const handleUpdated = () => {
+    retrieveFlowsHandler()
+
+    setUpdateFlow()
   }
   return <>
     {flows.map((flow) => {
@@ -49,12 +57,12 @@ function FlowList({ flowsChange }) {
           </div>
 
           <div className='w-5/12'>
-            <p className=' font-semibold text-lg '>{flow.date}</p>
+            <p className=' font-semibold text-lg '>{flow.date.toString()}</p>
           </div>
 
           <div className=''>
             <div className='flex flex-col self-end gap-1'>
-              <button className='bg-green-400  rounded-md p-1' type='button'><AiOutlineEdit size='1rem' /></button>
+              <button onClick={()=>{ setUpdateFlow(flow)}} className='bg-green-400  rounded-md p-1' type='button'><AiOutlineEdit size='1rem' /></button>
               <button className='bg-red-600  rounded-md p-1' type='button'><AiOutlineDelete size='1rem' /></button>
             </div>
           </div>
@@ -62,6 +70,7 @@ function FlowList({ flowsChange }) {
         </div>
       )
     })}
+     {updateFlow && <UpdateFlow flow={updateFlow} onClose={handleUpdateClose} onUpdated={handleUpdated} />}
   </>
 }
 

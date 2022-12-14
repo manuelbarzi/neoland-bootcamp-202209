@@ -1,15 +1,16 @@
 /* eslint-disable import/no-anonymous-default-export */
 /**
  * Deletes a post against API
+ * 
  * @param {string} token The user token
  * @param {string} appointmet Id The post id
  * @param {callback} callback The callback to attend the result
  */
-export default function (token, appointmentId, callback) {
+export default function (token, flowId, callback) {
     if (typeof token !== 'string') throw new TypeError('token is not a string')
     if (!token.length) throw new Error('token is empty')
-    if (typeof appointmentId !== 'string') throw new TypeError('appointmentId is not a string')
-    if (!appointmentId.length) throw new Error('appointmentId is empty')
+    if (typeof flowId !== 'string') throw new TypeError('flowId is not a string')
+    if (!flowId.length) throw new Error('flowId is empty')
 
     if (!callback)
         return new Promise((resolve, reject) => {
@@ -31,7 +32,7 @@ export default function (token, appointmentId, callback) {
 
             xhr.onerror = () => reject(new Error('connection error'))
 
-            xhr.open('DELETE', `http://localhost/appointment/${appointmentId}`)
+            xhr.open('DELETE', `http://localhost/flow/${flowId}`)
             xhr.setRequestHeader('Authorization', `Bearer ${token}`)
 
             xhr.send()
@@ -57,7 +58,7 @@ export default function (token, appointmentId, callback) {
 
     xhr.onerror = () => callback(new Error('connection error'))
 
-    xhr.open('DELETE', `http://localhost/appointment/${appointmentId}`)
+    xhr.open('DELETE', `http://localhost/flow/${flowId}`)
     xhr.setRequestHeader('Authorization', `Bearer ${token}`)
 
     xhr.send()

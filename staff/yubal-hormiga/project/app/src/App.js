@@ -39,15 +39,11 @@ function App() {
   return <Context.Provider value={{ login, logout, showAlert }}>
     {loggedIn ? <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/home" element={<Home />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
     </Routes>
       :
       <Routes>
-
-        <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="*" element={<Navigate replace to="/login" />} />
       </Routes>}
 

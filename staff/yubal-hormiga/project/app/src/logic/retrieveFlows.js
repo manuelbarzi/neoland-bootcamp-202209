@@ -19,6 +19,10 @@ export default function (token) {
 
             const flows = JSON.parse(json)
 
+            flows.forEach(flow => {
+                flow.date = new Date(flow.date)
+            })
+
             resolve(flows)
         }
 
