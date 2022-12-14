@@ -25,6 +25,7 @@ function PublishCurriculum({ className, curriculumToPublish, onPublishCurriculum
                 .then(() => onPublishCurriculum())
                 .catch(error => {
                     const { errorMessage, type } = errorHandling(error)
+                    onPublishCurriculumClose()
                     showAlert(errorMessage, type)
                 })
         } catch (error) {

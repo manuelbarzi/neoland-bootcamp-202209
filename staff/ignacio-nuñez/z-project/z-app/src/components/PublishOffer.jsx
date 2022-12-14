@@ -25,6 +25,7 @@ function PublishOffer({ className, offerToPublish, onPublishOffer, onPublishOffe
                 .then(() => onPublishOffer())
                 .catch(error => {
                     const { errorMessage, type } = errorHandling(error)
+                    onPublishOfferClose()
                     showAlert(errorMessage, type)
                 })
         } catch (error) {

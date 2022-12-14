@@ -1,9 +1,9 @@
 const { errors: { NotFoundError, ConflictError },
-    validators: { stringValidator, workerRoleValidator }
+    validators: { stringValidator }
 } = require('com')
 const { Users, Offers } = require('../models')
 /**
- * Retrieves all user offers
+ * Retrieves published offers
  * 
  * @param {string} userId The user id
  */

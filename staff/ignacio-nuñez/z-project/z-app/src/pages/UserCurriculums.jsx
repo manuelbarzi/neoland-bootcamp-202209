@@ -84,7 +84,7 @@ function UserCurriculums() {
                         return <article key={curriculum.id} className=" shadow-sm shadow-slate-600 bg-emerald-200 flex flex-col mt-3.5 border-2 p-4 w-full rounded-xl">
                             <Link to={`/curriculums/${curriculum.id}`} className="flex justify-between z-10">
                                 <h2 className='font-semibold'>{curriculum.title}</h2>
-                                <img className="w-1/5 text-xs" src={curriculum.photo} alt="company logo" />
+                                <img className="w-1/5 text-xs" src={curriculum.photo} alt="worker perfil" />
                             </Link>
                             <p className="text-xs">{format(curriculum.createDate)}</p>
                             <hr className="w-full border-black mt-3.5" />

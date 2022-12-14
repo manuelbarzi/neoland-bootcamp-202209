@@ -4,10 +4,9 @@ const { errors: { FormatError, LengthError, NotFoundError, ConflictError } } = r
 
 module.exports = (req, res) => {
     try {
-        const { title, description, photo, languages, studies, experiences, knowledges } = req.body
         const { userId } = req
 
-        createCurriculm(userId, title, description, photo, languages, studies, experiences, knowledges)
+        createCurriculm(userId)
             .then(offerId => res.json(offerId))
             .catch(error => {
                 if (error instanceof NotFoundError) res.status(404).json({ error: error.message })

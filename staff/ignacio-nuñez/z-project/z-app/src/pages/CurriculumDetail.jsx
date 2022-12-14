@@ -107,37 +107,6 @@ function CurriculumDetail() {
         }
     }
 
-    const updateCurriculumModality = event => {
-        const { target: { value: modality } } = event
-
-        try {
-            updateCurriculum(sessionStorage.token, curriculumId, user.id, { modality })
-                .catch(error => {
-                    const { errorMessage, type } = errorHandling(error)
-                    showAlert(errorMessage, type)
-
-                })
-        } catch (error) {
-            const { errorMessage, type } = errorHandling(error)
-            showAlert(errorMessage, type)
-        }
-    }
-
-    const updateCurriculumWorkTime = event => {
-        const { target: { value: workTime } } = event
-
-        try {
-            updateCurriculum(sessionStorage.token, curriculumId, user.id, { workTime })
-                .catch(error => {
-                    const { errorMessage, type } = errorHandling(error)
-                    showAlert(errorMessage, type)
-                })
-        } catch (error) {
-            const { errorMessage, type } = errorHandling(error)
-            showAlert(errorMessage, type)
-        }
-    }
-
     const onLanguageClick = (curriculumId, curriculumUserId, languages) => {
         setUpdatingLanguage({ curriculumId, curriculumUserId, languages })
     }
@@ -194,15 +163,15 @@ function CurriculumDetail() {
         <NavBar
         />
         <div className="flex items-center flex-col">
-            <div className="flex items-center flex-col mt-24">
-                <section className="flex items-center flex-col p-2">
+            <div className="flex items-center flex-col w-full mt-24">
+                <section className="flex items-center flex-col w-full p-2">
                     <article className="flex flex-col gap-2 shadow-sm shadow-slate-600 bg-emerald-200 mt-3.5 border-2 w-full rounded-xl">
                         <div className="flex justify-between z-10 p-2 mt-1">
                             {curriculum?.published ?
                                 <h2 name='title' id='title' className='bg-emerald-200 p-2 border-2 font-semibold rounded-lg'>{curriculum?.title}</h2> :
                                 <textarea onChange={updateCurriculumTitle} name='title' maxLength="25" id='title' rows='1' className='bg-emerald-200 p-2 border-2 font-semibold resize-none outline-none rounded-lg' defaultValue={curriculum?.title}></textarea>
                             }
-                            <img className="w-1/5 text-xs p-2" src={curriculum?.photo} alt="worker logo" />
+                            <img className="w-1/5 text-xs p-2" src={curriculum?.photo} alt="worker perfil" />
                         </div>
                         <div className='flex flex-col gap-2 bg-white p-2'>
                             <div className=' rounded-lg bg-emerald-50 p-2'>
@@ -212,7 +181,7 @@ function CurriculumDetail() {
                                 <h2 className='font-semibold'>Location:</h2>
                                     {curriculum?.published ?
                                         <span className="text-md w-1/2 block py-2.5 px-0 text-gray-700 bg-transparent border-0 border-b-2 border-gray-200 capitalize">{curriculum?.location ? curriculum.location : 'Location'}</span> :
-                                        <input onChange={updateCurriculumLocation} defaultValue={curriculum?.location} type="text" placeholder='Location' className='w-1/2 p-1 outline-none rounded-md bg-emerald-50' />
+                                        <input onChange={updateCurriculumLocation} defaultValue={curriculum?.location} type="text" placeholder='Location' className='w-2/3 outline-none rounded-md bg-emerald-50' />
                                     }
                                 </div>
                             </div>

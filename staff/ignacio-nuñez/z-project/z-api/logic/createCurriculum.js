@@ -19,7 +19,7 @@ module.exports = function createCurriculum(userId) {
         .then(curriculums => {
             if (curriculums.length >= 3) throw new ConflictError('Your cant have more than 3 curriculums')
 
-            const data = { createDate: new Date(), user: userId }
+            const data = { title: 'My new CV', description: '', createDate: new Date(), user: userId }
 
             data.published = false
 

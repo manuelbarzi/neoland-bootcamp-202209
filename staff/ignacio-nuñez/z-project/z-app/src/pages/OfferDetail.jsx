@@ -209,8 +209,8 @@ function OfferDetail() {
         <NavBar
         />
         <div className="flex items-center flex-col">
-            <div className="flex items-center flex-col mt-24">
-                <section className="flex items-center flex-col p-2">
+            <div className="flex items-center flex-col w-full mt-24">
+                <section className="flex items-center w-full flex-col p-2">
                     <article className="flex flex-col gap-2 shadow-sm shadow-slate-600 bg-emerald-200 mt-3.5 border-2 w-full rounded-xl">
                         <div className="flex justify-between z-10 p-2 mt-1">
                             {offer?.published ?
@@ -245,12 +245,8 @@ function OfferDetail() {
                                 <div className='flex gap-6 mt-2'>
                                     <div onClick={() => { return offer?.published ? null : onSalaryClick(offer.id, offer.user, offer.salary) }}
                                         className='flex justify-center w-1/2 cursor-pointer border rounded-md'>
-                                        <div className='text-md text-gray-700 flex justify-start p-1 gap-2 w-full'>
-                                            <span>Salary:</span>
-                                            <div>
-                                                <span>{offer?.salary?.salary ? offer.salary.salary : '-Salary-'} </span>
-                                                <span>{offer?.salary?.currency}</span>
-                                            </div>
+                                        <div className='text-md text-gray-700 flex justify-start p-2 gap-1 w-full'>
+                                            <span>{offer?.salary?.salary ? <span>{offer.salary.salary}{offer?.salary?.currency}<span className='text-xs'>/Year</span> </span> : '-Salary-'} </span>
                                         </div>
                                     </div>
                                     {offer?.published ?
@@ -267,13 +263,16 @@ function OfferDetail() {
                                 }
                             </div>
                             <div onClick={() => { return offer.published ? null : onExperienceClick(offer.id, offer.user, offer.experiences) }} className="cursor-pointer rounded-lg bg-emerald-50 p-2">
-                                <h2 className='font-semibold'>Experiences: </h2>
+                                <h2 className='font-semibold text-lg'>Experiences: </h2>
                                 {!offer?.experiences.length && <span> Not Experiences Requireds</span>}
                                 <ul className='flex flex-col gap-2'>
                                     {offer?.experiences.map(experience => {
                                         return <li key={experience.id}>
-                                            <h3>-Position: {experience.position}</h3>
-                                            <span className='ml-2'>{experience.years} years of experience</span>
+                                            <div className='flex gap-1'>
+                                                <h3 className='font-semibold'>Position:</h3>
+                                                <span>{experience.position}</span>
+                                            </div>
+                                            <span>{experience.years} years of experience</span>
                                             {/* <h4>Industry: {experience.industry}</h4> */}
                                         </li>
                                     })}

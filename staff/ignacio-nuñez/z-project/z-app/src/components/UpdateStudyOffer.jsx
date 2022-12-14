@@ -82,11 +82,11 @@ function UpdateStudyOffer({ className, onUpdateStudyOfferClose, onUpdateStudyOff
                 </div>
                 <hr className="w-full mt-3.5" />
                 <form onSubmit={updateStudyOfferHandler} className="flex flex-col items-center w-full mt-2 gap-2">
-                    <h3 className='font-semibold self-start'>Studies: </h3>
                     {studies?.map(study => {
                         return <div key={study.id} className="w-full self-start flex flex-col">
-                            <div className='flex p-1'>
-                                <textarea type="text" name="study" id="study" className="resize-none outline-none w-full" placeholder='Put a study here' defaultValue={study?.title}></textarea>
+                            <div className='flex gap-1 p-1'>
+                                <span className='font-semibold'>Title:</span>
+                                <textarea type="text" name="study" id="study" className="resize-none outline-none w-2/3" placeholder='Put a study here' defaultValue={study?.title}></textarea>
                                 <Button type="button" className="bg-red-300" onClick={() => handleDeleteStudy(study.id)}>Delete</Button>
                             </div>
                             <hr className="w-full" />

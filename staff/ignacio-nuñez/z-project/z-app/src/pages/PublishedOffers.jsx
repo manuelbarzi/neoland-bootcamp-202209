@@ -33,8 +33,8 @@ function PublishedOffers() {
         <NavBar
         />
         <div className="flex items-center flex-col">
-            <div className="flex items-center flex-col mt-20">
-                <section className="flex items-center flex-col p-2">
+            <div className="flex items-center flex-col w-full mt-20">
+                <section className="flex items-center flex-col w-full p-2">
                     {offers?.length ? offers.map(offer => {
                         return <article key={offer.id} className="flex flex-col gap-2 shadow-sm shadow-slate-600 bg-emerald-200 mt-3.5 border-2 w-full rounded-xl">
                             <div className="flex justify-between z-10 p-2 mt-1">

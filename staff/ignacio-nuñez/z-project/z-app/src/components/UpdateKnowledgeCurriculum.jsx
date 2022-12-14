@@ -85,7 +85,10 @@ function UpdateKnowledgeCurriculum({ className, onUpdateKnowledgeCurriculumClose
                     <h3 className='font-semibold self-start'>Knowledges:</h3>
                     {knowledges?.map(knowledge => {
                         return <div key={knowledge.id} className="w-full self-start flex flex-col">
-                            <input type="text" maxLength='25' name="title" id="title" className="outline-none" placeholder='Title' defaultValue={knowledge.title} />
+                            <div className='flex gap-1'>
+                                <span className='font-semibold'>Skill:</span>
+                                <input type="text" maxLength='25' name="title" id="title" className="outline-none" placeholder='Title' defaultValue={knowledge.title} />
+                            </div>
                             <div className='flex justify-between'>
                                 <select name="level" id="level" defaultValue={knowledge.level ? knowledge.level : 'select'}
                                     className="text-md block py-2.5 px-0 w-fit text-gray-700 bg-transparent border-0 border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-gray-200 peer">

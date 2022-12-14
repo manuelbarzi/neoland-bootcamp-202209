@@ -81,12 +81,28 @@ function UpdateStudyCurriculum({ className, onUpdateStudyCurriculumClose, onUpda
                     <button className="border-2 w-fit h-fit justify-self-end col-start-12 col-end-13 px-2 py-1 rounded-xl" onClick={closeStudyCurriculumHandler}>X</button>
                 </div>
                 <hr className="w-full mt-3.5" />
-                <form onSubmit={updateStudyCurriculumHandler} className="flex flex-col items-center w-full mt-2 gap-2">
-                    <h3 className='font-semibold self-start'>Studies: </h3>
+                <form onSubmit={updateStudyCurriculumHandler} className="flex flex-col items-center w-full mt-2 gap-1">
                     {studies?.map(study => {
                         return <div key={study.id} className="w-full self-start flex flex-col">
-                            <div className='flex p-1'>
-                                <textarea type="text" name="study" id="study" className="resize-none outline-none w-full" placeholder='Put a study here' defaultValue={study?.title}></textarea>
+                            <div className='flex flex-col p-1'>
+                                <div className='flex gap-1'>
+                                    <span className='font-semibold'>Institution: </span>
+                                    <textarea type="text" rows='1' name="institution" id="institution" className="resize-none outline-none" placeholder='Institution' defaultValue={study?.title}></textarea>
+                                </div>
+                                <div className='flex gap-1'>
+                                    <span className='font-semibold'>Title:</span>
+                                    <textarea type="text" rows='1' name="title" id="title" className="resize-none outline-none" placeholder='Title' defaultValue={study?.title}></textarea>
+                                </div>
+                                <div className='flex'>
+                                    <div className='flex flex-col'>
+                                        <span className='font-semibold'>From</span>
+                                        <input type="date" />
+                                    </div>
+                                    <div className='flex flex-col'>
+                                        <span className='font-semibold'>To</span>
+                                        <input type="date" />
+                                    </div>
+                                </div>
                                 <Button type="button" className="bg-red-300" onClick={() => handleDeleteStudy(study.id)}>Delete</Button>
                             </div>
                             <hr className="w-full" />

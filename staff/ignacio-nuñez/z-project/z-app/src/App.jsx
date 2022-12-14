@@ -10,6 +10,7 @@ import UserOffers from "./pages/UserOffers";
 import OfferDetail from "./pages/OfferDetail";
 import CurriculumDetail from "./pages/CurriculumDetail"
 import PublishedOffers from "./pages/PublishedOffers";
+import PublishedCurriculums from "./pages/PublishedCurriculums";
 import UserCurriculums from "./pages/UserCurriculums";
 import Alert from './components/Alert'
 import errorHandling from "./utils/errorHandling";
@@ -69,6 +70,10 @@ function App() {
         />}
         {<Route path="/offers"
           element={sessionStorage.token ? <PublishedOffers /> : <Navigate replace to="/login"
+          />}
+        />}
+         {<Route path="/curriculums"
+          element={sessionStorage.token ? <PublishedCurriculums/> : <Navigate replace to="/login"
           />}
         />}
         {<Route path="/user/profile"
