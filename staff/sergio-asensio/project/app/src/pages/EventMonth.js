@@ -6,6 +6,8 @@ import  CreateEvent from '../components/CreateEvent'
 import retrieveUser from '../logic/retrieveUser'
 import { errors } from 'com'
 import Context from '../components/Context'
+import retrieveEventMonth from '../logic/retrieveEventMonth'
+
 
 const { FormatError, AuthError, LengthError, NotFoundError } = errors
 
@@ -19,10 +21,9 @@ function EventMonth() {
     const [create, setCreate] = useState()
     const { showAlert } = useContext(Context)
 
-
     useEffect(() => {
         userRetrieve()
-        // eventRetrieve()
+        eventRetrieve()
     }, [])
 
     const userRetrieve = () => {
@@ -48,25 +49,27 @@ function EventMonth() {
         }
     }
 
-    // const eventRetrieve = () => {
-    //     try {
-    //         retrieveEvent(sessionStorage.token)
-    //             .then(event => setEvent(event))
-    //             .catch(error => {
-    //                 if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
-    //                     showAlert(error.message, 'warn')
-    //                 else if (error instanceof AuthError || error instanceof NotFoundError)
-    //                     showAlert(error.message, 'error')
-    //                 else
-    //                     showAlert(error.message, 'fatal')
-    //             })
-    //     } catch (error) {
-    //         if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
-    //             showAlert(error.message, 'warn')
-    //         else
-    //             showAlert(error.message, 'fatal')
-    //     }
-    // }
+    const eventRetrieve = () => {
+        try {
+            retrieveEventMonth(sessionStorage.token, month)
+                .then(event => {
+                    debugger
+                    setEvent(event)})
+                .catch(error => {
+                    if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
+                        showAlert(error.message, 'warn')
+                    else if (error instanceof AuthError || error instanceof NotFoundError)
+                        showAlert(error.message, 'error')
+                    else
+                        showAlert(error.message, 'fatal')
+                })
+        } catch (error) {
+            if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
+                showAlert(error.message, 'warn')
+            else
+                showAlert(error.message, 'fatal')
+        }
+    }
 
     
     const goEvents = () => {
@@ -89,12 +92,12 @@ function EventMonth() {
         <button onClick={handleCreateEvent}>crear</button>
         </div>
         <div>
-            <h1>title</h1>
-            <p>body</p>
+            <h1>{event?.title}</h1>
+            {/* <p>body</p>
             <p>requeriment</p>
             <p>capacity</p>
             <p>date</p>
-            <p>if inscription is open</p>
+            <p>if inscription is open</p> */}
 
         </div>
         

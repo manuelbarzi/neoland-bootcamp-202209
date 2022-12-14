@@ -60,7 +60,7 @@ function Events() {
 
             <button onClick={()=>handlerMonth('january')}>
             <div className='border rounded-xl h-36 p-2'>
-                <h1>ENERO</h1>
+                <div className='bg-teal-600'><h1>ENERO</h1></div>
                 <p>title</p>
                 <p>resumen</p>
             </div></button>

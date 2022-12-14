@@ -6,10 +6,10 @@ export default function ({ closeCreate, month}) {
     const submitCreateEvent = event => {
         event.preventDefault()
 
-        const {title: { value: title }, body: { value: body }, requeriment: { value: requeriment }, capacity: { value: capacity }, date: { value: date }, inscription: { value:inscription }  } = event.target
+        const {title: { value: title }, body: { value: body }, requeriment: { value: requeriment }, capacity: { value: capacity }, date: { value: date }, inscription: { value:inscription }, img: {value: img} } = event.target
         
         try {
-            createEvent(sessionStorage.token,month, title, body, requeriment, Number(capacity), Date(date), inscription)
+            createEvent(sessionStorage.token,month, title, body, requeriment, Number(capacity), Date(date), inscription, img)
                 // .then(() => onCreated())
                 .then(() => closeCreate())
                 .catch(error => alert(error.message))
@@ -38,8 +38,14 @@ export default function ({ closeCreate, month}) {
                 <label htmlFor="date">Date</label>
                 <input className="text-black pl-2" type="date" name="date" id="date" placeholder="input the date"></input>
                 
-                <label htmlFor="inscription">Inscription</label>
-                <input className="text-black pl-2" type="text" name="inscription" id="inscription" placeholder="iinscription"></input>
+                <label htmlFor="inscription">Inscription</label>                
+                <select className="text-black" id="iscription" name="inscription">
+                    <option value="close">close</option>
+                    <option value="open">open</option>
+                </select>
+
+                <label htmlFor="img">Imagen</label>
+                <input className="text-black pl-2" type="text" name="img" id="img" placeholder="input the link"></input>
                 
 
                 <button>Create</button>

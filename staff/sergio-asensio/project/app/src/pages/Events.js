@@ -6,6 +6,8 @@ import retrieveUser from '../logic/retrieveUser'
 import Context from '../components/Context'
 import { useContext } from 'react'
 import retrieveEvents from '../logic/retrieveEvents'
+import bloque from '../img/bloque.jpg'
+
 
 const { FormatError, AuthError, LengthError, NotFoundError } = errors
 
@@ -56,18 +58,15 @@ function Events() {
         <h1>12 MESES, 12 ACTIVIDADES</h1>
                 <button onClick={goHome} >HOME</button>
         </header>
-        <div className="grid grid-cols-2 gap-4 p-4">
+        <div className="grid grid-cols-2 gap-4 p-4 ">
 
-            {events.map(event => <button onClick={()=>handlerMonth(event.month)}>
-            <div className='border rounded-xl h-36 p-2'>
-                <h1>{event.month}</h1>
-                <p>title</p>
-                <p>resumen</p>
+            {events.map(event => <button className='p-4 ' key={event.month} onClick={()=>handlerMonth(event.month)}>
+            <div className='border rounded-xl h-48 p-4 '>
+                <h1 className='bg-teal-400 rounded-t-xl'>{event.month}</h1>
+                <p className='bg-slate-200	'> {event.title}</p>
+                <img className='rounded-b-xl' src={event.img}/>
             </div></button>)}
         </div>
-        
-        {/* {january && <CreateEvent closeCreate={() => setJanuary()}/>} */}
-
     </main>
 
 }

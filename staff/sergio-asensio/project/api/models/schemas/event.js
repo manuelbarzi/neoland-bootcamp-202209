@@ -45,8 +45,8 @@ module.exports = new Schema({
 
     },
     img: {
-        // type: String,
-        type: [String]
+        type: String,
+        // type: [String]
     }
    
 })

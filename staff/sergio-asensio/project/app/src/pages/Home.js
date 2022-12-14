@@ -65,7 +65,7 @@ function Home() {
 
         <div className='h-full p-8'>
             <Link to="/noticias"> <div className='h-1/4 border-4 border-solid rounded-md mb-4'>
-                <h2>NOTICIAS</h2>
+                <h2 className=''>NOTICIAS</h2>
                 <p>{notice?.title}</p>
                 <p>{notice?.body}</p>
             </div></Link>

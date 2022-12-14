@@ -1,31 +1,32 @@
-const { errors: { FormatError , NotFoundError} } = require('com')
+
+const { errors: { LengthError, FormatError, NotFoundError, UnexpectedError } } = require('com')
 const { User, Event } = require('../models')
-
-function retrieveEvent(userId, eventId) {
+/**
+ * Retrieves all events
+ * 
+ * @param {string} userId The user id
+ */
+function retrieveEventMonth(userId, month) {
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
-    if (!userId.length) throw new FormatError('userId is empty')
-    if (typeof eventId !== 'string') throw new TypeError('eventId is not a string')
-    if (!eventId.length) throw new FormatError('eventId is empty')
-
+    if (!userId.length) throw new LengthError('userId is empty')
 
     return User.findById(userId)
         .then(user => {
             if (!user)
-                throw new NotFoundError(`user with id ${userId} does not exist`)
+                throw new Error(`user with id ${userId} does not exist`)
 
-            return Event.findById(eventId).select('-__v').lean()
+
+            return Event.find({ month }).populate('user', '-email -password -__v').lean()
         })
         .then(event => {
-                if (!event)
-                throw new NotFoundError(`event with id ${eventId} does not exist`)
-                event.id = event._id.toString()
-    
-                delete event._id
-    
-                return event
-            })
-            
-        
+            const eventRetrieve = event[0]
+
+                eventRetrieve.id = eventRetrieve._id.toString()
+                delete eventRetrieve._id
+                delete eventRetrieve.__v
+
+            return eventRetrieve
+        })
 }
 
-module.exports = retrieveEvent
+module.exports = retrieveEventMonth

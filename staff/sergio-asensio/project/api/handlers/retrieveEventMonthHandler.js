@@ -1,11 +1,11 @@
-const retrieveEventMonth= require('../logic/retrieveEventMonth')
+const retrieveEventMonth = require('../logic/retrieveEventMonth')
 
 module.exports = (req, res) => {
     try {
-        const { userId } = req
+        const { userId, params: { month } } = req
 
-        retrieveEventMonth(userId)
-            .then(events => res.json(events))
+        retrieveEventMonth(userId, month)
+            .then(posts => res.json(posts))
             .catch(error => res.status(500).json({ error: error.message }))
     } catch (error) {
         res.status(500).json({ error: error.message })
