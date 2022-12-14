@@ -30,7 +30,7 @@ mongoose.connect(MONGODB_URL)
         api.post('/users/auth', jsonBodyParser, authenticateUserHandler)
         api.post('/users', jsonBodyParser, registerUserHandler)
         api.post('/users/list', jwtVerifier, jsonBodyParser, createListHandler)
-        api.post('/list/product', jwtVerifier, jsonBodyParser, createProductHandler)
+        api.post('/product/:listId', jsonBodyParser, createProductHandler)
         
         api.get('/users/lists', jwtVerifier, retrieveListsHandler)
         api.get('/users', jwtVerifier, retrieveUserHandler)
