@@ -1,5 +1,5 @@
 const { List } = require('../models')
-const { Product } = require('../models')
+const { Item } = require('../models')
 
 module.exports = function (listId, title) {
     if (typeof listId !== 'string') throw new TypeError('listId is not a string')
@@ -8,11 +8,11 @@ module.exports = function (listId, title) {
     if (!title.length) throw new Error('title is empty')
 
     return List.findById(listId)
-    .then(user => {
-        if (!user)
-            throw new Error(`user with id ${listId} does not exist`)
+    .then(list => {
+        if (!list)
+            throw new Error(`list with id ${listId} does not exist`)
 
-        return Product.create({ user: listId, title })
+        return Item.create({ list: listId, title })
     })
     .then(() => { })
 }
