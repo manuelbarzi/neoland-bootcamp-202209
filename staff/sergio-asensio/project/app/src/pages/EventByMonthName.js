@@ -22,10 +22,7 @@ function EventMonth() {
     const [updateEvent, setUpdateEvent] = useState()
     const [deleteEvent, setDeleteEvent] = useState()
 
-
-
     const { showAlert } = useContext(Context)
-
 
     useEffect(() => {
         userRetrieve()
@@ -118,8 +115,8 @@ function EventMonth() {
         {event ? <div>
             <div>
                 <h1>{event?.title}</h1>
-                <h3>{event?.boody}</h3>
-                <h3>{event?.requeriment}</h3>
+                <h3>{event?.body}</h3>
+                <h3>{event?.requirement}</h3>
                 <h3> Fecha: {event?.date}</h3>
                 <h3> Plazas: {event?.capacity}</h3>
                 <h3>Inscripciones: {event?.inscription}</h3>
@@ -139,7 +136,7 @@ function EventMonth() {
 
         {createEvent && <CreateEvent monthName={monthName} onCreated={handleEventCreated} closeCreate={() => setCreateEvent()} />}
         
-        {updateEvent && <UpdateEvent event={event} onDeleted={handleEventUpdated} onClose={() => setDeleteEvent()} />}
+        {updateEvent && <UpdateEvent event={event} onDeleted={handleEventUpdated} onClose={() => setUpdateEvent()} />}
 
         {deleteEvent && <DeleteEvent event={event} onDeleted={handleEventDeleted} onClose={() => setDeleteEvent()} />}
     </main>
