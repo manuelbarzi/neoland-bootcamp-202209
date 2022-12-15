@@ -2,9 +2,9 @@ const retrieveList = require('../logic/retrieveList')
 
 module.exports = (req, res) => {
     try {
-        const { query: { title }, userId } = req
+        const { userId, params: { listId } } = req
     
-        retrieveList(userId, title)
+        retrieveList(userId, listId)
             .then(list => res.json(list))
             .catch(error => {
                 if (error instanceof NotFoundError)

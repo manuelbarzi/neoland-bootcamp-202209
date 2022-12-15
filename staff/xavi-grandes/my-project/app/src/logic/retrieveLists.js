@@ -37,7 +37,7 @@ export default function (token) {
             reject(new UnexpectedError('server error'))
     }
 
-    xhr.open('GET', 'http://localhost/users/lists')
+    xhr.open('GET', 'http://localhost/lists')
     xhr.setRequestHeader('Authorization', `Bearer ${token}`)
     xhr.send()
     })

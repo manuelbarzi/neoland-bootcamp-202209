@@ -1,11 +1,11 @@
-const retrieveProducts = require('../logic/retrieveProducts')
+const retrieveItems = require('../logic/retrieveItems')
 const { errors: {NotFoundError, FormatError, TypeError } } = require('com')
 
 module.exports = (req, res) => {
     try {
-        const { query: { listId } } = req
+        const { params: { listId }, userId } = req
     
-        retrieveProducts(listId)
+        retrieveItems(userId, listId)
             .then(items => res.json(items))
             .catch(error => {
                 if (error instanceof NotFoundError)

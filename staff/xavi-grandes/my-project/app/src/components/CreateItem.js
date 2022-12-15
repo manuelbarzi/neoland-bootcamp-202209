@@ -1,21 +1,21 @@
 import log from '../utils/coolog'
-import createProduct from '../logic/createProduct'
+import createItem from '../logic/createItem'
 
 
-export default function ({onClose, listId, onProductCreated }) {
+export default function ({onClose, listId, onItemCreated }) {
     log.info('CreateList -> render')
 
-  const submitCreateProduct = (event) => {
+  const submitCreateItem = (event) => {
     event.preventDefault();
 
     const { title: {value: title} } = event.target
   
     try {
-      createProduct(listId, title)
+      createItem(listId, title)
       .then(() => {
           alert('You create a new product')
           //Change with show alert 
-          onProductCreated()
+          onItemCreated()
       })
       .catch(error => alert(error.message))
 
@@ -26,7 +26,7 @@ export default function ({onClose, listId, onProductCreated }) {
 
   return (
     <section className="absolute top-0 z-30 h-[100vh] w-full bg-blue-200">
-      <form className='mt-4 flex flex-col items-center' onSubmit={submitCreateProduct}>
+      <form className='mt-4 flex flex-col items-center' onSubmit={submitCreateItem}>
         <input className='w-4/5 h-[3rem] rounded-xl pl-4 text-xl' type="text" id="title" name="title" placeholder="Insert title"></input>
         <button className='self-end mr-[2.5rem] mt-4 w-[8.5rem] h-[3rem] bg-green-500 rounded-xl text-xl text-white'>Create</button>
       </form>

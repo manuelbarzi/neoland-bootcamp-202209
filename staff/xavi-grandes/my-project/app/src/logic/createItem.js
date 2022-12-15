@@ -30,9 +30,9 @@ export default function (listId, title) {
 
         xhr.onerror = () => reject(new Error ('connection error'))
 
-        xhr.open ('POST', `http://localhost/product/${listId}`)
+        xhr.open ('POST', `http://localhost/lists/${listId}/items`)
 
-        const payload = { title: title }
+        const payload = { title }
         const json = JSON.stringify(payload)
 
         xhr.send(json)

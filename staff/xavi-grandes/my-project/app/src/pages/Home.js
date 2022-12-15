@@ -7,7 +7,7 @@ import retrieveLists from "../logic/retrieveLists";
 import Context from "../components/Context";
 import Header from "../components/Header";
 import DeleteList from "../components/DeleteList";
-import CreateListComponent from "../components/CreateListComponent";
+import CreateList from "../components/CreateList";
 import { MdDelete } from "react-icons/md";
 const { FormatError, AuthError, LengthError, NotFoundError } = errors;
 
@@ -24,7 +24,8 @@ export default function Home() {
   useEffect(() => {
     try {
       retrieveUser(sessionStorage.token)
-        .then((user) => {setUser(user)
+        .then((user) => {
+          setUser(user)
         
           return retrieveLists(sessionStorage.token)
         })
@@ -85,7 +86,7 @@ export default function Home() {
 
   return (
     <>
-      {isCreateOpen && (<CreateListComponent onListCreated={handleCreatedList} onClose={toggleCreateListView} />)}
+      {isCreateOpen && (<CreateList onListCreated={handleCreatedList} onClose={toggleCreateListView} />)}
       {listIdToDelete && (<DeleteList listId={listIdToDelete} onClose={closeDeletePost} onDeleted={handleListDeleted} />)}
 
       {user && <Header userName={user.name} />}
@@ -93,7 +94,7 @@ export default function Home() {
         {lists &&
           lists.map((list) => (
             <article className="mt-1 bg-blue-300 h-12 w-3/5 rounded-lg flex items-center justify-between px-3 text-lg">
-              <Link to={`/list/${list.title}`}><strong>{list.title}</strong></Link>
+              <Link to={`/list/${list.id}`}><strong>{list.title}</strong></Link>
               <button className="h-10 w-10 flex justify-center items-center bg-slate-400" onClick={() => openDeleteList(list.id)}>
                 <MdDelete size="1.3rem" />
               </button>

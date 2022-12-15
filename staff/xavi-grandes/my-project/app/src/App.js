@@ -43,7 +43,7 @@ function App() {
     {loggedIn ? <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/profile" element={<Profile/>} />
-      <Route path="/list/:targetListName" element={<MyList/>} />
+      <Route path="/list/:listId" element={<MyList/>} />
       <Route path="/settings" element={<Settings/>} />
     </Routes>
       :

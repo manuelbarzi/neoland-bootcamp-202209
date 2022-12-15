@@ -30,7 +30,7 @@
 
         xhr.onerror = () => reject(new Error ('connection error'))
 
-        xhr.open ('POST', `http://localhost/users/list`)
+        xhr.open ('POST', `http://localhost/lists`)
         xhr.setRequestHeader('Authorization', `Bearer ${token}`)
 
         const payload = { title }

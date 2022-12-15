@@ -2,7 +2,9 @@ import { errors } from 'com'
 
 const { FormatError, UnexpectedError, AuthError, NotFoundError } = errors
 
-export default function (listId) {
+export default function (token, listId) {
+    if (typeof token !== 'string') throw new TypeError('token is not a string')
+    if (!token.length) throw new Error('token is empty')
     if (typeof listId !== 'string') throw new TypeError('listId is not a string')
     if (!listId.length) throw new Error('listId is empty')
 
@@ -37,7 +39,8 @@ export default function (listId) {
             reject(new UnexpectedError('server error'))
     }
 
-    xhr.open("GET", `http://localhost/products?listId=${listId}`);
+    xhr.open("GET", `http://localhost/lists/${listId}/items`);
+    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
     xhr.send()
     })
 }
