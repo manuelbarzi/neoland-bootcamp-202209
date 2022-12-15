@@ -59,7 +59,6 @@ function BoatForm({ onChange, boatInfo, onDiscard }) {
     }, [boatInfo])
 
 
-
     return (<>
 
         <div className="flex justify-center min-w-full">
@@ -71,8 +70,7 @@ function BoatForm({ onChange, boatInfo, onDiscard }) {
                                 <label htmlFor="nameInput" className="form-label inline-block mb-2 text-gray-700">Boat name</label>
                                 <input
                                     type="text"
-                                    className="form-control 
-                                    block w-full px-3 py-1.5 text-base font-normal 
+                                    className="form-control  block w-full px-3 py-1.5 text-base font-normal 
                                     text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 
                                     rounded transition ease-in-out m-0 focus:text-gray-700 
                                     focus:outline-none"
@@ -123,19 +121,8 @@ function BoatForm({ onChange, boatInfo, onDiscard }) {
                             <div className="form-group mb-6">
                                 <label htmlFor="lengthInput" className="form-label inline-block mb-2 text-gray-700">Length (m)</label>
                                 <input type="number" step="any" min="0"
-                                    className="form-control block
-                                        w-full
-                                        px-3
-                                        py-1.5
-                                        text-base
-                                        font-normal
-                                        text-gray-700
-                                        bg-white bg-clip-padding
-                                        border border-solid border-gray-300
-                                        rounded
-                                        transition
-                                        ease-in-out
-                                        m-0
+                                    className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding
+                                        border border-solid border-gray-300 rounded transition ease-in-out m-0
                                         focus:text-gray-700 focus:outline-none"
                                     id="lengthInput"
                                     name="length"
@@ -145,19 +132,9 @@ function BoatForm({ onChange, boatInfo, onDiscard }) {
                             <div className="form-group mb-6">
                                 <label htmlFor="beamInput" className="form-label inline-block mb-2 text-gray-700">Beam (m)</label>
                                 <input type="number" step="any" min="0"
-                                    className="form-control block
-                                        w-full
-                                        px-3
-                                        py-1.5
-                                        text-base
-                                        font-normal
-                                        text-gray-700
-                                        bg-white bg-clip-padding
-                                        border border-solid border-gray-300
-                                        rounded
-                                        transition
-                                        ease-in-out
-                                        m-0
+                                    className="form-control block  w-full  px-3  py-1.5  text-base  font-normal
+                                        text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition
+                                        ease-in-out m-0
                                         focus:text-gray-700 focus:outline-none"
                                     id="beamInput"
                                     name="beam"
@@ -167,19 +144,8 @@ function BoatForm({ onChange, boatInfo, onDiscard }) {
                             <div className="form-group mb-6">
                                 <label htmlFor="draftInput" className="form-label inline-block mb-2 text-gray-700">Draft (m)</label>
                                 <input type="number" step="any" min="0"
-                                    className="form-control block
-                                        w-full
-                                        px-3
-                                        py-1.5
-                                        text-base
-                                        font-normal
-                                        text-gray-700
-                                        bg-white bg-clip-padding
-                                        border border-solid border-gray-300
-                                        rounded
-                                        transition
-                                        ease-in-out
-                                        m-0
+                                    className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700
+                                        bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0
                                         focus:text-gray-700 focus:outline-none"
                                     id="draftInput"
                                     name="draft"

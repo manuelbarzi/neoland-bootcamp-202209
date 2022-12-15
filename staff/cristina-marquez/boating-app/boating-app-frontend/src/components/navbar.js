@@ -3,15 +3,17 @@ import { Link } from "react-router-dom"
 import UserContext from "../UserContext"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faRightFromBracket, faGear } from '@fortawesome/free-solid-svg-icons'
+import appSessionManager from "../helpers/sessionManager"
 
 function Navbar() {
 
-    const { user, setUser } = useContext(UserContext)
+    const { setUser } = useContext(UserContext)
 
 
     const logoutHandler = () => {
         try {
             setUser(null)
+            appSessionManager.removeSessionFromLocalStorage()
         } catch (error) {
             alert(error.message)
         }
@@ -61,8 +63,8 @@ function Navbar() {
                                              </li>
 
                                             <hr className="h-0 my-2 border border-solid border-t-0 border-gray-700 opacity-25" />
-                                            <li className="dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100">
-                                            <FontAwesomeIcon icon={faRightFromBracket} /> Logout
+                                            <li className="dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100" onClick={logoutHandler}>
+                                           <FontAwesomeIcon icon={faRightFromBracket} /> Logout
                                              </li>
                                       </ul>
                             </div>

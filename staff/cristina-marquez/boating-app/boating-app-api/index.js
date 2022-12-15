@@ -21,6 +21,7 @@ const updateBooking = require('./controllers/updateBooking')
 const deleteBooking = require('./controllers/deleteBooking')
 
 const getUserInfo = require('./controllers/getUserInfo')
+const updateUserInfo = require('./controllers/updateUserInfo')
 
 const context = require('./logic/context')
 const authoriseUser = require('./middleware/authoriseUser')
@@ -56,6 +57,7 @@ mongoose.connect(MONGODB_URL)
         app.delete('/bookings/:bookingId', authenticateUserMiddleware, authoriseUser, deleteBooking)
 
         app.get('/settings', authenticateUserMiddleware, getUserInfo)
+        app.patch('/settings/:userId', authenticateUserMiddleware, authoriseUser, updateUserInfo)
 
         const { PORT } = process.env
         app.listen(PORT, () => console.log(`server listening on port ${PORT}`))

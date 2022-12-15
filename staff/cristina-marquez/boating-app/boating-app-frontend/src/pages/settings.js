@@ -15,7 +15,7 @@ function Settings(){
 
     useEffect(() => {
         fetchInfo()
-    })
+    }, [])
    
     return(
         <main className="w-screen min-h-full bg-bone flex justify-center pt-10">

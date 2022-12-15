@@ -1,6 +1,7 @@
 const ObjectId = require('mongodb').ObjectId;
 const { Booking } = require('../models')
 const { Boat } = require('../models')
+const { User } = require('../models')
 
 module.exports = async (req, res, next) => {
     try {
@@ -29,6 +30,20 @@ module.exports = async (req, res, next) => {
 
             if (!boat) {
                 console.log('Booking ownership condition could not be satisfied')
+                return res.status(401).send({ error: 'Not authorised' })
+            }
+        }
+
+        if (req.params.userId) {
+            console.log('Checking userId')
+
+            const requestUserId = req.params.userId
+            const userId = req.user.id
+
+            const isSelf = userId === requestUserId
+
+            if (!isSelf) {
+                console.log('User ownership condition could not be satisfied')
                 return res.status(401).send({ error: 'Not authorised' })
             }
         }

@@ -25,7 +25,7 @@ class SessionManager {
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     }
 
-    removeSessionToLocalStorage() {
+    removeSessionFromLocalStorage() {
         localStorage.removeItem('token')
     }
 }
