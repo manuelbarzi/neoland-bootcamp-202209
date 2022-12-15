@@ -39,7 +39,7 @@ function RegisterForm({ onClose }) {
     }
 
     return <main className='bg-[#aaaa] fixed top-0 h-full w-full flex flex-col justify-center items-center overflow-hidden z-10' onClick={onClose}>
-        <div className='p-5 rounded-xl flex flex-col items-end bg-white' onClick={event => event.stopPropagation()}>
+        <div className='p-5 rounded-xl flex flex-col items-end bg-white border-2 border-slate-600' onClick={event => event.stopPropagation()}>
             <form className='flex flex-col justify-start m-4 gap-2 border-2 border-slate-600 rounded-xl p-6' onSubmit={handleRegister}>
                 <label htmlFor='name' className='container__item--left'>Name</label>
                 <input name='name' type='text' id='name' placeholder='  input your name' className='border-b border-black text-black rounded-xl' />

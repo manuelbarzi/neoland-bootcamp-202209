@@ -1,26 +1,26 @@
 import log from '../utils/coolog'
-import LOGO from '../img/LOGO.png'
 import { useState } from 'react'
 import LoginForm from '../components/LoginForm'
 import RegisterForm from '../components/RegisterForm'
 import PuntosVerdes from '../components/PuntosVerdes'
 
-import spotify from '../img/spotify.png'
-import map from '../img/map.png'
-import tgt from '../img/tgt.png'
-import vinted from '../img/vinted.png'
-import Wallapop from '../img/Wallapop.png'
-import carton from '../img/carton.png'
-import desecho from '../img/desecho.png'
-import organico from '../img/organico.png'
-import plastico from '../img/plastico.png'
-import vidrio from '../img/vidrio.png'
-
-import papelycarton from '../img/papelycarton.png'
-import botellasplastico from '../img/botellasplastico.png'
-import botellasvidrio from '../img/botellasvidrio.png'
-import frutaverdura from '../img/frutaverdura.png'
-import residuos from '../img/residuos.png'
+import  { 
+    LOGO,
+    botellasplastico,
+    botellasvidrio,
+    carton,
+    desecho,   
+    frutaverdura,
+    map,  
+    organico,
+    papelycarton,  
+    plastico,  
+    residuos,
+    spotify,
+    tgt,
+    vidrio,
+    vinted,
+    Wallapop }  from '../img'
 
 function Login() {
     log.info('Login -> render')
@@ -48,7 +48,7 @@ function Login() {
     return <main className='h-full flex flex-col'>
         <section className='h-full w-full'>
             <div className='flex bg-BgImage bg-cover justify-center p-20'>
-                <img src={LOGO} alt='Logo' className='h-80' />
+                <img src={LOGO} alt='Logo' className='h-80 ' />
             </div>
         </section>
 

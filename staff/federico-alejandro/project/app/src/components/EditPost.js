@@ -58,11 +58,11 @@ function EditPost({ onUpdated, onClose, postId }) {
 
 
     return <div className='bg-[#aaaa] fixed top-0 h-full w-full flex flex-col justify-center items-center overflow-hidden' onClick={onClose}>
-        <div className='p-5 rounded-xl flex flex-col items-end bg-white' onClick={event => event.stopPropagation()}>
+        <div className='p-5 rounded-xl flex flex-col items-end bg-white border-2 border-slate-600' onClick={event => event.stopPropagation()}>
             <AiOutlineCloseCircle size='1.5rem' onClick={onClose} className='cursor-pointer' />
 
             <form className='flex flex-col gap-2' onSubmit={submitUpdatePost}>
-                <label htmlFor='text'>Title</label>
+                <label className='font-bold' htmlFor='text'>Title</label>
                 <input className='text-black border-black resize-y rounded-md text-center' type='text' name='title' id='title' placeholder='input a title' defaultValue={post?.title} />
 
                 <label className='font-bold' htmlFor='text'>Text</label>

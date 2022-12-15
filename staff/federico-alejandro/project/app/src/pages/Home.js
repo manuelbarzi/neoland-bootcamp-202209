@@ -8,7 +8,6 @@ import Footer from '../components/Footer'
 import Context from '../components/Context'
 import CreatePost from '../components/CreatePost'
 import Post from '../components/Post'
-//import EditPost from '../components/EditPost'
 
 const { FormatError, AuthError, LengthError, NotFoundError } = errors
 
@@ -20,13 +19,10 @@ function Home() {
 
     const [createPostVisible, setCreatePostVisible] = useState()
 
-    //const [comments, setComments] = useState()
-
     useEffect(() => {
         try {
             retrievePublicPosts(sessionStorage.token)
                 .then(posts => setPosts(posts))
-                //.then(comments => setComments(comments))
                 .catch(error => {
                     if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
                         showAlert(error.message, 'warn')
@@ -35,7 +31,6 @@ function Home() {
                     else
                         showAlert(error.message, 'fatal')
                 })
-
         } catch (error) {
             if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
                 showAlert(error.message, 'warn')
@@ -55,31 +50,27 @@ function Home() {
                     setPosts(posts)
                     setCreatePostVisible()
                 })
-                //.then(comments => setComments(comments))
-                .catch(error => alert(error.message))
+                .catch(error => {
+                    if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
+                        showAlert(error.message, 'warn')
+                    else if (error instanceof AuthError || error instanceof NotFoundError)
+                        showAlert(error.message, 'error')
+                    else
+                        showAlert(error.message, 'fatal')
+                })
         } catch (error) {
-            alert(error.message)
+            if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
+                showAlert(error.message, 'warn')
+            else
+                showAlert(error.message, 'fatal')
         }
-        // retrievePublicPosts(sessionStorage.token, (error, posts, comments) => {
-        //     if (error) {
-        //         alert(error.message)
-
-        //         return
-        //     }
-        //     setCreatePostVisible(false)
-        //     setPosts(posts)
-        //     setComments(comments)
-        // })
-        // } catch (error) {
-        //     alert(error.message)
-        // }
+ 
     }
 
     const refreshPosts = () => {
         try {
             retrievePublicPosts(sessionStorage.token)
-                .then(posts => setPosts(posts))
-                //.then(comments => setComments(comments))    
+                .then(posts => setPosts(posts))    
                 .catch(error => {
                     if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
                         showAlert(error.message, 'warn')

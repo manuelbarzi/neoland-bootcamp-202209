@@ -1,5 +1,5 @@
 const retrievePublicPosts = require('../logic/retrievePublicPosts')
-const { errors: { FormatError, NotFoundError } } = require('com')
+const { errors: { FormatError, NotFoundError, ConflictError } } = require('com')
 
 module.exports = (req, res) => {
     try {

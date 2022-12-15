@@ -19,8 +19,7 @@ function retrievePublicPosts(userId) {
                     path: 'chats',
                     populate: {
                         path: 'user',
-                        select: 'name',
-                        select: '-email -password',
+                        select: 'name'
                     }
                 })
                 .populate({
@@ -33,45 +32,53 @@ function retrievePublicPosts(userId) {
                         }
                     }
                 }).select('-__v').lean()
-        }) //.populate('user', '-email -password')
+        })
         .then(posts => {
             posts.forEach(post => {
                 post.id = post._id.toString()
                 delete post._id
+                delete post.__v
 
                 if (!post.user.id) {
                     post.user.id = post.user._id.toString()
                     delete post.user._id
-                    //const chat = post.chats.find(chat => chat.user.toString() === userId)
-                    // post.chats = []
-                    post.chats?.forEach(chat => {
-                        chat.id = chat._id.toString()
-                        delete chat._id
-                        delete chat.__v
+                }
 
-                        if (!chat.user.id) {
-                            chat.user.id = chat.user._id.toString()
-                            delete chat.user._id
-                        }
+                const chat = post.chats.find(chat => chat.user.id.toString() === userId)
 
+                post.chats = []
+                /// 51 a 61 comentar
+                // post.chats?.forEach(chat => {
+                //     chat.id = chat._id.toString()
+                //     delete chat._id
+                //     delete chat.__v
+
+                //     if (!chat.user.id) {
+                //         chat.user.id = chat.user._id.toString()
+                //         delete chat.user._id
+                //     }
+
+                    if (chat) {
                         chat.comments.forEach(comment => {
                             comment.id = comment._id.toString()
 
                             delete comment._id
                             delete comment.__v
 
-                            if (!comment.user.id) {
-                                comment.user.id = comment.user._id.toString()
-                                delete comment.user._id
-                            }
+                            // if (!comment.user.id) {
+                            comment.user.id = comment.user._id.toString()
+                            delete comment.user._id
+                            // }
                         })
-                    })
-                }
+
+                        post.chats.push(chat)
+                    }
+                // })
             })
 
-            // post.chats.push(chat)
             return posts
         })
 }
+
 module.exports = retrievePublicPosts
 

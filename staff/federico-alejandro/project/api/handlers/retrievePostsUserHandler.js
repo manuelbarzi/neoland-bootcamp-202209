@@ -1,5 +1,5 @@
 const retrievePostsUser = require('../logic/retrievePostsUser')
-const { errors: { FormatError, NotFoundError } } = require('com')
+const { errors: { FormatError, NotFoundError, ConflictError } } = require('com')
 
 module.exports = (req, res) => {
     //const { headers: { authorization} } = req

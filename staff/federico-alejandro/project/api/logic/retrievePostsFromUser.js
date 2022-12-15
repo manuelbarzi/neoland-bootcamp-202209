@@ -23,12 +23,31 @@ function retrievePublicPosts(userId, targetUserId) {//targetUserId = persona (ob
         .then(targetUser => {
             if (!targetUser) throw new Error(`target user with id ${userId} does not exist`)
 
-            return Post.find({ user: (targetUserId), visibility: 'public' }).sort({ date: -1 }).populate('user', '-visibility -email -password').select('-__v').lean()
+            return Post.find({ user: (targetUserId), visibility: 'public' }).sort({ date: -1 }).populate('user', '-visibility -email -password')
+            .populate({
+                path: 'chats',
+                populate: {
+                    path: 'user',
+                    select: 'name',
+                    select: '-email -password'
+                }
+            })
+            .populate({
+                path: 'chats',
+                populate: {
+                    path: 'comments',
+                    populate: {
+                        path: 'user',
+                        select: 'name'
+                    }
+                }
+            }).select('-__v').lean()
         })
         .then(posts => {
             posts.forEach(post => {
                 post.id = post._id.toString()
                 delete post._id
+                delete post.__v
 
                 if (!post.user.id) {
                     post.user.id = post.user._id.toString()
@@ -50,7 +69,7 @@ function retrievePublicPosts(userId, targetUserId) {//targetUserId = persona (ob
                         delete comment._id
                     })
 
-                    post.chats.push(chat)
+                    //post.chats.push(chat)
                 }
             })
             return posts

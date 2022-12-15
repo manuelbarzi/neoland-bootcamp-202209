@@ -11,7 +11,6 @@ import retrievePost from '../logic/retrievePost'
 import { AiOutlineEdit, AiOutlineDelete, AiOutlineLock } from 'react-icons/ai'
 import { FaRegComment } from 'react-icons/fa'
 
-
 function Post({ post: postFromProps, onPostUpdated, onPostDeleted }) {
     const [post, setPost] = useState()
     const [isEditVisible, setEditVisible] = useState()
@@ -72,10 +71,10 @@ function Post({ post: postFromProps, onPostUpdated, onPostDeleted }) {
                 <button className='p-2' onClick={openCreateComment}><FaRegComment size='1rem' /></button>
             </div>
             {post?.chats.length ? post?.chats.map(chat => chat.comments.map(comment => {
-                return <article key={comment.id}  className='bg-slate-100 m-2 border rounded-xl'>
-                    <p>{comment?.user.name}</p>
+                return <article key={comment.id}  className='bg-slate-100 m-2 border-black rounded-xl'>
+                    <p className='flex justify-center'>{comment?.user.name}</p>
                     <p>{comment?.text}</p>
-                    <p>{format(comment?.date)}</p>
+                    <time className='flex justify-end font-bold text-xs mr-2'>{format(comment?.date)}</time>
                 </article>
             })
             ) : null}
