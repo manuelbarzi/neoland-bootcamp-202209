@@ -83,14 +83,15 @@ export default function MyList() {
       <main className="mt-[3rem] flex flex-col gap-2 items-center">
         {items &&
           items.map((item) => (
-            <article
-              key={items}
-              className="mt-1 bg-blue-300 h-12 w-3/5 rounded-lg flex items-center justify-between px-3 text-lg"
-            >
-              {item.title}
-            </article>
+              <article
+                onClick={toggleEditItemView}
+                key={items}
+                className="mt-1 bg-blue-300 h-12 w-4/5 rounded-lg flex items-center justify-between px-3 text-lg"
+              >
+                <div>{item.title}</div>
+                <input className="h-8 w-8" type="checkbox" name="iem" />
+              </article>
           ))}
-        <p onClick={toggleEditItemView}>Aquí irán los productos en lista </p>
       </main>
       <hr className="fixed bottom-[6.5rem] border border-black w-full"></hr>
       <section className="w-full h-[2.4rem] fixed bottom-[4.1rem] flex justify-around items-center px-2 bg-white">
