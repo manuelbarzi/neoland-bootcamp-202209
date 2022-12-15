@@ -2,6 +2,8 @@ import log from '../utils/coolog'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useState, useContext } from 'react'
 import CreateEvent from '../components/CreateEvent'
+import UpdateEvent from '../components/UpdateEvent'
+import DeleteEvent from '../components/DeleteEvent'
 import retrieveEventByMonthNumber from '../logic/retrieveEventByMonthNumber'
 import retrieveUser from '../logic/retrieveUser'
 import { errors } from 'com'
@@ -17,7 +19,7 @@ function EventMonth() {
     const [user, setUser] = useState()
     const [event, setEvent] = useState()
     const [createEvent, setCreateEvent] = useState()
-    const [update, setUpdateEvent] = useState()
+    const [updateEvent, setUpdateEvent] = useState()
     const [deleteEvent, setDeleteEvent] = useState()
 
 
@@ -56,13 +58,15 @@ function EventMonth() {
     const eventRetrieveMonth = () => {
         try {
             retrieveEventByMonthNumber(sessionStorage.token, getMonthNumberByName(monthName))
-                .then(event => setEvent(event))
+                .then(event => {
+                    setEvent(event)})
                 .catch(error => {
                     if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
                         showAlert(error.message, 'warn')
                     else if (error instanceof AuthError)
                         showAlert(error.message, 'error')
-                    else if (error instanceof NotFoundError) {
+                    else if (error instanceof NotFoundError) { 
+                        setEvent()
                     } else
                         showAlert(error.message, 'fatal')
                 })
@@ -82,20 +86,27 @@ function EventMonth() {
         setCreateEvent('true')
 
     }
-
     const handleEventCreated = () => {
         eventRetrieveMonth()
         setCreateEvent()
     }
 
+    const handleUpdateEvent = () => {
+        setUpdateEvent('true')
+    }
 
-    // const handleUpdateEvent = () => {
-    //     setUpdate('true')
-    // }
+    const handleEventUpdated = () => {
+        eventRetrieveMonth()
+        eventRetrieveMonth()
+    }
 
-    // const handleDeleteEvent = () => {
-    //     setDeleteEvent('true')
-    // }
+    const handleDeleteEvent = () => {
+        setDeleteEvent('true')
+    }
+    const handleEventDeleted = () => {
+        setDeleteEvent() 
+        eventRetrieveMonth()
+    }
 
     return <main className="h-full">
         <header className='h-1/6 top-0 flex justify-around items-center bg-teal-600	'>
@@ -105,8 +116,6 @@ function EventMonth() {
         </header>
 
         {event ? <div>
-            <button >--EDITAR--</button>
-            <button>--BORRAR--</button>
             <div>
                 <h1>{event?.title}</h1>
                 <h3>{event?.boody}</h3>
@@ -120,18 +129,22 @@ function EventMonth() {
             <butto>----INSCRIBIRSE---</butto>
             </div>}
 
-            {/* <button onClick={handleDeleteEvent}>--BORRAR--</button> */}
+            <button onClick={handleDeleteEvent}>--BORRAR--</button>
+            <button onClick={handleUpdateEvent}>--EDITAR--</button>
+
 
         </div> : <div>
             <button onClick={handleCreateEvent}>crear</button>
         </div>}
 
         {createEvent && <CreateEvent monthName={monthName} onCreated={handleEventCreated} closeCreate={() => setCreateEvent()} />}
-        {/* {deleteEvent && <DeleteEvent month={month} onClose={() => setDeleteEvent()} />} */}
+        
+        {updateEvent && <UpdateEvent event={event} onDeleted={handleEventUpdated} onClose={() => setDeleteEvent()} />}
+
+        {deleteEvent && <DeleteEvent event={event} onDeleted={handleEventDeleted} onClose={() => setDeleteEvent()} />}
     </main>
 
 }
 
 export default EventMonth
 
-// {createNoticeVisible && <CreateNotice onCreated={handleNoticeCreated} onClose={closeCreateNotice} />}
