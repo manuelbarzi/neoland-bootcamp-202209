@@ -1,7 +1,7 @@
 const { List } = require("../models");
 const { Item } = require("../models");
 
-module.exports = function (userId, listId, title) {
+module.exports = function (listId, title) {
   // TODO validate user
   if (typeof listId !== "string") throw new TypeError("listId is not a string");
   if (!listId.length) throw new Error("listId is empty");

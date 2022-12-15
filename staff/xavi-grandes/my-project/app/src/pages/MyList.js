@@ -61,7 +61,7 @@ export default function MyList() {
   };
 
   const handleCreatedItem = () => {
-    retrieveItems(listName).then((items) => {
+    retrieveItems(sessionStorage.token, listId).then((items) => {
       setItems(items);
 
       toggleCreateItemView();
@@ -73,7 +73,7 @@ export default function MyList() {
       {isCreateOpen && (
         <CreateItem
           onClose={toggleCreateItemView}
-          listId={listName}
+          listId={listId}
           onItemCreated={handleCreatedItem}
         />
       )}
@@ -85,11 +85,11 @@ export default function MyList() {
           items.map((item) => (
               <article
                 onClick={toggleEditItemView}
-                key={items}
+                // key={items}
                 className="mt-1 bg-blue-300 h-12 w-4/5 rounded-lg flex items-center justify-between px-3 text-lg"
               >
                 <div>{item.title}</div>
-                <input className="h-8 w-8" type="checkbox" name="iem" />
+                <input className="h-8 w-8" type="checkbox" name="iem" onClick={event => event.stopPropagation()} />
               </article>
           ))}
       </main>

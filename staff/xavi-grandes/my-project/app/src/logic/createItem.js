@@ -5,7 +5,7 @@
  */
 
 export default function (listId, title) {
-    if(typeof listId !== 'string') throw new TypeError('Token is not a string')
+    if(typeof listId !== 'string') throw new TypeError('listId is not a string')
     if(!listId.length) throw new Error('listId is empty')
 
     if(typeof title !== 'string') throw new TypeError ('title is not a string')
@@ -31,6 +31,7 @@ export default function (listId, title) {
         xhr.onerror = () => reject(new Error ('connection error'))
 
         xhr.open ('POST', `http://localhost/lists/${listId}/items`)
+        xhr.setRequestHeader('Content-Type', 'application/json')
 
         const payload = { title }
         const json = JSON.stringify(payload)
