@@ -7,7 +7,7 @@ import { useState } from 'react'
 import Context from './components/Context'
 import Alert from './components/Alert'
 import Events from './pages/Events'
-import EventMonth from './pages/EventMonth'
+import EventByMonthName from './pages/EventByMonthName'
 
 function App() {
   log.info('App -> render')
@@ -43,7 +43,7 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/noticias" element={<Noticias />} />
       <Route path="/events" element={<Events />} />
-      <Route path="/events/:month" element={<EventMonth />} />
+      <Route path="/events/:monthName" element={<EventByMonthName />} />
 
       
 

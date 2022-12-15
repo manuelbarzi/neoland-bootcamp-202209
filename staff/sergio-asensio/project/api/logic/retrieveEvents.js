@@ -13,23 +13,20 @@ function retrieveEvents(userId) {
         .then(user => {
             if (!user)
                 throw new Error(`user with id ${userId} does not exist`)
-   
             
-            return Event.find().sort({ monthNumber: 1 }).populate('user', '-email -password -__v').lean()
+            return Event.find().sort({ date: 1 }).populate('user', '-email -password -__v').lean()
         })
         .then(events => {
             events.forEach(event => {
-
                 event.id = event._id.toString()
                 delete event._id
                 delete event.__v
 
-
                 if (!event.user.id) {
                     event.user.id = event.user._id.toString()
+
                     delete event.user._id
                 }
-            
             })
 
             return events

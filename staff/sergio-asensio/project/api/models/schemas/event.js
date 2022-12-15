@@ -6,17 +6,6 @@ module.exports = new Schema({
         type: ObjectId,
         ref: 'User'
     },
-
-    month: {
-        type: String,
-        required: true,
-        unique: true
-    },
-
-    monthNumber: {
-        type: Number
-    },
-    
     title: {
         type: String,
         required: true
@@ -25,7 +14,7 @@ module.exports = new Schema({
         type: String,
         required: true
     },
-    requeriment: {
+    requirement: {
         type: String,
         required: true
     },
@@ -42,11 +31,11 @@ module.exports = new Schema({
         required: true,
         enum:['close', 'open'],
         default: 'close'
-
     },
-    img: {
+    image: {
         type: String,
-        // type: [String]
+    },
+    participants: {
+        type: [ObjectId]
     }
-   
 })

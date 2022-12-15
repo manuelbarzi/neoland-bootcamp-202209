@@ -7,7 +7,7 @@ import Context from '../components/Context'
 import { useContext } from 'react'
 import retrieveEvents from '../logic/retrieveEvents'
 import bloque from '../img/bloque.jpg'
-
+import getMonthName from '../utils/getMonthNameByNumber'
 
 const { FormatError, AuthError, LengthError, NotFoundError } = errors
 
@@ -43,29 +43,38 @@ function Events() {
         }
 
     }, [])
- 
+
     const navigate = useNavigate()
     const goHome = () => {
         navigate('/')
     }
 
-    const handlerMonth=(month) => {
-        navigate(`/events/${month}`)
+    const handleMonth = (month) => {
+        navigate(`/events/${getMonthName(month)}`)
     }
 
     return <main className="h-full">
         <header className='h-1/6 top-0 flex justify-around items-center bg-teal-600	'>
-        <h1>12 MESES, 12 ACTIVIDADES</h1>
-                <button onClick={goHome} >HOME</button>
+            <h1>12 MESES, 12 ACTIVIDADES</h1>
+            <button onClick={goHome} >HOME</button>
         </header>
         <div className="grid grid-cols-2 gap-4 p-4 ">
 
-            {events.map(event => <button className='p-4 ' key={event.month} onClick={()=>handlerMonth(event.month)}>
-            <div className='border rounded-xl h-48 p-4 '>
-                <h1 className='bg-teal-400 rounded-t-xl'>{event.month}</h1>
-                <p className='bg-slate-200	'> {event.title}</p>
-                <img className='rounded-b-xl' src={event.img}/>
-            </div></button>)}
+            {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(index => {
+                const event = events.find(event => {
+                    const month = event.date.getMonth()
+
+                    return month === index
+                })
+
+                return <button className='p-4 ' key={index} onClick={() => handleMonth(index + 1)}>
+                    <div className='border rounded-xl h-48 p-4 '>
+                        <h1 className='bg-teal-400 rounded-t-xl'>{getMonthName(index + 1)}</h1>
+                        <p className='bg-slate-200'>{event?.title}</p>
+                        <img className='rounded-b-xl' src={event?.image} />
+                    </div>
+                </button>
+            })}
         </div>
     </main>
 

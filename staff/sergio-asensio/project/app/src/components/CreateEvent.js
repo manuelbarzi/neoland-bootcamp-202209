@@ -1,15 +1,23 @@
 import { useEffect } from 'react'
 import createEvent from '../logic/createEvent'
+import getMonthNumberByName from '../utils/getMonthNumberByName'
 
-
-export default function ({ closeCreate, month}) {
+export default function ({ closeCreate, monthName}) {
     const submitCreateEvent = event => {
         event.preventDefault()
 
-        const {title: { value: title }, body: { value: body }, requeriment: { value: requeriment }, capacity: { value: capacity }, date: { value: date }, inscription: { value:inscription }, img: {value: img} } = event.target
+        const {title: { value: title }, body: { value: body }, requirement: { value: requirement }, capacity: { value: capacity }, date: { value: date }, inscription: { value:inscription }, image: {value: image} } = event.target
         
+        const _date = new Date(date)
+
+        if (_date.getMonth() !== getMonthNumberByName(monthName) - 1) {
+            alert(`please, choose a date that is inside month`)
+
+            return
+        }
+
         try {
-            createEvent(sessionStorage.token,month, title, body, requeriment, Number(capacity), Date(date), inscription, img)
+            createEvent(sessionStorage.token, title, body, requirement, Number(capacity), _date, inscription, image)
                 // .then(() => onCreated())
                 .then(() => closeCreate())
                 .catch(error => alert(error.message))
@@ -29,8 +37,8 @@ export default function ({ closeCreate, month}) {
                 <label htmlFor="body">Body</label>
                 <textarea className="text-black pl-2" type="text" name="body" id="body" placeholder="input the notice"></textarea>
                 
-                <label htmlFor="requeriment">Requeriments</label>
-                <input className="text-black pl-2" type="text" name="requeriment" id="requeriment" placeholder="input the requeriments"></input>
+                <label htmlFor="requirement">Requirements</label>
+                <input className="text-black pl-2" type="text" name="requirement" id="requirement" placeholder="input the requirements"></input>
                 
                 <label htmlFor="capacity">Capacity</label>
                 <input className="text-black pl-2" type="number" name="capacity" id="capacity" placeholder="input de capacity"></input>
@@ -44,8 +52,8 @@ export default function ({ closeCreate, month}) {
                     <option value="open">open</option>
                 </select>
 
-                <label htmlFor="img">Imagen</label>
-                <input className="text-black pl-2" type="text" name="img" id="img" placeholder="input the link"></input>
+                <label htmlFor="image">Imagen</label>
+                <input className="text-black pl-2" type="text" name="image" id="image" placeholder="input the link"></input>
                 
 
                 <button>Create</button>

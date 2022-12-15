@@ -5,9 +5,7 @@ const { FormatError, NotFoundError, UnexpectedError, AuthError, LengthError} = e
 export default function (token, month) {
     if (typeof token !== 'string') throw new TypeError('token is not a string')
     if (!token.length) throw new LengthError('token is empty')
-    if (typeof month !== 'string') throw new TypeError('month is not a string')
-    if (!month.length) throw new LengthError('month does not exist')
-
+    if (typeof month !== 'number') throw new TypeError('month is not a number')
 
     return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest()

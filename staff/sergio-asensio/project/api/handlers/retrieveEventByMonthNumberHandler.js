@@ -1,12 +1,12 @@
 const { NotFoundError } = require('com/errors')
-const retrieveEventMonth = require('../logic/retrieveEventMonth')
+const retrieveEventByMonthNumber = require('../logic/retrieveEventByMonthNumber')
 
 module.exports = (req, res) => {
     try {
         const { userId, params: { month } } = req
 
-        retrieveEventMonth(userId, month)
-            .then(posts => res.json(posts))
+        retrieveEventByMonthNumber(userId, Number(month))
+            .then(events => res.json(events))
             .catch(error => {
                 if (error instanceof NotFoundError) {
                     res.status(404).json({ error: error.message })

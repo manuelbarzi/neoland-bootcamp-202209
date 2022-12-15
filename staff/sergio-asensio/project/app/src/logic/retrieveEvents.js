@@ -22,58 +22,7 @@ export default function (token) {
 
             const events = JSON.parse(json)
 
-            if(!events.some(event => event.month === 'january')){
-                const month = { month: 'january', monthNumber: 0}
-                events.splice(month.monthNumber, 0, month)
-            }
-
-            if(!events.some(event => event.month === 'february')){
-                const month = { month: 'february', monthNumber: 1}
-                events.splice(month.monthNumber, 0, month)
-            }
-
-            if(!events.some(event => event.month === 'march')){
-                const month = { month: 'march', monthNumber: 2}
-                events.splice(month.monthNumber, 0, month)
-            }
-            if(!events.some(event => event.month === 'april')){
-                const month = { month: 'april', monthNumber: 3}
-                events.splice(month.monthNumber, 0, month)
-            }
-            if(!events.some(event => event.month === 'may')){
-                const month = { month: 'may', monthNumber: 4}
-                events.splice(month.monthNumber, 0, month)
-            }
-            if(!events.some(event => event.month === 'june')){
-                const month = { month: 'june', monthNumber: 5}
-                events.splice(month.monthNumber, 0, month)
-            }
-            if(!events.some(event => event.month === 'july')){
-                const month = { month: 'july', monthNumber: 6}
-                events.splice(month.monthNumber, 0, month)
-            }
-            if(!events.some(event => event.month === 'august')){
-                const month = { month: 'august', monthNumber: 7}
-                events.splice(month.monthNumber, 0, month)
-            }
-            if(!events.some(event => event.month === 'september')){
-                const month = { month: 'september', monthNumber: 8}
-                events.splice(month.monthNumber, 0, month)
-            }
-            if(!events.some(event => event.month === 'october')){
-                const month = { month: 'october', monthNumber: 9}
-                events.splice(month.monthNumber, 0, month)
-            }
-            if(!events.some(event => event.month === 'november')){
-                const month = { month: 'november', monthNumber: 10}
-                events.splice(month.monthNumber, 0, month)
-            }
-            if(!events.some(event => event.month === 'december')){
-                const month = { month: 'december', monthNumber: 11}
-                events.splice(month.monthNumber, 0, month)
-            }
-            
-
+            events.forEach(event => event.date = new Date(event.date))
 
             resolve(events)
         }

@@ -2,18 +2,16 @@ import log from '../utils/coolog'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useState, useContext } from 'react'
 import CreateEvent from '../components/CreateEvent'
-import DeleteEvent from '../components/DeleteEvent'
-import retrieveEventMonth from '../logic/retrieveEventMonth'
+import retrieveEventByMonthNumber from '../logic/retrieveEventByMonthNumber'
 import retrieveUser from '../logic/retrieveUser'
 import { errors } from 'com'
 import Context from '../components/Context'
-
+import getMonthNumberByName from '../utils/getMonthNumberByName'
 
 const { FormatError, AuthError, LengthError, NotFoundError } = errors
 
-
 function EventMonth() {
-    const { month } = useParams()
+    const { monthName } = useParams()
     const navigate = useNavigate()
 
     const [user, setUser] = useState()
@@ -57,7 +55,7 @@ function EventMonth() {
 
     const eventRetrieveMonth = () => {
         try {
-            retrieveEventMonth(sessionStorage.token, month)
+            retrieveEventByMonthNumber(sessionStorage.token, getMonthNumberByName(monthName))
                 .then(event => setEvent(event))
                 .catch(error => {
                     if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
@@ -76,7 +74,6 @@ function EventMonth() {
         }
     }
 
-
     const goEvents = () => {
         navigate('/events')
     }
@@ -90,18 +87,20 @@ function EventMonth() {
     //     setUpdate('true')
     // }
 
-    const handleDeleteEvent = () => {
-        setDeleteEvent('true')
-    }
+    // const handleDeleteEvent = () => {
+    //     setDeleteEvent('true')
+    // }
 
     return <main className="h-full">
         <header className='h-1/6 top-0 flex justify-around items-center bg-teal-600	'>
             <h1>12 MESES, 12 ACTIVIDADES</h1>
-            <h2>{month}</h2>
+            <h2>{monthName}</h2>
             <button onClick={goEvents}>Go_Back</button>
         </header>
 
         {event ? <div>
+            <button >--EDITAR--</button>
+            <button>--BORRAR--</button>
             <div>
                 <h1>{event?.title}</h1>
                 <h3>{event?.boody}</h3>
@@ -112,19 +111,17 @@ function EventMonth() {
                 <img src={event?.img} />
             </div>
             {event?.inscription === 'open' && <div>
-                <p>Pepe</p>
-                <p>Pepe</p>
-                <p>Pepe</p>
-                <p>...</p>
+            <butto>----INSCRIBIRSE---</butto>
             </div>}
-            <button >--EDITAR--</button>
-            <button onClick={handleDeleteEvent}>--BORRAR--</button>
+
+            {/* <button onClick={handleDeleteEvent}>--BORRAR--</button> */}
+
         </div> : <div>
             <button onClick={handleCreateEvent}>crear</button>
         </div>}
 
-        {createEvent && <CreateEvent month={month} closeCreate={() => setCreateEvent()} />}
-        {deleteEvent && <DeleteEvent month={month} onClose={() => setDeleteEvent()} />}
+        {createEvent && <CreateEvent monthName={monthName} closeCreate={() => setCreateEvent()} />}
+        {/* {deleteEvent && <DeleteEvent month={month} onClose={() => setDeleteEvent()} />} */}
     </main>
 
 }
