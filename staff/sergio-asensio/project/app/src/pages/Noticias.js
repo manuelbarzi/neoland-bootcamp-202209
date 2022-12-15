@@ -1,6 +1,7 @@
 import log from '../utils/coolog'
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import logo from '../img/logo.jpg'
 import CreateNotice from '../components/CreateNotice'
 import UpdateNotice from '../components/UpdateNotice'
 import DeleteNotice from '../components/DeleteNotice'
@@ -10,6 +11,8 @@ import retrieveUser from '../logic/retrieveUser'
 import { errors } from 'com'
 import Context from '../components/Context'
 import { useContext } from 'react'
+
+
 
 const { FormatError, AuthError, LengthError, NotFoundError } = errors
 
@@ -95,11 +98,6 @@ function Noticias() {
         }
     }
 
-    const navigate = useNavigate()
-    const goHome = () => {
-        navigate('/')
-    }
-
     const openCreateNotice = () => {
         setCreateNoticeVisible(true)
     }
@@ -145,9 +143,9 @@ function Noticias() {
     }
 
     return <><header className='h-1/6 top-0 flex justify-around items-center bg-teal-600	'>
+        <Link to="/"><img src={logo} className='w-20 h-20'/></Link>
         <h1>Noticias</h1>
         {user?.role === 'admin' && <button onClick={() => openCreateNotice()}> + </button>}
-        <button onClick={goHome} >HOME</button>
     </header>
         <div className="flex flex-col items-center gap-2 py-[5rem] h-full  bg-gray-100">
             {notices.map(notice => {

@@ -1,4 +1,3 @@
-import log from '../utils/coolog'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useState, useContext } from 'react'
 import CreateEvent from '../components/CreateEvent'
@@ -9,6 +8,8 @@ import retrieveUser from '../logic/retrieveUser'
 import { errors } from 'com'
 import Context from '../components/Context'
 import getMonthNumberByName from '../utils/getMonthNumberByName'
+import { Link } from 'react-router-dom'
+import logo from '../img/logo.jpg'
 
 const { FormatError, AuthError, LengthError, NotFoundError } = errors
 
@@ -56,13 +57,14 @@ function EventMonth() {
         try {
             retrieveEventByMonthNumber(sessionStorage.token, getMonthNumberByName(monthName))
                 .then(event => {
-                    setEvent(event)})
+                    setEvent(event)
+                })
                 .catch(error => {
                     if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
                         showAlert(error.message, 'warn')
                     else if (error instanceof AuthError)
                         showAlert(error.message, 'error')
-                    else if (error instanceof NotFoundError) { 
+                    else if (error instanceof NotFoundError) {
                         setEvent()
                     } else
                         showAlert(error.message, 'fatal')
@@ -101,12 +103,13 @@ function EventMonth() {
         setDeleteEvent('true')
     }
     const handleEventDeleted = () => {
-        setDeleteEvent() 
+        setDeleteEvent()
         eventRetrieveMonth()
     }
 
     return <main className="h-full">
         <header className='h-1/6 top-0 flex justify-around items-center bg-teal-600	'>
+            <Link to="/"><img src={logo} className='w-20 h-20' /></Link>
             <h1>12 MESES, 12 ACTIVIDADES</h1>
             <h2>{monthName}</h2>
             <button onClick={goEvents}>Go_Back</button>
@@ -123,19 +126,21 @@ function EventMonth() {
                 <img src={event?.image} />
             </div>
             {event?.inscription === 'open' && <div>
-            <butto>----INSCRIBIRSE---</butto>
+                <butto>----INSCRIBIRSE---</butto>
             </div>}
 
-            <button onClick={handleDeleteEvent}>--BORRAR--</button>
-            <button onClick={handleUpdateEvent}>--EDITAR--</button>
+            {user?.role === 'admin' && <div>
+                <button onClick={handleDeleteEvent}>--BORRAR--</button>
+                <button onClick={handleUpdateEvent}>--EDITAR--</button>
+            </div>}
 
+        </div> : <div>{user?.role === 'admin' && <div><button onClick={handleCreateEvent}>crear</button></div>
+        }
 
-        </div> : <div>
-            <button onClick={handleCreateEvent}>crear</button>
         </div>}
 
         {createEvent && <CreateEvent monthName={monthName} onCreated={handleEventCreated} closeCreate={() => setCreateEvent()} />}
-        
+
         {updateEvent && <UpdateEvent event={event} onDeleted={handleEventUpdated} onClose={() => setUpdateEvent()} />}
 
         {deleteEvent && <DeleteEvent event={event} onDeleted={handleEventDeleted} onClose={() => setDeleteEvent()} />}

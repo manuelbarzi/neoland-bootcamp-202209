@@ -1,13 +1,13 @@
 import log from '../utils/coolog'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate , Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { errors } from 'com'
 import retrieveUser from '../logic/retrieveUser'
 import Context from '../components/Context'
 import { useContext } from 'react'
 import retrieveEvents from '../logic/retrieveEvents'
-import bloque from '../img/bloque.jpg'
 import getMonthName from '../utils/getMonthNameByNumber'
+import logo from '../img/logo.jpg'
 
 const { FormatError, AuthError, LengthError, NotFoundError } = errors
 
@@ -45,9 +45,6 @@ function Events() {
     }, [])
 
     const navigate = useNavigate()
-    const goHome = () => {
-        navigate('/')
-    }
 
     const handleMonth = (month) => {
         navigate(`/events/${getMonthName(month)}`)
@@ -55,8 +52,8 @@ function Events() {
 
     return <main className="h-full">
         <header className='h-1/6 top-0 flex justify-around items-center bg-teal-600	'>
+        <Link to="/"><img src={logo} className='w-20 h-20'/></Link>
             <h1>12 MESES, 12 ACTIVIDADES</h1>
-            <button onClick={goHome} >HOME</button>
         </header>
         <div className="grid grid-cols-2 gap-4 p-4 ">
 
