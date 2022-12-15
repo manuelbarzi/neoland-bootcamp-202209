@@ -17,6 +17,8 @@ module.exports = (req, res) => {
     } catch (error) {
         if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
             res.status(400).json({ error: error.message })
+        else if (error instanceof ConflictError)
+            res.status(409).json({ error: error.message })
         else
             res.status(500).json({ error: error.message })
     }

@@ -1,14 +1,26 @@
 import { useContext, useEffect, useState } from "react"
 import NavBar from "../components/NavBar"
 import { Context } from "../components/Context"
+import SearchButton from "../components/SearchButton"
+import SearchPanel from "../components/SearchPanel"
 
 function Home() {
+    const [searchPanelStatus, setSearchPanelStatus] = useState()
     const { user } = useContext(Context)
+
+    const onSearchClick = () => {
+        setSearchPanelStatus(true)
+    }
+
+    const closeSearchPanel = () => {
+        setSearchPanelStatus()
+    }
 
     const userName = user && user.name
 
     return <main className="min-h-screen bg-slate-100">
-        <NavBar
+        <SearchButton
+            onSearchClick={onSearchClick}
         />
         <div className="flex items-center flex-col">
             <div className="flex items-center flex-col mt-28">
@@ -17,7 +29,12 @@ function Home() {
                 </div>
             </div>
         </div>
-
+        {searchPanelStatus && <SearchPanel
+            className={"inset-x-[2.5%] inset-y-[15%] absolute"} 
+            closeSearchPanel={closeSearchPanel}
+        />}
+        <NavBar
+        />
     </main>
 }
 

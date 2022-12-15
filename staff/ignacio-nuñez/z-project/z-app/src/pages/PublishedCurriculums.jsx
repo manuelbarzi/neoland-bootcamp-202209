@@ -5,6 +5,7 @@ import retrievePublishedCurriculums from "../logic/retrievePublishedCurriculums"
 import { format } from 'timeago.js'
 import Button from "../components/Button"
 import errorHandling from "../utils/errorHandling"
+import SearchButton from "../components/SearchButton"
 
 function PublishedCurriculums() {
     const [curriculums, setCurriculums] = useState([])
@@ -30,8 +31,9 @@ function PublishedCurriculums() {
     const userName = user && user.name
 
     return <main className="min-h-screen bg-slate-100">
-        <NavBar
-        />
+          <header>
+            <SearchButton/>
+        </header>
         <div className="flex items-center flex-col">
             <div className="flex items-center flex-col w-full mt-20">
                 <section className="flex items-center w-full flex-col p-2">
@@ -118,6 +120,8 @@ function PublishedCurriculums() {
                 </section>
             </div>
         </div>
+        <NavBar
+        />
     </main>
 }
 

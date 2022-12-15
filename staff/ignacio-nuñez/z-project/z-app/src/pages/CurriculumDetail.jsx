@@ -11,6 +11,7 @@ import UpdateStudyCurriculum from '../components/UpdateStudyCurriculum'
 import UpdateKnowledgeCurriculum from '../components/UpdateKnowledgeCurriculum'
 import Button from '../components/Button'
 import errorHandling from '../utils/errorHandling'
+import SearchButton from '../components/SearchButton'
 
 function CurriculumDetail() {
     const [curriculum, setCurriculum] = useState()
@@ -160,12 +161,13 @@ function CurriculumDetail() {
     }
 
     return <main className="min-h-screen bg-slate-100">
-        <NavBar
-        />
+        <header>
+            <SearchButton/>
+        </header>
         <div className="flex items-center flex-col">
-            <div className="flex items-center flex-col w-full mt-24">
-                <section className="flex items-center flex-col w-full p-2">
-                    <article className="flex flex-col gap-2 shadow-sm shadow-slate-600 bg-emerald-200 mt-3.5 border-2 w-full rounded-xl">
+            <div className="flex items-center flex-col w-full mb-24">
+                <section className="flex items-center flex-col w-full px-2">
+                    <article className="flex flex-col gap-2 shadow-sm shadow-slate-600 bg-emerald-200 border-2 w-full rounded-xl">
                         <div className="flex justify-between z-10 p-2 mt-1">
                             {curriculum?.published ?
                                 <h2 name='title' id='title' className='bg-emerald-200 p-2 border-2 font-semibold rounded-lg'>{curriculum?.title}</h2> :
@@ -178,7 +180,7 @@ function CurriculumDetail() {
                                 <div className='flex gap-6 justify-between'>
                                 </div>
                                 <div className='flex gap-6 mt-2'>
-                                <h2 className='font-semibold'>Location:</h2>
+                                    <h2 className='font-semibold'>Location:</h2>
                                     {curriculum?.published ?
                                         <span className="text-md w-1/2 block py-2.5 px-0 text-gray-700 bg-transparent border-0 border-b-2 border-gray-200 capitalize">{curriculum?.location ? curriculum.location : 'Location'}</span> :
                                         <input onChange={updateCurriculumLocation} defaultValue={curriculum?.location} type="text" placeholder='Location' className='w-2/3 outline-none rounded-md bg-emerald-50' />
@@ -194,7 +196,7 @@ function CurriculumDetail() {
                             </div>
                             <div onClick={() => { return curriculum.published ? null : onExperienceClick(curriculum.id, curriculum.user, curriculum.experiences) }} className="cursor-pointer rounded-lg bg-emerald-50 p-2">
                                 <h2 className='font-semibold'>Experiences: </h2>
-                                {!curriculum?.experiences.length && <span> Not Experiences Requireds</span>}
+                                {!curriculum?.experiences.length && <span> Not Experiences</span>}
                                 <ul className='flex flex-col gap-2'>
                                     {curriculum?.experiences.map(experience => {
                                         return <li key={experience.id}>
@@ -208,17 +210,32 @@ function CurriculumDetail() {
                             <div>
                                 <div onClick={() => { return curriculum.published ? null : onStudyClick(curriculum.id, curriculum.user, curriculum.studies) }} className="cursor-pointer rounded-lg bg-slate-100 p-2">
                                     <h2 className='font-semibold'>Studies:</h2>
-                                    {!curriculum?.studies?.length ? <span>Not Studies Required</span> :
+                                    {!curriculum?.studies?.length ? <span>Not Studies</span> :
                                         curriculum?.studies.map(study => {
-                                            return <div key={study.id}>
-                                                <h3>{study.title}</h3>
+                                            return <div key={study.id} className='flex flex-col'>
+                                                <div className='flex gap-1'>
+                                                    <h3 className='font-semibold'>Institution:</h3>
+                                                    <span>{study.institution}</span>
+                                                </div>
+                                                <div className='flex gap-1'>
+                                                    <h3 className='font-semibold'>Title:</h3>
+                                                    <span>{study.title}</span>
+                                                </div>
+                                                <div className='flex gap-1'>
+                                                    <h3 className='font-semibold'>From:</h3>
+                                                    <span>{study.from?.slice(0, -14).split("-").reverse().join("-")}</span>
+                                                </div>
+                                                <div className='flex gap-1'>
+                                                    <h3 className='font-semibold'>To:</h3>
+                                                    <span>{study.to?.slice(0, -14).split("-").reverse().join("-")}</span>
+                                                </div>
                                             </div>
                                         })}
                                 </div>
                             </div>
                             <div onClick={() => { return curriculum.published ? null : onKnowledgeClick(curriculum.id, curriculum.user, curriculum.knowledges) }} className="cursor-pointer rounded-lg bg-emerald-50 p-2">
                                 <h2 className='font-semibold'>Knowledges:</h2>
-                                {!curriculum?.knowledges?.length ? <span> Not Knowledges Required </span> :
+                                {!curriculum?.knowledges?.length ? <span> Not Knowledges</span> :
                                     <ul className="flex flex-wrap gap-2">
                                         {curriculum?.knowledges.map(knowledge => {
                                             return <li key={knowledge.id} className="max-w-[45%] text-sm flex border flex-col gap-1 rounded-xl p-1">
@@ -231,7 +248,7 @@ function CurriculumDetail() {
                             </div>
                             <div onClick={() => { return curriculum.published ? null : onLanguageClick(curriculum.id, curriculum.user, curriculum.languages) }} className="cursor-pointer rounded-lg bg-slate-100 p-2">
                                 <h2 className='font-semibold'>Languages:</h2>
-                                {!curriculum?.languages?.length ? <span>Not Languages Required</span> :
+                                {!curriculum?.languages?.length ? <span>Not Languages</span> :
                                     <div className="flex flex-wrap">
                                         {curriculum?.languages.map(language => {
                                             return <div key={language.id} className="flex flex-col w-1/2">
@@ -285,6 +302,8 @@ function CurriculumDetail() {
                 }
             </div>
         </div>
+        <NavBar
+        />
     </main >
 }
 export default CurriculumDetail

@@ -5,6 +5,7 @@ import retrievePublishedOffers from "../logic/retrievePublishedOffers"
 import { format } from 'timeago.js'
 import Button from "../components/Button"
 import errorHandling from "../utils/errorHandling"
+import SearchButton from "../components/SearchButton"
 
 function PublishedOffers() {
     const [offers, setOffers] = useState([])
@@ -27,16 +28,15 @@ function PublishedOffers() {
         }
     }, [])
 
-    const userName = user && user.name
-
     return <main className="min-h-screen bg-slate-100">
-        <NavBar
-        />
+          <header>
+            <SearchButton/>
+        </header>
         <div className="flex items-center flex-col">
-            <div className="flex items-center flex-col w-full mt-20">
-                <section className="flex items-center flex-col w-full p-2">
+            <div className="flex items-center flex-col w-full mb-24">
+                <section className="flex items-center flex-col w-full px-2">
                     {offers?.length ? offers.map(offer => {
-                        return <article key={offer.id} className="flex flex-col gap-2 shadow-sm shadow-slate-600 bg-emerald-200 mt-3.5 border-2 w-full rounded-xl">
+                        return <article key={offer.id} className="flex flex-col gap-2 shadow-sm shadow-slate-600 bg-emerald-200 border-2 w-full rounded-xl">
                             <div className="flex justify-between z-10 p-2 mt-1">
                                 <h2 className='bg-emerald-200 p-2 border-2 font-semibold resize-none outline-none rounded-lg'>{offer.title}</h2>
                                 <img className="w-1/5 text-xs p-2" src={offer.photo} alt="company logo" />
@@ -72,13 +72,14 @@ function PublishedOffers() {
 
                                 </div>
                                 <div className="rounded-lg bg-emerald-50 p-2">
-                                    <h2 className='font-semibold'>Experiences: {!offer.experiences.length && 'Not Experiences Requireds'}</h2>
-                                    {offer.experiences.map(experience => {
-                                        return <div key={experience.id}>
-                                            <h3>Position: {experience.position}</h3>
-                                            <span>{experience.years} years of experience</span>
-                                        </div>
-                                    })}
+                                    <h2 className='font-semibold'>Experiences:</h2>
+                                    {!offer.experiences.length ? <span>Not Experiences Requireds</span> :
+                                        offer.experiences.map(experience => {
+                                            return <div key={experience.id}>
+                                                <h3>Position: {experience.position}</h3>
+                                                <span>{experience.years} years of experience</span>
+                                            </div>
+                                        })}
                                 </div>
                                 <div>
                                     <div className="rounded-lg bg-slate-100 p-2">
@@ -92,18 +93,18 @@ function PublishedOffers() {
                                     </div>
                                 </div>
                                 <div className=" rounded-lg bg-emerald-50 p-2">
-                                <h2 className='font-semibold'>Knowledges:</h2>
-                                {!offer?.knowledges?.length ? <span> Not Knowledges Required </span> :
-                                    <ul className="flex flex-wrap gap-2">
-                                        {offer?.knowledges.map(knowledge => {
-                                            return <li key={knowledge.id} className="max-w-[45%] text-sm flex border flex-col gap-1 rounded-xl p-1">
-                                                <span>{knowledge.title}</span>
-                                                <span>Level: <span className='capitalize'>{knowledge.level}</span></span>
-                                            </li>
-                                        })}
-                                    </ul>
-                                }
-                            </div>
+                                    <h2 className='font-semibold'>Knowledges:</h2>
+                                    {!offer?.knowledges?.length ? <span> Not Knowledges Required </span> :
+                                        <ul className="flex flex-wrap gap-2">
+                                            {offer?.knowledges.map(knowledge => {
+                                                return <li key={knowledge.id} className="max-w-[45%] text-sm flex border flex-col gap-1 rounded-xl p-1">
+                                                    <span>{knowledge.title}</span>
+                                                    <span>Level: <span className='capitalize'>{knowledge.level}</span></span>
+                                                </li>
+                                            })}
+                                        </ul>
+                                    }
+                                </div>
                                 <div className="rounded-lg bg-slate-100 p-2">
                                     <h2 className='font-semibold'>Languages:</h2>
                                     {!offer.languages?.length ? <span>Not Languages Required</span> :
@@ -133,6 +134,8 @@ function PublishedOffers() {
                 </section>
             </div>
         </div>
+        <NavBar
+        />
     </main>
 }
 

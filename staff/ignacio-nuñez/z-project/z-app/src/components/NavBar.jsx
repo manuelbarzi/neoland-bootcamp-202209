@@ -1,5 +1,6 @@
 import { useContext } from "react"
 import { Link, useNavigate } from 'react-router-dom'
+import Button from "./Button"
 import { Context } from "./Context"
 
 function NavBar() {
@@ -15,19 +16,19 @@ function NavBar() {
         navigate('/login')
     }
 
-    return <header className="z-20 fixed w-full h-20 bg-teal-300 grid grid-cols-12">
+    return <footer className="z-20 bottom-0 fixed w-full h-20 bg-teal-300 grid grid-cols-12">
         <nav className="flex items-center justify-between p-4 h-20 col-start-1 col-end-13 text-2xl">
             <div className="z-10 flex gap-4">
-                <Link to={'/'}>Home</Link>
-                {user?.role === 'worker' && <Link to={'/offers'}>Offers</Link>}
-                {user?.role === 'company' && <Link to={'/curriculums'}>Cv's</Link>}
+                <Link className="text-lg" to={'/'}>Home</Link>
+                {user?.role === 'worker' && <Link className="text-lg" to={'/offers'}>Offers</Link>}
+                {user?.role === 'company' && <Link className="text-lg" to={'/curriculums'}>Cv's</Link>}
             </div>
             <div className="z-10 flex gap-4">
-                <Link to={'/user/profile'}>{userName || 'Loading...'}</Link>
-                <button onClick={handlerLogoutClick}>Logout</button>
+                <Link className="text-lg" to={'/user/profile'}>{userName || 'Loading...'}</Link>
+                <button className="text-lg" onClick={handlerLogoutClick}>Logout</button>
             </div>
         </nav>
-    </header>
+    </footer>
 }
 
 export default NavBar

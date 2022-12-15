@@ -20,17 +20,21 @@ function UpdateStudyCurriculum({ className, onUpdateStudyCurriculumClose, onUpda
 
         let studies = []
 
-        if (event.target.study) {
-            if (!event.target.study.value) {
-                for (let i = 0; i < event.target.study.length; i++) {
-                    const title = event.target.study[i].value
+        if (event.target.institution) {
+            if (!event.target.institution.value) {
+                for (let i = 0; i < event.target.institution.length; i++) {
+                    const institution = event.target.institution[i].value
+                    const title = event.target.title[i].value
+                    const from = event.target.from[i].value
+                    const to = event.target.to[i].value
 
-                    studies.push({ title })
+                    studies.push({ institution, title, from, to })
                 }
             } else {
-                const { study: { value: title } } = event.target
+                const { institution: { value: institution }, title: { value: title },
+                    from: { value: from }, to: { value: to } } = event.target
 
-                studies.push({ title })
+                studies.push({ institution, title, from, to })
             }
         }
         try {
@@ -87,7 +91,7 @@ function UpdateStudyCurriculum({ className, onUpdateStudyCurriculumClose, onUpda
                             <div className='flex flex-col p-1'>
                                 <div className='flex gap-1'>
                                     <span className='font-semibold'>Institution: </span>
-                                    <textarea type="text" rows='1' name="institution" id="institution" className="resize-none outline-none" placeholder='Institution' defaultValue={study?.title}></textarea>
+                                    <textarea type="text" rows='1' name="institution" id="institution" className="resize-none outline-none" placeholder='Institution' defaultValue={study?.institution}></textarea>
                                 </div>
                                 <div className='flex gap-1'>
                                     <span className='font-semibold'>Title:</span>
@@ -96,11 +100,11 @@ function UpdateStudyCurriculum({ className, onUpdateStudyCurriculumClose, onUpda
                                 <div className='flex'>
                                     <div className='flex flex-col'>
                                         <span className='font-semibold'>From</span>
-                                        <input type="date" />
+                                        <input name='from' id='from' type="date" defaultValue={study?.from?.slice(0, -14)} />
                                     </div>
                                     <div className='flex flex-col'>
                                         <span className='font-semibold'>To</span>
-                                        <input type="date" />
+                                        <input name='to' id='to' type="date" defaultValue={study?.to?.slice(0, -14)}/>
                                     </div>
                                 </div>
                                 <Button type="button" className="bg-red-300" onClick={() => handleDeleteStudy(study.id)}>Delete</Button>

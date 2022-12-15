@@ -9,6 +9,7 @@ import Button from "../components/Button"
 import PublishCurriculum from "../components/PublishCurriculum"
 import { Context } from "../components/Context"
 import errorHandling from "../utils/errorHandling"
+import SearchButton from "../components/SearchButton"
 
 function UserCurriculums() {
     const [curriculums, setCurriculums] = useState([])
@@ -72,10 +73,11 @@ function UserCurriculums() {
     }
 
     return <main className="min-h-screen bg-slate-100">
-        <NavBar
-        />
+          <header>
+            <SearchButton/>
+        </header>
         <div className="flex items-center flex-col">
-            <div className="w-full flex items-center flex-col mt-28">
+            <div className="w-full flex items-center flex-col mb-24">
                 <div onClick={onCreateCurriculumClick} className="flex justify-center items-center font-semibold text-lg border-2 shadow-sm shadow-slate-600 w-5/6 h-20 z-10 rounded-xl bg-emerald-300 cursor-pointer">
                     <span className="ml-2">Create new Curriculum</span>
                 </div>
@@ -109,6 +111,8 @@ function UserCurriculums() {
                         onPublishCurriculumClose={onPublishCurriculumClose} />}
             </div>
         </div>
+        <NavBar
+        />
     </main>
 }
 
