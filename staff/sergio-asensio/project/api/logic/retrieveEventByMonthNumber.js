@@ -24,8 +24,6 @@ function retrieveEventMonthNumber(userId, month) {
             return Event.findOne({ date: { $gte: startDate, $lt: endDate } }).populate('user', '-email -password -__v').lean()
         })
         .then(event => {
-            // const eventRetrieved = event[0]
-
             if (!event) {
                 throw new NotFoundError(`event for month ${month} does not exist`)
             } else

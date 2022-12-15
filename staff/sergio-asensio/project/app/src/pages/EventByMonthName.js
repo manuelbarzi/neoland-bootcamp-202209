@@ -83,6 +83,12 @@ function EventMonth() {
 
     }
 
+    const handleEventCreated = () => {
+        eventRetrieveMonth()
+        setCreateEvent()
+    }
+
+
     // const handleUpdateEvent = () => {
     //     setUpdate('true')
     // }
@@ -108,7 +114,7 @@ function EventMonth() {
                 <h3> Fecha: {event?.date}</h3>
                 <h3> Plazas: {event?.capacity}</h3>
                 <h3>Inscripciones: {event?.inscription}</h3>
-                <img src={event?.img} />
+                <img src={event?.image} />
             </div>
             {event?.inscription === 'open' && <div>
             <butto>----INSCRIBIRSE---</butto>
@@ -120,7 +126,7 @@ function EventMonth() {
             <button onClick={handleCreateEvent}>crear</button>
         </div>}
 
-        {createEvent && <CreateEvent monthName={monthName} closeCreate={() => setCreateEvent()} />}
+        {createEvent && <CreateEvent monthName={monthName} onCreated={handleEventCreated} closeCreate={() => setCreateEvent()} />}
         {/* {deleteEvent && <DeleteEvent month={month} onClose={() => setDeleteEvent()} />} */}
     </main>
 

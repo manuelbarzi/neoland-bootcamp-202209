@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import createEvent from '../logic/createEvent'
 import getMonthNumberByName from '../utils/getMonthNumberByName'
 
-export default function ({ closeCreate, monthName}) {
+export default function ({ closeCreate, onCreated, monthName}) {
     const submitCreateEvent = event => {
         event.preventDefault()
 
@@ -18,8 +18,7 @@ export default function ({ closeCreate, monthName}) {
 
         try {
             createEvent(sessionStorage.token, title, body, requirement, Number(capacity), _date, inscription, image)
-                // .then(() => onCreated())
-                .then(() => closeCreate())
+                .then(() => onCreated())
                 .catch(error => alert(error.message))
         } catch (error) {
             alert(error.message)
