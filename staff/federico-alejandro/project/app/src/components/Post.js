@@ -73,8 +73,9 @@ function Post({ post: postFromProps, onPostUpdated, onPostDeleted }) {
             </div>
             {post?.chats.length ? post?.chats.map(chat => chat.comments.map(comment => {
                 return <article key={comment.id}  className='bg-slate-100 m-2 border rounded-xl'>
-                    <p>{comment?.userId}</p>
+                    <p>{comment?.user.name}</p>
                     <p>{comment?.text}</p>
+                    <p>{format(comment?.date)}</p>
                 </article>
             })
             ) : null}

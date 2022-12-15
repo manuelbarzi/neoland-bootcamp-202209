@@ -34,7 +34,7 @@ function retrievePublicPosts(userId, targetUserId) {//targetUserId = persona (ob
                     post.user.id = post.user._id.toString()
                     delete post.user._id
                 }
-            // NO ESTOY SEGURO SI VA
+
                 const chat = post.chats.find(chat => chat.user.toString() === userId)
 
                 post.chats = []

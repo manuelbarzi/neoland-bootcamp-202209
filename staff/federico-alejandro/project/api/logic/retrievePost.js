@@ -18,8 +18,8 @@ module.exports = function (userId, postId) {
             if (!user)
                 throw new NotFoundError(`user with id ${userId} does not exist`)
 
-            return Post.findById(postId).lean()
-        })
+            return Post.findById(postId).lean() //.populate({chat: 'user', comment: 'user'})
+        })                                             // POPULATE ???
         .then(post => {
             if (!post) throw new NotFoundError(`post with id ${postId} does not exist`)
 

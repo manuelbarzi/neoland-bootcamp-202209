@@ -33,7 +33,6 @@ function retrievePostsUser(userId) {
 
                 if (chat) {
                     delete chat._id
-                    delete chat.user
                     delete chat.__v
 
                     chat.comments.forEach(comment => {

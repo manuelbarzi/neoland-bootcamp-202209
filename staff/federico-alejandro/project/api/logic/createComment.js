@@ -42,14 +42,14 @@ function createComment(userId, postId, text) {
                     .then(post => {
                         const chat = post.chats.find(chat => chat.user.toString() === userId)
                         
-                        const comment = new Comment({ user: userId, text })
+                        const comment = new Comment({ user: userId, text, date: new Date() })
 
                         chat.comments.push(comment)
                         
                         return post.save()
                     })
             } else {
-                const comment = new Comment({ user: userId, text })
+                const comment = new Comment({ user: userId, text, date: new Date() })
 
                 chat.comments.push(comment)
                 
