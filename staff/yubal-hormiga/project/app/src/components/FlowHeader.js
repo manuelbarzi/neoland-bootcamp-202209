@@ -1,25 +1,24 @@
 import FlowForm from "./FlowForm"
-function Flow({ pension, setPension, isValidPension, setIsValidPension }) {
+import { useState } from "react"
+function Flow({ totalFlows, isValidPension, setIsValidPension }) {
+    const [pension, setPension] = useState()
 
     return (
-        <header >
+        <headerm>
             {isValidPension ? <>
-                <div className="flex justify-around">
-                    <div className=' w-20 font-semibold text-lg'>
-                        <p>
-                            <span>Presupuesto:</span>{pension}€
-                        </p>
-                    </div>
-                    <div className=' w-20 font-semibold text-lg'>
-                        <p>
-                            <span>Gastado:</span>{pension}€
-                        </p>
-                    </div>
-                    <div className=' w-20 font-semibold text-lg' >
-                        <p>
-                            <span>Disponible:</span>{pension}€
-                        </p>
-                    </div>
+                <div className="flex justify-around" >
+                    <p className='  font-semibold text-lg'>
+                        <span>Presupuesto:</span>{pension}€
+                    </p>
+                    <p className='  font-semibold text-lg'>
+                        <span>Ingresado:</span>{totalFlows.income}€
+                    </p>
+                    <p className='  font-semibold text-lg'>
+                        <span>Gastado:</span>{totalFlows.spent}€
+                    </p>
+                    <p className='  font-semibold text-lg'>
+                        <span>Disponible:</span>{pension - totalFlows.spent + totalFlows.income}€
+                    </p>
                 </div>
                 <div className="flex justify-center  ">
                     <label for="file"></label>
@@ -33,7 +32,7 @@ function Flow({ pension, setPension, isValidPension, setIsValidPension }) {
                     setIsValidPension={setIsValidPension}
                 />
             }
-        </header >
+        </headerm >
     )
 }
 export default Flow

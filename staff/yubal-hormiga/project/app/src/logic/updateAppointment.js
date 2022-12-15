@@ -1,7 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
 /**
  * Updates a post against API
- * 
  * @param {string} token The user token
  * @param {string} appointmentId The post id
  * @param {string} text The post text

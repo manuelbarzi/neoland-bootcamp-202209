@@ -7,7 +7,7 @@ import retrieveFlows from '../logic/retrieveFlows'
 import UpdateFlow from './UpdateFlow'
 import DeleteFlow from './DeleteFlow'
 
-function FlowList({ flowsChange }) {
+function FlowList({ flowsChange, onRefresh }) {
   const [flows, setFlows] = useState([])
   const [updateFlow, setUpdateFlow] = useState()
   const [flowIdToDelete, setFlowIdToDelete] = useState()
@@ -15,6 +15,10 @@ function FlowList({ flowsChange }) {
   useEffect(() => {
     retrieveFlowsHandler()
   }, [flowsChange])
+
+  useEffect(() => {
+    onRefresh(flows)
+  }, [flows])
 
 
   const retrieveFlowsHandler = () => {
@@ -42,13 +46,13 @@ function FlowList({ flowsChange }) {
   const handleFlowDeleted = () => {
     try {
       retrieveFlows(sessionStorage.token)
-      .then(appointments => {
-        setFlowIdToDelete()
-        setFlows(appointments)
-      })
-      .catch((error) => {
-        alert(error.message)
-      })
+        .then(appointments => {
+          setFlowIdToDelete()
+          setFlows(appointments)
+        })
+        .catch((error) => {
+          alert(error.message)
+        })
     } catch (error) {
       alert(error.message)
     }
@@ -78,22 +82,22 @@ function FlowList({ flowsChange }) {
             <p className='font-semibold text-lg flex flex-row'>{flow.amount}€</p>
           </div>
 
-          <div className='w-5/12'>                           
-            <p className=' font-semibold text-lg '>{flow.date.toLocaleDateString()}</p> 
+          <div className='w-5/12'>
+            <p className=' font-semibold text-lg '>{flow.date.toLocaleDateString()}</p>
           </div>
 
           <div className=''>
             <div className='flex flex-col self-end gap-1'>
-              <button onClick={()=>{ setUpdateFlow(flow)}} className='bg-white rounded-md p-1 m-1' type='button'><AiOutlineEdit size='1.1rem' /></button>
-              <button onClick={() => openDeleteFlow(flow.id)}className=' bg-white rounded-md p-1 m-1' type='button'><AiOutlineDelete size='1.1rem' /></button>
+              <button onClick={() => { setUpdateFlow(flow) }} className='bg-white rounded-md p-1 m-1' type='button'><AiOutlineEdit size='1.1rem' /></button>
+              <button onClick={() => openDeleteFlow(flow.id)} className=' bg-white rounded-md p-1 m-1' type='button'><AiOutlineDelete size='1.1rem' /></button>
             </div>
           </div>
 
         </div>
       )
     })}
-     {updateFlow && <UpdateFlow flow={updateFlow} onClose={handleUpdateClose} onUpdated={handleUpdated} />}
-     {flowIdToDelete && <DeleteFlow flowId={flowIdToDelete} onDeleted={handleFlowDeleted} onClose={closeDeleteFlow} />}
+    {updateFlow && <UpdateFlow flow={updateFlow} onClose={handleUpdateClose} onUpdated={handleUpdated} />}
+    {flowIdToDelete && <DeleteFlow flowId={flowIdToDelete} onDeleted={handleFlowDeleted} onClose={closeDeleteFlow} />}
 
   </>
 }

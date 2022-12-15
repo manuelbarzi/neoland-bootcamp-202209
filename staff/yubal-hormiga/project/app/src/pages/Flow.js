@@ -4,11 +4,10 @@ import FlowModal from '../components/FlowModal'
 import FlowList from '../components/FlowList'
 
 function Flow() {
-
-  const [pension, setPension] = useState()
+  const [flowsChange, setFlowsChange] = useState([])//*Gastos
+  const [totalFlows, setTotalFlows] = useState()
   const [isValidPension, setIsValidPension] = useState(false)
   const [modal, setModal] = useState(false)
-  const [flowsChange, setFlowsChange] = useState()
 
   const handleNewExpense = () => {
     setModal(true)
@@ -19,12 +18,27 @@ function Flow() {
     setFlowsChange(Date.now())
 
   }
+  //*Recogemos los datos de FlowList
+  const handleOnRefreshedFlows = (flows) => {
+    let spent = 0
+    let income = 0
+
+    flows.forEach(flow => {
+      if (flow.type === "expense") {
+        spent += flow.amount
+      } else {
+        income += flow.amount
+      }
+    })
+
+    setTotalFlows({ spent, income })
+  }
 
   return <>
     <div>
       <FlowHeader
-        pension={pension}
-        setPension={setPension}
+        flowsChange={flowsChange}
+        totalFlows={totalFlows}
         isValidPension={isValidPension}
         setIsValidPension={setIsValidPension}
       />
@@ -45,6 +59,7 @@ function Flow() {
       />}
       <FlowList
         flowsChange={flowsChange}
+        onRefresh={handleOnRefreshedFlows}
       />
     </div>
   </>
