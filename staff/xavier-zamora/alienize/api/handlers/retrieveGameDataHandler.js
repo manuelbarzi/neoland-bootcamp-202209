@@ -1,4 +1,4 @@
-const { errors: { FormatError, LengthError, ConflictError } } = require('../../com')
+const { errors: { FormatError, LengthError, ConflictError, NotFoundError, AuthError } } = require('../../com')
 const retrieveGameData = require('../logic/retrieveGameData')
 
 module.exports = (req, res) => {

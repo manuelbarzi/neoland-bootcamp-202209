@@ -24,7 +24,7 @@ export default function retrieveGameId(token) {
             } else if (status === 400) {
                 const { error } = JSON.parse(json)
 
-                if (error.includes('is not a'))
+                if (error.includes('not'))
                     reject(new TypeError(error))
                 else if (error.includes('empty'))
                     reject(new FormatError(error))

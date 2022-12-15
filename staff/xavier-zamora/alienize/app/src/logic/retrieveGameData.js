@@ -24,7 +24,7 @@ export default function retrieveGameData(token) {
             } else if (status === 400) {
                 const { error } = JSON.parse(json)
 
-                if (error.includes('is not a'))
+                if (error.includes('not'))
                     reject(new TypeError(error))
                 else if (error.includes('empty'))
                     reject(new FormatError(error))
@@ -36,8 +36,11 @@ export default function retrieveGameData(token) {
                 const { error } = JSON.parse(json)
 
                 reject(new NotFoundError(error))
-            } else if (status < 500)
+            } else if (status < 500){
                 reject(new UnexpectedError('client error'))
+            }else if(status >= 500){
+                reject(new TypeError('Error. please return to lauch page'))
+            }
         }
 
         xhr.open('POST', 'http://localhost:2000/GameData')

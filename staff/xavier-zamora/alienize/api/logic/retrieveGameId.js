@@ -9,7 +9,7 @@ const { Game, User } = require('../models')
     if (!userId.length) throw new FormatError('userId is empty')
   
     return Game.findOne({ players: userId }).then(game => {
-
+      if(game === null) throw new TypeError('game not exist')
         return game._id
     })
     

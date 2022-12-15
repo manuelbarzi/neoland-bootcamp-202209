@@ -12,45 +12,59 @@ const { FormatError, AuthError, LengthError, NotFoundError } = errors
 function Battle() {
   log.info('Battle -> render')
 
+  const [selector, setSelector] = useState()
   const [user, setUser] = useState()
-  const [timer, setTimer] = useState(11)
+  const [timer, setTimer] = useState(21)
   const [count, setCount] = useState(0)
   const [game, setGame] = useState()
   const { showAlert } = useContext(Context)
 
   useEffect(() => {
     log.info('Battle -> useEffect')
-    retrieveUserHandler()
     gameMechanics()
   }, [count, timer])
 
+  const selectorSelect = () => {
+    if(game?.namePlayerOne === user?.name) setSelector(0)
+    if(game?.namePlayerTwo === user?.name) setSelector(1)
+  }
+
   const gameMechanics = () => {
-    if (game?.namePlayerTwo === undefined) {
-      setTimeout(function counting() {
+    if(!user){
+       retrieveUserHandler()
+    }
+    if(game?.turn >= 1){
+      retrieveGameDataHandler()
+    }
+    selectorSelect()
+    if(selector){
+      if(game?.hasTurn === false){
+        setTimeout(function countingTimer() {
+          setTimer(timer - 1)
+          if(timer < 1  ){
+            changeTurnHandler()
+            setTimer(21)
+          }
+        }, 1000)
+      }else{setTimeout(function countingTimer() {
         retrieveGameDataHandler()
         setCount(count + 1)
-      }, 1000)
-    }else if(game?.namePlayerOne === user.name && game.hasTurn === true){
-      setTimeout(function countingTimer() {
-        setTimer(timer - 1)
-        if(timer <= 0){
-          changeTurnHandler()
-          retrieveGameDataHandler()
-        }
-      }, 1000)
+      }, 10000)}
     }
-    else if(game?.namePlayerTwo === user.name && game.hasTurn === false){
-      setTimeout(function countingTimer() {
-        setTimer(timer - 1)
-        if(timer <= 0){
-          changeTurnHandler()
-          retrieveGameDataHandler()
-        }
-      }, 1000)
-    }/*
-    else{setTimeout(function countingTimer() {
-      retrieveGameDataHandler()
-    }, 10000)}*/
+    if(!selector){
+      if(game?.hasTurn === true){
+        setTimeout(function countingTimer() {
+          setTimer(timer - 1)
+          if(timer < 1  ){
+            changeTurnHandler()
+            setTimer(21)
+          }
+        }, 1000)
+      }else{setTimeout(function countingTimer() {
+        retrieveGameDataHandler()
+        setCount(count + 1)
+      }, 10000)}
+    }
   }
 
   const retrieveUserHandler = () => {
@@ -142,12 +156,39 @@ function Battle() {
   }
 
   return <main className="block h-screen w-full bg-blue-800">
-    <h2 onClick={atack1Handler}>Shoot Atack1</h2>
     <h2>{timer}</h2>
     <h2>{game?.turn}</h2>
     <h2>{game?.namePlayerOne}</h2>
     <h2>{game?.playerOneAlien.name}</h2>
-    <h2>{game?.playerOneAlien.stats.healthPoints}</h2>
+    <h2>Health Points: {game?.playerOneAlien.stats.healthPoints}</h2>
+    <h2>Especial Defense: {game?.playerOneAlien.stats.especialDefense}</h2>
+    <h2>Fisic Defense: {game?.playerOneAlien.stats.fisicDefense}</h2>
+    <h2>Fisic Attack: {game?.playerOneAlien.stats.fisicAttack}</h2>
+    <h2>Especial Attack: {game?.playerOneAlien.stats.especialAttack}</h2>
+    <h2>Psiquical Attack:{game?.playerOneAlien.stats.psiquicalAttack}</h2>
+    <h2>Speed: {game?.playerOneAlien.stats.speed}</h2>
+    <h2>Healing: {game?.playerOneAlien.stats.healing}</h2>
+    <h2>Repeat: {game?.playerOneAlien.stats.repeat}</h2>
+    <h2>{game?.playerOneAlien.attacks[0]}</h2>
+    <h2>{game?.playerOneAlien.attacks[1]}</h2>
+    <h2>{game?.playerOneAlien.attacks[2]}</h2>
+    <h2>{game?.playerOneAlien.attacks[3]}</h2>
+
+    <h2>{game?.namePlayerTwo}</h2>
+    <h2>{game?.playerTwoAlien.name}</h2>
+    <h2>Health Points: {game?.playerTwoAlien.stats.healthPoints}</h2>
+    <h2>Especial Defense: {game?.playerTwoAlien.stats.especialDefense}</h2>
+    <h2>Fisic Defense:{game?.playerTwoAlien.stats.fisicDefense}</h2>
+    <h2>Fisic Attack:{game?.playerTwoAlien.stats.fisicAttack}</h2>
+    <h2>Especial Attack: {game?.playerTwoAlien.stats.especialAttack}</h2>
+    <h2>Psiquical Attack: {game?.playerTwoAlien.stats.psiquicalAttack}</h2>
+    <h2>Speed: {game?.playerTwoAlien.stats.speed}</h2>
+    <h2>Healing: {game?.playerTwoAlien.stats.healing}</h2>
+    <h2>Repeat: {game?.playerTwoAlien.stats.repeat}</h2>
+    <h2>{game?.playerTwoAlien.attacks[0]}</h2>
+    <h2>{game?.playerTwoAlien.attacks[1]}</h2>
+    <h2>{game?.playerTwoAlien.attacks[2]}</h2>
+    <h2>{game?.playerTwoAlien.attacks[3]}</h2>
   </main>
 }
 

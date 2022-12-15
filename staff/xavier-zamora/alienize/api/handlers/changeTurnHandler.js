@@ -8,7 +8,7 @@ module.exports = (req, res) => {
         changeTurn(userId)
         .then(hasTurn => res.json(hasTurn))
         .catch(error => {
-            if(error instanceof NotFounError)
+            if(error instanceof NotFoundError)
             res.status(404).json({ error: error.message })
             else
                 res.status(500).json({ error: error.message })

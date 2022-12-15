@@ -10,13 +10,15 @@ function changeTurn(userId) {
 
     return Game.findOne({ players: userId })
         .then(game => {
+            if(game === null) throw new TypeError('game not exist')
             const players = game.players
+            const turn = game.turn
             const id = game._doc._id
             if(game._doc.hasTurn === false){
-                return Game.findByIdAndUpdate({ _id: id }, {players: players, hasTurn: true})
+                return Game.findByIdAndUpdate({ _id: id }, {players: players, hasTurn: true, turn: turn + 1})
             }
             if(game._doc.hasTurn === true){
-                return Game.findOneAndUpdate({ _id: id }, {players: players, hasTurn: false})
+                return Game.findByIdAndUpdate({ _id: id }, {players: players, hasTurn: false, turn: turn + 1})
             }
         })
 }
