@@ -2,7 +2,7 @@ import log from '../utils/coolog'
 import { useState, useEffect } from 'react'
 import createAppointment from '../logic/createAppointment'
 
-function AppointmentForm({ onNewAppointment, setAppointments, appointment }) {//!setAppointments
+function AppointmentForm({ onNewAppointment, appointment }) {
     log.info('AppoimentForm -> render')
 
     //*States */
@@ -15,15 +15,13 @@ function AppointmentForm({ onNewAppointment, setAppointments, appointment }) {//
     const handleChangeDate = event => setDate(event.target.value)
     const handleChangeText = event => setBody(event.target.value)
 
-    
-    useEffect(()=>{
+    useEffect(() => {
         setTitle(appointment.title)
         setDate(appointment.date)
         setBody(appointment.body)
 
-//    console.log( Object.keys(appointment))
-    },[appointment])
-  
+    }, [appointment])
+
     const submitCreateAppointment = event => {
         event.preventDefault()
         // console.log('writing')
@@ -43,16 +41,15 @@ function AppointmentForm({ onNewAppointment, setAppointments, appointment }) {//
         }
 
         onNewAppointment(appointment)
-
+        //*Limpiamos forumlario
         setTitle('')
         setDate('')
         setBody('')
 
-        // setAppointments(appointment)//?
     }
 
     return <>
-        <form className=' rounded-lg p-2 mb-4 ' onSubmit={submitCreateAppointment}>
+        <form className=' rounded-sm shadow-md shadow-sky-800 p-2 mb-4 ' onSubmit={submitCreateAppointment}>
             <div className='flex justify-evenly gap-2'>
                 <div className='flex shadow-md mb-3 '>
                     <label htmlFor='appointment' className=' w-20 font-semibold text-lg flex justify-start'>Cita</label>
@@ -61,7 +58,7 @@ function AppointmentForm({ onNewAppointment, setAppointments, appointment }) {//
                 </div>
                 <div className='flex shadow-md mb-3'>
                     <label htmlFor='date' className='flex justify-start w-20 font-semibold text-lg'>Fecha</label>
-                    <input type="datetime-local" className=' font-semibold text-lg text-center' value={date} onChange={handleChangeDate}/>
+                    <input type="datetime-local" className=' font-semibold text-lg text-center' value={date} onChange={handleChangeDate} />
 
                 </div>
             </div>
@@ -70,7 +67,7 @@ function AppointmentForm({ onNewAppointment, setAppointments, appointment }) {//
                 <textarea id='text' className='w-full text-center font-semibold text-lg  placeholder-gray-500 ' placeholder='Describe la cita' value={body} onChange={handleChangeText} />
             </div>
 
-            <input type='submit' className='font-medium py-1 px-5 bg-green-600 text-white  hover:bg-gray-700 rounded-md cursor-pointer' value='Añadir Cita' />
+            <input type='submit' className='text-center my-1 px-6 py-1 rounded-sm font-medium border-2 border-cyan-900 hover:text-white text-cyan-900 hover:bg-cyan-900 cursor-pointer ' value='Añadir Cita' />
         </form>
     </>
 

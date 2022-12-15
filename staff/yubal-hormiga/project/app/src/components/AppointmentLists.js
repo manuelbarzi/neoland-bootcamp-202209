@@ -59,7 +59,7 @@ function AppointmentLists({ appointmentsChange }) {
   return <>
     {appointments.map((appointment) => {
       return (
-        <div className='rounded-lg shadow-md flex justify-between gap-5 pb-1'>
+        <div className='hover:bg-purple-300 hover:shadow-white hover:border-2 hover:border-fuchsia-900  shadow-sky-800 p-1 rounded-sm shadow-md flex justify-between gap-5 pb-1 mb-2'>
 
           <div className=''>
             <p className='font-semibold text-lg flex flex-row'>Cita: <spam>{appointment.title}</spam></p>
@@ -75,8 +75,8 @@ function AppointmentLists({ appointmentsChange }) {
 
           <div className=''>
             <div className='flex flex-col self-end gap-1'>
-              <button onClick={() => setUpdateAppointment(appointment)} className='bg-green-400  rounded-md p-1' type='button'><AiOutlineEdit size='1rem' /></button>
-              <button onClick={() => openDeleteAppointment(appointment.id)} className='bg-red-600  rounded-md p-1' type='button'><AiOutlineDelete size='1rem' /></button>
+              <button onClick={() => setUpdateAppointment(appointment)} className='bg-white rounded-md p-1 m-1' type='button'><AiOutlineEdit size='1.1rem' /></button>
+              <button onClick={() => openDeleteAppointment(appointment.id)} className='bg-white rounded-md p-1 m-1' type='button'><AiOutlineDelete size='1.1rem' /></button>
             </div>
           </div>
 

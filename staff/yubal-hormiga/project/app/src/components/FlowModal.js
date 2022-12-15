@@ -47,11 +47,11 @@ function FlowModalIncome({ setModal, onNewFlow }) {
         setDate('')
     }
     return <>
-        <div className=' bg-green-100 p-2 rounded-lg'>
+        <div className='shadow-md p-2 rounded-lg'>
             <div className=''>
-                <button className='bg-red-400  rounded-md py-1 px-3 font-semibold text-lg ' type='button' onClick={closeModal}>Cerrar Apunte</button>
+                <button className='text-center my-1 px-6 py-1 rounded-sm font-medium border-2 border-cyan-900 text-white hover:text-white bg-cyan-900 hover:bg-white hover:text-sky-900 text-white cursor-pointer ' type='button' onClick={closeModal}>Cerrar Apunte</button>
             </div>
-            <form className='flex flex-col ' onSubmit={submitCreateFlow}>
+            <form className='flex flex-col shadow-md' onSubmit={submitCreateFlow}>
                 <div className='flex gap-4 justify-between'>
                     <div className='flex shadow-md mb-3 p-1'>
                         <legend className='font-semibold text-lg'>Apunte</legend>
@@ -95,7 +95,7 @@ function FlowModalIncome({ setModal, onNewFlow }) {
                         <input type="date" className='w-full font-semibold text-lg text-center' value={date} onChange={handleChangeDate} />
                     </div>
                 </div>
-                <input type='submit' className='mt-4 font-medium py-1 px-5 bg-green-600 text-white  hover:bg-gray-700 rounded-md cursor-pointer' value='Añadir Gasto' />
+                <input type='submit' className='text-center my-1 px-6 py-1 rounded-sm font-medium border-2 border-cyan-900 text-white hover:text-cyan-900 hover:bg-white bg-cyan-900 cursor-pointer' value='Añadir Gasto' />
 
             </form>
         </div>

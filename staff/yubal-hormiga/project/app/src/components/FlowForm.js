@@ -13,7 +13,7 @@ function FlowForm({ pension, setPension, setIsValidPension }) {
     return <div>
         <form onSubmit={submitCreatePension}>
             <div>
-                <label htmlFor="pension" className="mr-2 font-semibold text-lg">Pension</label>
+                <label htmlFor="pension" className="mr-2 font-semibold text-lg">Presupuesto</label>
                 <input className="font-semibold text-lg text-center"
                     id="pension"
                     type='number'
@@ -22,7 +22,7 @@ function FlowForm({ pension, setPension, setIsValidPension }) {
                     onChange={handlePension}
                 />
             </div>
-            <input type='submit' className='font-medium py-1 px-5 my-2 bg-green-600 text-white  hover:bg-gray-700 rounded-md cursor-pointer' value='Añadir' />
+            <input type='submit' className='text-center my-1 px-6 py-1 rounded-sm font-medium border-2 border-cyan-900 hover:text-white text-cyan-900 hover:bg-cyan-900 cursor-pointer' value='Añadir' />
 
         </form>
     </div>

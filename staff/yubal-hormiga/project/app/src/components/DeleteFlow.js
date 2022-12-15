@@ -16,11 +16,11 @@ export default function ({ flowId, onDeleted, onClose }) {
     }
 
     return <div className="'bg-[#aaaa] absolute  top-0 right-0 h-full w-full flex flex-col justify-center items-center overflow-hidden" onClick={onClose}>
-        <div className="bg-[white] p-5 rounded-xl flex flex-col items-end gap-2 bg-white dark:bg-black text-black dark:text-white" onClick={event => event.stopPropagation()}>
+        <div className="bg-cyan-700 text-white font-bold p-5 rounded-sm flex flex-col items-end gap-2 " onClick={event => event.stopPropagation()}>
             <p>Segur@ que quieres eliminar el apunte?</p>
             <div className="flex gap-2" >
-                 <Button onClick={onClose}>Cancel</Button>
-                <Button onClick={confirmDeleteFlow}>Delete</Button>
+                 <Button className='border-white bg-sky-900 hover:bg-sky-700 '  onClick={onClose}>Cancel</Button>
+                <Button className='border-white bg-sky-900 hover:bg-sky-700 'onClick={confirmDeleteFlow}>Delete</Button>
             </div>
         </div>
     </div>

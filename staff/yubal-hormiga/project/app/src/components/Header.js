@@ -8,16 +8,18 @@ export default function Header({ userName }) {
 
     const { logout } = useContext(Context)
 
-    return <header className='h-full w-full pr-3 pl-3 '>
+    return <header className='h-full w-full pr-3 pl-3 mb-3'>
         <div className='flex justify-between w-full h-full'>
-            <div className='flex'>
-                <h1 className='text-4xl  text-green-600 font-semibold'>Soy Mayor NO Idiota</h1>
+            <div className='flex gap-10 ml-11'>
+            <div className='font-bold text-7xl rotate-90  text-sky-800' >A</div>
+                <h1 className='text-5xl text-sky-800 font-semibold'>genda </h1>
+                <div className='font-bold text-7xl rotate-90  text-sky-800' >T</div>
             </div>
             <div className='flex flex-row gap-6'>
                 <div >
-                    <h4 className=' p-3 text-4xl  text-gray-700 font-semibold'>Bienvenido {userName}</h4>
+                    <h4 className=' p-3 text-3xl  text-sky-800 font-semibold'>Bienvenido <span className='text-sky-600 '>{userName}</span></h4>
                 </div>
-                <button onClick={logout} className='text-center my-3 px-8 rounded-md font-medium bg-gray-700 hover:bg-green-600 text-white hover: p-3 '>Salir</button>
+                <button onClick={logout} className='text-center my-3 px-6 rounded-sm font-medium border-2 border-cyan-900 hover:text-white text-cyan-900 hover:bg-cyan-900 '>Salir</button>
             </div>
 
             {/* <div className='flex gap-12 items-center'>

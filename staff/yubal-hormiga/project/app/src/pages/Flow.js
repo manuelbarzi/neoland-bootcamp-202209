@@ -8,7 +8,6 @@ function Flow() {
   const [pension, setPension] = useState()
   const [isValidPension, setIsValidPension] = useState(false)
   const [modal, setModal] = useState(false)
-
   const [flowsChange, setFlowsChange] = useState()
 
   const handleNewExpense = () => {
@@ -34,7 +33,7 @@ function Flow() {
         <>
           <main>
             <div className='my-1'>
-              <button className='font-medium py-1 px-5 my-2 bg-green-600 text-white  hover:bg-gray-700 rounded-md cursor-pointer' type='button' onClick={handleNewExpense}>Agregar un nuevo apunte</button>
+              <button className='text-center my-1 px-6 py-1 rounded-sm font-medium border-2 border-cyan-900 hover:text-white text-cyan-900 hover:bg-cyan-900 cursor-pointer r' type='button' onClick={handleNewExpense}>Agregar un nuevo apunte</button>
             </div>
           </main>
         </>

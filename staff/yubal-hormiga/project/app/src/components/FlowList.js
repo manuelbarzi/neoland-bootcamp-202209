@@ -60,7 +60,7 @@ function FlowList({ flowsChange }) {
       const kind = getLiteralForKind(flow.kind)//? PARA PODER CAMBIAR LOS VALUES
 
       return (
-        <div className='mt-2 rounded-lg shadow-md flex gap-5 pb-1'>
+        <div className='hover:bg-purple-200 hover:shadow-white hover:border-2 hover:border-fuchsia-900  shadow-sky-600 p-1 rounded-sm shadow-md flex justify-between gap-5 pb-1 mb-2'>
 
           <div className='w-1/12 ' >
             <p className=' font-semibold text-lg text-left'>{type}</p>
@@ -84,8 +84,8 @@ function FlowList({ flowsChange }) {
 
           <div className=''>
             <div className='flex flex-col self-end gap-1'>
-              <button onClick={()=>{ setUpdateFlow(flow)}} className='bg-green-400  rounded-md p-1' type='button'><AiOutlineEdit size='1rem' /></button>
-              <button onClick={() => openDeleteFlow(flow.id)}className='bg-red-600  rounded-md p-1' type='button'><AiOutlineDelete size='1rem' /></button>
+              <button onClick={()=>{ setUpdateFlow(flow)}} className='bg-white rounded-md p-1 m-1' type='button'><AiOutlineEdit size='1.1rem' /></button>
+              <button onClick={() => openDeleteFlow(flow.id)}className=' bg-white rounded-md p-1 m-1' type='button'><AiOutlineDelete size='1.1rem' /></button>
             </div>
           </div>
 
