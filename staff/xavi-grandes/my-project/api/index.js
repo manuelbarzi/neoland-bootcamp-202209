@@ -14,6 +14,8 @@ const retrieveListsHandler = require ('./handlers/retrieveListsHandler')
 const retrieveListHandler = require ('./handlers/retrieveListHandler')
 const deletelistHandler = require ('./handlers/deletelistHandler')
 const retrieveItemsHandler = require ('./handlers/retrieveItemsHandler')
+const retrieveItemHandler = require ('./handlers/retrieveItemHandler')
+const deleteItemHandler = require ('./handlers/deleteItemHandler')
 
 const jsonBodyParser = require('./utils/jsonBodyParser')
 const cors = require('./utils/cors')
@@ -36,14 +38,15 @@ mongoose.connect(MONGODB_URL)
         api.post('/lists', jwtVerifier, jsonBodyParser, createListHandler)
         api.get('/lists', jwtVerifier, retrieveListsHandler)
         api.get('/lists/:listId', jwtVerifier, retrieveListHandler)
-
         api.get('/lists/:listId/items', jwtVerifier, retrieveItemsHandler)
+        api.get('/lists/:listId/:itemId', jwtVerifier, retrieveItemHandler)
         api.post('/lists/:listId/items', jsonBodyParser, createItemHandler)
         
         api.patch('/users/email', jwtVerifier, jsonBodyParser, updateUserEmailHandler)
         api.patch('/users/password', jwtVerifier, jsonBodyParser, updateUserPasswordHandler)
         
         api.delete('/lists/:listId', jwtVerifier, deletelistHandler)
+        api.delete('/items/:itemId', deleteItemHandler)
 
         const { PORT } = process.env
 

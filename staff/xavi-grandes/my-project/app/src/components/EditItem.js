@@ -1,9 +1,8 @@
 import log from '../utils/coolog'
-import { useEffect, useState } from "react";
 import { IoCloseCircle } from 'react-icons/io5'
-import retrieveItem from '../logic/retrieveItem'
+import deleteItem from '../logic/deleteItem'
 
-export default function ({onClose, listId, item}) {
+export default function ({onClose, listId, item, onDeleted}) {
     log.info('CreateList -> render')
 
   //   const submitUpdateItem = event => {
@@ -25,7 +24,19 @@ export default function ({onClose, listId, item}) {
   //         alert(error.message)
   //     }
   // }
-          
+     
+  const handleDeleteItem = (event) => {
+    event.preventDefault()
+
+    try{
+      deleteItem(item.id)
+      .then(() => onDeleted())
+      .catch(error => alert(error.message))
+    } catch (error){
+      alert(error.message)
+    }  
+
+  }
 
   return <>
     <section className="absolute top-0 z-30 h-[100vh] w-full bg-[#64aaa464]" onClick={onClose}>
@@ -45,7 +56,7 @@ export default function ({onClose, listId, item}) {
                 </div>
                 <button className="mt-2 self-center bg-[#1b385b] border border-gray-400 rounded-2xl w-[90%] h-9 text-white text-lg">Aceptar Cambios</button>
             </form>
-            <button className="bg-red-400 border border-gray-400 rounded-2xl w-4/5 h-8 text-white text-lg">Borrar</button>
+            <button className="bg-red-400 border border-gray-400 rounded-2xl w-4/5 h-8 text-white text-lg" onClick={handleDeleteItem}>Borrar</button>
       </section>
     </section>
     </>
