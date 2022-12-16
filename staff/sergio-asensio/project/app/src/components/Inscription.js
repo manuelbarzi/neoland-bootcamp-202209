@@ -1,6 +1,10 @@
 import CreateEvent from '../components/CreateEvent'
 
 export default function ({ onClose }) {
+
+    const confirmInscription = () => {
+        console.log('inscrito')
+    }
    
 
     return <div className="bg-[#aaaa] fixed top-0 h-full w-full flex flex-col justify-center items-center overflow-hidden"
@@ -10,7 +14,7 @@ export default function ({ onClose }) {
         <p>Are you sure to signUP at this event?</p>
         <div className="flex gap-2" >
             <button onClick={onClose}>Cancel</button>
-            {/* <button onClick={confirmInscription}>YES</button> */}
+            <button onClick={confirmInscription}>YES</button>
          </div>
     </div>
 </div>

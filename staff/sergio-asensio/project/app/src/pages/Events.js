@@ -67,11 +67,11 @@ function Events() {
                     return month === index
                 })
 
-                return <button className='p-4 ' key={index} onClick={() => handleMonth(index + 1)}>
-                    <div className='border rounded-xl h-48 p-4 bg-green-50'>
+                return <button className='p-4 overflow overflow-hidden' key={index} onClick={() => handleMonth(index + 1)}>
+                    <div className='border rounded-xl h-48 p-4 bg-green-50 overflow-hidden	'>
                         <h1 className='bg-teal-400 rounded-t-xl uppercase'>{getMonthName(index + 1)}</h1>
                         <p className='bg-slate-200'>{event?.title}</p>
-                        <img className='rounded-b-xl' src={event?.image} />
+                        <img className='rounded-b-xl overflow-hidden	' src={event?.image} />
                     </div>
                 </button>
             })}
