@@ -1,8 +1,11 @@
 /* eslint-disable import/no-anonymous-default-export */
+import log from '../utils/coolog'
 import deleteAppointment from '../logic/deleteAppointment'
 import Button from './Button'
 
 export default function ({ appointmentId, onDeleted, onClose }) {
+    log.info('DeleteAppointment -> render')
+
     const confirmDeleteAppointment = event => {
         event.preventDefault()
 

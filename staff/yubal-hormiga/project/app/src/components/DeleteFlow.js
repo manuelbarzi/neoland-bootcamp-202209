@@ -1,8 +1,11 @@
 /* eslint-disable import/no-anonymous-default-export */
+import log from '../utils/coolog'
 import deleteFlow from '../logic/deleteFlow'
 import Button from './Button'
 
 export default function ({ flowId, onDeleted, onClose }) {
+    log.info('Delete -> render')
+
     const confirmDeleteFlow = event => {
         event.preventDefault()
 

@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
+import log from '../utils/coolog'
 import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai'
 import { getLiteralForKind } from '../utils/getLiteralForKind'
 import { getLiteralForType } from '../utils/getLiteralForType'
@@ -8,6 +9,8 @@ import UpdateFlow from './UpdateFlow'
 import DeleteFlow from './DeleteFlow'
 
 function FlowList({ flowsChange, onRefresh }) {
+  log.info('FlowList -> render')
+
   const [flows, setFlows] = useState([])
   const [updateFlow, setUpdateFlow] = useState()
   const [flowIdToDelete, setFlowIdToDelete] = useState()
@@ -64,7 +67,7 @@ function FlowList({ flowsChange, onRefresh }) {
       const kind = getLiteralForKind(flow.kind)//? PARA PODER CAMBIAR LOS VALUES
 
       return (
-        <div className='hover:bg-purple-200 hover:shadow-white hover:border-2 hover:border-fuchsia-900  shadow-sky-600 p-1 rounded-sm shadow-md flex justify-between gap-5 pb-1 mb-2'>
+        <div key={flow.id} className='hover:bg-purple-200 hover:shadow-white hover:border-2 hover:border-fuchsia-900  shadow-sky-600 p-1 rounded-sm shadow-md flex justify-between gap-5 pb-1 mb-2'>
 
           <div className='w-1/12 ' >
             <p className=' font-semibold text-lg text-left'>{type}</p>
@@ -75,7 +78,7 @@ function FlowList({ flowsChange, onRefresh }) {
           </div>
 
           <div className='w-full'>
-            <p className='font-semibold text-lg flex flex-row'>Descripcion:<spam> {flow.description}</spam></p>
+            <p className='font-semibold text-lg flex flex-row'>Descripcion: {flow.description}</p>
           </div>
 
           <div className='w-3/12 ' >

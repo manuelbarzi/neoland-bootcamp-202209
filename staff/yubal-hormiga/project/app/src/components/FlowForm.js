@@ -1,5 +1,6 @@
-
+import log from "../utils/coolog"
 function FlowForm({ pension, setPension, setIsValidPension }) {
+    log.info('FlowForm -> render')
 
     //*Eventos
     const handlePension = event => setPension(Number(event.target.value))

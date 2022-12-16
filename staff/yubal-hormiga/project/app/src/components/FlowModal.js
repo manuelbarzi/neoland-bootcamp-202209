@@ -1,6 +1,9 @@
+import log from '../utils/coolog'
 import { useState } from 'react'
 import createFlow from '../logic/createFlow'
 function FlowModalIncome({ setModal, onNewFlow }) {
+    log.info('FlowModal -> render')
+
     const closeModal = () => {
         setModal(false)
     }

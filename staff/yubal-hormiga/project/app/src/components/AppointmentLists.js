@@ -6,6 +6,8 @@ import UpdateAppointment from './UpdateAppointment'
 import DeleteAppointment from './DeleteAppointment'
 
 function AppointmentLists({ appointmentsChange }) {
+  log.info('AppoimentList -> render')
+
   const [appointments, setAppointments] = useState([])
   const [updateAppointment, setUpdateAppointment] = useState()
   const [appointmentIdToDelete, setAppointmentIdToDelete] = useState()
@@ -59,10 +61,10 @@ function AppointmentLists({ appointmentsChange }) {
   return <>
     {appointments.map((appointment) => {
       return (
-        <div className='hover:bg-purple-300 hover:shadow-white hover:border-2 hover:border-fuchsia-900  shadow-sky-800 p-1 rounded-sm shadow-md flex justify-between gap-5 pb-1 mb-2'>
+        <div key={appointment.id} className='hover:bg-purple-300 hover:shadow-white hover:border-2 hover:border-fuchsia-900  shadow-sky-800 p-1 rounded-sm shadow-md flex justify-between gap-5 pb-1 mb-2'>
 
           <div className=''>
-            <p className='font-semibold text-lg flex flex-row'>Cita: <spam>{appointment.title}</spam></p>
+            <p className='font-semibold text-lg flex flex-row'>Cita: {appointment.title}</p>
           </div>
 
           <div className='' >

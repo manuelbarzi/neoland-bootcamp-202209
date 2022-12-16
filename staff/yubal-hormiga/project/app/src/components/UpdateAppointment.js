@@ -1,9 +1,12 @@
 /* eslint-disable import/no-anonymous-default-export */
+import log from '../utils/coolog'
 import updateAppointment from '../logic/updateAppointment'
 import { GrFormClose } from 'react-icons/gr'
 import { useEffect, useState } from 'react'
 
 export default function UpdateAppointment({ onUpdated, onClose, appointment }) {
+    log.info('UpdateAppoiment -> render')
+
     const submitUpdateAppointment = event => {
         event.preventDefault()
 
