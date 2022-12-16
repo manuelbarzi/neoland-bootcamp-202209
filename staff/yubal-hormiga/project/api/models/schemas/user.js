@@ -13,5 +13,8 @@ module.exports = new Schema({
     password: {
         type: String,
         required: true
+    },
+    budget:{
+        type: Number,
     }
 })

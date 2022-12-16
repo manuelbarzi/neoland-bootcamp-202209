@@ -46,7 +46,7 @@ export default function (token, flowId, type, kind, description, amount, date, c
     xhr.setRequestHeader('Authorization', `Bearer ${token}`)
     xhr.setRequestHeader('Content-Type', 'application/json')
 
-    const payload = { type, kind, description, amount, date }
+    const payload = {type, kind, description, amount, date }
 
     const json = JSON.stringify(payload)
 

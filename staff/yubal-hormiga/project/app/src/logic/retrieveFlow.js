@@ -20,9 +20,9 @@ export default function (token, flowId, callback) {
                     return
                 }
 
-                const appointment = JSON.parse(json)
+                const flow = JSON.parse(json)
 
-                resolve(appointment)
+                resolve(flow)
             }
 
             xhr.onerror = () => reject(new Error('connection error'))

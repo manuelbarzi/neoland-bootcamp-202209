@@ -17,7 +17,7 @@ function FlowForm({ pension, setPension, setIsValidPension }) {
                 <input className="font-semibold text-lg text-center"
                     id="pension"
                     type='number'
-                    placeholder="Introduce Pension"
+                    placeholder="Introduce Presupuesto"
                     value={pension}
                     onChange={handlePension}
                 />
