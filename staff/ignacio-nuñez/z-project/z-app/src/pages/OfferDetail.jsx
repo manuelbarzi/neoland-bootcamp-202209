@@ -206,14 +206,12 @@ function OfferDetail() {
         setUpdatingSalary()
     }
 
-    return <main className="min-h-screen bg-slate-100">
-          <header>
-            <SearchButton/>
-        </header>
+    return <>{offer && <main className="min-h-screen bg-slate-100">
+        <SearchButton />
         <div className="flex items-center flex-col">
-            <div className="flex items-center flex-col w-full mt-24">
-                <section className="flex items-center w-full flex-col p-2">
-                    <article className="flex flex-col gap-2 shadow-sm shadow-slate-600 bg-emerald-200 mt-3.5 border-2 w-full rounded-xl">
+            <div className="flex items-center flex-col w-full mb-24 ">
+                <section className="flex items-center w-full flex-col px-2">
+                    <article className="flex flex-col gap-2 shadow-sm shadow-slate-600 bg-emerald-200 border-2 w-full rounded-xl">
                         <div className="flex justify-between z-10 p-2 mt-1">
                             {offer?.published ?
                                 <h2 name='title' id='title' className='bg-emerald-200 p-2 border-2 font-semibold rounded-lg'>{offer?.title}</h2> :
@@ -371,5 +369,7 @@ function OfferDetail() {
         <NavBar
         />
     </main >
+    }
+    </>
 }
 export default OfferDetail

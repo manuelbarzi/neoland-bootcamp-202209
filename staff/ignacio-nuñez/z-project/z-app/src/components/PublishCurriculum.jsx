@@ -39,7 +39,7 @@ function PublishCurriculum({ className, curriculumToPublish, onPublishCurriculum
     }
 
     return <div className="z-20 fixed w-screen h-screen bg-[#aaaa] inset-y-0" onClick={closePublishCurriculum}>
-        <div onClick={event => event.stopPropagation()} className={`shadow-lg shadow-slate-400 w-[90%] h-[22%] bg-white border-2 p-6 rounded-xl ${className ? className : ""}`}>
+        <div onClick={event => event.stopPropagation()} className={`shadow-lg shadow-slate-400 w-[90%] h-fit bg-white border-2 p-5 rounded-xl ${className ? className : ""}`}>
             <p className='font-semibold text-lg'>{isPublishedParraf}</p>
             <div className='flex justify-between gap-4 mt-5'>
                 <Button className="text-md bg-emerald-200 w-1/2" onClick={closePublishCurriculum}>Cancel</Button>

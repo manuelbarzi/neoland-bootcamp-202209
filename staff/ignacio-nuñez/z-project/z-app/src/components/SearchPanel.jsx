@@ -3,7 +3,11 @@ import Button from "./Button"
 function SearchPanel({ className, closeSearchPanel }) {
 
     const search = () => {
+        try{
 
+        }catch(error){
+            
+        }
     }
 
     return <div className="z-20 fixed w-screen h-screen bg-[#aaaa] inset-y-0" onClick={closeSearchPanel}>

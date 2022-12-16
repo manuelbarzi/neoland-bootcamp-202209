@@ -29,9 +29,7 @@ function PublishedOffers() {
     }, [])
 
     return <main className="min-h-screen bg-slate-100">
-          <header>
             <SearchButton/>
-        </header>
         <div className="flex items-center flex-col">
             <div className="flex items-center flex-col w-full mb-24">
                 <section className="flex items-center flex-col w-full px-2">

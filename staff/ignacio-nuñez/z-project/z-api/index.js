@@ -22,6 +22,8 @@ const retrievePublishedCurriculmsHandler = require('./handlers/retrievePublished
 const jsonBodyParser = require('./utils/jsonBodyParser')
 const cors = require('./utils/cors')
 const jwtVerifier = require('./utils/jwtVerifier')
+const searchCurriculumsHandler = require('./handlers/searchCurriculumsHandler')
+const searchOffersHandler = require('./handlers/searchOffersHandler')
 const { MONGODB_URL } = process.env
 
 mongoose.connect(MONGODB_URL)
@@ -42,6 +44,9 @@ mongoose.connect(MONGODB_URL)
         api.delete('/curriculums/:curriculumId', jwtVerifier, deleteCurriculumHandler)
         api.get('/curriculums/:curriculumId', jwtVerifier, retrieveCurriculumDetailHandler)
         api.patch('/curriculums/:curriculumId', jwtVerifier, jsonBodyParser, updateCurriculumHandler)
+
+        api.get('/search/curriculums' , jwtVerifier, searchCurriculumsHandler)
+        api.get('/search/offers' , jwtVerifier, searchOffersHandler)
         
         api.get('/offers', jwtVerifier, retrievePublishedOffersHandler)
         api.post('/offers', jwtVerifier, createOfferHandler)

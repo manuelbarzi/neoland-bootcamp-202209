@@ -32,7 +32,7 @@ function DeleteCurriculum({ className, curriculumToDelete, onDeleteCurriculum, o
     }
 
     return <div className="z-20 fixed w-screen h-screen bg-[#aaaa] inset-y-0" onClick={closeDeleteCurriculum}>
-        <div onClick={event => event.stopPropagation()} className={`shadow-lg shadow-slate-400 w-5/6 h-[22%] bg-white border-2 p-6 rounded-xl ${className ? className : ""}`}>
+        <div onClick={event => event.stopPropagation()} className={`shadow-lg shadow-slate-400 w-5/6 h-fit bg-white border-2 p-5 rounded-xl ${className ? className : ""}`}>
             <p className='font-semibold text-lg'>Are you sure that you want to delete this curriculum?</p>
             <div className='flex justify-between gap-4 mt-5'>
                 <Button className="text-md bg-emerald-200 w-1/2" onClick={closeDeleteCurriculum}>Cancel</Button>

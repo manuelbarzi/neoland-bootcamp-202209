@@ -31,9 +31,7 @@ function PublishedCurriculums() {
     const userName = user && user.name
 
     return <main className="min-h-screen bg-slate-100">
-          <header>
             <SearchButton/>
-        </header>
         <div className="flex items-center flex-col">
             <div className="flex items-center flex-col w-full mt-20">
                 <section className="flex items-center w-full flex-col p-2">

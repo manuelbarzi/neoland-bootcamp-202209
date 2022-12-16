@@ -38,10 +38,8 @@ function UpdateSalaryOffer({ className, onUpdateSalaryOfferClose, onUpdateSalary
     const deleteOfferSalary = event => {
         event.preventDefault()
 
-        const salary = { salary: '', currency: '' }
-
         try {
-            updateOffer(sessionStorage.token, offerSalaryData.offerId, offerSalaryData.offerUserId, { salary })
+            updateOffer(sessionStorage.token, offerSalaryData.offerId, offerSalaryData.offerUserId, { salary: {} })
                 .then(() => onUpdateSalaryOffer())
                 .catch(error => {
                     const { errorMessage, type } = errorHandling(error)

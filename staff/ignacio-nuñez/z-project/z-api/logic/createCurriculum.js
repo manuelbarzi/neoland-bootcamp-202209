@@ -25,8 +25,8 @@ module.exports = function createCurriculum(userId) {
 
             return Curriculums.create(data)
         })
-        .then(offer => {
-            offer.id = offer._id.toString()
-            return offer.id
+        .then(curriculum => {
+            curriculum.id = curriculum._id.toString()
+            return curriculum.id
         })
 }
