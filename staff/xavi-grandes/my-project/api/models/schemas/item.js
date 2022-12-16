@@ -13,5 +13,8 @@ module.exports = new Schema({
     },
     quantity: {
         type: Number
+    },
+    status: {
+        type: Boolean 
     }
 })
