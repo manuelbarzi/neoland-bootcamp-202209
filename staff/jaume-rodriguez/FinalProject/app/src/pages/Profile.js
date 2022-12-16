@@ -3,7 +3,6 @@ import { format } from 'timeago.js'
 import retrieveAUser from '../logic/retrieveAUser'
 import retrievePostsFromUser from '../logic/retrievePostsFromUser'
 import { useParams } from 'react-router-dom'
-import Header from '../components/Header'
 
 function Profile() {
 
@@ -30,7 +29,6 @@ function Profile() {
 
     return (
         <>
-            <Header />
             {/* POSTS PANEL*/}
             <section className="flex z-1 justify-center place-content-start flex-wrap bg-slate-200 min-h-screen">
                 <div className="flex flex-row justify-center content-center z-0 p-8 bg-sky-100 border-sky-900 border-b border-solid w-full h-16">

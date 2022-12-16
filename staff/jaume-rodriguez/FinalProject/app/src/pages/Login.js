@@ -1,13 +1,16 @@
 import { useState } from 'react'
 import authenticateUser from '../logic/authenticateUser'
-import logo from '../img/logologintrello.png';
 import { Link } from 'react-router-dom'
+import ButtonLogin from '../img/button-login.png';
+import ButtonLoginHover from '../img/button-login-hover.png';
+import logo from '../img/logo-wa.png';
 import { useContext } from 'react'
 import Context from '../components/Context'
 
 function Login(props) {
     const { login } = useContext(Context)
     const [inputPasswordText, setInputPasswordText] = useState(true)
+    const [hoverButton, setHoverButton] = useState(false)
 
     // FORM INPUTS VALUE
     const handleInputPasswordText = () => {
@@ -40,18 +43,16 @@ function Login(props) {
     }
 
     return (
-        <main className="h-screen" >
-            <div className="h-full flex flex-col flex-wrap justify-center items-center bg-gradient-to-br from-cyan-500 to-blue-500">
-                <h1 className="text-center text-white text-lg pb-4">
-                    Sign in to continue to Home
-                </h1>
-                <form className="flex flex-col justify-start w-96 gap-1 px-12 py-14 rounded bg-white" onSubmit={handleSubmit}>
-                    <img
-                        src={logo}
-                        alt="logo"
-                        className="self-center w-2/5 mb-8"
-                    />
-                    <label htmlFor="loginEmail"></label>
+        <main className="min-h-screen flex flex-col bg-[#191919]" >
+            <div className="relative flex flex-grow font-alata h-full flex-col  justify-center items-center bg-[url('/src/img/bg-login.jpg')] bg-no-repeat bg-center">
+                <img
+                    className='pt-[3.25rem] mb-5'
+                    src={logo}
+                    alt="logo" />
+
+                <form className="flex flex-col justify-start w-96 gap-1 px-12 pb-12 rounded bg-inherit flex-wrap -mt-[0.5rem]" onSubmit={handleSubmit}>
+                    <div className="mb-16"></div>
+                    <div className="mb-[0.25rem]"></div>
                     <input
                         name='email'
                         type="email"
@@ -61,9 +62,9 @@ function Login(props) {
                         title="Please use @ and . on your email"
                         defaultValue={props.registerInputEmailValue}
                         onChange={handleInputEmailValue}
-                        className="h-10 border-gray-400 border-2 rounded border-solid text-slate-800 text-base pl-2"
+                        className="pl-11 pr-4 mb-2.5 h-10 bg-inherit text-white text-sm rounded-xl autofill:bg-black mr-1 pt-1"
                     />
-                    <label htmlFor="loginPassword"></label>
+                    <div></div>
                     <input
                         name='password'
                         type={inputPasswordText ? 'password' : 'text'}
@@ -73,21 +74,29 @@ function Login(props) {
                         title="Please enter at least 8 characters without spaces"
                         defaultValue={props.registerInputPasswordValue}
                         onChange={handleInputPasswordValue}
-                        className="h-10 border-gray-400 border-2 rounded border-solid text-slate-800 text-base pl-2"
+                        className="pl-11 pr-4 mb-5 h-10 bg-inherit text-white text-sm rounded-xl mr-1 pt-1"
                     />
-                    <span className="flex">
+                    <label className="flex">
                         <input
                             type="checkbox"
-                            onChange={handleInputPasswordText} />
-                        <label className="text-xs mx-2 my-3">Show password</label>
-                    </span>
-                    <button className="w-full h-8 self-start rounded border-none text-white font-bold bg-sky-700">
-                        Sign in
+                            onChange={handleInputPasswordText}
+                            className="ml-1.5 w-4 h-4 accent-[#252130] appearance-none bg-[#252130] checked:bg-[#2187d3] checked:border checked:border-[#2187d3] checked:rounded focus:outline-none mt-1"
+                        />
+                    </label>
+                    <button className='mt-9 -ml-1 &{hover:activeHover}'
+                        onMouseEnter={() => setHoverButton(false)}
+                        onMouseLeave={() => setHoverButton(true)}>
+                        <img
+                            src={hoverButton ? ButtonLogin : ButtonLoginHover}
+                            alt="login" />
                     </button>
+                    <div className='flex flex-row  mt-4 items-center mb-1'>
+                        <Link to="/register" className="text-[#5175bd] text-lg hover:text-[#2187d3]">
+                            Sign up
+                        </Link>
+                        <p className='text-white text-sm text-center pt-0.5 ml-auto pr-1'>Forgot password?</p>
+                    </div>
                 </form>
-                <Link to="/register" className="mt-2 text-white text-base hover:text-black">
-                    Create an account
-                </Link>
             </div>
         </main>
     );

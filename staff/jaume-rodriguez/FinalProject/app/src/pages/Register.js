@@ -1,19 +1,17 @@
 import { useState } from 'react'
 import registerUser from '../logic/registerUser'
-import logo from '../img/logologintrello.png';
+import ButtonRegister from '../img/button-register.png';
+import ButtonRegisterHover from '../img/button-register-hover.png';
+import logo from '../img/logo-wa.png';
 import { Link } from 'react-router-dom'
 import { useContext } from 'react'
 import Context from '../components/Context'
 
 function Register(props) {
     const { login } = useContext(Context)
-    const [inputPasswordText, setInputPasswordText] = useState(true)
+    const [hoverButton, setHoverButton] = useState(false)
 
     // FORM INPUTS VALUE
-    const handleInputPasswordText = () => {
-        setInputPasswordText(!inputPasswordText);
-    }
-
     const handleInputEmailValue = (event) => {
         const newValue = event.target.value
         props.onInputEmailValue(newValue)
@@ -40,66 +38,65 @@ function Register(props) {
     }
 
     return (
-        <main className="h-screen">
-            <div className="h-full flex flex-col flex-wrap justify-center items-center bg-gradient-to-br from-cyan-500 to-blue-500">
-                <h1 className="text-center text-white text-lg pb-4">
-                    Create your Account to continue to Sign in
-                </h1>
-                <form className="flex flex-col justify-start w-96 gap-1 px-12 py-14 rounded bg-white" onSubmit={handleSubmit}>
-                    <img
-                        src={logo}
-                        alt="logo"
-                        className="self-center w-2/5 mb-8"
-                    />
-                    <label htmlFor="registerName"></label>
+        <main className="min-h-screen flex flex-col bg-[#191919]" >
+            <div className="relative flex flex-grow font-alata h-full flex flex-col  justify-center items-center bg-[url('/src/img/bg-register.jpg')] bg-no-repeat bg-center">
+                <img
+                    src={logo}
+                    alt="logo"
+                    className='mb-3'
+                />
+                <form className="flex flex-col justify-start w-96 gap-1 px-12 pb-12 rounded bg-inherit flex-wrap" onSubmit={handleSubmit}>
+                    <div className="mb-12"></div>
+                    <div className="mb-5"></div>
                     <input
                         name='name'
                         type="text"
-                        placeholder="Enter a name"
+                        placeholder="Username"
                         id="registerName"
                         required=""
                         title="Please enter at least 1 character"
-                        className="h-10 border-gray-400 border-2 rounded border-solid text-slate-800 text-base pl-2"
+                        className="pl-11 pr-4 mb-2.5 h-10 bg-inherit text-white text-sm rounded-xl autofill:bg-black mr-1 pt-1"
                         defaultValue={props.loginInputNameValue}
                     />
                     <label htmlFor="registerEmail"></label>
                     <input
                         name='email'
                         type="email"
-                        placeholder="Enter an e-mail"
+                        placeholder="Email"
                         id="registerEmail"
                         title="Please use @ and . on your email"
-                        className="h-10 border-gray-400 border-2 rounded border-solid text-slate-800 text-base pl-2"
+                        className="pl-11 pr-4 mb-3.5 h-10 bg-inherit text-white text-sm rounded-xl mr-1 pt-1"
                         defaultValue={props.loginInputEmailValue}
                         onChange={handleInputEmailValue}
                     />
-                    <label htmlFor="registerPassword"></label>
                     <input
                         name='password'
-                        type={inputPasswordText ? 'password' : 'text'}
-                        placeholder="Enter a password"
+                        type='password'
+                        placeholder="Password"
                         id="registerPassword"
                         title="Please enter at least 8 characters without spaces"
-                        className="h-10 border-gray-400 border-2 rounded border-solid text-slate-800 text-base pl-2"
+                        className="pl-11 pr-4 mb-3.5 h-10 bg-inherit text-white text-sm rounded-xl mr-1 pt-1"
                         defaultValue={props.loginInputPasswordValue}
                         onChange={handleInputPasswordValue}
 
                     />
-                    <span className="flex">
-                        <input
-                            type="checkbox"
-                            onChange={handleInputPasswordText} />
-                        <label className="text-xs mx-2 my-3">Show password</label>
-                    </span>
-                    <button className="w-full h-8 self-start bg-sky-700 rounded border-none text-white font-bold">
-                        Register
+                    <button
+                        className='mt-1.5 -ml-1'
+                        onMouseEnter={() => setHoverButton(false)}
+                        onMouseLeave={() => setHoverButton(true)}>
+                        <img
+                            src={hoverButton ? ButtonRegister : ButtonRegisterHover}
+                            alt="register" />
                     </button>
                 </form>
-                <Link to="/login" className="mt-2 text-white text-base hover:text-black">
-                    Sign in
-                </Link>
+                <div className='flex flex-row items-center -mt-7'>
+                    <p className="text-white text-sm text-center">Already have an Account? </p>
+                    <Link to="/login" className="text-[#5175bd] text-lg pb-0.5 hover:text-[#2187d3]">
+                        &nbsp;Log in
+                    </Link>
+                </div>
             </div>
-        </main>
+        </main >
     );
 }
 

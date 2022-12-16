@@ -1,12 +1,10 @@
-// TODO DRAG AND DROP
-// TODO TAREAS DE GRUPO
-// TODO Sin usuario te deja ver community
-
 import Login from './pages/Login'
 import Register from './pages/Register'
 import { useState } from 'react'
 import Home from './pages/Home'
-import SettingsAccount from './pages/SettingsAccount'
+import Settings from './pages/Settings'
+import Adventures from './pages/Adventures'
+import Adventure from './pages/Adventure'
 import Community from './pages/Community'
 import Profile from './pages/Profile'
 import { Routes, Route, Navigate } from 'react-router-dom'
@@ -44,8 +42,10 @@ function App() {
   return <Context.Provider value={{ login, logout }}>
     {loggedIn ? <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/settings-account" element={<SettingsAccount />} />
+      <Route path="/settings" element={<Settings />} />
       <Route path="/community" element={<Community />} />
+      <Route path="/adventures" element={<Adventures />} />
+      <Route path="/adventures/:adventureId" element={<Adventure />} />
       <Route path="/profile/:targetUserId" element={<Profile />} />
       <Route path="*" element={<Navigate replace to="/" />} />
     </Routes>

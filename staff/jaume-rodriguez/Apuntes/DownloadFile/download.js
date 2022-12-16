@@ -1,5 +1,3 @@
-// TODO $ node download http://212.183.159.230/1GB.zip 1gb.zip
-
 const { get } = require('http')
 const { createWriteStream } = require('fs')
 

@@ -1,6 +1,7 @@
 const { User, Quest } = require('../models')
 
 function retrieveQuest(userId, questId) {
+    console.log("reqtrieveQuest", userId, questId);
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
     if (!userId.length) throw new Error('userId is empty')
 

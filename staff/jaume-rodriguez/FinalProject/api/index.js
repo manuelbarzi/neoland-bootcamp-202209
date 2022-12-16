@@ -12,13 +12,6 @@ const {
     handlerUpdateUserPassword,
     handlerRetrieveAUser,
 
-    handlerCreateTask,
-    handlerRetrieveTasks,
-    handlerDeleteTask,
-    handlerUpdateTaskStatus,
-    handlerUpdateTaskText,
-    handlerUpdateTaskTitle,
-
     handlerCreatePost,
     handlerRetrievePublicPosts,
     handlerRetrievePost,
@@ -31,8 +24,6 @@ const {
     handlerRetrieveQuests,
     handlerRetrieveMainQuests,
     handlerRetrieveMainRandomQuest,
-    handlerRetrieveWorldQuests,
-    handlerRetrieveWorldRandomQuest,
     handlerDeleteQuest,
     handlerUpdateQuest,
     handlerPlayQuest,
@@ -42,7 +33,6 @@ const {
     handlerRetrieveAdventure,
     handlerRetrieveAdventures,
     handlerRetrieveMainAdventures,
-    handlerRetrieveMainRandomAdventure,
     handlerRetrieveWorldAdventures,
     handlerUpdateAdventure,
     handlerDeleteAdventure,
@@ -73,17 +63,10 @@ mongoose.connect(MONGODB_URL)
         api.patch('/users/updateUserEmail', jwtVerifier, jsonBodyParser, handlerUpdateUserEmail)
         api.patch('/users/updateUserPassword', jwtVerifier, jsonBodyParser, handlerUpdateUserPassword)
 
-        api.post('/tasks', jwtVerifier, jsonBodyParser, handlerCreateTask)
-        api.get('/tasks', jwtVerifier, handlerRetrieveTasks)
-        api.patch('/tasks/:taskId', jwtVerifier, jsonBodyParser, handlerUpdateTaskStatus)
-        api.patch('/tasks/text/:taskId', jwtVerifier, jsonBodyParser, handlerUpdateTaskText)
-        api.patch('/tasks/title/:taskId', jwtVerifier, jsonBodyParser, handlerUpdateTaskTitle)
-        api.delete('/tasks/:taskId', jwtVerifier, jsonBodyParser, handlerDeleteTask)
-
         api.post('/posts', jwtVerifier, jsonBodyParser, handlerCreatePost)
-        api.get('/posts/:postId', jwtVerifier, handlerRetrievePost)
-        api.get('/users/:targetUserId/posts', jwtVerifier, handlerRetrievePostsFromUser)
         api.get('/posts/public', jwtVerifier, handlerRetrievePublicPosts)
+        api.get('/users/:targetUserId/posts', jwtVerifier, handlerRetrievePostsFromUser)
+        api.get('/posts/:postId', jwtVerifier, handlerRetrievePost)
         api.patch('/posts/:postId', jwtVerifier, jsonBodyParser, handlerUpdatePost)
         api.delete('/posts/:postId', jwtVerifier, handlerDeletePost)
 
@@ -91,8 +74,6 @@ mongoose.connect(MONGODB_URL)
         api.get('/quest/', jwtVerifier, handlerRetrieveQuests)
         api.get('/quest/main/', jwtVerifier, handlerRetrieveMainQuests)
         api.get('/quest/main/random', jwtVerifier, handlerRetrieveMainRandomQuest)
-        api.get('/quest/world/', jwtVerifier, handlerRetrieveWorldQuests)
-        api.get('/quest/world/random', jwtVerifier, handlerRetrieveWorldRandomQuest)
         api.get('/quest/:questId', jwtVerifier, handlerRetrieveQuest)
         api.patch('/quest/:questId', jwtVerifier, jsonBodyParser, handlerUpdateQuest)
         api.delete('/quest/:questId', jwtVerifier, handlerDeleteQuest)
@@ -102,7 +83,6 @@ mongoose.connect(MONGODB_URL)
         api.post('/adventure/:adventureId/step', jwtVerifier, jsonBodyParser, handlerCreateAdventureStep)
         api.get('/adventure/', jwtVerifier, handlerRetrieveAdventures)
         api.get('/adventure/main', jwtVerifier, handlerRetrieveMainAdventures)
-        api.get('/adventure/main/random', jwtVerifier, handlerRetrieveMainRandomAdventure)
         api.get('/adventure/world', jwtVerifier, handlerRetrieveWorldAdventures)
         api.get('/adventure/:adventureId', jwtVerifier, handlerRetrieveAdventure)
         api.patch('/adventure/:adventureId', jwtVerifier, jsonBodyParser, handlerUpdateAdventure)

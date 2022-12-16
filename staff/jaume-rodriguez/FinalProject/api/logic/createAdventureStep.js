@@ -20,7 +20,6 @@ function createAdventureStep(userId, adventureId, text) {
             if (!adventure)
                 throw new Error(`adventure with id ${adventureId} does not exist`)
 
-            // TODO: Check that adventure.creator === userId
             foundAdventure = adventure;
             return Quest.create({ creator: userId, text, isAdventureStep: true })
         })

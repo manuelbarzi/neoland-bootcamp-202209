@@ -18,7 +18,27 @@ module.exports = new Schema({
     },
     exp: {
         type: Number,
+        default: 25,
+        required: true
+    },
+    level: {
+        type: Number,
+        default: 1,
+        required: true
+    },
+    gold: {
+        type: Number,
         default: 100,
+        required: true
+    },
+    lastQuestPlayedText: {
+        type: String,
+        default: ' ',
+        required: true
+    },
+    lastQuestPlayedTime: {
+        type: Number,
+        default: 0,
         required: true
     },
     questsPlayed: [questPlayed],

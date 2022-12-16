@@ -34,12 +34,12 @@ module.exports = function (userId, adventureId, questId) {
             if (!adventure)
                 throw new Error(`adventure with id ${adventureId} does not exist`)
 
-            const index = adventure.steps.findeIndex(steps => steps.quest.toString() === questId)
+            const index = adventure.steps.findIndex(steps => steps.quest.toString() === questId)
             return Adventure.steps[index].deleteOne({ _id: questId });
         })
         .then(result => {
             const { acknowledged } = result
 
-            if (!acknowledged) throw new Error(`could not delete adventure with id ${adventureId}`)
+            if (!acknowledged) throw new Error(`could not delete step with id ${questId}`)
         })
 };

@@ -16,5 +16,10 @@ module.exports = new Schema({
         type: Number,
         default: 0,
         required: true
+    },
+    lastStepPlayedTime: {
+        type: Number,
+        default: 0,
+        required: true
     }
 })

@@ -11,7 +11,7 @@ module.exports = function (userId, newEmail) {
             if (!user)
                 throw new Error(`user with id ${userId} does not exist`)
 
-            return User.updateOne({ userId }, { $set: { email: newEmail } })
+            return User.updateOne({ _id: userId }, { $set: { email: newEmail } })
         })
         .then(() => { })
 
