@@ -1,22 +1,25 @@
 import updateEvent from '../logic/updateEvent'
-// import getMonthNumberByName from '../utils/getMonthNumberByName'
+import getMonthNumberByName from '../utils/getMonthNumberByName'
+import { useParams } from 'react-router-dom'
 
 export default function ({ onUpdated, onClose, event }) {
-    const submitUpdateEvent = event => {
-        event.preventDefault()
+    const { monthName } = useParams()
 
-        const {title: { value: title }, body: { value: body }, requirement: { value: requirement }, capacity: { value: capacity }, date: { value: date }, inscription: { value:inscription }, image: {value: image} } = event.target
+    const submitUpdateEvent = e => {
+        e.preventDefault()
+
+        const {title: { value: title }, body: { value: body }, requirement: { value: requirement }, capacity: { value: capacity }, date: { value: date }, inscription: { value:inscription }, image: {value: image} } = e.target
         
-        // const _date = new Date(date)
+        const _date = new Date(date)
 
-        // if (_date.getMonth() !== getMonthNumberByName(monthName) - 1) {
-        //     alert(`please, choose a date that is inside month`)
+        if (_date.getMonth() !== getMonthNumberByName(monthName) - 1) {
+            alert(`please, choose a date that is inside month`)
 
-        //     return
-        // }
+            return
+        }
 
         try {
-            updateEvent(sessionStorage.token, title, body, requirement, Number(capacity), date, inscription, image)
+            updateEvent(sessionStorage.token, event.id, title, body, requirement, Number(capacity), _date, inscription, image)
                 .then(() => onUpdated())
                 .catch(error => alert(error.message))
         } catch (error) {
@@ -55,34 +58,8 @@ export default function ({ onUpdated, onClose, event }) {
                 <label htmlFor="image">Imagen</label>
                 <input className="text-black pl-2" type="text" name="image" id="image" defaultValue={event.image}></input>
                 
-
                 <button>Update</button>
             </form>
         </div>
     </div>
 }
-
-
-
-
-    // const submitUpdateEvent = e => {
-    //     e.preventDefault()
-
-    //     const {title: { value: title }, body: { value: body }, requirement: { value: requirement }, capacity: { value: capacity }, date: { value: date }, inscription: { value:inscription }, image: {value: image} } = event.target
-       
-    //     const _date = new Date(date)
-
-    //     if (_date.getMonth() !== getMonthNumberByName(monthName) - 1) {
-    //         alert(`please, choose a date that is inside month`)
-
-    //         return
-    //     }
-       
-    //     try {
-    //         updateEvent(sessionStorage.token, title, body, requirement, Number(capacity), _date, inscription, image)
-    //         .then (()=> onUpdated())
-    //         .catch(error => alert(error.message))
-    //     } catch (error) {
-    //         alert(error.message)
-    //     }
-    // }

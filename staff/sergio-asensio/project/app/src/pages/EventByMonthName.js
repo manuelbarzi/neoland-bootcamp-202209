@@ -96,8 +96,8 @@ function EventMonth() {
         setUpdateEvent('true')
     }
 
-    const handleEventUpdated = () => {
-        eventRetrieveMonth()
+    const eventUpdated = () => {
+        setUpdateEvent()
         eventRetrieveMonth()
     }
 
@@ -114,11 +114,12 @@ function EventMonth() {
     }
 
 
+
     return <main className="h-full">
         <header className='h-1/6 top-0 flex justify-around items-center bg-teal-600	'>
             <Link to="/"><img src={logo} className='w-20 h-20 cursor-pointer' /></Link>
             <h2 className='uppercase'>{monthName}</h2>
-            <button onClick={goEvents} className='className="border border-2 border-black'>Go_Back</button>
+            <button onClick={goEvents} className='border-2 border-black'>Go_Back</button>
         </header>
 
         {event ? <div>
@@ -130,29 +131,29 @@ function EventMonth() {
                 <h3> Plazas: {event?.capacity}</h3>
                 {event?.inscription === 'close' && <div><h3>Inscrition: Close</h3></div>}
                 {event?.inscription === 'open' && <div>
-                    Inscripciones <butto onClick={handlesignUp} className="border border-2 border-black bg-slate-300 p-1 cursor-pointer m-1">Inscribirse</butto>
+                    Inscripciones <button onClick={handlesignUp} className="border-2 border-black bg-slate-300 p-1 cursor-pointer m-1">Inscribirse</button>
                 </div>}
                 -------------------------------------
                 <img src={event?.image} />
             </div>
 
             {user?.role === 'admin' && <div>
-                <button onClick={handleDeleteEvent} className="border border-2 border-black  bg-slate-300 cursor-pointer m-1">BORRAR</button>
-                <button onClick={handleUpdateEvent} className="border border-2 border-black bg-slate-300 cursor-pointer m-1">EDITAR</button>
+                <button onClick={handleDeleteEvent} className="border-2 border-black  bg-slate-300 cursor-pointer m-1">BORRAR</button>
+                <button onClick={handleUpdateEvent} className="border-2 border-black bg-slate-300 cursor-pointer m-1">EDITAR</button>
             </div>}
 
-        </div> : <div>{user?.role === 'admin' && <div><button onClick={handleCreateEvent} className="border border-2 border-black bg-slate-300 cursor-pointer m-1">crear</button></div>
+        </div> : <div>{user?.role === 'admin' && <div><button onClick={handleCreateEvent} className="border-2 border-black bg-slate-300 cursor-pointer m-1">crear</button></div>
         }
 
         </div>}
 
         {createEvent && <CreateEvent monthName={monthName} onCreated={handleEventCreated} closeCreate={() => setCreateEvent()} />}
 
-        {updateEvent && <UpdateEvent event={event} onDeleted={handleEventUpdated} onClose={() => setUpdateEvent()} />}
+        {updateEvent && <UpdateEvent event={event} onUpdated={eventUpdated} onClose={() => setUpdateEvent()} />}
 
         {deleteEvent && <DeleteEvent event={event} onDeleted={handleEventDeleted} onClose={() => setDeleteEvent()} />}
     
-        {inscription && <Inscription onClose={() => setInscription()}/>}
+        {inscription && <Inscription event={event}  onClose={() => setInscription()}/>}
     
     </main>
 }

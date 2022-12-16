@@ -20,10 +20,9 @@ function Noticias() {
     log.info('Noticias -> render')
 
     const [createNoticeVisible, setCreateNoticeVisible] = useState(false)
-
+    const [updateNoticeVisible, setUpdateNoticeVisible] = useState(false)
     const [deleteNoticeVisible, setDeleteNoticeVisible] = useState(false)
 
-    const [updateNoticeVisible, setUpdateNoticeVisible] = useState(false)
     const [notice, setNotice] = useState()
     const [user, setUser] = useState()
 
@@ -143,7 +142,7 @@ function Noticias() {
     }
 
     return <><header className='h-1/6 top-0 flex justify-around items-center bg-teal-600	'>
-        <Link to="/"><img src={logo} className='w-20 h-20 cursor-pointer'/></Link>
+        <Link to="/"><img src={logo} className='w-20 h-20 cursor-pointer' /></Link>
         <h1>NOTICIAS</h1>
         {user?.role === 'admin' && <button onClick={() => openCreateNotice()}> + </button>}
     </header>

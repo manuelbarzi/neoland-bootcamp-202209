@@ -68,7 +68,7 @@ function Events() {
                 })
 
                 return <button className='p-4 ' key={index} onClick={() => handleMonth(index + 1)}>
-                    <div className='border rounded-xl h-48 p-4 '>
+                    <div className='border rounded-xl h-48 p-4 bg-green-50'>
                         <h1 className='bg-teal-400 rounded-t-xl uppercase'>{getMonthName(index + 1)}</h1>
                         <p className='bg-slate-200'>{event?.title}</p>
                         <img className='rounded-b-xl' src={event?.image} />
