@@ -69,9 +69,19 @@ export default function MyList() {
     });
   };
 
-  const changeStatus = (itemId, itemStatus) => {
-    updateStatus(itemId, itemStatus)
-  }
+  const handleChangeStatus = (itemId, itemStatus) => {
+    try {
+      updateStatus(itemId, itemStatus)
+
+    } catch (error) {
+        alert(error.message)
+    }
+    
+    retrieveItems(sessionStorage.token, listId)
+    .then((items) => {setItems(items);
+
+      })
+  } 
 
   const handleItemDeleted = () => {
     try {
@@ -99,9 +109,11 @@ export default function MyList() {
               <input
                 className="h-8 w-8"
                 type="checkbox"
-                name="item"
+                // id="item"
+                // name="item"
+                // value="true"
                 onClick={(event) => event.stopPropagation()}
-                onChange={(item) => changeStatus(item.id, item.status) }
+                onChange={() => handleChangeStatus(item.id, item.status) }
               />
             </article>
           ))}
