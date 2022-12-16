@@ -14,11 +14,11 @@ export default function MyList() {
   log.info("MyList -> render");
 
   const [isCreateOpen, setCreateOpen] = useState(false);
-  const [isEditOpen, setEditOpen] = useState(false);
   const { listId } = useParams();
   const { showAlert } = useContext(Context);
   const [listName, setListName] = useState();
   const [items, setItems] = useState();
+  const [itemToEdit, setItemToEdit] = useState();
 
   useEffect(() => {
     try {
@@ -56,41 +56,48 @@ export default function MyList() {
     setCreateOpen(!isCreateOpen);
   };
 
-  const toggleEditItemView = () => {
-    setEditOpen(!isEditOpen);
-  };
+  const openEditItem = (item) => setItemToEdit(item);
+
+  const closeEditItem = () => setItemToEdit();
 
   const handleCreatedItem = () => {
-    retrieveItems(sessionStorage.token, listId).then((items) => {
-      setItems(items);
+    retrieveItems(sessionStorage.token, listId)
+    .then((items) => {setItems(items);
 
-      toggleCreateItemView();
+      closeEditItem();
     });
   };
 
+  const handleItemDeleted = () => {
+    try {
+      retrieveItems(sessionStorage.token, listId)
+      .then((items) => {setItems(items);
+
+        closeEditItem()
+        })
+    } catch (error) {
+        alert(error.message)
+    }
+  } 
   return (
     <>
-      {isCreateOpen && (
-        <CreateItem
-          onClose={toggleCreateItemView}
-          listId={listId}
-          onItemCreated={handleCreatedItem}
-        />
-      )}
-      {isEditOpen && <EditItem onClose={toggleEditItemView} />}
-
-      {<Header listName={listName} />}
+      <Header listName={listName} />
       <main className="mt-[3rem] flex flex-col gap-2 items-center">
         {items &&
           items.map((item) => (
-              <article
-                onClick={toggleEditItemView}
-                // key={items}
-                className="mt-1 bg-blue-300 h-12 w-4/5 rounded-lg flex items-center justify-between px-3 text-lg"
-              >
-                <div>{item.title}</div>
-                <input className="h-8 w-8" type="checkbox" name="iem" onClick={event => event.stopPropagation()} />
-              </article>
+            <article
+              onClick={() => openEditItem(item)}
+              key={listName}
+              className="mt-1 bg-blue-300 h-12 w-4/5 rounded-lg flex items-center justify-between px-3 text-lg"
+            >
+              <div>{item.title}</div>
+              <input
+                className="h-8 w-8"
+                type="checkbox"
+                name="iem"
+                onClick={(event) => event.stopPropagation()}
+              />
+            </article>
           ))}
       </main>
       <hr className="fixed bottom-[6.5rem] border border-black w-full"></hr>
@@ -106,6 +113,22 @@ export default function MyList() {
           + Añadir
         </button>
       </footer>
+
+      {isCreateOpen && (
+        <CreateItem
+          onClose={toggleCreateItemView}
+          listId={listId}
+          onItemCreated={handleCreatedItem}
+        />
+      )}
+      {itemToEdit && (
+        <EditItem
+          listId={listId}
+          item={itemToEdit}
+          onDeleted={handleItemDeleted}
+          onClose={closeEditItem} /*onUpdated={handleItemUpdated}*/
+        />
+      )}
     </>
   );
 }
