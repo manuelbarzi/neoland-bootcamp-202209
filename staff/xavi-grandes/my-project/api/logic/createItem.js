@@ -12,7 +12,7 @@ module.exports = function (listId, title) {
     .then((list) => {
       if (!list) throw new Error(`list with id ${listId} does not exist`);
 
-      return Item.create({ list: listId, title });
+      return Item.create({ list: listId, title, status: false, quantity: 0, price: 0 });
     })
     .then(() => {});
 };
