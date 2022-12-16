@@ -8,6 +8,7 @@ import EditItem from "../components/EditItem";
 import { errors } from "com";
 import retrieveList from "../logic/retrieveList";
 import retrieveItems from "../logic/retrieveItems";
+import updateStatus from "../logic/updateStatus"
 const { FormatError, AuthError, LengthError, NotFoundError } = errors;
 
 export default function MyList() {
@@ -68,6 +69,10 @@ export default function MyList() {
     });
   };
 
+  const changeStatus = (itemId, itemStatus) => {
+    updateStatus(itemId, itemStatus)
+  }
+
   const handleItemDeleted = () => {
     try {
       retrieveItems(sessionStorage.token, listId)
@@ -94,8 +99,9 @@ export default function MyList() {
               <input
                 className="h-8 w-8"
                 type="checkbox"
-                name="iem"
+                name="item"
                 onClick={(event) => event.stopPropagation()}
+                onChange={(item) => changeStatus(item.id, item.status) }
               />
             </article>
           ))}
