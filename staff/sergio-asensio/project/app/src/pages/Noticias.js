@@ -143,8 +143,8 @@ function Noticias() {
     }
 
     return <><header className='h-1/6 top-0 flex justify-around items-center bg-teal-600	'>
-        <Link to="/"><img src={logo} className='w-20 h-20'/></Link>
-        <h1>Noticias</h1>
+        <Link to="/"><img src={logo} className='w-20 h-20 cursor-pointer'/></Link>
+        <h1>NOTICIAS</h1>
         {user?.role === 'admin' && <button onClick={() => openCreateNotice()}> + </button>}
     </header>
         <div className="flex flex-col items-center gap-2 py-[5rem] h-full  bg-gray-100">

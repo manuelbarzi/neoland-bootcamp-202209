@@ -18,7 +18,7 @@ export default function Header({ userName }) {
         <img src={logo} className='w-20 h-20'/>
     </div>
     <div>
-        <h1>Trepadores Cavernicolas</h1>
+        <h1>TREPADORES CAVERNICOLAS</h1>
     </div>
     <div>
         <p>{userName}</p>    

@@ -11,7 +11,6 @@ import logo from '../img/logo.jpg'
 
 const { FormatError, AuthError, LengthError, NotFoundError } = errors
 
-
 function Events() {
     log.info('Events -> render')
 
@@ -41,7 +40,8 @@ function Events() {
             else
                 showAlert(error.message, 'fatal')
         }
-
+        // const rest = jrfap
+        // console.log(new Date)
     }, [])
 
     const navigate = useNavigate()
@@ -50,10 +50,13 @@ function Events() {
         navigate(`/events/${getMonthName(month)}`)
     }
 
+    
+
     return <main className="h-full">
         <header className='h-1/6 top-0 flex justify-around items-center bg-teal-600	'>
-        <Link to="/"><img src={logo} className='w-20 h-20'/></Link>
+        <Link to="/"><img src={logo} className='w-20 h-20 cursor-pointer'/></Link>
             <h1>12 MESES, 12 ACTIVIDADES</h1>
+            <div className='className="border border-2 border-black'>Log Out</div>
         </header>
         <div className="grid grid-cols-2 gap-4 p-4 ">
 
@@ -66,7 +69,7 @@ function Events() {
 
                 return <button className='p-4 ' key={index} onClick={() => handleMonth(index + 1)}>
                     <div className='border rounded-xl h-48 p-4 '>
-                        <h1 className='bg-teal-400 rounded-t-xl'>{getMonthName(index + 1)}</h1>
+                        <h1 className='bg-teal-400 rounded-t-xl uppercase'>{getMonthName(index + 1)}</h1>
                         <p className='bg-slate-200'>{event?.title}</p>
                         <img className='rounded-b-xl' src={event?.image} />
                     </div>

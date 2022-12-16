@@ -34,10 +34,9 @@ function deleteEvent(token, eventId) {
         xhr.setRequestHeader('Content-Type', 'application/json')
 
         const payload = { eventId: eventId }
-
         const json = JSON.stringify(payload)
 
-        xhr.send(json)
+        xhr.send()
     })
     
 }

@@ -3,6 +3,7 @@ import { useEffect, useState, useContext } from 'react'
 import CreateEvent from '../components/CreateEvent'
 import UpdateEvent from '../components/UpdateEvent'
 import DeleteEvent from '../components/DeleteEvent'
+import Inscription from '../components/Inscription'
 import retrieveEventByMonthNumber from '../logic/retrieveEventByMonthNumber'
 import retrieveUser from '../logic/retrieveUser'
 import { errors } from 'com'
@@ -22,6 +23,7 @@ function EventMonth() {
     const [createEvent, setCreateEvent] = useState()
     const [updateEvent, setUpdateEvent] = useState()
     const [deleteEvent, setDeleteEvent] = useState()
+    const [inscription, setInscription] = useState()
 
     const { showAlert } = useContext(Context)
 
@@ -107,34 +109,39 @@ function EventMonth() {
         eventRetrieveMonth()
     }
 
+    const handlesignUp = () => {
+        setInscription('true')
+    }
+
+
     return <main className="h-full">
         <header className='h-1/6 top-0 flex justify-around items-center bg-teal-600	'>
-            <Link to="/"><img src={logo} className='w-20 h-20' /></Link>
-            <h1>12 MESES, 12 ACTIVIDADES</h1>
-            <h2>{monthName}</h2>
-            <button onClick={goEvents}>Go_Back</button>
+            <Link to="/"><img src={logo} className='w-20 h-20 cursor-pointer' /></Link>
+            <h2 className='uppercase'>{monthName}</h2>
+            <button onClick={goEvents} className='className="border border-2 border-black'>Go_Back</button>
         </header>
 
         {event ? <div>
             <div>
-                <h1>{event?.title}</h1>
+                <h1 >{event?.title}</h1>
                 <h3>{event?.body}</h3>
                 <h3>{event?.requirement}</h3>
                 <h3> Fecha: {event?.date}</h3>
                 <h3> Plazas: {event?.capacity}</h3>
-                <h3>Inscripciones: {event?.inscription}</h3>
+                {event?.inscription === 'close' && <div><h3>Inscrition: Close</h3></div>}
+                {event?.inscription === 'open' && <div>
+                    Inscripciones <butto onClick={handlesignUp} className="border border-2 border-black bg-slate-300 p-1 cursor-pointer m-1">Inscribirse</butto>
+                </div>}
+                -------------------------------------
                 <img src={event?.image} />
             </div>
-            {event?.inscription === 'open' && <div>
-                <butto>----INSCRIBIRSE---</butto>
-            </div>}
 
             {user?.role === 'admin' && <div>
-                <button onClick={handleDeleteEvent}>--BORRAR--</button>
-                <button onClick={handleUpdateEvent}>--EDITAR--</button>
+                <button onClick={handleDeleteEvent} className="border border-2 border-black  bg-slate-300 cursor-pointer m-1">BORRAR</button>
+                <button onClick={handleUpdateEvent} className="border border-2 border-black bg-slate-300 cursor-pointer m-1">EDITAR</button>
             </div>}
 
-        </div> : <div>{user?.role === 'admin' && <div><button onClick={handleCreateEvent}>crear</button></div>
+        </div> : <div>{user?.role === 'admin' && <div><button onClick={handleCreateEvent} className="border border-2 border-black bg-slate-300 cursor-pointer m-1">crear</button></div>
         }
 
         </div>}
@@ -144,8 +151,10 @@ function EventMonth() {
         {updateEvent && <UpdateEvent event={event} onDeleted={handleEventUpdated} onClose={() => setUpdateEvent()} />}
 
         {deleteEvent && <DeleteEvent event={event} onDeleted={handleEventDeleted} onClose={() => setDeleteEvent()} />}
+    
+        {inscription && <Inscription onClose={() => setInscription()}/>}
+    
     </main>
-
 }
 
 export default EventMonth

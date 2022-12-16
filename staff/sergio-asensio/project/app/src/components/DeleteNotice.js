@@ -26,14 +26,3 @@ export default function ({onDeleted, onClose, notice }) {
     </div>
 </div>
 }
-
-
-{/* <div className="bg-[#aaaa] fixed top-0 h-full w-full flex flex-col justify-center items-center overflow-hidden" onClick={onClose}>
-<div className="bg-[white]  dark:bg-black p-5 rounded-xl flex flex-col items-end gap-2" onClick={event => event.stopPropagation()}>
-    <p>Are you sure you want to delete this notice</p>
-    <div className="flex gap-2" >
-        <button onClick={onClose}>Cancel</button>
-        <button onClick={confirmDeleteNotice}>Delete</button>
-    </div>
-</div>
-</div> */}

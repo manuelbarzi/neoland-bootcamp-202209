@@ -34,10 +34,9 @@ function deleteNotice(token, noticeId) {
         xhr.setRequestHeader('Content-Type', 'application/json')
 
         const payload = { noticeId }
-
         const json = JSON.stringify(payload)
 
-        xhr.send(json)
+        xhr.send()
     })
     
 }
