@@ -109,9 +109,6 @@ export default function MyList() {
               <input
                 className="h-8 w-8"
                 type="checkbox"
-                // id="item"
-                // name="item"
-                // value=`${item.status}`
                 defaultChecked={item.status}
                 onClick={(event) => event.stopPropagation()}
                 onChange={() => handleChangeStatus(item.id, item.status) }
