@@ -41,7 +41,7 @@ function AppointmentForm({ onNewAppointment, appointment }) {
         }
 
         onNewAppointment(appointment)
-        //*Limpiamos forumlario
+        //*Limpiamos formulario
         setTitle('')
         setDate('')
         setBody('')

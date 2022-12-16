@@ -37,7 +37,7 @@ function Register() {
         }
     }
 
-    return <main className="h-full flex flex-col items-center justify-center gap-2 bg-green-100">
+    return <main className="h-full flex flex-col items-center justify-center gap-2 bg-slate-400">
         <div className='bg-white p-5 rounded-lg'>
             <form className="flex flex-col gap-2 mb-4" onSubmit={handleRegister}>
                 <label htmlFor="name" className="font-medium container__item--left">Nombre</label>
@@ -46,10 +46,10 @@ function Register() {
                 <input name="email" type="email" id="email" placeholder="input your e-mail" className="border-b border-black text-black" />
                 <label htmlFor="password" className="font-medium container__item--left">Contraseña</label>
                 <input name="password" type="password" id="password" placeholder="input your password" className="border-b border-black text-black" />
-                <button className="font-medium py-3 px-5 bg-green-600 text-white  hover:bg-gray-700 rounded-md">Regístrate</button>
+                <button className="text-center my-1 px-6 py-1 rounded-sm font-medium border-2 border-cyan-900 text-white hover:text-cyan-900 hover:bg-white bg-cyan-900 cursor-pointer">Regístrate</button>
             </form>
             <div className='tex-center  text-center gap-3 '>
-                <Link to="/login" className="font-medium p-3 rounded-md  text-white   bg-gray-700   hover:bg-green-600">Login</Link>
+                <Link to="/login" className="text-center my-1 px-6 py-1 rounded-sm font-medium border-2 border-cyan-900 hover:text-white text-cyan-900 bg-white hover:bg-cyan-900 cursor-pointer">Login</Link>
             </div>
 
         </div>

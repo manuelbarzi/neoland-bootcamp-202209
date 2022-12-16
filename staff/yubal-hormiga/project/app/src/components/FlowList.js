@@ -75,7 +75,7 @@ function FlowList({ flowsChange, onRefresh }) {
           </div>
 
           <div className='w-full'>
-            <p className='font-semibold text-lg flex flex-row'>Descripcion: <spam>{flow.description}</spam></p>
+            <p className='font-semibold text-lg flex flex-row'>Descripcion:<spam> {flow.description}</spam></p>
           </div>
 
           <div className='w-3/12 ' >

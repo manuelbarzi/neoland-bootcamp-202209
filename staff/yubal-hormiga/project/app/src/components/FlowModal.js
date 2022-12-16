@@ -79,7 +79,7 @@ function FlowModalIncome({ setModal, onNewFlow }) {
                     </div>
                 </div>
                 <div className='my-2 shadow-md mb-3'>
-                    <label htmlFor='description' className='text-center w-full font-semibold text-lg  placeholder-gray-500 ' >Descripción</label>
+                    <label htmlFor='description' className='text-center w-full font-semibold text-lg  placeholder-gray-500 '>Descripción</label>
                     {/* <textarea id='description' className='w-full text-center font-semibold text-lg  placeholder-gray-500 ' placeholder='Describe el gasto' value={description} onChange={handleChangeDescription} /> */}
                     <input id='description' className='text-center w-full font-semibold text-lg  placeholder-gray-500 ' type='text' placeholder='Describe el gasto' value={description} onChange={handleChangeDescription} />
                 </div>

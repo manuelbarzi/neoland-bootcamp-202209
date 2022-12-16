@@ -40,17 +40,17 @@ function Login() {
         }
     }
 
-    return <main className="h-full flex flex-col items-center justify-center gap-2 bg-green-100 ">
+    return <main className=" h-full flex flex-col items-center justify-center gap-2 bg-slate-400">
         <div className='bg-white p-5 rounded-lg'>
             <form className="flex flex-col gap-4 mb-4" onSubmit={handleLogin}>
                 <label htmlFor="email" className="font-medium container__item--left">E-mail</label>
                 <input name="email" type="email" id="email" placeholder="Introduce tu e-mail" className="border-b border-black text-black" />
                 <label htmlFor="password" className="font-medium container__item--left">Password</label>
                 <input name="password" type="password" id="password" placeholder="Introduce tu contraseña" className="border-b border-black text-black" />
-                <button className="font-medium py-3 px-5 bg-green-600 text-white  hover:bg-gray-700 rounded-md">Entrar</button>
+                <button className="text-center my-1 px-6 py-1 rounded-sm font-medium border-2 border-cyan-900 text-white hover:text-cyan-900 hover:bg-white bg-cyan-900 cursor-pointer">Entrar</button>
             </form>
             <div className=' tex-center  text-center gap-3'>
-                <Link to="/register" className="font-medium p-3 rounded-md  text-white   bg-gray-700   hover:bg-green-600">Regístrate</Link>
+                <Link to="/register" className="text-center my-1 px-6 py-1 rounded-sm font-medium border-2 border-cyan-900 hover:text-white text-cyan-900 bg-white hover:bg-cyan-900 cursor-pointer">Regístrate</Link>
             </div>
         </div>
     </main>
