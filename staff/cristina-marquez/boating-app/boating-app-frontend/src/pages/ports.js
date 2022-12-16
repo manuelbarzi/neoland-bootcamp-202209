@@ -1,6 +1,5 @@
 import PortsList from "../components/portslist";
 
-
 function PortsPage() {
 
     return (

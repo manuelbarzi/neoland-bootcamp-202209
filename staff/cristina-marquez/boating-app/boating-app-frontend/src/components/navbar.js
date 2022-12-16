@@ -2,7 +2,7 @@ import { useContext } from "react"
 import { Link } from "react-router-dom"
 import UserContext from "../UserContext"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser, faRightFromBracket, faGear } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faRightFromBracket, faGear, faSailboat, faWater } from '@fortawesome/free-solid-svg-icons'
 import appSessionManager from "../helpers/sessionManager"
 
 function Navbar() {
@@ -34,7 +34,7 @@ function Navbar() {
                 </button>
                 <div className="collapse navbar-collapse flex-grow items-center" id="navbarSupportedContent">
                     <Link to={'/ports'} className="nav-link" aria-current="page">
-                        <span className="text-xl">Boating App</span>
+                        <span className="text-xl"> <FontAwesomeIcon icon={faWater} /></span>
                     </Link>
 
                     <ul className="navbar-nav flex flex-col pl-0 list-style-none mr-auto">
@@ -48,7 +48,7 @@ function Navbar() {
                     <div className="flex justify-center">
                         <div>
                          <div className="dropdown relative">
-                                          <button className="dropdown-toggle px-6 py-3.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md
+                                          <button className="dropdown-toggle px-6 py-3.5 bg-blue-600 text-white font-medium text-xl leading-tight uppercase rounded shadow-md
                                                   hover:bg-blue-700 hover:shadow-lg
                                                     focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0
                                                     active:bg-blue-800 active:shadow-lg active:text-white transition duration-150 ease-in-out flex
