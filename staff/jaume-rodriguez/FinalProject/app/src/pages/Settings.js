@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react'
-import retrieveUser from '../logic/retrieveUser'
+import { useState } from 'react'
 import buttonBack from '../img/icon-back.png';
 import buttonSetName from '../img/button-setName.png';
 import buttonSetEmail from '../img/button-setEmail.png';
@@ -16,12 +15,10 @@ import { useContext } from 'react'
 import SetName from '../components/SetName'
 import SetEmail from '../components/SetEmail'
 import SetPassword from '../components/SetPassword'
-//import DailyQuest from '../components/DailyQuest'
 
 function Settings() {
     const { logout } = useContext(Context)
 
-    const [user, setUser] = useState(null)
     const [changeNameVisible, setChangeNameVisible] = useState(false)
     const [changeEmailVisible, setChangeEmailVisible] = useState(false)
     const [changePasswordVisible, setChangePasswordVisible] = useState(false)
@@ -29,17 +26,6 @@ function Settings() {
     const [hoverButtonSetEmail, setHoverButtonSetEmail] = useState(false)
     const [hoverButtonSetPassword, setHoverButtonSetPassword] = useState(false)
     const [hoverButtonLogout, setHoverButtonLogout] = useState(false)
-
-    useEffect(() => {
-        try {
-            retrieveUser(sessionStorage.token)
-                .then(user => {
-                    setUser(user)
-                })
-                .catch(error => alert(error.message))
-
-        } catch (error) { }
-    }, [])
 
     const openSetName = () => setChangeNameVisible(true)
     const closeSetName = () => setChangeNameVisible(false)
@@ -51,7 +37,7 @@ function Settings() {
     return (
         <div className="min-h-screen flex flex-col bg-[#191919]">
             <div className="relative flex flex-grow font-alata h-full flex-col  justify-center items-center bg-[url('/src/img/bg-settings.jpg')] bg-no-repeat bg-center">
-                <div className="flex flex-col justify-start w-96 h-[42rem] gap-1 px-6 py-6">
+                <div className="flex flex-col justify-center w-96 h-[42rem] gap-[9.3rem] px-6 py-6">
                     <header className='text-white flex flex-col mt-[0.5rem] '>
                         <Link to="/">
                             <img
@@ -66,68 +52,59 @@ function Settings() {
                         </Link>
                         <span className='text-[2rem] ml-[3rem] -mt-[1rem]'>Settings</span>
                     </header>
-                    <main className='z-10'>
-                        <section className='flex flex-col justify-center h-[34rem] ml-[4rem]'>
-                            <div className=''>
-                                <button
-                                    onMouseEnter={() => setHoverButtonSetName(true)}
-                                    onMouseLeave={() => setHoverButtonSetName(false)}
-                                    onClick={openSetName}>
-                                    <img
-                                        className='ml-[0.3rem] pt-1 cursor-pointer'
-                                        src={hoverButtonSetName ? buttonSetNameActive : buttonSetName}
-                                        alt="setName" />
-                                </button>
-                                <button
-                                    onMouseEnter={() => setHoverButtonSetEmail(true)}
-                                    onMouseLeave={() => setHoverButtonSetEmail(false)}
-                                    onClick={openSetEmail}>
-                                    <img
-                                        className=' ml-[0.3rem] cursor-pointer py-10'
-                                        src={hoverButtonSetEmail ? buttonSetEmailActive : buttonSetEmail}
-                                        alt="setEmail" />
-                                </button>
-                                <button
-                                    onMouseEnter={() => setHoverButtonSetPassword(true)}
-                                    onMouseLeave={() => setHoverButtonSetPassword(false)}
-                                    onClick={openSetPassword}>
-                                    <img
-                                        className='ml-[0.3rem] cursor-pointer'
-                                        src={hoverButtonSetPassword ? buttonSetPasswordActive : buttonSetPassword}
-                                        alt="setPassword" />
-                                </button>
-                            </div>
-                        </section>
-                        <section>
-                            <div className=''>
-                                <button
-                                    onMouseEnter={() => setHoverButtonLogout(true)}
-                                    onMouseLeave={() => setHoverButtonLogout(false)}>
-                                    <Link to="/login" onClick={logout}>
-                                        <img
-                                            className='-mt-[0rem] ml-[4.25rem] cursor-pointer'
-                                            src={hoverButtonLogout ? buttonLogoutActive : buttonLogout}
-                                            alt="logout" />
-                                    </Link>
-                                </button>
-                            </div>
-                        </section>
-                        <section>
-                            {changeNameVisible &&
-                                <SetName
-                                    onConfirm={closeSetName}
-                                    onClose={closeSetName} />}
-                            {changeEmailVisible &&
-                                <SetEmail
-                                    onConfirm={closeSetEmail}
-                                    onClose={closeSetEmail} />}
-                            {changePasswordVisible &&
-                                <SetPassword
-                                    onConfirm={closeSetPassword}
-                                    onClose={closeSetPassword} />}
-                        </section>
-                    </main>
-                    {/* <DailyQuest /> */}
+                    <section className='flex flex-col items-center gap-4'>
+                        <button
+                            onMouseEnter={() => setHoverButtonSetName(true)}
+                            onMouseLeave={() => setHoverButtonSetName(false)}
+                            onClick={openSetName}>
+                            <img
+                                className='cursor-pointer'
+                                src={hoverButtonSetName ? buttonSetNameActive : buttonSetName}
+                                alt="setName" />
+                        </button>
+                        <button
+                            onMouseEnter={() => setHoverButtonSetEmail(true)}
+                            onMouseLeave={() => setHoverButtonSetEmail(false)}
+                            onClick={openSetEmail}>
+                            <img
+                                className=' cursor-pointer'
+                                src={hoverButtonSetEmail ? buttonSetEmailActive : buttonSetEmail}
+                                alt="setEmail" />
+                        </button>
+                        <button
+                            onMouseEnter={() => setHoverButtonSetPassword(true)}
+                            onMouseLeave={() => setHoverButtonSetPassword(false)}
+                            onClick={openSetPassword}>
+                            <img
+                                className='cursor-pointer'
+                                src={hoverButtonSetPassword ? buttonSetPasswordActive : buttonSetPassword}
+                                alt="setPassword" />
+                        </button>
+                    </section>
+                    <section className='flex flex-col items-center '>
+                        <button
+                            onMouseEnter={() => setHoverButtonLogout(true)}
+                            onMouseLeave={() => setHoverButtonLogout(false)}>
+                            <Link to="/login" onClick={logout}>
+                                <img
+                                    className=' cursor-pointer'
+                                    src={hoverButtonLogout ? buttonLogoutActive : buttonLogout}
+                                    alt="logout" />
+                            </Link>
+                        </button>
+                    </section>
+                    {changeNameVisible &&
+                        <SetName
+                            onConfirm={closeSetName}
+                            onClose={closeSetName} />}
+                    {changeEmailVisible &&
+                        <SetEmail
+                            onConfirm={closeSetEmail}
+                            onClose={closeSetEmail} />}
+                    {changePasswordVisible &&
+                        <SetPassword
+                            onConfirm={closeSetPassword}
+                            onClose={closeSetPassword} />}
                 </div>
             </div>
         </div >

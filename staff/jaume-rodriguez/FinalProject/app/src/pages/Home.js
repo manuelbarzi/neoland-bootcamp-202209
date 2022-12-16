@@ -172,14 +172,16 @@ function Home() {
                                     className='z-10 absolute mt-[2.4rem] ml-[1rem]'
                                     src={iconAdventure}
                                     alt="iconAdventure" />
-                                <button
-                                    onMouseEnter={() => setHoverButtonAdventure(true)}
-                                    onMouseLeave={() => setHoverButtonAdventure(false)}>
-                                    <img
-                                        className='absolute z-10 ml-[9.5rem] mt-[2.8rem]'
-                                        src={hoverButtonAdventure ? buttonPlayActive : buttonPlay}
-                                        alt="play" />
-                                </button>
+                                <Link to="/adventures">
+                                    <button
+                                        onMouseEnter={() => setHoverButtonAdventure(true)}
+                                        onMouseLeave={() => setHoverButtonAdventure(false)}>
+                                        <img
+                                            className='absolute z-10 ml-[9.5rem] mt-[2.8rem]'
+                                            src={hoverButtonAdventure ? buttonPlayActive : buttonPlay}
+                                            alt="play" />
+                                    </button>
+                                </Link>
                             </div>
 
                         </section>
