@@ -19,18 +19,18 @@ module.exports = function(userId, listId) {
     .then((user) => {
       if (!user) throw new Error(`list with id ${userId} does not exist`);
 
-      return List.findOne({ user: ObjectId(userId) }).lean();
+      return List.findOne({ user: userId }).lean();
     })
     .then((list) => {
       if (!list) throw new Error(`list with id ${listId} does not exist`);
 
-      return Item.find({ list: ObjectId(listId) }).lean();
+      return Item.find({ list: listId }).lean();
     })
     .then((items) => {
       items.forEach((item) => {
         item.id = item._id.toString();
         delete item._id;
-        delete item.id;
+        delete item.list;
         delete item.__v;
       });
 
