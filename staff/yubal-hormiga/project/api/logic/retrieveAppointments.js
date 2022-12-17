@@ -15,7 +15,7 @@ module.exports = function (userId) {
             if (!user)
                 throw new NotFoundError(`user with id ${userId} does not exist`)
 
-            return Appointment.find({ user: userId }).sort({date: 1}).lean() //? no recoge sort({ date: -1 }).toArray()
+            return Appointment.find({ user: userId }).sort({ date: 1 }).lean() //? no recoge sort({ date: -1 }).toArray()
         })
         .then(appointments => {
             appointments.forEach(appointment => {

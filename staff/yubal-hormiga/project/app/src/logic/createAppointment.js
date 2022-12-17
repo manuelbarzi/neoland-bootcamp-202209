@@ -1,7 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
 /**
  * Creates a appointmet against API
- * 
  * @param {string} token The user token
  * @param {string} tittle The appointment text
  * @param {string} body The appointment text
@@ -82,8 +81,6 @@ export default function (token, title, body, date, callback) {
 
 /**
  * Attends the result of the appointment creation
- * 
  * @callback callback
- * 
  * @param {Error} error The authentication error
  */

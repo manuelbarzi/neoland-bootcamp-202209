@@ -2,7 +2,6 @@
 /* eslint-disable import/no-anonymous-default-export */
 /**
  * Creates a post against API
- * 
  * @param {string} token The user token
  * @param {string} text The post text
  * @param {string} visibility The post visibility
@@ -89,8 +88,6 @@ export default function (token, type, kind, description, amount, date, callback)
 
 /**
  * Attends the result of the post creation
- * 
  * @callback callback
- * 
  * @param {Error} error The authentication error
  */

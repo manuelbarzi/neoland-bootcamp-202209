@@ -58,19 +58,19 @@ function FlowModalIncome({ setModal, onNewFlow }) {
                 <div className='flex gap-4 justify-between'>
                     <div className='flex shadow-md mb-3 p-1'>
                         <legend className='font-semibold text-lg'>Apunte</legend>
-                        <div className='shadow-md '>
-                            <label htmlFor='type' className='w-20 font-semibold text-lg'></label>
+                        <div className=' '>
+                            <label htmlFor='type' className='w-20 font-semibold text-lg mr-2'></label>
                             <select id='type' value={type} onChange={handleChangeType} >
-                                <option value=''>--Seleccionar--</option>
+                                <option value=''>Selecciona</option>
                                 <option value='income'>Ingreso</option>
                                 <option value='expense'>Gasto</option>
                             </select>
                         </div>
                     </div>
                     <div className='shadow-md mb-3 p-1'>
-                        <label htmlFor='kind' className=' w-20 font-semibold text-lg' >Categoria</label>
+                        <label htmlFor='kind' className=' w-20 font-semibold text-lg mr-2' >Categoria</label>
                         <select id='kind' value={kind} onChange={handleChangeKind} >
-                            <option value=''>--Seleccionar--</option>
+                            <option value=''>Selecciona</option>
                             <option value='food'>Comida</option>
                             <option value='supply'>Suministros</option>
                             <option value='medicine'>Medicamentos</option>
@@ -98,7 +98,7 @@ function FlowModalIncome({ setModal, onNewFlow }) {
                         <input type="date" className='w-full font-semibold text-lg text-center' value={date} onChange={handleChangeDate} />
                     </div>
                 </div>
-                <input type='submit' className='text-center my-1 px-6 py-1 rounded-sm font-medium border-2 border-cyan-900 text-white hover:text-cyan-900 hover:bg-white bg-cyan-900 cursor-pointer' value='Añadir Gasto' />
+                <input type='submit' className='text-center my-1 px-6 py-1 rounded-sm font-medium border-2 border-cyan-900 text-white hover:text-cyan-900 hover:bg-white bg-cyan-900 cursor-pointer' value='Añadir Apunte' />
 
             </form>
         </div>

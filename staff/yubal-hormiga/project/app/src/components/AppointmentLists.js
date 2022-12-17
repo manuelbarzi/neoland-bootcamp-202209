@@ -46,13 +46,13 @@ function AppointmentLists({ appointmentsChange }) {
   const handleAppointmentDeleted = () => {
     try {
       retrieveAppointments(sessionStorage.token)
-      .then(appointments => {
-        setAppointmentIdToDelete()
-        setAppointments(appointments)
-      })
-      .catch((error) => {
-        alert(error.message)
-      })
+        .then(appointments => {
+          setAppointmentIdToDelete()
+          setAppointments(appointments)
+        })
+        .catch((error) => {
+          alert(error.message)
+        })
     } catch (error) {
       alert(error.message)
     }
@@ -61,7 +61,7 @@ function AppointmentLists({ appointmentsChange }) {
   return <>
     {appointments.map((appointment) => {
       return (
-        <div key={appointment.id} className='hover:bg-purple-300 hover:shadow-white hover:border-2 hover:border-fuchsia-900  shadow-sky-800 p-1 rounded-sm shadow-md flex justify-between gap-5 pb-1 mb-2'>
+        <div key={appointment.id} className='hover:bg-[#8ecae6]  hover:shadow-white  shadow-[#8ecae6] p-1 rounded-sm shadow-md flex justify-between gap-5 pb-1 mb-2'>
 
           <div className=''>
             <p className='font-semibold text-lg flex flex-row'>Cita: {appointment.title}</p>

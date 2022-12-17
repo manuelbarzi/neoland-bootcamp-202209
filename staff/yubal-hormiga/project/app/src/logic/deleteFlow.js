@@ -1,7 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
 /**
  * Deletes a post against API
- * 
  * @param {string} token The user token
  * @param {string} appointmet Id The post id
  * @param {callback} callback The callback to attend the result
@@ -66,8 +65,6 @@ export default function (token, flowId, callback) {
 
 /**
  * Attends the result of the post deletion
- * 
  * @callback callback
- * 
  * @param {Error} error The authentication error
  */

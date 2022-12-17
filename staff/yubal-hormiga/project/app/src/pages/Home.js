@@ -37,13 +37,13 @@ function Home() {
 
     return <main className=' '>
         {user && <Header userName={user.name} />}
-        <div className=' grid  grid-rows-3 grid-cols-2 gap-2  text-center mx-2'>
-            <section className='h-96 overflow-y-scroll border-2 border-sky-900 row-start-1 row-end-4 col-start-1 col-end-2  w-full p-2 rounded-sm bg-white '>
+        <div className=' grid grid-rows-2 grid-cols-2 gap-2  text-center mx-2'>
+            <section className='h-[32rem] overflow-y-auto  row-start-1 row-end-4 col-start-1 col-end-2  w-full p-2 rounded-sm bg-white '>
                 <div>
                     <Flow />
                 </div>
             </section>
-            <section className='h-96 overflow-y-scroll border-2 border-sky-900  row-start-1 row-end-3 col-start-2 col-end-3  w-full rounded-sm bg-white p-2'>
+            <section className='h-[32rem] overflow-y-auto row-start-1 row-end-3 col-start-2 col-end-3  w-full rounded-sm bg-white p-2'>
                 <div>
                     <Appointment />
                 </div>

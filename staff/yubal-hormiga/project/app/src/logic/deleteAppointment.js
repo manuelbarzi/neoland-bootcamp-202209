@@ -65,8 +65,6 @@ export default function (token, appointmentId, callback) {
 
 /**
  * Attends the result of the post deletion
- * 
  * @callback callback
- * 
  * @param {Error} error The authentication error
  */

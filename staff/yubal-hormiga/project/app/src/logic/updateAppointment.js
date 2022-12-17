@@ -51,8 +51,6 @@ export default function (token, appointmentId, title, body, date, callback) {
 
 /**
  * Attends the result of the post updation
- * 
  * @callback callback
- * 
  * @param {Error} error The authentication error
  */

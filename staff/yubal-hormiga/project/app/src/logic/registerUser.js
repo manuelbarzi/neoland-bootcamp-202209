@@ -6,7 +6,6 @@ const { FormatError, LengthError, ConflictError, UnexpectedError } = errors
 
 /**
  * Registers a user
- *
  * @param {string} name The user name 
  * @param {string} email The user email
  * @param {string} password The user password

@@ -22,8 +22,8 @@ export default function ({ flowId, onDeleted, onClose }) {
         <div className="bg-cyan-700 text-white font-bold p-5 rounded-sm flex flex-col items-end gap-2 " onClick={event => event.stopPropagation()}>
             <p>Segur@ que quieres eliminar el apunte?</p>
             <div className="flex gap-2" >
-                 <Button className='border-white bg-sky-900 hover:bg-sky-700 '  onClick={onClose}>Cancel</Button>
-                <Button className='border-white bg-sky-900 hover:bg-sky-700 'onClick={confirmDeleteFlow}>Delete</Button>
+                <Button className='border-white bg-sky-900 hover:bg-sky-700 ' onClick={onClose}>Cancel</Button>
+                <Button className='border-white bg-sky-900 hover:bg-sky-700 ' onClick={confirmDeleteFlow}>Delete</Button>
             </div>
         </div>
     </div>

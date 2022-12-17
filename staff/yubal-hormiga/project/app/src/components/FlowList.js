@@ -67,25 +67,25 @@ function FlowList({ flowsChange, onRefresh }) {
       const kind = getLiteralForKind(flow.kind)//? PARA PODER CAMBIAR LOS VALUES
 
       return (
-        <div key={flow.id} className='hover:bg-purple-200 hover:shadow-white hover:border-2 hover:border-fuchsia-900  shadow-sky-600 p-1 rounded-sm shadow-md flex justify-between gap-5 pb-1 mb-2'>
+        <div key={flow.id} className='hover:bg-[#8ecae6] hover:shadow-white  shadow-[#8ecae6] p-2 rounded-sm shadow-md flex justify-between gap-5 pb-1 mb-2'>
 
-          <div className='w-1/12 ' >
+          <div className=' ' >
             <p className=' font-semibold text-lg text-left'>{type}</p>
           </div>
 
-          <div className='w-2/12 text-right'>
+          <div className=' text-right'>
             <p className=' font-semibold text-lg text-left'>{kind}</p>
           </div>
 
-          <div className='w-full'>
+          <div className='full'>
             <p className='font-semibold text-lg flex flex-row'>Descripcion: {flow.description}</p>
           </div>
 
-          <div className='w-3/12 ' >
+          <div className='' >
             <p className='font-semibold text-lg flex flex-row'>{flow.amount}€</p>
           </div>
 
-          <div className='w-5/12'>
+          <div className=''>
             <p className=' font-semibold text-lg '>{flow.date.toLocaleDateString()}</p>
           </div>
 

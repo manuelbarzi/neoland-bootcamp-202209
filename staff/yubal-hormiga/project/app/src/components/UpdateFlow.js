@@ -27,18 +27,18 @@ export default function UpdateFlow({ onUpdated, onClose, flow }) {
     }
 
     return <div className='bg-[#aaaa] absolute  top-0 right-0 h-full w-full flex flex-col justify-center items-center overflow-hidden' onClick={onClose}>
-        <div className='p-3 rounded-xl flex flex-col items-end bg-white dark:bg-black text-black dark:text-white' onClick={event => event.stopPropagation()}>
+        <div className='p-6 rounded-xl flex flex-col items-end bg-white dark:bg-black text-black dark:text-white' onClick={event => event.stopPropagation()}>
             <GrFormClose size='1.5rem' onClick={onClose} className='mb-1 cursor-pointer' />
 
-            <form className='flex flex-col gap-2' onSubmit={submitUpdateFlow}>
-                <label htmlFor='type' className='w-full  font-semibold text-lg bg-slate-100'>Selecciona Apunte</label>
-                <select id='type' defaultValue={flow.type} className='font-semibold text-lg flex flex-row'>
+            <form className='flex flex-col gap-4' onSubmit={submitUpdateFlow}>
+                <label htmlFor='type' className='flex justify-start font-semibold text-xl'>Modifique Apunte:</label>
+                <select id='type' defaultValue={flow.type} className='font-semibold hover:opacity-100 rounded-sm text-lg flex flex-row bg-blue-100 opacity-40'>
                     <option value=''>--Seleccionar--</option>
                     <option value='income'>Ingreso</option>
                     <option value='expense'>Gasto</option>
                 </select>
-                <label htmlFor='kind' className=' w-full font-semibold text-lg bg-slate-100' >Selecciona Categoria</label>
-                <select id='kind' defaultValue={flow.kind} className='font-semibold text-lg flex flex-row' >
+                <label htmlFor='kind' className='flex justify-start font-semibold text-xl' >Modifique Categoria:</label>
+                <select id='kind' defaultValue={flow.kind} className='font-semibold hover:opacity-100 rounded-sm text-lg flex flex-row bg-blue-100 opacity-40' >
                     <option value=''>--Seleccionar--</option>
                     <option value='food'>Comida</option>
                     <option value='supply'>Suministros</option>
@@ -49,41 +49,22 @@ export default function UpdateFlow({ onUpdated, onClose, flow }) {
                     <option value='other'>Otros</option>
                 </select>
 
-                {/* <div className=''>
-                    <label htmlFor='type'></label>
-                    <input
-                        name='type'
-                        className='font-semibold text-lg flex flex-row'
-                        defaultValue={flow.type}
-                        id='type'
-                    />
-                </div> */}
-                {/* 
                 <div className=''>
-                    <label htmlFor='kind'></label>
-                    <input
-                        name='kind'
-                        className='font-semibold text-lg flex flex-row'
-                        defaultValue={flow.kind}
-                        id='kind'
-                    />
-                </div> */}
-
-                <div className=''>
-                    <label htmlFor='description' className='w-full font-semibold text-lg bg-slate-100'>Descripción</label>
+                    <label htmlFor='description' className='flex justify-start font-semibold text-xl'>Modifique Descripción:</label>
                     <input
                         name='description'
-                        className='w-full text-lg  border-2 border-sky-200'
+                        className='font-semibold hover:opacity-100 rounded-sm text-lg flex flex-row bg-blue-100 opacity-40'
                         defaultValue={flow.description}
                         id='description'
                     />
                 </div>
 
                 <div className='' >
-                <label htmlFor='description' className='w-full  font-semibold text-lg bg-slate-100'>Cantidad</label>
+                    <label htmlFor='description' className='flex justify-start font-semibold text-xl'>Modifique Cantidad:</label>
                     <input
                         name='amount'
-                        className='w-full text-lg  border-2 border-sky-200'
+                        type='number'
+                        className='font-semibold hover:opacity-100 rounded-sm text-lg flex flex-row bg-blue-100 opacity-40 text-center '
                         defaultValue={flow.amount}
                         id='amount'
                     />
@@ -93,7 +74,7 @@ export default function UpdateFlow({ onUpdated, onClose, flow }) {
                     <input
                         name='date'
                         type='datetime-local'
-                        className='w-full text-lg  border-2 border-sky-200'
+                        className=' font-semibold hover:opacity-100 rounded-sm text-lg flex flex-row bg-blue-100 opacity-40 text-center '
                         defaultValue={flow.date.toISOString().substring(0, 23)}
                         id='date'
                     />
@@ -110,5 +91,4 @@ export default function UpdateFlow({ onUpdated, onClose, flow }) {
     </div>
 }
 
-// post && post.text -> post?.text
 // type, kind, description, amount, date

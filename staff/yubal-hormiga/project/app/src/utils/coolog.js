@@ -17,7 +17,7 @@ function log(level, message) {
     console.log('%c' + level + ': ' + message, style)
 }
 
-log.on = true
+log.on = false
 log.level = 'DEBUG'
 
 log.debug = function (message) {

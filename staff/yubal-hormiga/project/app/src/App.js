@@ -17,7 +17,7 @@ function App() {
 
   const login = token => {
     sessionStorage.token = token
-     
+
     setLoggedIn(true)
 
     navigate('/')
@@ -47,7 +47,7 @@ function App() {
         <Route path="*" element={<Navigate replace to="/login" />} />
       </Routes>}
 
-      {message && <Alert message={message} level={level} onClose={closeAlert} />}
+    {message && <Alert message={message} level={level} onClose={closeAlert} />}
   </Context.Provider>
 }
 

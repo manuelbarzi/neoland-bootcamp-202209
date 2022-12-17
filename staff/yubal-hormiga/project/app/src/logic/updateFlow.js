@@ -1,7 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
 /**
  * Updates a post against API
- * 
  * @param {string} token The user token
  * @param {string} flow The post id
  * @param {string} tittle The appointment text
@@ -55,8 +54,6 @@ export default function (token, flowId, type, kind, description, amount, date, c
 
 /**
  * Attends the result of the post updation
- * 
  * @callback callback
- * 
  * @param {Error} error The authentication error
  */

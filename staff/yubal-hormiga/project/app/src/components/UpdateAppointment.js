@@ -2,7 +2,6 @@
 import log from '../utils/coolog'
 import updateAppointment from '../logic/updateAppointment'
 import { GrFormClose } from 'react-icons/gr'
-import { useEffect, useState } from 'react'
 
 export default function UpdateAppointment({ onUpdated, onClose, appointment }) {
     log.info('UpdateAppoiment -> render')
@@ -28,25 +27,25 @@ export default function UpdateAppointment({ onUpdated, onClose, appointment }) {
     }
 
     return <div className='bg-[#aaaa] absolute  top-0 right-0 h-full w-full flex flex-col justify-center items-center overflow-hidden' onClick={onClose}>
-        <div className='p-3 rounded-sm flex flex-col items-end bg-white dark:bg-black text-black dark:text-white border-2 border-sky-900' onClick={event => event.stopPropagation()}>
+        <div className='p-3 rounded-lg flex flex-col items-end bg-white dark:bg-black text-black dark:text-white ' onClick={event => event.stopPropagation()}>
             <GrFormClose size='1.5rem' onClick={onClose} className='cursor-pointer' />
 
-            <form className='flex flex-col gap-2  ' onSubmit={submitUpdateAppointment}>
-                <div className=''>
-                    <label htmlFor='title' className='font-semibold text-xl'>Cita</label>
+            <form className='flex flex-col gap-8' onSubmit={submitUpdateAppointment}>
+                <div className='flexflex-col  gap-3'>
+                    <label htmlFor='title' className='flex justify-start font-semibold text-xl'>Cita:</label>
                     <input
                         name='title'
-                        className='font-semibold text-lg flex flex-row border-2 border-sky-200 text-center '
+                        className='font-semibold hover:opacity-100 rounded-sm text-lg flex flex-row bg-blue-100 opacity-40'
                         defaultValue={appointment.title}
                         id='title'
                     />
                 </div>
 
-                <div className='' >
-                <label htmlFor='body' className='font-semibold text-xl'>Texto</label>
+                <div className='flex flex-col  gap-3' >
+                    <label htmlFor='body' className='flex justify-start font-semibold text-xl'>Texto:</label>
                     <input
                         name='body'
-                        className='font-semibold text-lg flex flex-row border-2 border-sky-200 text-center '
+                        className='font-semibold hover:opacity-100 rounded-sm text-lg flex flex-row bg-blue-100 opacity-40'
                         defaultValue={appointment.body}
                         id='body'
                     />
@@ -56,10 +55,10 @@ export default function UpdateAppointment({ onUpdated, onClose, appointment }) {
                     <input
                         name='date'
                         type='datetime-local'
-                        className='font-semibold text-lg flex flex-row border-2 border-sky-200 text-center '
+                        className='font-semibold hover:opacity-100 rounded-sm text-lg flex flex-row bg-blue-100 opacity-40 text-center'
                         defaultValue={appointment.date.toISOString().substring(0, 23)}
                         id='date'
-                        />
+                    />
                 </div>
 
                 <button

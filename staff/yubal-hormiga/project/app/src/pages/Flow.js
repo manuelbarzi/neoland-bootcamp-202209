@@ -46,8 +46,9 @@ function Flow() {
       {isValidPension && (
         <>
           <main>
-            <div className='my-1'>
+            <div className='my-1 hover:shadow-white  shadow-[#219ebc] p-1 rounded-sm shadow-md'>
               <button className='text-center my-1 px-6 py-1 rounded-sm font-medium border-2 border-cyan-900 hover:text-white text-cyan-900 hover:bg-cyan-900 cursor-pointer r' type='button' onClick={handleNewExpense}>Agregar un nuevo apunte</button>
+              
             </div>
           </main>
         </>

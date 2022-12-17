@@ -10,23 +10,24 @@ function Flow({ totalFlows, isValidPension, setIsValidPension }) {
         <header>
             {isValidPension ?
                 <>
-                    <div className="flex justify-around" >
+                    <div className="flex justify-between" >
                         {/* <p className='  font-semibold text-lg'>
                             <span>Presupuesto:</span>{totalFlows.income}€
                         </p> */}
-                        <p className='  font-semibold text-lg'>
-                            <span>Ingresado:</span> {totalFlows.income}€
+                        <p className='  font-semibold text-lg '>
+                            <span className='text-[#023047]' >Ingresado:</span> <spam className='text-[#fb8500]'>{totalFlows.income}€</spam>
                         </p>
-                        <p className='  font-semibold text-lg'>
-                            <span>Gastado:</span> {totalFlows.spent}€
+                        <p className='  font-semibold text-lg text-[#023047]'>
+                            <span className='text-[#023047]' >Gastado:</span> <spam className='text-[#fb8500]'>{totalFlows.spent}€</spam>
                         </p>
-                        <p className='  font-semibold text-lg'>
-                            <span>Disponible:</span> {totalFlows.income - totalFlows.spent}€
+                        <p className='  font-semibold text-lg text-[#023047]'>
+                            <span className='text-[#023047]' >Disponible:</span> <spam className='text-[#fb8500]'>{totalFlows.income - totalFlows.spent}€</spam>
+
                         </p>
                     </div>
                     <div className="flex justify-center  ">
                         <label htmlFor="file"></label>
-                        <progress className="w-full h-4 appearance-none " id="file" max={totalFlows.income} value={(totalFlows.income - totalFlows.spent)}></progress>
+                        <progress className="w-full h-4  " id="file" max={totalFlows.income} value={(totalFlows.income - totalFlows.spent)}></progress>
                     </div>
                 </>
                 :

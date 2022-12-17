@@ -49,17 +49,15 @@ function AppointmentForm({ onNewAppointment, appointment }) {
     }
 
     return <>
-        <form className=' rounded-sm shadow-md shadow-sky-800 p-2 mb-4 ' onSubmit={submitCreateAppointment}>
+        <form className=' rounded-sm shadow-md shadow-[#219ebc] p-2 mb-4 ' onSubmit={submitCreateAppointment}>
             <div className='flex justify-evenly gap-2'>
                 <div className='flex shadow-md mb-3 '>
                     <label htmlFor='appointment' className=' w-20 font-semibold text-lg flex justify-start'>Cita</label>
-                    <input id='appointment' className='text-center w-full font-semibold text-lg  placeholder-gray-500 ' type='text' placeholder='Nombre de  Cita' value={title} onChange={handleChangeName} />  {/*  value ->Para recoger nombre de la Cita Onchange como hicimos con el edit de post- para recoger los cambios */}
-
+                    <input id='appointment' className='w-full font-semibold text-lg  placeholder-gray-500 ' type='text' placeholder='Nombre de  Cita' value={title} onChange={handleChangeName} />  {/*  value ->Para recoger nombre de la Cita Onchange como hicimos con el edit de post- para recoger los cambios */}
                 </div>
                 <div className='flex shadow-md mb-3'>
                     <label htmlFor='date' className='flex justify-start w-20 font-semibold text-lg'>Fecha</label>
                     <input type="datetime-local" className=' font-semibold text-lg text-center' value={date} onChange={handleChangeDate} />
-
                 </div>
             </div>
             <div className='shadow-md mb-3'>

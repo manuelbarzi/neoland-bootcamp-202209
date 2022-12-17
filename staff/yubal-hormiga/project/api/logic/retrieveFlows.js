@@ -1,6 +1,5 @@
 const { errors: { FormatError, NotFoundError } } = require('../../my-commons')
 const { User, Flow } = require('../models')
-const { user } = require('../models/schemas')
 
 /**
  * Retrieves a flow from user
