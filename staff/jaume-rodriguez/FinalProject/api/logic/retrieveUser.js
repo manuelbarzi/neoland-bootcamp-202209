@@ -14,18 +14,9 @@ function retrieveUser(userId) {
             if (!user)
                 throw new NotFoundError(`user with id ${userId} does not exist`)
 
-            if (user.exp >= 100) {
-                user.level = 2
-            }
-            if (user.exp >= 500) {
-                user.level = 3
-            }
-            if (user.exp >= 1500) {
-                user.level = 4
-            }
-            if (user.exp >= 3000) {
-                user.level = 5
-            }
+            user.level = Math.floor(user.exp / 1000);
+            user.remainingExp = user.exp % 1000
+
             // sanitize
             user.id = user._id.toString()
 

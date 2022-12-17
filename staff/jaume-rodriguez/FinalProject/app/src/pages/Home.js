@@ -1,20 +1,16 @@
 import { useState, useEffect } from 'react'
 import retrieveUser from '../logic/retrieveUser'
-import userStats from '../img/user-stats-h.png';
-import resource from '../img/resource-h.png';
-import buttonSettings from '../img/button-settings.png';
-import fondo1Menu from '../img/fondo1-menu.png';
-import fondo2Menu from '../img/fondo2-menu.png';
-import iconRanking from '../img/icon-ranking.png';
-import iconCalendar from '../img/icon-calendar.png';
-import iconChest from '../img/icon-chest.png';
+import iconGold from '../img/icon-gold.png';
+import iconExp from '../img/icon-exp.png';
+import iconEdit from '../img/icon-edit.png';
+import iconEditActive from '../img/icon-edit-active.png';
 import iconCommunity from '../img/icon-community.png';
-import fondoQuest from '../img/fondo-quest.png';
-import questLog from '../img/quest-log.png';
+import iconCommunityActive from '../img/icon-community-active.png';
 import iconQuest from '../img/icon-quest.png';
+import iconQuestActive from '../img/icon-quest-active.png';
 import iconAdventure from '../img/icon-adventure.png';
-import buttonPlay from '../img/button-play.png';
-import buttonPlayActive from '../img/button-play-active.png';
+import AdventureActive from '../img/icon-adventure-active.png';
+import iconFreeReward from '../img/icon-free-reward.png';
 import { Link } from 'react-router-dom'
 import DailyQuest from '../components/DailyQuest'
 import GAME_CONSTANTS from '../shared/constants';
@@ -23,11 +19,13 @@ import { format } from 'timeago.js'
 function Home() {
     const [user, setUser] = useState(null)
     const [hoverButtonAdventure, setHoverButtonAdventure] = useState(false)
+    const [hoverButtonEdit, sethoverButtonEdit] = useState(false)
+    const [hoverButtonCommunity, sethoverButtonCommunity] = useState(false)
+    const [hoverButtonQuest, setHoverButtonQuest] = useState(false)
     const [dailyQuestVisible, setDailyQuestVisible] = useState(false)
 
     useEffect(() => {
         try {
-            console.log("retrieveUser");
             retrieveUser(sessionStorage.token)
                 .then(user => setUser(user))
                 .catch(error => alert(error.message))
@@ -64,73 +62,74 @@ function Home() {
     return (
         <div className="min-h-screen flex flex-col bg-[#191919]">
             <div className="relative flex flex-grow font-alata h-full flex-col  justify-center items-center bg-[url('/src/img/bg-home.jpg')] bg-no-repeat bg-center">
-                <div className="flex flex-col justify-start w-96 h-[42rem] gap-1 px-6 py-6 flex-wrap">
-
-                    <header className='text-white z-0'>
-                        <div className='z-10 absolute ml-[4.3rem]'>
-                            {user?.name}
-                        </div>
-                        <div className='z-10 absolute mt-[1.25rem] ml-[0.95rem] text-sm text-center w-[2rem]'>
+                <div className="flex flex-col justify-center w-96 h-[42rem] gap-[21.5rem] px-6 py-6">
+                    <header className='flex flex-col items-center text-white'>
+                        <span className=' text-lg text-center -ml-[0.2rem] mt-[1.6rem] mb-[1rem]'>
                             {user?.level}
-                        </div>
-                        <div className='z-10 absolute mt-[2.18rem] ml-[7rem] text-[0.6rem] text-center'>
-                            {user?.exp} / 1000
-                        </div>
-                        <button className='z-10 absolute ml-[19rem]'>
+                        </span>
+                        <div className='flex flex-row justify-center w-96 -ml-3'>
+                            <Link to="">
+                                <img
+                                    onMouseEnter={() => sethoverButtonCommunity(true)}
+                                    onMouseLeave={() => sethoverButtonCommunity(false)}
+                                    className='mr-[1.7rem] mt-[0.71rem]'
+                                    src={hoverButtonCommunity ? iconCommunityActive : iconCommunity}
+                                    alt="community" />
+                            </Link>
+                            <pan className="text-[1.5rem]">{user?.name}</pan>
                             <Link to="/settings">
                                 <img
-                                    className='hover:rotate-45 duration-200'
-                                    src={buttonSettings}
-                                    Settings
+                                    onMouseEnter={() => sethoverButtonEdit(true)}
+                                    onMouseLeave={() => sethoverButtonEdit(false)}
+                                    className='ml-6 mt-[0.71rem]'
+                                    src={hoverButtonEdit ? iconEditActive : iconEdit}
                                     alt="settings" />
                             </Link>
-                        </button>
-                        <img
-                            className=''
-                            src={userStats}
-                            alt="user" />
-                        <div className='z-10 absolute ml-[7.5rem] mt-2 text-sm'>
-                            {user?.gold}
                         </div>
-                        <button className='material-symbols-outlined self-end z-10 absolute ml-[10rem] mt-1.5 text-gray-500 hover:text-green-300 duration-200'>add</button>
-                        <img
-                            className='ml-9'
-                            src={resource}
-                            alt="resource" />
+                        <div className='flex flex-row justify-center mt-[2rem] gap-x-[1rem]'>
+                            <img
+                                className=''
+                                src={iconExp}
+                                alt="resource" />
+                            <span className='absolute text-right w-[6rem] -ml-[9.5rem] mt-[0.5rem] text-[0.85rem]'>{user?.exp} / 1000</span>
+                            <img
+                                className=''
+                                src={iconGold}
+                                alt="resource" />
+                            <span className='absolute text-right w-[5.5rem] ml-[11.6rem] mt-[0.5rem] text-[0.85rem]'>{user?.gold}</span>
+                        </div>
                     </header>
-                    <main>
-                        <section>
-                            <div className='mt-9'>
+                    <section className='flex flex-row justify-center w-96 absolute mt-[19rem] -ml-[1.6rem] '>
+                        <img
+                            className='hover:-mt-[1rem] duration-100'
+                            src={iconFreeReward}
+                            alt="freeReward "
+                        />
+                    </section>
+                    <main className='mt-[2rem]'>
+                        <section className='flex flex-row justify-center gap-x-[4.5rem]'>
+                            <Link to="/adventures">
                                 <img
-                                    className='mt-[0.2rem]  ml-[0.82rem] absolute z-10 cursor-pointer hover:mt-[0rem] duration-100'
-                                    src={iconRanking}
-                                    alt="iconRanking" />
-                                <img
-                                    className='mt-[0.62rem]  ml-[6.7rem] absolute z-10 cursor-pointer hover:mt-[0.42rem] duration-100'
-                                    src={iconCalendar}
-                                    alt="iconCalendar" />
-                                <img
-                                    className='mt-[0.49rem] ml-[12.20rem] absolute z-10 cursor-pointer hover:mt-[0.29rem] duration-100'
-                                    src={iconChest}
-                                    alt="iconChest" />
-                                <img
-                                    className='mt-[6rem] ml-[0.9rem] absolute z-10 cursor-pointer hover:mt-[5.80rem] duration-100'
-                                    src={iconCommunity}
-                                    alt="iconCommunity" />
-                                <img
+                                    onMouseEnter={() => setHoverButtonAdventure(true)}
+                                    onMouseLeave={() => setHoverButtonAdventure(false)}
                                     className=''
-                                    src={fondo1Menu}
-                                    alt="fondo1Menu" />
-                            </div>
-                            <div className=''>
-                                <img
-                                    className='mt-3'
-                                    src={fondo2Menu}
-                                    alt="fondo2Menu" />
-                            </div>
+                                    src={hoverButtonAdventure ? AdventureActive : iconAdventure}
+                                    alt="play" />
+                            </Link>
+                            <img
+                                onMouseEnter={() => setHoverButtonQuest(true)}
+                                onMouseLeave={() => setHoverButtonQuest(false)}
+                                onClick={openDailyQuest}
+                                className=''
+                                src={hoverButtonQuest ? iconQuestActive : iconQuest}
+                                alt="questLog" />
                         </section>
-                        <section className='flex flex-row items-start mt-14'>
-                            <div>
+                        <section>
+                            {dailyQuestVisible &&
+                                <DailyQuest
+                                    onClose={closeDailyQuest} />}
+                        </section>
+                        {/*                             <div>
                                 <span className='text-gray-300 absolute z-10 mt-5 ml-5 text-[0.85rem]'>
                                     {(user && user.lastQuestPlayedText !== ' ')
                                         ? user.lastQuestPlayedText
@@ -151,45 +150,7 @@ function Home() {
                                     className='pt-1.5'
                                     src={questLog}
                                     alt="questLog" />
-                            </div>
-                            <div className=' -mt-6'>
-                                <button
-                                    onClick={openDailyQuest}>
-                                    <img
-                                        className='pt-1.5 absolute z-10 ml-2 -mt-[2.8rem] hover:-mt-[3rem] duration-100'
-                                        src={iconQuest}
-                                        alt="questLog" />
-                                </button>
-                                <img
-                                    className=''
-                                    src={fondoQuest}
-                                    alt="fondoQuest" />
-                            </div>
-                        </section>
-                        <section>
-                            <div className='pt-5'>
-                                <img
-                                    className='z-10 absolute mt-[2.4rem] ml-[1rem]'
-                                    src={iconAdventure}
-                                    alt="iconAdventure" />
-                                <Link to="/adventures">
-                                    <button
-                                        onMouseEnter={() => setHoverButtonAdventure(true)}
-                                        onMouseLeave={() => setHoverButtonAdventure(false)}>
-                                        <img
-                                            className='absolute z-10 ml-[9.5rem] mt-[2.8rem]'
-                                            src={hoverButtonAdventure ? buttonPlayActive : buttonPlay}
-                                            alt="play" />
-                                    </button>
-                                </Link>
-                            </div>
-
-                        </section>
-                        <section>
-                            {dailyQuestVisible &&
-                                <DailyQuest
-                                    onClose={closeDailyQuest} />}
-                        </section>
+                            </div> */}
                     </main>
                 </div>
             </div>

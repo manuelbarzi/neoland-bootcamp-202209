@@ -60,7 +60,7 @@ function DailyQuest({ onClose }) {
 
                 {dailyQuest &&
                     [
-                        <span className='absolute z-10 text-blue-300 ml-[3rem] mt-[11.70rem] text-center w-[16rem] h-[4.5rem] bg-inherit'>
+                        <span className='absolute z-10 text-lime-400 ml-[3rem] mt-[11.70rem] text-center w-[16rem] h-[4.5rem] bg-inherit'>
                             {dailyQuest?.text}
                         </span>
                         ,
