@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 function Toast({ message, onClose, timeout }) {
   useEffect(() => {
-    let autoCloseTime = 5000;
+    let autoCloseTime = 6000;
     if (timeout) {
       autoCloseTime = timeout;
     }
@@ -10,10 +10,10 @@ function Toast({ message, onClose, timeout }) {
     setTimeout(() => {
       onClose();
     }, autoCloseTime);
-  }, [onClose, timeout]);
+  });
 
   return (
-    <div className="absolute bottom-0 inset-x-0 flex flex-col justify-end items-center">
+    <div className="fixed z-10 bottom-0 inset-x-0 flex flex-col justify-end items-center">
       <div
         className="bg-red-600 shadow-lg toast mx-auto w-96 max-w-full text-sm pointer-events-auto bg-clip-padding rounded-lg mb-3"
         id="static-example"

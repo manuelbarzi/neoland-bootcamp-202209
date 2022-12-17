@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import registerBoat from "../logic/registerBoat";
 import updateBoat from "../logic/updateBoat";
+import Toast from "./ui/toast";
 
 function BoatForm({ onChange, boatInfo, onDiscard }) {
   const [isEditMode, setIsEditMode] = useState(false);
+  const [isToastActive, setIsToastActive] = useState(false);
+  const [toastMessage, setToastMessage] = useState(null);
   const [formValues, setFormValues] = useState({
     name: "",
     flag: "",
@@ -39,7 +42,28 @@ function BoatForm({ onChange, boatInfo, onDiscard }) {
       }
 
       await onChange();
-    } catch (error) {}
+    } catch (error) {
+      if (error.response) {
+        // It's an AXIOS error
+        let reason = "Invalid request: ";
+        if (error.response.status >= 500) {
+          reason = "Server error: ";
+        }
+        const toastMessage = reason + error.response.data.message;
+
+        setToastMessage(toastMessage);
+        setIsToastActive(true);
+      } else {
+        // Generic error
+        console.error("Generic error: ", error);
+        setToastMessage(error.message);
+        setIsToastActive(true);
+      }
+    }
+  };
+
+  const closeToast = () => {
+    setIsToastActive(false);
   };
 
   useEffect(() => {
@@ -54,6 +78,7 @@ function BoatForm({ onChange, boatInfo, onDiscard }) {
   return (
     <>
       <div className="flex justify-center min-w-full">
+        {isToastActive && <Toast message={toastMessage} onClose={closeToast} />}
         <div className="block p-6 rounded-lg shadow-lg bg-white min-w-full">
           <form onSubmit={saveForm}>
             <div className="flex justify-center">

@@ -22,6 +22,23 @@ function BookingForm({ onUpdate, boats, ports, onDiscard, bookingInfo }) {
     }
   };
 
+  const updateEndDate = (event) => {
+    const endDateObject = new Date(event.value);
+    const now = new Date();
+    const startDateObject = new Date(startDate);
+
+    if (
+      endDateObject.getTime() < now.getTime() ||
+      endDateObject.getTime() < startDateObject.getTime()
+    ) {
+      setToastMessage("Invalid ending date. Please select a future date");
+      setIsToastActive(true);
+      event.value = "";
+    } else {
+      setEndDate(event.value);
+    }
+  };
+
   const saveForm = async (event) => {
     event.preventDefault();
 
@@ -69,11 +86,7 @@ function BookingForm({ onUpdate, boats, ports, onDiscard, bookingInfo }) {
   return (
     <div className="flex justify-center min-w-full">
       {isToastActive && (
-        <Toast
-          message={toastMessage}
-          onClose={closeToast}
-          timeout={6000}
-        ></Toast>
+        <Toast message={toastMessage} onClose={closeToast} /*timeout={6000}*/ />
       )}
 
       <div className="block p-6 rounded-lg shadow-lg bg-white min-w-full">
@@ -112,7 +125,7 @@ function BookingForm({ onUpdate, boats, ports, onDiscard, bookingInfo }) {
                     data-mdb-toggle="datepicker"
                     defaultValue={bookingInfo ? bookingInfo.endDate : ""}
                     onChange={(e) => {
-                      setEndDate(e.target.value);
+                      updateEndDate(e.target);
                     }}
                   />
                   <label htmlFor="floatingInput" className="text-gray-700">
