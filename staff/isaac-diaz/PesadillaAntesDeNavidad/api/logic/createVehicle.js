@@ -38,10 +38,13 @@ function createVehicle(userId, brand, model, type, license, licenseDate, kms) {
                 throw new NotFoundError(`user with id ${userId} not found`)
 
             const vehicle = { user: userId, brand, model, type, license, licenseDate, kms }
-            debugger
             //TODO licenseDate need arrive date format...
-            return Vehicle.create(vehicle)               
-
+            return Vehicle.create(vehicle)                         
+                .then(vehicle =>{
+                    vehicle.id = vehicle._id.toString()
+                    
+                    return vehicle.id
+                })
                 .catch(error => {
                     if (error.message.includes('E11000'))
                         throw new ConflictError(`vehicle with license ${license} already exist`)

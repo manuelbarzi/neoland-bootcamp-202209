@@ -40,8 +40,8 @@ function Login() {
         }
     }
 
-    return <main className='h-full flex flex-col items-center justify-center gap-2bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 dark:bg-black text-black dark:text-white'>
-        <form className='flex flex-col gap-2' onSubmit={handleLogin}>
+    return <main className='h-full flex flex-col items-center justify-center gap-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 dark:bg-black text-black dark:text-white'>
+        <form className='w-5/5 shadow-xl shadow-gray-400 border-2 bg- flex flex-col gap-1 justify-center items-center p-8 rounded-xl' onSubmit={handleLogin}>
             <label htmlFor='email' className='container__item-left'>E-mail</label>
             <input name='email' type='email' id='email' placeholder='input your e-mail' className='border-b border-black text-black' />
             <label htmlFor='password' className='container__item-left'>Password</label>

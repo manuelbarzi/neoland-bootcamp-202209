@@ -31,5 +31,18 @@ module.exports = new Schema({
     kms: {
         type: String,
         required: true
+    },
+    lastInspection: {
+        date: {
+            type: Date,
+            required: true
+        },
+        kms: {
+            type: Number,
+            required: true
+        }
+    },
+    lastITV: {
+        type: Date
     }
 })

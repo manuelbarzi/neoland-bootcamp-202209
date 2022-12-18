@@ -1,5 +1,5 @@
 import { errors, regex } from 'com'
-const { LengthError, FormatError } = errors
+const { LengthError, FormatError, ConflictError, UnexpectedError } = errors
 const { IS_ALPHABETICAL_REGEX } = regex
 
 
@@ -32,8 +32,11 @@ export default function createVehicle(token, brand, model, type, license, licens
         xhr.onload = () => {
             const { status, responseText: json } = xhr
 
-            if (status === 201)
-                resolve()
+            if (status === 201) {
+                const vehicleId = JSON.parse(json)
+
+                resolve(vehicleId)
+            }
             else if (status === 400) {
                 const { error } = JSON.parse(json)
                 if (error.includes('is not a string'))
@@ -45,12 +48,19 @@ export default function createVehicle(token, brand, model, type, license, licens
                 else
                     reject(new Error(error))
             }
+            else if (status === 409) {
+                const { error } = JSON.parse(json)
+                reject(new ConflictError(error))
+            }
+            else
+            reject(new UnexpectedError('server error'))
+
         }
 
 
         xhr.onerror = () => reject(new Error('connection error'))
 
-        xhr.open('POST', 'http://localhost/vehicle')
+        xhr.open('POST', 'http://localhost/vehicles')
         xhr.setRequestHeader('Authorization', `Bearer ${token}`)
         xhr.setRequestHeader('Content-Type', 'application/json')
 

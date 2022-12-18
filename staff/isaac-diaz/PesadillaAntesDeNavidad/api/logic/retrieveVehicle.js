@@ -17,7 +17,8 @@ module.exports = function (userId, vehicleId) {
         .then(vehicle => {
             if (!vehicle) throw new NotFoundError(`vehicle with id ${vehicleId} does not exist`)
 
-            if (vehicle.user.toString() !== userId) throw AuthError(`vehicle with id ${vehicleId} does not belong to user with id ${userId}`)
+            if (vehicle.user.toString() !== userId) throw new AuthError(`vehicle with id ${vehicleId} does not belong to user with id ${userId}`)
+            vehicle.id = vehicle._id.toString()
 
             delete vehicle._id
             delete vehicle.__v

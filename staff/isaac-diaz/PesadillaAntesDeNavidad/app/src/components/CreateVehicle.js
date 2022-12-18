@@ -3,7 +3,7 @@ import createVehicle from '../logic/createVehicle'
 import Button from './Button'
 
 
-export default function({ onCreated, onClose }) {
+export default function({ onClose }) {
     const navigate = useNavigate()
     const submitCreateVehicle = event => {
         event.preventDefault()
@@ -12,12 +12,8 @@ export default function({ onCreated, onClose }) {
 
         try {
             createVehicle(sessionStorage.token, brand, model, type, license, new Date(licenseDate), kms)
-            .then(() => {   
-                // event.target.reset()
-
-                onCreated()
-                navigate('/stadistics')
-
+            .then(vehicleId => {                   
+                navigate(`/stadistics/${vehicleId}`)
                  })
             .catch(error => alert(error.message))
                  
@@ -26,23 +22,23 @@ export default function({ onCreated, onClose }) {
         }
     }
 
-    return <div className='h-full flex flex-col items-center justify-center gap-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'>
+    return <div className='h-screen w-full flex flex-col items-center justify-center gap-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'>
         <form className='flex flex-col items-center justify-center gap-2' onSubmit={submitCreateVehicle}>
-            <label className='' htmlFor='brand'>Brand</label>
-            <input className='rounded-xl' name="brand" type="text" id="brand" placeholder='input your brand'></input>
+            <label htmlFor='brand'>Brand</label>
+            <input className='rounded-lg' name="brand" type="text" id="brand" placeholder='input your brand'></input>
             <label htmlFor='model'>Model</label>
-            <input name="model" type="text" id="model" placeholder='input your model'></input>
+            <input className='rounded-lg' name="model" type="text" id="model" placeholder='input your model'></input>
             <label htmlFor='type'>Type</label>
-            <select name='type' id='type'>
-                <option value='turism'>turism</option>
-                <option value='motorcycle'>motorcycle</option>                
+            <select className='rounded-lg' name='type' id='type'>
+                <option value='gas'>diesel</option>
+                <option value='diesel'>gasolina</option>                
             </select>
             <label htmlFor='license'>Lisence</label>
-            <input name="license" type="text" id="license" placeholder='input your lisece'></input>
+            <input className='rounded-lg' maxLength='7' name="license" type="text" id="license" placeholder='input your lisece'></input>
             <label htmlFor='licenseDate'>LisenceDate</label>
-            <input name="licenseDate" type="date" id="licenseDate" placeholder='input your license date'></input>
+            <input className='rounded-lg' name="licenseDate" type="date" id="licenseDate" placeholder='input your license date'></input>
             <label htmlFor='kms'>Kms</label>
-            <input name="kms" type="text" id="kms" placeholder='input kms'></input>
+            <input className='rounded-lg' name="kms" type="text" id="kms" placeholder='input kms'></input>
             <Button className='duration-700 ease-in-out hover:scale-125'>Create</Button>
             <button className='duration-700 ease-in-out hover:scale-125' onClick={onClose} type="button">X</button>
         </form>
