@@ -1,38 +1,54 @@
 import { useState, useEffect } from 'react'
-import retrieveMainAdventures from '../logic/retrieveMainAdventures'
+import retrieveAdventures from '../logic/retrieveAdventures'
 import buttonBack from '../img/icon-back.png';
 import buttonHome from '../img/icon-home.png';
 import buttonCreateActive from '../img/button-create-active.png';
-import buttonCreat from '../img/button-create.png';
+import buttonCreate from '../img/button-create.png';
+import buttonAddAdventure from '../img/button-add-adventure.png';
 import buttonDelete from '../img/icon-delete.png';
 import adventureMainOne from '../img/adventure-main-one.png';
 import { Link } from 'react-router-dom'
 import extractSubFromToken from '../utils/extractSubFromToken'
 import DeleteAdventure from '../components/DeleteAdventure'
+import CreateAdventure from '../components/CreateAdventure'
 
 function Adventures() {
     const userId = extractSubFromToken(sessionStorage.token)
-    const [mainAdventures, setMainAdventures] = useState(null)
+    const [adventures, setAdventures] = useState(null)
     const [hoverButtonCreate, setHoverButtonCreate] = useState(false)
     const [adventureIdToDelete, setAdventureIdToDelete] = useState()
+    const [createAdventureVisible, setCreateAdventureVisible] = useState(false)
 
     useEffect(() => {
         try {
-            retrieveMainAdventures(sessionStorage.token)
+            retrieveAdventures(sessionStorage.token)
                 .then(adventures => {
-                    setMainAdventures(adventures)
+                    setAdventures(adventures)
                 })
                 .catch(error => alert(error.message))
 
         } catch (error) { }
     }, [])
 
+    const handleAdventureCreated = () => {
+        try {
+            retrieveAdventures(sessionStorage.token)
+                .then(adventures => {
+                    setAdventures(adventures)
+                    setCreateAdventureVisible(false)
+                })
+                .catch(error => alert(error.message))
+
+        } catch (error) {
+            alert(error.message)
+        }
+    }
     const handleAdventureDeleted = () => {
         try {
-            retrieveMainAdventures(sessionStorage.token)
+            retrieveAdventures(sessionStorage.token)
                 .then(adventures => {
+                    setAdventures(adventures)
                     setAdventureIdToDelete()
-                    setMainAdventures(adventures)
                 })
                 .catch(error => alert(error.message))
 
@@ -43,11 +59,13 @@ function Adventures() {
 
     const openDeleteAdventure = adventureId => setAdventureIdToDelete(adventureId)
     const closeDeleteAdventure = () => setAdventureIdToDelete()
+    const openCreateAdventure = () => setCreateAdventureVisible(true)
+    const closeCreateAdventure = () => setCreateAdventureVisible(false)
 
     return (
         <div className="min-h-screen flex flex-col bg-[#191919]">
             <div className="relative flex flex-grow font-alata h-full flex-col  justify-center items-center bg-[url('/src/img/bg-settings.jpg')] bg-no-repeat bg-center">
-                <div className="flex flex-col justify-center w-96 h-[42rem] gap-[3.7rem] px-6 py-6">
+                <div className="flex flex-col justify-center w-96 h-[42rem] gap-[16rem] px-6 py-6">
                     <header className='text-white flex flex-col mt-[0.5rem] '>
                         <Link to="/">
                             <img
@@ -60,12 +78,12 @@ function Adventures() {
                                 src={buttonHome}
                                 alt="home" />
                         </Link>
-                        <span className='text-[2rem] ml-[3rem] -mt-[1rem]'>Adventures</span>
+                        <span className='text-yellow-400 text-[2rem] ml-[3rem] -mt-[1rem]'>Adventures</span>
                     </header>
                     <section className='flex flex-col items-center'>
-                        {mainAdventures &&
-                            <section className='flex flex-row justify-center'>
-                                {mainAdventures.map(adventure =>
+                        {adventures &&
+                            <section className='flex flex-row justify-center absolute -mt-[12.5rem]'>
+                                {adventures.map(adventure =>
                                     [<div>
                                         {adventure.creator.id === userId &&
                                             <img
@@ -74,6 +92,15 @@ function Adventures() {
                                                 Settings
                                                 alt="delete"
                                                 onClick={() => openDeleteAdventure(adventure.id)} />}
+                                        {adventure.isMainAdventure === "main"
+                                            ?
+                                            < span
+                                                className='absolute text-white text-[2.2rem] ml-[2.5rem] mt-[18rem]'>Main
+                                            </span>
+                                            : < span
+                                                className='absolute text-white text-[2.2rem] ml-[2.5rem] mt-[18rem]'>World
+                                            </span>}
+                                        <span className='absolute text-white text-[1.2rem] ml-[2.5rem] mt-[20.8rem]'>{adventure.title}</span>
                                         <Link to={`/adventures/${adventure.id}`}>
                                             <img
                                                 key={adventure.id}
@@ -85,17 +112,23 @@ function Adventures() {
                                     ]
                                 )}
                             </section>}
+                        {!adventures &&
+                            <section className='flex flex-row justify-center absolute -mt-[12.5rem]'>
+                                <img
+                                    className=''
+                                    src={buttonAddAdventure}
+                                    alt="addAdventure" />
+                            </section>}
                     </section>
                     <section>
                         <div className='flex flex-col items-center'>
-                            <button
+                            <img
                                 onMouseEnter={() => setHoverButtonCreate(true)}
-                                onMouseLeave={() => setHoverButtonCreate(false)}>
-                                <img
-                                    className='cursor-pointer'
-                                    src={hoverButtonCreate ? buttonCreateActive : buttonCreat}
-                                    alt="create" />
-                            </button>
+                                onMouseLeave={() => setHoverButtonCreate(false)}
+                                onClick={openCreateAdventure}
+                                className='cursor-pointer'
+                                src={hoverButtonCreate ? buttonCreateActive : buttonCreate}
+                                alt="create" />
                         </div>
                         {adventureIdToDelete &&
                             <DeleteAdventure
@@ -103,9 +136,13 @@ function Adventures() {
                                 onDeleted={handleAdventureDeleted}
                                 onClose={closeDeleteAdventure} />}
                     </section>
+                    {createAdventureVisible &&
+                        <CreateAdventure
+                            onCreated={handleAdventureCreated}
+                            onClose={closeCreateAdventure} />}
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 

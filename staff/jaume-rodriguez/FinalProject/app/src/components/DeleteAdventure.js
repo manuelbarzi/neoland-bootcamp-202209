@@ -21,7 +21,7 @@ function DeleteAdventure({ adventureId, onDeleted, onClose }) {
         }
     }
 
-    return <div className="bg-[#191919]/75 fixed left-0 top-0 h-full w-full flex flex-col justify-center items-center overflow-hidden" onClick={onClose}>
+    return <div className="bg-[#191919]/75 fixed left-0 top-0 h-full w-full flex flex-col justify-center items-center overflow-hidden">
         <div className="flex flex-col items-center" onClick={event => event.stopPropagation()}>
             <img
                 className=''

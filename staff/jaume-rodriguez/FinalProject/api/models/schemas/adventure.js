@@ -11,8 +11,8 @@ module.exports = new Schema({
         required: true
     },
     isMainAdventure: {
-        type: Boolean,
-        default: 'false',
+        type: String,
+        default: 'main',
         required: true
     },
     steps: [{

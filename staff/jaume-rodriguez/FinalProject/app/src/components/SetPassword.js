@@ -5,7 +5,7 @@ import bgSetCredentials from '../img/bg-set-credentials.png';
 import buttonOk from '../img/button-ok.png';
 import buttonOkActive from '../img/button-ok-active.png';
 
-function SetPassword({ onClose, onConfirm }) {
+function SetPassword({ onClose }) {
 
     const [user, setUser] = useState()
     const [hoverButtonOk, setHoverButtonOk] = useState(false)
@@ -32,7 +32,7 @@ function SetPassword({ onClose, onConfirm }) {
                     alert('The user password has been changed successfully')
                     user.password = newPassword
                     event.target.password.value = ''
-                    onConfirm()
+                    onClose()
                 })
                 .catch(error => alert(error.message))
 

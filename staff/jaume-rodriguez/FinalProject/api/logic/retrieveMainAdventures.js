@@ -10,7 +10,7 @@ function retrieveMainAdventures(userId) {
                 throw new Error(`user with id ${userId} does not exist`)
 
             return Adventure
-                .find({ isMainAdventure: true })
+                .find({ isMainAdventure: "main" })
                 .populate('creator', '-email -password')
                 .select('-__v')
                 .lean()

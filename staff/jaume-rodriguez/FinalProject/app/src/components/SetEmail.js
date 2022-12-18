@@ -5,7 +5,7 @@ import bgSetCredentials from '../img/bg-set-credentials.png';
 import buttonOk from '../img/button-ok.png';
 import buttonOkActive from '../img/button-ok-active.png';
 
-function SetEmail({ onClose, onConfirm }) {
+function SetEmail({ onClose }) {
 
     const [user, setUser] = useState()
     const [hoverButtonOk, setHoverButtonOk] = useState(false)
@@ -31,7 +31,7 @@ function SetEmail({ onClose, onConfirm }) {
                 .then(() => {
                     alert('The user email has been changed successfully')
                     user.email = newEmail
-                    onConfirm()
+                    onClose()
                 })
                 .catch(error => alert(error.message))
 

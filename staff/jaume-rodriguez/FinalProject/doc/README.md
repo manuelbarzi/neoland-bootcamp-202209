@@ -114,7 +114,7 @@ Adventure
 - [pk] id
 - creator -> User ref
 - title
-- isMainAdventure: boolean
+- isMainAdventure: string
 - steps (ObjectId array, ref Quests)
 - votes (ObjectId array ref Users)
 

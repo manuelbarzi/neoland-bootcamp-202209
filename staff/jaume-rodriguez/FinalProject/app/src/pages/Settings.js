@@ -95,15 +95,12 @@ function Settings() {
                     </section>
                     {changeNameVisible &&
                         <SetName
-                            onConfirm={closeSetName}
                             onClose={closeSetName} />}
                     {changeEmailVisible &&
                         <SetEmail
-                            onConfirm={closeSetEmail}
                             onClose={closeSetEmail} />}
                     {changePasswordVisible &&
                         <SetPassword
-                            onConfirm={closeSetPassword}
                             onClose={closeSetPassword} />}
                 </div>
             </div>
