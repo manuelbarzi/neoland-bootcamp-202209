@@ -24,6 +24,8 @@ const retrieveEventHandler = require('./handlers/retrieveEventHandler')
 const retrieveEventByMonthNumberHandler = require('./handlers/retrieveEventByMonthNumberHandler')
 const retrieveEventsHandler = require('./handlers/retrieveEventsHandler')
 const signUpEventHandler = require('./handlers/signUpEventHandler')
+const unsignUpEventHandler = require('./handlers/unsignUpEventHandler')
+
 
 const jsonBodyParser = require('./utils/jsonBodyParser')
 const cors = require('./utils/cors')
@@ -58,6 +60,8 @@ mongoose.connect(MONGODB_URL)
         api.get('/eventos/:eventId', jwtVerifier, retrieveEventHandler)
         api.patch('/eventos/:eventId', jwtVerifier,jsonBodyParser, updateEventHandler)
         api.patch('/eventos/inscription/:eventId', jwtVerifier, signUpEventHandler)
+        api.patch('/eventos/deleteinscription/:eventId', jwtVerifier, unsignUpEventHandler)
+
         api.delete('/eventos/:eventId', jwtVerifier, deleteEventHandler)
         api.get('/eventos', jwtVerifier, retrieveEventsHandler)
 
