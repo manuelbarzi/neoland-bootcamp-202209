@@ -38,9 +38,7 @@ export default function ({onClose, item, onDeleted, onUpdated}) {
   const handleSumQuantity = (event) => {
     event.preventDefault()
 
-    const { quantity: { value: quantity } } = event.target
-
-      return quantity + 1
+      // return quantity + 1
   }
 
   const handleRestQuantity = (event) => {

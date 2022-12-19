@@ -9,6 +9,7 @@ import { errors } from "com";
 import retrieveList from "../logic/retrieveList";
 import retrieveItems from "../logic/retrieveItems";
 import updateStatus from "../logic/updateStatus"
+import totalAmount from "../logic/totalAmount";
 const { FormatError, AuthError, LengthError, NotFoundError } = errors;
 
 export default function MyList() {
@@ -20,6 +21,7 @@ export default function MyList() {
   const [listName, setListName] = useState();
   const [items, setItems] = useState();
   const [itemToEdit, setItemToEdit] = useState();
+  // const [total, setTotal] = useState(0);
 
   useEffect(() => {
     try {
@@ -30,7 +32,12 @@ export default function MyList() {
 
           return retrieveItems(sessionStorage.token, listId);
         })
-        .then((items) => setItems(items))
+        .then((items) => { setItems(items)
+          
+          totalAmount(items)
+        })
+        // .then ((total) => {setTotal(total)})
+        
         .catch((error) => {
           if (
             error instanceof TypeError ||
@@ -94,6 +101,7 @@ export default function MyList() {
       .then((items) => {setItems(items);
 
         closeEditItem()
+        totalAmount(items)
         })
     } catch (error) {
         alert(error.message)
@@ -111,6 +119,7 @@ export default function MyList() {
         alert(error.message)
     }
   } 
+
   return (
     <>
       <Header listName={listName} />
@@ -138,7 +147,7 @@ export default function MyList() {
       <hr className="fixed bottom-[6.5rem] border border-black w-full"></hr>
       <section className="w-full h-[2.4rem] fixed bottom-[4.1rem] flex justify-around items-center px-2 bg-white">
         <p>Precio total del carrito</p>
-        <p>Total</p>
+        <p id='total'></p>
       </section>
       <footer className="z-10 fixed bottom-0 h-[4rem] flex justify-center items-center w-full bg-gray-200">
         <button
