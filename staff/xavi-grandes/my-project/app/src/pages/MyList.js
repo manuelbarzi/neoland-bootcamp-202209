@@ -125,22 +125,20 @@ export default function MyList() {
             <article
               onClick={() => openEditItem(item)}
               key={listName}
-              className="mt-1 bg-blue-300 h-12 w-[90%] rounded-lg flex items-center px-3 text-lg"
+              className="mt-1 bg-blue-300 h-12 w-[90%] rounded-lg flex items-center px-3 text-lg justify-between"
             >
               <div className="flex w-[55%] justify-between ">
                 <span>{item.title}</span>
               </div>
-              <div className="flex items-center justify-between w-[45%]">
-                {item.quantity > 0 && <span className="w-[20%] text-center">{item.quantity}</span>}
-                {item.amount > 0 && <span className="w-[30%] text-left ">{item.amount}€</span>}
+                {item.quantity > 0 && <span className="w-[15%] text-center">{item.quantity}</span>}
+                {item.amount > 0 && <span className="w-[20%] text-right pr-2">{item.amount}€</span>}
                 <input
-                  className="h-8 w-[20%]"
+                  className="h-8 w-8 items-end"
                   type="checkbox"
                   defaultChecked={item.status}
                   onClick={(event) => event.stopPropagation()}
                   onChange={() => handleChangeStatus(item.id, item.status)}
                 />
-              </div>
             </article>
           ))}
       </main>
