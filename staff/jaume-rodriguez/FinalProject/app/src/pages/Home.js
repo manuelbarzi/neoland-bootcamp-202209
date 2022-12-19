@@ -120,7 +120,7 @@ function Home() {
                                 onMouseEnter={() => setHoverButtonQuest(true)}
                                 onMouseLeave={() => setHoverButtonQuest(false)}
                                 onClick={openDailyQuest}
-                                className=''
+                                className='cursor-pointer'
                                 src={hoverButtonQuest ? iconQuestActive : iconQuest}
                                 alt="questLog" />
                         </section>

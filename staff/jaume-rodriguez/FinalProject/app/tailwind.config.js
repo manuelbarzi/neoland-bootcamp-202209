@@ -8,6 +8,10 @@ module.exports = {
     fontFamily: {
       'alata': ['"Alata"'],
     },
+    plugins: [
+      // ...
+      require('tailwind-scrollbar'),
+    ],
   },
   plugins: [],
 }

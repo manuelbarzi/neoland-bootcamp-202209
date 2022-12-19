@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react'
 import retrieveAdventures from '../logic/retrieveAdventures'
+import DeleteAdventure from '../components/DeleteAdventure'
+import CreateAdventure from '../components/CreateAdventure'
 import buttonBack from '../img/icon-back.png';
-import buttonHome from '../img/icon-home.png';
+import buttonNext from '../img/button-next.png';
+import buttonPrevious from '../img/button-previous.png';
 import buttonCreateActive from '../img/button-create-active.png';
 import buttonCreate from '../img/button-create.png';
 import buttonAddAdventure from '../img/button-add-adventure.png';
@@ -9,8 +12,6 @@ import buttonDelete from '../img/icon-delete.png';
 import adventureMainOne from '../img/adventure-main-one.png';
 import { Link } from 'react-router-dom'
 import extractSubFromToken from '../utils/extractSubFromToken'
-import DeleteAdventure from '../components/DeleteAdventure'
-import CreateAdventure from '../components/CreateAdventure'
 
 function Adventures() {
     const userId = extractSubFromToken(sessionStorage.token)
@@ -18,6 +19,7 @@ function Adventures() {
     const [hoverButtonCreate, setHoverButtonCreate] = useState(false)
     const [adventureIdToDelete, setAdventureIdToDelete] = useState()
     const [createAdventureVisible, setCreateAdventureVisible] = useState(false)
+    const [visibleAdventureIndex, setVisibleAdventureIndex] = useState(0)
 
     useEffect(() => {
         try {
@@ -62,64 +64,85 @@ function Adventures() {
     const openCreateAdventure = () => setCreateAdventureVisible(true)
     const closeCreateAdventure = () => setCreateAdventureVisible(false)
 
+
+    const modifyVisibleAdventureIndex = (indexModification) => {
+        let newIndex = visibleAdventureIndex + indexModification;
+        if (newIndex < 0) {
+            newIndex = adventures.length - 1;
+        } else if (newIndex >= adventures.length) {
+            newIndex = 0;
+        }
+        setVisibleAdventureIndex(newIndex);
+    }
+
     return (
         <div className="min-h-screen flex flex-col bg-[#191919]">
             <div className="relative flex flex-grow font-alata h-full flex-col  justify-center items-center bg-[url('/src/img/bg-settings.jpg')] bg-no-repeat bg-center">
-                <div className="flex flex-col justify-center w-96 h-[42rem] gap-[16rem] px-6 py-6">
+                <div className="flex flex-col justify-center w-96 h-[42rem] gap-[16rem] py-6">
                     <header className='text-white flex flex-col mt-[0.5rem] '>
                         <Link to="/">
                             <img
-                                className='absolute z-10 -mt-[0.1rem] ml-[0.3rem] hover:ml-[0.1rem] duration-100 cursor-pointer'
+                                className='absolute z-10 -mt-[0.1rem] hover:-ml-[0.2rem]  duration-100 cursor-pointer'
                                 src={buttonBack}
                                 Settings
                                 alt="back" />
-                            <img
-                                className='absolute -mt-[1rem] ml-[18.4rem] pt-1 cursor-pointer'
-                                src={buttonHome}
-                                alt="home" />
                         </Link>
-                        <span className='text-yellow-400 text-[2rem] ml-[3rem] -mt-[1rem]'>Adventures</span>
+                        <span className=' text-[2rem] ml-[3rem] -mt-[1rem]'>Adventures</span>
                     </header>
-                    <section className='flex flex-col items-center'>
-                        {adventures &&
-                            <section className='flex flex-row justify-center absolute -mt-[12.5rem]'>
-                                {adventures.map(adventure =>
-                                    [<div>
-                                        {adventure.creator.id === userId &&
-                                            <img
-                                                className='absolute ml-[11.2rem] mt-[1.3rem] cursor-pointer'
-                                                src={buttonDelete}
-                                                Settings
-                                                alt="delete"
-                                                onClick={() => openDeleteAdventure(adventure.id)} />}
-                                        {adventure.isMainAdventure === "main"
-                                            ?
-                                            < span
-                                                className='absolute text-white text-[2.2rem] ml-[2.5rem] mt-[18rem]'>Main
-                                            </span>
-                                            : < span
-                                                className='absolute text-white text-[2.2rem] ml-[2.5rem] mt-[18rem]'>World
-                                            </span>}
-                                        <span className='absolute text-white text-[1.2rem] ml-[2.5rem] mt-[20.8rem]'>{adventure.title}</span>
-                                        <Link to={`/adventures/${adventure.id}`}>
-                                            <img
-                                                key={adventure.id}
-                                                className='cursor-pointer'
-                                                src={adventureMainOne}
-                                                alt="home" />
-                                        </Link>
-                                    </div>
-                                    ]
-                                )}
+                    <section className='flex flex-col items-center justify-center '>
+                        {adventures && adventures.length > 0 &&
+                            <section className='flex flex-row justify-center absolute items-center -ml-[0.2rem]'>
+                                <div>
+                                    {adventures[visibleAdventureIndex].creator.id === userId &&
+                                        <img
+                                            className='absolute ml-[11.2rem] mt-[1.3rem] cursor-pointer'
+                                            src={buttonDelete}
+                                            Settings
+                                            alt="delete"
+                                            onClick={() => openDeleteAdventure(adventures[visibleAdventureIndex].id)} />}
+                                    {adventures[visibleAdventureIndex].isMainAdventure === "main"
+                                        ?
+                                        < span
+                                            className='absolute text-white text-[2.2rem] ml-[2.5rem] mt-[18rem]'>Main
+                                        </span>
+                                        : < span
+                                            className='absolute text-white text-[2.2rem] ml-[2.5rem] mt-[18rem]'>World
+                                        </span>}
+                                    <span className='absolute text-white text-[1.2rem] ml-[2.5rem] mt-[20.8rem]'>{adventures[visibleAdventureIndex].title}</span>
+                                    <Link to={`/adventures/${adventures[visibleAdventureIndex].id}`}>
+                                        <img
+                                            key={adventures[visibleAdventureIndex].id}
+                                            className='cursor-pointer'
+                                            src={adventureMainOne}
+                                            alt="home" />
+                                    </Link>
+                                </div>
                             </section>}
-                        {!adventures &&
-                            <section className='flex flex-row justify-center absolute -mt-[12.5rem]'>
+                        {(!adventures || adventures.length === 0) &&
+                            <section className='flex empty-adventures flex-row justify-center absolute -mt-[12.5rem]'>
                                 <img
                                     className=''
+                                    onClick={openCreateAdventure}
                                     src={buttonAddAdventure}
                                     alt="addAdventure" />
                             </section>}
                     </section>
+                    <button
+                        onClick={() => modifyVisibleAdventureIndex(-1)}
+                        className="absolute text-white ml-[0.8rem]">
+                        <img
+                            className=''
+                            src={buttonPrevious}
+                            alt="next" />
+                    </button>
+                    <button
+                        onClick={() => modifyVisibleAdventureIndex(+1)}
+                        className="absolute text-white ml-[20em]">
+                        <img
+                            className=''
+                            src={buttonNext}
+                            alt="next" />
+                    </button>
                     <section>
                         <div className='flex flex-col items-center'>
                             <img
@@ -130,7 +153,7 @@ function Adventures() {
                                 src={hoverButtonCreate ? buttonCreateActive : buttonCreate}
                                 alt="create" />
                         </div>
-                        {adventureIdToDelete &&
+                        {adventureIdToDelete != null &&
                             <DeleteAdventure
                                 adventureId={adventureIdToDelete}
                                 onDeleted={handleAdventureDeleted}
