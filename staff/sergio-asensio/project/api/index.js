@@ -23,7 +23,7 @@ const deleteEventHandler = require('./handlers/deleteEventHandler')
 const retrieveEventHandler = require('./handlers/retrieveEventHandler')
 const retrieveEventByMonthNumberHandler = require('./handlers/retrieveEventByMonthNumberHandler')
 const retrieveEventsHandler = require('./handlers/retrieveEventsHandler')
-// const signUpEventHandler = require('./handlers/signUpEventHandler')
+const signUpEventHandler = require('./handlers/signUpEventHandler')
 
 
 
@@ -59,7 +59,7 @@ mongoose.connect(MONGODB_URL)
         api.get('/eventos/:month', jwtVerifier, retrieveEventByMonthNumberHandler)
         api.get('/eventos/:eventId', jwtVerifier, retrieveEventHandler)
         api.patch('/eventos/:eventId', jwtVerifier,jsonBodyParser, updateEventHandler)
-        // api.patch('/eventos/inscription/:eventId', jwtVerifier,jsonBodyParser, signUpEventHandler)
+        api.patch('/eventos/inscription/:eventId', jwtVerifier, signUpEventHandler)
         api.delete('/eventos/:eventId', jwtVerifier, deleteEventHandler)
         api.get('/eventos', jwtVerifier, retrieveEventsHandler)
 

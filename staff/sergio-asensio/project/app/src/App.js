@@ -48,10 +48,6 @@ function App() {
       <Route path="/events/:monthName" element={<EventByMonthName />} />
       <Route path="/users" element={<Users />} />
 
-
-      
-
-
     </Routes>
       :
       <Routes>
