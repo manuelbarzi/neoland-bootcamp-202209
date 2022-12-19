@@ -1,13 +1,15 @@
 import log from "../utils/coolog"
 import FlowForm from "./FlowForm"
 import { useState } from "react"
+
 function Flow({ totalFlows, isValidPension, setIsValidPension }) {
     log.info('FlowHeader -> render')
 
     const [pension, setPension] = useState()
     setIsValidPension(true) //! ELIMINAR Y RECUPERAREMOS EL PRESUPUESTO
+    
     return (
-        <header>
+        <header className="">
             {isValidPension ?
                 <>
                     <div className="flex justify-between" >
@@ -29,6 +31,7 @@ function Flow({ totalFlows, isValidPension, setIsValidPension }) {
                         <label htmlFor="file"></label>
                         <progress className="w-full h-4  " id="file" max={totalFlows.income} value={(totalFlows.income - totalFlows.spent)}></progress>
                     </div>
+
                 </>
                 :
                 <FlowForm

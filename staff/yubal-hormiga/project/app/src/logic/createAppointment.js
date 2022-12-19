@@ -14,7 +14,7 @@ export default function (token, title, body, date, callback) {
     if (!title.length) throw new Error('text is empty')
     if (typeof body !== 'string') throw new TypeError('body is not a string')
     if (!body.length) throw new Error('body is empty')
-    // TODO validate date
+    if (!(date instanceof Date)) throw new TypeError('date is not a Date')
 
     if (!callback) {
         return new Promise((resolve, reject) => {
@@ -29,8 +29,6 @@ export default function (token, title, body, date, callback) {
                     reject(new Error(error))
 
                     return
-                } else if (status >= 400) {
-                    //TODO handle client errors
                 }
 
                 resolve()
@@ -49,7 +47,9 @@ export default function (token, title, body, date, callback) {
             xhr.send(json)
         })
     }
+
     if (typeof callback !== 'function') throw new TypeError('callback is not a function')
+
     const xhr = new XMLHttpRequest
 
     xhr.onload = () => {

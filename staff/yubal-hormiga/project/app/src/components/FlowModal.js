@@ -52,11 +52,11 @@ function FlowModalIncome({ setModal, onNewFlow }) {
     return <>
         <div className='shadow-md p-2 rounded-lg'>
             <div className=''>
-                <button className='text-center my-1 px-6 py-1 rounded-sm font-medium border-2 border-cyan-900 text-white hover:text-white bg-cyan-900 hover:bg-white hover:text-sky-900 text-white cursor-pointer ' type='button' onClick={closeModal}>Cerrar Apunte</button>
+                <button className='text-center my-3 px-6 py-1 rounded-sm font-medium border-2 border-cyan-900 text-white hover:text-white bg-cyan-900 hover:bg-white hover:text-sky-900 text-white cursor-pointer ' type='button' onClick={closeModal}>Cerrar Apunte</button>
             </div>
-            <form className='flex flex-col shadow-md' onSubmit={submitCreateFlow}>
-                <div className='flex gap-4 justify-between'>
-                    <div className='flex shadow-md mb-3 p-1'>
+            <form className='shadow-md' onSubmit={submitCreateFlow}>
+                <div className='md:flex gap-4 justify-between'>
+                    <div className='md:flex shadow-md mb-3 p-1'>
                         <legend className='font-semibold text-lg'>Apunte</legend>
                         <div className=' '>
                             <label htmlFor='type' className='w-20 font-semibold text-lg mr-2'></label>
@@ -84,10 +84,10 @@ function FlowModalIncome({ setModal, onNewFlow }) {
                 <div className='my-2 shadow-md mb-3'>
                     <label htmlFor='description' className='text-center w-full font-semibold text-lg  placeholder-gray-500 '>Descripción</label>
                     {/* <textarea id='description' className='w-full text-center font-semibold text-lg  placeholder-gray-500 ' placeholder='Describe el gasto' value={description} onChange={handleChangeDescription} /> */}
-                    <input id='description' className='text-center w-full font-semibold text-lg  placeholder-gray-500 ' type='text' placeholder='Describe el gasto' value={description} onChange={handleChangeDescription} />
+                    <input id='description' className='text-center w-full font-semibold text-lg  placeholder-gray-500 ' type='text' placeholder='Describe el apunte' value={description} onChange={handleChangeDescription} />
                 </div>
 
-                <div className='flex justify-between'>
+                <div className='md:flex md:justify-between'>
                     <div className='flex  shadow-md mb-3'>
                         <label htmlFor='amount' className=' w-20 font-semibold text-lg'>Cantidad</label>
                         <input id='amount' className='font-semibold text-lg text-center' type='number' placeholder='Importe' value={amount} onChange={handleChangeAmount} />

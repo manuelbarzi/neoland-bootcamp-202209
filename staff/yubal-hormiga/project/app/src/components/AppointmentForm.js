@@ -26,7 +26,7 @@ function AppointmentForm({ onNewAppointment, appointment }) {
         event.preventDefault()
         // console.log('writing')
         try {
-            createAppointment(sessionStorage.token, title, body, date)
+            createAppointment(sessionStorage.token, title, body, new Date(date))
                 .then(() => onNewAppointment())
                 .catch(error => alert(error.message))
         } catch (error) {
@@ -49,8 +49,8 @@ function AppointmentForm({ onNewAppointment, appointment }) {
     }
 
     return <>
-        <form className=' rounded-sm shadow-md shadow-[#219ebc] p-2 mb-4 ' onSubmit={submitCreateAppointment}>
-            <div className='flex justify-evenly gap-2'>
+        <form className=' rounded-lg shadow-md shadow-[#219ebc] p-2 mb-4 ' onSubmit={submitCreateAppointment}>
+            <div className='md:flex justify-evenly gap-2'>
                 <div className='flex shadow-md mb-3 '>
                     <label htmlFor='appointment' className=' w-20 font-semibold text-lg flex justify-start'>Cita</label>
                     <input id='appointment' className='w-full font-semibold text-lg  placeholder-gray-500 ' type='text' placeholder='Nombre de  Cita' value={title} onChange={handleChangeName} />  {/*  value ->Para recoger nombre de la Cita Onchange como hicimos con el edit de post- para recoger los cambios */}

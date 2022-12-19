@@ -61,7 +61,7 @@ function AppointmentLists({ appointmentsChange }) {
   return <>
     {appointments.map((appointment) => {
       return (
-        <div key={appointment.id} className='hover:bg-[#8ecae6]  hover:shadow-white  shadow-[#8ecae6] p-1 rounded-sm shadow-md flex justify-between gap-5 pb-1 mb-2'>
+        <div key={appointment.id} className='hover:bg-[#8ecae6]  hover:shadow-white  shadow-[#8ecae6] p-1 rounded-lg shadow-md flex justify-between gap-5 pb-1 mb-2'>
 
           <div className=''>
             <p className='font-semibold text-lg flex flex-row'>Cita: {appointment.title}</p>

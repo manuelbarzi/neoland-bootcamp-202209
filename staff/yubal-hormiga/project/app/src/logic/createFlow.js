@@ -19,8 +19,7 @@ export default function (token, type, kind, description, amount, date, callback)
     if (typeof amount !== 'number') throw new TypeError('amount is not a number')
     if (!amount) throw new Error('amount is empty')
     // if (typeof date !== 'number') throw new TypeError('date is not a number')
-    // if (!date.length) throw new LengthError('date is empty')
-    // TODO validate date
+    // if (!date.length) throw new TypeError('date is empty')
 
     if (!callback)
         return new Promise((resolve, reject) => {
@@ -35,9 +34,7 @@ export default function (token, type, kind, description, amount, date, callback)
                     reject(new Error(error))
 
                     return
-                } else if (status >= 400) {
-                    //TODO handle client errors
-                }
+                } 
 
                 resolve()
             }

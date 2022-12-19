@@ -12,8 +12,8 @@ function createFlow(userId, type, kind, description, amount, date) {
     if (!description.length) throw new LengthError('description is empty')
     if (typeof amount !== 'number') throw new TypeError('amount is not a number')
     if (!amount) throw new LengthError('amount is empty')
-    // if (typeof date !== 'number') throw new TypeError('date is not a number')
-    // if (!date.length) throw new LengthError('date is empty')
+    if (!(date instanceof Date)) throw new TypeError('date is not a Date')
+
 
     return User.findById(userId)
         .then(user => {
