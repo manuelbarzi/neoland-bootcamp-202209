@@ -25,8 +25,6 @@ const retrieveEventByMonthNumberHandler = require('./handlers/retrieveEventByMon
 const retrieveEventsHandler = require('./handlers/retrieveEventsHandler')
 const signUpEventHandler = require('./handlers/signUpEventHandler')
 
-const retrieveUserEventHandler = require('./handlers/retrieveUserEventHandler')
-
 const jsonBodyParser = require('./utils/jsonBodyParser')
 const cors = require('./utils/cors')
 const jwtVerifier = require('./utils/jwtVerifier')
@@ -62,10 +60,6 @@ mongoose.connect(MONGODB_URL)
         api.patch('/eventos/inscription/:eventId', jwtVerifier, signUpEventHandler)
         api.delete('/eventos/:eventId', jwtVerifier, deleteEventHandler)
         api.get('/eventos', jwtVerifier, retrieveEventsHandler)
-
-        api.get('/eventos/participantes/:user', jwtVerifier, retrieveUserEventHandler)
-
-
 
 
         const { PORT } = process.env
