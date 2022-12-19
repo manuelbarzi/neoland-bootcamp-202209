@@ -5,7 +5,7 @@ export default function (items) {
     document.getElementById("total").innerHTML = mapAmountItems.reduce(getSum, 0) + '€';
 
     function getSum(total, num) {
-        return total + Math.round(num)
+        return total + num
     }
 
   }
