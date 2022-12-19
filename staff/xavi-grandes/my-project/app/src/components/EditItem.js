@@ -3,7 +3,7 @@ import { IoCloseCircle } from 'react-icons/io5'
 import deleteItem from '../logic/deleteItem'
 import updateItem from '../logic/updateItem'
 
-export default function ({onClose, item, onDeleted}) {
+export default function ({onClose, item, onDeleted, onUpdated}) {
     log.info('CreateList -> render')
 
     const submitUpdateItem = event => {
@@ -14,15 +14,9 @@ export default function ({onClose, item, onDeleted}) {
       const itemId = item.id 
 
       try {
-          updateItem(itemId, title, quantity, amount, error => {
-              if (error) {
-                  alert(error.message)
+          updateItem(itemId, title, quantity, amount)
 
-                  return
-              }
-
-              // onUpdated()
-          })
+          onUpdated()
         } catch (error) {
           alert(error.message)
       }
