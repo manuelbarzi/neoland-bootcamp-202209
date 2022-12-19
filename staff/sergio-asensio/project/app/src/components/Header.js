@@ -2,16 +2,28 @@ import log from '../utils/coolog'
 import { AiOutlineLogout } from 'react-icons/ai'
 import { IoInvertModeOutline } from 'react-icons/io5'
 import Context from './Context'
-import { useContext } from 'react'
+import { useContext, useState} from 'react'
 import logo from '../img/logo.jpg'
+import Settings from '../components/Settings'
+
 
 export default function Header({ userName }) {
     log.info('Header -> render')
 
     const { logout } = useContext(Context)
+    const [settings, setSettings] = useState()
 
     const switchMode = () => document.querySelector('html').classList.toggle('dark')
     // className='h-screen'
+
+    const handleSettings = () =>{
+            if(!settings) 
+                setSettings('true')
+            else 
+                setSettings()
+
+    } 
+
     return <main >
     <header className='h-1/6 top-0 flex justify-around items-center bg-teal-600	'>
     <div>
@@ -21,25 +33,14 @@ export default function Header({ userName }) {
         <h1>TREPADORES CAVERNICOLAS</h1>
     </div>
     <div>
-        <p>{userName}</p>    
+        <p>{userName}</p> 
     </div>
     <div>
         <button onClick={logout}><AiOutlineLogout /></button>
         <button onClick={switchMode}><IoInvertModeOutline /></button>
+        <button onClick={handleSettings} className='className="border-2 border-black bg-slate-300 p-1 cursor-pointer m-1'>Settings</button>
         </div> 
     </header>
+    {settings && <Settings/>}
     </main>
 }
-
-// <header className='h-1/6 top-0 flex justify-around items-center bg-teal-600	'>
-// <div>
-//     <img src='"C:\Users\sergi\Desktop\Screenshot_20221203_111930.jpg"'/>
-// </div>
-// <div>
-//     <h1>Trepadores Cavernicolas</h1>
-// </div>
-// <div>
-//     <button onClick={toLogin} className="p-2 m-2 border rounded-xl">Login</button>
-//     <button onClick={toRegister}className="p-2 border rounded-xl">Register</button>
-// </div>
-// </header>

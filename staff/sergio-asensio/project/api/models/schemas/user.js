@@ -14,9 +14,14 @@ module.exports = new Schema({
         type: String,
         required: true
     },
+    // role: {
+    //     type: String,
+    //     enum: 'admin'        
+    // }
     role: {
         type: String,
-        enum: 'admin'        
+        enum:['user', 'admin'],
+        default: 'user'
     }
 })
 

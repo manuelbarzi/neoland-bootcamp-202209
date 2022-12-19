@@ -153,7 +153,7 @@ function EventMonth() {
 
         {deleteEvent && <DeleteEvent event={event} onDeleted={handleEventDeleted} onClose={() => setDeleteEvent()} />}
     
-        {inscription && <Inscription event={event}  onClose={() => setInscription()}/>}
+        {inscription && <Inscription event={event} user={user} onClose={() => setInscription()}/>}
     
     </main>
 }

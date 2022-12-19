@@ -1,9 +1,9 @@
-import CreateEvent from '../components/CreateEvent'
 
-export default function ({ onClose }) {
+export default function ({ onClose, user }) {
 
     const confirmInscription = () => {
-        console.log('inscrito')
+        console.log(user.id)
+        onClose()
     }
    
 

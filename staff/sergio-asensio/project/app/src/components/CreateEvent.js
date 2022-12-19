@@ -55,7 +55,7 @@ export default function ({ closeCreate, onCreated, monthName}) {
                 <input className="text-black pl-2" type="text" name="image" id="image" placeholder="input the link"></input>
                 
 
-                <button>Create</button>
+                <button className="border-2 border-black p-1 cursor-pointer m-1">Create</button>
             </form>
         </div>
     </div>

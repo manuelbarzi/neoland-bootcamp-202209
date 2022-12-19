@@ -6,6 +6,10 @@ const express = require('express')
 const authenticateUserHandler = require('./handlers/authenticateUserHandler')
 const registerUserHandler = require('./handlers/registerUserHandler')
 const retrieveUserHandler = require('./handlers/retrieveUserHandler')
+const retrieveUsersHandler = require('./handlers/retrieveUsersHandler')
+const updateUserRoleHandler = require('./handlers/updateUserRoleHandler')
+
+
 const createNoticeHandler = require('./handlers/createNoticeHandler')
 const updateNoticeHandler = require('./handlers/updateNoticeHandler')
 const deleteNoticeHandler = require('./handlers/deleteNoticeHandler')
@@ -19,6 +23,7 @@ const deleteEventHandler = require('./handlers/deleteEventHandler')
 const retrieveEventHandler = require('./handlers/retrieveEventHandler')
 const retrieveEventByMonthNumberHandler = require('./handlers/retrieveEventByMonthNumberHandler')
 const retrieveEventsHandler = require('./handlers/retrieveEventsHandler')
+// const signUpEventHandler = require('./handlers/signUpEventHandler')
 
 
 
@@ -39,6 +44,9 @@ mongoose.connect(MONGODB_URL)
         api.post('/users/auth', jsonBodyParser, authenticateUserHandler)
         api.post('/users', jsonBodyParser, registerUserHandler)
         api.get('/users', jwtVerifier, retrieveUserHandler)
+        api.get('/users/all', jwtVerifier, retrieveUsersHandler)
+        api.patch('/users/:user', jwtVerifier,jsonBodyParser, updateUserRoleHandler)
+
 
         api.post('/noticias', jwtVerifier, jsonBodyParser, createNoticeHandler)
         api.patch('/noticias/:noticeId', jwtVerifier,jsonBodyParser, updateNoticeHandler)
@@ -51,6 +59,7 @@ mongoose.connect(MONGODB_URL)
         api.get('/eventos/:month', jwtVerifier, retrieveEventByMonthNumberHandler)
         api.get('/eventos/:eventId', jwtVerifier, retrieveEventHandler)
         api.patch('/eventos/:eventId', jwtVerifier,jsonBodyParser, updateEventHandler)
+        // api.patch('/eventos/inscription/:eventId', jwtVerifier,jsonBodyParser, signUpEventHandler)
         api.delete('/eventos/:eventId', jwtVerifier, deleteEventHandler)
         api.get('/eventos', jwtVerifier, retrieveEventsHandler)
 

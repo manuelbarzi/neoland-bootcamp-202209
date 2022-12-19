@@ -8,6 +8,8 @@ import Context from './components/Context'
 import Alert from './components/Alert'
 import Events from './pages/Events'
 import EventByMonthName from './pages/EventByMonthName'
+import Users from './pages/Users'
+
 
 function App() {
   log.info('App -> render')
@@ -44,6 +46,8 @@ function App() {
       <Route path="/noticias" element={<Noticias />} />
       <Route path="/events" element={<Events />} />
       <Route path="/events/:monthName" element={<EventByMonthName />} />
+      <Route path="/users" element={<Users />} />
+
 
       
 

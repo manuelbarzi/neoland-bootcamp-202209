@@ -1,25 +1,31 @@
-import log from '../utils/coolog'
+import { useNavigate , Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import retrieveUser from '../logic/retrieveUser'
-import retrieveLastNotice from '../logic/retrieveLastNotice'
-import Header from '../components/Header'
-import { useContext } from 'react'
-import Context from '../components/Context'
 import { errors } from 'com'
-import { Link } from 'react-router-dom'
+import retrieveUser from '../logic/retrieveUser'
+import Context from '../components/Context'
+import { useContext } from 'react'
+import logo from '../img/logo.jpg'
+import retrieveUsers from '../logic/retrieveUsers'
+import UpdateUserRole from '../components/UpdateUserRole'
 
 
 const { FormatError, AuthError, LengthError, NotFoundError } = errors
 
-function Home() {
-    log.info('Home -> render')
-
-    const [user, setUser] = useState()
-    const [notice, setNotice] = useState()
+function Users() {
 
     const { showAlert } = useContext(Context)
 
+    const [user, setUser] = useState()
+    const [users, setUsers] = useState([])
+    const [role, setRole] = useState()
+
+
     useEffect(() => {
+        userRetrieve()
+        usersRetrieve()
+    }, [])
+
+    const userRetrieve = () => {
         try {
             retrieveUser(sessionStorage.token)
                 .then(user => {
@@ -40,16 +46,22 @@ function Home() {
             else
                 showAlert(error.message, 'fatal')
         }
+    }
 
+    const usersRetrieve = () => {
         try {
-            retrieveLastNotice(sessionStorage.token)
-                .then(notice => setNotice(notice))
+            retrieveUsers(sessionStorage.token)
+                .then(users => {
+                    setUsers(users)
+                })
                 .catch(error => {
                     if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
                         showAlert(error.message, 'warn')
-                    else if (error instanceof AuthError || error instanceof NotFoundError)
+                    else if (error instanceof AuthError)
                         showAlert(error.message, 'error')
-                    else
+                    else if (error instanceof NotFoundError) {
+                        setUsers()
+                    } else
                         showAlert(error.message, 'fatal')
                 })
         } catch (error) {
@@ -58,28 +70,33 @@ function Home() {
             else
                 showAlert(error.message, 'fatal')
         }
+    }
 
-    }, [])
+    const handleRole = () => {
+        setRole(true)
+        
+    }
 
-    return <div className="h-full  bg-white dark:bg-black text-black dark:text-white">
-        {user && <Header userName={user.name} />}
-
-        <div className='h-full p-8'>
-            <Link to="/noticias"> <div className='h-1/4 border-4 border-solid rounded-md mb-4  bg-green-50'>
-                <h2 className=''>NOTICIAS</h2>
-                <p>{notice?.title}</p>
-                <p>{notice?.body}</p>
-            </div></Link>
-
-            <Link to="events"><div className='h-1/4 border-4 border-solid rounded-md mb-4  bg-green-50'>
-                <h2>12 MESES, 12 ACTIVIDADES</h2>
-            </div></Link>
-
-            <div className='h-1/4 border-4 border-solid rounded-md  bg-green-50'>
-                <h2>RESERVA HORARIO</h2>
-            </div>
+  
+    return <main className="h-full">
+        <header className='h-1/6 top-0 flex justify-around items-center bg-teal-600	'>
+        <Link to="/"><img src={logo} className='w-20 h-20 cursor-pointer'/></Link>
+            <h1>USERS</h1>
+            <div className='border-2 border-black'>Log Out</div>
+        </header>
+        <div>
+            <ul>
+            {users.map(user => {
+                return <article key={user.id}>
+                 <li>{user.name},  {user.email},  {user.role}, <button onClick={handleRole} className='border-2 border-black'>edit</button></li>
+                 </article>
+            })}
+            </ul>
         </div>
-    </div>
+        {role && <UpdateUserRole user={user} onClose={()=> setRole()} onUpdated={()=> setRole()}/>}
+
+    </main>
+
 }
 
-export default Home
+export default Users
