@@ -1,10 +1,12 @@
-import axios from 'axios';
+import axios from "axios";
 
-async function getPorts() {
-
-    const response = await axios.get('http://localhost:8080/ports')
-    return response.data
-
+async function getPorts(getWeather = false) {
+  let url = "http://localhost:8080/ports";
+  if (getWeather) {
+    url = url + "?weather=true";
+  }
+  const response = await axios.get(url);
+  return response.data;
 }
 
-export default getPorts
+export default getPorts;

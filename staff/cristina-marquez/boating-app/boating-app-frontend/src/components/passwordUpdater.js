@@ -1,6 +1,10 @@
 import updateUserSettings from "../logic/updateUserSettings";
+import { useState } from "react";
+import Toast from "./ui/toast";
 
 function PasswordUpdater({ userInfo }) {
+  const [isToastActive, setIsToastActive] = useState(false);
+  const [toastMessage, setToastMessage] = useState(null);
   const savePassword = async (event) => {
     event.preventDefault();
 
@@ -11,12 +15,16 @@ function PasswordUpdater({ userInfo }) {
 
     if (!firstPassword.length) {
       // error toast
+      setToastMessage("Please, enter new password in both fields");
+      setIsToastActive(true);
       console.log("no password provided");
       return;
     }
 
     if (firstPassword !== secondPassword) {
       // error toast
+      setToastMessage("Passwords don't match");
+      setIsToastActive(true);
 
       console.log("password dont match");
       return;
@@ -28,8 +36,13 @@ function PasswordUpdater({ userInfo }) {
     await updateUserSettings(userInfo._id, modifications);
   };
 
+  const closeToast = () => {
+    setIsToastActive(false);
+  };
+
   return (
     <div className="block p-6 rounded-lg shadow-lg bg-white min-w-full">
+      {isToastActive && <Toast message={toastMessage} onClose={closeToast} />}
       <form onSubmit={savePassword}>
         <div className="grid grid-cols-2 gap-4 ">
           <div className="form-group mb-6">
