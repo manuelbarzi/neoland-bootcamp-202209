@@ -35,9 +35,18 @@ export default function ({onClose, item, onDeleted, onUpdated}) {
 
   }
 
-  const handleQuantity = (event) => {
+  const handleSumQuantity = (event) => {
     event.preventDefault()
 
+    const { quantity: { value: quantity } } = event.target
+
+      return quantity + 1
+  }
+
+  const handleRestQuantity = (event) => {
+    event.preventDefault()
+
+    document.getElementById('')
     alert('suma o resta cantidad')
   }
 
@@ -54,12 +63,12 @@ export default function ({onClose, item, onDeleted, onUpdated}) {
             <form className='flex flex-col gap-2' onSubmit={submitUpdateItem} >
                 <input className='pl-2 h-10 text-xl' id="title" name="title" defaultValue={item.title} />
                 <div className='flex justify-between gap-2'>
-                    <input className="bg-gray-200 w-[50%] pl-2 text-xl content-center" id="quantity" name="quantity" placeholder='Cantidad' />
-                    <button className="bg-gray-200 w-10 h-10 rounded-full flex justify-center text-3xl" onClick={handleQuantity}>+</button>
-                    <button className="bg-gray-200 w-10 h-10 rounded-full flex justify-center text-3xl" onClick={handleQuantity}>-</button>
+                    <input className="bg-gray-200 w-[50%] pl-2 text-xl content-center" id="quantity" name="quantity" placeholder='Cantidad' defaultValue={item.quantity} />
+                    <button className="bg-gray-200 w-10 h-10 rounded-full flex justify-center text-3xl" onClick={handleSumQuantity}>+</button>
+                    <button className="bg-gray-200 w-10 h-10 rounded-full flex justify-center text-3xl" onClick={handleRestQuantity}>-</button>
                 </div>
                 <div className='flex justify-between gap-2'>
-                    <input className="bg-gray-200 w-[50%] pl-2 text-xl content-center" id="amount" name="amount" placeholder='Precio'/>
+                    <input className="bg-gray-200 w-[50%] pl-2 text-xl content-center" id="amount" name="amount" placeholder='Precio' defaultValue={item.amount}/>
                     <button className="bg-gray-200 w-10 h-10 rounded-full flex justify-center text-3xl" onClick={handlePrice}>+</button>
                     <button className="bg-gray-200 w-10 h-10 rounded-full flex justify-center text-3xl" onClick={handlePrice}>-</button>
                 </div>
