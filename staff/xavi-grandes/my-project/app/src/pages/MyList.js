@@ -21,7 +21,6 @@ export default function MyList() {
   const [listName, setListName] = useState();
   const [items, setItems] = useState();
   const [itemToEdit, setItemToEdit] = useState();
-  // const [total, setTotal] = useState(0);
 
   useEffect(() => {
     try {
@@ -36,7 +35,6 @@ export default function MyList() {
           
           totalAmount(items)
         })
-        // .then ((total) => {setTotal(total)})
         
         .catch((error) => {
           if (
@@ -94,7 +92,6 @@ export default function MyList() {
       })
   } 
 
-  
   const handleItemUpdate = () => {
     try {
       retrieveItems(sessionStorage.token, listId)
