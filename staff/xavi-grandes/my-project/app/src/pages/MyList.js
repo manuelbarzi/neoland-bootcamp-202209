@@ -8,7 +8,7 @@ import EditItem from "../components/EditItem";
 import { errors } from "com";
 import retrieveList from "../logic/retrieveList";
 import retrieveItems from "../logic/retrieveItems";
-import updateStatus from "../logic/updateStatus"
+import updateStatus from "../logic/updateStatus";
 import totalAmount from "../logic/totalAmount";
 const { FormatError, AuthError, LengthError, NotFoundError } = errors;
 
@@ -31,11 +31,12 @@ export default function MyList() {
 
           return retrieveItems(sessionStorage.token, listId);
         })
-        .then((items) => { setItems(items)
-          
-          totalAmount(items)
+        .then((items) => {
+          setItems(items);
+
+          totalAmount(items);
         })
-        
+
         .catch((error) => {
           if (
             error instanceof TypeError ||
@@ -68,54 +69,52 @@ export default function MyList() {
 
   const handleCreatedItem = () => {
     try {
-      retrieveItems(sessionStorage.token, listId)
-      .then((items) => {setItems(items);
+      retrieveItems(sessionStorage.token, listId).then((items) => {
+        setItems(items);
 
-        setCreateOpen(!isCreateOpen)
-        })
+        setCreateOpen(!isCreateOpen);
+      });
     } catch (error) {
-        alert(error.message)
+      alert(error.message);
     }
-  }
+  };
 
   const handleChangeStatus = (itemId, itemStatus) => {
     try {
-      updateStatus(itemId, itemStatus)
-
+      updateStatus(itemId, itemStatus);
     } catch (error) {
-        alert(error.message)
+      alert(error.message);
     }
-    
-    retrieveItems(sessionStorage.token, listId)
-    .then((items) => {setItems(items);
 
-      })
-  } 
+    retrieveItems(sessionStorage.token, listId).then((items) => {
+      setItems(items);
+    });
+  };
 
   const handleItemUpdate = () => {
     try {
-      retrieveItems(sessionStorage.token, listId)
-      .then((items) => {setItems(items);
+      retrieveItems(sessionStorage.token, listId).then((items) => {
+        setItems(items);
 
-        closeEditItem()
-        totalAmount(items)
-        })
+        closeEditItem();
+        totalAmount(items);
+      });
     } catch (error) {
-        alert(error.message)
+      alert(error.message);
     }
-  }
+  };
 
   const handleItemDeleted = () => {
     try {
-      retrieveItems(sessionStorage.token, listId)
-      .then((items) => {setItems(items);
+      retrieveItems(sessionStorage.token, listId).then((items) => {
+        setItems(items);
 
-        closeEditItem()
-        })
+        closeEditItem();
+      });
     } catch (error) {
-        alert(error.message)
+      alert(error.message);
     }
-  } 
+  };
 
   return (
     <>
@@ -126,25 +125,29 @@ export default function MyList() {
             <article
               onClick={() => openEditItem(item)}
               key={listName}
-              className="mt-1 bg-blue-300 h-12 w-4/5 rounded-lg flex items-center justify-between px-3 text-lg"
+              className="mt-1 bg-blue-300 h-12 w-[90%] rounded-lg flex items-center px-3 text-lg"
             >
-              <div>{item.title}</div>
-              {item.quantity > 0 && <span>{item.quantity}</span>}
-              {item.amount > 0 && <span>{item.amount}€</span>}
-              <input
-                className="h-8 w-8"
-                type="checkbox"
-                defaultChecked={item.status}
-                onClick={(event) => event.stopPropagation()}
-                onChange={() => handleChangeStatus(item.id, item.status) }
-              />
+              <div className="flex w-[55%] justify-between ">
+                <span>{item.title}</span>
+              </div>
+              <div className="flex items-center justify-between w-[45%]">
+                {item.quantity > 0 && <span className="w-[20%] text-center">{item.quantity}</span>}
+                {item.amount > 0 && <span className="w-[30%] text-left ">{item.amount}€</span>}
+                <input
+                  className="h-8 w-[20%]"
+                  type="checkbox"
+                  defaultChecked={item.status}
+                  onClick={(event) => event.stopPropagation()}
+                  onChange={() => handleChangeStatus(item.id, item.status)}
+                />
+              </div>
             </article>
           ))}
       </main>
       <hr className="fixed bottom-[6.5rem] border border-black w-full"></hr>
       <section className="w-full h-[2.4rem] fixed bottom-[4.1rem] flex justify-around items-center px-2 bg-white">
         <p>Precio total del carrito</p>
-        <p id='total'></p>
+        <p id="total"></p>
       </section>
       <footer className="z-10 fixed bottom-0 h-[4rem] flex justify-center items-center w-full bg-gray-200">
         <button
@@ -167,7 +170,7 @@ export default function MyList() {
           listId={listId}
           item={itemToEdit}
           onDeleted={handleItemDeleted}
-          onClose={closeEditItem} 
+          onClose={closeEditItem}
           onUpdated={handleItemUpdate}
         />
       )}
