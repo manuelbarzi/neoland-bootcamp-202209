@@ -63,6 +63,21 @@ function Port({ portInfo }) {
 
             {/* facilities icons */}
           </div>
+          <div>
+            {/** TODO: Prevent loading this section if Weather property is null */}
+            <span className="text-midblue font-semibold">Weather:</span>
+            <ul className="text-midblue font-thin">
+              <li>{portInfo.weather.main},</li>
+              <li> {portInfo.weather.temperature} ºC</li>
+              <li> {portInfo.weather.windSpeed} knots</li>
+              <li>{portInfo.weather.humidity}%</li>
+              <img
+                alt="Port Weather icon"
+                src={`http://openweathermap.org/img/wn/${portInfo.weather.icon}@2x.png`}
+              />
+            </ul>
+          </div>
+
           <div className="flex justify-center">
             <button
               onClick={createNewBooking}
