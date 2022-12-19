@@ -113,8 +113,6 @@ function EventMonth() {
         setInscription('true')
     }
 
-
-
     return <main className="h-full">
         <header className='h-1/6 top-0 flex justify-around items-center bg-teal-600	'>
             <Link to="/"><img src={logo} className='w-20 h-20 cursor-pointer' /></Link>
@@ -129,6 +127,7 @@ function EventMonth() {
                 <h3>{event?.requirement}</h3>
                 <h3> Fecha: {event?.date}</h3>
                 <h3> Plazas: {event?.capacity}</h3>
+                {/* {event?.participants >= event.capacity && <div></div>} */}
                 {event?.inscription === 'close' && <div><h3>Inscrition: Close</h3></div>}
                 {event?.inscription === 'open' && <div>
                     Inscripciones <button onClick={handlesignUp} className="border-2 border-black bg-slate-300 p-1 cursor-pointer m-1">Inscribirse</button>
@@ -153,10 +152,12 @@ function EventMonth() {
 
         {deleteEvent && <DeleteEvent event={event} onDeleted={handleEventDeleted} onClose={() => setDeleteEvent()} />}
     
-        {inscription && <Inscription event={event} user={user} onClose={() => setInscription()}/>}
+        {inscription && <Inscription event={event} user={user} onClose={() => setInscription()} onRegistered={() =>setInscription()}
+/>}
     
     </main>
 }
 
 export default EventMonth
+
 

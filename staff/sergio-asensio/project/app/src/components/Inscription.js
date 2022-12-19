@@ -1,9 +1,17 @@
+import signUpEvent from '../logic/signUpEvent'
 
-export default function ({ onClose, user }) {
+export default function ({ onClose, onRegistered, event  }) {
 
     const confirmInscription = () => {
-        console.log(user.id)
-        onClose()
+        console.log(event.id)
+         try {
+            signUpEvent(sessionStorage.token, event.id)
+                .then(() => onRegistered())
+                .catch(error => alert(error.message))
+        } catch (error) {
+            alert(error.message)
+        }
+
     }
    
 

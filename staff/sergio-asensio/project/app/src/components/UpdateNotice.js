@@ -26,7 +26,7 @@ export default function ({ onUpdated, onClose, notice }) {
                 <label htmlFor="body">Updade-Notice</label>
                 <textarea className="text-black pl-2" type="text" name="body" id="body" placeholder="input the notice" defaultValue={notice.body}></textarea>
                 
-                <button>Update</button>
+                <button type='button'>Update</button>
             </form>
         </div>
     </div>
