@@ -62,12 +62,16 @@ export default function MyList() {
   const closeEditItem = () => setItemToEdit();
 
   const handleCreatedItem = () => {
-    retrieveItems(sessionStorage.token, listId)
-    .then((items) => {setItems(items);
+    try {
+      retrieveItems(sessionStorage.token, listId)
+      .then((items) => {setItems(items);
 
-      closeEditItem();
-    });
-  };
+        setCreateOpen(!isCreateOpen)
+        })
+    } catch (error) {
+        alert(error.message)
+    }
+  }
 
   const handleChangeStatus = (itemId, itemStatus) => {
     try {
@@ -82,6 +86,19 @@ export default function MyList() {
 
       })
   } 
+
+  
+  const handleItemUpdate = () => {
+    try {
+      retrieveItems(sessionStorage.token, listId)
+      .then((items) => {setItems(items);
+
+        closeEditItem()
+        })
+    } catch (error) {
+        alert(error.message)
+    }
+  }
 
   const handleItemDeleted = () => {
     try {
@@ -106,6 +123,8 @@ export default function MyList() {
               className="mt-1 bg-blue-300 h-12 w-4/5 rounded-lg flex items-center justify-between px-3 text-lg"
             >
               <div>{item.title}</div>
+              {item.quantity > 0 && <span>{item.quantity}</span>}
+              {item.amount > 0 && <span>{item.amount}€</span>}
               <input
                 className="h-8 w-8"
                 type="checkbox"
@@ -142,7 +161,8 @@ export default function MyList() {
           listId={listId}
           item={itemToEdit}
           onDeleted={handleItemDeleted}
-          onClose={closeEditItem} /*onUpdated={handleItemUpdated}*/
+          onClose={closeEditItem} 
+          onUpdated={handleItemUpdate}
         />
       )}
     </>
