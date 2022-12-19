@@ -51,12 +51,7 @@ export default function ({ onClose, item, onDeleted, onUpdated }) {
     setQuantity(newQuantity);
   };
 
-  const handleRestQuantity = (event) => {
-    event.preventDefault();
-
-    document.getElementById("");
-    alert("suma o resta cantidad");
-  };
+  const handleRestQuantity = () => setQuantity(quantity - 1)
 
   const handlePrice = (event) => {
     event.preventDefault();
