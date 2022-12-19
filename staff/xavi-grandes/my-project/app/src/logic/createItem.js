@@ -1,3 +1,7 @@
+import { errors } from 'com'
+
+const { ConflictError } = errors
+
 /**
  * Create list box on the home
  * @param {string} listId 
@@ -15,17 +19,25 @@ export default function (listId, title) {
         const xhr = new XMLHttpRequest()
 
         xhr.onload = () => {
-            const {status, responseText: json} = xhr
+            const {status, responseText: json } = xhr
 
-            if(status >= 500) {
-                const {error} = JSON.parse(json)
+            // if(status >= 500) {
+            //     const {error} = JSON.parse(json)
 
-                reject(new Error(error))
+            //     reject(new Error(error))
 
-                return
+            //     return
+            // }
+
+            // resolve()
+
+            if (status === 201)
+                resolve()
+            else if (status === 409) {
+                const { error } = JSON.parse(json)
+                
+                reject(new ConflictError(error))
             }
-
-            resolve()
         }
 
         xhr.onerror = () => reject(new Error ('connection error'))

@@ -124,7 +124,7 @@ export default function MyList() {
           items.map((item) => (
             <article
               onClick={() => openEditItem(item)}
-              key={listName}
+              key={item.title}
               className="mt-1 bg-blue-300 h-12 w-[90%] rounded-lg flex items-center px-3 text-lg justify-between"
             >
               <div className="flex w-[55%] justify-between ">
