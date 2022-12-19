@@ -21,13 +21,23 @@ function retrieveEventMonthNumber(userId, month) {
             const startDate = new Date(year, month - 1, 1)
             const endDate = new Date(year, month, 1)
 
-            return Event.findOne({ date: { $gte: startDate, $lt: endDate } }).populate('user', '-email -password -__v').lean()
+            return Event.findOne({ date: { $gte: startDate, $lt: endDate } })
+                .populate('user', '-email -password -__v')
+                .populate('participants', 'name')
+                .lean()
         })
         .then(event => {
             if (!event) {
                 throw new NotFoundError(`event for month ${month} does not exist`)
-            } else
-                event.id = event._id.toString()
+            }
+            
+            event.participants?.forEach(participant => {
+                participant.id = participant._id.toString()
+
+                delete participant._id
+            })
+
+            event.id = event._id.toString()
             delete event._id
             delete event.__v
 

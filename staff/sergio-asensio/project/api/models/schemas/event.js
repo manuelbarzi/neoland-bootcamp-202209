@@ -36,6 +36,7 @@ module.exports = new Schema({
         type: String,
     },
     participants: {
-        type: [ObjectId]
+        type: [ObjectId],
+        ref: 'User'
     }
 })

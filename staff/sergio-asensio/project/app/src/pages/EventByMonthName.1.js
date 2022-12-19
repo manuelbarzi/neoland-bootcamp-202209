@@ -133,6 +133,7 @@ function EventMonth() {
 
         {event ? <div>
             <div>
+                <p>{event.participants}</p>
                 <h1 >{event?.title}</h1>
                 <h3>{event?.body}</h3>
                 <h3>{event?.requirement}</h3>
@@ -147,13 +148,6 @@ function EventMonth() {
                 -------------------------------------
                 <img src={event?.image} />
             </div>
-
-            {event?.participants?.map(user => {
-
-
-
-                return <li key={user.id}>{user.name}</li>
-            }) }
 
             {user?.role === 'admin' && <div>
                 <button onClick={handleDeleteEvent} className="border-2 border-black  bg-slate-300 cursor-pointer m-1">BORRAR</button>
