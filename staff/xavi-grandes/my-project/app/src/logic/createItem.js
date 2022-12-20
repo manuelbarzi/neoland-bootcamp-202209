@@ -21,16 +21,6 @@ export default function (listId, title) {
         xhr.onload = () => {
             const {status, responseText: json } = xhr
 
-            // if(status >= 500) {
-            //     const {error} = JSON.parse(json)
-
-            //     reject(new Error(error))
-
-            //     return
-            // }
-
-            // resolve()
-
             if (status === 201)
                 resolve()
             else if (status === 409) {

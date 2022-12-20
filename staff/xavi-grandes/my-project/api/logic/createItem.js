@@ -11,14 +11,6 @@ module.exports = function (listId, title) {
   if (typeof title !== "string") throw new TypeError("title is not a string");
   if (!title.length) throw new Error("title is empty");
 
-  // return List.findById(listId)
-  //   .then((list) => {
-  //     if (!list) throw new Error(`list with id ${listId} does not exist`);
-
-  //     return Item.create({ list: listId, title, status: false, quantity: 0, amount: 0 });
-  //   })
-  //   .then(() => {});
-
   return List.findById(listId)
     .then((list) => {
       if (!list) throw new Error(`list with id ${listId} does not exist`);

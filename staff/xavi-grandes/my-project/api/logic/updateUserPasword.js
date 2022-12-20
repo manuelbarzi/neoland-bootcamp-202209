@@ -14,9 +14,6 @@ module.exports = function (userId, password, newPassword) {
     return User.findById(userId)
     .then(user => {
         if(!user) throw new Error(`user with id ${userId} does not exist`)
-        // if(user.password === password) {
-            
-        //     return User.updateOne({ _id: userId }, { $set: {password: newPassword} })
 
         return compare (password, user.password)
         .then((match) => {
@@ -26,7 +23,5 @@ module.exports = function (userId, password, newPassword) {
             return hash(password, 8)
             .then((hash) => User.updateOne({ _id: userId }, { $set: {password: hash}}))
         })
-        // }
-        // throw new Error('Current password wrong')
     })
 }
