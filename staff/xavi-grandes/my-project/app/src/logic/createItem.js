@@ -27,6 +27,10 @@ export default function (listId, title) {
                 const { error } = JSON.parse(json)
                 
                 reject(new ConflictError(error))
+            } else if (status < 500){
+                const { error } = JSON.parse(json)
+
+                reject(new Error(error) )
             }
         }
 
