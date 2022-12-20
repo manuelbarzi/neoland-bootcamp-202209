@@ -105,7 +105,6 @@ function EventMonth() {
         eventRetrieveMonth()
     }
 
-
     const handleDeleteEvent = () => {
         setDeleteEvent('true')
     }
@@ -122,10 +121,21 @@ function EventMonth() {
         setDeleteInscription('true')
     }
 
+    const handleResgistered = () => {
+        setInscription()
+        eventRetrieveMonth()
+    }
+
+    const handleDeleteInscription = () => {
+        setDeleteInscription()
+        eventRetrieveMonth()
+    }
+
     return <main className="h-full">
         <header className='h-1/6 top-0 flex justify-around items-center bg-teal-600	'>
             <Link to="/"><img src={logo} className='w-20 h-20 cursor-pointer' /></Link>
             <h2 className='uppercase'>{monthName}</h2>
+            <h2>{user?.name}</h2>
             <button onClick={goEvents} className='border-2 border-black'>Go_Back</button>
         </header>
 
@@ -168,9 +178,9 @@ function EventMonth() {
 
         {deleteEvent && <DeleteEvent event={event} onDeleted={handleEventDeleted} onClose={() => setDeleteEvent()} />}
     
-        {inscription && <Inscription event={event} user={user} onClose={() => setInscription()} onRegistered={() =>setInscription()}/>}
+        {inscription && <Inscription event={event} user={user} onClose={() => setInscription()} onRegistered={handleResgistered}/>}
     
-        {deleteinscription && <DeleteInscription event={event} onClose={() => setDeleteInscription()} onDeleted={() => setDeleteInscription()}/>}
+        {deleteinscription && <DeleteInscription event={event} onClose={() => setDeleteInscription()} onDeleted={handleDeleteInscription}/>}
     </main>
 }
 

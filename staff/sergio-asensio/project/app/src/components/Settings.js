@@ -45,11 +45,9 @@ export default function Settings(){
     }, [])
      
     return <div className=" bg-slate-200 p-2">
-        {user?.role === 'admin' && <div><button onClick={() => navigate('/users') } className='border-2 border-black'>Usuarios</button></div>} 
-       
+        <button onClick={() => navigate('/users') } className='border-2 border-black'>Usuarios</button>
         <button className='border-2 border-black'>profile</button>
         <button onClick={switchMode}><IoInvertModeOutline /></button>
-
         <button onClick={logout} className='border-2 border-black'>logout</button>
         </div>
 }

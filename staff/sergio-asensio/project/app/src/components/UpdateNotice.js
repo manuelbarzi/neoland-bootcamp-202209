@@ -4,6 +4,7 @@ export default function ({ onUpdated, onClose, notice }) {
     
     const submitUpdateNotice = event => {
         event.preventDefault()
+        console.log('adios')
 
         const { title: { value: title }, body: { value: body } } = event.target
 
@@ -26,7 +27,7 @@ export default function ({ onUpdated, onClose, notice }) {
                 <label htmlFor="body">Updade-Notice</label>
                 <textarea className="text-black pl-2" type="text" name="body" id="body" placeholder="input the notice" defaultValue={notice.body}></textarea>
                 
-                <button type='button'>Update</button>
+                <button>Update</button>
             </form>
         </div>
     </div>

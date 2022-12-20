@@ -11,8 +11,9 @@ import Context from '../components/Context'
 import getMonthNumberByName from '../utils/getMonthNumberByName'
 import { Link } from 'react-router-dom'
 import logo from '../img/logo.jpg'
+import DeleteInscription from '../components/DeleteInscription'
 
-const { FormatError, AuthError, LengthError, NotFoundError } = errors
+const { FormatError, AuthError, LengthError, NotFoundError, ConflictError } = errors
 
 function EventMonth() {
     const { monthName } = useParams()
@@ -24,6 +25,7 @@ function EventMonth() {
     const [updateEvent, setUpdateEvent] = useState()
     const [deleteEvent, setDeleteEvent] = useState()
     const [inscription, setInscription] = useState()
+    const [deleteinscription, setDeleteInscription] = useState()
 
     const { showAlert } = useContext(Context)
 
@@ -113,17 +115,23 @@ function EventMonth() {
         setInscription('true')
     }
 
+    const handleUnsignUp = () => {
+        setDeleteInscription('true')
+    }
 
-    // .then(users => {
-    //     users.forEach(user => {
-    //         user.id = user._id.toString()
-    //         delete user._id
-    //         delete user.__v   
-            
-    //         delete user.password
-    
-    //     })
+    const handleResgistered = () => {
+        setInscription()
+        eventRetrieveMonth()
+    }
 
+    const handleDeleteInscription = () => {
+        setDeleteInscription()
+        eventRetrieveMonth()
+    }
+
+    // const inscribedUser = event?.participants?.some(e =>  user.Id === e.toString()) 
+    console.log(user.id)
+    console.log(event.participants)
     return <main className="h-full">
         <header className='h-1/6 top-0 flex justify-around items-center bg-teal-600	'>
             <Link to="/"><img src={logo} className='w-20 h-20 cursor-pointer' /></Link>
@@ -133,7 +141,10 @@ function EventMonth() {
 
         {event ? <div>
             <div>
-                <p>{event.participants}</p>
+
+                {event?.participants?.includes(user.Id) && <div><h1>hola</h1></div> }
+
+
                 <h1 >{event?.title}</h1>
                 <h3>{event?.body}</h3>
                 <h3>{event?.requirement}</h3>
@@ -143,11 +154,17 @@ function EventMonth() {
                     <h3>{event.inscription = 'No more places'}</h3></div>}
                 {event?.inscription === 'close' && <div><h3>Inscrition: Close</h3></div>}
                 {event?.inscription === 'open' && <div>
-                    Inscripciones <button onClick={handlesignUp} className="border-2 border-black bg-slate-300 p-1 cursor-pointer m-1">Inscribirse</button>
+                    Inscripciones <div>
+                    <button onClick={handlesignUp} className="border-2 border-black bg-slate-300 p-1 cursor-pointer m-1">Inscribirse</button>
+                    <button onClick={handleUnsignUp} className="border-2 border-black bg-slate-300 p-1 cursor-pointer m-1">Desinscribirse</button></div>
                 </div>}
                 -------------------------------------
                 <img src={event?.image} />
             </div>
+
+            {event?.participants?.map(user => {
+                return <li key={user.id}>{user.name}</li>
+            }) }
 
             {user?.role === 'admin' && <div>
                 <button onClick={handleDeleteEvent} className="border-2 border-black  bg-slate-300 cursor-pointer m-1">BORRAR</button>
@@ -156,18 +173,14 @@ function EventMonth() {
 
         </div> : <div>{user?.role === 'admin' && <div><button onClick={handleCreateEvent} className="border-2 border-black bg-slate-300 cursor-pointer m-1">crear</button></div>
         }
-
+            
         </div>}
 
         {createEvent && <CreateEvent monthName={monthName} onCreated={handleEventCreated} closeCreate={() => setCreateEvent()} />}
-
         {updateEvent && <UpdateEvent event={event} onUpdated={eventUpdated} onClose={() => setUpdateEvent()} />}
-
         {deleteEvent && <DeleteEvent event={event} onDeleted={handleEventDeleted} onClose={() => setDeleteEvent()} />}
-    
-        {inscription && <Inscription event={event} user={user} onClose={() => setInscription()} onRegistered={() =>setInscription()}
-/>}
-    
+        {inscription && <Inscription event={event} user={user} onClose={() => setInscription()} onRegistered={handleResgistered}/>}
+        {deleteinscription && <DeleteInscription event={event} onClose={() => setDeleteInscription()} onDeleted={handleDeleteInscription}/>}
     </main>
 }
 

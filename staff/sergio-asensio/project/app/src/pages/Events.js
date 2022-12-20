@@ -56,6 +56,7 @@ function Events() {
         <header className='h-1/6 top-0 flex justify-around items-center bg-teal-600	'>
         <Link to="/"><img src={logo} className='w-20 h-20 cursor-pointer'/></Link>
             <h1>12 MESES, 12 ACTIVIDADES</h1>
+            <h2>{user?.name}</h2>
             <div className='className="border border-2 border-black'>Log Out</div>
         </header>
         

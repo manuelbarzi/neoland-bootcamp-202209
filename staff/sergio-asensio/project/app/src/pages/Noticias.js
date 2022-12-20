@@ -11,6 +11,9 @@ import retrieveUser from '../logic/retrieveUser'
 import { errors } from 'com'
 import Context from '../components/Context'
 import { useContext } from 'react'
+import { MdDeleteForever, MdEdit } from 'react-icons/md'
+// import { IoInvertModeOutline } from 'react-icons/io5'
+
 
 
 
@@ -144,6 +147,7 @@ function Noticias() {
     return <><header className='h-1/6 top-0 flex justify-around items-center bg-teal-600	'>
         <Link to="/"><img src={logo} className='w-20 h-20 cursor-pointer' /></Link>
         <h1>NOTICIAS</h1>
+        <h2>{user?.name}</h2>
         {user?.role === 'admin' && <button onClick={() => openCreateNotice()}> + </button>}
     </header>
         <div className="flex flex-col items-center gap-2 py-[5rem] h-full  bg-gray-100">
@@ -152,8 +156,8 @@ function Noticias() {
                     <p className='underline p-2'>{notice.title}</p>
                     <p>{notice.body}</p>
                     {user?.role === 'admin' && <div>
-                        <button onClick={() => openUpdateNotice(notice.id)}>Editar</button>
-                        <button onClick={() => openDeleteNotice(notice.id)}>Borrar</button>
+                        <button onClick={() => openUpdateNotice(notice.id)}><MdEdit/></button>
+                        <button onClick={() => openDeleteNotice(notice.id)}><MdDeleteForever/></button>
                     </div>}
                 </article>
             })}

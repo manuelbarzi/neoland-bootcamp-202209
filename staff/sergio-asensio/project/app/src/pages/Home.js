@@ -66,17 +66,17 @@ function Home() {
 
         <div className='h-full p-8'>
             <Link to="/noticias"> <div className='h-1/4 border-4 border-solid rounded-md mb-4  bg-green-50'>
-                <h2 className=''>NOTICIAS</h2>
-                <p>{notice?.title}</p>
-                <p>{notice?.body}</p>
+                <h2 className='underline p-2'>NOTICIAS</h2>
+                <p className='ml-2'>{notice?.title}</p>
+                <p className='ml-2'>{notice?.body}</p>
             </div></Link>
 
             <Link to="events"><div className='h-1/4 border-4 border-solid rounded-md mb-4  bg-green-50'>
-                <h2>12 MESES, 12 ACTIVIDADES</h2>
+                <h2 className='underline p-2'>12 MESES, 12 ACTIVIDADES</h2>
             </div></Link>
 
             <div className='h-1/4 border-4 border-solid rounded-md  bg-green-50'>
-                <h2>RESERVA HORARIO</h2>
+                <h2 className='underline p-2'>RESERVA HORARIO</h2>
             </div>
         </div>
     </div>

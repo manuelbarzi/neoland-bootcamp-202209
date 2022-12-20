@@ -8,6 +8,8 @@ const registerUserHandler = require('./handlers/registerUserHandler')
 const retrieveUserHandler = require('./handlers/retrieveUserHandler')
 const retrieveUsersHandler = require('./handlers/retrieveUsersHandler')
 const updateUserRoleHandler = require('./handlers/updateUserRoleHandler')
+const retrieveOneUserHandler = require('./handlers/retrieveOneUserHandler')
+
 
 
 const createNoticeHandler = require('./handlers/createNoticeHandler')
@@ -44,6 +46,8 @@ mongoose.connect(MONGODB_URL)
         api.post('/users/auth', jsonBodyParser, authenticateUserHandler)
         api.post('/users', jsonBodyParser, registerUserHandler)
         api.get('/users', jwtVerifier, retrieveUserHandler)
+        api.get('/users/user/:user', jwtVerifier, retrieveOneUserHandler)
+
         api.get('/users/all', jwtVerifier, retrieveUsersHandler)
         api.patch('/users/:user', jwtVerifier,jsonBodyParser, updateUserRoleHandler)
 

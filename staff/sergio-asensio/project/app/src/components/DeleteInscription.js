@@ -3,7 +3,6 @@ import unsignUpEvent from '../logic/unsignUpEvent'
 export default function ({ onClose, onDeleted, event  }) {
 
     const confirmDeleteInscription = () => {
-        console.log(event.id)
          try {
             unsignUpEvent(sessionStorage.token, event.id)
                 .then(() => onDeleted())
