@@ -20,9 +20,9 @@ function PortsList() {
   return (
     <div className="w-full">
       {isLoading && (
-        <div class="flex justify-center items-center">
+        <div className="flex justify-center items-center">
           <div
-            className="mt-16"
+            className="animate-spin mt-16"
             style={{ animation: "spin 4s linear infinite" }}
             role="status"
           >
@@ -30,11 +30,11 @@ function PortsList() {
               icon={faDharmachakra}
               className="text-6xl text-darkblue"
             />
-            <span class="visually-hidden">Loading...</span>
+            <span className="visually-hidden">Loading...</span>
           </div>
         </div>
       )}
-      <div className="grid gap-10 grid-cols-3 p-8">
+      <div className="grid gap-10 grid-cols-3 p-4">
         {ports &&
           ports.map((port) => <Port key={port._id} portInfo={port}></Port>)}
       </div>

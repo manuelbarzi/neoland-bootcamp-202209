@@ -28,12 +28,12 @@ function Port({ portInfo }) {
   }
 
   return (
-    <>
-      <div className="flex flex-col bg-white font-sans shadow-md">
-        <div
-          className="h-60 bg-cover bg-center"
-          style={{ backgroundImage: `url(${portInfo.imagePath})` }}
-        ></div>
+    <div className="flex flex-col bg-white font-sans shadow-md">
+      <div
+        className="h-60 bg-cover bg-center"
+        style={{ backgroundImage: `url(${portInfo.imagePath})` }}
+      ></div>
+      <div className="flex flex-col h-full justify-between">
         <div className="p-6">
           <div className="flex flex-col items-center">
             <h2 className="text-darkblue font-bold text-lg">{portInfo.name}</h2>
@@ -49,8 +49,8 @@ function Port({ portInfo }) {
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-2 ">
-            <div className="grid place-items-start">
+          <div className="flex w-full">
+            <div className="flex flex-col w-1/2">
               <span className="text-midblue font-semibold">Address:</span>
               <ul className="text-midblue font-thin">
                 <li>{portInfo.street}</li>
@@ -71,7 +71,7 @@ function Port({ portInfo }) {
               <p className="text-midblue font-thin">{portInfo.berths}</p>
             </div>
 
-            <div className="grid place-items-end">
+            <div className="flex flex-col justify-end items-end w-1/2">
               <span className="text-midblue font-semibold"></span>
               <ul className="text-midblue font-thin">
                 <li>
@@ -98,18 +98,17 @@ function Port({ portInfo }) {
               </ul>
             </div>
           </div>
-
-          <div className="flex justify-center h-full">
-            <button
-              onClick={createNewBooking}
-              className="bg-midgreen text-white rounded-lg text-md p-2 w-full "
-            >
-              Book now
-            </button>
-          </div>
+        </div>
+        <div className="justify-self-end">
+          <button
+            onClick={createNewBooking}
+            className="bg-midgreen text-white text-md p-2 w-full "
+          >
+            Book now
+          </button>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
