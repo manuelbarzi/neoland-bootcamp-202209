@@ -13,7 +13,7 @@ function retrieveUsers(userId) {
         .then(user => {
             if (!user)
                 throw new NotFoundError(`user with id ${userId} does not exist`)
-            if (user.role !== 'admin') throw new Error('user is not able to see the users')
+            // if (user.role !== 'admin') throw new Error('user is not able to see the users')
 
 
             return User.find().sort({ email: 1 }).lean()

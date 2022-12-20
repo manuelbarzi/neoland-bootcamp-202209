@@ -38,7 +38,7 @@
 //         }
 //         xhr.onerror = () => reject(new Error('connection error'))
 
-//         xhr.open('GET', `http://localhost/users/${user}`)
+//         xhr.open('GET', `http://localhost/users/user/${user}`)
 //         xhr.setRequestHeader('Authorization', `Bearer ${token}`)
 //         xhr.send()
 //     })

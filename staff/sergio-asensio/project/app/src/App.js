@@ -15,17 +15,22 @@ function App() {
   log.info('App -> render')
 
   const [loggedIn, setLoggedIn] = useState(!!sessionStorage.token)
+  // const [role, setRole] = useState()
   const [message, setMessage] = useState()
   const [level, setLevel] = useState()
   const navigate = useNavigate()
 
   const login = token => {
     sessionStorage.token = token
-     
+
     setLoggedIn(true)
 
     navigate('/')
   }
+
+  // const saveRole = (role) => {
+  //   setRole(role)
+  // }
 
   const logout = () => {
     delete sessionStorage.token
@@ -40,6 +45,7 @@ function App() {
 
   const closeAlert = () => setMessage()
 
+  {/* // return <Context.Provider value={{ login, logout, showAlert, saveRole }}> */ }
   return <Context.Provider value={{ login, logout, showAlert }}>
     {loggedIn ? <Routes>
       <Route path="/" element={<Home />} />
@@ -47,7 +53,8 @@ function App() {
       <Route path="/events" element={<Events />} />
       <Route path="/events/:monthName" element={<EventByMonthName />} />
       <Route path="/users" element={<Users />} />
-      
+
+      {/* {role === "admin" && <Route path="/users" element={<Users />} />} */}
 
     </Routes>
       :
@@ -57,7 +64,7 @@ function App() {
 
       </Routes>}
 
-      {message && <Alert message={message} level={level} onClose={closeAlert} />}
+    {message && <Alert message={message} level={level} onClose={closeAlert} />}
   </Context.Provider>
 }
 

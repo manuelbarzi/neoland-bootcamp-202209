@@ -5,13 +5,15 @@ import Context from '../components/Context'
 import { errors } from 'com'
 import { useEffect, useState } from 'react'
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom'
+import retrieveUser from '../logic/retrieveUser'
 
 const { FormatError, AuthError, LengthError, NotFoundError } = errors
 
 
-export default function Loginate({onClose}) {
+export default function Loginate({ onClose }) {
     log.info('Login -> render')
 
+    // const { login, showAlert, saveRole } = useContext(Context)
     const { login, showAlert } = useContext(Context)
 
     const handleLogin = event => {
@@ -23,7 +25,12 @@ export default function Loginate({onClose}) {
 
         try {
             authenticateUser(email, password)
-                .then(token => login(token))
+                .then(token => {
+                    login(token)
+
+                    // retrieveUser(token)
+                    //     .then(user => saveRole(user.role))
+                })
                 .catch(error => {
                     if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
                         showAlert(error.message, 'warn')
@@ -54,5 +61,5 @@ export default function Loginate({onClose}) {
                 <button className="p-2 border rounded-xl">Login</button>
             </form>
         </div>
-     </div>
+    </div>
 }

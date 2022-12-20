@@ -147,7 +147,7 @@ function EventMonth() {
                 <h3> Fecha: {event?.date}</h3>
                 <h3> Plazas: {event?.capacity}</h3>
                 {event?.participants?.length >= event.capacity && <div>
-                    <h3>{event.inscription = 'No more places'}</h3></div>}
+                    <h3>{event.inscription = 'No more places'}</h3><button onClick={handleUnsignUp} className="border-2 border-black bg-slate-300 p-1 cursor-pointer m-1">Desinscribirse</button></div>}
                 {event?.inscription === 'close' && <div><h3>Inscrition: Close</h3></div>}
                 {event?.inscription === 'open' && <div>
                     Inscripciones <div>

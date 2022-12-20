@@ -7,17 +7,18 @@ import { useContext } from 'react'
 import logo from '../img/logo.jpg'
 import retrieveUsers from '../logic/retrieveUsers'
 import UpdateUserRole from '../components/UpdateUserRole'
+import {  MdEdit } from 'react-icons/md'
+
 
 
 const { FormatError, AuthError, LengthError, NotFoundError } = errors
 
 function Users() {
-
     const { showAlert } = useContext(Context)
 
     const [user, setUser] = useState()
     const [users, setUsers] = useState([])
-    const [role, setRole] = useState()
+    const [userToChange, setUserToChange] = useState()
 
 
     useEffect(() => {
@@ -72,11 +73,8 @@ function Users() {
         }
     }
 
-    const handleRole = () => {
-        setRole(true)
-        
-    }
-  
+    const handleEditRole = (userToChange) => setUserToChange(userToChange)
+    
     return <main className="h-full">
         <header className='h-1/6 top-0 flex justify-around items-center bg-teal-600	'>
         <Link to="/"><img src={logo} className='w-20 h-20 cursor-pointer'/></Link>
@@ -85,15 +83,16 @@ function Users() {
         </header>
         <div>
             <ul>
-            {users.map(user => {
-                return <article key={user.id}>
-                 <li>{user.name},  {user.email},  {user.role}, <button  onClick={handleRole} className='border-2 border-black'>edit</button></li>
-                 {/* {role && <UpdateUserRole usuario={user.id} onClose={()=>setRole()} onUpdated={()=> setRole()}/>} */}              
+            {users.map(userToChange => {
+                return <article key={userToChange.id}>
+                 <li>{userToChange.name},  {userToChange.email},  {userToChange.role}
+                 {user.role === 'admin' && <button onClick={() => handleEditRole(userToChange)} className='border-2 border-black'><MdEdit/></button>}
+                 </li>
                  </article>
             })}
             </ul>
         </div>
-        {role && <UpdateUserRole onClose={()=>setRole()} onUpdated={()=> setRole()}/>}
+        {userToChange && <UpdateUserRole userToChange={userToChange}  onClose={()=>setUserToChange()} onUpdated={()=>setUserToChange()}/>}
 
     </main>
 
