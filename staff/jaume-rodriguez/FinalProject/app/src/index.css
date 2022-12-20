@@ -30,7 +30,7 @@ select:-webkit-autofill:focus {
 }
 
 .scrollbar::-webkit-scrollbar-thumb {
-  background: #2b2b2a;
+  background: #1a1a19;
 }
 
 .scrollbar::-webkit-scrollbar-thumb:hover {

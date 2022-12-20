@@ -2,6 +2,8 @@
 //DONE: Aplicar questCompleted to random
 //DONE: Add new img when adventures are empty
 //DONE: Create galery to adventures img
+//TODO: RANKING
+//TODO: CHAT
 //TODO: Etiquetar que es cada cosa en los render de páginas y componentes
 //TODO: Limitar la info que nos llegan de los retriev
 //TODO: New alert system

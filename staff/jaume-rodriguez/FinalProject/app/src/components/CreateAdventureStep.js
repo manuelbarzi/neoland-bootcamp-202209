@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import createAdventureStep from '../logic/createAdventureStep';
 import bgCreateAdventureStep from '../img/bg-create-adventure-step.png';
-import buttonCreateAdventure from '../img/button-create-adventure.png';
-import buttonCreateAdventureActive from '../img/button-create-adventure-active.png';
+import buttonAddNewStep from '../img/button-add-new-step.png';
+import buttonAddNewStepActive from '../img/button-add-new-step-active.png';
 import buttonCancel from '../img/button-cancel.png';
 
 function SetName({ onClose, onCreated, adventureId }) {
@@ -58,7 +58,7 @@ function SetName({ onClose, onCreated, adventureId }) {
                                 onMouseEnter={() => setHoverButtonCreateAdventure(true)}
                                 onMouseLeave={() => setHoverButtonCreateAdventure(false)}
                                 className="cursor-pointer"
-                                src={hoverButtonCreateAdventure ? buttonCreateAdventureActive : buttonCreateAdventure}
+                                src={hoverButtonCreateAdventure ? buttonAddNewStepActive : buttonAddNewStep}
                                 alt="buttonCreateAdventure" />
                         </button>
                     </section>

@@ -1,4 +1,4 @@
-function retrieveUser(token) {
+function retrieveUsers(token) {
     if (typeof token !== 'string') throw new TypeError('token is not a string')
     if (!token.length) throw new Error('token is empty')
 
@@ -16,16 +16,14 @@ function retrieveUser(token) {
                 return
             }
 
-            const user = JSON.parse(json)
-
-            resolve(user)
+            const users = JSON.parse(json)
+            return resolve(users)
         }
 
-        xhr.open('GET', `http://localhost/user`)
+        xhr.open('GET', 'http://localhost/users/')
         xhr.setRequestHeader('Authorization', `Bearer ${token}`)
-        xhr.setRequestHeader('Content-Type', 'application/json')
         xhr.send()
     })
 }
 
-export default retrieveUser
+export default retrieveUsers

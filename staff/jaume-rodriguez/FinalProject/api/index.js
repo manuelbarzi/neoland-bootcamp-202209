@@ -7,6 +7,7 @@ const {
     handlerRegister,
     handlerAuth,
     handlerRetrieveUser,
+    handlerRetrieveUsers,
     handlerUpdateUserName,
     handlerUpdateUserEmail,
     handlerUpdateUserPassword,
@@ -57,7 +58,8 @@ mongoose.connect(MONGODB_URL)
         api.post('/users/auth', jsonBodyParser, handlerAuth)
         api.post('/users', jsonBodyParser, handlerRegister)
 
-        api.get('/users', jwtVerifier, handlerRetrieveUser)
+        api.get('/user', jwtVerifier, handlerRetrieveUser)
+        api.get('/users/', jwtVerifier, handlerRetrieveUsers)
         api.get('/users/:targetUserId', jwtVerifier, handlerRetrieveAUser)
         api.patch('/users/updateUserName', jwtVerifier, jsonBodyParser, handlerUpdateUserName)
         api.patch('/users/updateUserEmail', jwtVerifier, jsonBodyParser, handlerUpdateUserEmail)

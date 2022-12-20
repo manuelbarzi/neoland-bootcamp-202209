@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import Settings from './pages/Settings'
 import Adventures from './pages/Adventures'
 import Adventure from './pages/Adventure'
+import Ranking from './pages/Ranking'
 import Community from './pages/Community'
 import Profile from './pages/Profile'
 import { Routes, Route, Navigate } from 'react-router-dom'
@@ -46,6 +47,7 @@ function App() {
       <Route path="/community" element={<Community />} />
       <Route path="/adventures" element={<Adventures />} />
       <Route path="/adventures/:adventureId" element={<Adventure />} />
+      <Route path="/ranking" element={<Ranking />} />
       <Route path="/profile/:targetUserId" element={<Profile />} />
       <Route path="*" element={<Navigate replace to="/" />} />
     </Routes>

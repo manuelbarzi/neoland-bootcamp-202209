@@ -13,8 +13,6 @@ import AdventureActive from '../img/icon-adventure-active.png';
 import iconFreeReward from '../img/icon-free-reward.png';
 import { Link } from 'react-router-dom'
 import DailyQuest from '../components/DailyQuest'
-import GAME_CONSTANTS from '../shared/constants';
-import { format } from 'timeago.js'
 
 function Home() {
     const [user, setUser] = useState(null)
@@ -41,24 +39,6 @@ function Home() {
             .catch(error => alert(error.message))
     }
 
-    function isReadyToPlayQuest() {
-        if (!user) {
-            return false
-        }
-
-        const currentTimeMilliseconds = Date.now()
-        const timeLapsed = currentTimeMilliseconds - user.lastQuestPlayedTime
-        return timeLapsed >= GAME_CONSTANTS.dailyQuestCooldown;
-    }
-
-    function getNextPlayDate() {
-        if (!user) {
-            return 0
-        }
-
-        return user.lastQuestPlayedTime + GAME_CONSTANTS.dailyQuestCooldown;
-    }
-
     return (
         <div className="min-h-screen flex flex-col bg-[#191919]">
             <div className="relative flex flex-grow font-alata h-full flex-col  justify-center items-center bg-[url('/src/img/bg-home.jpg')] bg-no-repeat bg-center">
@@ -76,7 +56,7 @@ function Home() {
                                     src={hoverButtonCommunity ? iconCommunityActive : iconCommunity}
                                     alt="community" />
                             </Link>
-                            <pan className="text-[1.5rem]">{user?.name}</pan>
+                            <span className="text-[1.5rem]">{user?.name}</span>
                             <Link to="/settings">
                                 <img
                                     onMouseEnter={() => sethoverButtonEdit(true)}
@@ -91,7 +71,7 @@ function Home() {
                                 className=''
                                 src={iconExp}
                                 alt="resource" />
-                            <span className='absolute text-right w-[6rem] -ml-[9.5rem] mt-[0.5rem] text-[0.85rem]'>{user?.exp} / 1000</span>
+                            <span className='absolute text-right w-[6rem] -ml-[9.5rem] mt-[0.5rem] text-[0.85rem]'>{user?.exp}</span>
                             <img
                                 className=''
                                 src={iconGold}
@@ -129,28 +109,6 @@ function Home() {
                                 <DailyQuest
                                     onClose={closeDailyQuest} />}
                         </section>
-                        {/*                             <div>
-                                <span className='text-gray-300 absolute z-10 mt-5 ml-5 text-[0.85rem]'>
-                                    {(user && user.lastQuestPlayedText !== ' ')
-                                        ? user.lastQuestPlayedText
-                                        : 'You are ready to play your first quest'
-                                    }
-                                </span>
-                                <span className='text-gray-400 absolute z-10 mt-10 ml-[1rem] text-[0.7rem] text-right w-[12.3rem]'>
-                                    {(user && user.lastQuestPlayedTime !== 0)
-                                        ? (
-                                            isReadyToPlayQuest()
-                                                ? 'Quest available'
-                                                : 'Time for next Daily Quest: ' + format(getNextPlayDate(), 'en-EN', { minInterval: 3, })
-                                        )
-                                        : ''
-                                    }
-                                </span>
-                                <img
-                                    className='pt-1.5'
-                                    src={questLog}
-                                    alt="questLog" />
-                            </div> */}
                     </main>
                 </div>
             </div>

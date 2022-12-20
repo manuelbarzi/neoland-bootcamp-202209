@@ -3,6 +3,7 @@ module.exports = {
     handlerAuth: require('./handlerAuth'),
 
     handlerRetrieveUser: require('./handlerRetrieveUser'),
+    handlerRetrieveUsers: require('./handlerRetrieveUsers'),
     handlerRetrieveAUser: require('./handlerRetrieveAUser'),
     handlerUpdateUserName: require('./handlerUpdateUserName'),
     handlerUpdateUserEmail: require('./handlerUpdateUserEmail'),

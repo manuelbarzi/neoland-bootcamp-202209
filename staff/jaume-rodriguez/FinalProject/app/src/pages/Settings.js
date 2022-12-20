@@ -43,7 +43,6 @@ function Settings() {
                             <img
                                 className='absolute z-10 -mt-[0.1rem] ml-[0.3rem] hover:ml-[0.1rem] duration-100 cursor-pointer'
                                 src={buttonBack}
-                                Settings
                                 alt="back" />
                             <img
                                 className='absolute -mt-[1rem] ml-[18.4rem] pt-1 cursor-pointer'

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import retrieveAdventures from '../logic/retrieveAdventures'
 import DeleteAdventure from '../components/DeleteAdventure'
 import CreateAdventure from '../components/CreateAdventure'
-import buttonBack from '../img/icon-back.png';
+import buttonHome from '../img/icon-home.png';
 import buttonNext from '../img/button-next.png';
 import buttonPrevious from '../img/button-previous.png';
 import buttonCreateActive from '../img/button-create-active.png';
@@ -46,6 +46,7 @@ function Adventures() {
         }
     }
     const handleAdventureDeleted = () => {
+        setVisibleAdventureIndex(Math.max(0, visibleAdventureIndex - 1));
         try {
             retrieveAdventures(sessionStorage.token)
                 .then(adventures => {
@@ -64,7 +65,6 @@ function Adventures() {
     const openCreateAdventure = () => setCreateAdventureVisible(true)
     const closeCreateAdventure = () => setCreateAdventureVisible(false)
 
-
     const modifyVisibleAdventureIndex = (indexModification) => {
         let newIndex = visibleAdventureIndex + indexModification;
         if (newIndex < 0) {
@@ -77,27 +77,25 @@ function Adventures() {
 
     return (
         <div className="min-h-screen flex flex-col bg-[#191919]">
-            <div className="relative flex flex-grow font-alata h-full flex-col  justify-center items-center bg-[url('/src/img/bg-settings.jpg')] bg-no-repeat bg-center">
-                <div className="flex flex-col justify-center w-96 h-[42rem] gap-[16rem] py-6">
-                    <header className='text-white flex flex-col mt-[0.5rem] '>
+            <div className="relative flex flex-grow font-alata h-full flex-col justify-center items-center bg-[url('/src/img/bg-settings.jpg')] bg-no-repeat bg-center">
+                <div className="flex flex-col justify-center gap-[2rem]">
+                    <header className='text-white flex flex-row items-start justify-center'>
                         <Link to="/">
                             <img
-                                className='absolute z-10 -mt-[0.1rem] hover:-ml-[0.2rem]  duration-100 cursor-pointer'
-                                src={buttonBack}
-                                Settings
-                                alt="back" />
+                                className='cursor-pointer absolute ml-[13rem]'
+                                src={buttonHome}
+                                alt="home" />
                         </Link>
-                        <span className=' text-[2rem] ml-[3rem] -mt-[1rem]'>Adventures</span>
+                        <span className=' text-yellow-400 text-[2rem]'>Adventures</span>
                     </header>
-                    <section className='flex flex-col items-center justify-center '>
+                    <section className='flex flex-col h-[27rem] w-[21.813rem] bg-inherit items-center'>
                         {adventures && adventures.length > 0 &&
-                            <section className='flex flex-row justify-center absolute items-center -ml-[0.2rem]'>
+                            <section className='text-white mt-[0.7rem] flex flex-col relative'>
                                 <div>
                                     {adventures[visibleAdventureIndex].creator.id === userId &&
                                         <img
-                                            className='absolute ml-[11.2rem] mt-[1.3rem] cursor-pointer'
+                                            className='absolute ml-[11.2rem] mt-[1.85rem] cursor-pointer'
                                             src={buttonDelete}
-                                            Settings
                                             alt="delete"
                                             onClick={() => openDeleteAdventure(adventures[visibleAdventureIndex].id)} />}
                                     {adventures[visibleAdventureIndex].isMainAdventure === "main"
@@ -112,14 +110,14 @@ function Adventures() {
                                     <Link to={`/adventures/${adventures[visibleAdventureIndex].id}`}>
                                         <img
                                             key={adventures[visibleAdventureIndex].id}
-                                            className='cursor-pointer'
+                                            className='cursor-pointer mt-2'
                                             src={adventureMainOne}
-                                            alt="home" />
+                                            alt="adventures" />
                                     </Link>
                                 </div>
                             </section>}
                         {(!adventures || adventures.length === 0) &&
-                            <section className='flex empty-adventures flex-row justify-center absolute -mt-[12.5rem]'>
+                            <section className='text-white mt-[0.7rem] flex flex-col relative'>
                                 <img
                                     className=''
                                     onClick={openCreateAdventure}
@@ -129,7 +127,7 @@ function Adventures() {
                     </section>
                     <button
                         onClick={() => modifyVisibleAdventureIndex(-1)}
-                        className="absolute text-white ml-[0.8rem]">
+                        className="absolute text-white">
                         <img
                             className=''
                             src={buttonPrevious}
@@ -137,14 +135,14 @@ function Adventures() {
                     </button>
                     <button
                         onClick={() => modifyVisibleAdventureIndex(+1)}
-                        className="absolute text-white ml-[20em]">
+                        className="absolute text-white ml-[18.9rem]">
                         <img
                             className=''
                             src={buttonNext}
                             alt="next" />
                     </button>
                     <section>
-                        <div className='flex flex-col items-center'>
+                        <div className='flex flex-col items-center mt-[1rem]'>
                             <img
                                 onMouseEnter={() => setHoverButtonCreate(true)}
                                 onMouseLeave={() => setHoverButtonCreate(false)}
@@ -164,7 +162,7 @@ function Adventures() {
                             onCreated={handleAdventureCreated}
                             onClose={closeCreateAdventure} />}
                 </div>
-            </div>
+            </div >
         </div >
     );
 }
