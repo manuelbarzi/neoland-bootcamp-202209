@@ -1,69 +1,69 @@
-export default function calculateNextItvDate(licenseDate, lastInspectionDate) {
-    var now = new Date
-    var yearNow = now.getFullYear()
+export default function calculateNextItvDate(licenseDate, lastItvDate) {
+    const now = new Date
+    const yearNow = now.getFullYear()
 
-    var licenseYear = licenseDate.getFullYear()
-    var lastInspectionYear = lastInspectionDate.getFullYear()
+    const licenseYear = licenseDate.getFullYear()
+    const lastInspectionYear = lastItvDate.getFullYear()
 
-    var age = yearNow - licenseYear
+    const age = yearNow - licenseYear
 
     if (age < 4) {
-        if (!lastInspectionDate) {
-            var licenseMonth = licenseDate.getMonth()
-            var licenseDay = licenseDate.getDate()
+        if (!lastItvDate) {
+            const licenseMonth = licenseDate.getMonth()
+            const licenseDay = licenseDate.getDate()
 
-            var nextInspectionYear = licenseYear + 4
+            const nextInspectionYear = licenseYear + 4
 
-            var nextInspectionDate = new Date(nextInspectionYear, licenseMonth, licenseDay)
+            const nextInspectionDate = new Date(nextInspectionYear, licenseMonth, licenseDay)
 
             return nextInspectionDate
-        } else if (lastInspectionDate) {
-            var licenseMonth = licenseDate.getMonth()
-            var licenseDay = licenseDate.getDate()
+        } else if (lastItvDate) {
+            const licenseMonth = licenseDate.getMonth()
+            const licenseDay = licenseDate.getDate()
 
-            var nextInspectionYear = lastInspectionYear + 2
+            const nextInspectionYear = lastInspectionYear + 2
 
-            var nextInspectionDate = new Date(nextInspectionYear, licenseMonth, licenseDay)
+            const nextInspectionDate = new Date(nextInspectionYear, licenseMonth, licenseDay)
 
             return nextInspectionDate
         }
     } else if (age < 10) {
-        if (!lastInspectionDate) {
-            var licenseMonth = licenseDate.getMonth()
-            var licenseDay = licenseDate.getDate()
+        if (!lastItvDate) {
+            const licenseMonth = licenseDate.getMonth()
+            const licenseDay = licenseDate.getDate()
 
-            var nextInspectionYear = licenseYear + 4
+            const nextInspectionYear = licenseYear + 4
 
-            var nextInspectionDate = new Date(nextInspectionYear, licenseMonth, licenseDay)
+            const nextInspectionDate = new Date(nextInspectionYear, licenseMonth, licenseDay)
 
             return nextInspectionDate
-        } else if (lastInspectionDate) {
-            var licenseMonth = licenseDate.getMonth()
-            var licenseDay = licenseDate.getDate()
+        } else if (lastItvDate) {
+            const licenseMonth = licenseDate.getMonth()
+            const licenseDay = licenseDate.getDate()
 
-            var nextInspectionYear = lastInspectionYear + 2
+            const nextInspectionYear = lastInspectionYear + 2
 
-            var nextInspectionDate = new Date(nextInspectionYear, licenseMonth, licenseDay)
+            const nextInspectionDate = new Date(nextInspectionYear, licenseMonth, licenseDay)
 
             return nextInspectionDate
         }
     } else {
-        if (!lastInspectionDate) {
-            var licenseMonth = licenseDate.getMonth()
-            var licenseDay = licenseDate.getDate()
+        if (!lastItvDate) {
+            const licenseMonth = licenseDate.getMonth()
+            const licenseDay = licenseDate.getDate()
 
-            var nextInspectionYear = licenseYear + 4
+            const nextInspectionYear = licenseYear + 4
 
-            var nextInspectionDate = new Date(nextInspectionYear, licenseMonth, licenseDay)
+            const nextInspectionDate = new Date(nextInspectionYear, licenseMonth, licenseDay)
 
             return nextInspectionDate
-        } else if (lastInspectionDate) {
-            var licenseMonth = licenseDate.getMonth()
-            var licenseDay = licenseDate.getDate()
+        } else if (lastItvDate) {
+            const licenseMonth = licenseDate.getMonth()
+            const licenseDay = licenseDate.getDate()
 
-            var nextInspectionYear = lastInspectionYear + 1
+            const nextInspectionYear = lastInspectionYear + 1
 
-            var nextInspectionDate = new Date(nextInspectionYear, licenseMonth, licenseDate)
+            const nextInspectionDate = new Date(nextInspectionYear, licenseMonth, licenseDay)
 
             return nextInspectionDate
         }

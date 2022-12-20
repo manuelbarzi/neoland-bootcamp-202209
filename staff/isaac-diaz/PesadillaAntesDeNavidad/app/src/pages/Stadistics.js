@@ -4,16 +4,19 @@ import log from '../utils/coolog'
 import retrieveUser from '../logic/retrieveUser'
 import Header from '../components/Header'
 import { useParams } from 'react-router-dom'
-import EditVehicle from '../components/EditVehicle'
-// import nextInspectionOil from '../logic/helpers/calculateNextInspectionOil'
-// import calculateNextItvDate from '../logic/helpers/calculateNextItvDate'
+import updateVehicle from '../logic/updateVehicle'
+import calculateNextItvDate from '../logic/helpers/calculateNextItvDate'
+import calculateNextCheckOilDate from '../logic/helpers/calculateNextCheckOil'
+import calculateKmsToExpireCheckOil from '../logic/helpers/calculateKmsToExpireCheckOil'
 
 export default function Stadistics() {
     log.info('render -> myProfile')
 
     const [user, setUser] = useState()
     const [vehicle, setVehicle] = useState()
-    const [editVehicleVisible, setEditVehicleVisible] = useState()
+    const [nextItvDate, setNextItvDate] = useState()
+    const [nextOilCheckDate, setNextOilCheckDate] = useState()
+    // const [editVehicleVisible, setEditVehicleVisible] = useState()
 
     const { vehicleId } = useParams()
 
@@ -31,56 +34,101 @@ export default function Stadistics() {
         } catch (error) {
             alert(error.message)
         }
+        // try {
+        //     calculateNextItvDate()
+        //     calculateNextCheckOilDate()
+        // } catch (error) {
+        //     alert(error.message)
+        // }
     }, [])
 
-    const openEditVisible = () => setEditVehicleVisible(true)
+    useEffect(() => {
+        if(vehicle && vehicle.licenseDate && vehicle.lastItvDate) {
+            const nextItvDateCalculated = calculateNextItvDate(new Date(vehicle.licenseDate), new Date(vehicle.lastItvDate))
+            const nextCheckDateCalculated = calculateNextCheckOilDate(vehicle.lastOilCheckKms, new Date(vehicle.lastOilCheckDate), new Date(vehicle.licenseDate), vehicle.fuelType)
+            const nextCheckKmsCalculated = calculateKmsToExpireCheckOil(vehicle.lastKms, vehicle.kms, vehicle.fuelType)
 
-    const closeEditVisible = () => setEditVehicleVisible(false)
+            setNextItvDate(nextItvDateCalculated)
+            setNextOilCheckDate(nextCheckDateCalculated)
+        }
+    }, [vehicle])
 
-    const handleEditVehicle = () => {
-        
-        closeEditVisible()
+    // const openEditVisible = () => setEditVehicleVisible(true)
+
+    // const closeEditVisible = () => setEditVehicleVisible(false)
+
+    // const handleEditVehicle = () => {
+
+    // closeEditVisible()
+
+    // }
+    const onUpdateVehicle = event => {
+        event.preventDefault()
+
+        const { brand: { value: brand }, model: { value: model }, fuelType: { value: fuelType }, license: { value: license },
+            licenseDate: { value: licenseDate }, kms: { value: kms }, lastOilCheckDate: { value: lastOilCheckDate }, lastOilCheckKms: { value: lastOilCheckKms },
+            lastItvDate: { value: lastItvDate }, tyrePressureFront: { value: tyrePressureFront }, tyrePressureRear: { value: tyrePressureRear } } = event.target
+
+        try {
+            updateVehicle(sessionStorage.token, vehicleId, brand, model, fuelType, license, new Date(licenseDate), parseInt(kms), new Date(lastOilCheckDate),
+                parseInt(lastOilCheckKms), new Date(lastItvDate), tyrePressureFront, tyrePressureRear)
+                .then(() => {
+                    retrieveVehicle(sessionStorage.token, vehicleId)
+                        .then(vehicle => setVehicle(vehicle))
+                    // setVehicle({ ...vehicle, brand, model, fulType, license, licenseDate, kms, lastItv, lastCheckOil, tyrePressure })
+                })
+                .catch(error => {
+                    alert(error.message)
+                })
+        } catch (error) {
+            alert(error.message)
+        }
     }
 
     return <main className='h-full flex items-center justify-center mt-6 border-4'>
         {user && <Header userName={user.name} />}
-        {editVehicleVisible && <EditVehicle onClose={closeEditVisible} onEdited={handleEditVehicle} />}
-        <div className='flex items-center justify-center border-black'>
+        {/* {editVehicleVisible && <EditVehicle onClose={closeEditVisible} onEdited={handleEditVehicle} />} */}
+        <form onSubmit={onUpdateVehicle} className='flex items-center justify-center border-black'>
             <div className='flex flex-col border-2'>
                 <h2>Brand</h2>
-                <input defaultValue={vehicle?.brand} />
+                <input required name='brand' id='brand' type='text' defaultValue={vehicle?.brand} />
                 <h2>Model</h2>
-                <input defaultValue={vehicle?.model} />               
+                <input required name='model' id='model' type='text' defaultValue={vehicle?.model} />
+                <h2>Fuel type</h2>
+                <select id='fuelType' defaultValue={vehicle?.fuelType}>
+                    <option name='gasolina' type='text' id='gasolina' value='gasolina'>gasolina</option>
+                    <option name='diesel' type='text' id='diesel' value='diesel'>diesel</option>
+                </select>
             </div>
             <div className='flex flex-col border-2'>
-                <h2>Type</h2>
-                <select defaultValue={vehicle?.type}>
-                    <option value='gasolina'>gasolina</option>
-                    <option value='diesel'>diesel</option>
-                </select>
                 <h2>license</h2>
-                <input defaultValue={vehicle?.license} />
+                <input required name='license' id='license' type='text' defaultValue={vehicle?.license} />
                 <h2>licenseDate</h2>
-                <input defaultValue={vehicle?.licenseDate.slice(0, -17).split('-').reverse().join('/')} />
+                <input required name='licenseDate' id='licenseDate' type='Date' defaultValue={vehicle?.licenseDate?.slice(0, -14)} />
                 <h2>kms</h2>
-                <input defaultValue={vehicle?.kms} />
+                <input required name='kms' id='kms' type='number' defaultValue={vehicle?.kms} />
             </div>
             <div className='border-2'>
+                <h2>Last check oil date</h2>
+                <input required name='lastOilCheckDate' id='lastOilCheckDate' type='Date' defaultValue={vehicle?.lastOilCheckDate?.slice(0, -14)} />
+                <h2>Last check oil kms</h2>
+                <input required name='lastOilCheckKms' id='lastOilCheckKms' type='number' defaultValue={vehicle?.lastOilCheckKms} />
+                <h2>Next check Oil Date</h2>
+                {nextOilCheckDate && <p>{nextOilCheckDate.nextOilCheckDate.toISOString().slice(0, -14).split('-').reverse().join('/')}</p>}
+                <h2>Next ckeck Oil Kms</h2>
+                {nextOilCheckDate && <p>{nextOilCheckDate.nextOilCheckKms}</p>}
                 <h2>Last ITV</h2>
-                <input />
+                <input required name='lastItvDate' id='lastItvDate' type='Date' defaultValue={vehicle?.lastItvDate?.slice(0, -14)} />
                 <h2>Next ITV</h2>
-                {/* <p>{calculateNextItvDate}</p> */}
-                <h2>Last revision oil</h2>
-                <input />
-                <h2>Next Revision Oil</h2>
-                {/* <p>{nextInspectionOil}</p> */}
-                <h2>tire pressure</h2>
-                <input />
-
+                {nextItvDate && <p>{nextItvDate.toISOString()}</p>}                
+                <h2>tire pressure front</h2>
+                <input required name='tyrePressureFront' id='tyrePressureFront' type='text' defaultValue={vehicle?.tyrePressureFront} />
+                <h2>tire pressure rear</h2>
+                <input required name='tyrePressureRear' id='tyrePressureRear' type='text' defaultValue={vehicle?.tyrePressureRear} />
             </div>
-        </div>
-        <div className='flex'>
-        <button className='' onClick={openEditVisible} className='border-black'>Edit</button>    
-        </div>
+            <div>
+                <button className='border-black'>Update</button>
+            </div>
+        </form>
     </main>
 }

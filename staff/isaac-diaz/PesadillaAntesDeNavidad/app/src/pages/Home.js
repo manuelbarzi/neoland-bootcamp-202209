@@ -75,7 +75,7 @@ function Home() {
     }
     //Hacer el delete(revisar logicas y api)
 
-    return <main className='h-full mt-16 min-h-screen overflow-hidden bg-white dark:bg-black text-black dark:text-white m-6'>
+    return <main className='h-80 overflow-y-auto mt-16 min-h-screen overflow-hidden bg-white dark:bg-black text-black dark:text-white m-6'>
         {vehicles && !createVehicleVisible && vehicles.length > 0 && vehicles.map(vehicle => <TarjetVehicle vehicle={vehicle} refreshVehicles={vehiclesToRetrieve} />)}
         {createVehicleVisible && <CreateVehicle onClose={closeCreateVehicle} onCreated={handleCreatedVehicle} />}
         {user && <Header userName={user.name} />}

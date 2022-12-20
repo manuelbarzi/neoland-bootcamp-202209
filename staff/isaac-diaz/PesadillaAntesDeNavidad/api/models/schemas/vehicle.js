@@ -15,7 +15,7 @@ module.exports = new Schema({
         type: String,
         required: true       
     },
-    type: {
+    fuelType: {
         type: String,
         required: true
     },
@@ -26,23 +26,25 @@ module.exports = new Schema({
     },
     licenseDate: {
         type: Date,
-        required: true,
-    },
-    kms: {
-        type: String,
         required: true
     },
-    lastInspection: {
-        date: {
-            type: Date,
-            required: true
-        },
-        kms: {
-            type: Number,
-            required: true
-        }
+    kms: {
+        type: Number,
+        required: true
     },
-    lastITV: {
+    lastOilCheckDate: {
         type: Date
+    },
+    lastOilCheckKms: {
+        type: Number
+    },
+    lastItvDate: {
+        type: Date
+    },
+    tyrePressureFront: {
+        type: String
+    },
+    tyrePressureRear: {
+        type: String
     }
 })

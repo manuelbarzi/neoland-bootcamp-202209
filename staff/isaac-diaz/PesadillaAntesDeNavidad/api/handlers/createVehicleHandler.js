@@ -1,15 +1,15 @@
 const createVehicle = require('../logic/createVehicle')
 const { 
     errors: {
-        LengthError, FormatError, NotFoundError, AuthError, ConflictError
+        LengthError, FormatError, NotFoundError, ConflictError
     }
 } = require('com')
 
 module.exports = (req, res) => {
     try {
-        const { body: { brand, model, type, license, licenseDate, kms }, userId } = req
+        const { body: { brand, model, fuelType, license, licenseDate, kms }, userId } = req
 
-        createVehicle(userId, brand, model, type, license, new Date(licenseDate), kms)
+        createVehicle(userId, brand, model, fuelType, license, new Date(licenseDate), kms)
             .then(vehicleId => res.status(201).json(vehicleId))
             .catch(error => {
                 if (error instanceof NotFoundError)

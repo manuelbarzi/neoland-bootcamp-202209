@@ -3,25 +3,13 @@
 // si ha pasado un año de la fecha de matriculacion, caducada
 // si ha pasado un año desde la ultima revision, caducada
 
- function isTheInspectionCaducated(lastInspectionOil, licenseDate, lastKms, kms, gas) {
+ function isOilCheckExpired(lastOilCheckDate, lastOilCheckKms, licenseDate, kms, fuelType) {
     const now = new Date
     const licenseYear = licenseDate.getFullYear()
-    const lastInspectYear = lastInspectionOil.getFullYear()
+    const lastOilCheckYear = lastOilCheckDate.getFullYear()
 
-    if (gas === 'gasolina') {
-        if (lastKms + 10000 >= kms) {
-
-            return true
-        }
-        else if (licenseYear + 1 <= now) {
-
-            return true
-        }
-        else if (lastInspectYear + 1 <= now)
-
-            return true
-    } else if (gas === 'diesel') {
-        if (lastKms + 15000 >= kms) {
+    if (fuelType === 'gasolina') {
+        if (lastOilCheckKms + 10000 >= kms) {
 
             return true
         }
@@ -29,7 +17,19 @@
 
             return true
         }
-        else if (lastInspectYear + 1 <= now)
+        else if (lastOilCheckYear + 1 <= now)
+
+            return true
+    } else if (fuelType === 'diesel') {
+        if (lastOilCheckKms + 15000 >= kms) {
+
+            return true
+        }
+        else if (licenseYear + 1 <= now) {
+
+            return true
+        }
+        else if (lastOilCheckYear + 1 <= now)
 
             return true
     }

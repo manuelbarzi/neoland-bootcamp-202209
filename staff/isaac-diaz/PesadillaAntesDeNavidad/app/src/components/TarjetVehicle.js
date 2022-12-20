@@ -3,7 +3,7 @@ import Button from './Button'
 import DeleteVehicle from '../components/DeleteVehicle'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-
+import StatusVehicle from '../components/StatusVehicle'
 // const [vehicle, setVehicles] = useState
 
 export default function ({ vehicle, refreshVehicles }) {
@@ -32,8 +32,8 @@ export default function ({ vehicle, refreshVehicles }) {
                     <p>{vehicle.brand}</p>
                     <label className='underline text-lg'>Model</label>
                     <p>{vehicle.model}</p>
-                    <label className='underline text-lg'>Type</label>
-                    <p>{vehicle.type}</p>
+                    <label className='underline text-lg'>Fuel type</label>
+                    <p>{vehicle.fuelType}</p>
                 </div>
                 <div className='flex flex-col mt-0 m-6'>                   
                     <label className='underline text-lg'>License</label>
