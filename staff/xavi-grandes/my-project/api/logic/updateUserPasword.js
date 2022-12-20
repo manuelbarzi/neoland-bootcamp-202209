@@ -20,7 +20,7 @@ module.exports = function (userId, password, newPassword) {
             if(!match) throw new AuthError ('Current password wrong')
 
 
-            return hash(password, 8)
+            return hash(newPassword, 8)
             .then((hash) => User.updateOne({ _id: userId }, { $set: {password: hash}}))
         })
     })
