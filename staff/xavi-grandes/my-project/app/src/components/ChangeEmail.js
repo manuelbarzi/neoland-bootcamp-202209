@@ -2,11 +2,13 @@ import log from '../utils/coolog'
 import { IoCloseCircle } from 'react-icons/io5'
 import updateUserEmail from '../logic/updateUserEmail'
 import retrieveUser from '../logic/retrieveUser'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
+import Context from '../components/Context';
 
 export default function ({onClose}) {
 
     const [user, setUser] = useState()
+    const { showAlert } = useContext(Context)
 
     useEffect(() => {
         try {
@@ -29,7 +31,8 @@ export default function ({onClose}) {
         try {
             updateUserEmail(sessionStorage.token, newEmail)
                 .then(() => {
-                    alert('The user email has been changed successfully')
+                    // alert('The user email has been changed successfully')
+                    showAlert('The user email has been changed successfully', 'info')
                     user.email = newEmail
                     onClose()
                 })

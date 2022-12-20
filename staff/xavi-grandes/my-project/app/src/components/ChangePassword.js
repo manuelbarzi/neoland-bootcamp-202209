@@ -1,9 +1,12 @@
 import log from '../utils/coolog'
 import { IoCloseCircle } from 'react-icons/io5'
 import updateUserPassword from '../logic/updateUserPasword'
-
+import { useContext } from 'react'
+import Context from '../components/Context';
 
 export default function ({onClose}) {
+
+    const { showAlert } = useContext(Context)
 
     const handleUpdateUserPassword = event => {
         log.info('Settings -> handleUpdateUserPassword')
@@ -15,7 +18,8 @@ export default function ({onClose}) {
     try {
         updateUserPassword(sessionStorage.token, password, newPassword)
         .then(() => {
-            alert('Pasword has been changed successfully')
+            // alert('Pasword has been changed successfully')
+            showAlert('Password has been changed successfully', 'info')
             //Change with show alert
             onClose()
         })

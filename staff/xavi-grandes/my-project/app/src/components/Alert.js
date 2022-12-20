@@ -18,7 +18,7 @@ export default function Alert({ message, level = "error", onClose }) {
       <div
         className={`p-5 rounded-xl flex flex-col items-end gap-2 
         ${ level === "fatal" ? "bg-[red]" : "bg-white dark:bg-black"}
-        ${ level === "info" ? "bg-[#71ce71c1] text-white" : "bg-white dark:bg-black"}
+        ${ level === "info" ? "bg-[#71ce71e4] text-white" : "bg-white dark:bg-black"}
          text-black dark:text-white border-4 border-[${color}]`}
         onClick={(event) => event.stopPropagation()}
       >
