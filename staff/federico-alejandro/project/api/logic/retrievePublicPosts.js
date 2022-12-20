@@ -14,7 +14,13 @@ function retrievePublicPosts(userId) {
             if (!user)
                 throw new Error(`user with id ${userId} does not exist`)
 
-            return Post.find({ visibility: 'public' }).sort({ date: -1 }).populate('user', '-email -password')
+            return Post.find({ visibility: 'public' })
+                .select('-__v')
+                .sort({ date: -1 })
+                .populate({
+                    path: 'user',
+                    select: '-email -password'
+                })
                 .populate({
                     path: 'chats',
                     populate: {
@@ -31,7 +37,8 @@ function retrievePublicPosts(userId) {
                             select: 'name'
                         }
                     }
-                }).select('-__v').lean()
+                })
+                .lean()
         })
         .then(posts => {
             posts.forEach(post => {
@@ -39,41 +46,54 @@ function retrievePublicPosts(userId) {
                 delete post._id
                 delete post.__v
 
-                if (!post.user.id) {
-                    post.user.id = post.user._id.toString()
-                    delete post.user._id
+                const { user } = post
+
+                if (user._id) {
+                    user.id = user._id.toString()
+                    delete user._id
+                    delete user.__v
                 }
 
-                const chat = post.chats.find(chat => chat.user.id.toString() === userId)
+                if (post.user.id !== userId) {
+                    if (post.user.id === userId) {
+                        post.chats = []
 
-                post.chats = []
-                /// 51 a 61 comentar
-                // post.chats?.forEach(chat => {
-                //     chat.id = chat._id.toString()
-                //     delete chat._id
-                //     delete chat.__v
+                        const chat = post.chats.find(chat => (chat.user._doc.id || chat.user._doc._id.toString()) === userId)
 
-                //     if (!chat.user.id) {
-                //         chat.user.id = chat.user._id.toString()
-                //         delete chat.user._id
-                //     }
-
-                    if (chat) {
-                        chat.comments.forEach(comment => {
-                            comment.id = comment._id.toString()
-
-                            delete comment._id
-                            delete comment.__v
-
-                            // if (!comment.user.id) {
-                            comment.user.id = comment.user._id.toString()
-                            delete comment.user._id
-                            // }
-                        })
-
-                        post.chats.push(chat)
+                        if (chat) post.chats.push(chat)
                     }
-                // })
+                }
+
+                post.chats.forEach(chat => {
+                    chat.id = chat._id.toString()
+                    delete chat._id
+
+                    chat.user = chat.user._doc
+
+                    const { user } = chat
+
+                    if (user._id) {
+                        user.id = user._id.toString()
+
+                        delete user._id
+                    }
+
+                    chat.comments.forEach(comment => {
+                        comment.id = comment._id.toString()
+
+                        delete comment._id
+                        delete comment.__v
+
+                        comment.user = comment.user._doc
+
+                        const { user } = comment
+
+                        if (user._id) {
+                            user.id = user._id.toString()
+                            delete user._id
+                        }
+                    })
+                })
             })
 
             return posts

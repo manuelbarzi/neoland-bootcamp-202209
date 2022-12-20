@@ -1,12 +1,12 @@
 const { NotFoundError, ConflictError, FormatError, LengthError, AuthError } = require('com')
-const createComment = require('../logic/createComment')
+const createChat = require('../logic/createChat')
 
 module.exports = (req, res) => {
     try {
-        const { body: { text }, params: { postId, chatId }, userId } = req
+        const { body: { text }, params: { postId }, userId } = req
 
-        createComment(userId, postId, chatId, text)
-            .then(() => res.status(201).send())
+        createChat(userId, postId, text)
+            .then(chatId => res.status(201).json({ chatId }))
             .catch(error => {
                 if (error instanceof AuthError) res.status(401).json({ error: error.message })
                 else if (error instanceof NotFoundError) res.status(404).json({ error: error.message })

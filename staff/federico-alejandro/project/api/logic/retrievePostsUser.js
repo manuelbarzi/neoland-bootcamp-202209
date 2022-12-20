@@ -10,18 +10,22 @@ function retrievePostsUser(userId) {
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
     if (!userId.length) throw new LengthError('userId is empty')
 
-    return User.findById(userId).select('-password').lean()
+    return User.findById(userId)
         .then(user => {
             if (!user)
                 throw new NotFoundError(`user with id ${userId} does not exist`)
 
-            return Post.find({ user: userId }).sort({ date: -1 }).populate('user', '-email -password')
+            return Post.find({ user: userId })
+                .sort({ date: -1 })
+                .populate({
+                    path: 'user',
+                    select: '-email -password'
+                })
                 .populate({
                     path: 'chats',
                     populate: {
                         path: 'user',
                         select: 'name',
-                        select: '-email -password'
                     }
                 })
                 .populate({
@@ -33,35 +37,53 @@ function retrievePostsUser(userId) {
                             select: 'name'
                         }
                     }
-                }).lean()
+                })
+                .lean()
         })
         .then(posts => {
             posts.forEach(post => {
                 post.id = post._id.toString()
                 delete post._id
                 delete post.__v
-                // post.user = { id: post.user.toString() }
-                if (!post.user.id) {
-                    post.user.id = post.user._id.toString()
-                    delete post.user._id
+
+                const { user } = post
+
+                if (user._id) {
+                    user.id = user._id.toString()
+                    delete user._id
+                    delete user.__v
                 }
+                // post.user = { id: post.user.toString() }
+                // if (!post.user.id) {
+                //     post.user.id = post.user._id.toString()
+                //     delete post.user._id
+                // }
 
-                const chat = post.chats.find(chat => chat.user.id.toString() === userId)
+                if (post.user.id !== userId) {
+                    post.chats = []
+                                               
+                    const chat = post.chats.find(chat => (chat.user._doc.id || chat.user._doc._id.toString()) === userId)
 
-                post.chats = []
+                    if (chat) post.chats.push(chat)
+                }
+                post.chats.forEach(chat => {
+                    chat.id = chat._id.toString()
+                    delete chat._id
+                    //     delete chat.__v
+                    chat.user = chat.user._doc
 
-                //  post.chats?.forEach(chat => {
-                //     chat.id = chat._id.toString()
+                    const { user } = chat
 
-                //     delete chat._id
-                //     delete chat.__v
-
-                //     if (!chat.user.id) {
-                //         chat.user.id = chat.user._id.toString()
-                //         delete chat.user._id
-                //     }
-                if (chat) {
-                    // delete chat._id
+                    if (user._id) {
+                        user.id = user._id.toString()
+                        delete user._id
+                    }
+                    //     if (!chat.user.id) {
+                    //         chat.user.id = chat.user._id.toString()
+                    //         delete chat.user._id
+                    //     }
+                    //if (chat) {
+                    //delete chat._id
                     // delete chat.__v
                     chat.comments.forEach(comment => {
                         comment.id = comment._id.toString()
@@ -69,14 +91,16 @@ function retrievePostsUser(userId) {
                         delete comment.__v
                         delete comment._id
 
-                        //if (!comment.user.id) {
-                        comment.user.id = comment.user._id.toString()
-                        delete comment.user._id
-                        //}
+                        const { user } = comment
+
+                        if (user._id) {
+                            user.id = user._id.toString()
+                            delete user._id
+                        }
                         //})
                     })
-                    post.chats.push(chat)
-                }
+                    //post.chats.push(chat)
+                })
             })
 
             return posts

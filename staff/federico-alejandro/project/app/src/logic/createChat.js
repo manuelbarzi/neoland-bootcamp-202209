@@ -1,13 +1,13 @@
 import { LengthError } from "com/errors"
 /**
- * Creates a comment against API
+ * Creates a chat against API
  * 
  * @param {string} token The user token
  * @param {string} text The comment text
  * @param {string} postId The post id
- * @param {string} chatId The chat id
+ * 
  */
-function createComment(token, text, postId, chatId) {
+function createChat(token, text, postId) {
     if (typeof token !== 'string') throw new TypeError('token is not a string')
     if (!token.length) throw new LengthError('token is empty')
 
@@ -16,9 +16,6 @@ function createComment(token, text, postId, chatId) {
 
     if (typeof postId !== 'string') throw new TypeError('postId is not a string')
     if (!postId.length) throw new LengthError('postId is empty')
-
-    if (typeof chatId !== 'string') throw new TypeError('chatId is not a string')
-    if (!chatId.length) throw new LengthError('chatId is empty')
 
     return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest()
@@ -34,7 +31,9 @@ function createComment(token, text, postId, chatId) {
                     return
                 }
 
-                resolve()
+                const { chatId } = JSON.parse(json)
+
+                resolve(chatId)
             
 
             // if (status === 201)
@@ -62,7 +61,7 @@ function createComment(token, text, postId, chatId) {
 
         xhr.onerror = () => reject(new Error('connection error'))
 
-        xhr.open('POST', `http://localhost/posts/${postId}/chats/${chatId}/comments`)
+        xhr.open('POST', `http://localhost/posts/${postId}/chats`)
         xhr.setRequestHeader('Authorization', `Bearer ${token}`)
         xhr.setRequestHeader('Content-Type', 'application/json')
 
@@ -73,4 +72,4 @@ function createComment(token, text, postId, chatId) {
         xhr.send(json)
     })
 }
-export default createComment
+export default createChat

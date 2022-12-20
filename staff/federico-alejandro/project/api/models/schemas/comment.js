@@ -4,7 +4,8 @@ const { Types: { ObjectId } } = Schema
 module.exports = new Schema({
     user: {
         type: ObjectId,
-        ref: 'User'
+        ref: 'User',
+        required: true
     },
     text: {
         type: String,

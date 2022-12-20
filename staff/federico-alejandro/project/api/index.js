@@ -16,6 +16,7 @@ const deletePostHandler = require('./handlers/deletePostHandler')
 const retrievePostsFromUserHandler = require('./handlers/retrievePostsFromUserHandler')
 const retrievePostsUserHandler = require('./handlers/retrievePostsUserHandler')
 
+const createChatHandler =require('./handlers/createChatHandler')
 const createCommentHandler = require('./handlers/createCommentHandler')
 const retrieveCommentHandler = require('./handlers/retrieveCommentHandler')
 const deleteCommentHandler = require('./handlers/deleteCommentHandler')
@@ -40,7 +41,7 @@ mongoose.connect(MONGODB_URL)
     api.get('/users', jwtVerifier, retrieveUserHandler)
     api.get('/users/:targetUserId', jwtVerifier, retrieveAUserHandler)
 
-    api.get('/users/:targetUserId/posts', jwtVerifier, retrievePostsFromUserHandler)//no funciona
+    api.get('/users/:targetUserId/posts', jwtVerifier, retrievePostsFromUserHandler)
     
     api.post('/posts', jwtVerifier, jsonBodyParser, createPostHandler)
     api.get('/posts/public', jwtVerifier, retrievePublicPostsHandler)
@@ -49,9 +50,10 @@ mongoose.connect(MONGODB_URL)
     api.delete('/posts/:postId', jwtVerifier, deletePostHandler)
     api.get('/posts',jwtVerifier, retrievePostsUserHandler)
 
-    api.post('/posts/:postId/comments', jwtVerifier, jsonBodyParser, createCommentHandler)
-    api.get('/posts/:commentId', jwtVerifier, retrieveCommentHandler)
-    api.get('/posts/:postId/comments/:commentId', jwtVerifier, deleteCommentHandler)
+    api.post('/posts/:postId/chats', jwtVerifier, jsonBodyParser, createChatHandler)
+    api.post('/posts/:postId/chats/:chatId/comments', jwtVerifier, jsonBodyParser, createCommentHandler)
+    api.get('/posts/:postId/chats/:chatId/comments/:commentId', jwtVerifier, retrieveCommentHandler)
+    api.delete('/posts/:postId/chats/:chatId/comments/:commentId', jwtVerifier, deleteCommentHandler)
 
 
     

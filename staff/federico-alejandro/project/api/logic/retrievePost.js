@@ -1,5 +1,7 @@
 const { errors: { LengthError, NotFoundError } } = require('com')
 const { User, Post } = require('../models')
+const { user } = require('../models/schemas')
+const { post } = require('../models/schemas/user')
 /**
  * Retrieves a post from user
  * 
@@ -18,38 +20,78 @@ module.exports = function (userId, postId) {
             if (!user)
                 throw new NotFoundError(`user with id ${userId} does not exist`)
 
-            return Post.findById(postId).lean() //.populate({chat: 'user', comment: 'user'})
+            return Post.findById(postId)
+                .populate({
+                    path: 'user',
+                    select: '-email -password -__v'
+                })
+                .populate({
+                    path: 'chats',
+                    select: '-__v',
+                    populate: [{
+                        path: 'user',
+                        select: 'name',
+                    },
+                    {
+                        path: 'comments',
+                        populate: {
+                            path: 'user',
+                            select: 'name'
+                        }
+                    }]
+                })
+                .lean()
         })                                             // POPULATE ???
         .then(post => {
             if (!post) throw new NotFoundError(`post with id ${postId} does not exist`)
 
             post.id = post._id.toString()
             delete post._id
-            delete post.date
-            delete post.user
 
-            const chat = post.chats.find(chat => chat.user.toString() === userId)
+            const { user } = post
+            user.id = user._id.toString()
+            delete user._id
 
-            post.chats = []
+            if (user.id !== userId) {
+                const chat = post.chats.find(chat => chat.user._id.toString() === userId)
 
-            if (chat) {
+                post.chats = []
+
+                if (chat)
+                    post.chats.push(chat)
+            }
+
+            post.chats.forEach(chat => {
+                chat.id = chat._id.toString()
                 delete chat._id
                 delete chat.__v
 
+                chat.user = chat.user._doc
+
+                const { user } = chat
+
+                if (user._id) {
+                    user.id = user._id.toString()
+                    delete user._id
+                    delete user.__v
+                }
+
                 chat.comments.forEach(comment => {
                     comment.id = comment._id.toString()
-
-                    delete comment.__v
                     delete comment._id
-                    
-                if (!comment.user.id) {
-                    comment.user.id = comment.user._id.toString()
-                    delete comment.user._id
-                }
-                })
+                    delete comment.__v
 
-                post.chats.push(chat)
-            }
+                    comment.user = comment.user._doc
+
+                    const { user } = comment
+
+                    if (user._id) {
+                        user.id = user._id.toString()
+                        delete user._id
+                        delete user.__v
+                    }
+                })
+            })
 
             return post
         })

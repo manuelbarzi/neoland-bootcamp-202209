@@ -23,25 +23,32 @@ function retrievePublicPosts(userId, targetUserId) {//targetUserId = persona (ob
         .then(targetUser => {
             if (!targetUser) throw new Error(`target user with id ${userId} does not exist`)
 
-            return Post.find({ user: (targetUserId), visibility: 'public' }).sort({ date: -1 }).populate('user', '-visibility -email -password')
-            .populate({
-                path: 'chats',
-                populate: {
+            return Post.find({ user: (targetUserId), visibility: 'public' })
+                .sort({ date: -1 })
+                .populate({
                     path: 'user',
-                    select: 'name',
-                    select: '-email -password'
-                }
-            })
-            .populate({
-                path: 'chats',
-                populate: {
-                    path: 'comments',
+                    select: '-visibility -email -password'
+                })
+                .populate({
+                    path: 'chats',
                     populate: {
                         path: 'user',
-                        select: 'name'
+                        select: 'name -email -password'
+                        //select: '-email -password'
                     }
-                }
-            }).select('-__v').lean()
+                })
+                .populate({
+                    path: 'chats',
+                    populate: {
+                        path: 'comments',
+                        populate: {
+                            path: 'user',
+                            select: 'name'
+                        }
+                    }
+                })
+                .select('-__v')
+                .lean()
         })
         .then(posts => {
             posts.forEach(post => {
@@ -49,28 +56,68 @@ function retrievePublicPosts(userId, targetUserId) {//targetUserId = persona (ob
                 delete post._id
                 delete post.__v
 
-                if (!post.user.id) {
-                    post.user.id = post.user._id.toString()
-                    delete post.user._id
+                const { user } = post
+
+                if (user._id) {
+                    user.id = user._id.toString()
+                    delete user._id
                 }
 
-                const chat = post.chats.find(chat => chat.user.toString() === userId)
+                // if (post.user.id === user) {
+                    if (post.user.id === userId) {
+                        post.chats = []
 
-                post.chats = []
+                        const chat = post.chats.find(chat => (chat.user._doc.id || chat.user._doc._id.toString()) !== userId)
 
-                if (chat) {
+                        if (chat) post.chats.push(chat)
+                    }
+
+                // }
+
+                post.chats.forEach(chat => {
+                    chat.id = chat._id.toString()
                     delete chat._id
-                    delete chat.__v
+
+                    chat.user = chat.user._doc
+
+                    const { user } = chat
+
+                    if (user._id) {
+                        user.id = user._id.toString()
+
+                        delete user._id
+                    }
 
                     chat.comments.forEach(comment => {
                         comment.id = comment._id.toString()
-    
-                        delete comment.__v
-                        delete comment._id
-                    })
 
-                    //post.chats.push(chat)
-                }
+                        delete comment._id
+                        delete comment.__v
+
+                        comment.user = comment.user._doc
+
+                        const { user } = comment
+
+                        if (user._id) {
+                            user.id = user._id.toString()
+                            delete user._id
+                        }
+                    })
+                })
+
+                // if (chat) {
+                //     delete chat._id
+                //     delete chat.__v
+
+                // chat.comments.forEach(comment => {
+                //     comment.id = comment._id.toString()
+
+                //     delete comment.__v
+                //     delete comment._id
+                // })
+
+                //post.chats.push(chat)
+                //})
             })
             return posts
         })

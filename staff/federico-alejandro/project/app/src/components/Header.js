@@ -4,9 +4,9 @@ import { useContext, useEffect, useState } from 'react'
 import retrieveUser from '../logic/retrieveUser'
 import { errors } from 'com'
 import LOGO from '../img/LOGO.png'
+import Settings from './Settings'
 
-import { AiOutlineLogout } from 'react-icons/ai'
-
+import { AiOutlineLogout, AiOutlineMenu, AiOutlineSetting } from 'react-icons/ai'
 
 const { FormatError, AuthError, LengthError, NotFoundError } = errors
 
@@ -15,6 +15,8 @@ export default function Header() {
 
     const { logout, showAlert } = useContext(Context)
     const [user, setUser] = useState()
+    const [toggleButton, setToggleButton] = useState()
+    const [settingsPanel, setSettingsPanel] = useState()
 
     useEffect(() => {
         try {
@@ -36,11 +38,22 @@ export default function Header() {
         }
     }, [])
 
+   const handleToggleMenu = () => setToggleButton(toggleButton === 'menu' ? 'close' : 'menu')
+
+    const settings = () => !settingsPanel ? setSettingsPanel(true) : setSettingsPanel()
+    const closeSettingsPanel = () => setSettingsPanel()
+
     return <header className='fixed w-full h-[2.5rem] flex justify-between items-center gap-2 bg-slate-200'>
-        <img src={LOGO} alt='LOGO' className='h-10 ml-4'/>
+        <img src={LOGO} alt='LOGO' className='h-10 ml-4' />
         {user && <p className='font-bold text-black mx-1.5'>{user.name}</p>}
         <div className='mr-4'>
-            <button onClick={logout}><AiOutlineLogout /></button>
+            <button  className='flex' onClick={handleToggleMenu}><AiOutlineMenu size='1.5rem'/></button>
+            {toggleButton === 'close' && <div className='flex flex-col gap-1.5 mt-2.5 fixed bg-slate-200 border-8 rounded-lg'>
+                <button onClick={logout}><AiOutlineLogout size='1.25rem'/></button>
+                <button onClick={settings}><AiOutlineSetting size='1.25rem'/></button>
+            </div>}
         </div>
+
+        {settingsPanel && <Settings onClose={closeSettingsPanel} />}
     </header>
 }

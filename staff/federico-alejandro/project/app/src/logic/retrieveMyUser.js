@@ -1,58 +1,50 @@
-function retrieveMyUserProfile(userId, callback) {
-    if (typeof userId !== 'string') throw new TypeError('userId is not a string')
-    if (!userId.length) throw new Error('userId is empty')
+import { LengthError, AuthError, NotFoundError, UnexpectedError, FormatError } from "com/errors"
+/**
+ * Retrieve an user
+ * 
+ * @param {string} token The token user 
+ * 
+ */
+function retrieveMyUserProfile(token) {
+    if (typeof token !== 'string') throw new TypeError('token is not a string')
+    if (!token.length) throw new LengthError('token is empty')
     
-    if(!callback)
     return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest()
 
         xhr.onload = function () {
             const { status, responseText: json } = xhr
     
-            if (status >= 500) {
+            if (status === 200) {
+                const user = JSON.parse(json)
+
+                resolve(user)
+            } else if (status === 400) {
                 const { error } = JSON.parse(json)
-    
-                reject(new Error(error))
-    
-                return
-            }
-    
-            const user = JSON.parse(json)
-    
-            resolve(user)
+
+                if (error.includes('is not a'))
+                    reject(new TypeError(error))
+                else if (error.includes('empty'))
+                    reject(new FormatError(error))
+            } else if (status === 401) {
+                const { error } = JSON.parse(json)
+
+                reject(new AuthError(error))
+            } else if (status === 404) {
+                const { error } = JSON.parse(json)
+
+                reject(new NotFoundError(error))
+            } else if (status < 500)
+                reject(new UnexpectedError('client error'))
+            else
+                reject(new UnexpectedError('server error'))
         }
 
         xhr.onerror = () => reject(new Error('connection error'))
     
         xhr.open('GET', 'http://localhost/users')
-        xhr.setRequestHeader('Authorization', `Bearer ${userId}`)
+        xhr.setRequestHeader('Authorization', `Bearer ${token}`)
         xhr.send()
     })
-    
-    
-    if (typeof callback !== 'function') throw new TypeError('callback is not a function')
-    const xhr = new XMLHttpRequest()
-
-    xhr.onload = function () {
-        const { status, responseText: json } = xhr
-
-        if (status >= 500) {
-            const { error } = JSON.parse(json)
-
-            callback(new Error(error))
-
-            return
-        }
-
-        const user = JSON.parse(json)
-
-        callback(null, user)
-    }
-
-    xhr.onerror = () => callback(new Error('connection error'))
-
-    xhr.open('GET', 'http://localhost/users')
-    xhr.setRequestHeader('Authorization', `Bearer ${userId}`)
-    xhr.send()
 }
     export default retrieveMyUserProfile

@@ -58,21 +58,21 @@ function EditPost({ onUpdated, onClose, postId }) {
 
 
     return <div className='bg-[#aaaa] fixed top-0 h-full w-full flex flex-col justify-center items-center overflow-hidden' onClick={onClose}>
-        <div className='p-5 rounded-xl flex flex-col items-end bg-white border-2 border-slate-600' onClick={event => event.stopPropagation()}>
+        <div className='p-5 rounded-xl flex flex-col items-end bg-white border-2 border-slate-600 shadow-inner shadow-slate-600' onClick={event => event.stopPropagation()}>
             <AiOutlineCloseCircle size='1.5rem' onClick={onClose} className='cursor-pointer' />
 
-            <form className='flex flex-col gap-2' onSubmit={submitUpdatePost}>
+            <form className='flex flex-col gap-2 ' onSubmit={submitUpdatePost}>
                 <label className='font-bold' htmlFor='text'>Title</label>
-                <input className='text-black border-black resize-y rounded-md text-center' type='text' name='title' id='title' placeholder='input a title' defaultValue={post?.title} />
+                <input className='bg-slate-100 text-black border-black resize-y rounded-md text-center' type='text' name='title' id='title' placeholder='input a title' defaultValue={post?.title} />
 
                 <label className='font-bold' htmlFor='text'>Text</label>
-                <textarea className='text-black border-black resize-y rounded-md text-center' type='text' name='text' id='text' placeholder='input a text' defaultValue={post?.text}></textarea>
+                <textarea className='bg-slate-100 text-black border-black resize-y rounded-md text-center' type='text' name='text' id='text' placeholder='input a text' defaultValue={post?.text}></textarea>
 
                 <label className='font-bold' htmlFor='image'>Image</label>
-                <input className='text-black border-black resize-y rounded-md text-center' type='text' name='image' id='image' placeholder='input an image url' />
+                <input className='bg-slate-100 text-black border-black resize-y rounded-md text-center' type='text' name='image' id='image' placeholder='input an image url' />
                 
                 <label htmlFor='visibility'><MdOutlineVisibility /></label>
-                <select className='text-black' id='visibility' name='visibility' value={visibility} onChange={changeVisibility}>
+                <select className='bg-slate-100 text-black' id='visibility' name='visibility' value={visibility} onChange={changeVisibility}>
                     <option value='public'>public</option>
                     <option value='private'>private</option>
                 </select>

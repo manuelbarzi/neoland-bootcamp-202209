@@ -41,21 +41,21 @@ function CreatePost({ onCreated, onClose }) {
     }
 
     return <div className='bg-[#aaaa] fixed top-0 h-full w-full flex flex-col justify-center items-center overflow-hidden' onClick={onClose}>
-        <div className='p-5 rounded-xl flex flex-col items-end bg-white border-2 border-slate-600' onClick={event => event.stopPropagation()}>
+        <div className='p-5 rounded-xl flex flex-col items-end bg-white border-2 border-slate-600 shadow-inner shadow-slate-600' onClick={event => event.stopPropagation()}>
             <AiOutlineCloseCircle size='1.5rem' onClick={onClose} className='cursor-pointer' />
 
-            <form className='flex flex-col justify-start m-4 gap-2 p-4 border-2  rounded-xl' onSubmit={submitCreatePost}>
+            <form className='flex flex-col justify-start m-4 gap-2 p-4 border-2 rounded-xl shadow-inner shadow-slate-600' onSubmit={submitCreatePost}>
                 <label className='font-bold' htmlFor='text'>Title</label>
-                <input className='border-b border-black text-black rounded-xl text-center' type='text' name='title' id='title' placeholder='input a title' />
+                <input className='bg-slate-100 border-b border-black text-black rounded-xl text-center' type='text' name='title' id='title' placeholder='input a title' />
 
                 <label className='font-bold' htmlFor='text'>Text</label>
-                <textarea className='border-b border-black text-black rounded-xl text-center' type='text' name='text' id='text' placeholder='input a text'></textarea>
+                <textarea className='bg-slate-100 border-b border-black text-black rounded-xl text-center' type='text' name='text' id='text' placeholder='input a text'></textarea>
 
                 <label className='font-bold' htmlFor='image'>Image</label>
-                <input className='border-b border-black text-black rounded-xl text-center' type='text' name='image' id='image' placeholder='input an image url' />
+                <input className='bg-slate-100 border-b border-black text-black rounded-xl text-center' type='text' name='image' id='image' placeholder='input an image url' />
 
                 <label htmlFor='visibility'><MdOutlineVisibility /></label>
-                <select className='text-black' id='visibility' name='visibility'>
+                <select className='bg-slate-100 text-black' id='visibility' name='visibility'>
                     <option value='public'>public</option>
                     <option value='private'>private</option>
                 </select>
