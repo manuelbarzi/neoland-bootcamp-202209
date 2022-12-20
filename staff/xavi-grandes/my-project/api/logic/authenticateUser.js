@@ -4,6 +4,7 @@ const {
 } = require('com')
 
 const { User } = require('../models')
+const { compare } = require('bcryptjs')
 
 /**
  * Authenticates a user
@@ -11,7 +12,7 @@ const { User } = require('../models')
  * @param {string} email The user email
  * @param {string} password The user password
  */
-function authenticateUser(email, password) {
+module.exports = function(email, password) {
     if (typeof email !== 'string') throw new TypeError('email is not a string')
     if (!IS_EMAIL_REGEX.test(email)) throw new FormatError('email is not valid')
 
@@ -24,11 +25,12 @@ function authenticateUser(email, password) {
             if (!user)
                 throw new NotFoundError('user not registered')
 
-            if (user.password !== password)
-                throw new AuthError('wrong password')
+                return compare(password, user.password)
+                .then(match => {
+                    if (!match)
+                        throw new AuthError('wrong password')
 
-            return user.id
+                    return user.id
+                })
         })
 }
-
-module.exports = authenticateUser

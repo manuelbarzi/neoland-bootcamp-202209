@@ -1,4 +1,7 @@
 const { User } = require('../models')
+const { compare } = require('bcryptjs')
+const { hash } = require('bcryptjs')
+const { errors: { AuthError } } = require('com')
 
 module.exports = function (userId, password, newPassword) {
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
@@ -11,10 +14,19 @@ module.exports = function (userId, password, newPassword) {
     return User.findById(userId)
     .then(user => {
         if(!user) throw new Error(`user with id ${userId} does not exist`)
-        if(user.password === password) {
+        // if(user.password === password) {
             
-            return User.updateOne({ _id: userId }, { $set: {password: newPassword} })
-        }
-        throw new Error('Current password wrong')
+        //     return User.updateOne({ _id: userId }, { $set: {password: newPassword} })
+
+        return compare (password, user.password)
+        .then((match) => {
+            if(!match) throw new AuthError ('Current password wrong')
+
+
+            return hash(password, 8)
+            .then((hash) => User.updateOne({ _id: userId }, { $set: {password: hash}}))
+        })
+        // }
+        // throw new Error('Current password wrong')
     })
 }
