@@ -1,8 +1,12 @@
 import log from '../utils/coolog'
 import createList from '../logic/createList'
+import { useContext } from 'react'
+import Context from '../components/Context';
 
 export default function ({onClose, onListCreated }) {
     log.info('CreateList -> render')
+
+    const { showAlert } = useContext(Context)
 
   const submitCreateList = (event) => {
     event.preventDefault();
@@ -12,8 +16,7 @@ export default function ({onClose, onListCreated }) {
     try {
       createList(sessionStorage.token, title)
       .then(() => {
-          alert('You create a list')
-          //Change with show alert 
+          showAlert('You create a list', 'info')
           onListCreated()
       })
       .catch(error => alert(error.message))
