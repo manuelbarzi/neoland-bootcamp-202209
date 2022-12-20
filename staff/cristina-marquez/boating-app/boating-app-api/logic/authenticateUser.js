@@ -1,21 +1,15 @@
-
-const { User } = require('../models')
-const context = require('./context')
+const { User } = require("../models");
+const { HttpException } = require("../utils/httpException");
+const context = require("./context");
 
 async function authenticateUser(email, password) {
+  const user = await User.findOne({ email }).select("+password");
 
-    const user = await User.findOne({ email }).select('+password')
+  if (!user || user.password !== password) {
+    throw new HttpException(401, "invalid credentials");
+  }
 
-    if (!user) {
-        throw new Error('user not registered')
-    }
-
-    if (user.password !== password) {
-        throw new Error('wrong password')
-    }
-
-    return user
-
+  return user;
 }
 
-module.exports = authenticateUser
+module.exports = authenticateUser;

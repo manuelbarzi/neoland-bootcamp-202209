@@ -1,5 +1,6 @@
 const authenticateUser = require("../logic/authenticateUser");
 const jwt = require("jsonwebtoken");
+const { HttpException } = require("../utils/httpException");
 
 module.exports = async (req, res) => {
   let { email, password } = req.body;
@@ -18,6 +19,13 @@ module.exports = async (req, res) => {
 
     res.status(200).send({ token: userToken });
   } catch (error) {
+    console.log(error);
+    if (error instanceof HttpException) {
+      console.log(error.message);
+      res.status(error.statusCode);
+      return res.json({ message: error.message });
+    }
+
     res.status(500);
     res.json({ message: error.message });
   }
