@@ -45,6 +45,7 @@ function App() {
       <Route path="/profile" element={<Profile/>} />
       <Route path="/list/:listId" element={<MyList/>} />
       <Route path="/settings" element={<Settings/>} />
+      <Route path="*" element={<Navigate replace to="/" />} />
     </Routes>
       :
       <Routes>
