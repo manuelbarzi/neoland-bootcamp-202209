@@ -1,4 +1,11 @@
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faTemperatureThreeQuarters,
+  faWind,
+  faDroplet,
+  faMapPin,
+} from "@fortawesome/free-solid-svg-icons";
 
 function Port({ portInfo }) {
   const navigate = useNavigate();
@@ -28,13 +35,13 @@ function Port({ portInfo }) {
           style={{ backgroundImage: `url(${portInfo.imagePath})` }}
         ></div>
         <div className="p-6">
-          <div>
+          <div className="flex flex-col items-center">
             <h2 className="text-darkblue font-bold text-lg">{portInfo.name}</h2>
             <div>
               <div>
-                <span className="text-midblue font-semibold">Location:</span>
                 <div className="text-midblue font-thin">
-                  {" "}
+                  <FontAwesomeIcon icon={faMapPin} />
+                  <span className="ml-1"></span>{" "}
                   {convertToDms(portInfo.coordinates[0], false)}
                   <span className="ml-1"></span>
                   {convertToDms(portInfo.coordinates[1], true)}
@@ -42,46 +49,60 @@ function Port({ portInfo }) {
               </div>
             </div>
           </div>
-          <div>
-            <span className="text-midblue font-semibold">Address:</span>
-            <ul className="text-midblue font-thin">
-              <li>{portInfo.street},</li>
-              <li> {portInfo.postalCode},</li>
-              <li> {portInfo.town},</li>
-              <li>{portInfo.city},</li>
-              <li> {portInfo.country}</li>
-            </ul>
-            <span className="text-midblue font-semibold">Contact Number:</span>
-            <p className="text-midblue font-thin"> {portInfo.contactNumber}</p>
-            <span className="text-midblue font-semibold">VHF channel:</span>
-            <p className="text-midblue font-thin">{portInfo.VHF}</p>
+          <div className="grid grid-cols-2 ">
+            <div className="grid place-items-start">
+              <span className="text-midblue font-semibold">Address:</span>
+              <ul className="text-midblue font-thin">
+                <li>{portInfo.street}</li>
+                <li> {portInfo.postalCode}</li>
+                <li> {portInfo.town}</li>
+                <li>{portInfo.city}</li>
+              </ul>
+              <span className="text-midblue font-semibold">
+                Contact Number:
+              </span>
+              <p className="text-midblue font-thin">
+                {" "}
+                {portInfo.contactNumber}
+              </p>
+              <span className="text-midblue font-semibold">VHF channel:</span>
+              <p className="text-midblue font-thin">{portInfo.VHF}</p>
+              <span className="text-midblue font-semibold">Berths:</span>
+              <p className="text-midblue font-thin">{portInfo.berths}</p>
+            </div>
+
+            <div className="grid place-items-end">
+              <span className="text-midblue font-semibold"></span>
+              <ul className="text-midblue font-thin">
+                <li>
+                  <FontAwesomeIcon icon={faTemperatureThreeQuarters} />{" "}
+                  {portInfo.weather.temperature} ºC
+                </li>
+                <li>
+                  {" "}
+                  <FontAwesomeIcon icon={faWind} /> {portInfo.weather.windSpeed}{" "}
+                  knots
+                </li>
+                <li>
+                  <FontAwesomeIcon icon={faDroplet} />
+                  <span className="ml-1"></span>
+                  {portInfo.weather.humidity} %
+                </li>
+                <li>{portInfo.weather.main}</li>
+                <img
+                  alt="Port Weather icon"
+                  src={`http://openweathermap.org/img/wn/${portInfo.weather.icon}@2x.png`}
+                  height="60px"
+                  width="60px"
+                />
+              </ul>
+            </div>
           </div>
 
-          <div>
-            <span className="text-midblue font-semibold">Berths:</span>
-            <p className="text-midblue font-thin">{portInfo.berths}</p>
-
-            {/* facilities icons */}
-          </div>
-          <div>
-            {/** TODO: Prevent loading this section if Weather property is null */}
-            <span className="text-midblue font-semibold">Weather:</span>
-            <ul className="text-midblue font-thin">
-              <li>{portInfo.weather.main},</li>
-              <li> {portInfo.weather.temperature} ºC</li>
-              <li> {portInfo.weather.windSpeed} knots</li>
-              <li>{portInfo.weather.humidity}%</li>
-              <img
-                alt="Port Weather icon"
-                src={`http://openweathermap.org/img/wn/${portInfo.weather.icon}@2x.png`}
-              />
-            </ul>
-          </div>
-
-          <div className="flex justify-center">
+          <div className="flex justify-center h-full">
             <button
               onClick={createNewBooking}
-              className="bg-midgreen text-white rounded-lg text-md p-2 "
+              className="bg-midgreen text-white rounded-lg text-md p-2 w-full "
             >
               Book now
             </button>
