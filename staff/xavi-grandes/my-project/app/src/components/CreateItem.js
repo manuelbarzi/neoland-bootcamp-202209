@@ -1,9 +1,14 @@
 import log from '../utils/coolog'
 import createItem from '../logic/createItem'
+import { useContext } from 'react'
+import Context from '../components/Context';
+
 
 
 export default function ({onClose, listId, onItemCreated }) {
     log.info('CreateList -> render')
+
+    const { showAlert } = useContext(Context)
 
   const submitCreateItem = (event) => {
     event.preventDefault();
@@ -13,8 +18,8 @@ export default function ({onClose, listId, onItemCreated }) {
     try {
       createItem(listId, title)
       .then(() => {
-          alert('You create a new product')
-          //Change with show alert 
+        showAlert('You create a new product', 'info')
+          // alert('You create a new product')
           onItemCreated()
       })
       .catch(error => alert(error.message))
