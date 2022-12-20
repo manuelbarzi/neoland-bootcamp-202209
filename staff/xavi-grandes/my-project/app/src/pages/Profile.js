@@ -9,6 +9,7 @@ import { IoExit } from "react-icons/io5";
 import retrieveUser from '../logic/retrieveUser'
 import ChangeEmail from '../components/ChangeEmail';
 import ChangePassword from '../components/ChangePassword';
+import DeleteUser from '../components/DeleteUser';
 import profile from '../Images/profile.png'
 
 const { FormatError, AuthError, LengthError, NotFoundError } = errors
@@ -19,6 +20,7 @@ export default function () {
     const { logout } = useContext(Context)
     const [user, setUser] = useState({email:'default@email.com'})
     const { showAlert } = useContext(Context)
+    
 
     useEffect(() => {
         try {
@@ -52,6 +54,11 @@ export default function () {
         setOpenPass(openPass === 'close'? 'open': 'close')
     }
 
+    const [deleteOpen, setDeleteOpen] = useState('close');
+    const openDeleteUser = (event) => {
+        setDeleteOpen ( deleteOpen === 'close'? 'open': 'close' )
+    }
+
     return <>
         <Header />
         <main className="mt-[3rem] flex flex-col items-center gap-4">
@@ -64,9 +71,10 @@ export default function () {
             <button className='w-4/5 h-10 flex justify-between items-center' onClick={openUpdatePassword}><p>Cambiar contraseña</p><GrNext/></button>
             <hr className="bg-black w-4/5" />
             <button className='w-4/5 h-10 flex justify-between items-center' onClick={logout}><p>Cerrar session</p><IoExit size="1.3rem"/></button>
-            <button className='w-4/5 h-10 flex justify-between items-center'><p>Borrar cuenta</p><MdDelete size="1.3rem"/></button>
+            <button className='w-4/5 h-10 flex justify-between items-center' onClick={openDeleteUser}><p>Borrar cuenta</p><MdDelete size="1.3rem"/></button>
         </main>
         { show === 'open' && <ChangeEmail onClose={openUpdateEmail}/>}
         { openPass === 'open' && <ChangePassword onClose={openUpdatePassword}/>}
+        { deleteOpen === 'open' && <DeleteUser onClose={openDeleteUser}/>}
     </>
 }
