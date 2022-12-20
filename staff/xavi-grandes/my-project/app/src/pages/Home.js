@@ -9,6 +9,7 @@ import Header from "../components/Header";
 import DeleteList from "../components/DeleteList";
 import CreateList from "../components/CreateList";
 import { MdDelete } from "react-icons/md";
+import BackgroundEmpty from "../components/BackgroundEmpty"
 const { FormatError, AuthError, LengthError, NotFoundError } = errors;
 
 export default function Home() {
@@ -91,6 +92,7 @@ export default function Home() {
 
       {user && <Header userName={user.name} />}
       <main className="mt-[3rem] flex flex-col gap-2 items-center">
+      {lists == '' && <BackgroundEmpty />}
         {lists &&
           lists.map((list) => (
             <article className="mt-1 bg-blue-300 h-12 w-3/5 rounded-lg flex items-center justify-between px-3 text-lg">
