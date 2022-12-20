@@ -1,6 +1,5 @@
 import log from '../utils/coolog'
-// import { AiOutlineLogout } from 'react-icons/ai'
-// import { IoInvertModeOutline } from 'react-icons/io5'
+import { MdSettings } from 'react-icons/md'
 import Context from './Context'
 import { useContext, useState} from 'react'
 import logo from '../img/logo.jpg'
@@ -36,9 +35,7 @@ export default function Header({ userName }) {
         <p>{userName}</p> 
     </div>
     <div>
-        {/* <button onClick={logout}><AiOutlineLogout /></button>
-        <button onClick={switchMode}><IoInvertModeOutline /></button> */}
-        <button onClick={handleSettings} className='className="border-2 border-black bg-slate-300 p-1 cursor-pointer m-1'>Settings</button>
+        <button onClick={handleSettings} ><MdSettings/></button>
         </div> 
     </header>
     {settings && <Settings/>}

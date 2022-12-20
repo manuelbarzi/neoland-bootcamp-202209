@@ -5,13 +5,14 @@ import logo from '../img/logo.jpg'
 import CreateNotice from '../components/CreateNotice'
 import UpdateNotice from '../components/UpdateNotice'
 import DeleteNotice from '../components/DeleteNotice'
+import Settings from '../components/Settings'
 import retrieveNotices from '../logic/retrieveNotices'
 import retrieveNotice from '../logic/retrieveNotice'
 import retrieveUser from '../logic/retrieveUser'
 import { errors } from 'com'
 import Context from '../components/Context'
 import { useContext } from 'react'
-import { MdDeleteForever, MdEdit } from 'react-icons/md'
+import { MdDeleteForever, MdEdit, MdSettings } from 'react-icons/md'
 // import { IoInvertModeOutline } from 'react-icons/io5'
 
 
@@ -26,6 +27,7 @@ function Noticias() {
     const [updateNoticeVisible, setUpdateNoticeVisible] = useState(false)
     const [deleteNoticeVisible, setDeleteNoticeVisible] = useState(false)
 
+    const [settings, setSettings] = useState()
     const [notice, setNotice] = useState()
     const [user, setUser] = useState()
 
@@ -144,28 +146,44 @@ function Noticias() {
         setDeleteNoticeVisible(false)
     }
 
-    return <><header className='h-1/6 top-0 flex justify-around items-center bg-teal-600	'>
+    const handleSettings = () => {
+        if (!settings)
+            setSettings('true')
+        else
+            setSettings()
+
+    }
+
+    return <><header className='h-1/6 top-0 flex justify-around items-center bg-teal-600'>
         <Link to="/"><img src={logo} className='w-20 h-20 cursor-pointer' /></Link>
         <h1>NOTICIAS</h1>
         <h2>{user?.name}</h2>
-        {user?.role === 'admin' && <button onClick={() => openCreateNotice()}> + </button>}
+        <div>
+            <button onClick={handleSettings}><MdSettings size='1.5rem'/></button>
+        </div>
+
     </header>
+    {settings && <Settings/>}
+
         <div className="flex flex-col items-center gap-2 py-[5rem] h-full  bg-gray-100">
+        {user?.role === 'admin' && <button onClick={() => openCreateNotice()}> + </button>}
             {notices.map(notice => {
                 return <article key={notice.id} className="border rounded-xl w-[50%] flex flex-col p-5 break-words  bg-green-50">
                     <p className='underline p-2'>{notice.title}</p>
                     <p>{notice.body}</p>
                     {user?.role === 'admin' && <div>
-                        <button onClick={() => openUpdateNotice(notice.id)}><MdEdit/></button>
-                        <button onClick={() => openDeleteNotice(notice.id)}><MdDeleteForever/></button>
+                        <button onClick={() => openUpdateNotice(notice.id)}><MdEdit /></button>
+                        <button onClick={() => openDeleteNotice(notice.id)}><MdDeleteForever /></button>
                     </div>}
                 </article>
             })}
 
         </div>
+
         {createNoticeVisible && <CreateNotice onCreated={handleNoticeCreated} onClose={closeCreateNotice} />}
         {updateNoticeVisible && <UpdateNotice notice={notice} onUpdated={handleNoticeUpdated} onClose={closeUpdateNotice} />}
         {deleteNoticeVisible && <DeleteNotice notice={notice} onDeleted={handleNoticeDeleted} onClose={closeDeleteNotice} />}
+
     </>
 }
 export default Noticias

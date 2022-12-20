@@ -139,8 +139,9 @@ function EventMonth() {
             <button onClick={goEvents} className='border-2 border-black'>Go_Back</button>
         </header>
 
-        {event ? <div>
-            <div>
+        {event ? <div className='mx-4'>
+            <div className='flex mt-4 gap-6 justify-between'>
+                <div>
                 <h1 >{event?.title}</h1>
                 <h3>{event?.body}</h3>
                 <h3>{event?.requirement}</h3>
@@ -149,18 +150,20 @@ function EventMonth() {
                 {event?.participants?.length >= event.capacity && <div>
                     <h3>{event.inscription = 'No more places'}</h3><button onClick={handleUnsignUp} className="border-2 border-black bg-slate-300 p-1 cursor-pointer m-1">Desinscribirse</button></div>}
                 {event?.inscription === 'close' && <div><h3>Inscrition: Close</h3></div>}
-                {event?.inscription === 'open' && <div>
-                    Inscripciones <div>
-                    <button onClick={handlesignUp} className="border-2 border-black bg-slate-300 p-1 cursor-pointer m-1">Inscribirse</button>
-                    <button onClick={handleUnsignUp} className="border-2 border-black bg-slate-300 p-1 cursor-pointer m-1">Desinscribirse</button></div>
+                {event?.inscription === 'open' && <div >
+                    Inscripciones <div className='flex justify-center gap-5'>
+                        <button onClick={handlesignUp} className="border-2 border-black bg-slate-300 p-1 cursor-pointer m-1">Inscribirse</button>
+                        <button onClick={handleUnsignUp} className="border-2 border-black bg-slate-300 p-1 cursor-pointer m-1">Desinscribirse</button></div>
                 </div>}
-                -------------------------------------
-                <img src={event?.image} />
+                </div>
+
+                <div className=' rounded-sm'><img src={event?.image} /></div>
             </div>
+
 
             {event?.participants?.map(user => {
                 return <li key={user.id}>{user.name}</li>
-            }) }
+            })}
 
             {user?.role === 'admin' && <div>
                 <button onClick={handleDeleteEvent} className="border-2 border-black  bg-slate-300 cursor-pointer m-1">BORRAR</button>
@@ -177,10 +180,10 @@ function EventMonth() {
         {updateEvent && <UpdateEvent event={event} onUpdated={eventUpdated} onClose={() => setUpdateEvent()} />}
 
         {deleteEvent && <DeleteEvent event={event} onDeleted={handleEventDeleted} onClose={() => setDeleteEvent()} />}
-    
-        {inscription && <Inscription event={event} user={user} onClose={() => setInscription()} onRegistered={handleResgistered}/>}
-    
-        {deleteinscription && <DeleteInscription event={event} onClose={() => setDeleteInscription()} onDeleted={handleDeleteInscription}/>}
+
+        {inscription && <Inscription event={event} user={user} onClose={() => setInscription()} onRegistered={handleResgistered} />}
+
+        {deleteinscription && <DeleteInscription event={event} onClose={() => setDeleteInscription()} onDeleted={handleDeleteInscription} />}
     </main>
 }
 

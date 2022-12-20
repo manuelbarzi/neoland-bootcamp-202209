@@ -8,6 +8,8 @@ import { useContext } from 'react'
 import retrieveEvents from '../logic/retrieveEvents'
 import getMonthName from '../utils/getMonthNameByNumber'
 import logo from '../img/logo.jpg'
+import { MdSettings } from 'react-icons/md'
+
 
 const { FormatError, AuthError, LengthError, NotFoundError } = errors
 
@@ -60,7 +62,7 @@ function Events() {
             <div className='className="border border-2 border-black'>Log Out</div>
         </header>
         
-        <div className="grid grid-cols-2 gap-4 p-4 ">
+        <div className=" md:grid md:grid-cols-3 md:gap-4 p-4 ">
 
             {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(index => {
                 const event = events.find(event => {
@@ -69,11 +71,11 @@ function Events() {
                     return month === index
                 })
 
-                return <button className='p-4 overflow overflow-hidden' key={index} onClick={() => handleMonth(index + 1)}>
-                    <div className='border rounded-xl h-48 p-4 bg-green-50 overflow-hidden	'>
+                return <button className=' min-w-full	p-4 overflow overflow-hidden'  key={index} onClick={() => handleMonth(index + 1)}>
+                    <div className='border rounded-xl h-48 p-4 bg-green-50 overflow-hidden'>
                         <h1 className='bg-teal-400 rounded-t-xl uppercase'>{getMonthName(index + 1)}</h1>
                         <p className='bg-slate-200'>{event?.title}</p>
-                        <img className='rounded-b-xl object-contain	' src={event?.image} />
+                        <img className='m-a rounded-b-xl object-contain	' src={event?.image} />
                     </div>
                 </button>
             })}
