@@ -1,28 +1,26 @@
-const { errors: { LengthError } } = require('com')
+const { errors: { LengthError} } = require('com')
 
 /* eslint-disable import/no-anonymous-default-export */
-/**
- * Creates a post against API
+/**z
+ * Creates a appointmet against API
  * @param {string} token The user token
- * @param {string} text The post text
- * @param {string} visibility The post visibility
+ * @param {string} tittle The appointment text
+ * @param {string} body The appointment text
+ * @param {string} date The appointment date * 
  * @param {callback} callback The callback to attend the result
  */
-export default function (token, type, kind, description, amount, date, callback) {
+export default function (token, title, body, date, callback) {
     if (typeof token !== 'string') throw new TypeError('token is not a string')
-    if (!token.length) throw new Error('token is empty')
-    if (typeof type !== 'string') throw new TypeError('type is not a string')
-    if (!type.length) throw new LengthError('type is empty')
-    if (typeof kind !== 'string') throw new TypeError('kind is not a string')
-    if (!kind.length) throw new LengthError('kind is empty')
-    if (typeof description !== 'string') throw new TypeError('description is not a string')
-    if (!description.length) throw new LengthError('description is empty')
-    if (typeof amount !== 'number') throw new TypeError('amount is not a number')
-    if (!amount) throw new LengthError('amount is empty')
-    // if (!(date instanceof Date)) throw new TypeError('date is not a Date')
+    if (!token.length) throw new LengthError('token is empty')
+    if (typeof title !== 'string') throw new TypeError('text is not a string')
+    if (!title.length) throw new LengthError('text is empty')
+    if (typeof body !== 'string') throw new TypeError('body is not a string')
+    if (!body.length) throw new LengthError('body is empty')
+    if (!(date instanceof Date)) throw new TypeError('date is not a Date')
 
 
-    if (!callback)
+
+    if (!callback) {
         return new Promise((resolve, reject) => {
             const xhr = new XMLHttpRequest
 
@@ -42,19 +40,18 @@ export default function (token, type, kind, description, amount, date, callback)
 
             xhr.onerror = () => reject(new Error('connection error'))
 
-            xhr.open('POST', 'http://localhost/flow')
+            xhr.open('POST', 'http://localhost/appointment')
             xhr.setRequestHeader('Authorization', `Bearer ${token}`)
             xhr.setRequestHeader('Content-Type', 'application/json')
 
-            const payload = { type, kind, description, amount, date }
+            const payload = { title, body, date }
 
             const json = JSON.stringify(payload)
 
             xhr.send(json)
         })
-
+    }
     if (typeof callback !== 'function') throw new TypeError('callback is not a function')
-
     const xhr = new XMLHttpRequest
 
     xhr.onload = () => {
@@ -73,11 +70,11 @@ export default function (token, type, kind, description, amount, date, callback)
 
     xhr.onerror = () => callback(new Error('connection error'))
 
-    xhr.open('POST', 'http://localhost/flow')
+    xhr.open('POST', 'http://localhost/appointment')
     xhr.setRequestHeader('Authorization', `Bearer ${token}`)
     xhr.setRequestHeader('Content-Type', 'application/json')
 
-    const payload = { type, kind, description, amount, date }
+    const payload = { title, body, date }
 
     const json = JSON.stringify(payload)
 
@@ -85,7 +82,7 @@ export default function (token, type, kind, description, amount, date, callback)
 }
 
 /**
- * Attends the result of the post creation
+ * Attends the result of the appointment creation
  * @callback callback
  * @param {Error} error The authentication error
  */

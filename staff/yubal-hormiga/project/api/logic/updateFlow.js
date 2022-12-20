@@ -1,4 +1,4 @@
-const { errors: { LengthError, NotFoundError } } = require('../../my-commons')
+const { errors: { LengthError, NotFoundError } } = require('com')
 const { User, Flow } = require('../models')
 
 module.exports = function (userId, type, kind, description, amount, date, flowId) {
@@ -14,8 +14,7 @@ module.exports = function (userId, type, kind, description, amount, date, flowId
     if (!description.length) throw new LengthError('description is empty')
     if (typeof amount !== 'number') throw new TypeError('amount is not a number')
     if (!amount) throw new LengthError('amount is empty')
-    // if (typeof date !== 'number') throw new TypeError('date is not a number')
-    // if (!date.length) throw new LengthError('date is empty')
+    if (!(date instanceof Date)) throw new TypeError('date is not a Date')
 
 
     return User.findById(userId)

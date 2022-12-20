@@ -1,4 +1,4 @@
-const { errors: { LengthError, NotFoundError } } = require('com')
+const { errors: { LengthError, } } = require('com')
 const { User, Appointment } = require('../models')
 
 function deleteAppointment(userId, appointmentId) {
@@ -11,13 +11,13 @@ function deleteAppointment(userId, appointmentId) {
     return User.findById(userId)
         .then(user => {
             if (!user)
-                throw new (NotFoundError`user with id ${userId} does not exist`)
+                throw new Error(`user with id ${userId} does not exist`)
 
             return Appointment.findById(appointmentId)
         })
         .then(appointment => {
             if (!appointment)
-                throw new NotFoundError(`appointment with id ${appointmentId} does not exist`)
+                throw new Error(`appointment with id ${appointmentId} does not exist`)
 
             if (appointment.user.toString() !== userId)
                 throw new Error(`appointment with id ${appointmentId} does not belong to user with id ${userId}`)

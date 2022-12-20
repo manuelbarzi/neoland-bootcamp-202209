@@ -1,5 +1,7 @@
+const { errors: { LengthError } } = require('com')
+
 /* eslint-disable import/no-anonymous-default-export */
-/**
+/**z
  * Creates a appointmet against API
  * @param {string} token The user token
  * @param {string} tittle The appointment text
@@ -9,12 +11,14 @@
  */
 export default function (token, title, body, date, callback) {
     if (typeof token !== 'string') throw new TypeError('token is not a string')
-    if (!token.length) throw new Error('token is empty')
-    if (typeof title !== 'string') throw new TypeError('text is not a string')
-    if (!title.length) throw new Error('text is empty')
+    if (!token.length) throw new LengthError('token is empty')
+    if (typeof title !== 'string') throw new TypeError('title is not a string')
+    if (!title.length) throw new LengthError('title is empty')
     if (typeof body !== 'string') throw new TypeError('body is not a string')
-    if (!body.length) throw new Error('body is empty')
+    if (!body.length) throw new LengthError('body is empty')
     if (!(date instanceof Date)) throw new TypeError('date is not a Date')
+
+
 
     if (!callback) {
         return new Promise((resolve, reject) => {
@@ -47,9 +51,7 @@ export default function (token, title, body, date, callback) {
             xhr.send(json)
         })
     }
-
     if (typeof callback !== 'function') throw new TypeError('callback is not a function')
-
     const xhr = new XMLHttpRequest
 
     xhr.onload = () => {

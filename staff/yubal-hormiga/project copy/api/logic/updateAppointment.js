@@ -10,7 +10,8 @@ module.exports = function (userId, title, body, date, appointmentId) {
     if (!title.length) throw new LengthError('title is empty')
     if (typeof body !== 'string') throw new TypeError('body is not a string')
     if (!body.length) throw new LengthError('body is empty')
-    if (!(date instanceof Date)) throw new TypeError('date is not a Date')
+    // if (typeof date !== 'number') throw new TypeError('date is not a number')
+    // if (!date.length) throw new LengthError('date is empty')
 
 
 

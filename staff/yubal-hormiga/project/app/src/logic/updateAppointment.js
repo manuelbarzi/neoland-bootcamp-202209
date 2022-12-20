@@ -1,3 +1,5 @@
+const { errors: { LengthError } } = require('com')
+
 /* eslint-disable import/no-anonymous-default-export */
 /**
  * Updates a post against API
@@ -13,11 +15,10 @@ export default function (token, appointmentId, title, body, date, callback) {
     if (typeof appointmentId !== 'string') throw new TypeError('appointmentId is not a string')
     if (!appointmentId.length) throw new Error('appointmentId is empty')
     if (typeof title !== 'string') throw new TypeError('title is not a string')
-    if (!title.length) throw new Error('title is empty')
+    if (!title.length) throw new LengthError('title is empty')
     if (typeof body !== 'string') throw new TypeError('body is not a string')
-    if (!body.length) throw new Error('body is empty')
-    // if (typeof date !== 'number') throw new TypeError('date is not a number')
-    // if (!date) throw new Error('date is empty')
+    if (!body.length) throw new LengthError('body is empty')
+    // if (!(date instanceof Date)) throw new TypeError('date is not a Date')
     if (typeof callback !== 'function') throw new TypeError('callback is not a function')
 
     const xhr = new XMLHttpRequest

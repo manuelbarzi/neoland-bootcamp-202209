@@ -1,10 +1,11 @@
+const { errors: { FormatError } } = require('com')
+
 /* eslint-disable import/no-anonymous-default-export */
 export default function (token, appointmentId, callback) {
     if (typeof token !== 'string') throw new TypeError('token is not a string')
     if (!token.length) throw new Error('token is empty')
     if (typeof appointmentId !== 'string') throw new TypeError('appointmentId is not a string')
-    if (!appointmentId.length) throw new Error('appointmentId is empty')
-
+    if (!appointmentId.length) throw new FormatError('appointmentId is empty')
     if (!callback)
         return new Promise((resolve, reject) => {
             const xhr = new XMLHttpRequest

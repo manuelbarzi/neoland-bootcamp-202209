@@ -1,4 +1,3 @@
-const { errors: { LengthError } } = require('com')
 
 /* eslint-disable import/no-anonymous-default-export */
 /**
@@ -12,13 +11,13 @@ export default function (token, type, kind, description, amount, date, callback)
     if (typeof token !== 'string') throw new TypeError('token is not a string')
     if (!token.length) throw new Error('token is empty')
     if (typeof type !== 'string') throw new TypeError('type is not a string')
-    if (!type.length) throw new LengthError('type is empty')
+    if (!type.length) throw new Error('type is empty')
     if (typeof kind !== 'string') throw new TypeError('kind is not a string')
-    if (!kind.length) throw new LengthError('kind is empty')
+    if (!kind.length) throw new Error('kind is empty')
     if (typeof description !== 'string') throw new TypeError('description is not a string')
-    if (!description.length) throw new LengthError('description is empty')
+    if (!description.length) throw new Error('description is empty')
     if (typeof amount !== 'number') throw new TypeError('amount is not a number')
-    if (!amount) throw new LengthError('amount is empty')
+    if (!amount) throw new Error('amount is empty')
     // if (!(date instanceof Date)) throw new TypeError('date is not a Date')
 
 
