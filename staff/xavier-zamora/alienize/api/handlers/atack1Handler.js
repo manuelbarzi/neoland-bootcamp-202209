@@ -1,11 +1,12 @@
-const atack1 = require('../logic/atack1')
+const attack1 = require('../logic/attack1')
 const { errors: { FormatError, NotFoundError } } = require('com')
 
 module.exports = (req, res) => {
     try {
         const { userId } = req
+        const { index } = req.body
 
-        atack1(userId)
+        attack1(userId, index)
             .then(user => res.json(user))
             .catch(error => {
                 if (error instanceof NotFoundError)

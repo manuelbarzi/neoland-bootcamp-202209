@@ -2,7 +2,7 @@ import log from '../utils/coolog'
 import retrieveGameData from '../logic/retrieveGameData'
 import retrieveUser from '../logic/retrieveUser'
 import changeTurn from '../logic/changeTurn'
-import atack1 from '../logic/atack1'
+import attack1 from '../logic/attack1'
 import { useCallback, useContext, useEffect, useState } from 'react'
 import Context from '../components/Context'
 import { Link } from 'react-router-dom'
@@ -12,7 +12,7 @@ const { FormatError, AuthError, LengthError, NotFoundError } = errors
 function Battle() {
   log.info('Battle -> render')
 
-  const [selector, setSelector] = useState()
+  const [selector, setSelector] = useState(0)
   const [user, setUser] = useState()
   const [timer, setTimer] = useState(21)
   const [count, setCount] = useState(0)
@@ -30,40 +30,41 @@ function Battle() {
   }
 
   const gameMechanics = () => {
-    if(!user){
-       retrieveUserHandler()
-    }
-    if(game?.turn >= 1){
-      retrieveGameDataHandler()
-    }
+    if (!user) retrieveUserHandler()
+    if (game?.turn >= 1) retrieveGameDataHandler()
     selectorSelect()
-    if(selector){
-      if(game?.hasTurn === false){
+    
+    if (selector === 0) {
+      if (game?.hasTurn === false) {
         setTimeout(function countingTimer() {
           setTimer(timer - 1)
-          if(timer < 1  ){
+          if (timer < 1) {
             changeTurnHandler()
             setTimer(21)
           }
         }, 1000)
-      }else{setTimeout(function countingTimer() {
-        retrieveGameDataHandler()
-        setCount(count + 1)
-      }, 10000)}
+      } else {
+        setTimeout(function countingTimer() {
+          retrieveGameDataHandler()
+          setCount(count + 1)
+        }, 1000)
+      }
     }
-    if(!selector){
-      if(game?.hasTurn === true){
+    if (selector === 1) {
+      if (game?.hasTurn === true) {
         setTimeout(function countingTimer() {
           setTimer(timer - 1)
-          if(timer < 1  ){
+          if (timer < 1) {
             changeTurnHandler()
             setTimer(21)
           }
         }, 1000)
-      }else{setTimeout(function countingTimer() {
-        retrieveGameDataHandler()
-        setCount(count + 1)
-      }, 10000)}
+      } else {
+        setTimeout(function countingTimer() {
+          retrieveGameDataHandler()
+          setCount(count + 1)
+        }, 1000)
+      }
     }
   }
 
@@ -131,14 +132,13 @@ function Battle() {
     }
   }
 
-  const atack1Handler = event => {
-    log.info('Battle -> atack1Handler')
-
-    event.preventDefault()
-
+  const attack1Handler = (index) => {
+    log.info('Battle -> attack1Handler')
+    
+    if(selector === 0 && game?.hasTurn === false){
     try {
-      atack1(sessionStorage.token)
-        .then(token => atack1(token))
+      attack1(sessionStorage.token, index)
+        .then(token => attack1(token))
         .catch(error => {
           if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
             showAlert(error.message, 'warn')
@@ -153,11 +153,38 @@ function Battle() {
       else
         showAlert(error.message, 'fatal')
     }
+    changeTurnHandler()
+    setTimer(21)
+  }
+
+  if(selector === 1 && game?.hasTurn === true){
+    try {
+      attack1(sessionStorage.token, index)
+        .then(token => attack1(token))
+        .catch(error => {
+          if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
+            showAlert(error.message, 'warn')
+          else if (error instanceof AuthError || error instanceof NotFoundError)
+            showAlert(error.message, 'error')
+          else
+            showAlert(error.message, 'fatal')
+        })
+    } catch (error) {
+      if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
+        showAlert(error.message, 'warn')
+      else
+        showAlert(error.message, 'fatal')
+    }
+    changeTurnHandler()
+    setTimer(21)
+  }
   }
 
   return <main className="block h-screen w-full bg-blue-800">
+
     <h2>{timer}</h2>
     <h2>{game?.turn}</h2>
+
     <h2>{game?.namePlayerOne}</h2>
     <h2>{game?.playerOneAlien.name}</h2>
     <h2>Health Points: {game?.playerOneAlien.stats.healthPoints}</h2>
@@ -169,10 +196,7 @@ function Battle() {
     <h2>Speed: {game?.playerOneAlien.stats.speed}</h2>
     <h2>Healing: {game?.playerOneAlien.stats.healing}</h2>
     <h2>Repeat: {game?.playerOneAlien.stats.repeat}</h2>
-    <h2>{game?.playerOneAlien.attacks[0]}</h2>
-    <h2>{game?.playerOneAlien.attacks[1]}</h2>
-    <h2>{game?.playerOneAlien.attacks[2]}</h2>
-    <h2>{game?.playerOneAlien.attacks[3]}</h2>
+    {game?.playerOneAlien.attacks.map((attacks, index) => { return (<button key={index} onClick={() => attack1Handler(index)} >{attacks}</button>) })}
 
     <h2>{game?.namePlayerTwo}</h2>
     <h2>{game?.playerTwoAlien.name}</h2>
@@ -185,10 +209,7 @@ function Battle() {
     <h2>Speed: {game?.playerTwoAlien.stats.speed}</h2>
     <h2>Healing: {game?.playerTwoAlien.stats.healing}</h2>
     <h2>Repeat: {game?.playerTwoAlien.stats.repeat}</h2>
-    <h2>{game?.playerTwoAlien.attacks[0]}</h2>
-    <h2>{game?.playerTwoAlien.attacks[1]}</h2>
-    <h2>{game?.playerTwoAlien.attacks[2]}</h2>
-    <h2>{game?.playerTwoAlien.attacks[3]}</h2>
+    {game?.playerTwoAlien.attacks.map((attacks, index) => { return (<button key={index} onClick={() => attack1Handler(index)} >{attacks}</button>) })}
   </main>
 }
 

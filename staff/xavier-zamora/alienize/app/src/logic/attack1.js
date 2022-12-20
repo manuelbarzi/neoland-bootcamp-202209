@@ -7,7 +7,7 @@ const { FormatError, AuthError, NotFoundError, UnexpectedError } = errors
  * @param {token} token The user token
  */
 
-export default function atack1(token) {
+export default function atack1(token, index) {
     if (typeof token !== 'string') throw new TypeError('token is not a string')
     if (!token.length) throw new FormatError('token is empty')
     return new Promise((resolve, reject) => {
@@ -39,9 +39,14 @@ export default function atack1(token) {
         }
         xhr.onerror = () => reject(new Error('connection error'))
 
-        xhr.open('Get', 'http://localhost:2000/Battle/atack1')
+        xhr.open('POST', 'http://localhost:2000/attack')
         xhr.setRequestHeader('Authorization', `Bearer ${token}`)
 
-        xhr.send()
+        const payload = { index }
+
+        const json = JSON.stringify(payload)
+
+        xhr.send(json)
+
     })
 }

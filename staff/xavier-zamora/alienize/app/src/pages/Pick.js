@@ -11,7 +11,7 @@ const { FormatError, AuthError, LengthError, NotFoundError } = errors
 function Pick() {
   log.info('Pick -> render')
  
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState()
   const [user, setUser] = useState()
   const [gameId, setGameId] = useState()
   const [game, setGame] = useState()
@@ -23,16 +23,13 @@ function Pick() {
 
   const pickPageMechanics = () => {
     if(user === undefined) retrieveUserIdHandler()
-    if(user !== undefined && gameId === undefined){ 
-      retrieveGameIdHandler()
-    }
-    if(gameId !== undefined && game === undefined){
-      retrieveGameDataHandler()
-    }
+    if(user !== undefined && gameId === undefined) retrieveGameIdHandler()
+    if(gameId !== undefined && game === undefined) retrieveGameDataHandler()
     if(game !== undefined && game?.playerTwoName !== undefined){
       randomPickHandler()
       navBattle()
-    }
+    }/*else setCount(1)
+    if(count === 1) navBattle()*/
   }
 
   const retrieveGameDataHandler = () => {
