@@ -10,6 +10,7 @@ import updateItem from "../logic/updateItem";
 export default function ({ onClose, item, onDeleted, onUpdated }) {
   log.info("CreateList -> render");
   const [quantity, setQuantity] = useState(item.quantity);
+  const [amount, setAmount] = useState(item.amount);
 
   const submitUpdateItem = (event) => {
     event.preventDefault();
@@ -53,11 +54,21 @@ export default function ({ onClose, item, onDeleted, onUpdated }) {
 
   const handleRestQuantity = () => setQuantity(quantity - 1)
 
-  const handlePrice = (event) => {
-    event.preventDefault();
+  // const handlePrice = (event) => {
+  //   event.preventDefault();
 
-    alert("suma o resta precio");
+  //   alert("suma o resta precio");
+  // };
+
+  const handleSumAmount = () => setAmount(amount + 0.5);
+
+  const handleChangeAmount = (event) => {
+    const newAmount = event.target.value;
+
+    setAmount(newAmount);
   };
+
+  const handleRestAmount = () => setAmount(amount - 0.5)
 
   return (
     <>
@@ -112,21 +123,23 @@ export default function ({ onClose, item, onDeleted, onUpdated }) {
                   name="amount"
                   placeholder="Precio"
                   type="number"
-                  defaultValue={item.amount}
+                  step="0.01"
+                  onChange={handleChangeAmount}
+                  value={amount}
                 />
                 <span className="absolute ml-[-35px] mt-1 text-gray-400"><MdEuro size="2rem"/></span>
               </div>
               <button
                 type="button"
                 className="bg-gray-200 w-10 h-10 rounded-full flex justify-center text-3xl"
-                onClick={handlePrice}
+                onClick={handleSumAmount}
               >
                 +
               </button>
               <button
                 type="button"
                 className="bg-gray-200 w-10 h-10 rounded-full flex justify-center text-3xl"
-                onClick={handlePrice}
+                onClick={handleRestAmount}
               >
                 -
               </button>
