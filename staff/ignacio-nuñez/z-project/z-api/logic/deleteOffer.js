@@ -2,7 +2,7 @@ const {
     errors: { NotFoundError, ConflictError },
     validators: { stringValidator }
 } = require('com')
-const { Users, Offers } = require('../models')
+const { Users, Offers, Curriculums, Matchs } = require('../models')
 
 module.exports = function deleteOffer(userId, offerId) {
     stringValidator(userId, 'userId')
@@ -20,6 +20,10 @@ module.exports = function deleteOffer(userId, offerId) {
 
             if (offer.user.toString() !== userId) throw new ConflictError(`offer with id ${offerId} does not belong to user with id ${userId}`)
 
-            return Offers.findByIdAndDelete(offerId)
+            return Promise.all([Offers.findByIdAndDelete(offerId),
+            Curriculums.updateMany({ $or: [{ offersILike: offerId }, { offersTheyLikeMe: offerId }] },
+                { $pull: { 'offersTheyLikeMe': offerId, 'offersILike': offerId }}),
+            Users.updateMany({ dislikes: offerId }, { $pull: { 'dislikes': offerId } }),
+            Matchs.deleteMany({ offer: offerId })])
         })
 }

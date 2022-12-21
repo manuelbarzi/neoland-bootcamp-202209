@@ -91,11 +91,11 @@ function UpdateExperienceCurriculum({ className, onUpdateExperienceCurriculumClo
                             <div className='flex flex-col gap-1 p-1'>
                                 <div className='flex gap-1'>
                                     <span className='font-semibold'>Place: </span>
-                                    <textarea type="text" rows='1' name="place" id="place" autoFocus className="resize-none outline-none" placeholder='Place' defaultValue={experience?.place}></textarea>
+                                    <textarea type="text" rows='1' name="place" id="place" autoFocus className="resize-none outline-none w-full" placeholder='Place' defaultValue={experience?.place}></textarea>
                                 </div>
                                 <div className='flex gap-1'>
                                     <span className='font-semibold'>Position:</span>
-                                    <textarea type="text" rows='1' name="position" id="position" className="resize-none outline-none" placeholder='Title' defaultValue={experience?.position}></textarea>
+                                    <textarea type="text" rows='1' name="position" id="position" className="resize-none outline-none w-full" placeholder='Position' defaultValue={experience?.position}></textarea>
                                 </div>
                                 <div className='flex'>
                                     <div className='flex flex-col'>

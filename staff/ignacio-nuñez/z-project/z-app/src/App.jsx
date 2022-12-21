@@ -33,14 +33,14 @@ function App() {
       retrieveUserHandler()
 
       retrieveMatchsNotificationsHandler()
+
+      const intervalId = setInterval(() => {
+        retrieveMatchsNotificationsHandler()
+      }, 5000)
+
+      setMatchsNotificationsAmountIntervalId(intervalId)
     }
   }, [])
-
-  const handleLogout = () => {
-    setUser()
-
-    clearInterval(matchsNotificationsAmountIntervalId)
-  }
 
   const retrieveUserHandler = () => {
     try {
@@ -56,8 +56,27 @@ function App() {
     }
   }
 
+  const retrieveMatchsNotificationsHandler = () => {
+    try {
+      retrieveMatchsNotificationsAmount(sessionStorage.token)
+        .then(amountOfNotifications => {
+          setMatchsNotificationsAmount(matchsNotificationsAmount => matchsNotificationsAmount + amountOfNotifications)
+        })
+    } catch (error) {
+      const { errorMessage, type } = errorHandling(error)
+      showAlert(errorMessage, type)
+    }
+  }
+
+  const onOpenMatchs = () => {
+    setMatchsNotificationsAmount(0)
+  }
+
   const onLoggedIn = () => {
     retrieveUserHandler()
+
+    retrieveMatchsNotificationsHandler()
+    
     const intervalId = setInterval(() => {
       retrieveMatchsNotificationsHandler()
     }, 5000)
@@ -65,17 +84,10 @@ function App() {
     setMatchsNotificationsAmountIntervalId(intervalId)
   }
 
-  const retrieveMatchsNotificationsHandler = () => {
-    try {
-      retrieveMatchsNotificationsAmount(sessionStorage.token)
-        .then(amountOfNotifications => {
-          if (amountOfNotifications > 0)
-            setMatchsNotificationsAmount(amountOfNotifications)
-        })
-    } catch (error) {
-      const { errorMessage, type } = errorHandling(error)
-      showAlert(errorMessage, type)
-    }
+  const handleLogout = () => {
+    setUser()
+
+    clearInterval(matchsNotificationsAmountIntervalId)
   }
 
   const showAlert = (message, level = 'error') => {
@@ -127,11 +139,11 @@ function App() {
           />}
         />}
         {<Route path="/worker/matchs"
-          element={sessionStorage.token ? <WorkerMatchs /> : <Navigate replace to="/login"
+          element={sessionStorage.token ? <WorkerMatchs onOpenMatchs={onOpenMatchs} /> : <Navigate replace to="/login"
           />}
         />}
         {<Route path="/company/matchs"
-          element={sessionStorage.token ? <CompanyMatchs /> : <Navigate replace to="/login"
+          element={sessionStorage.token ? <CompanyMatchs onOpenMatchs={onOpenMatchs} /> : <Navigate replace to="/login"
           />}
         />}
 

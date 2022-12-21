@@ -91,11 +91,11 @@ function UpdateStudyCurriculum({ className, onUpdateStudyCurriculumClose, onUpda
                             <div className='flex flex-col p-1 gap-1'>
                                 <div className='flex gap-1'>
                                     <span className='font-semibold'>Institution: </span>
-                                    <textarea type="text" rows='1' name="institution" id="institution" autoFocus className="resize-none outline-none" placeholder='Institution' defaultValue={study?.institution}></textarea>
+                                    <textarea type="text" rows='1' name="institution" id="institution" autoFocus className="resize-none outline-none w-full" placeholder='Institution' defaultValue={study?.institution}></textarea>
                                 </div>
                                 <div className='flex gap-1'>
                                     <span className='font-semibold'>Title:</span>
-                                    <textarea type="text" rows='1' name="title" id="title" className="resize-none outline-none" placeholder='Title' defaultValue={study?.title}></textarea>
+                                    <textarea type="text" rows='1' name="title" id="title" className="resize-none outline-none w-full" placeholder='Title' defaultValue={study?.title}></textarea>
                                 </div>
                                 <div className='flex'>
                                     <div className='flex flex-col'>

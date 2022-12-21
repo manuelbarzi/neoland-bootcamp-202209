@@ -10,7 +10,7 @@ import retrieveMatchs from "../logic/retrieveMatchs"
 import Button from "../components/Button"
 import DislikeOffer from "../components/DislikeOffer"
 
-function WorkerMatchs() {
+function WorkerMatchs({ onOpenMatchs }) {
     const [matchs, setMatchs] = useState([])
     const [searchPanelStatus, setSearchPanelStatus] = useState()
     const [dislikeOffer, setDislikeOffer] = useState()
@@ -20,6 +20,8 @@ function WorkerMatchs() {
 
     useEffect(() => {
         retrieveMatchsHandler()
+
+        onOpenMatchs()
     }, [])
 
     const retrieveMatchsHandler = () => {

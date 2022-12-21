@@ -19,7 +19,7 @@ module.exports = function createOffer(userId) {
         .then(offers => {
             if (offers.length >= 3) throw new ConflictError('Your cant have more than 3 offers')
 
-            const data = { title: 'My new offer', description: '', createDate: new Date(), user: userId }
+            const data = { title: `My new Offer ${offers.length ? offers.length + 1 : ''}`, description: '', createDate: new Date(), user: userId }
 
             data.published = false
 

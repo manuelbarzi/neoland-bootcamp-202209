@@ -10,7 +10,7 @@ import retrieveMatchs from "../logic/retrieveMatchs"
 import Button from "../components/Button"
 import DislikeCurriculum from "../components/DislikeCurriculum"
 
-function CompanyMatchs() {
+function CompanyMatchs({ onOpenMatchs }) {
     const [matchs, setMatchs] = useState([])
     const [searchPanelStatus, setSearchPanelStatus] = useState()
     const [dislikeCurriculum, setDislikeCurriculum] = useState()
@@ -20,6 +20,8 @@ function CompanyMatchs() {
 
     useEffect(() => {
         retrieveMatchsHandler()
+
+        onOpenMatchs()
     }, [])
 
     const retrieveMatchsHandler = () => {
@@ -71,7 +73,7 @@ function CompanyMatchs() {
         <div className="flex items-center flex-col">
             <div className="w-full flex items-center flex-col mb-24">
                 <div className="flex justify-center items-center font-semibold text-lg border-2 shadow-sm shadow-slate-600 w-5/6 h-20 z-10 rounded-xl bg-emerald-300 cursor-pointer">
-                    <span className="ml-2">My Matchs</span>
+                    <span className="ml-2">{matchs.length === 0 ? 'You dont have matchs yet' : 'My Matchs'}</span>
                 </div>
                 <section className="flex items-center flex-col w-5/6">
                     {matchs.map(match => {

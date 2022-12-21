@@ -26,7 +26,7 @@ function NavBar() {
             {user?.role === 'worker' && <Link to={'/worker/matchs'}>Matchs</Link>}
             {user?.role === 'company' && <Link to={'/company/matchs'}>Matchs</Link>}
             <div className="z-10 flex gap-4">
-                <Link className="text-lg" to={'/user/profile'}>{userName || 'Loading...'}</Link>
+                <Link className="text-lg" to={'/user/profile'}>Profile</Link>
                 <button className="text-lg" onClick={handlerLogoutClick}>Logout</button>
             </div>
         </nav>
