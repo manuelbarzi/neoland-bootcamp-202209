@@ -2,11 +2,14 @@ import { useEffect, useState } from "react";
 import BoatForm from "../components/boatForm";
 import BoatsList from "../components/boatslist";
 import getUserBoats from "../logic/boatslist";
+import SuccessToast from "../components/ui/successToast";
 
 function Boats() {
   const [boats, setBoats] = useState([]);
   const [isBoatFormVisible, setisBoatFormVisible] = useState(false);
   const [editableBoatInfo, setEditableBoatInfo] = useState(false);
+  const [isSuccessToastActive, setIsSuccessToastActive] = useState(false);
+  const [successToastMessage, setSuccessToastMessage] = useState(null);
 
   const fetchBoats = async () => {
     const fetchedBoats = await getUserBoats();
@@ -35,12 +38,18 @@ function Boats() {
   const onBoatsEdited = async () => {
     setisBoatFormVisible(false);
     await refreshBoats();
+    let successMessage = "Boats updated succesfully";
+    setSuccessToastMessage(successMessage);
+    setIsSuccessToastActive(true);
   };
 
   const onUpdateBoatRequest = (boatId) => {
     console.log("Received update event for boat", boatId);
     setEditableBoatInfo(boats.find((boat) => boat._id === boatId));
     setisBoatFormVisible(true);
+  };
+  const closeSuccessToast = () => {
+    setIsSuccessToastActive(false);
   };
 
   return (
@@ -55,6 +64,12 @@ function Boats() {
               onUpdateBoatRequest={onUpdateBoatRequest}
             ></BoatsList>
           </div>
+        )}
+        {isSuccessToastActive && (
+          <SuccessToast
+            message={successToastMessage}
+            onClose={closeSuccessToast}
+          />
         )}
 
         {!isBoatFormVisible && (

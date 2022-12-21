@@ -1,10 +1,13 @@
 import updateUserSettings from "../logic/updateUserSettings";
 import { useState } from "react";
 import Toast from "./ui/toast";
+import SuccessToast from "./ui/successToast";
 
 function PasswordUpdater({ userInfo }) {
   const [isToastActive, setIsToastActive] = useState(false);
   const [toastMessage, setToastMessage] = useState(null);
+  const [isSuccessToastActive, setIsSuccessToastActive] = useState(false);
+  const [successToastMessage, setSuccessToastMessage] = useState(null);
   const savePassword = async (event) => {
     event.preventDefault();
 
@@ -13,9 +16,9 @@ function PasswordUpdater({ userInfo }) {
     let firstPassword = form.firstPassword.value;
     let secondPassword = form.secondPassword.value;
 
-    if (!firstPassword.length) {
+    if (!firstPassword.length || firstPassword.length < 6) {
       // error toast
-      setToastMessage("Please, enter new password in both fields");
+      setToastMessage("Please, enter new password, minimum 6 characters");
       setIsToastActive(true);
       console.log("no password provided");
       return;
@@ -34,15 +37,27 @@ function PasswordUpdater({ userInfo }) {
       password: firstPassword,
     };
     await updateUserSettings(userInfo._id, modifications);
+    let successMessage = "Password updated succesfully";
+    setSuccessToastMessage(successMessage);
+    setIsSuccessToastActive(true);
   };
 
   const closeToast = () => {
     setIsToastActive(false);
   };
+  const closeSuccessToast = () => {
+    setIsSuccessToastActive(false);
+  };
 
   return (
     <div className="block p-6 rounded-lg shadow-lg bg-white min-w-full">
       {isToastActive && <Toast message={toastMessage} onClose={closeToast} />}
+      {isSuccessToastActive && (
+        <SuccessToast
+          message={successToastMessage}
+          onClose={closeSuccessToast}
+        />
+      )}
       <form onSubmit={savePassword}>
         <div className="grid grid-cols-2 gap-4 ">
           <div className="form-group mb-6">

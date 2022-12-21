@@ -1,7 +1,6 @@
 import { useState } from "react";
 import createBooking from "../logic/createBooking";
 import updateBooking from "../logic/updateBooking";
-import SuccessToast from "./ui/successToast";
 import Toast from "./ui/toast";
 
 function BookingForm({ onUpdate, boats, ports, onDiscard, bookingInfo }) {

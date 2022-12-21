@@ -31,7 +31,7 @@ function SettingsForm({ userInfo }) {
 
     try {
       await updateUserSettings(userInfo._id, userFormInfo);
-      let successMessage = "Settings updated";
+      let successMessage = "Information updated succesfully";
       setSuccessToastMessage(successMessage);
       setIsSuccessToastActive(true);
     } catch (error) {

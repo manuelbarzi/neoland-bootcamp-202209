@@ -10,21 +10,14 @@ The main idea was to mix technology with a field/subject I am really passionate 
 
 ## Functional Description
 
-- [ ] User Login
-- [ ] Register User
-- [ ] CRUD of user's boats
-- [ ] CRUD of port bookings
-- [ ] User settings
-- [ ] View main port info
-- [ ] View the weather on each port
+- [X] User Login
+- [X] Register User
+- [X] CRUD of user's boats
+- [X] CRUD of port bookings
+- [X] User settings
+- [X] View main port info
+- [X] View the weather on each port
 
-### 🎨 Design
-
-Both Login and Register pages are divided, on the left hand side the form is set. On the right hand, I have used an aerial image of two boats.
-
-#### Color Palette
-
-I have chosen a combination of 4 colours: navy, mid-grey, turqoise and white bone. I think these tones are the perfect match for the theme of the app.
 
 ## Technical Description
 
@@ -32,11 +25,14 @@ I have chosen a combination of 4 colours: navy, mid-grey, turqoise and white bon
 
 - Navbar
 - Home
-- Menu
+- Login
+- Register Form
 - Ports
 - User's settings
 - User's bookings
+- Booking Form
 - User's boats
+- Boat Form
 
 ### Data Model
 
@@ -82,15 +78,33 @@ Booking
 - endDate (Date, required)
 - port (ObjectId, port id, required)
 - boat (ObjectId, boat id, required)
-- status (String, required, enum: ['x', 'y', 'z'])
 
 ### Technologies
 
-- Tailwind
-- AntDesign
+- JavaScript
 - React
 - React Router
+- Axios
 - Node
 - Express
 - Mongoose
 - JWT
+- Tailwind
+- Font awesome
+
+### 🎨 Design
+
+Both Login and Register pages are divided, on the left hand side the form is set. On the right hand, I have used an aerial image of two boats.
+
+#### Color Palette
+
+I have chosen a combination of 4 colours: navy, mid-grey, turqoise and white bone. I think these tones are the perfect match for the theme of the app.
+
+## 🔜 Next version
+
+- [ ] Mobile version
+- [ ] Add prices to each port
+- [ ] Port facilities icons
+- [ ] Port rating and opinions
+- [ ] User documents such as lisense and boat documents
+- [ ] Port geolocation using Maps and GPS

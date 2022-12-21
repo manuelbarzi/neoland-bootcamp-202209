@@ -28,6 +28,10 @@ function Register() {
     event.preventDefault();
     setFormStep(formStep + 1);
   };
+  const previousFormStep = (event) => {
+    event.preventDefault();
+    setFormStep(formStep - 1);
+  };
   const registerBirthDate = (event) => {
     const birthDateObject = new Date(event.value);
     const now = new Date();
@@ -260,7 +264,7 @@ function Register() {
                                         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                       id="passwordInput"
                       name="password"
-                      placeholder="Password"
+                      placeholder="Min. 6 characters"
                       onChange={(e) => {
                         setPassword(e.target.value);
                       }}
@@ -377,16 +381,27 @@ function Register() {
                   </div>
 
                   <button
-                    type="submit"
-                    className="w-full px-6 py-2.5 bg-midgreen 
+                    type="button"
+                    className=" px-3 py-1.5 bg-midgreen text-bone w-full
+                                                            font-medium text-xs leading-tight uppercase rounded shadow-md
+                                                            hover:bg-blue-700 hover:shadow-lg"
+                    onClick={previousFormStep}
+                  >
+                    Previous step
+                  </button>
+                  <div className="pt-2">
+                    <button
+                      type="submit"
+                      className="w-full px-6 py-2.5 bg-midgreen 
                                     text-white font-medium text-xs leading-tight 
                                     uppercase rounded shadow-md hover:bg-blue-700 
                                     hover:shadow-lg focus:bg-blue-700 focus:shadow-lg 
                                     focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150
                                     ease-in-out"
-                  >
-                    Register
-                  </button>
+                    >
+                      Register
+                    </button>
+                  </div>
                 </>
               )}
             </form>
