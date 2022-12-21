@@ -31,7 +31,7 @@ function retrieveEventMonthNumber(userId, month) {
                 throw new NotFoundError(`event for month ${month} does not exist`)
             }
             
-            event?.participants?.forEach(participant => {
+            event.participants.forEach(participant => {
                 participant.id = participant._id.toString()
 
                 delete participant._id

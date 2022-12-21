@@ -22,8 +22,10 @@ export default function Registarte({ onClose }) {
 
         try {
             registerUser(name, email, password)
-                .then(()=> onClose())
-                
+                .then(()=> {
+                    onClose()
+                    showAlert('succesed...enjoy it')
+                })
                 .catch(error => {
                     if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
                         showAlert(error.message, 'warn')

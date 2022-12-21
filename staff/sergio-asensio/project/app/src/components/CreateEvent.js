@@ -17,7 +17,7 @@ export default function ({ closeCreate, onCreated, monthName}) {
         }
 
         try {
-            createEvent(sessionStorage.token, title, body, requirement, Number(capacity), _date, inscription, image)
+            createEvent(sessionStorage.token, title, body, requirement, Number(capacity), _date , inscription, image)
                 .then(() => onCreated())
                 .catch(error => alert(error.message))
         } catch (error) {

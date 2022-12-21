@@ -62,10 +62,10 @@ function Home() {
 
     }, [])
 
-    return <div className="h-full  bg-white dark:bg-black text-black dark:text-white">
+    return <div className="h-full">
         {user && <Header userName={user.name} />}
 
-        <div className='h-full p-8'>
+        <div className='h-full  bg-slate-100 p-8'>
             <Link to="/noticias"> <div className='h-1/4 border-4 border-solid rounded-md mb-4  bg-green-50'>
                 <h2 className='underline p-2'>NOTICIAS</h2>
                 <p className='ml-2'>{notice?.title}</p>

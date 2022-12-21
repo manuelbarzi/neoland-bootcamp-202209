@@ -81,8 +81,8 @@ function Users() {
             <h1>USERS</h1>
             <div className='border-2 border-black'>Log Out</div>
         </header>
-        <div>
-            <ul>
+        <div className='m-2'>
+            
             {users.map(userToChange => {
                 return <article key={userToChange.id}>
                  <li>{userToChange.name},  {userToChange.email},  {userToChange.role}
@@ -90,7 +90,8 @@ function Users() {
                  </li>
                  </article>
             })}
-            </ul>
+        
+           
         </div>
         {userToChange && <UpdateUserRole userToChange={userToChange}  onClose={()=>setUserToChange()} onUpdated={()=>setUserToChange()}/>}
 
