@@ -44,6 +44,7 @@ function Events() {
             else
                 showAlert(error.message, 'fatal')
         }
+
     }, [])
 
     const navigate = useNavigate()

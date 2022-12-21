@@ -154,7 +154,8 @@ function Noticias() {
 
     }
 
-    return <><header className='h-1/6 top-0 flex justify-around items-center bg-teal-600'>
+    return <main className='bg-slate-100'>
+        <header className='h-1/6 top-0 flex justify-around items-center bg-teal-600'>
         <Link to="/"><img src={logo} className='w-20 h-20 cursor-pointer' /></Link>
         <h1>NOTICIAS</h1>
         <div className='flex items-center gap-1'>
@@ -164,7 +165,6 @@ function Noticias() {
         <div>
             <button onClick={handleSettings}><SlMenu size='1.5rem'/></button>
         </div>
-
     </header>
     {settings && <Settings/>}
 
@@ -187,6 +187,6 @@ function Noticias() {
         {updateNoticeVisible && <UpdateNotice notice={notice} onUpdated={handleNoticeUpdated} onClose={closeUpdateNotice} />}
         {deleteNoticeVisible && <DeleteNotice notice={notice} onDeleted={handleNoticeDeleted} onClose={closeDeleteNotice} />}
 
-    </>
+    </main>
 }
 export default Noticias

@@ -76,7 +76,7 @@ function Users() {
         usersRetrieve()
     }
 
-    return <main className="h-full">
+    return <main className="h-full bg-slate-100">
         <header className='h-1/6 top-0 flex justify-around items-center bg-teal-600	'>
             <Link to="/"><img src={logo} className='w-20 h-20 cursor-pointer' /></Link>
             <h1>USERS</h1>
@@ -86,7 +86,7 @@ function Users() {
             </div>
 
         </header>
-        <table className='m-10'>
+        <table className='m-10 '>
             <tr>
                 <th>Nombre</th>
                 <th>E-mail</th>

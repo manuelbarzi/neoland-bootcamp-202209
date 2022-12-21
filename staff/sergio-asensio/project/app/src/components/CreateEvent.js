@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import createEvent from '../logic/createEvent'
 import getMonthNumberByName from '../utils/getMonthNumberByName'
 

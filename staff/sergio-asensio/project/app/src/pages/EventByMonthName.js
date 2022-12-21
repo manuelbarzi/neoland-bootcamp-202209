@@ -146,14 +146,14 @@ function EventMonth() {
             </div>
         </header>
 
-        {event ? <div className='mx-4 '>
+        {event ? <div className='mx-4 bg-slate-100'>
             <div className='flex mt-4 gap-6 justify-between'>
                 <div>
-                    <h1>{event.title}</h1>
+                    <h1 className='underline'>{event.title}</h1>
                     <h3>{event.body}</h3>
-                    <h3>Requisitos: {event.requirement}</h3>
-                    <h3> Fecha: {shortDate} </h3>
-                    <h3> Plazas: {event.capacity}</h3>
+                    <h3><u>Requisitos:</u> {event.requirement}</h3>
+                    <h3><u>Fecha:</u> {shortDate} </h3>
+                    <h3><u>Plazas:</u> {event.capacity}</h3>
                     {!available && <div>
                         <h3>{event.inscription = 'No more places'}</h3>
                         {enrolled && <button onClick={handleUnsignUp} className="border-2 rounded-full border-black bg-red-50 p-1 cursor-pointer m-1">Desinscribirse</button>}</div>}
@@ -169,7 +169,7 @@ function EventMonth() {
                     {event.inscription === 'open' && <p>Plazas disponibles: {available} </p>}
                 </div>
 
-                <div className=' rounded-sm'><img src={event?.image} /></div>
+                <div><img src={event?.image} /></div>
             </div>
 
             {event?.participants?.map(user => {
