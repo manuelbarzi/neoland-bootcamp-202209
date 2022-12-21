@@ -18,6 +18,12 @@ User
 - ...
 
 ## Technical Description
+We have used:
+=============
+React : To create the base of the project
+Tailwind: A CSS framework that prioritises usability over styling. This framework provides a set of classes to give structure and style, and to be able to quickly create custom designs.
+Autoprefixer: Allows you to parse standard CSS code and add the necessary CSS vendor prefixes to ensure that the functionality is best suited to older browsers.
+
 
 ### Data Model
 

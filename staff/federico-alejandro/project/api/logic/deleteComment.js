@@ -1,7 +1,7 @@
 const { errors: { LengthError, NotFoundError } } = require('com')
 const { User, Post} = require('../models');
 /**
- * Delete comment from an user
+ * Delete comment from a post
  * 
  * @param {string} userId The user id
  * @param {string} postId The post id

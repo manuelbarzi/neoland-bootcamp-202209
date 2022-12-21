@@ -38,22 +38,24 @@ export default function Header() {
         }
     }, [])
 
-   const handleToggleMenu = () => setToggleButton(toggleButton === 'menu' ? 'close' : 'menu')
-
+    const handleToggleMenu = () => setToggleButton(toggleButton === 'menu' ? 'close' : 'menu') 
+    
     const settings = () => !settingsPanel ? setSettingsPanel(true) : setSettingsPanel()
     const closeSettingsPanel = () => setSettingsPanel()
 
+
     return <header className='fixed w-full h-[2.5rem] flex justify-between items-center gap-2 bg-slate-200'>
         <img src={LOGO} alt='LOGO' className='h-10 ml-4' />
-        {user && <p className='font-bold text-black mx-1.5'>{user.name}</p>}
+        {user && <p className='font-bold text-black mx-1.5 '>{user.name}</p>}
         <div className='mr-4'>
-            <button  className='flex' onClick={handleToggleMenu}><AiOutlineMenu size='1.5rem'/></button>
+            <button type='button' className='flex' onClick={handleToggleMenu}><AiOutlineMenu size='1.5rem' /></button>
             {toggleButton === 'close' && <div className='flex flex-col gap-1.5 mt-2.5 fixed bg-slate-200 border-8 rounded-lg'>
-                <button onClick={logout}><AiOutlineLogout size='1.25rem'/></button>
-                <button onClick={settings}><AiOutlineSetting size='1.25rem'/></button>
+                <button onClick={logout}><AiOutlineLogout size='1.25rem' /></button>
+                <button onClick={settings}><AiOutlineSetting size='1.25rem' /></button>
             </div>}
         </div>
 
-        {settingsPanel && <Settings onClose={closeSettingsPanel} />}
+        {settingsPanel && <Settings onClose={closeSettingsPanel}  />}
+
     </header>
 }

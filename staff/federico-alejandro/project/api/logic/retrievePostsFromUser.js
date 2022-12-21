@@ -7,7 +7,7 @@ const { User, Post } = require('../models')
  * @param {string} targetUserId The target user id to retrieve posts from
  * 
  */
-function retrievePublicPosts(userId, targetUserId) {//targetUserId = persona (objetivo) que quiero ver
+function retrievePostsFromUser(userId, targetUserId) {//targetUserId = persona (objetivo) que quiero ver
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
     if (!userId.length) throw new LengthError('userId is empty')
     if (typeof targetUserId !== 'string') throw new TypeError('targetUserId is not a string')
@@ -27,27 +27,23 @@ function retrievePublicPosts(userId, targetUserId) {//targetUserId = persona (ob
                 .sort({ date: -1 })
                 .populate({
                     path: 'user',
-                    select: '-visibility -email -password'
+                    select: '-visibility -email -password -__v'
                 })
                 .populate({
                     path: 'chats',
-                    populate: {
+                    select: '-__v',
+                    populate: [{
                         path: 'user',
-                        select: 'name -email -password'
-                        //select: '-email -password'
-                    }
-                })
-                .populate({
-                    path: 'chats',
-                    populate: {
+                        select: 'name',
+                    },
+                    {
                         path: 'comments',
                         populate: {
                             path: 'user',
                             select: 'name'
                         }
-                    }
+                    }]
                 })
-                .select('-__v')
                 .lean()
         })
         .then(posts => {
@@ -63,16 +59,14 @@ function retrievePublicPosts(userId, targetUserId) {//targetUserId = persona (ob
                     delete user._id
                 }
 
-                // if (post.user.id === user) {
-                    if (post.user.id === userId) {
-                        post.chats = []
+                if (user.id === userId) {
+                    post.chats = []
 
-                        const chat = post.chats.find(chat => (chat.user._doc.id || chat.user._doc._id.toString()) !== userId)
+                    const chat = post.chats.find(chat => (chat.user._doc.id || chat.user._doc._id.toString()) !== userId)
 
-                        if (chat) post.chats.push(chat)
-                    }
-
-                // }
+                    if (chat)
+                        post.chats.push(chat)
+                }
 
                 post.chats.forEach(chat => {
                     chat.id = chat._id.toString()
@@ -84,8 +78,8 @@ function retrievePublicPosts(userId, targetUserId) {//targetUserId = persona (ob
 
                     if (user._id) {
                         user.id = user._id.toString()
-
                         delete user._id
+                        delete user.__v
                     }
 
                     chat.comments.forEach(comment => {
@@ -101,26 +95,13 @@ function retrievePublicPosts(userId, targetUserId) {//targetUserId = persona (ob
                         if (user._id) {
                             user.id = user._id.toString()
                             delete user._id
+                            delete user.__v
                         }
                     })
                 })
-
-                // if (chat) {
-                //     delete chat._id
-                //     delete chat.__v
-
-                // chat.comments.forEach(comment => {
-                //     comment.id = comment._id.toString()
-
-                //     delete comment.__v
-                //     delete comment._id
-                // })
-
-                //post.chats.push(chat)
-                //})
             })
             return posts
         })
 }
 
-module.exports = retrievePublicPosts
+module.exports = retrievePostsFromUser

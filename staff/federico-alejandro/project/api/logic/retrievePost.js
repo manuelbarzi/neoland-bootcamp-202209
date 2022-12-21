@@ -1,7 +1,5 @@
 const { errors: { LengthError, NotFoundError } } = require('com')
 const { User, Post } = require('../models')
-const { user } = require('../models/schemas')
-const { post } = require('../models/schemas/user')
 /**
  * Retrieves a post from user
  * 
@@ -41,7 +39,7 @@ module.exports = function (userId, postId) {
                     }]
                 })
                 .lean()
-        })                                             // POPULATE ???
+        })                                           
         .then(post => {
             if (!post) throw new NotFoundError(`post with id ${postId} does not exist`)
 

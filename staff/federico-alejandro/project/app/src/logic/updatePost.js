@@ -1,4 +1,4 @@
-import { AuthError, FormatError, LengthError, NotFoundError, UnexpectedError } from "com/errors"
+const { errors: { AuthError, FormatError, LengthError, NotFoundError, UnexpectedError, ConflictError } } = require('com')
 /**
  * Update a post against API
  * 
@@ -38,7 +38,6 @@ function updatePost(token, postId, title, text, visibility, image) {
         xhr.onload = () => {
             const { status, responseText: json } = xhr
 
-
             if (status === 204)
                 resolve()
             else if (status === 400) {
@@ -58,6 +57,10 @@ function updatePost(token, postId, title, text, visibility, image) {
                 const { error } = JSON.parse(json)
 
                 reject(new NotFoundError(error))
+            } else if (status === 409) {
+                const { error } = JSON.parse(json)
+
+                reject(new ConflictError(error))
             } else if (status < 500)
                 reject(new UnexpectedError('client error'))
             else

@@ -4,7 +4,6 @@ import { errors } from 'com'
 import retrievePublicPosts from '../logic/retrievePublicPosts'
 
 import Header from '../components/Header'
-import Settings from '../components/Settings'
 import Footer from '../components/Footer'
 import Context from '../components/Context'
 import CreatePost from '../components/CreatePost'
@@ -16,7 +15,6 @@ function Home() {
     log.info('Home -> render')
 
     const [posts, setPosts] = useState()
-    // const [settingsPanel, setSettingsPanel] = useState()
     const { showAlert } = useContext(Context)
 
     const [createPostVisible, setCreatePostVisible] = useState()
@@ -45,7 +43,6 @@ function Home() {
     const closeCreatePost = () => setCreatePostVisible()
 
     const handlePostCreated = () => {
-
         try {
             retrievePublicPosts(sessionStorage.token)
                 .then(posts => {
@@ -100,7 +97,6 @@ function Home() {
         <Footer onCreate={openCreatePost} />
         {createPostVisible && <CreatePost onCreated={handlePostCreated} onClose={closeCreatePost} />}
     
-    {/* {settingsPanel && <Settings onClose={closeSettingsPanel} />} */}
     </main>
 }
 

@@ -1,5 +1,5 @@
 const retrievePostsFromUser = require('../logic/retrievePostsFromUser')
-const { errors: { FormatError, NotFoundError } } = require('com')
+const { errors: { FormatError, NotFoundError, ConflictError } } = require('com')
 
 module.exports = (req, res) => {
     try {

@@ -1,4 +1,4 @@
-import { LengthError, FormatError, AuthError, NotFoundError, UnexpectedError } from "com/errors"
+const { errors: { LengthError, FormatError, AuthError, NotFoundError, UnexpectedError, ConflictError } } = require('com')
 /**
  * Creates a post against API
  * 
@@ -33,6 +33,8 @@ function createPost(token, title, text, visibility, image) {
         xhr.onload = () => {
             const { status, responseText: json } = xhr
 
+            // const data = JSON.parse(json)
+
             if (status === 201)
                 resolve()
             else if (status === 400) {
@@ -52,6 +54,9 @@ function createPost(token, title, text, visibility, image) {
                 const { error } = JSON.parse(json)
 
                 reject(new NotFoundError(error))
+            } else if (status === 409) {
+                const { error } = JSON.parse(json)
+                reject(new ConflictError(error))
             } else if (status < 500)
                 reject(new UnexpectedError('client error'))
             else

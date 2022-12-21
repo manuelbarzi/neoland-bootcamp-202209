@@ -1,11 +1,7 @@
 import log from '../utils/coolog'
-//import {format} from 'timeago.js'
 import { useParams } from 'react-router-dom'
-// import { FaRegComment } from 'react-icons/fa'
 import { useEffect, useState } from 'react'
-
 import retrieveAUser from '../logic/retrieveAUser'
-//import retrieveComment from '../logic/retrieveComment'
 import retrievePostsFromUser from '../logic/retrievePostsFromUser'
 
 import Post from '../components/Post'

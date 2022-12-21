@@ -1,11 +1,21 @@
 import { LengthError } from "com/errors"
+/**
+ * Update User Passwrod
+ * 
+ * @param {string} token userId client 
+ * @param {string} password current password
+ * @param {string} newPassword new password 
+ */
 
-function updateEmail(token, email) {
+function updatePassword(token, password, newPassword) {
     if (typeof token !== 'string') throw new TypeError('token is not a string')
     if (!token.length) throw new LengthError('token is empty')
 
-    if (typeof email !== 'string') throw new TypeError('email is not a string')
-    if (!email.length) throw new LengthError('email is empty')
+    if (typeof password !== 'string') throw new TypeError('password is not a string')
+    if (!password.length) throw new LengthError('password is empty')
+
+    if (typeof newPassword !== 'string') throw new TypeError('newPassword is not a string')
+    if (!newPassword.length) throw new LengthError('newPassword is empty')
 
     return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest()
@@ -29,7 +39,7 @@ function updateEmail(token, email) {
         xhr.setRequestHeader('Authorization', `Bearer ${token}`)
         xhr.setRequestHeader('Content-Type', 'application/json')
 
-        const payload = { email }
+        const payload = { password, newPassword }
 
         const json = JSON.stringify(payload)
 
@@ -37,4 +47,4 @@ function updateEmail(token, email) {
     })
 }
 
-export default updateEmail
+export default updatePassword

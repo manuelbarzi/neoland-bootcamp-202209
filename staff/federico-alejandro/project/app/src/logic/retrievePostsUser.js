@@ -1,11 +1,10 @@
-import { LengthError } from "com/errors"
+const { errors: { LengthError, NotFoundError, UnexpectedError, ConflictError } } = require('com')
 /**
  * Retrieves all posts from a user
  * 
  * @param {string} token The user token
  * 
  */
-
 function retrievePostsUser(token) {
     if (typeof token !== 'string') throw new TypeError('token is not a string')
     if (!token.length) throw new LengthError('token is empty')
@@ -16,17 +15,30 @@ function retrievePostsUser(token) {
             xhr.onload = function () {
                 const { status, responseText: json } = xhr
 
-                if (status >= 500) {
-                    const { error } = JSON.parse(json)
+                const data = JSON.parse(json)
 
-                    reject(new Error(error))
+            if (status === 200) {
+                resolve(data)
+            }
+            else if (status === 400) {
+                const { error } = data
 
-                    return
-                }
+                if (error.includes('is not a '))
+                    reject(new TypeError(error))
+                else if (error.includes('empty'))
+                    reject(new LengthError(error))
+            }  else if (status === 404) {
+                const { error } = data
 
-                const posts = JSON.parse(json)
+                reject(new NotFoundError(error))
+            } else if (status === 409) {
+                const { error } = data
 
-                resolve(posts)
+                reject(new ConflictError(error))
+            } else if (status < 500)
+                reject(new UnexpectedError('client error'))
+            else
+                reject(new UnexpectedError('server error'))
             }
 
             xhr.onerror = () => reject(new Error('connection error'))

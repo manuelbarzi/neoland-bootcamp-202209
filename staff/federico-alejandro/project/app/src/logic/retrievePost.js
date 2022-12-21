@@ -1,6 +1,7 @@
-import { LengthError } from "com/errors"
+const { errors: { LengthError, NotFoundError, UnexpectedError, ConflictError } } = require('com')
+
 /**
- * Delete a post against API
+ * Retrieve a post from a user
  * 
  * @param {string} token The user token
  * @param {string} postId The post postId
@@ -11,31 +12,43 @@ function retrievePost(token, postId) {
     if (typeof postId !== 'string') throw new TypeError('postId is not a string')
     if (!postId.length) throw new LengthError('postId is empty')
 
-        return new Promise((resolve, reject) => {
-            const xhr = new XMLHttpRequest()
+    return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest()
 
-            xhr.onload = function () {
-                const { status, responseText: json } = xhr
+        xhr.onload = function () {
+            const { status, responseText: json } = xhr
 
-                if (status >= 500) {
-                    const { error } = JSON.parse(json)
+            // const data = JSON.parse(json)
 
-                    reject(new Error(error))
+            if (status === 200) {
+                resolve()
+            } else if (status === 400) {
+                const { error } = JSON.parse(json)
 
-                    return
-                }
+                if (error.includes('is not a '))
+                    reject(new TypeError(error))
+                else if (error.includes('empty'))
+                    reject(new LengthError(error))
+            } else if (status === 404) {
+                const { error } = JSON.parse(json)
 
-                const post = JSON.parse(json)
+                reject(new NotFoundError(error))
+            } else if (status === 409) {
+                const { error } = JSON.parse(json)
 
-                resolve(post)
-            }
-            
-            xhr.onerror = () => reject(new Error('connection error'))
+                reject(new ConflictError(error))
+            } else if (status < 500)
+                reject(new UnexpectedError('client error'))
+            else
+                reject(new UnexpectedError('server error'))
+        }
 
-            xhr.open('GET', `http://localhost/posts/${postId}`)
-            xhr.setRequestHeader('Authorization', `Bearer ${token}`)
-            xhr.send()
-        })
+        xhr.onerror = () => reject(new Error('connection error'))
+
+        xhr.open('GET', `http://localhost/posts/${postId}`)
+        xhr.setRequestHeader('Authorization', `Bearer ${token}`)
+        xhr.send()
+    })
 }
 
 export default retrievePost

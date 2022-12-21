@@ -1,4 +1,4 @@
-import { LengthError } from "com/errors"
+const {errors:{ LengthError, AuthError, NotFoundError, UnexpectedError, ConflictError}} = require('com')
 /**
  * Delete a comment against API
  * 
@@ -27,15 +27,33 @@ function deleteComment(token, postId, chatId, commentId) {
             xhr.onload = () => {
                 const { status } = xhr
 
-                if (status >= 500) {
-                    const { error } = JSON.parse(json)
+                const data = JSON.parse(json)
 
-                    reject(new Error(error))
-
-                    return
-                }
-
-                resolve()
+                if (status === 204)
+                    resolve()
+                else if (status === 400) {
+                    const { error } = data
+    
+                    if (error.includes('is not a '))
+                        reject(new TypeError(error))
+                    else if (error.includes('empty'))
+                        reject(new LengthError(error))
+                } else if (status === 401) {
+                    const { error } = data
+    
+                    reject(new AuthError(error))
+                } else if (status === 404) {
+                    const { error } = data
+    
+                    reject(new NotFoundError(error))
+                } else if (status === 409) {
+                    const { error } = data
+    
+                    reject(new ConflictError(error))
+                } else if (status < 500)
+                    reject(new UnexpectedError('client error'))
+                else
+                    reject(new UnexpectedError('server error'))
             }
 
             xhr.onerror = () => reject(new Error('connection error'))

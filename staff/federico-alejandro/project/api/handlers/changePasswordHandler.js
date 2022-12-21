@@ -4,9 +4,9 @@ const { ConflictError, NotFoundError, FormatError, LengthError, AuthError } = re
 
 module.exports = (req, res) => {
     try {
-        const { password} = req.body
+        const { password, newPassword} = req.body
 
-        updatePassword(password)
+        updatePassword(password, newPassword)
         .then(() => res.status(201).send())
         .catch(error => {
             if (error instanceof AuthError)  res.status(401).json({ error: error.message })

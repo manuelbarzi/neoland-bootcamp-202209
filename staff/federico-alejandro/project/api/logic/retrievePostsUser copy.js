@@ -19,22 +19,24 @@ function retrievePostsUser(userId) {
                 .sort({ date: -1 })
                 .populate({
                     path: 'user',
-                    select: '-email -password -__v'
+                    select: '-email -password'
                 })
                 .populate({
                     path: 'chats',
-                    select: '-__v',
-                    populate: [{
+                    populate: {
                         path: 'user',
                         select: 'name',
-                    },
-                    {
+                    }
+                })
+                .populate({
+                    path: 'chats',
+                    populate: {
                         path: 'comments',
                         populate: {
                             path: 'user',
                             select: 'name'
                         }
-                    }]
+                    }
                 })
                 .lean()
         })
@@ -49,20 +51,20 @@ function retrievePostsUser(userId) {
                 if (user._id) {
                     user.id = user._id.toString()
                     delete user._id
+                    delete user.__v
                 }
-             
-                if (user.id !== userId) {
-                    post.chats = []
 
+                if (post.user.id !== userId) {
+                    post.chats = []
+                                               
                     const chat = post.chats.find(chat => (chat.user._doc.id || chat.user._doc._id.toString()) === userId)
 
-                    if (chat)
-                        post.chats.push(chat)
+                    if (chat) post.chats.push(chat)
                 }
                 post.chats.forEach(chat => {
                     chat.id = chat._id.toString()
                     delete chat._id
-                    
+                    //     delete chat.__v
                     chat.user = chat.user._doc
 
                     const { user } = chat
@@ -70,25 +72,21 @@ function retrievePostsUser(userId) {
                     if (user._id) {
                         user.id = user._id.toString()
                         delete user._id
-                        delete user.__v
                     }
-              
+   
                     chat.comments.forEach(comment => {
                         comment.id = comment._id.toString()
 
-                        delete comment._id
                         delete comment.__v
+                        delete comment._id
 
                         const { user } = comment
 
                         if (user._id) {
                             user.id = user._id.toString()
                             delete user._id
-                            delete user.__V
                         }
-                        
                     })
-                   
                 })
             })
 

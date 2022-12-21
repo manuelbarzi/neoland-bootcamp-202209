@@ -1,5 +1,5 @@
 import log from '../utils/coolog'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import LoginForm from '../components/LoginForm'
 import RegisterForm from '../components/RegisterForm'
 import PuntosVerdes from '../components/PuntosVerdes'
@@ -27,9 +27,24 @@ import {
 function Login() {
     log.info('Login -> render')
 
+    useEffect(() => {
+        (async () => {
+            fetch('https://open.spotify.com/oembed?url=https%3A%2F%2Fopen.spotify.com%2Fshow%2F0SgWmwew0jSG4WC9DM38zu')
+                .then(response => {
+                    return response.json()
+                })
+                .then(something => {
+                    debugger
+                    setSpoty(something)
+                }
+                )
+        })()
+    }, [])
+
     const [loginForm, setLoginForm] = useState()
     const [registerForm, setRegisterForm] = useState()
     const [puntosVerdes, setPuntosVerdes] = useState()
+    const [spoty, setSpoty] = useState()
 
     const info = () => !puntosVerdes ? setPuntosVerdes(true) : setPuntosVerdes()
     const closePuntosVerdes = () => setPuntosVerdes()
@@ -47,16 +62,18 @@ function Login() {
             document.querySelector(`#${id}`).style.opacity = '0.1'
     }
 
+  
+
     return <main className='h-full flex flex-col'>
+        <link rel='alternate' type='application/json+oembed' href='https://open.spotify.com/oembed?url=https%3A%2F%2Fopen.spotify.com%2Fshow%2F5eXZwvvxt3K2dxha3BSaAe' />
         <section className='h-full w-full'>
             <div className='flex bg-BgImage bg-cover justify-center p-20'>
                 <img src={LOGO} alt='Logo' className='h-72 ' />
             </div>
         </section>
-
-        <section className='bg-[#55BDDB]  w-full pt-10'>
+        <section className='bg-[#55BDDB] w-full pt-10'>
             <div className='flex flex-row gap-40 justify-center items-center'>
-                <a href='https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d50727.53686849737!2d2.1526199753695816!3d41.40609151521783!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1spuntos%20verde!5e0!3m2!1ses!2ses!4v1670927268322!5m2!1ses!2ses" 
+                <a href='https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d50727.53686849737!2d2.1526199753695816!3d41.40609151521783!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1spuntos%20verde!5e0!3m2!1ses!2ses!4v1670927268322!5m2!1ses!2ses 
                     width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade' target='blank' >
                     <img src={localizacion} alt='localizacion' className='h-20 ' />
                 </a>
@@ -70,7 +87,7 @@ function Login() {
             </div>
         </section>
 
-        <section className='bg-[#55BDDB]  h-full w-full  p-8'>
+        <section className='bg-cyan-500 h-full w-full  p-8'>
             <span className='flex h-80 justify-around'>
                 <div>
                     <img src={carton} alt='carton' id='carton' className=' h-60 mt-6 absolute shadow-2xl shadow-slate-800 z-10' onClick={showContent} />
@@ -116,8 +133,8 @@ function Login() {
                 <p className='text-white text-xl'>Conoce algunas de las webs y apps que te ayudarán a comenzar a reciclar, reutilizar y reducir.</p>
                 <p className='text-white text-xl'>Te animamos también a escuchar los Podcasts disponibles para mantenerte informado y conocer más</p>
                 <p className='text-white text-xl'>sobre aquellas pequeñas acciones que puedes adoptar para cambiar el mundo.</p>
-                <div className='flex flex-col pt-8 items-center'>
-                    <div className='flex flex-row ml-4'>
+                <div className='flex flex-col pt-10 items-center'>
+                    <div className='flex flex-row ml-4 mb-4'>
                         <a href='https://es.wallapop.com/' target='blank'>
                             <img src={Wallapop} alt='wallapop' className='bg-slate-200 h-12 mt-4 mr-4 border-white border-2 rounded-lg' /></a>
                         <a href='https://www.vinted.es/' target='blank'>
@@ -125,10 +142,11 @@ function Login() {
                         <a href='https://toogoodtogo.es/es/' target='blank'>
                             <img src={tgt} alt='tgt' className='bg-slate-200 h-12 mt-4 mr-4 border-white border-2 rounded-lg' /></a>
                     </div>
-                    <a href="https://open.spotify.com/embed/show/0SgWmwew0jSG4WC9DM38zu?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" target='blank'>
-                        <img src={spotify} alt='spotify' className='h-12 m-4 rounded-lg bg-slate-600 border-white border-2' /> </a>
+                    {spoty && spoty.html &&
+                        <div  dangerouslySetInnerHTML={{ __html: spoty.html }}></div>}
+                    {/* <iframe width="100%" height="152" title="Spotify Embed: My Path to Spotify: Women in Engineering "  frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" src={spoty} /> */}
+                    {/* <a href="https://open.spotify.com/embed/show/0SgWmwew0jSG4WC9DM38zu?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" target='blank'> <img src={spotify} alt='spotify' className='h-12 m-4 rounded-lg bg-slate-600 border-white border-2' /> </a> */}
                 </div>
-
             </div>
 
         </section>

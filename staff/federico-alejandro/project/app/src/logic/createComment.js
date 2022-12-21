@@ -1,4 +1,4 @@
-import { LengthError } from "com/errors"
+const { errors: { LengthError, AuthError, NotFoundError, UnexpectedError, ConflictError } } = require('com')
 /**
  * Creates a comment against API
  * 
@@ -26,38 +26,34 @@ function createComment(token, text, postId, chatId) {
         xhr.onload = () => {
             const { status, responseText: json } = xhr
 
-                if (status >= 500) {
-                    const { error } = JSON.parse(json)
+            // const data = JSON.parse(json)
 
-                    reject(new Error(error))
 
-                    return
-                }
-
+            if (status === 201)
                 resolve()
-            
+            else if (status === 400) {
+                const { error } = JSON.parse(json)
 
-            // if (status === 201)
-            //     resolve()
-            // else if (status === 400) {
-            //     const { error } = JSON.parse(json)
+                if (error.includes('is not a '))
+                    reject(new TypeError(error))
+                else if (error.includes('length'))
+                    reject(new LengthError(error))
+            } else if (status === 401) {
+                const { error } = JSON.parse(json)
 
-            //     if (error.includes('is not a '))
-            //         reject(new TypeError(error))
-            //     else if (error.includes('length'))
-            //         reject(new LengthError(error))
-            // } else if (status === 401) {
-            //     const { error } = JSON.parse(json)
+                reject(new AuthError(error))
+            } else if (status === 404) {
+                const { error } = JSON.parse(json)
 
-            //     reject(new AuthError(error))
-            // } else if (status === 404) {
-            //     const { error } = JSON.parse(json)
+                reject(new NotFoundError(error))
+            } else if (status === 409) {
+                const { error } = JSON.parse(json)
 
-            //     reject(new NotFoundError(error))
-            // } else if (status < 500)
-            //     reject(new UnexpectedError('client error'))
-            // else
-            //     reject(new UnexpectedError('server error'))
+                reject(new ConflictError(error))
+            } else if (status < 500)
+                reject(new UnexpectedError('client error'))
+            else
+                reject(new UnexpectedError('server error'))
         }
 
         xhr.onerror = () => reject(new Error('connection error'))

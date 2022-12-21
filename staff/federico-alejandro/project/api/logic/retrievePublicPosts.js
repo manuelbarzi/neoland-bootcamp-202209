@@ -19,24 +19,22 @@ function retrievePublicPosts(userId) {
                 .sort({ date: -1 })
                 .populate({
                     path: 'user',
-                    select: '-email -password'
+                    select: '-email -password, -__v'
                 })
                 .populate({
                     path: 'chats',
-                    populate: {
+                    select: '-__v',
+                    populate: [{
                         path: 'user',
-                        select: 'name'
-                    }
-                })
-                .populate({
-                    path: 'chats',
-                    populate: {
+                        select: 'name',
+                    },
+                    {
                         path: 'comments',
                         populate: {
                             path: 'user',
                             select: 'name'
                         }
-                    }
+                    }]
                 })
                 .lean()
         })
@@ -47,20 +45,20 @@ function retrievePublicPosts(userId) {
                 delete post.__v
 
                 const { user } = post
-
                 if (user._id) {
                     user.id = user._id.toString()
                     delete user._id
-                    delete user.__v
+                    //delete user.__v
                 }
 
-                if (post.user.id !== userId) {
-                    if (post.user.id === userId) {
+                if (user.id !== userId) {
+                    if (user.id === userId) {
                         post.chats = []
 
                         const chat = post.chats.find(chat => (chat.user._doc.id || chat.user._doc._id.toString()) === userId)
 
-                        if (chat) post.chats.push(chat)
+                        if (chat)
+                            post.chats.push(chat)
                     }
                 }
 
@@ -74,13 +72,13 @@ function retrievePublicPosts(userId) {
 
                     if (user._id) {
                         user.id = user._id.toString()
-
                         delete user._id
+                        delete user.__v
+
                     }
 
                     chat.comments.forEach(comment => {
                         comment.id = comment._id.toString()
-
                         delete comment._id
                         delete comment.__v
 
@@ -91,6 +89,7 @@ function retrievePublicPosts(userId) {
                         if (user._id) {
                             user.id = user._id.toString()
                             delete user._id
+                            delete user.__v
                         }
                     })
                 })

@@ -1,5 +1,4 @@
-const { errors: { LengthError, NotFoundError } } = require('com')
-const { ConflictError } = require('com/errors')
+const { errors: { LengthError, NotFoundError, ConflictError } } = require('com')
 const { User, Post, Chat } = require('../models')
 /**
  * Create a chat on a post

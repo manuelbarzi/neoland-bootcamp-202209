@@ -1,7 +1,7 @@
 function PuntosVerdes({ onClose }) {
 
     return <section className='bg-[#aaaa] fixed top-0 h-full w-full flex flex-col justify-center items-center overflow-hidden z-10' onClick={onClose}>
-        <div className='bg-green-400 p-5 border-white border-4 rounded-xl flex flex-col items-center justify-center bg-white' onClick={event => event.stopPropagation()}>
+        <div className='bg-green-400 p-5 border-white border-4 rounded-xl flex flex-col items-center justify-center' onClick={event => event.stopPropagation()}>
 
             <p> Los puntos verdes sirven para depositar los residuos que no podemos tirar en los sistemas de recogida habituales.</p>
             <p>Cuando llevamos los residuos a los puntos verdes contribuimos a mejorar su proceso de reciclaje y preservamos el medio ambiente.</p>
