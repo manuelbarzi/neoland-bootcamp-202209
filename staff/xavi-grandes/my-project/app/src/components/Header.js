@@ -17,7 +17,6 @@ export default function Header({ userName, listName } ) {
         <button className='p-2 ml-1 flex items-center cursor-pointer' onClick={showMenu}><AiOutlineMenu className='h-[20px] w-[20px]'/></button>
     { show === 'menu' && <Menu onClose={showMenu}/>}
 
-        {/* TODO: este variable estará dentro del menú. */}
         <p>{listName? listName: userName}</p>
 
     </header>
