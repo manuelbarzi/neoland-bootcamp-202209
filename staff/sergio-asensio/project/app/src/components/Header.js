@@ -1,5 +1,5 @@
 import log from '../utils/coolog'
-import { MdSettings } from 'react-icons/md'
+import { SlMenu } from 'react-icons/sl'
 import {  HiOutlineUser } from 'react-icons/hi'
 import Context from './Context'
 import { useContext, useState} from 'react'
@@ -33,7 +33,7 @@ export default function Header({ userName }) {
             <p>{userName}</p>
             </div>
     <div>
-        <button onClick={handleSettings} ><MdSettings/></button>
+        <button onClick={handleSettings} ><SlMenu size='1.5rem'/></button>
         </div> 
     </header>
     {settings && <Settings/>}

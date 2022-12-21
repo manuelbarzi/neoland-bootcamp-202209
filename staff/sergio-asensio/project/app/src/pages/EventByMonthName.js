@@ -16,8 +16,6 @@ import extractSubFromToken from '../utils/extractSubFromToken'
 import { HiOutlineUser } from 'react-icons/hi'
 import { TiArrowBack } from 'react-icons/ti'
 
-
-
 const { FormatError, AuthError, LengthError, NotFoundError } = errors
 
 function EventMonth() {
@@ -31,8 +29,6 @@ function EventMonth() {
     const [deleteEvent, setDeleteEvent] = useState()
     const [inscription, setInscription] = useState()
     const [deleteinscription, setDeleteInscription] = useState()
-
-
 
     const { showAlert } = useContext(Context)
 
@@ -88,10 +84,8 @@ function EventMonth() {
         }
     }
 
-    const goEvents = () => {
-        navigate('/events')
-    }
-
+    const goEvents = () => navigate('/events')
+    
     const handleCreateEvent = () => {
         setCreateEvent('true')
 
@@ -101,31 +95,25 @@ function EventMonth() {
         setCreateEvent()
     }
 
-    const handleUpdateEvent = () => {
-        setUpdateEvent('true')
-    }
-
+    const handleUpdateEvent = () => setUpdateEvent('true')
+    
     const eventUpdated = () => {
         setUpdateEvent()
         eventRetrieveMonth()
     }
 
-    const handleDeleteEvent = () => {
-        setDeleteEvent('true')
-    }
+    const handleDeleteEvent = () => setDeleteEvent('true')
+    
     const handleEventDeleted = () => {
         setDeleteEvent()
         eventRetrieveMonth()
     }
 
-    const handlesignUp = () => {
-        setInscription('true')
-    }
+    const handlesignUp = () => setInscription('true')
+    
 
-    const handleUnsignUp = () => {
-        setDeleteInscription('true')
-    }
-
+    const handleUnsignUp = () => setDeleteInscription('true')
+    
     const handleResgistered = () => {
         setInscription()
         eventRetrieveMonth()
@@ -136,9 +124,7 @@ function EventMonth() {
         eventRetrieveMonth()
     }
 
-
-    // const shortDate = event?.date?.slice(0, -14)
-
+    const shortDate = event?.date?.slice(0, -14)
 
     const userId = extractSubFromToken(sessionStorage.token)
     const enrolled = event && event.participants ? event.participants.some(participant => participant.id === userId) : false
@@ -166,7 +152,7 @@ function EventMonth() {
                     <h1>{event.title}</h1>
                     <h3>{event.body}</h3>
                     <h3>Requisitos: {event.requirement}</h3>
-                    <h3> Fecha: {event.date} </h3>
+                    <h3> Fecha: {shortDate} </h3>
                     <h3> Plazas: {event.capacity}</h3>
                     {!available && <div>
                         <h3>{event.inscription = 'No more places'}</h3>

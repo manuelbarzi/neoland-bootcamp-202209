@@ -9,10 +9,8 @@ import { useContext } from 'react'
 import retrieveEvents from '../logic/retrieveEvents'
 import getMonthName from '../utils/getMonthNameByNumber'
 import logo from '../img/logo.jpg'
-import { MdSettings } from 'react-icons/md'
 import { HiOutlineUser } from 'react-icons/hi'
-
-
+import { SlMenu } from 'react-icons/sl'
 
 const { FormatError, AuthError, LengthError, NotFoundError } = errors
 
@@ -46,8 +44,6 @@ function Events() {
             else
                 showAlert(error.message, 'fatal')
         }
-        // const rest = jrfap
-        // console.log(new Date)
     }, [])
 
     const navigate = useNavigate()
@@ -64,18 +60,18 @@ function Events() {
     }
     
     return <main className="h-full">
-        <header className='h-1/6 top-0 flex justify-around items-center bg-teal-600	'>
+        <header className='h-1/6 w-full flex justify-around items-center bg-teal-600	'>
         <Link to="/"><img src={logo} className='w-20 h-20 cursor-pointer'/></Link>
             <h1>12 MESES, 12 ACTIVIDADES</h1>
             <div className='flex items-center gap-1'>
             <HiOutlineUser/>
             <p>{user?.name}</p>
             </div>
-            <button onClick={handleSettings}><MdSettings size='1.5rem'/></button>
+            <button onClick={handleSettings}><SlMenu size='1.5rem'/></button>
         </header>
         {settings && <Settings/>}
         
-        <div className=" md:grid md:grid-cols-3 md:gap-4 p-4 bg-slate-100 ">
+        <div className="md:grid md:grid-cols-3 md:gap-4 p-4 bg-slate-100 ">
 
             {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(index => {
                 const event = events.find(event => {

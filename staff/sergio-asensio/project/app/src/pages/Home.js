@@ -8,8 +8,6 @@ import Context from '../components/Context'
 import { errors } from 'com'
 import { Link } from 'react-router-dom'
 
-
-
 const { FormatError, AuthError, LengthError, NotFoundError } = errors
 
 function Home() {

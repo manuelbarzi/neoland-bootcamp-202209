@@ -12,8 +12,10 @@ import retrieveUser from '../logic/retrieveUser'
 import { errors } from 'com'
 import Context from '../components/Context'
 import { useContext } from 'react'
-import { MdDeleteForever, MdEdit, MdSettings } from 'react-icons/md'
+import { MdDeleteForever, MdEdit } from 'react-icons/md'
 import {  HiOutlineUser, HiPlus } from 'react-icons/hi'
+import { SlMenu } from 'react-icons/sl'
+
 
 
 const { FormatError, AuthError, LengthError, NotFoundError } = errors
@@ -160,7 +162,7 @@ function Noticias() {
             <p>{user?.name}</p>
             </div>
         <div>
-            <button onClick={handleSettings}><MdSettings size='1.5rem'/></button>
+            <button onClick={handleSettings}><SlMenu size='1.5rem'/></button>
         </div>
 
     </header>
