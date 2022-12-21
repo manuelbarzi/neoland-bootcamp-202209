@@ -1,6 +1,6 @@
 require('dotenv').config()
 
-const mongoose = require('mongoose')
+const { connect } = require('mongoose')
 const express = require('express')
 
 const authenticateUserHandler = require('./handlers/authenticateUserHandler')
@@ -13,7 +13,7 @@ const jwtVerifier = require('./utils/jwtVerifier')
 
 const { MONGODB_URL } = process.env
 
-mongoose.connect(MONGODB_URL)
+connect(MONGODB_URL)
     .then(() => {
         console.log(`db connected to ${MONGODB_URL}`)
 
@@ -24,7 +24,7 @@ mongoose.connect(MONGODB_URL)
         api.post('/users/auth', jsonBodyParser, authenticateUserHandler)
         api.post('/users', jsonBodyParser, registerUserHandler)
         api.get('/users', jwtVerifier, retrieveUserHandler)
-        
+
         const { PORT } = process.env
 
         api.listen(PORT, () => console.log(`server listening on port ${PORT}`))
