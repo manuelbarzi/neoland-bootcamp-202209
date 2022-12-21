@@ -88,10 +88,10 @@ function UpdateStudyCurriculum({ className, onUpdateStudyCurriculumClose, onUpda
                 <form onSubmit={updateStudyCurriculumHandler} className="flex flex-col items-center w-full mt-2 gap-1">
                     {studies?.map(study => {
                         return <div key={study.id} className="w-full self-start flex flex-col">
-                            <div className='flex flex-col p-1'>
+                            <div className='flex flex-col p-1 gap-1'>
                                 <div className='flex gap-1'>
                                     <span className='font-semibold'>Institution: </span>
-                                    <textarea type="text" rows='1' name="institution" id="institution" className="resize-none outline-none" placeholder='Institution' defaultValue={study?.institution}></textarea>
+                                    <textarea type="text" rows='1' name="institution" id="institution" autoFocus className="resize-none outline-none" placeholder='Institution' defaultValue={study?.institution}></textarea>
                                 </div>
                                 <div className='flex gap-1'>
                                     <span className='font-semibold'>Title:</span>
@@ -100,14 +100,14 @@ function UpdateStudyCurriculum({ className, onUpdateStudyCurriculumClose, onUpda
                                 <div className='flex'>
                                     <div className='flex flex-col'>
                                         <span className='font-semibold'>From</span>
-                                        <input name='from' id='from' type="date" defaultValue={study?.from?.slice(0, -14)} />
+                                        <input name='from' id='from' className='text-lg p-1' type="date" defaultValue={study?.from?.slice(0, -14)} />
                                     </div>
                                     <div className='flex flex-col'>
                                         <span className='font-semibold'>To</span>
-                                        <input name='to' id='to' type="date" defaultValue={study?.to?.slice(0, -14)}/>
+                                        <input name='to' id='to' className='text-lg p-1' type="date" defaultValue={study?.to?.slice(0, -14)}/>
                                     </div>
                                 </div>
-                                <Button type="button" className="bg-red-300" onClick={() => handleDeleteStudy(study.id)}>Delete</Button>
+                                <Button type="button" className="bg-red-300 mt-2" onClick={() => handleDeleteStudy(study.id)}>Delete</Button>
                             </div>
                             <hr className="w-full" />
                         </div>

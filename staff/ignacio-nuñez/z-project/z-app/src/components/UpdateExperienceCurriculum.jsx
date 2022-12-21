@@ -23,15 +23,17 @@ function UpdateExperienceCurriculum({ className, onUpdateExperienceCurriculumClo
         if (event.target.position) {
             if (!event.target.position.value) {
                 for (let i = 0; i < event.target.position.length; i++) {
+                    const place = event.target.place[i].value
                     const position = event.target.position[i].value
-                    const years = event.target.years[i].value
+                    const from = event.target.from[i].value
+                    const to = event.target.to[i].value
 
-                    experiences.push({ position, years })
+                    experiences.push({ place, position, from, to })
                 }
             } else {
-                const { position: { value: position }, years: { value: years } } = event.target
+                const { place: { value: place }, position: { value: position }, from: { value: from }, to: { value: to } } = event.target
 
-                experiences.push({ position, years })
+                experiences.push({ place, position, from, to })
             }
         }
         try {
@@ -86,17 +88,28 @@ function UpdateExperienceCurriculum({ className, onUpdateExperienceCurriculumClo
                     <h3 className='font-semibold self-start'>Work Experiences: </h3>
                     {experiences?.map(experience => {
                         return <div key={experience.id} className="w-full self-start flex flex-col">
-                            <div>
-                                <label htmlFor="position" className="self-start font-semibold">Position: </label>
-                                <input type="text" name="position" id="position" className="outline-none" placeholder='Position' defaultValue={experience.position} />
-                            </div>
-                            <div className='flex'>
-                                <div>
-                                    <label htmlFor="years" className="self-start h-full font-semibold">Years: </label>
-                                    <input type="text" name="years" id="years" className="outline-none w-1/2" placeholder='Years' defaultValue={experience.years} />
+                            <div className='flex flex-col gap-1 p-1'>
+                                <div className='flex gap-1'>
+                                    <span className='font-semibold'>Place: </span>
+                                    <textarea type="text" rows='1' name="place" id="place" autoFocus className="resize-none outline-none" placeholder='Place' defaultValue={experience?.place}></textarea>
                                 </div>
-                                <Button type="button" className="bg-red-300" onClick={() => handleDeleteExperience(experience.id)}>Delete</Button>
+                                <div className='flex gap-1'>
+                                    <span className='font-semibold'>Position:</span>
+                                    <textarea type="text" rows='1' name="position" id="position" className="resize-none outline-none" placeholder='Title' defaultValue={experience?.position}></textarea>
+                                </div>
+                                <div className='flex'>
+                                    <div className='flex flex-col'>
+                                        <span className='font-semibold'>From</span>
+                                        <input name='from' id='from' className='text-lg p-1' type="date" defaultValue={experience?.from?.slice(0, -14)} />
+                                    </div>
+                                    <div className='flex flex-col'>
+                                        <span className='font-semibold'>To</span>
+                                        <input name='to' id='to' className='text-lg p-1' type="date" defaultValue={experience?.to?.slice(0, -14)} />
+                                    </div>
+                                </div>
+                                <Button type="button" className="bg-red-300 mt-2" onClick={() => handleDeleteExperience(experience.id)}>Delete</Button>
                             </div>
+                            <hr className="w-full" />
                         </div>
                     })}
                     <div className='flex justify-between gap-4 mt-5 w-full'>

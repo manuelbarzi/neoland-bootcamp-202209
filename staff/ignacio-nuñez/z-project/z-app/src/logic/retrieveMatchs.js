@@ -1,22 +1,24 @@
 import { errors, validators } from 'com'
 
-const { LengthError, NotFoundError, UnexpectedError, ConflictError } = errors
+const { LengthError, NotFoundError, UnexpectedError } = errors
 const { stringValidator } = validators
 
-function retrieveOfferDetail(token, offerId) {
+function retrieveMatchs(token) {
     stringValidator(token, 'token')
-    stringValidator(offerId, 'offerId')
     
-    return fetch(`http://localhost:80/offers/${offerId}`, {
-        headers: {
+    return fetch(`http://localhost:80/matchs`, {
+        method: 'GET',
+        headers: { 
             'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json' 
         }
     })
         .then(res => {
-            if (res.status === 200) {
+            if (res.status === 202) {
                 return res.json()
-                    .then(offer => offer)
+                    .then(matchs => {
+                        return matchs
+                    })
             }
             else if (res.status === 400) {
                 return res.json()
@@ -29,11 +31,6 @@ function retrieveOfferDetail(token, offerId) {
                     .then(error => {
                         throw new NotFoundError(error.error)
                     })
-            } else if (res.status === 409) {
-                return res.json()
-                    .then(error => {
-                        throw new ConflictError(error.error)
-                    })
             }
             else if (res.status < 500)
                 throw new UnexpectedError('client error')
@@ -42,4 +39,4 @@ function retrieveOfferDetail(token, offerId) {
         })
 }
 
-export default retrieveOfferDetail
+export default retrieveMatchs

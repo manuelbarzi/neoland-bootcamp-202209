@@ -22,17 +22,17 @@ function Home() {
         <SearchButton
             onSearchClick={onSearchClick}
         />
+         {searchPanelStatus && <SearchPanel
+            className={"inset-x-[2.5%] inset-y-[15%] absolute"} 
+            closeSearchPanel={closeSearchPanel}
+        />}
         <div className="flex items-center flex-col">
-            <div className="flex items-center flex-col mt-28">
+            <div className="flex items-center flex-col mb-20">
                 <div className="z-10 border-2 shadow-sm shadow-slate-600 p-6 w-96 h-20 bg-emerald-200 rounded-xl">
                     <h2>{`Hola ${userName}`}</h2>
                 </div>
             </div>
         </div>
-        {searchPanelStatus && <SearchPanel
-            className={"inset-x-[2.5%] inset-y-[15%] absolute"} 
-            closeSearchPanel={closeSearchPanel}
-        />}
         <NavBar
         />
     </main>

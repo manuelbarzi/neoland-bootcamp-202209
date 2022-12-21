@@ -1,7 +1,7 @@
 const { errors: { NotFoundError, ConflictError },
     validators: { stringValidator }
 } = require('com')
-const { Users, Curriculums } = require('../models')
+const { Users, Curriculums, Offers } = require('../models')
 /**
  * Retrieves published curriculums
  * 
@@ -10,14 +10,30 @@ const { Users, Curriculums } = require('../models')
 module.exports = function retrievePublishedCurriculums(userId) {
     stringValidator(userId, 'userId')
 
-    return Users.findById(userId)
+    return Users.findById(userId).lean()
         .then(user => {
             if (!user)
                 throw new NotFoundError(`user with id ${userId} does not exist`)
-            else if(user.role !== 'company')
+            else if (user.role !== 'company')
                 throw new ConflictError(`user ${user._id} does not have a worker role`)
 
-            return Curriculums.find({ published: true }).sort({ createDate: -1 }).populate('user', '-email -password -role -__v').select('-published -__v').lean()
+            const dislikesArray = user.dislikes ? user.dislikes : []
+
+            return Offers.find({ user: userId }).lean()
+                .then(offers => {
+                    const likesArray = offers.reduce((acumulator, offers) => {
+                        if (offers.curriculumsILike) {
+                            acumulator.push(...offers.curriculumsILike)
+
+                            return acumulator
+                        } else
+                            return acumulator.concat()
+                    }, [])
+
+                    const curriculumsToIgnore = dislikesArray.concat(likesArray)
+
+                    return Curriculums.find({ published: true }).where('_id').nin(curriculumsToIgnore).limit(1).sort({ createDate: -1 }).populate('user', '-email -password -role -__v').select('-published -offersIlike -offersTheyLikeMe -__v').lean()
+                })
         })
         .then(curriculums => {
             curriculums.forEach(curriculum => {

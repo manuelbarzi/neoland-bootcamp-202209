@@ -13,6 +13,7 @@ import Button from '../components/Button'
 import UpdateSalaryOffer from '../components/UpdateSalaryOffer'
 import errorHandling from '../utils/errorHandling'
 import SearchButton from '../components/SearchButton'
+import SearchPanel from '../components/SearchPanel'
 
 function OfferDetail() {
     const [offer, setOffer] = useState()
@@ -21,6 +22,7 @@ function OfferDetail() {
     const [updatingStudy, setUpdatingStudy] = useState()
     const [updatingKnowledge, setUpdatingKnowledge] = useState()
     const [updatingSalary, setUpdatingSalary] = useState()
+    const [searchPanelStatus, setSearchPanelStatus] = useState()
 
     const { user, showAlert } = useContext(Context)
     const { offerId } = useParams()
@@ -33,7 +35,7 @@ function OfferDetail() {
 
     const retrieveOffer = () => {
         try {
-            retrieveOfferDetail(sessionStorage.token, offerId, user.id)
+            retrieveOfferDetail(sessionStorage.token, offerId)
                 .then(offerDetail => setOffer(offerDetail))
                 .catch(error => {
                     const { errorMessage, type } = errorHandling(error)
@@ -49,14 +51,14 @@ function OfferDetail() {
 
     let titleTimeoutId
 
-    const updateOfferTitle = event => {
+    const updateOfferTitle = (event, offerUserId) => {
         const { target: { value: title } } = event
 
         if (titleTimeoutId) clearTimeout(titleTimeoutId)
 
         try {
             titleTimeoutId = setTimeout(() => {
-                updateOffer(sessionStorage.token, offerId, user.id, { title })
+                updateOffer(sessionStorage.token, offerId, offerUserId, { title })
                     .catch(error => {
                         const { errorMessage, type } = errorHandling(error)
                         showAlert(errorMessage, type)
@@ -70,14 +72,14 @@ function OfferDetail() {
 
     let descriptionTimeoutId
 
-    const updateOfferDescription = event => {
+    const updateOfferDescription = (event, offerUserId) => {
         const { target: { value: description } } = event
 
         if (descriptionTimeoutId) clearTimeout(descriptionTimeoutId)
 
         try {
             descriptionTimeoutId = setTimeout(() => {
-                updateOffer(sessionStorage.token, offerId, user.id, { description })
+                updateOffer(sessionStorage.token, offerId, offerUserId, { description })
                     .catch(error => {
                         const { errorMessage, type } = errorHandling(error)
                         showAlert(errorMessage, type)
@@ -91,14 +93,14 @@ function OfferDetail() {
 
     let locationTimeoutId
 
-    const updateOfferLocation = event => {
+    const updateOfferLocation = (event, offerUserId) => {
         const { target: { value: location } } = event
 
         if (locationTimeoutId) clearTimeout(locationTimeoutId)
 
         try {
             locationTimeoutId = setTimeout(() => {
-                updateOffer(sessionStorage.token, offerId, user.id, { location })
+                updateOffer(sessionStorage.token, offerId, offerUserId, { location })
                     .catch(error => {
                         const { errorMessage, type } = errorHandling(error)
                         showAlert(errorMessage, type)
@@ -110,11 +112,11 @@ function OfferDetail() {
         }
     }
 
-    const updateOfferModality = event => {
+    const updateOfferModality = (event, offerUserId) => {
         const { target: { value: modality } } = event
 
         try {
-            updateOffer(sessionStorage.token, offerId, user.id, { modality })
+            updateOffer(sessionStorage.token, offerId, offerUserId, { modality })
                 .catch(error => {
                     const { errorMessage, type } = errorHandling(error)
                     showAlert(errorMessage, type)
@@ -126,11 +128,11 @@ function OfferDetail() {
         }
     }
 
-    const updateOfferWorkTime = event => {
+    const updateOfferWorkTime = (event, offerUserId) => {
         const { target: { value: workTime } } = event
 
         try {
-            updateOffer(sessionStorage.token, offerId, user.id, { workTime })
+            updateOffer(sessionStorage.token, offerId, offerUserId, { workTime })
                 .catch(error => {
                     const { errorMessage, type } = errorHandling(error)
                     showAlert(errorMessage, type)
@@ -206,34 +208,51 @@ function OfferDetail() {
         setUpdatingSalary()
     }
 
+    const onSearchClick = () => {
+        setSearchPanelStatus(true)
+    }
+
+    const closeSearchPanel = () => {
+        setSearchPanelStatus()
+    }
+
     return <>{offer && <main className="min-h-screen bg-slate-100">
-        <SearchButton />
+        <SearchButton
+            onSearchClick={onSearchClick}
+        />
+        {searchPanelStatus && <SearchPanel
+            className={"inset-x-[2.5%] inset-y-[15%] absolute"}
+            closeSearchPanel={closeSearchPanel}
+        />}
         <div className="flex items-center flex-col">
-            <div className="flex items-center flex-col w-full mb-24 ">
-                <section className="flex items-center w-full flex-col px-2">
-                    <article className="flex flex-col gap-2 shadow-sm shadow-slate-600 bg-emerald-200 border-2 w-full rounded-xl">
-                        <div className="flex justify-between z-10 p-2 mt-1">
-                            {offer?.published ?
-                                <h2 name='title' id='title' className='bg-emerald-200 p-2 border-2 font-semibold rounded-lg'>{offer?.title}</h2> :
-                                <textarea onChange={updateOfferTitle} name='title' maxLength="25" id='title' rows='1' className='bg-emerald-200 p-2 border-2 font-semibold resize-none outline-none rounded-lg' defaultValue={offer?.title}></textarea>
-                            }
-                            <img className="w-1/5 text-xs p-2" src={offer?.photo} alt="company logo" />
+            <div className="flex items-center flex-col w-full mb-16 ">
+                <section className="flex items-center w-full flex-col p-2">
+                    <article className="flex flex-col pt-4 gap-2 shadow-sm shadow-slate-600 bg-emerald-200 border-2 w-full rounded-xl">
+                        <div className="w-full flex justify-center">
+                            <span className="font-semibold text-lg">{offer.user.name}</span>
                         </div>
-                        <div className='flex flex-col gap-2 bg-white p-2'>
+                        <div className="flex justify-between gap-5 z-10 p-2 mt-1">
+                            {offer?.published || user.role !== 'company' ?
+                                 <h2 className='bg-emerald-200 p-4 w-3/4 border-2 font-semibold rounded-lg'>{offer.title}</h2> :
+                                <textarea onChange={event => updateOfferTitle(event, offer.user.id)} name='title' maxLength="25" id='title' rows='1' className='bg-emerald-200 p-4 w-3/4 border-2 font-semibold resize-none outline-none rounded-lg' defaultValue={offer?.title}></textarea>
+                            }
+                            <img className="w-1/4 text-xs p-2" src={offer?.photo} alt="company logo" />
+                        </div>
+                        <div className='overflow-scroll h-[32rem] flex flex-col gap-2 bg-white p-2'>
                             <div className=' rounded-lg bg-emerald-50 p-2'>
                                 <div className='flex gap-6 justify-between'>
-                                    {offer?.published ?
+                                    {offer?.published || user.role !== 'company' ?
                                         <span className="text-md w-1/2 block py-2.5 px-0 text-gray-700 bg-transparent border-0 border-b-2 border-gray-200 capitalize">{offer?.workTime ? offer.workTime : 'Work time'}</span> :
-                                        <select onChange={updateOfferWorkTime} name="workTime" id="workTime" defaultValue={offer?.workTime ? offer.workTime : 'select'}
+                                        <select onChange={event => updateOfferWorkTime(event, offer.user.id)} name="workTime" id="workTime" defaultValue={offer?.workTime ? offer.workTime : 'select'}
                                             className="text-md w-1/2 block py-2.5 px-0 text-gray-700 bg-transparent border-0 border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
                                             <option disabled hidden value="select">Work Time</option>
                                             <option value="part time">Part time</option>
                                             <option value="full time">Full time</option>
                                         </select>
                                     }
-                                    {offer?.published ?
+                                    {offer?.published || user.role !== 'company' ?
                                         <span className="text-md w-1/2 block py-2.5 px-0 text-gray-700 bg-transparent border-0 border-b-2 border-gray-200 capitalize">{offer?.modality ? offer.modality : 'Modality'}</span> :
-                                        <select onChange={updateOfferModality} name="modality" id="modality" defaultValue={offer?.modality ? offer.modality : 'select'}
+                                        <select onChange={event => updateOfferModality(event, offer.user.id)} name="modality" id="modality" defaultValue={offer?.modality ? offer.modality : 'select'}
                                             className="text-md w-1/2 block py-2.5 px-0 text-gray-700 bg-transparent border-0 border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
                                             <option disabled hidden value="select">Modality</option>
                                             <option value="remote">Remote</option>
@@ -243,26 +262,26 @@ function OfferDetail() {
                                     }
                                 </div>
                                 <div className='flex gap-6 mt-2'>
-                                    <div onClick={() => { return offer?.published ? null : onSalaryClick(offer.id, offer.user, offer.salary) }}
+                                    <div onClick={() => { return offer?.published || user.role !== 'company' ? null : onSalaryClick(offer.id, offer.user.id, offer.salary) }}
                                         className='flex justify-center w-1/2 cursor-pointer border rounded-md'>
                                         <div className='text-md text-gray-700 flex justify-start p-2 gap-1 w-full'>
                                             <span>{offer?.salary?.salary ? <span>{offer.salary.salary}{offer?.salary?.currency}<span className='text-xs'>/Year</span> </span> : '-Salary-'} </span>
                                         </div>
                                     </div>
-                                    {offer?.published ?
+                                    {offer?.published || user.role !== 'company' ?
                                         <span className="text-md w-1/2 block py-2.5 px-0 text-gray-700 bg-transparent border-0 border-b-2 border-gray-200 capitalize">{offer?.location ? offer.location : 'Location'}</span> :
-                                        <input onChange={updateOfferLocation} defaultValue={offer?.location} type="text" placeholder='Location' className='w-1/2 p-1 outline-none rounded-md bg-emerald-50' />
+                                        <input onChange={event => updateOfferLocation(event, offer.user.id)} defaultValue={offer?.location} type="text" placeholder='Location' className='w-1/2 p-1 outline-none rounded-md bg-emerald-50' />
                                     }
                                 </div>
                             </div>
                             <div className='bg-slate-100 p-2 rounded-lg'>
                                 <h3 className='font-semibold'>Description:</h3>
-                                {offer?.published ?
+                                {offer?.published || user.role !== 'company' ?
                                     <p name='description' id='description' className='ml-1'>{offer?.description}</p> :
-                                    <textarea onChange={updateOfferDescription} maxLength="140" rows='3' name='description' id='description' className='w-full font-medium resize-none outline-none bg-slate-100 rounded-lg' placeholder='Put a description' defaultValue={offer?.description}></textarea>
+                                    <textarea onChange={event => updateOfferDescription(event, offer.user.id)} maxLength="140" rows='3' name='description' id='description' className='w-full resize-none outline-none bg-slate-100 rounded-lg' placeholder='Put a description' defaultValue={offer?.description}></textarea>
                                 }
                             </div>
-                            <div onClick={() => { return offer.published ? null : onExperienceClick(offer.id, offer.user, offer.experiences) }} className="cursor-pointer rounded-lg bg-emerald-50 p-2">
+                            <div onClick={() => { return offer.published || user.role !== 'company' ? null : onExperienceClick(offer.id, offer.user.id, offer.experiences) }} className="cursor-pointer rounded-lg bg-emerald-50 p-2">
                                 <h2 className='font-semibold text-lg'>Experiences: </h2>
                                 {!offer?.experiences.length && <span> Not Experiences Requireds</span>}
                                 <ul className='flex flex-col gap-2'>
@@ -279,7 +298,7 @@ function OfferDetail() {
                                 </ul>
                             </div>
                             <div>
-                                <div onClick={() => { return offer.published ? null : onStudyClick(offer.id, offer.user, offer.studies) }} className="cursor-pointer rounded-lg bg-slate-100 p-2">
+                                <div onClick={() => { return offer.published || user.role !== 'company' ? null : onStudyClick(offer.id, offer.user.id, offer.studies) }} className="cursor-pointer rounded-lg bg-slate-100 p-2">
                                     <h2 className='font-semibold'>Studies:</h2>
                                     {!offer?.studies?.length ? <span>Not Studies Required</span> :
                                         offer?.studies.map(study => {
@@ -289,7 +308,7 @@ function OfferDetail() {
                                         })}
                                 </div>
                             </div>
-                            <div onClick={() => { return offer.published ? null : onKnowledgeClick(offer.id, offer.user, offer.knowledges) }} className="cursor-pointer rounded-lg bg-emerald-50 p-2">
+                            <div onClick={() => { return offer.published || user.role !== 'company' ? null : onKnowledgeClick(offer.id, offer.user.id, offer.knowledges) }} className="cursor-pointer rounded-lg bg-emerald-50 p-2">
                                 <h2 className='font-semibold'>Knowledges:</h2>
                                 {!offer?.knowledges?.length ? <span> Not Knowledges Required </span> :
                                     <ul className="flex flex-wrap gap-2">
@@ -302,7 +321,7 @@ function OfferDetail() {
                                     </ul>
                                 }
                             </div>
-                            <div onClick={() => { return offer.published ? null : onLanguageClick(offer.id, offer.user, offer.languages) }} className="cursor-pointer rounded-lg bg-slate-100 p-2">
+                            <div onClick={() => { return offer.published || user.role !== 'company' ? null : onLanguageClick(offer.id, offer.user.id, offer.languages) }} className="cursor-pointer rounded-lg bg-slate-100 p-2">
                                 <h2 className='font-semibold'>Languages:</h2>
                                 {!offer?.languages?.length ? <span>Not Languages Required</span> :
                                     <div className="flex flex-wrap">
@@ -319,7 +338,8 @@ function OfferDetail() {
                             </div>
                         </div>
                         <div className='w-full z-10 flex justify-between p-2'>
-                            <Link to='/user/profile' className='w-1/3'><Button className='bg-emerald-300 w-full'>Go Back</Button></Link>
+                            {user?.role === 'company' && <Link to='/user/profile' className='w-1/3'><Button className='h-20 bg-emerald-300 w-full'>Go Back</Button></Link>}
+                            {user?.role === 'worker' && <Link to='/worker/matchs' className='w-1/3'><Button className='h-20 bg-emerald-300 w-full'>Go Back</Button></Link>}
                             <p className="self-end p-2">{format(offer?.createDate)}</p>
                         </div>
                     </article>

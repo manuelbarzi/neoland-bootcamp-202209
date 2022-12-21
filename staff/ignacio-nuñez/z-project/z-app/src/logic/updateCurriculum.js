@@ -2,11 +2,11 @@ import { errors, validators } from 'com'
 import extractSubFromToken from '../utils/extractSubFromToken'
 
 const { LengthError, NotFoundError, UnexpectedError, ConflictError, ContentError } = errors
-const { stringValidator, languagesValidator, cvStudyValidator, experienceValidator,
+const { stringValidator, languagesValidator, cvStudyValidator, cvExperienceValidator,
     knowledgeValidator, booleanValidator,
     titleValidator, descriptionValidator, locationValidator } = validators
 
-function updatecurriculum(token, curriculumId, curriculumUserId, { title, description, photo, location, languages, studies, experiences, knowledges, published } = {}) {
+function updateCurriculum(token, curriculumId, curriculumUserId, { title, description, photo, location, languages, studies, experiences, knowledges, published } = {}) {
     stringValidator(token, 'token')
     stringValidator(curriculumId, 'curriculumId')
     stringValidator(curriculumUserId, 'curriculumUserId')
@@ -17,7 +17,7 @@ function updatecurriculum(token, curriculumId, curriculumUserId, { title, descri
     if (location) locationValidator(location)
     if (languages) languagesValidator(languages)
     if (studies) cvStudyValidator(studies)
-    if (experiences) experienceValidator(experiences)
+    if (experiences) cvExperienceValidator(experiences)
     if (knowledges) knowledgeValidator(knowledges)
     if (typeof published === 'boolean') booleanValidator(published, 'published')
 
@@ -76,4 +76,4 @@ function updatecurriculum(token, curriculumId, curriculumUserId, { title, descri
         })
 }
 
-export default updatecurriculum
+export default updateCurriculum

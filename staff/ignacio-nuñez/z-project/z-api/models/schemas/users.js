@@ -1,4 +1,5 @@
 const { Schema } = require('mongoose')
+const { Types: { ObjectId } } = Schema
 
 module.exports = new Schema({
     name: {
@@ -18,5 +19,8 @@ module.exports = new Schema({
         type: String,
         enum: ['worker', 'company'],
         required: true
+    },
+    dislikes:{
+        type:[ObjectId]
     }
 })

@@ -45,6 +45,14 @@ module.exports = new Schema({
         type: Boolean,
     },
 
+    curriculumsILike: {
+        type: [ObjectId]
+    },
+
+    curriculumsTheyLikeMe: {
+        type: [ObjectId]
+    },
+
     user: {
         type: ObjectId,
         ref: 'Users',

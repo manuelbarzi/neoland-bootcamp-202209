@@ -10,11 +10,13 @@ import PublishOffer from "../components/PublishOffer"
 import { Context } from "../components/Context"
 import errorHandling from "../utils/errorHandling"
 import SearchButton from "../components/SearchButton"
+import SearchPanel from "../components/SearchPanel"
 
 function UserOffers() {
     const [offers, setOffers] = useState([])
     const [offerToDelete, setOfferToDelete] = useState()
     const [offerToPublish, setOfferToPublish] = useState()
+    const [searchPanelStatus, setSearchPanelStatus] = useState()
 
     const { showAlert } = useContext(Context)
 
@@ -71,9 +73,23 @@ function UserOffers() {
             showAlert(errorMessage, type)
         }
     }
+    
+    const onSearchClick = () => {
+        setSearchPanelStatus(true)
+    }
+
+    const closeSearchPanel = () => {
+        setSearchPanelStatus()
+    }
 
     return <main className="min-h-screen bg-slate-100">
-            <SearchButton />
+            <SearchButton
+            onSearchClick={onSearchClick}
+            />
+             {searchPanelStatus && <SearchPanel
+            className={"inset-x-[2.5%] inset-y-[15%] absolute"} 
+            closeSearchPanel={closeSearchPanel}
+        />}
         <div className="flex items-center flex-col">
             <div className="w-full flex items-center flex-col mb-24">
                 <div onClick={onCreateOfferClick} className="flex justify-center items-center font-semibold text-lg border-2 shadow-sm shadow-slate-600 w-5/6 h-20 z-10 rounded-xl bg-emerald-300 cursor-pointer">

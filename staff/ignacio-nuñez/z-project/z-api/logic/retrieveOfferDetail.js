@@ -17,12 +17,10 @@ module.exports = function retrieveOfferToDetail(userId, offerId) {
             if (!user)
                 throw new NotFoundError(`user with id ${userId} does not exist`)
 
-            return Offers.findById(offerId).select('-__v').lean()
+            return Offers.findById(offerId).populate('user', 'name').select('-curriculumsIlike -curriculumsTheyLikeMe -__v').lean()
         })
         .then(offer => {
             if (!offer) throw new NotFoundError(`offer with id ${offerId} does not exist`)
-
-            if (offer.user.toString() !== userId) throw new ConflictError(`offer with id ${offerId} does not belong to user with id ${userId}`)
 
             if(offer.languages){
             offer.languages.forEach(language=>{
@@ -52,9 +50,10 @@ module.exports = function retrieveOfferToDetail(userId, offerId) {
             offer.salary.id = offer.salary._id.toString()
             delete offer.salary._id
         }
-
-
             offer.id = offer._id.toString()
+            offer.user.id = offer.user._id.toString()
+
+            delete offer.user._id
             delete offer._id
             return offer
         })

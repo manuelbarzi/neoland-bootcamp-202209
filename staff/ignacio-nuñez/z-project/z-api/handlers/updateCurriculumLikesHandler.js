@@ -1,21 +1,19 @@
-const updateCurriculum = require('../logic/updateCurriculum')
-
-const { errors: { LengthError, ConflictError, NotFoundError, ContentError } } = require('com')
+const { errors: { LengthError, ConflictError, NotFoundError} } = require('com')
+const updateCurriculumLikes = require('../logic/updateCurriculumLikes')
 
 module.exports = (req, res) => {
     try {
-        const { userId, params: { curriculumId }, body: { title, description, photo, location, languages, studies, experiences, knowledges, published } } = req
+        const { userId, params: { curriculumId, offerId } } = req
 
-        updateCurriculum(userId, curriculumId, title, description, photo, location, languages, studies, experiences, knowledges, published)
+        updateCurriculumLikes(userId, curriculumId, offerId)
             .then(() => res.status(202).send())
             .catch(error => {
                 if (error instanceof ConflictError) res.status(409).json({ error: error.message })
                 else if (error instanceof NotFoundError) res.status(404).json({ error: error.message })
-                else if (error instanceof ContentError) res.status(406).json({ error: error.message })
                 else res.status(500).json({ error: error.message })
             })
     } catch (error) {
-        if (error instanceof TypeError || error instanceof LengthError)
+        if (error instanceof TypeError ||  error instanceof LengthError)
             res.status(400).json({ error: error.message })
         else if (error instanceof ConflictError)
             res.status(409).json({ error: error.message })

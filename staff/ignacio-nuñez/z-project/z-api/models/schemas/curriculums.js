@@ -6,35 +6,43 @@ const experience = require('./curriculums/cvExperience')
 const knowledge = require('./curriculums/cvKnowledge')
 
 module.exports = new Schema({
-    title:{
+    title: {
         type: String,
     },
-    description:{
+    description: {
         type: String,
     },
-    photo:{ 
+    photo: {
         type: String
     },
-    location:{
+    location: {
         type: String
     },
-    createDate:{
+    createDate: {
         type: Date,
         required: true
     },
-    languages:[language],
-    
-    studies:[study],
+    languages: [language],
 
-    experiences:[experience],
+    studies: [study],
 
-    knowledges:[knowledge],
+    experiences: [experience],
 
-    published:{
+    knowledges: [knowledge],
+
+    published: {
         type: Boolean,
     },
-    
-    user:{
+
+    offersILike: {
+        type: [ObjectId]
+    },
+
+    offersTheyLikeMe: {
+        type: [ObjectId]
+    },
+
+    user: {
         type: ObjectId,
         ref: 'Users',
         required: true

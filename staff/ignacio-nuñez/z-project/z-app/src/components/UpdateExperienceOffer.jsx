@@ -88,7 +88,7 @@ function UpdateExperienceOffer({ className, onUpdateExperienceOfferClose, onUpda
                             <div className='flex flex-col'>
                             <div>
                                 <label htmlFor="position" className="self-start font-semibold">Position: </label>
-                                <input maxLength='20' type="text" name="position" id="position" className="outline-none w-2/3" placeholder='Position' defaultValue={experience.position} />
+                                <input maxLength='20' type="text" autoFocus name="position" id="position" className="outline-none w-2/3" placeholder='Position' defaultValue={experience.position} />
                             </div>
                                 <div>
                                     <label htmlFor="years" className="self-start h-full font-semibold">Years: </label>

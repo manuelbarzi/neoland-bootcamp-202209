@@ -86,7 +86,7 @@ function UpdateStudyOffer({ className, onUpdateStudyOfferClose, onUpdateStudyOff
                         return <div key={study.id} className="w-full self-start flex flex-col">
                             <div className='flex gap-1 p-1'>
                                 <span className='font-semibold'>Title:</span>
-                                <textarea type="text" name="study" id="study" className="resize-none outline-none w-2/3" placeholder='Put a study here' defaultValue={study?.title}></textarea>
+                                <textarea type="text" name="study" id="study" autoFocus className="resize-none outline-none w-2/3" placeholder='Put a study here' defaultValue={study?.title}></textarea>
                                 <Button type="button" className="bg-red-300" onClick={() => handleDeleteStudy(study.id)}>Delete</Button>
                             </div>
                             <hr className="w-full" />

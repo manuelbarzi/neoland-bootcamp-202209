@@ -15,7 +15,7 @@ module.exports = (req, res) => {
                 else res.status(500).json({ error: error.message })
             })
     } catch (error) {
-        if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
+        if (error instanceof TypeError || error instanceof LengthError)
             res.status(400).json({ error: error.message })
         else if (error instanceof ContentError) res.status(406).json({ error: error.message })
         else

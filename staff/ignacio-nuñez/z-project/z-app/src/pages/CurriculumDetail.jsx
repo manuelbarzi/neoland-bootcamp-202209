@@ -12,6 +12,7 @@ import UpdateKnowledgeCurriculum from '../components/UpdateKnowledgeCurriculum'
 import Button from '../components/Button'
 import errorHandling from '../utils/errorHandling'
 import SearchButton from '../components/SearchButton'
+import SearchPanel from '../components/SearchPanel'
 
 function CurriculumDetail() {
     const [curriculum, setCurriculum] = useState()
@@ -19,6 +20,7 @@ function CurriculumDetail() {
     const [updatingExperience, setUpdatingExperience] = useState()
     const [updatingStudy, setUpdatingStudy] = useState()
     const [updatingKnowledge, setUpdatingKnowledge] = useState()
+    const [searchPanelStatus, setSearchPanelStatus] = useState()
 
     const { user, showAlert } = useContext(Context)
     const { curriculumId } = useParams()
@@ -31,7 +33,7 @@ function CurriculumDetail() {
 
     const retrieveCurriculum = () => {
         try {
-            retrieveCurriculumDetail(sessionStorage.token, curriculumId, user.id)
+            retrieveCurriculumDetail(sessionStorage.token, curriculumId)
                 .then(curriculumDetail => setCurriculum(curriculumDetail))
                 .catch(error => {
                     const { errorMessage, type } = errorHandling(error)
@@ -47,14 +49,14 @@ function CurriculumDetail() {
 
     let titleTimeoutId
 
-    const updateCurriculumTitle = event => {
+    const updateCurriculumTitle = (event, curriculumUserId) => {
         const { target: { value: title } } = event
 
         if (titleTimeoutId) clearTimeout(titleTimeoutId)
 
         try {
             titleTimeoutId = setTimeout(() => {
-                updateCurriculum(sessionStorage.token, curriculumId, user.id, { title })
+                updateCurriculum(sessionStorage.token, curriculumId, curriculumUserId, { title })
                     .catch(error => {
                         const { errorMessage, type } = errorHandling(error)
                         showAlert(errorMessage, type)
@@ -68,14 +70,14 @@ function CurriculumDetail() {
 
     let descriptionTimeoutId
 
-    const updateCurriculumDescription = event => {
+    const updateCurriculumDescription = (event, curriculumUserId) => {
         const { target: { value: description } } = event
 
         if (descriptionTimeoutId) clearTimeout(descriptionTimeoutId)
 
         try {
             descriptionTimeoutId = setTimeout(() => {
-                updateCurriculum(sessionStorage.token, curriculumId, user.id, { description })
+                updateCurriculum(sessionStorage.token, curriculumId, curriculumUserId, { description })
                     .catch(error => {
                         const { errorMessage, type } = errorHandling(error)
                         showAlert(errorMessage, type)
@@ -89,14 +91,14 @@ function CurriculumDetail() {
 
     let locationTimeoutId
 
-    const updateCurriculumLocation = event => {
+    const updateCurriculumLocation = (event, curriculumUserId) => {
         const { target: { value: location } } = event
 
         if (locationTimeoutId) clearTimeout(locationTimeoutId)
 
         try {
             locationTimeoutId = setTimeout(() => {
-                updateCurriculum(sessionStorage.token, curriculumId, user.id, { location })
+                updateCurriculum(sessionStorage.token, curriculumId, curriculumUserId, { location })
                     .catch(error => {
                         const { errorMessage, type } = errorHandling(error)
                         showAlert(errorMessage, type)
@@ -108,7 +110,7 @@ function CurriculumDetail() {
         }
     }
 
-    const onLanguageClick = (curriculumId, curriculumUserId, languages) => {
+    const onLanguageClick = (curriculumUserId, languages) => {
         setUpdatingLanguage({ curriculumId, curriculumUserId, languages })
     }
 
@@ -121,7 +123,7 @@ function CurriculumDetail() {
         setUpdatingLanguage()
     }
 
-    const onExperienceClick = (curriculumId, curriculumUserId, experiences) => {
+    const onExperienceClick = (curriculumUserId, experiences) => {
         setUpdatingExperience({ curriculumId, curriculumUserId, experiences })
     }
 
@@ -134,7 +136,7 @@ function CurriculumDetail() {
         setUpdatingExperience()
     }
 
-    const onStudyClick = (curriculumId, curriculumUserId, studies) => {
+    const onStudyClick = (curriculumUserId, studies) => {
         setUpdatingStudy({ curriculumId, curriculumUserId, studies })
     }
 
@@ -147,7 +149,7 @@ function CurriculumDetail() {
         setUpdatingStudy()
     }
 
-    const onKnowledgeClick = (curriculumId, curriculumUserId, knowledges) => {
+    const onKnowledgeClick = (curriculumUserId, knowledges) => {
         setUpdatingKnowledge({ curriculumId, curriculumUserId, knowledges })
     }
 
@@ -160,53 +162,83 @@ function CurriculumDetail() {
         setUpdatingKnowledge()
     }
 
-    return <main className="min-h-screen bg-slate-100">
-            <SearchButton/>
+    const onSearchClick = () => {
+        setSearchPanelStatus(true)
+    }
+
+    const closeSearchPanel = () => {
+        setSearchPanelStatus()
+    }
+
+    return <>{curriculum && <main className="min-h-screen bg-slate-100">
+        <SearchButton
+            onSearchClick={onSearchClick}
+        />
+        {searchPanelStatus && <SearchPanel
+            className={"inset-x-[2.5%] inset-y-[15%] absolute"}
+            closeSearchPanel={closeSearchPanel}
+        />}
         <div className="flex items-center flex-col">
-            <div className="flex items-center flex-col w-full mb-24">
-                <section className="flex items-center flex-col w-full px-2">
-                    <article className="flex flex-col gap-2 shadow-sm shadow-slate-600 bg-emerald-200 border-2 w-full rounded-xl">
-                        <div className="flex justify-between z-10 p-2 mt-1">
-                            {curriculum?.published ?
-                                <h2 name='title' id='title' className='bg-emerald-200 p-2 border-2 font-semibold rounded-lg'>{curriculum?.title}</h2> :
-                                <textarea onChange={updateCurriculumTitle} name='title' maxLength="25" id='title' rows='1' className='bg-emerald-200 p-2 border-2 font-semibold resize-none outline-none rounded-lg' defaultValue={curriculum?.title}></textarea>
-                            }
-                            <img className="w-1/5 text-xs p-2" src={curriculum?.photo} alt="worker perfil" />
+            <div className="flex items-center flex-col w-full mb-16">
+                <section className="flex items-center flex-col w-full p-2">
+                    <article className="flex flex-col pt-4 gap-2 shadow-sm shadow-slate-600 bg-emerald-200 border-2 w-full rounded-xl">
+                        <div className="w-full flex justify-center">
+                            <span className="font-semibold text-lg">{curriculum.user.name}</span>
                         </div>
-                        <div className='flex flex-col gap-2 bg-white p-2'>
+                        <div className="flex justify-between gap-5 z-10 p-2 mt-1">
+                            {curriculum?.published || user.role !== 'worker' ?
+                                <h2 className='bg-emerald-200 w-3/4 p-4 border-2 font-semibold resize-none outline-none rounded-lg'>{curriculum.title}</h2> :
+                                <textarea onChange={event => updateCurriculumTitle(event, curriculum.user.id)} name='title' maxLength="25" id='title' rows='1' className='bg-emerald-200 p-4 w-3/4 border-2 font-semibold resize-none outline-none rounded-lg' defaultValue={curriculum?.title}></textarea>
+                            }
+                            <img className="w-1/4 text-xs p-2" src={curriculum?.photo} alt="worker perfil" />
+                        </div>
+                        <div className='overflow-scroll h-[32rem] flex flex-col gap-2 bg-white p-2'>
                             <div className=' rounded-lg bg-emerald-50 p-2'>
                                 <div className='flex gap-6 justify-between'>
                                 </div>
                                 <div className='flex gap-6 mt-2'>
                                     <h2 className='font-semibold'>Location:</h2>
-                                    {curriculum?.published ?
+                                    {curriculum?.published || user.role !== 'worker' ?
                                         <span className="text-md w-1/2 block py-2.5 px-0 text-gray-700 bg-transparent border-0 border-b-2 border-gray-200 capitalize">{curriculum?.location ? curriculum.location : 'Location'}</span> :
-                                        <input onChange={updateCurriculumLocation} defaultValue={curriculum?.location} type="text" placeholder='Location' className='w-2/3 outline-none rounded-md bg-emerald-50' />
+                                        <input onChange={event => updateCurriculumLocation(event, curriculum.user.id)} defaultValue={curriculum?.location} type="text" placeholder='Location' className='w-2/3 outline-none rounded-md bg-emerald-50' />
                                     }
                                 </div>
                             </div>
                             <div className='bg-slate-100 p-2 rounded-lg'>
                                 <h3 className='font-semibold'>Description:</h3>
-                                {curriculum?.published ?
+                                {curriculum?.published || user.role !== 'worker' ?
                                     <p name='description' id='description' className='ml-1'>{curriculum?.description}</p> :
-                                    <textarea onChange={updateCurriculumDescription} maxLength="140" rows='3' name='description' id='description' className='w-full font-medium resize-none outline-none bg-slate-100 rounded-lg' placeholder='Put a description' defaultValue={curriculum?.description}></textarea>
+                                    <textarea onChange={event => updateCurriculumDescription(event, curriculum.user.id)} maxLength="140" rows='3' name='description' id='description' className='w-full resize-none outline-none bg-slate-100 rounded-lg' placeholder='Put a description' defaultValue={curriculum?.description}></textarea>
                                 }
                             </div>
-                            <div onClick={() => { return curriculum.published ? null : onExperienceClick(curriculum.id, curriculum.user, curriculum.experiences) }} className="cursor-pointer rounded-lg bg-emerald-50 p-2">
+                            <div onClick={() => { return curriculum.published || user.role !== 'worker' ? null : onExperienceClick(curriculum.user.id, curriculum.experiences) }} className="cursor-pointer rounded-lg bg-emerald-50 p-2">
                                 <h2 className='font-semibold'>Experiences: </h2>
                                 {!curriculum?.experiences.length && <span> Not Experiences</span>}
-                                <ul className='flex flex-col gap-2'>
+                                <div className='flex flex-col gap-2'>
                                     {curriculum?.experiences.map(experience => {
-                                        return <li key={experience.id}>
-                                            <h3>-Position: {experience.position}</h3>
-                                            <span className='ml-2'>{experience.years} years of experience</span>
-                                            {/* <h4>Industry: {experience.industry}</h4> */}
-                                        </li>
+                                        return <div key={experience.id} className='flex flex-col'>
+                                            <div className='flex gap-1'>
+                                                <h3 className='font-semibold'>Place:</h3>
+                                                <span>{experience.place}</span>
+                                            </div>
+                                            <div className='flex gap-1'>
+                                                <h3 className='font-semibold'>Position:</h3>
+                                                <span>{experience.position}</span>
+                                            </div>
+                                            <div className='flex gap-1'>
+                                                <h3 className='font-semibold'>From:</h3>
+                                                <span>{experience.from?.slice(0, -14).split("-").reverse().join("-")}</span>
+                                            </div>
+                                            <div className='flex gap-1'>
+                                                <h3 className='font-semibold'>To:</h3>
+                                                <span>{experience.to?.slice(0, -14).split("-").reverse().join("-")}</span>
+                                            </div>
+                                        </div>
                                     })}
-                                </ul>
+                                </div>
                             </div>
                             <div>
-                                <div onClick={() => { return curriculum.published ? null : onStudyClick(curriculum.id, curriculum.user, curriculum.studies) }} className="cursor-pointer rounded-lg bg-slate-100 p-2">
+                                <div onClick={() => { return curriculum.published || user.role !== 'worker' ? null : onStudyClick(curriculum.user.id, curriculum.studies) }} className="cursor-pointer rounded-lg bg-slate-100 p-2">
                                     <h2 className='font-semibold'>Studies:</h2>
                                     {!curriculum?.studies?.length ? <span>Not Studies</span> :
                                         curriculum?.studies.map(study => {
@@ -231,7 +263,7 @@ function CurriculumDetail() {
                                         })}
                                 </div>
                             </div>
-                            <div onClick={() => { return curriculum.published ? null : onKnowledgeClick(curriculum.id, curriculum.user, curriculum.knowledges) }} className="cursor-pointer rounded-lg bg-emerald-50 p-2">
+                            <div onClick={() => { return curriculum.published || user.role !== 'worker' ? null : onKnowledgeClick(curriculum.user.id, curriculum.knowledges) }} className="cursor-pointer rounded-lg bg-emerald-50 p-2">
                                 <h2 className='font-semibold'>Knowledges:</h2>
                                 {!curriculum?.knowledges?.length ? <span> Not Knowledges</span> :
                                     <ul className="flex flex-wrap gap-2">
@@ -244,7 +276,7 @@ function CurriculumDetail() {
                                     </ul>
                                 }
                             </div>
-                            <div onClick={() => { return curriculum.published ? null : onLanguageClick(curriculum.id, curriculum.user, curriculum.languages) }} className="cursor-pointer rounded-lg bg-slate-100 p-2">
+                            <div onClick={() => { return curriculum.published || user.role !== 'worker' ? null : onLanguageClick(curriculum.user.id, curriculum.languages) }} className="cursor-pointer rounded-lg bg-slate-100 p-2">
                                 <h2 className='font-semibold'>Languages:</h2>
                                 {!curriculum?.languages?.length ? <span>Not Languages</span> :
                                     <div className="flex flex-wrap">
@@ -261,7 +293,8 @@ function CurriculumDetail() {
                             </div>
                         </div>
                         <div className='w-full z-10 flex justify-between p-2'>
-                            <Link to='/user/profile' className='w-1/3'><Button className='bg-emerald-300 w-full'>Go Back</Button></Link>
+                            {user?.role === 'worker' && <Link to='/user/profile' className='w-1/3'><Button className='h-20 bg-emerald-300 w-full'>Go Back</Button></Link>}
+                            {user?.role === 'company' && <Link to='/company/matchs' className='w-1/3'><Button className='h-20 bg-emerald-300 w-full'>Go Back</Button></Link>}
                             <p className="self-end p-2">{format(curriculum?.createDate)}</p>
                         </div>
                     </article>
@@ -303,5 +336,6 @@ function CurriculumDetail() {
         <NavBar
         />
     </main >
+    }</>
 }
 export default CurriculumDetail

@@ -1,7 +1,7 @@
 const { errors: { NotFoundError, ConflictError },
     validators: { stringValidator }
 } = require('com')
-const { Users, Offers } = require('../models')
+const { Users, Offers, Curriculums } = require('../models')
 /**
  * Retrieves published offers
  * 
@@ -10,14 +10,30 @@ const { Users, Offers } = require('../models')
 module.exports = function retrievePublishedOffers(userId) {
     stringValidator(userId, 'userId')
 
-    return Users.findById(userId)
+    return Users.findById(userId).lean()
         .then(user => {
             if (!user)
                 throw new NotFoundError(`user with id ${userId} does not exist`)
-            else if(user.role !== 'worker')
+            else if (user.role !== 'worker')
                 throw new ConflictError(`user ${user._id} does not have a worker role`)
 
-            return Offers.find({ published: true }).sort({ createDate: -1 }).populate('user', '-email -password -role -__v').select('-published -__v').lean()
+            const dislikesArray = user.dislikes ? user.dislikes : []
+
+            return Curriculums.find({ user: userId }).lean()
+                .then(curriculums => {
+                    const likesArray = curriculums.reduce((acumulator, curriculum) => {
+                        if (curriculum.offersILike) {
+                            acumulator.push(...curriculum.offersILike)
+
+                            return acumulator
+                        } else
+                            return acumulator.concat()
+                    }, [])
+
+                    const offersToIgnore = dislikesArray.concat(likesArray)
+
+                    return Offers.find({ published: true }).where('_id').nin(offersToIgnore).limit(1).sort({ createDate: -1 }).populate('user', '-email -password -role -__v').select('-published -curriculumsIlike -curriculumsTheyLikeMe -__v').lean()
+                })
         })
         .then(offers => {
             offers.forEach(offer => {
@@ -49,7 +65,7 @@ module.exports = function retrievePublishedOffers(userId) {
                         delete knowledge._id
                     })
                 }
-                if(offer.salary){
+                if (offer.salary) {
                     offer.salary.id = offer.salary._id.toString()
 
                     delete offer.salary._id

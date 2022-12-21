@@ -1,6 +1,6 @@
 const {
     errors: { NotFoundError, ConflictError, ContentError },
-    validators: { stringValidator, languagesValidator, ofStudyValidator, experienceValidator,
+    validators: { stringValidator, languagesValidator, ofStudyValidator, ofExperienceValidator,
         knowledgeValidator, booleanValidator, modalityValidator, salaryValidator, workTimeValidator,
         titleValidator, descriptionValidator, locationValidator } } = require('com')
 const { Users, Offers } = require('../models')
@@ -17,7 +17,7 @@ module.exports = function updateOffer(userId, offerId, title, description, photo
     if (workTime) workTimeValidator(workTime)
     if (languages) languagesValidator(languages)
     if (studies) ofStudyValidator(studies)
-    if (experiences) experienceValidator(experiences)
+    if (experiences) ofExperienceValidator(experiences)
     if (knowledges) knowledgeValidator(knowledges)
     if (typeof published === 'boolean') booleanValidator(published, 'published')
 
@@ -49,35 +49,28 @@ module.exports = function updateOffer(userId, offerId, title, description, photo
             if (knowledges) data.knowledges = knowledges
             if (typeof published === 'boolean') {
                 if (published) {
-                    return Offers.findById(offerId)
-                        .then(offer => {
-                            if (offer.description.length < 5)
-                                throw new ContentError('to publish put a description with a length higher than 5')
+                    if (offer.description.length < 5)
+                        throw new ContentError('to publish put a description with a length higher than 5')
 
-                            if (!offer.location)
-                                throw new ContentError('to publish put a location')
+                    if (!offer.location)
+                        throw new ContentError('to publish put a location')
 
-                            else if (!offer.workTime && !offer.modality && !offer.salary)
-                                throw new ContentError('to publish put at least one of these: Work time, modality or salary')
+                    else if (!offer.workTime && !offer.modality && !offer.salary)
+                        throw new ContentError('to publish put at least one of these: Work time, modality or salary')
 
-                            else if (offer.experiences.length === 0 && offer.studies.length === 0 && offer.languages.length === 0 && offer.knowledges.length === 0)
-                                throw new ContentError('to publish put at least one of these: experience, study, languages or knowledges')
+                    else if (offer.experiences.length === 0 && offer.studies.length === 0 && offer.languages.length === 0 && offer.knowledges.length === 0)
+                        throw new ContentError('to publish put at least one of these: experience, study, languages or knowledges')
 
-                            data.published = published
+                    data.published = published
 
-                            return Offers.findByIdAndUpdate(offerId, data)
-                        })
+                    return Offers.findByIdAndUpdate(offerId, data)
                 }
                 data.published = published
 
                 return Offers.findByIdAndUpdate(offerId, data)
             }
-            return Offers.findById(offerId)
-                .then(offer => {
-                    if (offer.published) throw new ConflictError('You cant update a published offer')
-                })
-                .then(() => {
-                    return Offers.findByIdAndUpdate(offerId, data)
-                })
+            if (offer.published) throw new ConflictError('You cant update a published offer')
+
+            return Offers.findByIdAndUpdate(offerId, data)
         })
 }

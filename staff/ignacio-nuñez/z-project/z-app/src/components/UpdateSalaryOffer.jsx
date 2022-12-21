@@ -20,7 +20,7 @@ function UpdateSalaryOffer({ className, onUpdateSalaryOfferClose, onUpdateSalary
 
         const { amount: { value: amount }, currency: { value: currency } } = event.target
 
-        const salary = { salary: amount, currency }
+        const salary = { salary: parseInt(amount), currency }
 
         try {
             updateOffer(sessionStorage.token, offerSalaryData.offerId, offerSalaryData.offerUserId, { salary })
@@ -67,7 +67,7 @@ function UpdateSalaryOffer({ className, onUpdateSalaryOfferClose, onUpdateSalary
                     <div className='flex flex-col items-center gap-4'>
                         <div className='flex justify-center gap-2'>
                             <span className='font-semibold py-2.5'>Salary:</span>
-                            <input name="amount" id="amount" type="text" maxLength='8' placeholder='Salary' className='w-1/3 py-2.5  outline-none rounded-md' defaultValue={salary?.salary && salary.salary} />
+                            <input name="amount" id="amount" autoFocus type="text" maxLength='8' placeholder='Salary' className='w-1/3 py-2.5  outline-none rounded-md' defaultValue={salary?.salary && salary.salary} />
                             <select name="currency" id="currency" defaultValue={salary?.currency ? salary.currency : '$'}
                                 className="text-md w-1/6 block py-2.5 px-0 text-gray-700 bg-transparent border-0 border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
                                 <option value="$">$</option>

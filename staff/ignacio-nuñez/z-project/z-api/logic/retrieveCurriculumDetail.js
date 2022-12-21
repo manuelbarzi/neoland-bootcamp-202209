@@ -17,12 +17,10 @@ module.exports = function retrieveCurriculumToDetail(userId, curriculumId) {
             if (!user)
                 throw new NotFoundError(`user with id ${userId} does not exist`)
 
-            return Curriculums.findById(curriculumId).select('-__v').lean()
+            return Curriculums.findById(curriculumId).populate('user', 'name').select('-offersIlike -offersTheyLikeMe -__v').lean()
         })
         .then(curriculum => {
             if (!curriculum) throw new NotFoundError(`curriculum with id ${curriculumId} does not exist`)
-
-            if (curriculum.user.toString() !== userId) throw new ConflictError(`curriculum with id ${curriculumId} does not belong to user with id ${userId}`)
 
             if(curriculum.languages){
             curriculum.languages.forEach(language=>{
@@ -49,6 +47,9 @@ module.exports = function retrieveCurriculumToDetail(userId, curriculumId) {
             })
         }
             curriculum.id = curriculum._id.toString()
+            curriculum.user.id = curriculum.user._id.toString()
+
+            delete curriculum.user._id
             delete curriculum._id
             return curriculum
         })

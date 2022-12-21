@@ -4,7 +4,8 @@ const passwordValidator = require('./passwordValidator')
 const roleValidator = require('./roleValidator')
 const stringValidator = require('./stringValidator')
 const languagesValidator = require('./languagesValidator')
-const experienceValidator = require('./experienceValidator')
+const ofExperienceValidator = require('./ofExperienceValidator')
+const cvExperienceValidator = require('./cvExperienceValidator')
 const ofStudyValidator = require('./ofStudyValidator')
 const cvStudyValidator = require('./cvStudyValidator')
 const knowledgeValidator = require('./knowledgeValidator')
@@ -23,7 +24,8 @@ module.exports ={
     roleValidator,
     stringValidator,
     languagesValidator,
-    experienceValidator,
+    ofExperienceValidator,
+    cvExperienceValidator,
     ofStudyValidator,
     cvStudyValidator,
     knowledgeValidator,

@@ -87,7 +87,7 @@ function UpdateKnowledgeCurriculum({ className, onUpdateKnowledgeCurriculumClose
                         return <div key={knowledge.id} className="w-full self-start flex flex-col">
                             <div className='flex gap-1'>
                                 <span className='font-semibold'>Skill:</span>
-                                <input type="text" maxLength='25' name="title" id="title" className="outline-none" placeholder='Title' defaultValue={knowledge.title} />
+                                <input type="text" maxLength='25' autoFocus name="title" id="title" className="outline-none" placeholder='Title' defaultValue={knowledge.title} />
                             </div>
                             <div className='flex justify-between'>
                                 <select name="level" id="level" defaultValue={knowledge.level ? knowledge.level : 'select'}

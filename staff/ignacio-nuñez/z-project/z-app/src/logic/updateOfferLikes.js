@@ -1,23 +1,29 @@
 import { errors, validators } from 'com'
+import extractSubFromToken from '../utils/extractSubFromToken'
 
 const { LengthError, NotFoundError, UnexpectedError, ConflictError } = errors
 const { stringValidator } = validators
 
-function retrieveOfferDetail(token, offerId) {
+function updateCurriculumLikes(token, offerId, curriculumId, offerUserId) {
     stringValidator(token, 'token')
     stringValidator(offerId, 'offerId')
-    
-    return fetch(`http://localhost:80/offers/${offerId}`, {
+    stringValidator(curriculumId, 'curriculumId')
+    stringValidator(offerUserId, 'offerUserId')
+
+    const userId = extractSubFromToken(token)
+
+    if (offerUserId !== userId) throw new Error('userId is different than offerUserId')
+
+    return fetch(`http://localhost:80/offers/likes/${offerId}/${curriculumId}`, {
+        method: 'PATCH',
         headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
         }
     })
         .then(res => {
-            if (res.status === 200) {
-                return res.json()
-                    .then(offer => offer)
-            }
+            if (res.status === 202) return
+
             else if (res.status === 400) {
                 return res.json()
                     .then(error => {
@@ -34,12 +40,11 @@ function retrieveOfferDetail(token, offerId) {
                     .then(error => {
                         throw new ConflictError(error.error)
                     })
-            }
-            else if (res.status < 500)
+            } else if (res.status < 500)
                 throw new UnexpectedError('client error')
             else
                 throw new UnexpectedError('server error')
         })
 }
 
-export default retrieveOfferDetail
+export default updateCurriculumLikes

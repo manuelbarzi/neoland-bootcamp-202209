@@ -1,18 +1,20 @@
 import { useContext, useEffect, useState } from "react"
 import NavBar from "../components/NavBar"
 import { Context } from "../components/Context"
-import retrievePublishedCurriculums from "../logic/retrievePublishedCurriculums"
+import searchCurriculums from "../logic/searchCurriculums"
 import { format } from 'timeago.js'
 import Button from "../components/Button"
 import errorHandling from "../utils/errorHandling"
 import SearchButton from "../components/SearchButton"
 import SearchPanel from "../components/SearchPanel"
+import { useSearchParams } from 'react-router-dom'
 import OffersToChoose from "../components/OffersToChoose"
 import DislikeCurriculum from "../components/DislikeCurriculum"
 
-function PublishedCurriculums() {
+function SearchedCurriculums() {
     const [curriculums, setCurriculums] = useState([])
     const [searchPanelStatus, setSearchPanelStatus] = useState()
+    const [searchParams, setSearchParams] = useSearchParams()
     const [chooseOffer, setChooseOffer] = useState()
     const [curriculumIdILike, setCurriculumIdILike] = useState()
     const [dislikeCurriculum, setDislikeCurriculum] = useState()
@@ -21,14 +23,17 @@ function PublishedCurriculums() {
     const { user, showAlert } = useContext(Context)
 
     useEffect(() => {
-        onRetrievePublishedCurriculums()
-    }, [])
+        retrieveSearchedCurriculums()
+    }, [searchParams.get('q'), searchParams.get('location')])
 
-    const onRetrievePublishedCurriculums = () => {
+    const retrieveSearchedCurriculums = () => {
         try {
-            retrievePublishedCurriculums(sessionStorage.token)
+            const keyWord = searchParams.get('q')
+            const location = searchParams.get('location')
+            searchCurriculums(sessionStorage.token, keyWord, location)
                 .then(curriculums => {
                     setCurriculums(curriculums)
+                    setSearchPanelStatus()
                 })
                 .catch(error => {
                     const { errorMessage, type } = errorHandling(error)
@@ -60,7 +65,7 @@ function PublishedCurriculums() {
     const onChooseOffer = () => {
         setChooseOffer()
         setCurriculumIdILike()
-        onRetrievePublishedCurriculums()
+        retrieveSearchedCurriculums()
     }
 
     const dislikeCurriculumHandler = curriculumId => {
@@ -75,9 +80,8 @@ function PublishedCurriculums() {
     const onDislikeCurriculum = () => {
         setDislikeCurriculum()
         setCurriculumIdToDislike()
-        onRetrievePublishedCurriculums()
+        retrieveSearchedCurriculums()
     }
-
 
     return <main className="min-h-screen bg-slate-100">
         <SearchButton
@@ -89,13 +93,13 @@ function PublishedCurriculums() {
         />}
         <div className="flex items-center flex-col">
             <div className="flex items-center flex-col w-full mb-16">
-                <section className="flex items-center w-full flex-col p-2">
+                <section className="flex items-center w-full flex-col pt-2 px-2">
                     {curriculums?.length ? curriculums.map(curriculum => {
                         return <article key={curriculum.id} className="flex flex-col gap-2 pt-4 shadow-sm shadow-slate-600 bg-emerald-200 border-2 w-full rounded-xl">
                             <div className="w-full flex justify-center">
                                 <span className="font-semibold text-lg">{curriculum.user.name}</span>
                             </div>
-                            <div className="flex justify-between gap-5 z-10 p-2 mt-1">
+                            <div className="flex justify-between z-10 p-2 mt-1">
                                 <h2 className='bg-emerald-200 w-3/4 p-4 border-2 font-semibold resize-none outline-none rounded-lg'>{curriculum.title}</h2>
                                 <img className="w-1/4 text-xs p-2" src={curriculum.photo} alt="company logo" />
                             </div>
@@ -170,7 +174,7 @@ function PublishedCurriculums() {
                             </div>
                         </article>
                     }) : <div>
-                        <h3>There is not published curriculums yet</h3>
+                        <h3>No results</h3>
                     </div>
                     }
                 </section>
@@ -190,7 +194,8 @@ function PublishedCurriculums() {
                 curriculumIdToDislike={curriculumIdToDislike}
                 onDislikeCurriculum={onDislikeCurriculum}
                 onDislikeCurriculumClose={onDislikeCurriculumClose} />}
+
     </main>
 }
 
-export default PublishedCurriculums
+export default SearchedCurriculums

@@ -1,17 +1,19 @@
 import { useContext, useEffect, useState } from "react"
 import NavBar from "../components/NavBar"
 import { Context } from "../components/Context"
-import retrievePublishedOffers from "../logic/retrievePublishedOffers"
 import { format } from 'timeago.js'
 import Button from "../components/Button"
 import errorHandling from "../utils/errorHandling"
 import SearchButton from "../components/SearchButton"
+import { useSearchParams } from 'react-router-dom'
+import searchOffers from "../logic/searchOffers"
 import SearchPanel from "../components/SearchPanel"
-import CurriculumsToChoose from "../components/CurriculumsToChoose"
 import DislikeOffer from "../components/DislikeOffer"
+import CurriculumsToChoose from "../components/CurriculumsToChoose"
 
-function PublishedOffers() {
+function SearchedOffers() {
     const [offers, setOffers] = useState([])
+    const [searchParams, setSearchParams] = useSearchParams()
     const [searchPanelStatus, setSearchPanelStatus] = useState()
     const [chooseCurriculum, setChooseCurriculum] = useState()
     const [offerIdILike, setOfferIdILike] = useState()
@@ -21,14 +23,17 @@ function PublishedOffers() {
     const { user, showAlert } = useContext(Context)
 
     useEffect(() => {
-        onRetrievePublishedOffers()
-    }, [])
+        onSearchOffers()
+    }, [searchParams.get('q'), searchParams.get('location')])
 
-    const onRetrievePublishedOffers = () => {
+    const onSearchOffers = () => {
         try {
-            retrievePublishedOffers(sessionStorage.token)
+            const keyWord = searchParams.get('q')
+            const location = searchParams.get('location')
+            searchOffers(sessionStorage.token, keyWord, location)
                 .then(offers => {
                     setOffers(offers)
+                    setSearchPanelStatus()
                 })
                 .catch(error => {
                     const { errorMessage, type } = errorHandling(error)
@@ -60,7 +65,7 @@ function PublishedOffers() {
     const onChooseCurriculum = () => {
         setChooseCurriculum()
         setOfferIdILike()
-        onRetrievePublishedOffers()
+        onSearchOffers()
     }
 
     const dislikeOfferHandler = (offerId) => {
@@ -75,7 +80,7 @@ function PublishedOffers() {
     const onDislikeOffer = () => {
         setDislikeOffer()
         setOfferIdToDislike()
-        onRetrievePublishedOffers()
+        onSearchOffers()
     }
 
     return <main className="min-h-screen bg-slate-100">
@@ -90,27 +95,27 @@ function PublishedOffers() {
             <div className="flex items-center flex-col w-full mb-16">
                 <section className="flex items-center flex-col w-full p-2">
                     {offers?.length ? offers.map(offer => {
-                        return <article key={offer.id} className="flex flex-col pt-4 gap-2 shadow-sm shadow-slate-600 bg-emerald-200 border-2 w-full rounded-xl">
+                        return <article key={offer.id} className="flex flex-col gap-2 pt-4 shadow-sm shadow-slate-600 bg-emerald-200 border-2 w-full rounded-xl">
                             <div className="w-full flex justify-center">
                                 <span className="font-semibold text-lg">{offer.user.name}</span>
                             </div>
-                            <div className="flex justify-between gap-5 z-10 p-2 mt-1">
-                                <h2 className='bg-emerald-200 p-4 w-3/4 border-2 font-semibold rounded-lg'>{offer.title}</h2>
+                            <div className="flex justify-between z-10 p-2 mt-1">
+                                <h2 className='bg-emerald-200 p-4 w-3/4 border-2 font-semibold resize-none outline-none rounded-lg'>{offer.title}</h2>
                                 <img className="w-1/4 text-xs p-2" src={offer.photo} alt="company logo" />
                             </div>
                             <div className='overflow-scroll h-[32rem] flex flex-col gap-2 bg-white p-2'>
-                                <div className=' rounded-lg bg-emerald-50 p-2'>
-                                    <div className='flex gap-6 justify-between'>
+                                <div className='rounded-lg bg-emerald-50 p-2'>
+                                    <div className='flex gap-3 justify-between'>
                                         <div className='flex justify-center w-1/2  border rounded-md'>
-                                            <span className="text-md w-1/2 py-2.5 text-gray-700 bg-transparent border-0 border-gray-200 capitalize">{offer?.workTime ? offer.workTime : 'Work time'}</span>
+                                            <span className="py-2 text-gray-700 bg-transparent border-0 border-gray-200 capitalize">{offer?.workTime ? offer.workTime : 'Work time'}</span>
                                         </div>
                                         <div className='flex justify-center w-1/2  border rounded-md'>
-                                            <span className="text-md w-1/2 py-2.5 text-gray-700 bg-transparent border-0 border-gray-200 capitalize">{offer?.modality ? offer.modality : 'Modality'}</span>
+                                            <span className="py-2 text-gray-700 bg-transparent border-0 border-gray-200 capitalize">{offer?.modality ? offer.modality : 'Modality'}</span>
                                         </div>
                                     </div>
-                                    <div className='flex gap-6 mt-2'>
+                                    <div className='flex gap-3 mt-2'>
                                         <div className='flex justify-center items-center w-1/2  border rounded-md'>
-                                            <div className='text-md text-gray-700 flex p-1 gap-2'>
+                                            <div className='text-gray-700 flex p-1 gap-2'>
                                                 <span >Salary:</span>
                                                 <div>
                                                     <span>{offer?.salary?.salary ? offer.salary.salary : '-Salary-'}</span>
@@ -119,7 +124,7 @@ function PublishedOffers() {
                                             </div>
                                         </div>
                                         <div className='flex justify-center w-1/2  border rounded-md'>
-                                            <span className="text-md w-1/2 py-2.5 px-0 text-gray-700 bg-transparent border-0 border-gray-200 capitalize">{offer?.location ? offer.location : 'Location'}</span>
+                                            <span className="w-1/2 py-2.5 px-0 text-gray-700 bg-transparent border-0 border-gray-200 capitalize">{offer?.location ? offer.location : 'Location'}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -185,7 +190,7 @@ function PublishedOffers() {
                             </div>
                         </article>
                     }) : <div>
-                        <h3>There is not published offers yet</h3>
+                        <h3>No results</h3>
                     </div>
                     }
                 </section>
@@ -199,13 +204,15 @@ function PublishedOffers() {
                 offerIdILike={offerIdILike}
                 onChooseCurriculum={onChooseCurriculum}
                 onChooseCurriculumClose={onChooseCurriculumClose} />}
+
         {dislikeOffer &&
             <DislikeOffer
                 className="inset-x-[8.3%] inset-y-1/3 absolute"
                 offerIdToDislike={offerIdToDislike}
                 onDislikeOffer={onDislikeOffer}
                 onDislikeOfferClose={onDislikeOfferClose} />}
+
     </main>
 }
 
-export default PublishedOffers
+export default SearchedOffers

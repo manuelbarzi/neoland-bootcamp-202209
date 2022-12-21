@@ -1,17 +1,11 @@
 import { errors, validators } from 'com'
-import extractSubFromToken from '../utils/extractSubFromToken'
 
 const { LengthError, NotFoundError, UnexpectedError, ConflictError } = errors
 const { stringValidator } = validators
 
-function retrieveCurriculumDetail(token, curricuculumId, curricuculumUserId) {
+function retrieveCurriculumDetail(token, curricuculumId) {
     stringValidator(token, 'token')
     stringValidator(curricuculumId, 'curricuculumId')
-    stringValidator(curricuculumUserId, 'curricuculumUserId')
-    
-    const userId = extractSubFromToken(token)
-
-    if (curricuculumUserId !== userId) throw new Error('userId is different than curricuculumUserId')
 
     return fetch(`http://localhost:80/curriculums/${curricuculumId}`, {
         headers: {

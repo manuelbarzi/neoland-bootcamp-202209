@@ -1,4 +1,4 @@
-import { useContext } from "react"
+    import { useContext } from "react"
 import { Link, useNavigate } from 'react-router-dom'
 import Button from "./Button"
 import { Context } from "./Context"
@@ -23,6 +23,8 @@ function NavBar() {
                 {user?.role === 'worker' && <Link className="text-lg" to={'/offers'}>Offers</Link>}
                 {user?.role === 'company' && <Link className="text-lg" to={'/curriculums'}>Cv's</Link>}
             </div>
+            {user?.role === 'worker' && <Link to={'/worker/matchs'}>Matchs</Link>}
+            {user?.role === 'company' && <Link to={'/company/matchs'}>Matchs</Link>}
             <div className="z-10 flex gap-4">
                 <Link className="text-lg" to={'/user/profile'}>{userName || 'Loading...'}</Link>
                 <button className="text-lg" onClick={handlerLogoutClick}>Logout</button>

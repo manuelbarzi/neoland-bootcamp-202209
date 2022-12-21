@@ -18,12 +18,16 @@ const retrieveUserCurriculumsHandler = require('./handlers/retrieveUserCurriculu
 const retrieveCurriculumDetailHandler = require('./handlers/retrieveCurriculumDetailHandler')
 const updateCurriculumHandler = require('./handlers/updateCurriculumHandler')
 const retrievePublishedCurriculmsHandler = require('./handlers/retrievePublishedCurriculmsHandler')
+const updateCurriculumLikesHandler = require('./handlers/updateCurriculumLikesHandler')
+const searchCurriculumsHandler = require('./handlers/searchCurriculumsHandler')
+const searchOffersHandler = require('./handlers/searchOffersHandler')
+const updateOfferLikesHandler = require('./handlers/updateOfferLikesHandler')
+const updateUserDislikesHandler = require('./handlers/updateUserDislikesHandler')
+const retrieveMatchsHandler = require('./handlers/retrieveMatchsHandler')
 
 const jsonBodyParser = require('./utils/jsonBodyParser')
 const cors = require('./utils/cors')
 const jwtVerifier = require('./utils/jwtVerifier')
-const searchCurriculumsHandler = require('./handlers/searchCurriculumsHandler')
-const searchOffersHandler = require('./handlers/searchOffersHandler')
 const { MONGODB_URL } = process.env
 
 mongoose.connect(MONGODB_URL)
@@ -38,16 +42,21 @@ mongoose.connect(MONGODB_URL)
         api.get('/users',jwtVerifier, retrieveUserHandler)
         api.get('/users/offers', jwtVerifier, retrieveUserOffersHandler)
         api.get('/users/curriculums', jwtVerifier, retrieveUserCurriculumsHandler)
+        api.patch('/users/dislikes/:documentId', jwtVerifier, updateUserDislikesHandler)
 
         api.get('/curriculums', jwtVerifier, retrievePublishedCurriculmsHandler)
         api.post('/curriculums', jwtVerifier, createCurriculumHandler)
         api.delete('/curriculums/:curriculumId', jwtVerifier, deleteCurriculumHandler)
         api.get('/curriculums/:curriculumId', jwtVerifier, retrieveCurriculumDetailHandler)
+        api.patch('/curriculums/likes/:curriculumId/:offerId', jwtVerifier, updateCurriculumLikesHandler)
         api.patch('/curriculums/:curriculumId', jwtVerifier, jsonBodyParser, updateCurriculumHandler)
+
+        api.get('/matchs', jwtVerifier, retrieveMatchsHandler)
 
         api.get('/search/curriculums' , jwtVerifier, searchCurriculumsHandler)
         api.get('/search/offers' , jwtVerifier, searchOffersHandler)
-        
+
+        api.patch('/offers/likes/:offerId/:curriculumId', jwtVerifier, updateOfferLikesHandler)
         api.get('/offers', jwtVerifier, retrievePublishedOffersHandler)
         api.post('/offers', jwtVerifier, createOfferHandler)
         api.delete('/offers/:offerId', jwtVerifier, deleteOfferHandler)

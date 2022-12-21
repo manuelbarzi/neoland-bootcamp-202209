@@ -2,7 +2,7 @@ import { errors, validators } from 'com'
 import extractSubFromToken from '../utils/extractSubFromToken'
 
 const { LengthError, NotFoundError, UnexpectedError, ConflictError, ContentError } = errors
-const { stringValidator, languagesValidator, ofStudyValidator, experienceValidator,
+const { stringValidator, languagesValidator, ofStudyValidator, ofExperienceValidator,
     knowledgeValidator, modalityValidator, salaryValidator, workTimeValidator, booleanValidator,
     titleValidator, descriptionValidator, locationValidator } = validators
 
@@ -20,7 +20,7 @@ function updateOffer(token, offerId, offerUserId, { title, description, photo, m
     if (workTime) workTimeValidator(workTime)
     if (languages) languagesValidator(languages)
     if (studies) ofStudyValidator(studies)
-    if (experiences) experienceValidator(experiences)
+    if (experiences) ofExperienceValidator(experiences)
     if (knowledges) knowledgeValidator(knowledges)
     if (typeof published === 'boolean') booleanValidator(published, 'published')
 
