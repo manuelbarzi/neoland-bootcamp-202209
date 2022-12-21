@@ -37,7 +37,7 @@ export default function retrieveUser(token) {
                 reject(new UnexpectedError('server error'))
         }
 
-        xhr.open('GET', `${process.env.REACT_APP_API_URL}/users`)
+        xhr.open('GET', 'http://localhost/users')
         xhr.setRequestHeader('Authorization', `Bearer ${token}`)
         xhr.send()
     })
