@@ -13,6 +13,10 @@ import { Link } from 'react-router-dom'
 import logo from '../img/logo.jpg'
 import DeleteInscription from '../components/DeleteInscription'
 import extractSubFromToken from '../utils/extractSubFromToken'
+import { HiOutlineUser } from 'react-icons/hi'
+import { TiArrowBack } from 'react-icons/ti'
+
+
 
 const { FormatError, AuthError, LengthError, NotFoundError } = errors
 
@@ -133,9 +137,7 @@ function EventMonth() {
     }
 
 
-    const shortDate = event?.date?.slice(0,-14)
-
-
+    // const shortDate = event?.date?.slice(0, -14)
 
 
     const userId = extractSubFromToken(sessionStorage.token)
@@ -146,11 +148,16 @@ function EventMonth() {
     const available = max - participants
 
     return <main className="h-full bg-slate-100">
-        <header className='h-1/6 top-0 flex justify-around items-center bg-teal-600	'>
+        <header className='h-1/6 top-0 flex justify-around items-center bg-teal-600'>
             <Link to="/"><img src={logo} className='w-20 h-20 cursor-pointer' /></Link>
-            <h2 className='uppercase'>{monthName}</h2>
-            <h2>{user?.name}</h2>
-            <button onClick={goEvents} className='border-2 border-black'>Go_Back</button>
+            <div className='flex items-center gap-1'>
+                <button onClick={goEvents} className='border-2 border-black'><TiArrowBack /></button>
+                <h2 className='uppercase'>{monthName}</h2>
+            </div>
+            <div className='flex items-center gap-1'>
+                <HiOutlineUser />
+                <p>{user?.name}</p>
+            </div>
         </header>
 
         {event ? <div className='mx-4 '>
@@ -159,7 +166,7 @@ function EventMonth() {
                     <h1>{event.title}</h1>
                     <h3>{event.body}</h3>
                     <h3>Requisitos: {event.requirement}</h3>
-                    <h3> Fecha: {shortDate} </h3>
+                    <h3> Fecha: {event.date} </h3>
                     <h3> Plazas: {event.capacity}</h3>
                     {!available && <div>
                         <h3>{event.inscription = 'No more places'}</h3>
@@ -169,7 +176,7 @@ function EventMonth() {
                         Inscription : <div><div>
                             {!enrolled && <button onClick={handlesignUp} className="border-2 rounded-full border-black  bg-green-100 p-1 cursor-pointer m-1">Inscribirse</button>}
                             {enrolled && <button onClick={handleUnsignUp} className="border-2 rounded-full border-black  bg-red-100 p-1 cursor-pointer m-1">Desinscribirse</button>}
-                            </div>
+                        </div>
                         </div>
                     </div>}
                     -------------------------------------------

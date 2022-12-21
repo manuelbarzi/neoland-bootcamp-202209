@@ -13,9 +13,7 @@ import { errors } from 'com'
 import Context from '../components/Context'
 import { useContext } from 'react'
 import { MdDeleteForever, MdEdit, MdSettings } from 'react-icons/md'
-// import { IoInvertModeOutline } from 'react-icons/io5'
-
-
+import {  HiOutlineUser, HiPlus } from 'react-icons/hi'
 
 
 const { FormatError, AuthError, LengthError, NotFoundError } = errors
@@ -157,7 +155,10 @@ function Noticias() {
     return <><header className='h-1/6 top-0 flex justify-around items-center bg-teal-600'>
         <Link to="/"><img src={logo} className='w-20 h-20 cursor-pointer' /></Link>
         <h1>NOTICIAS</h1>
-        <h2>{user?.name}</h2>
+        <div className='flex items-center gap-1'>
+            <HiOutlineUser/>
+            <p>{user?.name}</p>
+            </div>
         <div>
             <button onClick={handleSettings}><MdSettings size='1.5rem'/></button>
         </div>
@@ -166,7 +167,7 @@ function Noticias() {
     {settings && <Settings/>}
 
         <div className="flex flex-col items-center gap-2 py-[5rem] h-full  bg-gray-100">
-        {user?.role === 'admin' && <button onClick={() => openCreateNotice()}> + </button>}
+        {user?.role === 'admin' && <button onClick={() => openCreateNotice()}><HiPlus/></button>}
             {notices.map(notice => {
                 return <article key={notice.id} className="border rounded-xl w-[50%] flex flex-col p-5 break-words  bg-green-50">
                     <p className='underline p-2'>{notice.title}</p>

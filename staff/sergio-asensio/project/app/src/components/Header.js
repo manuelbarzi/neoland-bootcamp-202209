@@ -1,5 +1,6 @@
 import log from '../utils/coolog'
 import { MdSettings } from 'react-icons/md'
+import {  HiOutlineUser } from 'react-icons/hi'
 import Context from './Context'
 import { useContext, useState} from 'react'
 import logo from '../img/logo.jpg'
@@ -9,11 +10,7 @@ import Settings from '../components/Settings'
 export default function Header({ userName }) {
     log.info('Header -> render')
 
-    const { logout } = useContext(Context)
     const [settings, setSettings] = useState()
-
-    const switchMode = () => document.querySelector('html').classList.toggle('dark')
-    // className='h-screen'
 
     const handleSettings = () =>{
             if(!settings) 
@@ -31,9 +28,10 @@ export default function Header({ userName }) {
     <div>
         <h1>TREPADORES CAVERNICOLAS</h1>
     </div>
-    <div>
-        <p>{userName}</p> 
-    </div>
+    <div className='flex items-center gap-1'>
+            <HiOutlineUser/>
+            <p>{userName}</p>
+            </div>
     <div>
         <button onClick={handleSettings} ><MdSettings/></button>
         </div> 

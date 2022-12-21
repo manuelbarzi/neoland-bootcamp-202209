@@ -10,6 +10,8 @@ import retrieveEvents from '../logic/retrieveEvents'
 import getMonthName from '../utils/getMonthNameByNumber'
 import logo from '../img/logo.jpg'
 import { MdSettings } from 'react-icons/md'
+import { HiOutlineUser } from 'react-icons/hi'
+
 
 
 const { FormatError, AuthError, LengthError, NotFoundError } = errors
@@ -61,12 +63,14 @@ function Events() {
 
     }
     
-
     return <main className="h-full">
         <header className='h-1/6 top-0 flex justify-around items-center bg-teal-600	'>
         <Link to="/"><img src={logo} className='w-20 h-20 cursor-pointer'/></Link>
             <h1>12 MESES, 12 ACTIVIDADES</h1>
-            <h2>{user?.name}</h2>
+            <div className='flex items-center gap-1'>
+            <HiOutlineUser/>
+            <p>{user?.name}</p>
+            </div>
             <button onClick={handleSettings}><MdSettings size='1.5rem'/></button>
         </header>
         {settings && <Settings/>}

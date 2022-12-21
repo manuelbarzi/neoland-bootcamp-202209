@@ -8,6 +8,8 @@ import logo from '../img/logo.jpg'
 import retrieveUsers from '../logic/retrieveUsers'
 import UpdateUserRole from '../components/UpdateUserRole'
 import {  MdEdit } from 'react-icons/md'
+import {  HiOutlineUser } from 'react-icons/hi'
+
 
 
 
@@ -79,7 +81,11 @@ function Users() {
         <header className='h-1/6 top-0 flex justify-around items-center bg-teal-600	'>
         <Link to="/"><img src={logo} className='w-20 h-20 cursor-pointer'/></Link>
             <h1>USERS</h1>
-            <div className='border-2 border-black'>Log Out</div>
+            <div className='flex items-center gap-1'>
+            <HiOutlineUser/>
+            <p>{user?.name}</p>
+            </div>
+            
         </header>
         <div className='m-2'>
             
