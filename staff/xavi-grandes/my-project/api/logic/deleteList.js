@@ -1,5 +1,5 @@
 const { ObjectId } = require('mongodb')
-const { User, List} = require('../models')
+const { User, List } = require('../models')
 
 module.exports = function (userId, listId) {
     if (typeof userId !== 'string') throw new TypeError('userId is not a string')
@@ -21,8 +21,9 @@ module.exports = function (userId, listId) {
             if (list.user.toString() !== userId)
                 throw new Error(`list with id ${listId} does not belong to user with id ${userId}`)
 
-
-            return List.deleteOne({ _id: ObjectId(listId) })
+                // Item.deleteMany({list: ObjectId(listId)})
+            
+                return List.deleteOne({ _id: ObjectId(listId) })
         })
         .then(result => {
             const { acknowledged } = result
