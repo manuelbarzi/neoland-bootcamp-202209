@@ -20,8 +20,6 @@ module.exports = function (userId, listId) {
 
             if (list.user.toString() !== userId)
                 throw new Error(`list with id ${listId} does not belong to user with id ${userId}`)
-
-                // Item.deleteMany({list: ObjectId(listId)})
             
                 return List.deleteOne({ _id: ObjectId(listId) })
         })
