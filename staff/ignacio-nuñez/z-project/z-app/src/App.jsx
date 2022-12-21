@@ -18,19 +18,28 @@ import errorHandling from "./utils/errorHandling";
 import SearchedCurriculums from "./pages/SearchedCurriculums";
 import WorkerMatchs from "./pages/WorkerMatchs";
 import CompanyMatchs from "./pages/CompanyMatchs";
+import retrieveMatchsNotificationsAmount from "./logic/retrieveMatchsNotificationsAmount";
+import MatchsNotificationsAmount from "./components/MatchsNotificationsAmount";
 
 function App() {
   const [user, setUser] = useState()
   const [message, setMessage] = useState()
   const [level, setLevel] = useState()
+  const [matchsNotificationsAmountIntervalId, setMatchsNotificationsAmountIntervalId] = useState()
+  const [matchsNotificationsAmount, setMatchsNotificationsAmount] = useState(0)
 
   useEffect(() => {
-    if (sessionStorage.token)
+    if (sessionStorage.token) {
       retrieveUserHandler()
+
+      retrieveMatchsNotificationsHandler()
+    }
   }, [])
 
   const handleLogout = () => {
     setUser()
+
+    clearInterval(matchsNotificationsAmountIntervalId)
   }
 
   const retrieveUserHandler = () => {
@@ -49,8 +58,25 @@ function App() {
 
   const onLoggedIn = () => {
     retrieveUserHandler()
+    const intervalId = setInterval(() => {
+      retrieveMatchsNotificationsHandler()
+    }, 5000)
+
+    setMatchsNotificationsAmountIntervalId(intervalId)
   }
 
+  const retrieveMatchsNotificationsHandler = () => {
+    try {
+      retrieveMatchsNotificationsAmount(sessionStorage.token)
+        .then(amountOfNotifications => {
+          if (amountOfNotifications > 0)
+            setMatchsNotificationsAmount(amountOfNotifications)
+        })
+    } catch (error) {
+      const { errorMessage, type } = errorHandling(error)
+      showAlert(errorMessage, type)
+    }
+  }
 
   const showAlert = (message, level = 'error') => {
     setMessage(message)
@@ -76,8 +102,8 @@ function App() {
           element={sessionStorage.token ? <PublishedOffers /> : <Navigate replace to="/login"
           />}
         />}
-         {<Route path="/curriculums"
-          element={sessionStorage.token ? <PublishedCurriculums/> : <Navigate replace to="/login"
+        {<Route path="/curriculums"
+          element={sessionStorage.token ? <PublishedCurriculums /> : <Navigate replace to="/login"
           />}
         />}
         {<Route path="/user/profile"
@@ -88,30 +114,31 @@ function App() {
           element={sessionStorage.token ? <OfferDetail /> : <Navigate replace to="/login"
           />}
         />}
-          {<Route path="/curriculums/:curriculumId"
+        {<Route path="/curriculums/:curriculumId"
           element={sessionStorage.token ? <CurriculumDetail /> : <Navigate replace to="/login"
           />}
         />}
-           {<Route path="/search/offers"
+        {<Route path="/search/offers"
           element={sessionStorage.token ? <SearchedOffers /> : <Navigate replace to="/login"
           />}
         />}
-             {<Route path="/search/curriculums"
+        {<Route path="/search/curriculums"
           element={sessionStorage.token ? <SearchedCurriculums /> : <Navigate replace to="/login"
           />}
         />}
-         {<Route path="/worker/matchs"
+        {<Route path="/worker/matchs"
           element={sessionStorage.token ? <WorkerMatchs /> : <Navigate replace to="/login"
           />}
         />}
-                 {<Route path="/company/matchs"
+        {<Route path="/company/matchs"
           element={sessionStorage.token ? <CompanyMatchs /> : <Navigate replace to="/login"
           />}
         />}
 
       </Routes>
       {message && <Alert message={message} level={level} onAlertClose={closeAlert} />}
-
+      {sessionStorage.token && <MatchsNotificationsAmount matchsNotificationsAmount={matchsNotificationsAmount}
+        className="left-[55%] bottom-[5%] absolute" />}
     </Context.Provider>
   )
 }

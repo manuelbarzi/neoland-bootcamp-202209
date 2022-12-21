@@ -1,4 +1,4 @@
-const { errors: { NotFoundError, ConflictError },
+const { errors: { NotFoundError },
     validators: { stringValidator }
 } = require('com')
 const { Users, Matchs, Curriculums, Offers } = require('../models')
@@ -7,7 +7,7 @@ const { Users, Matchs, Curriculums, Offers } = require('../models')
  * 
  * @param {string} userId The user id
  */
-module.exports = function updateOffer(userId) {
+module.exports = function retrieveMatchs(userId) {
     stringValidator(userId, 'userId')
 
     return Users.findById(userId)

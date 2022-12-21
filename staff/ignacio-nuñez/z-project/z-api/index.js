@@ -24,6 +24,7 @@ const searchOffersHandler = require('./handlers/searchOffersHandler')
 const updateOfferLikesHandler = require('./handlers/updateOfferLikesHandler')
 const updateUserDislikesHandler = require('./handlers/updateUserDislikesHandler')
 const retrieveMatchsHandler = require('./handlers/retrieveMatchsHandler')
+const retrieveMatchsNotificationsAmountHandler = require('./handlers/retrieveMatchsNotificationsAmountHandler')
 
 const jsonBodyParser = require('./utils/jsonBodyParser')
 const cors = require('./utils/cors')
@@ -52,6 +53,8 @@ mongoose.connect(MONGODB_URL)
         api.patch('/curriculums/:curriculumId', jwtVerifier, jsonBodyParser, updateCurriculumHandler)
 
         api.get('/matchs', jwtVerifier, retrieveMatchsHandler)
+        api.get('/matchs/notifications', jwtVerifier, retrieveMatchsNotificationsAmountHandler)
+
 
         api.get('/search/curriculums' , jwtVerifier, searchCurriculumsHandler)
         api.get('/search/offers' , jwtVerifier, searchOffersHandler)

@@ -88,9 +88,6 @@ function WorkerMatchs() {
                                     <p className="text-xs">{format(match.offer.createDate)}</p>
                                 </Link>
                                 <hr className="w-full border-black mt-3.5" />
-                                {/* <div className='z-10 flex justify-end mt-2'>
-                                <Button className="text-md bg-green-400 w-1/2">See Details</Button>
-                            </div> */}
                                 <div className='z-10 flex justify-between gap-4 mt-2'>
                                     <Button onClick={() => dislikeOfferHandler(match.offer.id)} className="text-md bg-red-400 w-1/2">Dislike</Button>
                                     <Button className="text-md bg-green-400 w-1/2">Chat</Button>
