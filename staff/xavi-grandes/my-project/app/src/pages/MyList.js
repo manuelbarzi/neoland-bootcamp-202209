@@ -10,6 +10,7 @@ import retrieveList from "../logic/retrieveList";
 import retrieveItems from "../logic/retrieveItems";
 import updateStatus from "../logic/updateStatus";
 import totalAmount from "../logic/totalAmount";
+import BackgroundEmptyItems from "../components/BackgroundEmptyItems"
 const { FormatError, AuthError, LengthError, NotFoundError } = errors;
 
 export default function MyList() {
@@ -120,6 +121,7 @@ export default function MyList() {
     <>
       <Header listName={listName} />
       <main className="mt-[3rem] flex flex-col gap-2 items-center">
+      {items == '' && <BackgroundEmptyItems />}
         {items &&
           items.map((item) => (
             <article
