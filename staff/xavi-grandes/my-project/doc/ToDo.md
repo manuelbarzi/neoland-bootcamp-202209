@@ -5,7 +5,7 @@ Estrategia ha sido empezar con frontend
 __App__
 [x] introducir Routes de home '/', /settings y /profile
 [x] introducir Route de '/lista:NombreDeLista
-
+[x] Encriptar la contraseña con hash
 
 __Navegación__
 [x] Agregar un menú de navegación vertical clicable desde el Header
@@ -14,17 +14,20 @@ __Navegación__
 [x] Cerrar menu al clicar fuera de la pantalla o en alguno de los botones de navegación.
 
 __Listas__
-[ ] Pintar tablones de listas 
-[ ] Crear estilos 
+[x] Pintar tablones de listas 
+[x] Crear listas  
+[x] Borrar listas
 
 __lista de la compra__
-[ ] Pintar productos
-[ ] pintar botón de edición
-[ ] Editar productos
-[ ] Borrar productos
-[ ] Botón de suma y resta de cantidades
-[ ] Agregar botón checkbox para visualizar el proceso de la lista.
-[ ] Añadir un componente sumario del total de precio
+[x] Pintar items
+[x] pintar botón de edición
+[x] Crear componente de edición
+[x] Editar items
+[x] Borrar items
+[x] Botón de suma y resta de cantidades (+1, -1)
+[x] Botón de suma y resta de precios (0.5€)
+[x] Agregar botón checkbox con status para visualizar el proceso de la lista.
+[x] Añadir un sumatorio total de precio
 
 __Profile__
 [x] Introducir imagen de avatar
@@ -37,10 +40,6 @@ __Profile__
 
 __Settings__
 [x] Introducir botón toggle switch para cambiar el tema de claro a oscuro
-[ ] Pintar las pantallas en modo dark
-[ ] Conseguir que la capa menu quede por encima del toggle y este siga funcionando.
-
-
-TODO:
-[ ] Conseguir mantener la sesión para que no necesite el usuario volver a registrarse.
+[x] Pintar las pantallas en modo dark
+[x] Conseguir que la capa menu quede por encima del toggle y este siga funcionando.
 
