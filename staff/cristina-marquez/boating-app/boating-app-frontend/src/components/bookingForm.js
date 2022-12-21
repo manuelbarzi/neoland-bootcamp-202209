@@ -1,6 +1,7 @@
 import { useState } from "react";
 import createBooking from "../logic/createBooking";
 import updateBooking from "../logic/updateBooking";
+import SuccessToast from "./ui/successToast";
 import Toast from "./ui/toast";
 
 function BookingForm({ onUpdate, boats, ports, onDiscard, bookingInfo }) {
@@ -85,9 +86,7 @@ function BookingForm({ onUpdate, boats, ports, onDiscard, bookingInfo }) {
 
   return (
     <div className="flex justify-center min-w-full">
-      {isToastActive && (
-        <Toast message={toastMessage} onClose={closeToast} /*timeout={6000}*/ />
-      )}
+      {isToastActive && <Toast message={toastMessage} onClose={closeToast} />}
 
       <div className="block p-6 rounded-lg shadow-lg bg-white min-w-full">
         <form onSubmit={saveForm}>

@@ -1,10 +1,13 @@
 import updateUserSettings from "../logic/updateUserSettings";
 import Toast from "./ui/toast";
 import { useState } from "react";
+import SuccessToast from "./ui/successToast";
 
 function SettingsForm({ userInfo }) {
   const [isToastActive, setIsToastActive] = useState(false);
   const [toastMessage, setToastMessage] = useState(null);
+  const [isSuccessToastActive, setIsSuccessToastActive] = useState(false);
+  const [successToastMessage, setSuccessToastMessage] = useState(null);
   const getLocaleDate = (dateString) => {
     const dateValue = new Date(dateString);
     return dateValue.toLocaleDateString();
@@ -26,12 +29,11 @@ function SettingsForm({ userInfo }) {
       },
     };
 
-    if (form.password.value.length) {
-      userFormInfo.password = form.password.value;
-    }
-
     try {
       await updateUserSettings(userInfo._id, userFormInfo);
+      let successMessage = "Settings updated";
+      setSuccessToastMessage(successMessage);
+      setIsSuccessToastActive(true);
     } catch (error) {
       if (error.response) {
         // It's an AXIOS error
@@ -55,10 +57,20 @@ function SettingsForm({ userInfo }) {
   const closeToast = () => {
     setIsToastActive(false);
   };
+  const closeSuccessToast = () => {
+    setIsSuccessToastActive(false);
+  };
 
   return (
     <div className="flex justify-center min-w-full">
       {isToastActive && <Toast message={toastMessage} onClose={closeToast} />}
+      {isSuccessToastActive && (
+        <SuccessToast
+          message={successToastMessage}
+          onClose={closeSuccessToast}
+        />
+      )}
+
       <div className="block p-6 rounded-lg shadow-lg bg-white min-w-full">
         <form onSubmit={saveForm}>
           <div className="grid grid-cols-2 gap-4 ">
