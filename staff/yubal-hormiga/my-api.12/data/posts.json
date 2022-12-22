@@ -1,0 +1,149 @@
+[
+    {
+        "id": "post-2",
+        "user": "user-2",
+        "text": "bleh bleh bleh",
+        "date": "2022-11-27T12:18:31.429Z",
+        "visibility": "private"
+    },
+    {
+        "id": "post-3",
+        "user": "user-10",
+        "text": "bla, bla, bla",
+        "visibility": "public",
+        "date": "2022-11-21T14:59:49.871Z"
+    },
+    {
+        "id": "post-4",
+        "user": "user-10",
+        "text": "bla, bla, ble",
+        "visibility": "public",
+        "date": "2022-11-21T19:58:56.425Z"
+    },
+    {
+        "id": "post-5",
+        "user": "user-10",
+        "text": "bla, bla, ble, blublu",
+        "visibility": "public",
+        "date": "2022-11-21T19:59:15.206Z"
+    },
+    {
+        "id": "post-7",
+        "user": "user-9",
+        "text": "tolete",
+        "visibility": "private",
+        "date": "2022-11-21T20:04:00.455Z"
+    },
+    {
+        "id": "post-9",
+        "user": "user-20",
+        "text": "hola",
+        "visibility": "public",
+        "date": "2022-11-22T19:45:57.507Z"
+    },
+    {
+        "id": "post-10",
+        "user": "user-15",
+        "text": "feo",
+        "visibility": "public",
+        "date": "2022-11-22T19:49:38.370Z"
+    },
+    {
+        "id": "post-11",
+        "user": "user-21",
+        "text": "hola yubal",
+        "visibility": "private",
+        "date": "2022-11-23T10:42:14.337Z"
+    },
+    {
+        "id": "post-12",
+        "user": "user-21",
+        "text": "asdfasf",
+        "visibility": "private",
+        "date": "2022-11-23T10:42:25.991Z"
+    },
+    {
+        "id": "post-13",
+        "user": "user-21",
+        "text": "sdfasdfasdf",
+        "visibility": "public",
+        "date": "2022-11-23T10:42:39.232Z"
+    },
+    {
+        "id": "post-14",
+        "user": "user-21",
+        "text": "asdfasdfsadf",
+        "visibility": "private",
+        "date": "2022-11-23T10:42:48.009Z"
+    },
+    {
+        "id": "post-15",
+        "user": "user-21",
+        "text": "asdfasdfa",
+        "visibility": "private",
+        "date": "2022-11-23T10:46:40.766Z"
+    },
+    {
+        "id": "post-16",
+        "user": "user-22",
+        "text": "perola",
+        "visibility": "public",
+        "date": "2022-11-23T14:18:23.256Z"
+    },
+    {
+        "id": "post-17",
+        "user": "user-23",
+        "text": "yubal",
+        "visibility": "public",
+        "date": "2022-11-23T15:39:27.417Z"
+    },
+    {
+        "id": "post-18",
+        "user": "user-23",
+        "text": "pedro",
+        "visibility": "public",
+        "date": "2022-11-23T15:39:46.560Z"
+    },
+    {
+        "id": "post-19",
+        "user": "user-23",
+        "text": "okpoko",
+        "visibility": "public",
+        "date": "2022-11-23T15:41:56.911Z"
+    },
+    {
+        "id": "post-20",
+        "user": "user-15",
+        "text": "dafgsdfgdfsgdx",
+        "visibility": "public",
+        "date": "2022-11-23T15:42:18.923Z"
+    },
+    {
+        "id": "post-21",
+        "user": "user-15",
+        "text": "ssadfgsdg",
+        "visibility": "public",
+        "date": "2022-11-23T15:43:30.922Z"
+    },
+    {
+        "id": "post-22",
+        "user": "user-15",
+        "text": "tonto",
+        "visibility": "public",
+        "date": "2022-11-25T14:25:53.997Z"
+    },
+    {
+        "id": "post-23",
+        "user": "user-24",
+        "text": "hola",
+        "visibility": "public",
+        "date": "2022-11-24T08:10:18.066Z"
+    },
+    {
+        "id": "post-24",
+        "user": "user-10",
+        "text": "Estupendo compi",
+        "visibility": "public",
+        "date": "2022-11-24T15:13:54.425Z"
+    }
+]
