@@ -98,6 +98,8 @@ __TODO__
 - create unregister user logic
 - Test logic in server-side
 - Paint the screens in dark mode
+- Update text with language selector
+- Change showalert to toasters
 - ...
 
 __DOING__
@@ -107,15 +109,13 @@ __REVIEW__
 - ...
 
 __DONE__
+
 Login
 - Athenticate user email and password on login.
 
 Register
 - Create a new user on register page. (name, email, password)
 - Encrypt the password with hash.
-
-App
-- Create routes whether logged in or not.
 
 Home
 - Create a Header.
