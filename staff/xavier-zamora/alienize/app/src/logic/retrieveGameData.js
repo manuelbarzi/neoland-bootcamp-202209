@@ -38,8 +38,6 @@ export default function retrieveGameData(token) {
                 reject(new NotFoundError(error))
             } else if (status < 500){
                 reject(new UnexpectedError('client error'))
-            }else if(status >= 500){
-                reject(new TypeError('Error. please return to lauch page'))
             }
         }
 

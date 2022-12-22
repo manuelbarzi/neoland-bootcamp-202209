@@ -3,6 +3,7 @@ import retrieveGameId from '../logic/retrieveGameId'
 import randomPick from '../logic/randomPicks'
 import retrieveUser from '../logic/retrieveUser'
 import retrieveGameData from '../logic/retrieveGameData'
+import { Link } from 'react-router-dom'
 import { useContext, useEffect, useState } from 'react'
 import Context from '../components/Context'
 import { errors } from 'com'
@@ -28,8 +29,7 @@ function Pick() {
     if(game !== undefined && game?.playerTwoName !== undefined){
       randomPickHandler()
       navBattle()
-    }/*else setCount(1)
-    if(count === 1) navBattle()*/
+    }
   }
 
   const retrieveGameDataHandler = () => {
@@ -125,6 +125,7 @@ function Pick() {
   }
 
   return <main className="block h-screen w-full bg-blue-800">
+    <Link to="/Battle" className="flex p-36 text-1xl text-white justify-center content-center"><h2 className='border-solid border-2 bg-black p-4 pl-8 pr-8 inline-block inline-block animate-pulse rounded-full'>Go Game</h2></Link>
   </main>
 }
 

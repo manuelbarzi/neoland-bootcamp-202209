@@ -17,10 +17,10 @@ function attack1(userId, index) {
       const alienOneId = game.aliensPlayerOne[0].toString()
       const alienTwoId = game.aliensPlayerTwo[0].toString()
 
-      if (game.players[0]._id.toString() !== userId) {
+      if (game.players[0]._id.toString() === userId) {
         return GameAliens.findById({ _id: alienOneId })
           .then(alien => {
-
+            if(!alien) throw new TypeError('Error')
             let attack
 
             if (index === 0) attack = alien.attacks[0]
@@ -81,7 +81,7 @@ function attack1(userId, index) {
             if (attack === "Oasis") chop(alienOneId, alienTwoId, userId)
 
             //Stone
-            if (attack === "Deteachment") chop(alienOneId, alienTwoId, userId)
+            if (attack === "Detachment") chop(alienOneId, alienTwoId, userId)
             if (attack === "Stoned") chop(alienOneId, alienTwoId, userId)
             if (attack === "Stone Fusion") chop(alienOneId, alienTwoId, userId)
 
@@ -90,14 +90,13 @@ function attack1(userId, index) {
             if (attack === "Flood") chop(alienOneId, alienTwoId, userId)
             if (attack === "Rought Sea") chop(alienOneId, alienTwoId, userId)
             if (attack === "Water Punch") chop(alienOneId, alienTwoId, userId)
-
-            if (attack === "High Voltatge") chop(alienOneId, alienTwoId, userId)
-            if (attack === "Fast Flight") chop(alienOneId, alienTwoId, userId)
           })
       }
-      if (game.players[1]._id.toString() !== userId) {
+      if (game.players[1]._id.toString() === userId) {
         return GameAliens.findById({ _id: alienTwoId })
           .then(alien => {
+
+            if(!alien) throw new TypeError('Error')
 
             let attack
 
@@ -159,7 +158,7 @@ function attack1(userId, index) {
             if (attack === "Oasis") chop(alienTwoId, alienOneId, userId)
 
             //Stone
-            if (attack === "Deteachment") chop(alienTwoId, alienOneId, userId)
+            if (attack === "Detachment") chop(alienTwoId, alienOneId, userId)
             if (attack === "Stoned") chop(alienTwoId, alienOneId, userId)
             if (attack === "Stone Fusion") chop(alienTwoId, alienOneId, userId)
 
@@ -168,9 +167,6 @@ function attack1(userId, index) {
             if (attack === "Flood") chop(alienTwoId, alienOneId, userId)
             if (attack === "Rought Sea") chop(alienTwoId, alienOneId, userId)
             if (attack === "Water Punch") chop(alienTwoId, alienOneId, userId)
-
-            if (attack === "High Voltatge") chop(alienTwoId, alienOneId, userId)
-            if (attack === "Fast Flight") chop(alienTwoId, alienOneId, userId)
           })
       }
     })
