@@ -121,8 +121,6 @@ User
 - adventuresPlayed: [adventurePlayed]
   })
 
-(Array of ObjectId)
-
 Quest
 
 - creator: {
@@ -234,9 +232,8 @@ Post
 
 **BACKLOG**
 
-- share post to a user (visibility = friend)
-- filter posts by user
-- ...
+- Aventos de Grupos donde todos participan y aportan según el Combat Power
+- Objetos que limiten o permitan el avance en las DailyQuest y Adventure Steps.
 
 **TODO**
 
