@@ -216,7 +216,7 @@ Post
 - text (String, required)
 - date (Date, required)
 
-### Technologies
+## Technologies
 
 - JavaScript
 - React
