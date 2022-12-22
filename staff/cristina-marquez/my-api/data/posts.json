@@ -1,0 +1,16 @@
+[
+    {
+        "id": "post-5",
+        "user": 2,
+        "text": "sersiwrfassf",
+        "visibility": "private",
+        "date": "2022-11-18T19:27:30.936Z"
+    },
+    {
+        "id": "post-7",
+        "user": 1,
+        "text": "dfgdfg",
+        "visibility": "public",
+        "date": "2022-11-24T14:47:38.187Z"
+    }
+]
