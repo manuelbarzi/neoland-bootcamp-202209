@@ -8,6 +8,9 @@ It's the final fullstack project where the main objective is to apply everything
 
 The main idea was to mix technology with a field/subject I am really passionate about: the sea.  While thinking about this, I asked myself, if in Internet you can book in different sites the accomodation in-land, what about an app to book stays in port when sailing? And that is how Boating-app was born.
 
+![](https://media.giphy.com/media/XkqzaEcKWR0X1zUeW2/giphy.gif)
+
+
 ## Functional Description
 
 - [X] User Login
@@ -17,7 +20,6 @@ The main idea was to mix technology with a field/subject I am really passionate 
 - [X] User settings
 - [X] View main port info
 - [X] View the weather on each port
-
 
 ## Technical Description
 
@@ -34,7 +36,14 @@ The main idea was to mix technology with a field/subject I am really passionate 
 - User's boats
 - Boat Form
 
-### Data Model
+### Blocks
+
+```
+App (client-side)        API (server-side)       DB
+[React > logic > xhr] -> [Express > Mongoose] -> [Mongo]
+```
+
+### 📈 Data Model
 
 All data storage is done in MongoDB by using Mongoose.
 
@@ -90,7 +99,7 @@ Booking
 - port: (ObjectId, port id, required)
 - boat: (ObjectId, boat id, required)
 
-### Technologies
+### 🔩 Technologies
 
 - JavaScript
 - React
