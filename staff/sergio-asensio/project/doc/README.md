@@ -2,7 +2,7 @@
 
 ## Intro
 
-This app is about a mountain club, where we can join to the activities, watch the news... T
+This app is about a mountain club, where we can join to the activities, watch the news... 
 There are two kind of users, one of them is the 'user' who just can read the notices, see and join to the events..., the other one is 'admin' who can create, update and delete events, notices... they can also change the role of the other users
  
 
@@ -73,6 +73,16 @@ App (client-side)        API (server-side)       DB
 
 ## Planning
 
+__BACKLOG__
+
+- create a key user
+- apply for the federation card
+- send climbing shoes to repair
+- get club clothes
+- chat with others users to made plans
+- user finder
+
+
 __TODO__
 
 - booking timetable to use gym
@@ -82,7 +92,7 @@ __TODO__
 
 __DOING__
 
-- profile user
+- update profile user
 - ...
 
 __DONE__

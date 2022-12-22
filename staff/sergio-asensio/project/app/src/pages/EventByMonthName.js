@@ -149,24 +149,25 @@ function EventMonth() {
         {event ? <div className='mx-4 bg-slate-100'>
             <div className='flex mt-4 gap-6 justify-between'>
                 <div>
-                    <h1 className='underline'>{event.title}</h1>
+                    <h1 className='underline'><b>{event.title}</b></h1>
                     <h3>{event.body}</h3>
-                    <h3><u>Requisitos:</u> {event.requirement}</h3>
-                    <h3><u>Fecha:</u> {shortDate} </h3>
-                    <h3><u>Plazas:</u> {event.capacity}</h3>
+                    <br></br>
+                    <h3><b>Requisitos:</b> {event.requirement}</h3>
+                    <h3><b>Fecha:</b> {shortDate} </h3>
+                    <h3><b>Plazas:</b> {event.capacity}</h3>
                     {!available && <div>
                         <h3>{event.inscription = 'No more places'}</h3>
                         {enrolled && <button onClick={handleUnsignUp} className="border-2 rounded-full border-black bg-red-50 p-1 cursor-pointer m-1">Desinscribirse</button>}</div>}
-                    {event.inscription === 'close' && <div><h3>Inscrition: Close</h3></div>}
+                    {event.inscription === 'close' && <div><h3><b>Inscrition:</b> Close</h3></div>}
                     {event.inscription === 'open' && <div className='flex items-baseline'>
-                        Inscription : <div><div>
+                        <b>Inscription:</b> <div><div>
                             {!enrolled && <button onClick={handlesignUp} className="border-2 rounded-full border-black  bg-green-100 p-1 cursor-pointer m-1">Inscribirse</button>}
                             {enrolled && <button onClick={handleUnsignUp} className="border-2 rounded-full border-black  bg-red-100 p-1 cursor-pointer m-1">Desinscribirse</button>}
                         </div>
                         </div>
                     </div>}
                     -------------------------------------------
-                    {event.inscription === 'open' && <p>Plazas disponibles: {available} </p>}
+                    {event.inscription === 'open' && <p><u>Plazas disponibles:</u> {available} </p>}
                 </div>
 
                 <div><img src={event?.image} /></div>
