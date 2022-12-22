@@ -1,0 +1,191 @@
+[
+    {
+        "name": "Optimus Prime",
+        "faction": "Autobot",
+        "color": "blue",
+        "role": "Boss",
+        "image": "https://hips.hearstapps.com/es.h-cdn.co/fotoes/images/cinefilia/conoces-a-los-robots-de-transformers/optimus-prime/12868650-1-esl-ES/OPTIMUS-PRIME.jpg?resize=980:*"
+    },
+    {
+        "name": "Megatron",
+        "faction": "Decepticon",
+        "color": "gray",
+        "role": "Boss",
+        "image": "https://hips.hearstapps.com/es.h-cdn.co/fotoes/images/cinefilia/conoces-a-los-robots-de-transformers/megatron/12868734-1-esl-ES/MEGATRON.jpg?resize=980:*"
+    },
+    {
+        "name": "Bumblebee",
+        "faction": "Autobot",
+        "color": "yellow",
+        "role": "warrior",
+        "image": "https://hips.hearstapps.com/es.h-cdn.co/fotoes/images/cinefilia/conoces-a-los-robots-de-transformers/bumblebee/12868601-1-esl-ES/BUMBLEBEE.jpg?resize=980:*"
+    },
+    {
+        "name": "Ratchet",
+        "faction": "Autobot",
+        "color": "yellow",
+        "role": "support",
+        "image": "https://hips.hearstapps.com/es.h-cdn.co/fotoes/images/cinefilia/conoces-a-los-robots-de-transformers/ratchet/12868608-1-esl-ES/RATCHET.jpg?resize=980:*"
+    },
+    {
+        "name": "Ironhide",
+        "faction": "Autobot",
+        "color": "gray",
+        "role": "tank",
+        "image": "https://hips.hearstapps.com/es.h-cdn.co/fotoes/images/cinefilia/conoces-a-los-robots-de-transformers/ironhide/12868741-1-esl-ES/IRONHIDE.jpg?resize=768:*"
+    },
+    {
+        "name": "Starscream",
+        "faction": "Decepticon",
+        "color": "gray",
+        "role": "warrior",
+        "image": "https://hips.hearstapps.com/es.h-cdn.co/fotoes/images/cinefilia/conoces-a-los-robots-de-transformers/starscream/12868580-1-esl-ES/STARSCREAM.jpg?resize=980:*"
+    },
+    {
+        "name": "Frenzy",
+        "faction": "Decepticon",
+        "color": "silver",
+        "role": "scout",
+        "image": "https://hips.hearstapps.com/es.h-cdn.co/fotoes/images/cinefilia/conoces-a-los-robots-de-transformers/frenzy/12868615-1-esl-ES/FRENZY.jpg?resize=768:*"
+    },
+    {
+        "name": "Blackout",
+        "faction": "Decepticon",
+        "color": "gray",
+        "role": "tank",
+        "image": "https://hips.hearstapps.com/es.h-cdn.co/fotoes/images/cinefilia/conoces-a-los-robots-de-transformers/blackout/12868622-1-esl-ES/BLACKOUT.jpg?resize=980:*"
+    },
+    {
+        "name": "Bonecrusher",
+        "faction": "Decepticon",
+        "color": "brown",
+        "role": "warrior",
+        "image": "https://hips.hearstapps.com/es.h-cdn.co/fotoes/images/cinefilia/conoces-a-los-robots-de-transformers/bonecrusher/12868915-1-esl-ES/Bonecrusher.jpg?resize=980:*"
+    },
+    {
+        "name": "The Fallen",
+        "faction": "Decepticon",
+        "color": "red",
+        "role": "boss",
+        "image": "https://hips.hearstapps.com/es.h-cdn.co/fotoes/images/cinefilia/conoces-a-los-robots-de-transformers/the-fallen/12868643-1-esl-ES/THE-FALLEN.jpg?resize=980:*"
+    },
+    {
+        "name": "Wheelie",
+        "faction": "Autobot",
+        "color": "blue",
+        "role": "scout",
+        "image": "https://hips.hearstapps.com/es.h-cdn.co/fotoes/images/cinefilia/conoces-a-los-robots-de-transformers/wheelie/12868636-1-esl-ES/WHEELIE.jpg?resize=980:*"
+    },
+    {
+        "name": "Soundwave",
+        "faction": "Decepticon",
+        "color": "blue",
+        "role": "support",
+        "image": "https://hips.hearstapps.com/es.h-cdn.co/fotoes/images/cinefilia/conoces-a-los-robots-de-transformers/soundwave/12868587-1-esl-ES/SOUNDWAVE.jpg?resize=980:*"
+    },
+    {
+        "name": "Sideswipe",
+        "faction": "Autobot",
+        "color": "gray",
+        "role": "assassin",
+        "image": "https://hips.hearstapps.com/es.h-cdn.co/fotoes/images/cinefilia/conoces-a-los-robots-de-transformers/sideswipe/12868692-1-esl-ES/SIDESWIPE.jpg?resize=980:*"
+    },
+    {
+        "name": "Scalpel",
+        "faction": "Decepticon",
+        "color": "gray",
+        "role": "support",
+        "image": "https://hips.hearstapps.com/es.h-cdn.co/fotoes/images/cinefilia/conoces-a-los-robots-de-transformers/scalpel/12868678-1-esl-ES/SCALPEL.jpg?resize=980:*"
+    },
+    {
+        "name": "Mudflap",
+        "faction": "Autobot",
+        "color": "green",
+        "role": "scout",
+        "image": "https://hips.hearstapps.com/es.h-cdn.co/fotoes/images/cinefilia/conoces-a-los-robots-de-transformers/mudflap-y-skids/12868566-1-esl-ES/MUDFLAP-Y-SKIDS.jpg?resize=980:*"
+    },
+    {
+        "name": "Skids",
+        "faction": "Autobot",
+        "color": "orange",
+        "role": "scout",
+        "image": "https://hips.hearstapps.com/es.h-cdn.co/fotoes/images/cinefilia/conoces-a-los-robots-de-transformers/mudflap-y-skids/12868566-1-esl-ES/MUDFLAP-Y-SKIDS.jpg?resize=980:*"
+    },
+    {
+        "name": "Arcee",
+        "faction": "Autobot",
+        "color": "purple",
+        "role": "assassin",
+        "image": "https://hips.hearstapps.com/es.h-cdn.co/fotoes/images/cinefilia/conoces-a-los-robots-de-transformers/arcee-chromia-y-elita-on/12868552-1-esl-ES/Arcee-Chromia-y-Elita-on.jpg?resize=980:*"
+    },
+    {
+        "name": "Chromia",
+        "faction": "Autobot",
+        "color": "pink",
+        "role": "assassin",
+        "image": "https://hips.hearstapps.com/es.h-cdn.co/fotoes/images/cinefilia/conoces-a-los-robots-de-transformers/arcee-chromia-y-elita-on/12868552-1-esl-ES/Arcee-Chromia-y-Elita-on.jpg?resize=980:*"
+    },
+    {
+        "name": "Elita-on",
+        "faction": "Autobot",
+        "color": "purple",
+        "role": "assassin",
+        "image": "https://hips.hearstapps.com/es.h-cdn.co/fotoes/images/cinefilia/conoces-a-los-robots-de-transformers/arcee-chromia-y-elita-on/12868552-1-esl-ES/Arcee-Chromia-y-Elita-on.jpg?resize=980:*"
+    },
+    {
+        "name": "Rampage",
+        "faction": "Decepticon",
+        "color": "orange",
+        "role": "demolition",
+        "image": "https://hips.hearstapps.com/es.h-cdn.co/fotoes/images/cinefilia/conoces-a-los-robots-de-transformers/rampage/12868720-1-esl-ES/RAMPAGE.jpg?resize=980:*"
+    },
+    {
+        "name": "Demolishor",
+        "faction": "Decepticon",
+        "color": "red",
+        "role": "demolition",
+        "image": "https://hips.hearstapps.com/es.h-cdn.co/fotoes/images/cinefilia/conoces-a-los-robots-de-transformers/demolishor/12868699-1-esl-ES/DEMOLISHOR.jpg?resize=980:*"
+    },
+    {
+        "name": "Devastator",
+        "faction": "Decepticon",
+        "color": "red",
+        "role": "demolition",
+        "image": "https://hips.hearstapps.com/es.h-cdn.co/fotoes/images/cinefilia/conoces-a-los-robots-de-transformers/devastator/12869002-1-esl-ES/Devastator.jpg?resize=980:*"
+    },
+    {
+        "name": "Wheeljack",
+        "faction": "Autobot",
+        "color": "blue",
+        "role": "support",
+        "image": "https://hips.hearstapps.com/es.h-cdn.co/fotoes/images/cinefilia/conoces-a-los-robots-de-transformers/wheeljack/12868671-1-esl-ES/WHEELJACK.jpg?resize=980:*"
+    },
+    {
+        "name": "Sentinel Prime",
+        "faction": "Autobot",
+        "color": "red",
+        "role": "Boss",
+        "image": "https://hips.hearstapps.com/es.h-cdn.co/fotoes/images/cinefilia/conoces-a-los-robots-de-transformers/sentinel-prime/12868664-1-esl-ES/SENTINEL-PRIME.jpg?resize=980:*"
+    },
+    {
+        "name": "Laserbreak",
+        "faction": "Decepticon",
+        "color": "pink",
+        "role": "assassin",
+        "image": "https://hips.hearstapps.com/es.h-cdn.co/fotoes/images/cinefilia/conoces-a-los-robots-de-transformers/laserbreak/12868706-1-esl-ES/LASERBREAK.jpg?resize=980:*"
+    },
+    {
+        "name": "Brains",
+        "faction": "Autobot",
+        "color": "blue",
+        "role": "scout",
+        "image": "https://hips.hearstapps.com/es.h-cdn.co/fotoes/images/cinefilia/conoces-a-los-robots-de-transformers/brains/12868629-1-esl-ES/BRAINS.jpg?resize=980:*"
+    },
+    {
+        "name": "Igor",
+        "faction": "Decepticon",
+        "color": "green",
+        "role": "scout",
+        "image": "https://hips.hearstapps.com/es.h-cdn.co/fotoes/images/cinefilia/conoces-a-los-robots-de-transformers/igor/12868713-1-esl-ES/IGOR.jpg?resize=980:*"
+    }
+]

@@ -1,0 +1,102 @@
+[
+    {
+        "id": "user-1",
+        "name": "Hector",
+        "surname": "Huerta",
+        "direction": "Almendros 26",
+        "postal": "28979",
+        "barrio": "Nuevo",
+        "email": "hector@huerta.com",
+        "password": "123123123"
+    },
+    {
+        "id": "user-2",
+        "name": "Javier",
+        "surname": "Reboul",
+        "direction": "magnolios",
+        "postal": "28979",
+        "barrio": "nuevo",
+        "email": "javier@reboul.com",
+        "password": "123123123"
+    },
+    {
+        "id": "user-3",
+        "name": "Cristian",
+        "surname": "Varela",
+        "direction": "cruces 21",
+        "postal": "28979",
+        "barrio": "centro",
+        "email": "cristian@varela.com",
+        "password": "123123123"
+    },
+    {
+        "id": "user-4",
+        "name": "Armando",
+        "surname": "Alonso",
+        "direction": "cruces 20",
+        "postal": "28979",
+        "barrio": "centro",
+        "email": "armando@alonso.com",
+        "password": "123123123"
+    },
+    {
+        "id": "user-5",
+        "name": "Juanjo",
+        "surname": "Gonzalez",
+        "direction": "tejar 20",
+        "postal": "28979",
+        "barrio": "centro",
+        "email": "juanjo@gonzalez.com",
+        "password": "123123123"
+    },
+    {
+        "id": "user-6",
+        "name": "Felipe",
+        "surname": "Medina",
+        "direction": "almendros 30",
+        "postal": "28979",
+        "barrio": "pradera",
+        "email": "felipe@medina.com",
+        "password": "123123123"
+    },
+    {
+        "id": "user-7",
+        "name": "Ivan",
+        "surname": "Vozmediano",
+        "direction": "perales 10",
+        "postal": "28979",
+        "barrio": "centro",
+        "email": "ivan@vozmediano.com",
+        "password": "123123123"
+    },
+    {
+        "id": "user-8",
+        "name": "Saul",
+        "surname": "Dominguez",
+        "direction": "cruces 20",
+        "postal": "28979",
+        "barrio": "centro",
+        "email": "saul@dominguez.com",
+        "password": "123123123"
+    },
+    {
+        "id": "user-9",
+        "name": "Willian",
+        "surname": "Oliveira",
+        "direction": "Brasil",
+        "postal": "22222",
+        "barrio": "Brasilia",
+        "email": "william@Oliveira.com",
+        "password": "123123123"
+    },
+    {
+        "id": "user-10",
+        "name": "Marcela ",
+        "surname": "Lima",
+        "direction": "C/ Oslo, 53",
+        "postal": "28922",
+        "barrio": "",
+        "email": "marce@lima.com",
+        "password": "123123123"
+    }
+]
