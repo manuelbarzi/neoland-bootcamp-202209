@@ -224,9 +224,10 @@ Post
 - Express
 - Mongo
 - Mongoose
+- Insomnia
 - Tailwind
 - Photoshop
-- ...
+- VsCode
 
 ## Planning
 
