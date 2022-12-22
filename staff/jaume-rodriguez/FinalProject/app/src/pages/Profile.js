@@ -1,8 +1,12 @@
 import { useState, useEffect } from 'react'
 import { format } from 'timeago.js'
+import { useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import retrieveAUser from '../logic/retrieveAUser'
 import retrievePostsFromUser from '../logic/retrievePostsFromUser'
-import { useParams } from 'react-router-dom'
+import buttonBack from '../img/icon-back.png';
+import buttonHome from '../img/icon-home.png';
+import buttonCreatePost from '../img/button-create-post.png';
 
 function Profile() {
 
@@ -30,42 +34,57 @@ function Profile() {
     return (
         <>
             {/* POSTS PANEL*/}
-            <section className="flex z-1 justify-center place-content-start flex-wrap bg-slate-200 min-h-screen">
-                <div className="flex flex-row justify-center content-center z-0 p-8 bg-sky-100 border-sky-900 border-b border-solid w-full h-16">
-                    <span className="self-center font-semibold text-4xl text-sky-800">
-                        {user ? user.name : 'home'} Profile
-                    </span>
-                </div>
-                {/*POSTS*/}
-                <div className="flex flex-col items-center m-4 gap-x-4">
-                    <section className="flex flex-col items-center bg-white p-4 w-80 font-semibold bg-inherit text-white">
-                        <div className="flex flex-row w-full">
-                            <span className="align-self-start text-lg text-black text-base font-normal">Tus posts</span>
-                            <h1 className="ml-auto text-black self-end material-symbols-outlined font-normal">
-                                more_horiz
-                            </h1>
+            <section className="min-h-screen flex flex-col bg-[#191919]">
+                <div className="relative flex flex-grow font-alata h-full flex-col justify-center items-center bg-[url('/src/img/bg-settings.jpg')] bg-no-repeat bg-center">
+                    {/*POSTS*/}
+                    <div className="flex flex-col justify-center gap-[2rem]">
+                        <header className='text-white flex flex-row items-start justify-center'>
+                            <Link to="/chat">
+                                <img
+                                    className='cursor-pointer absolute -ml-[3rem] mt-[0.9rem]'
+                                    src={buttonBack}
+                                    alt="home" />
+                            </Link>
+                            <span className=' text-orange-200 text-[2rem]'>{user?.name}</span>
+                        </header>
+                        {/* POST*/}
+                        {posts &&
+                            <section className="flex flex-col h-[27rem] ml-[1.3rem] bg-inherit justify-start items-center overflow-y-scroll scrollbar overscroll-contain ">
+                                {posts.map(post =>
+                                    <article
+                                        key={post.id}
+                                        className="h-[27rem] w-[21.813rem] p-4 flex justify-start flex-col mb-4 bg-inherit text-white">
+                                        <span
+                                            className='-mt-2 pb-2 text-orange-200'>{user.name}
+                                        </span>
+                                        <p
+                                            className="flex flex-col text-justify p-4 text-sm border-black rounded border-t bg-[#2d2b2b] text-gray-300 font-normal py-4 mb-2">{post.text}
+                                        </p>
+                                        <div className="flex">
+                                            <time className='self-end ml-auto px-2 text-sm text-gray-400'>
+                                                {format(post.date)}
+                                            </time>
+                                        </div>
+                                    </article>)}
+                            </section>}
+                        <div className='flex flex-col items-center mt-[1rem]'>
+                            <Link to="/">
+                                <img
+                                    className='cursor-pointer -ml-[1rem] absolute z-10'
+                                    src={buttonHome}
+                                    alt="buttonHome" />
+                            </Link>
+                            <img
+                                className='opacity-0'
+                                src={buttonCreatePost}
+                                alt="buttonCreatePost"
+                            />
                         </div>
-                        <hr className="w-full mx-auto my-2 border-black" />
-                    </section>
-                    {/* POST*/}
-                    {posts && <div className="flex flex-col items-center">
-                        {posts.map(post =>
-                            <article
-                                key={post.id}
-                                className="w-[21rem] p-4 flex justify-center flex-col mb-4 rounded border-solid border-sky-700 border-t border-b-4 border-x bg-sky-100">
-                                <p className='pb-2'><strong>{user.name}</strong></p>
-                                <p
-                                    className="flex flex-col text-justify p-4 text-sm border-sky-700 border-t bg-sky-100 text-black text-[15px] font-normal py-4">{post.text}</p>
-                                <div className="flex self-end w-full">
-                                    <time className='self-end ml-auto px-2 text-slate-600'>{format(post.date)}</time>
-                                </div>
-                            </article>)}
-                    </div>}
+                    </div>
                 </div>
             </section >
         </>
     );
-
 }
 
 export default Profile

@@ -6,16 +6,23 @@ import Settings from './pages/Settings'
 import Adventures from './pages/Adventures'
 import Adventure from './pages/Adventure'
 import Ranking from './pages/Ranking'
+import Chat from './pages/Chat'
 import Community from './pages/Community'
 import Profile from './pages/Profile'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import Context from './components/Context'
+import Alert from './components/Alert'
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(!!sessionStorage.token)
   const [inputNameValue, setInputNameValue] = useState('')
   const [inputEmailValue, setInputEmailValue] = useState('')
   const [inputPasswordValue, setInputPasswordValue] = useState('')
+  const [message, setMessage] = useState()
+
+  const showAlert = (message = 'error') => {
+    setMessage(message)
+  }
 
 
   // LOGIN & LOGOUT
@@ -40,7 +47,7 @@ function App() {
     setInputPasswordValue(newValue)
   }
 
-  return <Context.Provider value={{ login, logout }}>
+  return <Context.Provider value={{ login, logout, showAlert }}>
     {loggedIn ? <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/settings" element={<Settings />} />
@@ -48,6 +55,7 @@ function App() {
       <Route path="/adventures" element={<Adventures />} />
       <Route path="/adventures/:adventureId" element={<Adventure />} />
       <Route path="/ranking" element={<Ranking />} />
+      <Route path="/chat" element={<Chat />} />
       <Route path="/profile/:targetUserId" element={<Profile />} />
       <Route path="*" element={<Navigate replace to="/" />} />
     </Routes>
@@ -67,6 +75,7 @@ function App() {
           onInputPasswordValue={handleInputPasswordValue} />} />
         <Route path="*" element={<Navigate replace to="/login" />} />
       </Routes>}
+    {message && <Alert message={message} />}
   </Context.Provider>
 }
 

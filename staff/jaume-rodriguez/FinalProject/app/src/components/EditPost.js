@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react'
 import updatePost from '../logic/updatePost'
 import retrieveUser from '../logic/retrieveUser';
 import retrievePost from '../logic/retrievePost'
-import Button from './Button'
+import bgEditPost from '../img/bg-edit-post.png';
+import buttonUpdatePost from '../img/button-update-post.png';
+import buttonCancel from '../img/button-cancel.png';
 
 function EditPost({ onUpdated, onClose, postId }) {
     const [user, setUser] = useState()
@@ -27,10 +29,10 @@ function EditPost({ onUpdated, onClose, postId }) {
     const submitUpdatePost = event => {
         event.preventDefault()
 
-        const { text: { value: text }, visibility: { value: visibility } } = event.target
+        const { text: { value: text } } = event.target
 
         try {
-            updatePost(sessionStorage.token, postId, text, visibility)
+            updatePost(sessionStorage.token, postId, text)
                 .then(() => onUpdated())
                 .catch(error => alert(error.message))
 
@@ -39,27 +41,36 @@ function EditPost({ onUpdated, onClose, postId }) {
         }
     }
 
-    return <div className="bg-[#aaaa] fixed top-0 h-full w-full flex flex-col justify-start items-center overflow-hidden" onClick={onClose}>
-        <div className="w-[21rem] p-3 my-3 flex justify-center flex-col rounded-xl border-solid border-sky-700 border-t border-b-4 border-x bg-slate-100 mt-[20rem]" onClick={event => event.stopPropagation()}>
-            <div className="flex w-full place-content-center">
-                <p className="fixed ml-auto my-[0.2rem] font-semibold">Edit Post</p>
-                <button className="hover:bg-slate-300 ml-auto rounded-2xl p-1 text-[1.4rem] text-black font-semibold material-symbols-outlined" onClick={onClose}>close</button>
-            </div>
-
-            <form className="flex flex-col gap-2" onSubmit={submitUpdatePost}>
+    return <div className="bg-[#191919]/75 fixed left-0 top-0 h-full w-full flex flex-col justify-center items-center overflow-hidden">
+        <div className="flex flex-col items-center justify-center -mt-[1.5rem]" onClick={event => event.stopPropagation()}>
+            <img
+                className=''
+                src={bgEditPost}
+                alt="bgEditPost" />
+            <form className="flex flex-col items-center " onSubmit={submitUpdatePost}>
                 <textarea
+                    name='text'
                     type="text"
-                    name="text"
+                    placeholder={"What's in your mind, " + (user?.name) + " ?"}
                     id="text"
-                    placeholder={"What's in your mind, " + (user ? user.name : "") + " ?"}
-                    rows="3"
-                    className=" placeholder:text-slate-700 flex flex-col text-justify p-4 text-sm border-sky-700 border bg-sky-200 text-black text-[15px] font-normal py-4 mt-3"
-                    defaultValue={post?.text}></textarea>
-                <select id="visibility" name="visibility" defaultValue={post?.visibility} className="text-black bg-inherit self-start font-semibold text-sky-700">
-                    <option value="public">Anyone can see it</option>
-                    <option value="private">Only friends can see it</option>
-                </select>
-                <Button>Update</Button>
+                    title="Please enter at least 1 character"
+                    defaultValue={post?.text}
+                    className="px-4 py-2 h-[10rem] w-[17rem] bg-inherit text-white text-center text-sm rounded-xl autofill:bg-black absolute -mt-[17.5rem] ml-[0.4rem] resize-none scrollbar"
+                />
+                <section className='flex flex-row absolute justify-center gap-x-3 -mt-[5.5rem]'>
+                    <img
+                        className="cursor-pointer"
+                        src={buttonCancel}
+                        alt="buttonCancel"
+                        onClick={onClose}
+                    />
+                    <button className=''>
+                        <img
+                            className="cursor-pointer"
+                            src={buttonUpdatePost}
+                            alt="buttonCreateAdventure" />
+                    </button>
+                </section>
             </form>
         </div>
     </div>

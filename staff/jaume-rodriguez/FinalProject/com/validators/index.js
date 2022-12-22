@@ -1,5 +1,15 @@
 module.exports = {
     validateEmail: require('./validateEmail'),
     validatePassword: require('./validatePassword'),
-    validateName: require('./validateName')
+    validateName: require('./validateName'),
+    validateTitle: require('./validateTitle'),
+    validateToken: require('./validateToken'),
+    validateIsMainAdventure: require('./validateIsMainAdventure'),
+    validateUserId: require('./validateUserId'),
+    validateAdventureId: require('./validateAdventureId'),
+    validateText: require('./validateText'),
+    validateIsMainQuest: require('./validateIsMainQuest'),
+    validatePostId: require('./validatePostId'),
+    validateQuestId: require('./validateQuestId'),
+    validateTargetUserId: require('./validateTargetUserId'),
 }

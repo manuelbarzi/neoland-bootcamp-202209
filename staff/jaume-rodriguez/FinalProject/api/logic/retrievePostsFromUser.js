@@ -1,24 +1,26 @@
 const { User, Post } = require('../models')
+const {
+    errors: { NotFoundError },
+    validators: { validateUserId, validateTargetUserId }
+} = require('com')
 
 function retrievePostsFromUser(userId, targetUserId) {
-    if (typeof userId !== 'string') throw new TypeError('userId is not a string')
-    if (!userId.length) throw new Error('userId is empty')
-    if (typeof targetUserId !== 'string') throw new TypeError('targetUserId is not a string')
-    if (!targetUserId.length) throw new Error('targetUserId is empty')
+    validateUserId(userId)
+    validateTargetUserId(targetUserId)
 
     return User.findById(userId).select('-password').lean()
         .then(user => {
-            if (!user) throw new Error(`user with id ${userId} does not exist`)
+            if (!user) throw new NotFoundError('User not registered')
 
             return User.findById(targetUserId).select('-password').lean()
         })
         .then(targetUser => {
             if (!targetUser)
-                throw new Error(`target user with id ${userId} does not exist`)
+                throw new NotFoundError('The TargetUser does not exist')
 
-            return Post.find({ user: targetUserId, visibility: 'public' })
+            return Post.find({ user: targetUserId })
                 .sort({ date: -1 })
-                .select('-__v -visibility')
+                .select('-__v')
                 .lean()
         })
 }

@@ -1,15 +1,17 @@
 const { User } = require('../models')
+const {
+    errors: { NotFoundError },
+    validators: { validatePassword, validateUserId }
+} = require('com')
 
 module.exports = function (userId, newPassword) {
-    if (!userId.length) throw new Error('userId is empty')
-    if (typeof userId !== 'string') throw new TypeError('userId is not a string')
-    if (!newPassword.length) throw new Error('Password is empty')
-    if (typeof newPassword !== 'string') throw new TypeError('Password is not a string')
+    validateUserId(userId)
+    validatePassword(newPassword)
 
     return User.findById(userId)
         .then(user => {
             if (!user)
-                throw new Error(`user with id ${userId} does not exist`)
+                throw new NotFoundError('User not registered')
 
             return User.updateOne({ _id: userId }, { $set: { password: newPassword } })
         })

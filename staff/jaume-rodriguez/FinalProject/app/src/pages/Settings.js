@@ -38,18 +38,14 @@ function Settings() {
         <div className="min-h-screen flex flex-col bg-[#191919]">
             <div className="relative flex flex-grow font-alata h-full flex-col  justify-center items-center bg-[url('/src/img/bg-settings.jpg')] bg-no-repeat bg-center">
                 <div className="flex flex-col justify-center w-96 h-[42rem] gap-[9.3rem] px-6 py-6">
-                    <header className='text-white flex flex-col mt-[0.5rem] '>
+                    <header className='text-white flex flex-row items-start justify-center '>
                         <Link to="/">
                             <img
-                                className='absolute z-10 -mt-[0.1rem] ml-[0.3rem] hover:ml-[0.1rem] duration-100 cursor-pointer'
+                                className='cursor-pointer absolute -ml-[3rem] mt-[0.9rem]'
                                 src={buttonBack}
                                 alt="back" />
-                            <img
-                                className='absolute -mt-[1rem] ml-[18.4rem] pt-1 cursor-pointer'
-                                src={buttonHome}
-                                alt="home" />
                         </Link>
-                        <span className='text-[2rem] ml-[3rem] -mt-[1rem]'>Settings</span>
+                        <span className='text-gray-300 text-[2rem]'>Settings</span>
                     </header>
                     <section className='flex flex-col items-center gap-4'>
                         <button

@@ -1,10 +1,11 @@
+import { errors, validators } from 'com'
+const { FormatError, ConflictError, LengthError, UnexpectedError } = errors
+const { validateTitle, validateToken, validateIsMainAdventure } = validators
+
 function createAdventure(token, title, isMainAdventure) {
-    if (typeof token !== 'string') throw new TypeError('token is not a string')
-    if (!token.length) throw new Error('token is empty')
-    if (typeof title !== 'string') throw new TypeError('title is not a string')
-    if (!title.length) throw new Error('title is empty')
-    if (typeof isMainAdventure !== 'string') throw new TypeError('isMainAdventure is not a string')
-    if (!isMainAdventure.length) throw new Error('isMainAdventure is empty')
+    validateToken(token)
+    validateTitle(title)
+    validateIsMainAdventure(isMainAdventure)
 
     return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest()
@@ -12,19 +13,33 @@ function createAdventure(token, title, isMainAdventure) {
         xhr.onload = () => {
             const { status, responseText: json } = xhr
 
-            if (status >= 500) {
+            if (status === 201)
+                resolve()
+            else if (status === 400) {
                 const { error } = JSON.parse(json)
 
-                reject(new Error(error))
+                if (error.includes('is not a'))
+                    reject(new TypeError(error))
+                else if (error.includes('empty'))
+                    reject(new FormatError(error))
+                else if (error.includes('valid') || error.includes('spaces'))
+                    reject(new FormatError(error))
+                else if (error.includes('length'))
+                    reject(new LengthError(error))
+            } else if (status === 409) {
+                const { error } = JSON.parse(json)
 
-                return
-            }
+                reject(new ConflictError(error))
+            } else if (status < 500)
+                reject(new UnexpectedError('client error'))
+            else
+                reject(new UnexpectedError('server error'))
             resolve()
         }
 
         xhr.onerror = () => reject(new Error('connection error'))
 
-        xhr.open('POST', 'http://localhost/adventure')
+        xhr.open('POST', `${process.env.REACT_APP_API_URL}/adventure`)
         xhr.setRequestHeader('Authorization', `Bearer ${token}`)
         xhr.setRequestHeader('Content-Type', 'application/json')
 

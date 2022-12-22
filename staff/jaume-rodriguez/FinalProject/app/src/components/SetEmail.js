@@ -40,7 +40,7 @@ function SetEmail({ onClose }) {
         }
     };
     return (
-        <section className="bg-[#191919]/75 fixed left-0 top-0 h-full w-full flex flex-col justify-center items-center overflow-hidden" onClick={onClose}>
+        <section className="bg-[#191919]/75 fixed left-0 top-0 h-full w-full flex flex-col justify-center items-center overflow-hidden">
             <div className="flex flex-col justify-center" onClick={event => event.stopPropagation()}>
                 <form className="flex w-full flex-col justify-center" onSubmit={handleUserEmailSubmit}>
                     <div className='flex '>

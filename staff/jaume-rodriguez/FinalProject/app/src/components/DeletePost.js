@@ -1,8 +1,14 @@
+import { useState } from 'react'
 import deletePost from '../logic/deletePost'
-import Button from './Button'
+import buttonDelete from '../img/button-delete.png';
+import buttonDeleteActive from '../img/button-delete-active.png';
+import buttonCancel from '../img/button-cancel.png';
+import bgDeletePost from '../img/bg-delete-post.png';
 
 function DeletePost({ postId, onDeleted, onClose }) {
+    const [hoverButtonDelete, setHoverButtonDelete] = useState(false)
     const confirmDeletePost = event => {
+
         event.preventDefault()
 
         try {
@@ -15,17 +21,26 @@ function DeletePost({ postId, onDeleted, onClose }) {
         }
     }
 
-    return <div className="bg-[#aaaa] fixed top-0 h-full w-full flex flex-col justify-start items-center overflow-hidden" onClick={onClose}>
-        <div className="w-[21rem] p-3 flex justify-center flex-col rounded-xl border-solid border-sky-700 border-t border-b-4 border-x bg-slate-100 mt-[20rem]" onClick={event => event.stopPropagation()}>
-            <div className='p-2'>
-                <div className='flex flex-col'>
-                    <p >Are you sure you want to permanently remove this comment from Community?</p>
-                    <div className='flex flex row self-end mt-4 gap-2'>
-                        <Button onClick={onClose}>Cancel</Button>
-                        <Button onClick={confirmDeletePost}>Delete</Button>
-                    </div>
-                </div>
-            </div>
+    return <div className="bg-[#191919]/75 fixed left-0 top-0 h-full w-full flex flex-col justify-center items-center overflow-hidden">
+        <div className="flex flex-col items-center" onClick={event => event.stopPropagation()}>
+            <img
+                className=''
+                src={bgDeletePost}
+                alt="bgDeletePost" />
+            <section className='flex flex row absolute justify-center mt-[7.2rem] gap-x-3'>
+                <img
+                    onClick={onClose}
+                    className='cursor-pointer'
+                    src={buttonCancel}
+                    alt="cancel" />
+                <img
+                    onClick={confirmDeletePost}
+                    className='cursor-pointer'
+                    onMouseEnter={() => setHoverButtonDelete(true)}
+                    onMouseLeave={() => setHoverButtonDelete(false)}
+                    src={hoverButtonDelete ? buttonDeleteActive : buttonDelete}
+                    alt="deleteConfirm" />
+            </section>
         </div>
     </div>
 }

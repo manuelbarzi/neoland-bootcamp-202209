@@ -10,12 +10,6 @@ module.exports = new Schema({
         type: String,
         required: true
     },
-    visibility: {
-        type: String,
-        enum: ['public', 'private'],
-        default: 'public',
-        required: true
-    },
     date: {
         type: Date,
         required: true

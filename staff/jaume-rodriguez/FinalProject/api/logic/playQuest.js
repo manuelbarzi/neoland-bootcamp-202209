@@ -1,17 +1,19 @@
 const { User, Quest, QuestPlayed } = require("../models")
 const { GAME_CONSTANTS } = require("../shared");
+const {
+    errors: { NotFoundError },
+    validators: { validateUserId, validateQuestId }
+} = require('com')
 
 function playQuest(userId, questId) {
-    if (typeof userId !== 'string') throw new TypeError('userId is not a string')
-    if (!userId.length) throw new Error('userId is empty')
-    if (typeof questId !== 'string') throw new TypeError('questId is not a string')
-    if (!questId.length) throw new Error('questId is empty')
+    validateUserId(userId)
+    validateQuestId(questId)
 
     let foundUser = null
     return User.findById(userId)
         .then(user => {
             if (!user) {
-                throw new Error(`user with id ${userId} does not exist`)
+                throw new NotFoundError('User not registered')
             }
             foundUser = user
 
@@ -19,7 +21,7 @@ function playQuest(userId, questId) {
         })
         .then(quest => {
             if (!quest) {
-                throw new Error(`quest with id ${quest} does not exist`)
+                throw new NotFoundError('Quest does not exist')
             }
 
             foundUser.gold += 100

@@ -53,7 +53,7 @@ function SetName({ onClose, onCreated, adventureId }) {
                             alt="buttonCancel"
                             onClick={onClose}
                         />
-                        <button>
+                        <button className=''>
                             <img
                                 onMouseEnter={() => setHoverButtonCreateAdventure(true)}
                                 onMouseLeave={() => setHoverButtonCreateAdventure(false)}

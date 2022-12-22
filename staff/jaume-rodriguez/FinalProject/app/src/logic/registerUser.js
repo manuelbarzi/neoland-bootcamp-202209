@@ -44,7 +44,7 @@ function registerUser(name, email, password) {
 
         xhr.onerror = () => reject(new Error('connection error'))
 
-        xhr.open('POST', 'http://localhost/users')
+        xhr.open('POST', `${process.env.REACT_APP_API_URL}/users`)
         xhr.setRequestHeader('Content-Type', 'application/json')
 
         const payload = { name, email, password }

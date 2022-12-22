@@ -3,6 +3,7 @@ const {
     validators: { validateEmail, validatePassword }
 } = require('com')
 const { User } = require('../models')
+const { compare } = require('bcryptjs')
 
 function authenticateUser(email, password) {
     validateEmail(email)
@@ -13,10 +14,13 @@ function authenticateUser(email, password) {
             if (!user)
                 throw new NotFoundError('user not registered')
 
-            if (user.password !== password)
-                throw new AuthError('wrong password')
+            return compare(password, user.password)
+                .then(match => {
+                    if (!match)
+                        throw new AuthError('wrong password')
 
-            return user.id
+                    return user.id
+                })
         })
 }
 

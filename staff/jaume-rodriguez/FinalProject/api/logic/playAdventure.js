@@ -1,23 +1,28 @@
 const { User, Adventure, AdventurePlayed } = require("../models")
+const {
+    errors: { NotFoundError },
+    validators: { validateUserId, validateAdventureId }
+} = require('com')
 
 function playAdventure(userId, adventureId) {
-    if (typeof userId !== 'string') throw new TypeError('userId is not a string')
-    if (!userId.length) throw new Error('userId is empty')
-    if (typeof adventureId !== 'string') throw new TypeError('adventureId is not a string')
-    if (!adventureId.length) throw new Error('adventureId is empty')
+    validateUserId(userId)
+    validateAdventureId(adventureId)
 
+    let foundCreator = null
     let foundUser = null
     return User.findById(userId)
         .then(user => {
             if (!user)
-                throw new Error(`user with id ${userId} does not exist`)
+                throw new NotFoundError('User not registered')
+
             foundUser = user
             return Adventure.findById(adventureId)
         })
+
         .then(adventure => {
             if (!adventure)
-                throw new Error(`adventure with id ${adventureId} does not exist`)
-
+                throw new NotFoundError('Adventure does not exist')
+            foundCreator = adventure
             let adventurePlayed = foundUser.adventuresPlayed.find(adventurePlayed => adventurePlayed.adventure.toString() === adventureId)
 
             if (adventurePlayed === undefined) {

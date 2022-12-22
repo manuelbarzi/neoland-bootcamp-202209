@@ -1,8 +1,10 @@
+import { errors, validators } from 'com'
+const { FormatError, ConflictError, LengthError, UnexpectedError } = errors
+const { validateToken, validateName } = validators
+
 function updateUserName(newName, token) {
-    if (typeof token !== 'string') throw new TypeError('token is not a string')
-    if (!token.length) throw new Error('token is empty')
-    if (typeof newName !== 'string') throw new Error('name is not a string')
-    if (!newName.length) throw new Error('newName is empty')
+    validateToken(token)
+    validateName(newName)
 
     return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest()
@@ -10,20 +12,31 @@ function updateUserName(newName, token) {
         xhr.onload = () => {
             const { status, responseText: json } = xhr
 
-            if (status >= 500) {
+            if (status === 204)
+                resolve()
+            else if (status === 400) {
+                const { error } = JSON.parse(json)
+                if (error.includes('is not a'))
+                    reject(new TypeError(error))
+                else if (error.includes('empty'))
+                    reject(new FormatError(error))
+                else if (error.includes('valid') || error.includes('spaces'))
+                    reject(new FormatError(error))
+                else if (error.includes('length'))
+                    reject(new LengthError(error))
+            } else if (status === 409) {
                 const { error } = JSON.parse(json)
 
-                reject(new Error(error))
-
-                return
-            }
-
-            resolve()
+                reject(new ConflictError(error))
+            } else if (status < 500)
+                reject(new UnexpectedError('client error'))
+            else
+                reject(new UnexpectedError('server error'))
         }
 
         xhr.onerror = () => reject(new Error('connection error'))
 
-        xhr.open('PATCH', `http://localhost/users/updateUserName`)
+        xhr.open('PATCH', `${process.env.REACT_APP_API_URL}/users/updateUserName`)
         xhr.setRequestHeader('Authorization', `Bearer ${token}`)
         xhr.setRequestHeader('Content-Type', 'application/json')
 

@@ -1,20 +1,19 @@
 const { User, Post } = require('../models')
+const {
+    errors: { NotFoundError },
+    validators: { validateUserId, validateText }
+} = require('com')
 
-function createPost(userId, text, visibility) {
-    if (typeof userId !== 'string') throw new TypeError('userId is not a string')
-    if (!userId.length) throw new Error('userId is empty')
-    if (typeof text !== 'string') throw new TypeError('text is not a string')
-    if (!text.length) throw new Error('text is empty')
-    if (typeof visibility !== 'string') throw new TypeError('visibility is not a string')
-    if (!visibility.length) throw new Error('visibility is empty')
-    if (visibility !== 'public' && visibility !== 'private') throw new Error('invalid visibility')
+function createPost(userId, text) {
+    validateUserId(userId)
+    validateText(text)
 
     return User.findById(userId)
         .then(user => {
             if (!user)
-                throw new Error(`user with id ${userId} does not exist`)
+                throw new NotFoundError('User not registered')
 
-            return Post.create({ user: userId, text, visibility, date: new Date })
+            return Post.create({ user: userId, text, date: new Date })
         })
         .then(() => { })
 }

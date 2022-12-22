@@ -1,28 +1,28 @@
 import { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { format } from 'timeago.js'
+import GAME_CONSTANTS from '../shared/constants';
 import retrieveUser from '../logic/retrieveUser'
 import retrieveAdventure from '../logic/retrieveAdventure'
 import playAdventure from '../logic/playAdventure'
 import AdventureStep from '../components/AdventureStep'
-import { useParams } from 'react-router-dom'
-import bgAdventureReward from '../img/bg-adventure-reward.png';
+import CreateAdventureStep from '../components/CreateAdventureStep'
+import bgAdventureStep from '../img/bg-adventure-step.png';
 import buttonBack from '../img/icon-back.png';
 import buttonPlayStep from '../img/button-play-step.png';
+import buttonAddStep from '../img/button-add-step.png';
+import buttonPlayStepNonMoney from '../img/button-play-step-nonmoney.png';
 import buttonPlayStepDisabled from '../img/button-play-step-disabled.png';
 import buttonPlayStepView from '../img/button-play-step-view.png';
-import bgAdventureStep from '../img/bg-adventure-step.png';
-import { Link } from 'react-router-dom'
-import buttonAddStepActive from '../img/button-add-step-active.png';
-import buttonAddStep from '../img/button-add-step.png';
-import CreateAdventureStep from '../components/CreateAdventureStep'
-import GAME_CONSTANTS from '../shared/constants';
-import { format } from 'timeago.js'
+import alertErrorMoney from '../img/error-money.png';
 
 function Adventure() {
     const [user, setUser] = useState(null)
     const [adventure, setAdventure] = useState(null)
-    const [hoverButtonCreate, setHoverButtonCreate] = useState(false)
     const [createAdventureStepVisible, setCreateAdventureStepVisible] = useState(false)
     const [adventureStepVisible, setAdventureStepVisible] = useState(-1)
+    const [showErrorMoney, setErrorMoney] = useState(false);
     const { adventureId } = useParams()
 
     useEffect(() => {
@@ -38,7 +38,12 @@ function Adventure() {
         } catch (error) { }
     }, [adventureId])
 
-
+    const HandlerShowErrorMoney = () => {
+        setErrorMoney(true)
+        setTimeout(() => {
+            setErrorMoney(false);
+        }, 3000);
+    }
 
     function getStepsCompleted() {
         if (!user) {
@@ -82,7 +87,9 @@ function Adventure() {
         setAdventureStepVisible(i)
         try {
             playAdventure(sessionStorage.token, adventureId)
-                .catch(error => alert(error.message));
+                .catch(error => {
+                    alert(error.message)
+                });
 
         } catch (error) {
             alert(error.message)
@@ -127,7 +134,7 @@ function Adventure() {
                                 src={buttonBack}
                                 alt="back" />
                         </Link>
-                        <span className='text-blue-400 text-[2rem]'>{adventure?.title}</span>
+                        <span className='text-blue-300 text-[2rem]'>{adventure?.title}</span>
                     </header>
                     <section className=''>
                         {adventure &&
@@ -165,12 +172,18 @@ function Adventure() {
                                             </span>
 
                                             {getStepsCompleted() === i && isReadyToPlayAdventureStep() &&
-                                                <img
-                                                    className='w-[7.375rem] -mt-[3.7rem] ml-[12.7rem] cursor-pointer'
-                                                    src={buttonPlayStep}
-                                                    alt="buttonPlayStep"
-                                                    onClick={() => playAdventureStep(i)} />
-                                            }
+                                                (user.gold >= 200
+                                                    ? <img
+                                                        className='w-[7.375rem] -mt-[3.7rem] ml-[12.7rem] cursor-pointer'
+                                                        src={buttonPlayStep}
+                                                        alt="buttonPlayStep"
+                                                        onClick={() => playAdventureStep(i)} />
+                                                    : <img
+                                                        className='w-[7.375rem] -mt-[3.7rem] ml-[12.7rem] cursor-pointer'
+                                                        src={buttonPlayStepNonMoney}
+                                                        alt="buttonPlayStepNonMoney"
+                                                        onClick={() => HandlerShowErrorMoney()} />
+                                                )}
                                             {getStepsCompleted() === i && !isReadyToPlayAdventureStep() &&
                                                 <img
                                                     className='w-[7.375rem] -mt-[3.7rem] ml-[12.7rem]'
@@ -182,15 +195,23 @@ function Adventure() {
                                 )}
                             </section>}
                     </section>
-                    {isUserOwnerOfAdventure() &&
+                    <img
+                        className={`square absolute flex self-center -mt-[5rem] opacity-0 duration-300 pointer-events-none ${showErrorMoney ? 'opacity-100 ' : ''}`}
+                        src={alertErrorMoney}
+                        alt="alertErrorMoney" />
+                    {isUserOwnerOfAdventure() ?
                         <div className='flex flex-col items-center mt-[1rem]'>
                             <img
-                                onMouseEnter={() => setHoverButtonCreate(true)}
-                                onMouseLeave={() => setHoverButtonCreate(false)}
                                 onClick={openCreateAdventureStep}
                                 className='cursor-pointer'
-                                src={hoverButtonCreate ? buttonAddStepActive : buttonAddStep}
-                                alt="create" />
+                                src={buttonAddStep}
+                                alt="addStep" />
+                        </div> :
+                        <div className='flex flex-col items-center mt-[1rem] opacity-0'>
+                            <img
+                                className=''
+                                src={buttonAddStep}
+                                alt="falseAddStep" />
                         </div>
                     }
                     {adventureStepVisible >= 0 &&

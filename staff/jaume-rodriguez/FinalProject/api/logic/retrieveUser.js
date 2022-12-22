@@ -1,9 +1,11 @@
-const { errors: { FormatError } } = require('com')
 const { User } = require('../models')
+const {
+    errors: { NotFoundError },
+    validators: { validateUserId }
+} = require('com')
 
 function retrieveUser(userId) {
-    if (typeof userId !== 'string') throw new TypeError('userId is not a string')
-    if (!userId.length) throw new FormatError('userId is empty')
+    validateUserId(userId)
 
     return User.findById(userId)
         .select('-password')
