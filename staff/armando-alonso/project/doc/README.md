@@ -2,25 +2,25 @@
 
 # Intro
 
-This application collects the problems about the neighbourhoods. Neighbour can registered and report all the problems that they can see in the street, parks, walls and everything infraestructure the city has.
+The application in its first phase will be to establish a web portal where unregistered users will be able to access and then a part of the web where only registered users will be able to access. In this site will be able to publish news the users that are registered and that will be visible without being registered or not.
 
 ## Functional Description
 
 ### Use Cases
 
 Visitor (non-registered user)
-- Create landing page with public posts
-- View all public Issues 
+- [X] Create landing page with public posts
+- [X] View all public Issues 
 
 User
-- Create landing page with public posts
-- View all public Issues 
-- Create issue
-- View all public Issues 
-- Update Issue
-- View profile
-- Change Name
-- Change Password
+- [X] Create landing page with public posts Registered
+- [X] View all public Issues 
+- [X] Create post
+- [X] View all public post
+- [X] Update post
+- [X] View profile
+- [ ] Change Name
+- [ ] Change Password
 
 
 ## Technical Description
@@ -34,9 +34,6 @@ User
 - postalCode (String)
 - neighbourhood (String)
 - city (String)
-- gender (string)
-- pet (String)
-- vehicle (String)
 - email (String, required)
 - password (String, required)
 
@@ -47,3 +44,12 @@ Post
 - visibility (String, required, enum: ['public', 'private'])
 - date (Date, required)
 
+### Technologies
+
+- Tailwind
+- Tailwind Elements (Library)
+- Tailwind FlowBite (Library)d
+- Node
+- Express
+- React
+- React Router
