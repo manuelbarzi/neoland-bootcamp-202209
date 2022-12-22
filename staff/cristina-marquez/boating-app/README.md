@@ -40,44 +40,55 @@ All data storage is done in MongoDB by using Mongoose.
 
 User
 
-- id: '',
-- name: '',
-- surname: '',
-- birth date: date
-- passport: '',
-- email: '',
-- contact: '+34 123456789',
-- address:
+- id: Object Id
+- name: (String, required)
+- surname: (String, required)
+- birth date: (Date, required)
+- idNumber: (String, required)
+- email: (String, required)
+- contact: (String, required)
+- address {
+    street: (String, required)
+    postalCode: (String, required)
+    city: (String, required)
+    country: (String, required)
+}
 
 Boat
 
-- id: '',
+- id: Object Id
 - owner (ObjectId, user id)
-- name: '',
-- flag: '',
-- regNumber: '',
-- sail: true
-- length: number
-- beam: number
-- draft: number
+- name: (String, required)
+- flag: (String, required)
+- regNumber: (String, required)
+- sail: (Boolean, required)
+- length: (Number, required)
+- beam: (Number, required)
+- draft: (Number, required)
 
 Port
 
-- id (ObjectId, required),
-- name (String, requried),
+- id: ObjectId
+- name: (String, required)
 - coordinates ([Number], required),
-- address (String, required)
-- berths (Number, required)
-- vhf (Number, required)
-- phone (String, required)
+- address {
+    street: (String, required)
+    postalCode: (String, required)
+    city: (String, required)
+    country: (String, required)
+}
+
+- berths: (Number, required)
+- vhf: (Number, required)
+- phone: (String, required)
 - facilities ([String], required, enum ['wc', 'restaurant', 'laundry', 'swim', 'parking', 'gas', 'gym', 'travel'])
 
 Booking
 
-- startDate (Date, required)
-- endDate (Date, required)
-- port (ObjectId, port id, required)
-- boat (ObjectId, boat id, required)
+- startDate: (Date, required)
+- endDate: (Date, required)
+- port: (ObjectId, port id, required)
+- boat: (ObjectId, boat id, required)
 
 ### Technologies
 
