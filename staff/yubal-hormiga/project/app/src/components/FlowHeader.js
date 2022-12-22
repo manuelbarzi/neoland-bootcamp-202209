@@ -18,13 +18,13 @@ function Flow({ totalFlows, isValidPension, setIsValidPension }) {
                             <span>Presupuesto:</span>{totalFlows.income}€
                         </p> */}
                         <p className='  font-semibold text-lg '>
-                            <span className='text-[#023047]' >Ingresado:</span> <span className='text-[#fb8500]'>{totalFlows.income}€</span>
+                            <span className='text-[#023047]' >Ingresado:</span> <spam className='text-[#fb8500]'>{totalFlows.income}€</spam>
                         </p>
                         <p className='  font-semibold text-lg text-[#023047]'>
-                            <span className='text-[#023047]' >Gastado:</span> <span className='text-[#fb8500]'>{totalFlows.spent}€</span>
+                            <span className='text-[#023047]' >Gastado:</span> <spam className='text-[#fb8500]'>{totalFlows.spent}€</spam>
                         </p>
                         <p className='  font-semibold text-lg text-[#023047]'>
-                            <span className='text-[#023047]' >Disponible:</span> <span className='text-[#fb8500]'>{totalFlows.income - totalFlows.spent}€</span>
+                            <span className='text-[#023047]' >Disponible:</span> <spam className='text-[#fb8500]'>{totalFlows.income - totalFlows.spent}€</spam>
 
                         </p>
                     </div>

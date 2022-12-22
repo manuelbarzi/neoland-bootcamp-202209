@@ -13,7 +13,6 @@ export default function (token, flowId, callback) {
     if (typeof flowId !== 'string') throw new TypeError('flowId is not a string')
     if (!flowId.length) throw new LengthError('flowId is empty')
 
-
     if (!callback)
         return new Promise((resolve, reject) => {
             const xhr = new XMLHttpRequest

@@ -3,7 +3,10 @@
 ## Intro
 
 It is an application where on the one hand you can add appointments and on the other hand you can keep track of your expenses, both in chronological order.
-![](https://media.giphy.com/media/kLOkqcrdC5mrCE7k7G/giphy.gif) ## 
+
+
+![](https://media.giphy.com/media/kLOkqcrdC5mrCE7k7G/giphy.gif) 
+
 
 ## Functional Description
 
@@ -70,3 +73,11 @@ Flow
 
 
 
+### Planning
+
+_BACKLOG_
+- Testing
+- Enter Budget
+- Chat
+- Bak Ratings
+- Links of interest

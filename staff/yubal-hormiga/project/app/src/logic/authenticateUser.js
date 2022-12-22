@@ -2,7 +2,6 @@ import { regex, errors } from 'com'
 
 const { IS_EMAIL_REGEX, HAS_SPACES_REGEX } = regex
 const { FormatError, AuthError, LengthError, NotFoundError, UnexpectedError } = errors
-
 /**
  * Authenticates a user
  * 
@@ -12,7 +11,6 @@ const { FormatError, AuthError, LengthError, NotFoundError, UnexpectedError } = 
 export default function authenticateUser(email, password) {
     if (typeof email !== 'string') throw new TypeError('email is not a string')
     if (!IS_EMAIL_REGEX.test(email)) throw new FormatError('email is not valid')
-
     if (typeof password !== 'string') throw new TypeError('password is not a string')
     if (password.length < 8) throw new LengthError('password length is less than 8')
     if (HAS_SPACES_REGEX.test(password)) throw new FormatError('password has spaces')

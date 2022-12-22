@@ -9,6 +9,7 @@ import { useContext } from 'react'
 import { errors } from 'com'
 
 const { FormatError, AuthError, LengthError, NotFoundError } = errors
+
 function AppointmentLists({ appointmentsChange }) {
   log.info('AppoimentList -> render')
   const { showAlert } = useContext(Context)

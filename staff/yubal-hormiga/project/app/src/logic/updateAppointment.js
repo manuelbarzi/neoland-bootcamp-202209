@@ -16,8 +16,6 @@ export default function (token, appointmentId, title, body, date, callback) {
     if (!title.length) throw new Error('title is empty')
     if (typeof body !== 'string') throw new TypeError('body is not a string')
     if (!body.length) throw new Error('body is empty')
-    // if (typeof date !== 'number') throw new TypeError('date is not a number')
-    // if (!date) throw new Error('date is empty')
     if (typeof callback !== 'function') throw new TypeError('callback is not a function')
 
     const xhr = new XMLHttpRequest
