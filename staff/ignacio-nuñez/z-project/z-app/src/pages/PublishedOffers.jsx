@@ -105,7 +105,7 @@ function PublishedOffers() {
                                             <span className="text-md w-1/2 py-2.5 text-gray-700 bg-transparent border-0 border-gray-200 capitalize">{offer?.workTime ? offer.workTime : 'Work time'}</span>
                                         </div>
                                         <div className='flex justify-center w-1/2  border rounded-md'>
-                                            <span className="text-md w-1/2 py-2.5 text-gray-700 bg-transparent border-0 border-gray-200 capitalize">{offer?.modality ? offer.modality : 'Modality'}</span>
+                                            <span className="py-2 text-gray-700 bg-transparent border-0 border-gray-200 capitalize">{offer?.modality ? offer.modality : 'Modality'}</span>
                                         </div>
                                     </div>
                                     <div className='flex gap-6 mt-2'>

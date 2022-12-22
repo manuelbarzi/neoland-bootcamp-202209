@@ -18,7 +18,7 @@ function UpdateKnowledgeCurriculum({ className, onUpdateKnowledgeCurriculumClose
     const updateKnowledgeCurriculumHandler = event => {
         event.preventDefault()
 
-        let knowledges = []
+        const knowledges = []
 
         if (event.target.title) {
             if (!event.target.title.value) {

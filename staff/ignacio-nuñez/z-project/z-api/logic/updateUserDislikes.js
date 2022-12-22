@@ -30,7 +30,7 @@ module.exports = function updateCurriculum(userId, documentId) {
                     .then(([curriculums]) => {
 
                         if (curriculums) {
-                            let curriculumsId = curriculums?.length ? curriculums.map(curriculum => curriculum._id.toString()) :
+                            const curriculumsId = curriculums?.length ? curriculums.map(curriculum => curriculum._id.toString()) :
                                 [curriculums._id.toString()]
 
                             return Promise.all([
@@ -69,7 +69,7 @@ module.exports = function updateCurriculum(userId, documentId) {
                     .then(([offers]) => {
 
                         if (offers) {
-                            let offersId = offers?.length ? offers.map(offer => offer._id.toString()) :
+                            const offersId = offers?.length ? offers.map(offer => offer._id.toString()) :
                                 [offers._id.toString()]
 
                             return Promise.all([
