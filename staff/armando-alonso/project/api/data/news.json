@@ -1,0 +1,272 @@
+[
+    {
+        "id": "news-1",
+        "user": "user-4",
+        "title": "Pintado del Toro",
+        "text": "Hoy han pintado el toro de la plaza en serranillos del Valle.",
+        "topic": "cultura",
+        "visibility": "public",
+        "date": "2022-12-01T12:18:31.429Z"
+    },
+    {
+        "id": "news-2",
+        "user": "user-4",
+        "title": "Luces de Navidad",
+        "text": "Colocan y encienden las luces de navidad de led en el municipio.",
+        "topic": "energia",
+        "visibility": "public",
+        "date": "2022-11-18T11:37:45.925Z"
+    },
+    {
+        "id": "news-3",
+        "user": "user-7",
+        "title": "Loteria de Navidad",
+        "text": "El próximo domingo estará el lotero en el ayuntamiento.",
+        "topic": "observaciones",
+        "visibility": "public",
+        "date": "2022-11-18T11:39:30.958Z"
+    },
+    {
+        "id": "news-4",
+        "user": "user-2",
+        "title": "Nueva parada de Autobus",
+        "text": "El municipio cuenta con una nueva parada de autobuses en la calle Chuletas",
+        "topic": "trasporte",
+        "visibility": "public",
+        "date": "2022-11-18T11:39:50.682Z"
+    },
+    {
+        "id": "news-5",
+        "user": "user-1",
+        "title": "Nuevo Bar",
+        "text": "Apertura de un nuevo bar en la plaza del municipio",
+        "topic": "observaciones",
+        "visibility": "public",
+        "date": "2022-11-18T11:39:51.273Z"
+    },
+    {
+        "id": "news-6",
+        "user": "user-1",
+        "title": "Parque roto",
+        "text": "Encuentan el mobiliario de el parque infantil con importantes desperfectos",
+        "topic": "vandalismo",
+        "visibility": "public",
+        "date": "2022-11-18T11:39:51.784Z"
+    },
+    {
+        "id": "news-7",
+        "user": "user-2",
+        "title": "Nueva depuradora",
+        "text": "El municipio cuenta con la instalación de una nueva depuradora mas eficiente.",
+        "topic": "medio-ambiente",
+        "visibility": "public",
+        "date": "2022-11-18T12:01:17.960Z"
+    },
+    {
+        "id": "news-8",
+        "user": "user-5",
+        "title": "Ambulatorio",
+        "text": "El ambulatorio del municipio se a visto obligado a cerrar por la pandemia del covid.",
+        "topic": "sanidad",
+        "visibility": "public",
+        "date": "2022-11-18T12:03:02.518Z"
+    },
+    {
+        "id": "news-9",
+        "user": "user-4",
+        "title": "Pintado del Toro",
+        "text": "Hoy han pintado el toro de la plaza en serranillos del Valle",
+        "topic": "cultura",
+        "visibility": "private",
+        "date": "2022-11-18T12:04:23.271Z"
+    },
+    {
+        "id": "news-10",
+        "user": "user-9",
+        "title": "Luces de Navidad",
+        "text": "Colocan y encienden las luces de navidad de led en el municipio.",
+        "topic": "energia",
+        "visibility": "private",
+        "date": "2022-11-18T12:04:34.975Z"
+    },
+    {
+        "id": "news-11",
+        "user": "user-5",
+        "title": "Nueva parada de Autobus",
+        "text": "El municipio cuenta con una nueva parada de autobuses en la calle Chuletas",
+        "topic": "trasporte",
+        "visibility": "public",
+        "date": "2022-11-21T12:03:33.879Z"
+    },
+    {
+        "id": "news-12",
+        "user": "user-5",
+        "title": "Loteria de Navidad",
+        "text": "El próximo domingo estará el lotero en el ayuntamiento.",
+        "topic": "observaciones",
+        "visibility": "public",
+        "date": "2022-11-21T12:08:30.651Z"
+    },
+    {
+        "id": "news-13",
+        "user": "user-6",
+        "title": "Nueva parada de Autobus",
+        "text": "El municipio cuenta con una nueva parada de autobuses en la calle Chuletas",
+        "topic": "trasporte",
+        "visibility": "public",
+        "date": "2022-11-21T12:08:42.398Z"
+    },
+    {
+        "id": "news-14",
+        "user": "user-8",
+        "title": "Nuevo Bar",
+        "text": "Apertura de un nuevo bar en la plaza del municipio",
+        "topic": "observaciones",
+        "visibility": "public",
+        "date": "2022-11-21T12:10:57.460Z"
+    },
+    {
+        "id": "news-15",
+        "user": "user-8",
+        "title": "Parque roto",
+        "text": "Encuentan el mobiliario de el parque infantil con importantes desperfectos",
+        "topic": "vandalismo",
+        "visibility": "public",
+        "date": "2022-11-21T12:14:43.228Z"
+    },
+    {
+        "id": "news-16",
+        "user": "user-9",
+        "title": "Nueva depuradora",
+        "text": "El municipio cuenta con la instalación de una nueva depuradora mas eficiente.",
+        "topic": "medio-ambiente",
+        "visibility": "public",
+        "date": "2022-11-28T18:21:06.353Z"
+    },
+    {
+        "id": "news-17",
+        "user": "user-3",
+        "title": "Nueva parada de Autobus",
+        "text": "El municipio cuenta con una nueva parada de autobuses en la calle Chuletas",
+        "topic": "trasporte",
+        "visibility": "public",
+        "date": "2022-11-22T12:08:05.615Z"
+    },
+    {
+        "id": "news-18",
+        "user": "user-2",
+        "title": "Luces de Navidad",
+        "text": "Colocan y encienden las luces de navidad de led en el municipio.",
+        "topic": "energia",
+        "visibility": "private",
+        "date": "2022-11-22T12:13:38.775Z"
+    },
+    {
+        "id": "news-19",
+        "user": "user-4",
+        "title": "Loteria de Navidad",
+        "text": "El próximo domingo estará el lotero en el ayuntamiento.",
+        "topic": "observaciones",
+        "visibility": "public",
+        "date": "2022-11-28T18:26:50.418Z"
+    },
+    {
+        "id": "news-20",
+        "user": "user-7",
+        "title": "Ambulatorio",
+        "text": "El ambulatorio del municipio se a visto obligado a cerrar por la pandemia del covid.",
+        "topic": "sanidad",
+        "visibility": "public",
+        "date": "2022-11-28T18:27:13.639Z"
+    },
+    {
+        "id": "news-21",
+        "user": "user-3",
+        "title": "El toro",
+        "text": "El toro de serranillos ha sido pintado por un artista de renombre. Esto hecho que el toro sea reconocido como un obra de arte y que el pueblo de Serranillos del Valle incremente su interes turístico",
+        "topic": "cultura",
+        "visibility": "public",
+        "date": "2022-12-12T15:16:07.621Z"
+    },
+    {
+        "id": "news-22",
+        "user": "user-1",
+        "title": "asdfasdfas",
+        "text": "asfasdf",
+        "topic": "cultura",
+        "visibility": "public",
+        "date": "2022-12-12T15:21:54.517Z"
+    },
+    {
+        "id": "news-23",
+        "user": "user-1",
+        "title": "sgdfhsdfgh",
+        "text": "gfdhdfghdfg",
+        "topic": "cultura",
+        "visibility": "private",
+        "date": "2022-12-12T15:24:40.023Z"
+    },
+    {
+        "id": "news-24",
+        "user": "user-1",
+        "title": "sgdfhsdfgh",
+        "text": "gfdhdfghdfg",
+        "topic": "cultura",
+        "visibility": "public",
+        "date": "2022-12-12T15:27:04.686Z"
+    },
+    {
+        "id": "news-25",
+        "user": "user-1",
+        "title": "sgdfhsdfgh",
+        "text": "gfdhdfghdfg",
+        "topic": "sanidad",
+        "visibility": "public",
+        "date": "2022-12-12T15:27:11.829Z"
+    },
+    {
+        "id": "news-26",
+        "user": "user-1",
+        "title": "Nueva noticia",
+        "text": "Es un texto de prueba",
+        "topic": "cultura",
+        "visibility": "public",
+        "date": "2022-12-13T11:12:34.528Z"
+    },
+    {
+        "id": "news-27",
+        "user": "user-1",
+        "title": "",
+        "text": "jklfjañlkdjfklajdfjakfjañlksdjfd",
+        "topic": "sanidad",
+        "visibility": "public",
+        "date": "2022-12-13T16:21:01.561Z"
+    },
+    {
+        "id": "news-28",
+        "user": "user-1",
+        "title": "hoy a las 6",
+        "text": "la ultima prueba",
+        "topic": "observaciones",
+        "visibility": "public",
+        "date": "2022-12-13T16:38:45.186Z"
+    },
+    {
+        "id": "news-29",
+        "user": "user-1",
+        "title": "y este es privado",
+        "text": "no tiene que aparecer",
+        "topic": "vandalismo",
+        "visibility": "private",
+        "date": "2022-12-13T16:39:13.188Z"
+    },
+    {
+        "id": "news-30",
+        "user": "user-1",
+        "title": "Marce llega del curro",
+        "text": "Marce ha llegado hoy de trabajar hjasta la polla",
+        "topic": "observaciones",
+        "visibility": "public",
+        "date": "2022-12-13T21:16:05.440Z"
+    }
+]
