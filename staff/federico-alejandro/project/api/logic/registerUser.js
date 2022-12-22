@@ -3,6 +3,7 @@ const {
     regex: { IS_EMAIL_REGEX, HAS_SPACES_REGEX, IS_ALPHABETICAL_REGEX }
 } = require('../../com')
 const { User } = require('../models')
+const { hash } = require('bcryptjs')
 /**
  * Register a user
  * 
@@ -23,13 +24,15 @@ function registerUser(name, email, password) {
     if (password.length < 8) throw new LengthError('password length is less than 8')
     if (HAS_SPACES_REGEX.test(password)) throw new FormatError('password has spaces')
 
-    return User.create({ name, email, password })
-         .catch(error => {
-            if (error.message.includes('E11000'))
-                throw new ConflictError(`user with email ${email} already exists`)
+    return hash(password, 8)
+        .then(hash => User.create({ name, email, password: hash })
+            .catch(error => {
+                if (error.message.includes('E11000'))
+                    throw new ConflictError(`user with email ${email} already exists`)
 
-            throw new UnexpectedError(error.message)
-        })
+                throw new UnexpectedError(error.message)
+            })
+        )
 }
 
 module.exports = registerUser

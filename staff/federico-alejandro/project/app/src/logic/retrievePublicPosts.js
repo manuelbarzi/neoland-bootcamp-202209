@@ -15,25 +15,26 @@ function retrievePublicPosts(token) {
             xhr.onload = function () {
                 const { status, responseText: json } = xhr
 
-                const data = JSON.parse(json)
+                // const data = JSON.parse(json)
 
                 if (status === 200) {
-                    resolve(data)
+                    const post = JSON.parse(json)
+                    
+                    resolve(post)
                 }
-
                 else if (status === 400) {
-                    const { error } = data
+                    const { error } = JSON.parse(json)
     
                     if (error.includes('is not a '))
                         reject(new TypeError(error))
                     else if (error.includes('empty'))
                         reject(new LengthError(error))
                 }  else if (status === 404) {
-                    const { error } = data
+                    const { error } = JSON.parse(json)
     
                     reject(new NotFoundError(error))
                 } else if (status === 409) {
-                    const { error } = data
+                    const { error } = JSON.parse(json)
     
                     reject(new ConflictError(error))
                 } else if (status < 500)

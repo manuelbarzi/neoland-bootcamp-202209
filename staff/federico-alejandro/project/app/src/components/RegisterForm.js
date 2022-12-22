@@ -43,13 +43,13 @@ function RegisterForm({ onClose }) {
             <form className='flex flex-col justify-start m-4 gap-2 border-2 border-slate-600 rounded-xl p-6 shadow-inner shadow-slate-600' onSubmit={handleRegister}>
                 
                 <label htmlFor='name' className='container__item--left'>Name</label>
-                <input name='name' type='text' id='name' placeholder='  input your name' className='border-b border-black text-black rounded-xl' />
+                <input name='name' type='text' id='name' placeholder='  input your name' className='border-b border-black text-black text-center rounded-xl' />
                 
                 <label htmlFor='email' className='container__item--left'>E-mail</label>
-                <input name='email' type='email' id='email' placeholder='  input your e-mail' className='border-b border-black text-black rounded-xl' />
+                <input name='email' type='email' id='email' placeholder='  input your e-mail' className='border-b border-black text-black text-center rounded-xl' />
                 
                 <label htmlFor='password' className='container__item--left'>Password</label>
-                <input name='password' type='password' id='password' placeholder='  input your password' className='border-b border-black text-black rounded-xl' />
+                <input name='password' type='password' id='password' placeholder='  input your password' className='border-b border-black text-black text-center rounded-xl' />
                 
                 <button className='bg-green-400 gap-2  font-bold text-white border-2 p-2 border-green-400 rounded-xl'>Register</button>
             </form>

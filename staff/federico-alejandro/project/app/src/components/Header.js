@@ -15,7 +15,7 @@ export default function Header() {
 
     const { logout, showAlert } = useContext(Context)
     const [user, setUser] = useState()
-    const [toggleButton, setToggleButton] = useState()
+    const [toggleButton, setToggleButton] = useState('menu')
     const [settingsPanel, setSettingsPanel] = useState()
 
     useEffect(() => {

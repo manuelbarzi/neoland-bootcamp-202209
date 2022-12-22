@@ -109,7 +109,6 @@ function Post({ post: postFromProps, onPostUpdated, onPostDeleted }) {
                         showAlert(error.message, 'fatal')
                     }
         }
-
         // CREATE COMMENT //
         const openCreateComment = (chatId) => {
             setChatId(chatId)
@@ -158,7 +157,7 @@ function Post({ post: postFromProps, onPostUpdated, onPostDeleted }) {
 
         return post ?
             <>
-                <article className='bg-white rounded-xl w-[25%] flex flex-col p-[0.25rem] shadow-inner shadow-slate-900'>
+                 <article className='bg-white rounded-xl w-[25%] flex flex-col p-[0.25rem] shadow-inner shadow-slate-900'>
                     <div className='flex justify-between '><Link to={`/profile/${post.user.id}`}><strong>{post.user.name}</strong></Link>
                         <time className='flex justify-end font-bold text-xs'>{format(post.date)}</time>
                     </div>
@@ -168,7 +167,7 @@ function Post({ post: postFromProps, onPostUpdated, onPostDeleted }) {
                         {post.image && <div className='w-fit h-fit'><img src={post.image} alt='' /></div>}
                     </div>
                     <div className='flex justify-between'>
-                        <button onClick={() => openCreateChat()}><FaRegComment size='1rem' /></button>
+                        <button className='ml-2' onClick={() => openCreateChat()}><FaRegComment size='1rem' /></button>
                         {post.user.id === userId && <div className='flex justify-end'>
                             <div className='flex self-end pb-0'>
                                 <button onClick={openEditPost}><AiOutlineEdit size='1rem' /></button>
@@ -189,13 +188,11 @@ function Post({ post: postFromProps, onPostUpdated, onPostDeleted }) {
                                 </div>
                                 <p className='ml-2'>{comment.text}</p>
                                 <div className='flex justify-end'>
-                                    {comment.user.id !== userId && <button onClick={() => openCreateComment(chat.id)}><FaRegComment size='0.85rem' /></button>}
+                                    <button className='mr-2' onClick={() => openCreateComment(chat.id)}><FaRegComment size='0.85rem' /></button>
                                     {comment.user.id === userId && <button onClick={() => openDeleteComment(chat.id, comment.id)}><AiOutlineDelete size='0.85rem' /></button>}
                                 </div>
                             </div>
                         })}
-                        {/* <div className='flex justify-end p-2'>
-                    </div> */}
                     </div>
                     ) : null}
                 </article>

@@ -26,12 +26,12 @@ export default function registerUser(name, email, password) {
         xhr.onload = () => {
             const { status, responseText: json } = xhr
 
-            const data = JSON.parse(json)
+            //const data = JSON.parse(json)
             
             if (status === 201)
                 resolve()
             else if (status === 400) {
-                const { error } = data
+                const { error } = JSON.parse(json)
 
                 if (error.includes('is not a'))
                     reject(new TypeError(error))
@@ -40,7 +40,7 @@ export default function registerUser(name, email, password) {
                 else if (error.includes('length'))
                     reject(new LengthError(error))
             } else if (status === 409) {
-                const { error } = data
+                const { error } = JSON.parse(json)
 
                 reject(new ConflictError(error))
             } else if (status < 500)

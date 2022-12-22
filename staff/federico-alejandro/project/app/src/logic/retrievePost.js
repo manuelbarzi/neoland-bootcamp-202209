@@ -18,10 +18,8 @@ function retrievePost(token, postId) {
         xhr.onload = function () {
             const { status, responseText: json } = xhr
 
-            // const data = JSON.parse(json)
-
             if (status === 200) {
-                resolve()
+                resolve(JSON.parse(json))
             } else if (status === 400) {
                 const { error } = JSON.parse(json)
 

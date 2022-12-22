@@ -1,4 +1,4 @@
-const { NotFoundError, ConflictError, FormatError, LengthError, AuthError } = require('com')
+const { errors:{NotFoundError, ConflictError, FormatError, LengthError, AuthError} } = require('com')
 const createChat = require('../logic/createChat')
 
 module.exports = (req, res) => {

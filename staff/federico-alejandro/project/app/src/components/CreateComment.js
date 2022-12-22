@@ -38,6 +38,7 @@ function CreateComment({ onCreated, onClose, postId, chatId }) {
                                 showAlert(error.message, 'fatal')
                         }
                     })
+                    .catch(error => showAlert(error.message, 'fatal'))
             } else {
                 createComment(sessionStorage.token, text, postId, chatId)
                     .then(() => onCreated())

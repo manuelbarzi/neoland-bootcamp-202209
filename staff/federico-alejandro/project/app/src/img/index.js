@@ -16,6 +16,7 @@ const Wallapop = require('./Wallapop.png')
 const chat = require('./chat.png')
 const localizacion = require('./localizacion.png')
 const ideas = require('./ideas.png')
+const mano = require('./mano.png')
 
 module.exports = {
     LOGO,
@@ -35,5 +36,6 @@ module.exports = {
     Wallapop,
     chat,
     localizacion,
-    ideas
+    ideas,
+    mano
 }

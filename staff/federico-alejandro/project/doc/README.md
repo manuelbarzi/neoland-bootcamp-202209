@@ -2,7 +2,9 @@
 
 ## Intro
 
-This App that blah blah blah...
+Is an web to donate what you no longer use, if you want to give your things a second life, publish it!. The donor decides to whom he/she wants to donate it. It also contains information on how to recycle and take care of the planet.  
+
+![](https://media.tenor.com/yEW0bneCw30AAAAC/gif1.gif) 
 
 ## Functional Description
 
@@ -15,15 +17,17 @@ User
 - Delete a post
 - View profile
 - Change password
-- ...
+- Create comment 
+- Delete comment
 
 ## Technical Description
-We have used:
-=============
-React : To create the base of the project
-Tailwind: A CSS framework that prioritises usability over styling. This framework provides a set of classes to give structure and style, and to be able to quickly create custom designs.
-Autoprefixer: Allows you to parse standard CSS code and add the necessary CSS vendor prefixes to ensure that the functionality is best suited to older browsers.
 
+### Blocks
+
+```
+App (client-side)        API (server-side)       DB
+[React > logic > xhr] -> [Express > Mongoose] -> [Mongo]
+```
 
 ### Data Model
 
@@ -46,3 +50,13 @@ Comment
 - text (String, required)
 - date (Date, required)
 - answers [Comments]
+
+### Technologies
+
+- JavaScript
+- React
+- Node
+- Express
+- Mongo
+- Mongoose
+- Tailwind

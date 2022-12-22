@@ -1,9 +1,10 @@
-import { LengthError } from "com/errors"
-/**
+import { regex, errors } from 'com'
+const { IS_EMAIL_REGEX } = regex
+const { LengthError } = errors/**
  * Update User email
  * 
  * @param {string} token userId client 
- * @param {string} email current email
+ * @param {string} email old email
  * @param {string} newEmail new email 
  */
 
@@ -13,9 +14,13 @@ function updateEmail(token, email, newEmail) {
 
     if (typeof email !== 'string') throw new TypeError('email is not a string')
     if (!email.length) throw new LengthError('email is empty')
+    if (!IS_EMAIL_REGEX.test(email)) throw new Error('email is not valid')
+
     
     if (typeof newEmail !== 'string') throw new TypeError('newEmail is not a string')
     if (!newEmail.length) throw new LengthError('newEmail is empty')
+    if (!IS_EMAIL_REGEX.test(email)) throw new Error('email is not valid')
+
 
     return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest()

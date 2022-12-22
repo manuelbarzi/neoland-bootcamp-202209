@@ -86,11 +86,11 @@ function Home() {
         }
     }
 
-    return <main className='overflow-hidden bg-gradient-to-b from-[#439A97] via-[#62B6B7] to-[#97DECE]'>
+    return <main className='overflow-hidden min-h-screen bg-gradient-to-b from-[#439A97] via-[#62B6B7] to-[#97DECE]'>
         <Header />
         
 
-        {posts && <div className='flex flex-col items-center gap-4 py-[3rem] bg-gradient-to-b from-[#439A97] via-[#62B6B7] to-[#97DECE]'>
+        {posts && <div className='flex flex-col items-center gap-4 py-[3rem] '>
             {posts.map(post => <Post key={post.id} post={post} onPostUpdated={refreshPosts} onPostDeleted={refreshPosts} />)}
         </div>}
 

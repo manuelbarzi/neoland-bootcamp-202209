@@ -18,13 +18,12 @@ function retrievePostsFromUser(token, targetUserId) {
             xhr.onload = function () {
                 const { status, responseText: json } = xhr
 
-                const data = JSON.parse(json)
 
             if (status === 200) {
-                resolve(data)
-                // const { post } = JSON.parse(json)
+               
+                const  post  = JSON.parse(json)
 
-                // resolve(post)
+                resolve(post)
             }
             else if (status === 400) {
                 const { error } = JSON.parse(json)
