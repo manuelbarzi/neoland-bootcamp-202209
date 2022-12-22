@@ -24,6 +24,8 @@ function App() {
     setMessage(message)
   }
 
+  const hideAlert = () => setMessage()
+
 
   // LOGIN & LOGOUT
   const login = (token) => {
@@ -75,7 +77,7 @@ function App() {
           onInputPasswordValue={handleInputPasswordValue} />} />
         <Route path="*" element={<Navigate replace to="/login" />} />
       </Routes>}
-    {message && <Alert message={message} />}
+    {message && <Alert message={message} onClose={hideAlert} />}
   </Context.Provider>
 }
 

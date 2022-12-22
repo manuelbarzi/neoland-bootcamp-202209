@@ -4,9 +4,13 @@ import updateUserEmail from '../logic/updateUserEmail';
 import bgSetCredentials from '../img/bg-set-credentials.png';
 import buttonOk from '../img/button-ok.png';
 import buttonOkActive from '../img/button-ok-active.png';
+import { useContext } from 'react'
+import Context from '../components/Context'
+import { errors } from 'com'
+const { FormatError, AuthError, LengthError, NotFoundError } = errors
 
 function SetEmail({ onClose }) {
-
+    const { showAlert } = useContext(Context)
     const [user, setUser] = useState()
     const [hoverButtonOk, setHoverButtonOk] = useState(false)
 
@@ -29,14 +33,23 @@ function SetEmail({ onClose }) {
         try {
             updateUserEmail(newEmail, sessionStorage.token)
                 .then(() => {
-                    alert('The user email has been changed successfully')
                     user.email = newEmail
                     onClose()
                 })
-                .catch(error => alert(error.message))
+                .catch(error => {
+                    if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
+                        showAlert(error.message, 'warn')
+                    else if (error instanceof AuthError || error instanceof NotFoundError)
+                        showAlert(error.message, 'error')
+                    else
+                        showAlert(error.message, 'fatal')
+                })
 
         } catch (error) {
-            alert(error.message)
+            if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
+                showAlert(error.message, 'warn')
+            else
+                showAlert(error.message, 'fatal')
         }
     };
     return (

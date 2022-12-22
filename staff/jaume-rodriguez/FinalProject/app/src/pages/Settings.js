@@ -8,7 +8,6 @@ import buttonSetNameActive from '../img/button-setName-active.png';
 import buttonSetEmailActive from '../img/button-setEmail-active.png';
 import buttonSetPasswordActive from '../img/button-setPassword-active.png';
 import buttonLogoutActive from '../img/button-logout-active.png';
-import buttonHome from '../img/icon-home.png';
 import { Link } from 'react-router-dom'
 import Context from '../components/Context'
 import { useContext } from 'react'

@@ -18,7 +18,7 @@ function SetName({ onClose, onCreated, adventureId }) {
         try {
             createAdventureStep(sessionStorage.token, adventureId, text)
                 .then(() => {
-                    alert('The Adventure Step has been changed successfully')
+                    //alert('The Adventure Step has been changed successfully')
                     onClose()
                 })
                 .then(() => onCreated())

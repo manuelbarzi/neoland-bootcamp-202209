@@ -6,9 +6,11 @@ import ButtonLoginHover from '../img/button-login-hover.png';
 import logo from '../img/logo-wa.png';
 import { useContext } from 'react'
 import Context from '../components/Context'
+import { errors } from 'com'
+const { FormatError, AuthError, LengthError, NotFoundError } = errors
 
 function Login(props) {
-    const { login } = useContext(Context)
+    const { login, showAlert } = useContext(Context)
     const [inputPasswordText, setInputPasswordText] = useState(true)
     const [hoverButton, setHoverButton] = useState(false)
 
@@ -36,9 +38,19 @@ function Login(props) {
         try {
             authenticateUser(email, password)
                 .then(token => login(token))
-                .catch(error => alert(error.message))
+                .catch(error => {
+                    if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
+                        showAlert(error.message, 'warn')
+                    else if (error instanceof AuthError || error instanceof NotFoundError)
+                        showAlert(error.message, 'error')
+                    else
+                        showAlert(error.message, 'fatal')
+                })
         } catch (error) {
-            alert(error.message)
+            if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
+                showAlert(error.message, 'warn')
+            else
+                showAlert(error.message, 'fatal')
         }
     }
 
