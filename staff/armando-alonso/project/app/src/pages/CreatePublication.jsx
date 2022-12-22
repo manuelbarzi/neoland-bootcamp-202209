@@ -15,10 +15,10 @@ function PageCreateNews({ onNavigateFromCreateToHome, updateCreateState }) {
 
         event.preventDefault()
 
-        const { title: { value: title }, resume: { value: resume }, text: { value: text }, topic: { value: topic }, visibility: { value: visibility } } = event.target
+        const { title: { value: title }, resume: { value: resume }, text: { value: text }, topic: { value: topic }, visibility: { value: visibility },municipio: { value: municipio }, img: { value: img } } = event.target
 
         try {
-            createPost( sessionStorage.userId, title, resume, text, topic, visibility)
+            createPost( sessionStorage.userId, title, resume, text, topic, visibility, municipio, img)
                 .then(() => {
                     alert('Post creado satisfactoriamente')
                     event.target.reset()
@@ -92,15 +92,20 @@ function PageCreateNews({ onNavigateFromCreateToHome, updateCreateState }) {
                     <div className="flex">
                         <div className="flex flex-wrap mb-6 basis-1/2">
                             <label htmlFor='municipio'>Municipio</label>
-                            <select id="visibility" className="block w-full px-4 py-3 text-base text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="visibility">
+                            <select id="municipio" className="block w-full px-4 py-3 text-base text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="municipio">
                                 <option value="serranillos">Serranillos del Valle</option>
                                 <option value="grinon">Griñon</option>
                             </select>
                         </div>
+                        <div className="flex flex-wrap mb-6 basis-1/2">
+                        <label htmlFor='img'>Img</label>
+                        <input id="img" type="text" className="flex form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" name="img" />
                     </div>
+                    </div>
+                    
                     <div className="mb-6">
                         <label htmlFor='post'></label>
-                        <select id="post" className="hidden w-full px-4 py-3 text-base text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="visibility">
+                        <select id="post" className="hidden w-full px-4 py-3 text-base text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="post">
                             <option value="noticia"></option>
                         </select>
                     </div>

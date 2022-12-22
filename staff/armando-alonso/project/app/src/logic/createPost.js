@@ -10,7 +10,7 @@
  * 
  */
 
-function createPost( userId, title, resume, text, topic, visibility) {
+function createPost( userId, title, resume, text, topic, visibility, municipio, img) {
 
     return new Promise((resolve, reject) => {
 
@@ -37,7 +37,7 @@ function createPost( userId, title, resume, text, topic, visibility) {
         xhr.setRequestHeader('Authorization', `Bearer ${userId}`)
         xhr.setRequestHeader('Content-Type', 'application/json')
 
-        const payload = { title, resume, text, topic, visibility }
+        const payload = { title, resume, text, topic, visibility, municipio, img }
 
         const json = JSON.stringify(payload)
 

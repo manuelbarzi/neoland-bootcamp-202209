@@ -19,6 +19,8 @@ function Article() {
     const [title, setTitle] = useState()
     const [resume, setResume] = useState()
     const [text, setText] = useState()
+    const [topic, setTopic] = useState()
+    const [img, setImg] = useState()
 
 
     useEffect(() => {
@@ -32,6 +34,8 @@ function Article() {
                 setTitle(post.title)
                 setResume(post.resume)
                 setText(post.text)
+                setTopic(post.topic)
+                setImg(post.img)
             })
         } catch (error) {
             alert(error.message)
@@ -50,10 +54,10 @@ function Article() {
   {/* <!-- Navbar --> */}
   {/* <!-- Navbar --> */}
 
-  <img src="https://mdbootstrap.com/img/new/slides/041.jpg" className="max-w-full h-auto rounded-xl" alt="..." />
+  <img src={img} className="max-w-full h-auto rounded-xl" alt="..." />
   <div className="p-4 text-center absolute">
-    <h2 className="font-semibold text-4xl mb-4 text-white">{postId}</h2>
-    <h4 className="font-semibold text-xl mb-2 text-white"></h4>
+    <h2 className="flex font-semibold text-4xl mb-4 text-white">{title}</h2>
+    <h4 className="flex font-semibold text-xl mb-2 text-white">{resume}</h4>
   </div>
                 </section>
                 <section className="flex flex-wrap basis-3/12 p-5 justify-center">
@@ -61,13 +65,17 @@ function Article() {
                     <RecentNews />
                 </section>
                 <section className="flex flex-wrap basis-9/12 p-5">
-                <div className="flex justify-center">
-                    <div className="block p-6 rounded-lg shadow-lg bg-white">
-                    <h1 className="text-5xl font-bold mt-0 mb-6">{title}</h1>
-                    <h3 className="text-3xl font-bold mb-8">{resume}</h3>
-                        <p className="text-gray-700 text-base mb-4">{text}</p>
+                <div className="flex">
+                    <div className="flex flex-col p-6 rounded-lg shadow-lg bg-white">
+                    <h1 className="pr-20 pl-20 flex justify-center text-4xl font-bold mt-0 mb-6">{title}</h1>
+                    <h3 className="pr-20 pl-20 text-xl font-bold mb-8 ">{resume}</h3>
+                    <p className="pr-20 pl-20 text-justify text-gray-700 text-base mb-4">{text}</p>
+                    <span class="flex mx-auto text-xs py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-gray-200 text-gray-700 rounded-full">{topic}</span>
                     </div>
                     </div>
+                </section>
+                <section className="flex flex-wrap basis-3/12 p-5 justify-center">
+                    <Advertiser />
                 </section>
                 <section className="flex flex-wrap basis-9/12 p-5 justify-center">
                     <CarouselLastNews />

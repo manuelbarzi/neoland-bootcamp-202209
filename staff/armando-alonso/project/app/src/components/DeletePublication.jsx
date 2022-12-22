@@ -65,7 +65,7 @@ function DeleteThisPublication({ publicationId, onDeleted, onClose }) {
                             <div className="flex w-full justify-center">
                             <img
                                 className="w-full p-2 md:h-16 object-cover md:w-20 rounded-t-lg md:rounded-none md:rounded-l-lg"
-                                src="https://mdbootstrap.com/wp-content/uploads/2020/06/vertical.jpg"
+                                src={publication.img}
                                 alt=""
                             />
                             <div className="w-full p-2 flex">

@@ -1,7 +1,7 @@
 const { ObjectId } = require('mongodb')
 const context = require('./context')
 
-function createPost( userId, title, resume, text, topic, visibility) {
+function createPost( userId, title, resume, text, topic, visibility, municipio, img) {
 
     const { db } = context
 
@@ -13,7 +13,7 @@ function createPost( userId, title, resume, text, topic, visibility) {
             if (!user)
                 throw new Error(`El Usuario no existe.`)
 
-            const post = { user: ObjectId(userId), title, resume, text, topic, visibility, date: new Date }
+            const post = { user: ObjectId(userId), title, resume, text, topic, visibility, municipio, img, date: new Date }
 
             return posts.insertOne(post)
         })

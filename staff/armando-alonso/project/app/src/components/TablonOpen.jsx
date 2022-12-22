@@ -35,7 +35,7 @@ const TablonOpen = () => {
         <div className="flex w-full justify-center">
           <img
             className="w-full p-2 md:h-16 object-cover md:w-20 rounded-t-lg md:rounded-none md:rounded-l-lg"
-            src="https://mdbootstrap.com/wp-content/uploads/2020/06/vertical.jpg"
+            src={notice.img}
             alt=""
           />
           <div className="w-full p-2 flex">
@@ -45,7 +45,6 @@ const TablonOpen = () => {
           </div>
           <div className="flex flex-col basis-1/6">
            <span className="text-xs inline-block py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-blue-600 text-white rounded-full">{notice.topic}</span>
-           <span className="text-xs inline-block py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-blue-600 text-white rounded-full">{notice.user.name}</span>
           </div>
         </div>
         </div>
