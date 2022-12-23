@@ -239,8 +239,6 @@ Post
 **TODO**
 
 - Bloquear crear aventura según el rol
-- Crear aventura cuesta dinero
-- Completar aventura da dinero al creador de la misma
 - Delete adventure also delete questSteps
 - SPINERS
 - Etiquetar que es cada cosa en los render de páginas y componentes
@@ -266,6 +264,8 @@ Post
 
 **DONE**
 
+- Crear aventura cuesta dinero
+- Completar aventura da dinero al creador de la misma
 - Ordenar los archivos y variables
 - Aplicar questCompleted to random
 - Barra superior con todos los recursos

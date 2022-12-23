@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import retrieveUser from '../logic/retrieveUser'
 import retrieveAdventures from '../logic/retrieveAdventures'
 import DeleteAdventure from '../components/DeleteAdventure'
 import CreateAdventure from '../components/CreateAdventure'
@@ -6,33 +7,52 @@ import buttonBack from '../img/icon-back.png';
 import buttonNext from '../img/button-next.png';
 import buttonPrevious from '../img/button-previous.png';
 import buttonCreate from '../img/button-create.png';
+import buttonCreateNonMoney from '../img/button-create-nonmoney.png';
 import buttonAddAdventure from '../img/button-add-adventure.png';
 import buttonDelete from '../img/icon-delete.png';
 import adventureMainOne from '../img/adventure-main-one.png';
 import adventureWorldOne from '../img/adventure-world-one.png';
 import { Link } from 'react-router-dom'
 import extractSubFromToken from '../utils/extractSubFromToken'
+import alertErrorMoney from '../img/error-money.png';
 
 function Adventures() {
     const userId = extractSubFromToken(sessionStorage.token)
+    const [user, setUser] = useState(null)
     const [adventures, setAdventures] = useState(null)
     const [adventureIdToDelete, setAdventureIdToDelete] = useState()
     const [createAdventureVisible, setCreateAdventureVisible] = useState(false)
     const [visibleAdventureIndex, setVisibleAdventureIndex] = useState(0)
+    const [showErrorMoney, setErrorMoney] = useState(false);
 
     useEffect(() => {
         try {
+            retrieveUser(sessionStorage.token)
+                .then(user => setUser(user))
+                .catch(error => alert(error.message))
+
             retrieveAdventures(sessionStorage.token)
                 .then(adventures => {
                     setAdventures(adventures)
                 })
                 .catch(error => alert(error.message))
 
-        } catch (error) { }
+        } catch (error) { alert(error.message) }
     }, [])
+
+    const HandlerShowErrorMoney = () => {
+        setErrorMoney(true)
+        setTimeout(() => {
+            setErrorMoney(false);
+        }, 3000);
+    }
 
     const handleAdventureCreated = () => {
         try {
+            retrieveUser(sessionStorage.token)
+                .then(user => setUser(user))
+                .catch(error => alert(error.message))
+
             retrieveAdventures(sessionStorage.token)
                 .then(adventures => {
                     setAdventures(adventures)
@@ -150,11 +170,19 @@ function Adventures() {
                     </button>
                     <section>
                         <div className='flex flex-col items-center mt-[1rem]'>
-                            <img
-                                onClick={openCreateAdventure}
-                                className='cursor-pointer'
-                                src={buttonCreate}
-                                alt="create" />
+                            {user &&
+                                (user.gold >= 1000
+                                    ? <img
+                                        onClick={openCreateAdventure}
+                                        className='cursor-pointer'
+                                        src={buttonCreate}
+                                        alt="create" />
+                                    : <img
+                                        className='cursor-pointer'
+                                        src={buttonCreateNonMoney}
+                                        alt="create"
+                                        onClick={() => HandlerShowErrorMoney()}
+                                    />)}
                         </div>
                         {adventureIdToDelete != null &&
                             <DeleteAdventure
@@ -162,6 +190,10 @@ function Adventures() {
                                 onDeleted={handleAdventureDeleted}
                                 onClose={closeDeleteAdventure} />}
                     </section>
+                    <img
+                        className={`square absolute flex self-center -mt-[5rem] opacity-0 duration-300 pointer-events-none ${showErrorMoney ? 'opacity-100 ' : ''}`}
+                        src={alertErrorMoney}
+                        alt="alertErrorMoney" />
                     {createAdventureVisible &&
                         <CreateAdventure
                             onCreated={handleAdventureCreated}

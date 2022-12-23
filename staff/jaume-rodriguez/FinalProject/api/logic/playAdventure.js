@@ -8,8 +8,9 @@ function playAdventure(userId, adventureId) {
     validateUserId(userId)
     validateAdventureId(adventureId)
 
-    let foundCreator = null
+    let hasFinishedAdventure = false
     let foundUser = null
+    let foundAdventure = null
     return User.findById(userId)
         .then(user => {
             if (!user)
@@ -22,7 +23,7 @@ function playAdventure(userId, adventureId) {
         .then(adventure => {
             if (!adventure)
                 throw new NotFoundError('Adventure does not exist')
-            foundCreator = adventure
+            foundAdventure = adventure
             let adventurePlayed = foundUser.adventuresPlayed.find(adventurePlayed => adventurePlayed.adventure.toString() === adventureId)
 
             if (adventurePlayed === undefined) {
@@ -36,15 +37,21 @@ function playAdventure(userId, adventureId) {
             const totalSteps = adventure.steps.length // NOTE: This is why we need the adventure
             if (adventurePlayed.stepsCompleted >= totalSteps) {
                 adventurePlayed.stepsCompleted = 0
-                foundUser.gold += 25
                 foundUser.exp += 3000
+                hasFinishedAdventure = true
                 adventurePlayed.timesCompleted++
                 // NOTE: Given a quest that has been already completed, then we display the texts of all steps, but restart the progress
             }
 
-
             return foundUser.save()
+        }).then(() => {
+            return User.findById(foundAdventure.creator._id)
+        }).then(creatorUser => {
+            if (!creatorUser)
+                throw new NotFoundError('cretor user not registered')
+            else if (hasFinishedAdventure === true)
+                creatorUser.gold += 25
+            return creatorUser.save()
         })
-        .then(() => { })
 }
 module.exports = playAdventure

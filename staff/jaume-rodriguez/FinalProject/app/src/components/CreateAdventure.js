@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react'
-import retrieveUser from '../logic/retrieveUser';
+import { useState } from 'react'
 import createAdventure from '../logic/createAdventure';
 import bgCreateAdventure from '../img/bg-create-adventure.png';
 import buttonCreateAdventure from '../img/button-create-adventure.png';
@@ -7,19 +6,7 @@ import buttonCreateAdventureActive from '../img/button-create-adventure-active.p
 import buttonCancel from '../img/button-cancel.png';
 
 function SetName({ onClose, onCreated }) {
-
-    const [user, setUser] = useState()
     const [hoverButtonCreateAdventure, setHoverButtonCreateAdventure] = useState(false)
-
-    useEffect(() => {
-        try {
-            retrieveUser(sessionStorage.token)
-                .then(user => setUser(user))
-                .catch(error => alert(error.message))
-
-        } catch (error) {
-        }
-    }, [])
 
     // FORM SUBMITS
     const handleCreateAdventureSubmit = (event) => {

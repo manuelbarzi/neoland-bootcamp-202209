@@ -12,6 +12,7 @@ import bgAdventureStep from '../img/bg-adventure-step.png';
 import buttonBack from '../img/icon-back.png';
 import buttonPlayStep from '../img/button-play-step.png';
 import buttonAddStep from '../img/button-add-step.png';
+import buttonAddStepDisabled from '../img/button-add-step-disabled.png';
 import buttonPlayStepNonMoney from '../img/button-play-step-nonmoney.png';
 import buttonPlayStepDisabled from '../img/button-play-step-disabled.png';
 import buttonPlayStepView from '../img/button-play-step-view.png';
@@ -207,10 +208,10 @@ function Adventure() {
                                 src={buttonAddStep}
                                 alt="addStep" />
                         </div> :
-                        <div className='flex flex-col items-center mt-[1rem] opacity-0'>
+                        <div className='flex flex-col items-center mt-[1rem] opacity-100'>
                             <img
                                 className=''
-                                src={buttonAddStep}
+                                src={buttonAddStepDisabled}
                                 alt="falseAddStep" />
                         </div>
                     }
