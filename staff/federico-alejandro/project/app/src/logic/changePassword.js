@@ -1,4 +1,5 @@
-import { LengthError } from "com/errors"
+import { HAS_SPACES_REGEX } from "com/regex"
+import { LengthError, FormatError } from "com/errors"
 /**
  * Update User Passwrod
  * 
@@ -6,17 +7,18 @@ import { LengthError } from "com/errors"
  * @param {string} password current password
  * @param {string} newPassword new password 
  */
-
-function updatePassword(token, password, newPassword) {
+function changePassword(token, password, newPassword) {
     if (typeof token !== 'string') throw new TypeError('token is not a string')
     if (!token.length) throw new LengthError('token is empty')
 
     if (typeof password !== 'string') throw new TypeError('password is not a string')
     if (!password.length) throw new LengthError('password is empty')
+    if (HAS_SPACES_REGEX.test(password)) throw new FormatError('password has spaces')
 
     if (typeof newPassword !== 'string') throw new TypeError('newPassword is not a string')
     if (!newPassword.length) throw new LengthError('newPassword is empty')
-
+    if (HAS_SPACES_REGEX.test(newPassword)) throw new FormatError('newPassword has spaces')
+    
     return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest()
 
@@ -35,7 +37,7 @@ function updatePassword(token, password, newPassword) {
 
         xhr.onerror = () => reject(new Error('connection error'))
 
-        xhr.open('PATCH', 'http://localhost/users/settings')
+        xhr.open('PATCH', 'http://localhost/users/password')
         xhr.setRequestHeader('Authorization', `Bearer ${token}`)
         xhr.setRequestHeader('Content-Type', 'application/json')
 
@@ -47,4 +49,4 @@ function updatePassword(token, password, newPassword) {
     })
 }
 
-export default updatePassword
+export default changePassword

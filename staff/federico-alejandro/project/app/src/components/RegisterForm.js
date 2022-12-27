@@ -54,7 +54,6 @@ function RegisterForm({ onClose }) {
                 <button className='bg-green-400 gap-2  font-bold text-white border-2 p-2 border-green-400 rounded-xl'>Register</button>
             </form>
 
-            {/* <Link to='/login' className='underline'>Login</Link> */}
         </div>
     </main>
 }

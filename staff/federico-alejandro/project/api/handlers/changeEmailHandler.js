@@ -1,12 +1,11 @@
-const changePassword = require('../logic/changePassword')
+const changeEmail = require('../logic/changeEmail')
 const { errors: { ConflictError, NotFoundError, FormatError, LengthError, AuthError } } = require('com')
-
 
 module.exports = (req, res) => {
     try {
-        const { body: { password, newPassword }, userId } = req
+        const { body: { newEmail }, userId } = req
 
-        changePassword(userId, password, newPassword)
+        changeEmail(userId, newEmail)
             .then(() => res.status(201).send())
             .catch(error => {
                 if (error instanceof AuthError) res.status(401).json({ error: error.message })

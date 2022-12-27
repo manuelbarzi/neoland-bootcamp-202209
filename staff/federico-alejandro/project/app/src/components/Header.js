@@ -38,11 +38,14 @@ export default function Header() {
         }
     }, [])
 
-    const handleToggleMenu = () => setToggleButton(toggleButton === 'menu' ? 'close' : 'menu') 
-    
-    const settings = () => !settingsPanel ? setSettingsPanel(true) : setSettingsPanel()
-    const closeSettingsPanel = () => setSettingsPanel()
+    const handleToggleMenu = () => setToggleButton(toggleButton === 'menu' ? 'close' : 'menu')
 
+    const settings = () => {
+        !settingsPanel ? setSettingsPanel(true) : setSettingsPanel()
+
+        setToggleButton('menu')
+    }
+    const closeSettingsPanel = () => setSettingsPanel()
 
     return <header className='fixed w-full h-[2.5rem] flex justify-between items-center gap-2 bg-slate-200'>
         <img src={LOGO} alt='LOGO' className='h-10 ml-4' />
@@ -55,7 +58,7 @@ export default function Header() {
             </div>}
         </div>
 
-        {settingsPanel && <Settings onClose={closeSettingsPanel}  />}
-
+        {settingsPanel && <Settings onClose={closeSettingsPanel} />}
+ 
     </header>
 }

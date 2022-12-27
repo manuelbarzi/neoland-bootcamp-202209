@@ -15,29 +15,38 @@ function Home() {
     log.info('Home -> render')
 
     const [posts, setPosts] = useState()
+
     const { showAlert } = useContext(Context)
 
     const [createPostVisible, setCreatePostVisible] = useState()
 
     useEffect(() => {
-        try {
-            retrievePublicPosts(sessionStorage.token)
-                .then(posts => setPosts(posts))
-                .catch(error => {
-                    if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
-                        showAlert(error.message, 'warn')
-                    else if (error instanceof AuthError || error instanceof NotFoundError)
-                        showAlert(error.message, 'error')
-                    else
-                        showAlert(error.message, 'fatal')
-                })
-        } catch (error) {
-            if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
-                showAlert(error.message, 'warn')
-            else
-                showAlert(error.message, 'fatal')
-        }
+        // try {
+        //     retrievePublicPosts(sessionStorage.token)
+        //         .then(posts => setPosts(posts))
+        //         .catch(error => {
+        //             if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
+        //                 showAlert(error.message, 'warn')
+        //             else if (error instanceof AuthError || error instanceof NotFoundError)
+        //                 showAlert(error.message, 'error')
+        //             else
+        //                 showAlert(error.message, 'fatal')
+        //         })
+        // } catch (error) {
+        //     if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
+        //         showAlert(error.message, 'warn')
+        //     else
+        //         showAlert(error.message, 'fatal')
+        // }
+        refreshPosts()
+
+        const intervalId = setInterval(() => {
+                refreshPosts()
+        }, 5000)
+
+        return ()=> clearInterval(intervalId)
     }, [])
+
 
     const openCreatePost = () => setCreatePostVisible(true)
     const closeCreatePost = () => setCreatePostVisible()
@@ -88,7 +97,7 @@ function Home() {
 
     return <main className='overflow-hidden min-h-screen bg-gradient-to-b from-[#439A97] via-[#62B6B7] to-[#97DECE]'>
         <Header />
-        
+
 
         {posts && <div className='flex flex-col items-center gap-4 py-[3rem] '>
             {posts.map(post => <Post key={post.id} post={post} onPostUpdated={refreshPosts} onPostDeleted={refreshPosts} />)}
@@ -96,7 +105,7 @@ function Home() {
 
         <Footer onCreate={openCreatePost} />
         {createPostVisible && <CreatePost onCreated={handlePostCreated} onClose={closeCreatePost} />}
-    
+
     </main>
 }
 
