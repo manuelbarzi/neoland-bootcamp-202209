@@ -1,12 +1,28 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import retrieveUser from '../logic/retrieveUser'
 import createAdventure from '../logic/createAdventure';
 import bgCreateAdventure from '../img/bg-create-adventure.png';
 import buttonCreateAdventure from '../img/button-create-adventure.png';
 import buttonCreateAdventureActive from '../img/button-create-adventure-active.png';
 import buttonCancel from '../img/button-cancel.png';
+import { useContext } from 'react'
+import Context from '../components/Context'
+import { errors } from 'com'
+const { FormatError, AuthError, LengthError, NotFoundError } = errors
 
 function SetName({ onClose, onCreated }) {
+    const { showAlert } = useContext(Context)
+    const [user, setUser] = useState(null)
     const [hoverButtonCreateAdventure, setHoverButtonCreateAdventure] = useState(false)
+
+    useEffect(() => {
+        try {
+            retrieveUser(sessionStorage.token)
+                .then(user => setUser(user))
+                .catch(error => alert(error.message))
+
+        } catch (error) { }
+    }, [])
 
     // FORM SUBMITS
     const handleCreateAdventureSubmit = (event) => {
@@ -15,16 +31,26 @@ function SetName({ onClose, onCreated }) {
         let { title: { value: title }, isMainAdventure: { value: isMainAdventure } } = event.target
 
         try {
-            createAdventure(sessionStorage.token, title, isMainAdventure)
+            createAdventure(sessionStorage.token, title, isMainAdventure, user.gold)
                 .then(() => {
                     //alert('The adventure has been changed successfully')
                     onClose()
                 })
                 .then(() => onCreated())
-                .catch(error => alert(error.message))
+                .catch(error => {
+                    if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
+                        showAlert(error.message, 'warn')
+                    else if (error instanceof AuthError || error instanceof NotFoundError)
+                        showAlert(error.message, 'error')
+                    else
+                        showAlert(error.message, 'fatal')
+                })
 
         } catch (error) {
-            alert(error.message)
+            if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
+                showAlert(error.message, 'warn')
+            else
+                showAlert(error.message, 'fatal')
         }
     };
 

@@ -29,6 +29,7 @@ module.exports = {
     handlerCreateAdventureStep: require('./handlerCreateAdventureStep'),
     handlerRetrieveAdventure: require('./handlerRetrieveAdventure'),
     handlerRetrieveAdventures: require('./handlerRetrieveAdventures'),
+    handlerRetrieveMyAdventures: require('./handlerRetrieveMyAdventures'),
     handlerRetrieveMainAdventures: require('./handlerRetrieveMainAdventures'),
     handlerRetrieveWorldAdventures: require('./handlerRetrieveWorldAdventures'),
     handlerUpdateAdventure: require('./handlerUpdateAdventure'),

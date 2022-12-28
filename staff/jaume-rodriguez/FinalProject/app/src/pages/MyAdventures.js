@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react'
-import retrieveAdventures from '../logic/retrieveAdventures'
+import retrieveUser from '../logic/retrieveUser'
+import retrieveMyAdventures from '../logic/retrieveMyAdventures'
 import DeleteAdventure from '../components/DeleteAdventure'
 import CreateAdventure from '../components/CreateAdventure'
 import buttonBack from '../img/icon-back.png';
 import buttonNext from '../img/button-next.png';
 import buttonPrevious from '../img/button-previous.png';
-import buttonMyAdventures from '../img/button-my-adventures.png';
+import buttonCreate from '../img/button-create.png';
+import buttonCreateNonMoney from '../img/button-create-nonmoney.png';
 import buttonAddAdventure from '../img/button-add-adventure.png';
 import buttonDelete from '../img/icon-delete.png';
 import iconUniqueParticipants from '../img/icon-unique-participants.png';
@@ -17,17 +19,24 @@ import adventureMainOne from '../img/adventure-main-one.png';
 import adventureWorldOne from '../img/adventure-world-one.png';
 import { Link } from 'react-router-dom'
 import extractSubFromToken from '../utils/extractSubFromToken'
+import alertErrorMoney from '../img/error-money.png';
 
-function Adventures() {
+function UserAdventures() {
     const userId = extractSubFromToken(sessionStorage.token)
+    const [user, setUser] = useState(null)
     const [adventures, setAdventures] = useState(null)
     const [adventureIdToDelete, setAdventureIdToDelete] = useState()
     const [createAdventureVisible, setCreateAdventureVisible] = useState(false)
     const [visibleAdventureIndex, setVisibleAdventureIndex] = useState(0)
+    const [showErrorMoney, setErrorMoney] = useState(false);
 
     useEffect(() => {
         try {
-            retrieveAdventures(sessionStorage.token)
+            retrieveUser(sessionStorage.token)
+                .then(user => setUser(user))
+                .catch(error => alert(error.message))
+
+            retrieveMyAdventures(sessionStorage.token)
                 .then(adventures => {
                     setAdventures(adventures)
                 })
@@ -36,9 +45,20 @@ function Adventures() {
         } catch (error) { alert(error.message) }
     }, [])
 
+    const HandlerShowErrorMoney = () => {
+        setErrorMoney(true)
+        setTimeout(() => {
+            setErrorMoney(false);
+        }, 3000);
+    }
+
     const handleAdventureCreated = () => {
         try {
-            retrieveAdventures(sessionStorage.token)
+            retrieveUser(sessionStorage.token)
+                .then(user => setUser(user))
+                .catch(error => alert(error.message))
+
+            retrieveMyAdventures(sessionStorage.token)
                 .then(adventures => {
                     setAdventures(adventures)
                     setCreateAdventureVisible(false)
@@ -52,7 +72,7 @@ function Adventures() {
     const handleAdventureDeleted = () => {
         setVisibleAdventureIndex(Math.max(0, visibleAdventureIndex - 1));
         try {
-            retrieveAdventures(sessionStorage.token)
+            retrieveMyAdventures(sessionStorage.token)
                 .then(adventures => {
                     setAdventures(adventures)
                     setAdventureIdToDelete()
@@ -84,13 +104,13 @@ function Adventures() {
             <div className="relative flex flex-grow font-alata h-full flex-col justify-center items-center bg-[url('/src/img/bg-settings.jpg')] bg-no-repeat bg-center">
                 <div className="flex flex-col justify-center gap-[2rem]">
                     <header className='text-white flex flex-row items-start justify-center'>
-                        <Link to="/">
+                        <Link to="/adventures">
                             <img
                                 className='cursor-pointer absolute -ml-[3rem] mt-[0.9rem]'
                                 src={buttonBack}
                                 alt="home" />
                         </Link>
-                        <span className=' text-orange-200 text-[2rem]'>Adventures</span>
+                        <span className=' text-orange-200 text-[2rem]'>My Adventures</span>
                     </header>
                     <section className='flex flex-col h-[27rem] w-[21.813rem] bg-inherit items-center'>
                         {adventures && adventures.length > 0 &&
@@ -196,12 +216,19 @@ function Adventures() {
                     </button>
                     <section>
                         <div className='flex flex-col items-center mt-[1rem]'>
-                            <Link to="/my/adventures">
-                                <img
-                                    className='cursor-pointer'
-                                    src={buttonMyAdventures}
-                                    alt="buttonMyAdventures" />
-                            </Link>
+                            {user &&
+                                (user.gold >= 1000
+                                    ? <img
+                                        onClick={openCreateAdventure}
+                                        className='cursor-pointer'
+                                        src={buttonCreate}
+                                        alt="create" />
+                                    : <img
+                                        className='cursor-pointer'
+                                        src={buttonCreateNonMoney}
+                                        alt="create"
+                                        onClick={() => HandlerShowErrorMoney()}
+                                    />)}
                         </div>
                         {adventureIdToDelete != null &&
                             <DeleteAdventure
@@ -209,6 +236,10 @@ function Adventures() {
                                 onDeleted={handleAdventureDeleted}
                                 onClose={closeDeleteAdventure} />}
                     </section>
+                    <img
+                        className={`square absolute flex self-center -mt-[5rem] opacity-0 duration-300 pointer-events-none ${showErrorMoney ? 'opacity-100 ' : ''}`}
+                        src={alertErrorMoney}
+                        alt="alertErrorMoney" />
                     {createAdventureVisible &&
                         <CreateAdventure
                             onCreated={handleAdventureCreated}
@@ -219,4 +250,4 @@ function Adventures() {
     );
 }
 
-export default Adventures
+export default UserAdventures

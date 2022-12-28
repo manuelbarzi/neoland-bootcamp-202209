@@ -1,29 +1,25 @@
 import { errors, validators } from 'com'
 const { FormatError, ConflictError, LengthError, UnexpectedError } = errors
-const { validateTitle, validateToken, validateIsMainAdventure, validateCreateGoldEnough } = validators
+const { validateToken } = validators
 
-function createAdventure(token, title, isMainAdventure, gold) {
+function retrieveMyAdventures(token) {
     validateToken(token)
-    validateTitle(title)
-    validateIsMainAdventure(isMainAdventure)
-    validateCreateGoldEnough(gold)
 
     return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest()
 
-        xhr.onload = () => {
+        xhr.onload = function () {
             const { status, responseText: json } = xhr
 
-            if (status === 201)
-                resolve()
-            else if (status === 400) {
+            if (status === 200) {
+                const adventures = JSON.parse(json)
+                resolve(adventures)
+            } else if (status === 400) {
                 const { error } = JSON.parse(json)
 
                 if (error.includes('is not a'))
                     reject(new TypeError(error))
                 else if (error.includes('empty'))
-                    reject(new FormatError(error))
-                else if (error.includes('valid') || error.includes('spaces'))
                     reject(new FormatError(error))
                 else if (error.includes('length'))
                     reject(new LengthError(error))
@@ -35,20 +31,12 @@ function createAdventure(token, title, isMainAdventure, gold) {
                 reject(new UnexpectedError('client error'))
             else
                 reject(new UnexpectedError('server error'))
-            resolve()
         }
 
-        xhr.onerror = () => reject(new Error('connection error'))
-
-        xhr.open('POST', `${process.env.REACT_APP_API_URL}/adventure`)
+        xhr.open('GET', `${process.env.REACT_APP_API_URL}/my/adventure/`)
         xhr.setRequestHeader('Authorization', `Bearer ${token}`)
-        xhr.setRequestHeader('Content-Type', 'application/json')
-
-        const payload = { title, isMainAdventure }
-        const json = JSON.stringify(payload)
-
-        xhr.send(json)
+        xhr.send()
     })
 }
 
-export default createAdventure
+export default retrieveMyAdventures

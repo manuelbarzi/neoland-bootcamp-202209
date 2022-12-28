@@ -1,10 +1,11 @@
 import { errors, validators } from 'com'
 const { FormatError, ConflictError, LengthError, UnexpectedError } = errors
-const { validateAdventureId, validateToken } = validators
+const { validateAdventureId, validateToken, validateDeleteGoldEnough } = validators
 
-function deleteAdventure(token, adventureId) {
+function deleteAdventure(token, adventureId, gold) {
     validateToken(token)
     validateAdventureId(adventureId)
+    validateDeleteGoldEnough(gold)
 
     return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest()

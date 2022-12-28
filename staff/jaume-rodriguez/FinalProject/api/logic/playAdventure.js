@@ -8,6 +8,8 @@ function playAdventure(userId, adventureId) {
     validateUserId(userId)
     validateAdventureId(adventureId)
 
+    let hasNewUnicPlayer = false
+    let hasBeenCompleted = false
     let hasFinishedAdventure = false
     let foundUser = null
     let foundAdventure = null
@@ -29,6 +31,7 @@ function playAdventure(userId, adventureId) {
             if (adventurePlayed === undefined) {
                 adventurePlayed = new AdventurePlayed({ adventure: adventureId })
                 foundUser.adventuresPlayed.push(adventurePlayed)
+                hasNewUnicPlayer = true
             }
             adventurePlayed.lastStepPlayedTime = Date.now()
             adventurePlayed.stepsCompleted++
@@ -40,18 +43,37 @@ function playAdventure(userId, adventureId) {
                 foundUser.exp += 3000
                 hasFinishedAdventure = true
                 adventurePlayed.timesCompleted++
+                hasBeenCompleted = true
                 // NOTE: Given a quest that has been already completed, then we display the texts of all steps, but restart the progress
             }
 
             return foundUser.save()
-        }).then(() => {
+        })
+
+        .then(() => {
             return User.findById(foundAdventure.creator._id)
-        }).then(creatorUser => {
+        })
+
+        .then(creatorUser => {
             if (!creatorUser)
                 throw new NotFoundError('cretor user not registered')
             else if (hasFinishedAdventure === true)
                 creatorUser.gold += 25
             return creatorUser.save()
+        })
+
+        .then(() => {
+            return Adventure.findById(adventureId)
+        })
+
+        .then(adventure => {
+            if (!adventure)
+                throw new NotFoundError('adventure does not exist')
+            else if (hasNewUnicPlayer === true)
+                adventure.uniquePlayersPlaying++
+            else if (hasBeenCompleted === true)
+                adventure.goldCollected += 25
+            return adventure.save()
         })
 }
 module.exports = playAdventure

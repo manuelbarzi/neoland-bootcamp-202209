@@ -15,7 +15,7 @@ function Alert({ message, onClose }) {
     }, []);
 
     return <main className="fixed h-full w-full top-0 flex flex-col pointer-events-none" >
-        <div className="flex font-alata h-full flex-col justify-center items-center">
+        <div className="flex font-alata h-full flex-col justify-center items-center -mt-[1rem]">
             <div className="flex flex-col justify-center items-center relative">
                 <img
                     className={`square opacity-0 duration-300 pointer-events-none ${start ? 'opacity-100' : ''}`}

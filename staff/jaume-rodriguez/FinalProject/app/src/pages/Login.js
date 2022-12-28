@@ -58,11 +58,11 @@ function Login(props) {
         <main className="min-h-screen flex flex-col bg-[#191919]" >
             <div className="relative flex flex-grow font-alata h-full flex-col  justify-center items-center bg-[url('/src/img/bg-login.jpg')] bg-no-repeat bg-center">
                 <img
-                    className='pt-[3.25rem] mb-5'
+                    className='pt-[3.25rem] mb-5 -mt-[9.4rem]'
                     src={logo}
                     alt="logo" />
 
-                <form className="flex flex-col justify-start w-96 gap-1 px-12 pb-12 rounded bg-inherit flex-wrap -mt-[0.5rem]" onSubmit={handleSubmit}>
+                <form className="flex flex-col justify-start w-96 gap-1 px-12 pb-12 rounded bg-inherit flex-wrap -mt-[0.6rem]" onSubmit={handleSubmit}>
                     <div className="mb-16"></div>
                     <div className="mb-[0.25rem]"></div>
                     <input
@@ -95,18 +95,20 @@ function Login(props) {
                             className="ml-1.5 w-4 h-4 accent-[#252130] appearance-none bg-[#252130] checked:bg-[#2187d3] checked:border checked:border-[#2187d3] checked:rounded focus:outline-none mt-1"
                         />
                     </label>
-                    <button className='mt-9 -ml-1 &{hover:activeHover}'
-                        onMouseEnter={() => setHoverButton(false)}
-                        onMouseLeave={() => setHoverButton(true)}>
-                        <img
-                            src={hoverButton ? ButtonLogin : ButtonLoginHover}
-                            alt="login" />
-                    </button>
-                    <div className='flex flex-row  mt-4 items-center mb-1'>
-                        <Link to="/register" className="text-[#5175bd] text-lg hover:text-[#2187d3]">
-                            Sign up
-                        </Link>
-                        <p className='text-white text-sm text-center pt-0.5 ml-auto pr-1'>Forgot password?</p>
+                    <div className='absolute mt-[13.85rem]'>
+                        <button className='mt-9 -ml-1 &{hover:activeHover}'
+                            onMouseEnter={() => setHoverButton(false)}
+                            onMouseLeave={() => setHoverButton(true)}>
+                            <img
+                                src={hoverButton ? ButtonLogin : ButtonLoginHover}
+                                alt="login" />
+                        </button>
+                        <div className='flex flex-row  mt-4 items-center mb-1'>
+                            <Link to="/register" className="text-[#5175bd] text-lg hover:text-[#2187d3]">
+                                Sign up
+                            </Link>
+                            <p className='text-white text-sm text-center pt-0.5 ml-auto pr-1'>Forgot password?</p>
+                        </div>
                     </div>
                 </form>
             </div>

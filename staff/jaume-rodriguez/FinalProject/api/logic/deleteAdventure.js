@@ -12,7 +12,7 @@ module.exports = function (userId, adventureId) {
         .findById(userId)
         .then((user) => {
             if (!user) throw new NotFoundError('User not registered')
-
+            foundUser = user
             return Adventure.findById(adventureId).lean()
         })
         .then((adventure) => {
@@ -27,5 +27,14 @@ module.exports = function (userId, adventureId) {
             const { acknowledged } = result
 
             if (!acknowledged) throw new UnexpectedError(`could not delete adventure with id ${adventureId}`)
+        })
+        .then(() => {
+            return User.findById(userId)
+        })
+        .then((user) => {
+            if (!user) throw new NotFoundError('User not registered')
+            user.gold -= 1500
+
+            return user.save()
         })
 };

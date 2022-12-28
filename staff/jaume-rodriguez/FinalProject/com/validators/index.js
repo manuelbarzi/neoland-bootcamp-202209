@@ -12,4 +12,6 @@ module.exports = {
     validatePostId: require('./validatePostId'),
     validateQuestId: require('./validateQuestId'),
     validateTargetUserId: require('./validateTargetUserId'),
+    validateDeleteGoldEnough: require('./validateDeleteGoldEnough'),
+    validateCreateGoldEnough: require('./validateCreateGoldEnough'),
 }

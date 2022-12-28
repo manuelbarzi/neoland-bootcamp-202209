@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Home from './pages/Home'
 import Settings from './pages/Settings'
 import Adventures from './pages/Adventures'
+import MyAdventures from './pages/MyAdventures'
 import Adventure from './pages/Adventure'
 import Ranking from './pages/Ranking'
 import Chat from './pages/Chat'
@@ -55,6 +56,7 @@ function App() {
       <Route path="/settings" element={<Settings />} />
       <Route path="/community" element={<Community />} />
       <Route path="/adventures" element={<Adventures />} />
+      <Route path="/my/adventures" element={<MyAdventures />} />
       <Route path="/adventures/:adventureId" element={<Adventure />} />
       <Route path="/ranking" element={<Ranking />} />
       <Route path="/chat" element={<Chat />} />

@@ -33,6 +33,7 @@ const {
     handlerCreateAdventureStep,
     handlerRetrieveAdventure,
     handlerRetrieveAdventures,
+    handlerRetrieveMyAdventures,
     handlerRetrieveMainAdventures,
     handlerRetrieveWorldAdventures,
     handlerUpdateAdventure,
@@ -84,6 +85,7 @@ mongoose.connect(MONGODB_URL)
         api.post('/adventure', jwtVerifier, jsonBodyParser, handlerCreateAdventure)
         api.post('/adventure/:adventureId/step', jwtVerifier, jsonBodyParser, handlerCreateAdventureStep)
         api.get('/adventure/', jwtVerifier, handlerRetrieveAdventures)
+        api.get('/my/adventure/', jwtVerifier, handlerRetrieveMyAdventures)
         api.get('/adventure/main', jwtVerifier, handlerRetrieveMainAdventures)
         api.get('/adventure/world', jwtVerifier, handlerRetrieveWorldAdventures)
         api.get('/adventure/:adventureId', jwtVerifier, handlerRetrieveAdventure)

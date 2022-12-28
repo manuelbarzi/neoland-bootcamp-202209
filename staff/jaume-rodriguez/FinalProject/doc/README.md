@@ -236,10 +236,13 @@ Post
 - Aventos de Grupos donde todos participan y aportan según el Combat Power
 - Objetos que limiten o permitan el avance en las DailyQuest y Adventure Steps.
 
-**TODO**
+**DOING**
 
-- Bloquear crear aventura según el rol
 - Delete adventure also delete questSteps
+
+- **TODO**
+
+- Balanceo de costes (Borja)
 - SPINERS
 - Etiquetar que es cada cosa en los render de páginas y componentes
 - Limitar la info que nos llegan de los retriev
@@ -249,6 +252,7 @@ Post
 - Permitir actualizar aventuras
 - Permitir borrar y editar steps
 - Al borrar aventura, también borra las quests step
+- Crear los 5 steps de golpe y luego darle a los steps añadir texto.
 - Borradores de adventures
 - Publicar adventure ( no es lo mismo que crear)
 - preload de todas las imagenes
@@ -256,14 +260,24 @@ Post
 - Cada tantos steps consigues un bonus
 - Algunos quest requieren de objetos
 - EVENTOS SEMANALES QUE OBLIGANA EQUIPARSE X TIPO DE OBJETOS PARA LAS DAILYQUEST. ELEMENTALES, CALOR, ETC
-
-**DOING**
-
-- Presentar el projecto
-- ...
+- Cada 5 Steps recompensa para el creador y/o el jugador
+- Coste de crear la aventura sea por pack de steps.
+- AL terminar una aventura, no reinicia la aventura
+- Añadir rewards distintos por repetición de aventura.
+- Buscador de aventuras, recientes jugadas predeterminado + filtros por tags.
+- Arreglar Tailwind Login & Register
+- BUG Crear Adventure sin dinero con 2 browsers.
+- ¿Borrar aventura devuelve dinero a los aventureros?.
 
 **DONE**
 
+- Alert de create Adventure sea un validator y no un compo
+- Borrar aventura coste de oro igual o más a crearla.
+- Arreglar pixel que se mueve entre loginy register
+- Quitar titulo Main y World, añadir decoración al dibujo.
+- Ver cuanta gente juega tu aventura.
+- Ver el dinero que ha generado tu aventura.
+- Página de tus aventuras.
 - Crear aventura cuesta dinero
 - Completar aventura da dinero al creador de la misma
 - Ordenar los archivos y variables
