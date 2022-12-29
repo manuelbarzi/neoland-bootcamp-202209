@@ -16,9 +16,9 @@ module.exports = new Schema({
         type: String,
         required: true
     },
-    exp: {
+    combatPoints: {
         type: Number,
-        default: 25,
+        default: 0,
         required: true
     },
     level: {
@@ -28,7 +28,7 @@ module.exports = new Schema({
     },
     gold: {
         type: Number,
-        default: 100,
+        default: 50,
         required: true
     },
     lastQuestPlayedText: {

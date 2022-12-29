@@ -173,7 +173,7 @@ function Adventure() {
                                             </span>
 
                                             {getStepsCompleted() === i && isReadyToPlayAdventureStep() &&
-                                                (user.gold >= 200
+                                                (user.gold >= 25
                                                     ? <img
                                                         className='w-[7.375rem] -mt-[3.7rem] ml-[12.7rem] cursor-pointer'
                                                         src={buttonPlayStep}

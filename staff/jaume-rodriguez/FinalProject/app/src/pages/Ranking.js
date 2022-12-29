@@ -33,7 +33,7 @@ function Adventure() {
                     <section className='ml-[1rem]'>
                         {users &&
                             <section className='flex flex-col h-[27rem] w-[21.813rem] bg-inherit justify-start items-center overflow-y-scroll scrollbar overscroll-contain '>
-                                {users.sort((a, b) => b.exp - a.exp).map((user, i) =>
+                                {users.sort((a, b) => b.combatPoints - a.combatPoints).map((user, i) =>
                                     <div key={user.id} className=" mt-[0.7rem] flex flex-col relative">
                                         <span className="text-orange-200 absolute ml-[2rem] mt-[1.1rem]">
                                             {i + 1}
@@ -42,7 +42,7 @@ function Adventure() {
                                             {user?.name}
                                         </span>
                                         <span className="text-gray-300 absolute ml-[7.5rem] mt-[1.1rem] text-lg text-right w-[9rem] text-right">
-                                            {user?.exp}
+                                            {user?.combatPoints}
                                         </span>
                                         <img
                                             className=''

@@ -1,3 +1,3 @@
 module.exports = (gold) => {
-    if (gold < 1500) throw new TypeError('Not enough gold')
+    if (gold < 100) throw new TypeError('Not enough gold')
 }

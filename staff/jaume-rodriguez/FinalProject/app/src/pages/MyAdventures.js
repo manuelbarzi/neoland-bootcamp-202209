@@ -217,7 +217,7 @@ function UserAdventures() {
                     <section>
                         <div className='flex flex-col items-center mt-[1rem]'>
                             {user &&
-                                (user.gold >= 1000
+                                (user.gold >= 100
                                     ? <img
                                         onClick={openCreateAdventure}
                                         className='cursor-pointer'

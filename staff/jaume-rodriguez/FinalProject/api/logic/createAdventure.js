@@ -18,7 +18,7 @@ function createAdventure(userId, title, isMainAdventure) {
             return Adventure.create({ creator: userId, title, isMainAdventure })
         })
         .then(() => {
-            foundUser.gold -= 1000
+            foundUser.gold -= 100
             return foundUser.save()
         })
 }

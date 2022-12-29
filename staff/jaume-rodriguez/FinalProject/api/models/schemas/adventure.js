@@ -32,5 +32,10 @@ module.exports = new Schema({
     votes: [{
         type: ObjectId,
         ref: 'User'
-    }]
+    }],
+    active: {
+        type: Boolean,
+        default: true,
+        required: true
+    }
 })

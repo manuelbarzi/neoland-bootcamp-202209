@@ -33,7 +33,7 @@ module.exports = function (userId, adventureId) {
         })
         .then((user) => {
             if (!user) throw new NotFoundError('User not registered')
-            user.gold -= 1500
+            user.gold -= 100
 
             return user.save()
         })

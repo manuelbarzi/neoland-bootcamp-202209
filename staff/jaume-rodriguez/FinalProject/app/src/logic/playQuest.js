@@ -12,9 +12,10 @@ function playQuest(token, questId) {
         xhr.onload = () => {
             const { status, responseText: json } = xhr
 
-            if (status === 204)
-                resolve()
-            else if (status === 400) {
+            if (status === 200) {
+                const reward = JSON.parse(json)
+                resolve(reward)
+            } else if (status === 400) {
                 const { error } = JSON.parse(json)
 
                 if (error.includes('is not a'))

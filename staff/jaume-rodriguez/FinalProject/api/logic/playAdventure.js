@@ -10,7 +10,7 @@ function playAdventure(userId, adventureId) {
 
     let hasNewUnicPlayer = false
     let hasBeenCompleted = false
-    let hasFinishedAdventure = false
+    let hasDoneAStep = false
     let foundUser = null
     let foundAdventure = null
     return User.findById(userId)
@@ -34,14 +34,14 @@ function playAdventure(userId, adventureId) {
                 hasNewUnicPlayer = true
             }
             adventurePlayed.lastStepPlayedTime = Date.now()
+            hasDoneAStep = true
             adventurePlayed.stepsCompleted++
-            foundUser.gold -= 200
+            foundUser.gold -= 25
 
             const totalSteps = adventure.steps.length // NOTE: This is why we need the adventure
             if (adventurePlayed.stepsCompleted >= totalSteps) {
                 adventurePlayed.stepsCompleted = 0
-                foundUser.exp += 3000
-                hasFinishedAdventure = true
+                foundUser.combatPoints += 100
                 adventurePlayed.timesCompleted++
                 hasBeenCompleted = true
                 // NOTE: Given a quest that has been already completed, then we display the texts of all steps, but restart the progress
@@ -57,8 +57,8 @@ function playAdventure(userId, adventureId) {
         .then(creatorUser => {
             if (!creatorUser)
                 throw new NotFoundError('cretor user not registered')
-            else if (hasFinishedAdventure === true)
-                creatorUser.gold += 25
+            else if (hasDoneAStep === true)
+                creatorUser.gold += 5
             return creatorUser.save()
         })
 

@@ -13,6 +13,7 @@ import GAME_CONSTANTS from '../shared/constants';
 
 function DailyQuest({ onClose }) {
     const [dailyQuest, setDailyQuest] = useState(null)
+    const [reward, setReward] = useState(null)
     const [user, setUser] = useState(null)
     const [hoverButtonDone, setHoverButtonDone] = useState(false)
     const [hoverButtonPlayQuest, setHoverButtonPlayQuest] = useState(false)
@@ -45,13 +46,23 @@ function DailyQuest({ onClose }) {
             .then(quest => {
                 setDailyQuest(quest)
                 playQuest(sessionStorage.token, quest.id)
+                    .then(reward => {
+                        setReward(reward)
+                    })
             })
+            .catch(error => alert(error.message))
     };
 
     return (
         <section className="bg-[#191919]/75 fixed left-0 top-0 h-full w-full flex flex-col justify-center items-center overflow-hidden z-10" onClick={onClose}>
             <div className="flex flex-col justify-center" onClick={event => event.stopPropagation()}>
                 <div className=''>
+                    <span className='absolute w-[5rem] text-right mt-[14rem] ml-[12.15rem] text-orange-300'>
+                        {reward === null ? "?" : reward === 1 ? "3" : reward <= 29 ? "2" : "1"}
+                    </span>
+                    <span className='absolute w-[5rem] text-right mt-[15.25rem] ml-[12.15rem] text-orange-300'>
+                        {reward === null ? "?" : reward === 1 ? "50" : reward <= 29 ? "25" : "10"}
+                    </span>
                     <img
                         className=''
                         src={bgDailyQuest}
@@ -87,7 +98,7 @@ function DailyQuest({ onClose }) {
                         />
                         :
                         [
-                            <span key="text-not-ready" className='absolute z-10 text-rose-300 ml-[3rem] mt-[11.70rem] text-center w-[16rem] h-[4.5rem] bg-inherit'>
+                            <span key="text-not-ready" className='absolute z-10 text-rose-300 ml-[3rem] mt-[12.4rem] text-center w-[16rem] h-[4.5rem] bg-inherit'>
                                 You are not ready yet to take on your next quest
                             </span>
                             ,

@@ -9,6 +9,7 @@ function playQuest(userId, questId) {
     validateUserId(userId)
     validateQuestId(questId)
 
+    let reward = 0
     let foundUser = null
     return User.findById(userId)
         .then(user => {
@@ -24,8 +25,20 @@ function playQuest(userId, questId) {
                 throw new NotFoundError('Quest does not exist')
             }
 
-            foundUser.gold += 100
-            foundUser.exp += 50
+            dailyQuestReward = Math.floor(Math.random() * 101)
+
+            if (dailyQuestReward <= 1) {
+                foundUser.gold += 50
+                foundUser.combatPoints += 3
+            } else if (dailyQuestReward <= 29) {
+                foundUser.gold += 25
+                foundUser.combatPoints += 2
+            } else {
+                foundUser.gold += 10
+                foundUser.combatPoints += 1
+            }
+            reward = dailyQuestReward
+
             const currentTimeMilliseconds = Date.now()
             const timeLapsed = currentTimeMilliseconds - foundUser.lastQuestPlayedTime
 
@@ -47,6 +60,6 @@ function playQuest(userId, questId) {
 
             return foundUser.save()
         })
-        .then(() => { })
+        .then(() => { return reward })
 }
 module.exports = playQuest

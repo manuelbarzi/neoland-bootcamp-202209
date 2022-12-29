@@ -6,7 +6,7 @@ module.exports = (req, res) => {
         const { userId, params: { questId } } = req
 
         playQuest(userId, questId)
-            .then(() => res.status(204).send())
+            .then(reward => res.json(reward))
             .catch(error => {
                 if (error instanceof NotFoundError)
                     res.status(404).json({ error: error.message })

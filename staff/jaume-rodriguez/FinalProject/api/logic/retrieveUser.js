@@ -16,8 +16,8 @@ function retrieveUser(userId) {
             if (!user)
                 throw new NotFoundError(`user with id ${userId} does not exist`)
 
-            user.level = Math.floor(user.exp / 1000);
-            user.remainingExp = user.exp % 1000
+            user.level = Math.floor(user.combatPoints / 500);
+            user.remainingCombatPoints = user.combatPoints % 500
 
             // sanitize
             user.id = user._id.toString()

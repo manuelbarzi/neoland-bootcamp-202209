@@ -238,21 +238,23 @@ Post
 
 **DOING**
 
-- Delete adventure also delete questSteps
-
 - **TODO**
 
-- Balanceo de costes (Borja)
+- AL terminar una aventura, no reinicia la aventura
+- Crear aventura te de 5 steps
+- Cada 5 Steps recompensa para el jugador
+- Crear los 5 steps de golpe y luego darle a los steps añadir texto.
+- Delete adventure change a status and not delete the adventure from DB
+- EL nivel default es 1
 - SPINERS
 - Etiquetar que es cada cosa en los render de páginas y componentes
 - Limitar la info que nos llegan de los retriev
 - JWT evitar que expire y no se actualice
-- Primer step no entra el cd
+- BUG Primer step no entra el cd
 - RAID event
 - Permitir actualizar aventuras
 - Permitir borrar y editar steps
 - Al borrar aventura, también borra las quests step
-- Crear los 5 steps de golpe y luego darle a los steps añadir texto.
 - Borradores de adventures
 - Publicar adventure ( no es lo mismo que crear)
 - preload de todas las imagenes
@@ -260,17 +262,16 @@ Post
 - Cada tantos steps consigues un bonus
 - Algunos quest requieren de objetos
 - EVENTOS SEMANALES QUE OBLIGANA EQUIPARSE X TIPO DE OBJETOS PARA LAS DAILYQUEST. ELEMENTALES, CALOR, ETC
-- Cada 5 Steps recompensa para el creador y/o el jugador
-- Coste de crear la aventura sea por pack de steps.
-- AL terminar una aventura, no reinicia la aventura
 - Añadir rewards distintos por repetición de aventura.
 - Buscador de aventuras, recientes jugadas predeterminado + filtros por tags.
 - Arreglar Tailwind Login & Register
 - BUG Crear Adventure sin dinero con 2 browsers.
-- ¿Borrar aventura devuelve dinero a los aventureros?.
 
 **DONE**
 
+- Mostrar que ganancia ha tenido el jugador en la dailyQuest
+- Ganancias DailyQuest random
+- Balanceo de costes (Borja)
 - Alert de create Adventure sea un validator y no un compo
 - Borrar aventura coste de oro igual o más a crearla.
 - Arreglar pixel que se mueve entre loginy register

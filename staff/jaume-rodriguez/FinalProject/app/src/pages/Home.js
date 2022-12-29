@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import retrieveUser from '../logic/retrieveUser'
 import iconGold from '../img/icon-gold.png';
-import iconExp from '../img/icon-exp.png';
+import iconCombatPoints from '../img/icon-combat-points.png';
 import iconEdit from '../img/icon-edit.png';
 import iconCommunity from '../img/icon-community.png';
 import iconCommunityActive from '../img/icon-community-active.png';
@@ -65,9 +65,9 @@ function Home() {
                         <div className='flex flex-row justify-center mt-[2rem] gap-x-[1rem]'>
                             <img
                                 className=''
-                                src={iconExp}
-                                alt="exp" />
-                            <span className='absolute text-right w-[6rem] -ml-[9.5rem] mt-[0.5rem] text-[0.85rem]'>{user?.exp}</span>
+                                src={iconCombatPoints}
+                                alt="iconCombatPoints" />
+                            <span className='absolute text-right w-[6rem] -ml-[9.5rem] mt-[0.5rem] text-[0.85rem]'>{user?.combatPoints}</span>
                             <img
                                 className=''
                                 src={iconGold}
