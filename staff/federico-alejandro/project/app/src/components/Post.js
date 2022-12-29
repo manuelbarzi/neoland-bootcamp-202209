@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useEffect, useState, useContext } from 'react'
 import extractSubFromToken from '../utils/extractSubFromToken'
 
+import LikeButton from './LikeButton' // PROBAR SI FUNCIONA
 import Context from '../components/Context'
 import EditPost from '../components/EditPost'
 import DeletePost from '../components/DeletePost'
@@ -10,8 +11,9 @@ import CreateComment from '../components/CreateComment'
 import DeleteComment from './DeleteComment'
 import retrievePost from '../logic/retrievePost'
 
-import { AiOutlineEdit, AiOutlineDelete, AiOutlineLock, AiFillLike } from 'react-icons/ai'
+import { AiOutlineEdit, AiOutlineDelete, AiOutlineLock } from 'react-icons/ai'
 import { FaRegComment } from 'react-icons/fa'
+
 
 import { errors } from 'com'
 const { FormatError, LengthError, ConflictError } = errors
@@ -167,7 +169,10 @@ function Post({ post: postFromProps, onPostUpdated, onPostDeleted }) {
                     {post.image && <div className='w-fit h-fit'><img src={post.image} alt='' /></div>}
                 </div>
                 <div className='flex justify-between'>
-                    <button className='mx-2' onClick={() => openCreateChat()}><FaRegComment size='1rem' /></button>
+                    <div>
+                        <button className='mx-2' onClick={() => openCreateChat()}><FaRegComment size='1rem' /></button>
+                        <LikeButton id={post.id} />
+                    </div>
                     {post.user.id === userId && <div className='flex justify-end'>
                         <div className='flex self-end pb-0'>
                             <button onClick={openEditPost}><AiOutlineEdit size='1rem' /></button>
