@@ -238,37 +238,42 @@ Post
 
 **DOING**
 
+- Crear los 5 steps de golpe y luego darle a los steps añadir texto.
+- Cada 5 Steps recompensa para el jugador 50 Combat Points
+- Coste de aventura 100^2 cada 5 pasos creados.
+- Beneficios para el creador, 5 por paso ( primeros 5), 20 por paso ( segundos 5)
+
 - **TODO**
 
-- AL terminar una aventura, no reinicia la aventura
-- Crear aventura te de 5 steps
-- Cada 5 Steps recompensa para el jugador
-- Crear los 5 steps de golpe y luego darle a los steps añadir texto.
-- Delete adventure change a status and not delete the adventure from DB
-- EL nivel default es 1
+- BUG Primer step no entra el cd
+- BUG Crear Adventure sin dinero con 2 browsers.
+- Resolver Waring React prop key
 - SPINERS
+- Permitir borrar y editar steps
 - Etiquetar que es cada cosa en los render de páginas y componentes
 - Limitar la info que nos llegan de los retriev
 - JWT evitar que expire y no se actualice
-- BUG Primer step no entra el cd
 - RAID event
 - Permitir actualizar aventuras
-- Permitir borrar y editar steps
-- Al borrar aventura, también borra las quests step
 - Borradores de adventures
 - Publicar adventure ( no es lo mismo que crear)
 - preload de todas las imagenes
-- Solve boolean value from a form be sent as a body
-- Cada tantos steps consigues un bonus
 - Algunos quest requieren de objetos
 - EVENTOS SEMANALES QUE OBLIGANA EQUIPARSE X TIPO DE OBJETOS PARA LAS DAILYQUEST. ELEMENTALES, CALOR, ETC
 - Añadir rewards distintos por repetición de aventura.
 - Buscador de aventuras, recientes jugadas predeterminado + filtros por tags.
 - Arreglar Tailwind Login & Register
-- BUG Crear Adventure sin dinero con 2 browsers.
 
 **DONE**
 
+- Balance subida de nivel x combat points
+- BUG goldCollected does not get gold from first step adventure
+- Limitar el número de caracteres del título de las aventuras creadas.
+- Remarcar la aventura completada en el panel de aventuras
+- Mostrar steps que lleva el jugador
+- EL nivel default es 1
+- Delete adventure change a status and not delete the adventure from DB
+- AL terminar una aventura, no reinicia la aventura
 - Mostrar que ganancia ha tenido el jugador en la dailyQuest
 - Ganancias DailyQuest random
 - Balanceo de costes (Borja)

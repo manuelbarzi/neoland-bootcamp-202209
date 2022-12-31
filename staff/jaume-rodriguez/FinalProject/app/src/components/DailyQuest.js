@@ -3,8 +3,7 @@ import playQuest from '../logic/playQuest'
 import retrieveMainRandomQuest from '../logic/retrieveMainRandomQuest'
 import retrieveUser from '../logic/retrieveUser'
 import bgDailyQuest from '../img/bg-dailyquest.png';
-import buttonDone from '../img/button-done.png';
-import buttonDoneActive from '../img/button-done-active.png';
+import buttonPlayed from '../img/button-played.png';
 import buttonPlayQuest from '../img/button-play-quest.png';
 import buttonPlayQuestActive from '../img/button-play-quest-active.png';
 import buttonExit from '../img/button-exit.png';
@@ -15,7 +14,6 @@ function DailyQuest({ onClose }) {
     const [dailyQuest, setDailyQuest] = useState(null)
     const [reward, setReward] = useState(null)
     const [user, setUser] = useState(null)
-    const [hoverButtonDone, setHoverButtonDone] = useState(false)
     const [hoverButtonPlayQuest, setHoverButtonPlayQuest] = useState(false)
     const [hoverButtonExit, setHoverButtonExit] = useState(false)
 
@@ -76,11 +74,9 @@ function DailyQuest({ onClose }) {
                         </span>
                         ,
                         <img
-                            src={hoverButtonDone ? buttonDoneActive : buttonDone}
+                            src={buttonPlayed}
                             alt="dailyQuest"
                             className='absolute z-10 ml-[6.55rem] mt-[23rem] cursor-pointer'
-                            onMouseEnter={() => setHoverButtonDone(true)}
-                            onMouseLeave={() => setHoverButtonDone(false)}
                             onClick={() => onClose()}
                         />
                     ]

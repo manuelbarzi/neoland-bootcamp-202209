@@ -40,10 +40,9 @@ function playAdventure(userId, adventureId) {
 
             const totalSteps = adventure.steps.length // NOTE: This is why we need the adventure
             if (adventurePlayed.stepsCompleted >= totalSteps) {
-                adventurePlayed.stepsCompleted = 0
-                foundUser.combatPoints += 100
+                //adventurePlayed.stepsCompleted = 0
+                foundUser.combatPoints += 50
                 adventurePlayed.timesCompleted++
-                hasBeenCompleted = true
                 // NOTE: Given a quest that has been already completed, then we display the texts of all steps, but restart the progress
             }
 
@@ -69,10 +68,10 @@ function playAdventure(userId, adventureId) {
         .then(adventure => {
             if (!adventure)
                 throw new NotFoundError('adventure does not exist')
-            else if (hasNewUnicPlayer === true)
+            if (hasNewUnicPlayer === true)
                 adventure.uniquePlayersPlaying++
-            else if (hasBeenCompleted === true)
-                adventure.goldCollected += 25
+            if (hasDoneAStep === true)
+                adventure.goldCollected += 5
             return adventure.save()
         })
 }

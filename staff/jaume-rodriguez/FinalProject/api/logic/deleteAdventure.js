@@ -21,7 +21,8 @@ module.exports = function (userId, adventureId) {
             if (adventure.creator.toString() !== userId)
                 throw new NotFoundError('Adventure does not belong to this user')
 
-            return Adventure.deleteOne({ _id: adventureId });
+            const filter = { active: true }
+            return Adventure.updateOne(filter, { active: false });
         })
         .then(result => {
             const { acknowledged } = result

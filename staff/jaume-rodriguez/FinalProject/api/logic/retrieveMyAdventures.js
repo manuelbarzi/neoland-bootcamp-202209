@@ -13,7 +13,7 @@ function retrieveMyAdventures(userId) {
                 throw new NotFoundError('User not registered')
 
             return Adventure
-                .find({ creator: userId })
+                .find({ creator: userId, active: true })
                 .populate('creator', '-email -password')
                 .select('-__v')
                 .lean()

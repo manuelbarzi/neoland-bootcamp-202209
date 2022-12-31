@@ -18,7 +18,7 @@ module.exports = new Schema({
     },
     combatPoints: {
         type: Number,
-        default: 0,
+        default: 25,
         required: true
     },
     level: {
