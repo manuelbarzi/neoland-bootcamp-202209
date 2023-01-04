@@ -47,7 +47,7 @@ export default function Settings() {
     return <div className='flex justify-end bg-slate-100'>
         <div className=" flex flex-col w-40  bg-green-50 p-2 rounded-b-xl">
             <button onClick={() => navigate('/users')} className='border-2 border-black'>Usuarios</button>
-            <button className='border-2 border-black mt-1'>Profile</button>
+            <button onClick={() => navigate('/profile')} className='border-2 border-black mt-1'>Profile</button>
             <button onClick={logout} className='border-2 border-black mt-1'>Logout</button>
         </div>
     </div>

@@ -9,6 +9,8 @@ import Alert from './components/Alert'
 import Events from './pages/Events'
 import EventByMonthName from './pages/EventByMonthName'
 import Users from './pages/Users'
+import Profile from './pages/Profile'
+
 
 
 function App() {
@@ -53,6 +55,8 @@ function App() {
       <Route path="/events" element={<Events />} />
       <Route path="/events/:monthName" element={<EventByMonthName />} />
       <Route path="/users" element={<Users />} />
+      <Route path="/profile" element={<Profile />} />
+
 
       {/* {role === "admin" && <Route path="/users" element={<Users />} />} */}
 

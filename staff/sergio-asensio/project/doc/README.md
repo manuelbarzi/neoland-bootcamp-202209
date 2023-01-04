@@ -57,7 +57,7 @@ App (client-side)        API (server-side)       DB
 - date (Date, required)
 - incription (String, required, enum ['close', 'open'], default 'close')
 - image: (String)
-- participants: (Array)
+- participants: [objectId]
 
 ### Technologies
 
