@@ -21,23 +21,7 @@ function Home() {
     const [createPostVisible, setCreatePostVisible] = useState()
 
     useEffect(() => {
-        // try {
-        //     retrievePublicPosts(sessionStorage.token)
-        //         .then(posts => setPosts(posts))
-        //         .catch(error => {
-        //             if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
-        //                 showAlert(error.message, 'warn')
-        //             else if (error instanceof AuthError || error instanceof NotFoundError)
-        //                 showAlert(error.message, 'error')
-        //             else
-        //                 showAlert(error.message, 'fatal')
-        //         })
-        // } catch (error) {
-        //     if (error instanceof TypeError || error instanceof FormatError || error instanceof LengthError)
-        //         showAlert(error.message, 'warn')
-        //     else
-        //         showAlert(error.message, 'fatal')
-        // }
+     
         refreshPosts()
 
         const intervalId = setInterval(() => {

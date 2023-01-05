@@ -29,5 +29,5 @@ module.exports = new Schema({
         default: Date.now,
         required: true
     },
-    chats: [chat]
+    chats: [chat],
 })

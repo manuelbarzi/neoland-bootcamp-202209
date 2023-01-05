@@ -10,5 +10,6 @@ module.exports = {
     User,
     Post,
     Chat,
-    Comment
+    Comment,
 }
+    

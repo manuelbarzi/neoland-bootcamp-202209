@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useEffect, useState, useContext } from 'react'
 import extractSubFromToken from '../utils/extractSubFromToken'
 
-import LikeButton from './LikeButton' // PROBAR SI FUNCIONA
+import LikeButton from './LikeButton' 
 import Context from '../components/Context'
 import EditPost from '../components/EditPost'
 import DeletePost from '../components/DeletePost'
@@ -56,6 +56,7 @@ function Post({ post: postFromProps, onPostUpdated, onPostDeleted }) {
                     setPost(postFromApi)
                     setChatId()
                     setCommentId()
+                    
 
                     closeDeleteComment()
                 })
@@ -93,6 +94,7 @@ function Post({ post: postFromProps, onPostUpdated, onPostDeleted }) {
                     setPost(postFromApi)
                     setChatId()
                     setCommentId()
+                    
 
                     closeCreateChat()
                 })
@@ -130,6 +132,7 @@ function Post({ post: postFromProps, onPostUpdated, onPostDeleted }) {
                     setPost(postFromApi)
                     setChatId()
                     setCommentId()
+                    
 
                     closeCreateChat()
                     closeCreateComment()
@@ -155,6 +158,7 @@ function Post({ post: postFromProps, onPostUpdated, onPostDeleted }) {
         setChatId()
         setCommentId()
         onPostUpdated()
+        
     }
 
     return post ?
