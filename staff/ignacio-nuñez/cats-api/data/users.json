@@ -1,0 +1,20 @@
+[
+    {
+        "userId": "user-1",
+        "name": "Peter Pan",
+        "email": "peter@pan.com",
+        "password": "123123123"
+    },
+    {
+        "userId": "user-2",
+        "name": "Wendy Darling",
+        "email": "wendy@darling.com",
+        "password": "123123123"
+    },
+    {
+        "userId": "user-3",
+        "name": "luffy",
+        "email": "one@piece.com",
+        "password": "123123123"
+    }
+]
