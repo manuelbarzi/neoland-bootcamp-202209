@@ -232,6 +232,7 @@ Post
 ## Planning
 
 **BACKLOG**
+a
 
 - Aventos de Grupos donde todos participan y aportan según el Combat Power
 - Objetos que limiten o permitan el avance en las DailyQuest y Adventure Steps.
