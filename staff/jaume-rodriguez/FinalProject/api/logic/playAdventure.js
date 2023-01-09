@@ -9,7 +9,6 @@ function playAdventure(userId, adventureId) {
     validateAdventureId(adventureId)
 
     let hasNewUnicPlayer = false
-    let hasBeenCompleted = false
     let hasDoneAStep = false
     let foundUser = null
     let foundAdventure = null
