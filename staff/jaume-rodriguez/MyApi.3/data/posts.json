@@ -1,0 +1,30 @@
+[
+    {
+        "id": "post-1",
+        "user": "",
+        "text": "",
+        "date": "",
+        "visibility": ""
+    },
+    {
+        "id": "post-2",
+        "user": "user-2",
+        "text": "asd",
+        "visibility": "public",
+        "date": "2022-11-25T16:29:04.633Z"
+    },
+    {
+        "id": "post-3",
+        "user": "user-2",
+        "text": "gggggggg",
+        "visibility": "public",
+        "date": "2022-11-25T16:30:43.372Z"
+    },
+    {
+        "id": "post-4",
+        "user": "user-2",
+        "text": "locuraa!",
+        "visibility": "public",
+        "date": "2022-11-26T01:27:29.934Z"
+    }
+]
